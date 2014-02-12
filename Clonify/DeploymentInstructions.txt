@@ -1,0 +1,11 @@
+Depolyment Instructions:
+
+1- Clone repository from github repository.
+2- Copy Clonify3 out side the folder with Clonify.
+3- Make sure that a user with username: admin and password:admin.
+3- Run dssd.sql 1st and then insert.sql in database.
+4- Run http://localhost/Clonify3/auth/login in browser.
+5- Make sure that the Clone Miner folder has all the required files and folders (i.e input and output folder, clones.exe etc)
+6- Run CloneMinerInvoker from .... Clonify\CMInvoker.
+7- 
+ 

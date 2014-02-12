@@ -1,0 +1,4 @@
+0,C:/xampp/htdocs/Team2/Clonify3/files/umerhayat/java/Cocos2dxAccelerometer.java
+1,C:/xampp/htdocs/Team2/Clonify3/files/umerhayat/java/Cocos2dxBitmap.java
+2,C:/xampp/htdocs/Team2/Clonify3/files/umerhayat/java/Cocos2dxRenderer.java
+3,C:/xampp/htdocs/Team2/Clonify3/files/umerhayat/java/SCICopy.java
