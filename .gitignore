@@ -1,12 +1,11 @@
 /nbproject/
 .DS_Store
-/application/config/database.php
-/application/config/config.php
-application/cache/*
-!application/cache/index.html
-!application/cache/.htaccess
+/Clonify3/application/config/database.php
+/Clonify3/application/config/config.php
+/Clonify3/application/cache/*
+!/Clonify3/application/cache/index.html
+!/Clonify3/application/cache/.htaccess
 
-application/logs/*
-!application/logs/index.html
-!application/logs/.htaccess
-/nbproject/
+/Clonify3/application/logs/*
+!/Clonify3/application/logs/index.html
+!/Clonify3/application/logs/.htaccess
