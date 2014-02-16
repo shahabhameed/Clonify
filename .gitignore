@@ -1,17 +1,18 @@
 /nbproject/
 .DS_Store
-/Clonify3/application/config/database.php
-/Clonify3/application/config/config.php
-/Clonify3/application/cache/*
-!/Clonify3/application/cache/index.html
-!/Clonify3/application/cache/.htaccess
+/WebSite/application/config/database.php
+/WebSite/application/config/config.php
+/WebSite/application/cache/*
+!/WebSite/application/cache/index.html
+!/WebSite/application/cache/.htaccess
 
 /Clonify/CMInvoker/config.properties
-/Clonify3/application/logs/*
-!/Clonify3/application/logs/index.html
-!/Clonify3/application/logs/.htaccess
+/WebSite/application/logs/*
+!/WebSite/application/logs/index.html
+!/WebSite/application/logs/.htaccess
 /Clonify/CMInvoker/CMInvoker/nbproject/private/
 /CMInvoker/nbproject/
 /CMInvoker/build/
 /CMInvoker/dist/
 /CMInvoker/config.properties
+/WebSite/files/
