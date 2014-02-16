@@ -64,16 +64,15 @@ public class Database {
 				id = results.getInt(1);
 				System.out.println("Invoke Config ID: "+id);
 				results = s.executeQuery("select * from invocation_parameters u where u.invocation_id  =" + id + ";");
-				if (results.next()) {
-					
+				if (results.next()) {					
 					invokeParameter = new InvokeParameter(
-															results.getInt("invocation_id"),
-															results.getInt("min_similatiry_SCC_tokens"), 
-															results.getInt("grouping_choice"),
-															results.getInt("method_analysis"),
-															results.getString("suppressed_tokens"),
-															results.getString("equal_tokens")
-															);
+                                                                results.getInt("invocation_id"),
+								results.getInt("min_similatiry_SCC_tokens"), 
+								results.getInt("grouping_choice"),
+								results.getInt("method_analysis"),
+								results.getString("suppressed_tokens"),
+								results.getString("equal_tokens")
+                                                            );
 					
 					System.out.println(" \ninvokeParameter: " +invokeParameter.toString());
 					
@@ -81,15 +80,12 @@ public class Database {
 							"user_repository r where d.id=f.directory_id and d.repository_id=r.id and f.id IN " +
 							"(select file_id from invocation_files where invocation_id=" + id +");");
 					
-					
 					while (results.next()) {
 						String fileName = results.getString(1);
 						invokeParameter.getInput_files().add(fileName);
-					}
-					
+					}					
 					System.out.println("Input_files: " + invokeParameter.getInput_files());
 				}
-
 			}
 			System.out.println("Invoke Config ID: "+id);
 			s.close();

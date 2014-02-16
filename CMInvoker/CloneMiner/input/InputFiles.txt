@@ -1,4 +1,9 @@
-C:/xampp/htdocs/Team2/Clonify3/files/umerhayat/java/Cocos2dxAccelerometer.java
-C:/xampp/htdocs/Team2/Clonify3/files/umerhayat/java/Cocos2dxBitmap.java
-C:/xampp/htdocs/Team2/Clonify3/files/umerhayat/java/Cocos2dxRenderer.java
-C:/xampp/htdocs/Team2/Clonify3/files/umerhayat/java/SCICopy.java
+C:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxAccelerometer.java
+C:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxActivity.java
+C:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxBitmap.java
+C:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxGLSurfaceView.java
+C:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxMusic.java
+C:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxRenderer.java
+C:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxSound.java
+C:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/SCICopy.java
+C:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/SCSInFileInstance.java

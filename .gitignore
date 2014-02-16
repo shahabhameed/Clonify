@@ -11,4 +11,7 @@
 !/Clonify3/application/logs/index.html
 !/Clonify3/application/logs/.htaccess
 /Clonify/CMInvoker/CMInvoker/nbproject/private/
-/CMInvoker/nbproject/private/
+/CMInvoker/nbproject/
+/CMInvoker/build/
+/CMInvoker/dist/
+/CMInvoker/config.properties

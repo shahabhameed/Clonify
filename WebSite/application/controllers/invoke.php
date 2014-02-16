@@ -66,12 +66,14 @@ class Invoke extends CI_Controller
 		//$this->load->model('invoke_model');
 		//$this->invoke_model->new_invocation();
 		$this->invoke_model->eq();
-		$this->open_view('dashboard',NULL);//loading success view
+		$this->open_view('dashboard',NULL, false);//loading success view
 	}
 	
-	function open_view($pagename,$data){
+	function open_view($pagename,$data, $loadSidebar=true){
 		$this->load->view('partials/main_header');
-                $this->load->view('partials/sidebar');
+                if ($loadSidebar){
+                  $this->load->view('partials/sidebar');
+                }
 		$this->load->view($pagename,$data);
 		$this->load->view('partials/main_footer');		
 	}  
