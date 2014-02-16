@@ -22,7 +22,8 @@
             <ul>
                  <li>
                     <a href="<?php echo site_url();?>"><span class="icon16 fa fa-cloud-upload"></span>File Manager</a>
-                </li>    
+                </li>
+                <li><a href=" <?php echo site_url('invoke/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Invoke</a></li>
                 <li>
                     <a href="#"><span class="icon16 fa fa-desktop"></span>Clone Class View</a>
                     <ul class="sub">

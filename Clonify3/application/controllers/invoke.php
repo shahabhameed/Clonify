@@ -71,6 +71,7 @@ class Invoke extends CI_Controller
 	
 	function open_view($pagename,$data){
 		$this->load->view('partials/main_header');
+                $this->load->view('partials/sidebar');
 		$this->load->view($pagename,$data);
 		$this->load->view('partials/main_footer');		
 	}  
