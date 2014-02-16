@@ -2,10 +2,21 @@
 
 class Ex_cont extends CI_Controller
 {
+	var $_path = ''; 
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->library('tank_auth');
+		$this->load->helper('path');
+		if (!$this->tank_auth->is_logged_in()) {         // Not logged in
+        redirect('/auth/login/');
+      	}
+      	$username = $this->tank_auth->get_username();
+      	$this->_path = set_realpath(FCPATH.'files/'.$username);
+      	if (!file_exists($this->_path)) {
+		    mkdir($this->_path, 0777, true);
+		}
+      	// print_r($this->_path);exit;
 		//$this->ci->load->library('session');
 	}
 	function index()
@@ -14,23 +25,19 @@ class Ex_cont extends CI_Controller
 	}
 	function elfinder_init()
 	{
-	//$this->ci->load->library('session');
-	//$this->load->library('tank_auth');
-	//$this->lang->load('tank_auth');
-	$this->load->helper('path');
-	$username = $this->tank_auth->get_username();
-	$opts = array(
-		// 'debug' => true, 
-		'roots' => array(
-		array( 
-			'driver' => 'LocalFileSystem', 
-			'path'   => set_realpath('C:\xampp\htdocs\Team2\Clonify3\files\\'.$username), 
-			'URL'    => site_url('http://203.135.63.151/Team2/Clonify3') . '/'
-			// more elFinder options here
-		) 
-		)
-	);
-	$this->load->library('elfinder_lib', $opts);
+		$username = $this->tank_auth->get_username();
+		$opts = array(
+			// 'debug' => true, 
+			'roots' => array(
+			array( 
+				'driver' => 'LocalFileSystem', 
+				'path'   => $this->_path, 
+				'URL'    => site_url()
+				// more elFinder options here
+			) 
+			)
+		);
+		$this->load->library('elfinder_lib', $opts);
 	}
 	
 	function saveFilesToDb()
@@ -41,7 +48,7 @@ class Ex_cont extends CI_Controller
 		//save the file names in db using model
 		//load view? - 
 		$username = $this->tank_auth->get_username();
-		$dir = new RecursiveDirectoryIterator('C:\xampp\htdocs\Team2\Clonify3\files\\'.$username,
+		$dir = new RecursiveDirectoryIterator($this->_path,
 			FilesystemIterator::SKIP_DOTS);
 
 		// Flatten the recursive iterator, folders come before their files
