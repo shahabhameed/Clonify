@@ -721,13 +721,8 @@ class Tank_auth
           $user->id,
           $this->ci->config->item('login_record_ip', 'tank_auth'),
           $this->ci->config->item('login_record_time', 'tank_auth'));
+    
   }
-  function get_username_by_id_mod($user_id)
-	{
-		
-			$newData =   $this->ci->users->get_username_by_id_mod($user_id);
-			return $newData->username;
-	}
 }
 
 /* End of file Tank_auth.php */

@@ -264,9 +264,9 @@
     text-align: center;
     position: relative;
     background: #d90004;
-    -moz-box-shadow: 5px 5px 9px #111;
-    -webkit-box-shadow: 5px 5px 9px #111;
-    box-shadow: 5px 5px 9px #111;
+    -moz-panel-shadow: 5px 5px 9px #111;
+    -webkit-panel-shadow: 5px 5px 9px #111;
+    panel-shadow: 5px 5px 9px #111;
     background: -moz-radial-gradient(80px 80px, circle farthest-corner, #d90004 35%, #960004 100%);
     background: -webkit-gradient(radial, 80 80, 60, 80 80, 120, from(#d90004), to(#960004));
     -moz-border-radius: 100px;
@@ -510,8 +510,8 @@
     margin: 0 auto;
     background: url('images/icons-big.png') 0 0 no-repeat;
     -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
+    -webkit-background-clip: padding-panel;
+    background-clip: padding-panel;
 }
 .elfinder-cwd .elfinder-droppable-active .elfinder-cwd-icon {
     background-position: 0 -100px;
@@ -1104,7 +1104,7 @@
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
-    -webkit-background-clip: padding-box;
+    -webkit-background-clip: padding-panel;
     padding: 0;
     background: #000;
     z-index: 90000;
@@ -1340,10 +1340,10 @@ embed.elfinder-quicklook-preview-audio {
     text-shadow: 0 1px 0 white;
     border-color: #CCC #CCC #AAA;
     background-color: #E0E0E0;
-    -moz-box-shadow: inset 0 0 1px #fff;
-    -ms-box-shadow: inset 0 0 1px #fff;
-    -webkit-box-shadow: inset 0 0 1px white;
-    box-shadow: inset 0 0 1px white;
+    -moz-panel-shadow: inset 0 0 1px #fff;
+    -ms-panel-shadow: inset 0 0 1px #fff;
+    -webkit-panel-shadow: inset 0 0 1px white;
+    panel-shadow: inset 0 0 1px white;
     filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fffafafa,EndColorStr=#ffdcdcdc);
     background-image: -moz-linear-gradient(top,#FAFAFA 0,#DCDCDC 100%);
     background-image: -ms-linear-gradient(top,#FAFAFA 0,#DCDCDC 100%);
@@ -1353,8 +1353,6 @@ embed.elfinder-quicklook-preview-audio {
     background-image: linear-gradient(to bottom,#FAFAFA 0,#DCDCDC 100%);
 }
 .elfinder .elfinder-button {
-    width: 16px;
-    height: 16px;
     margin: 0;
     padding: 4px;
     float: left;
@@ -1604,7 +1602,7 @@ embed.elfinder-quicklook-preview-audio {
  **/
 
 /* dialogs */
-.std42-dialog, .std42-dialog .ui-widget-content { background-color:#ededed; background-image:none; background-clip: content-box; }
+.std42-dialog, .std42-dialog .ui-widget-content { background-color:#ededed; background-image:none; background-clip: content-panel; }
 
 /* navbar */
 .elfinder .elfinder-navbar { 

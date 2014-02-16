@@ -21,47 +21,7 @@ $(document).ready(function() {
 	  e.preventDefault();
 	  $(this).tab('show');
 	})
-
-	//--------------- Accordion ------------------//
-    var acc = $('.accordion'); //get all accordions
-    var accHeading = acc.find('.accordion-heading');
-	var accBody = acc.find('.accordion-body');
-
-	//function to put icons
-	accPutIcon = function () {
-		acc.each(function(index) {
-		   accExp = $(this).find('.accordion-body.in');
-		   accExp.prev().find('a.accordion-toggle').append($('<span class="icon12 entypo-icon-minus-2 gray"></span>'));
-
-		   accNor = $(this).find('.accordion-body').not('.accordion-body.in');
-		   accNor.prev().find('a.accordion-toggle').append($('<span class="icon12 entypo-icon-plus-2 gray"></span>'));
-
-
-		});
-	}
-
-	//function to update icons
-	accUpdIcon = function() {
-		acc.each(function(index) {
-		   accExp = $(this).find('.accordion-body.in');
-		   accExp.prev().find('span').remove();
-		   accExp.prev().find('a.accordion-toggle').append($('<span class="icon12 entypo-icon-minus-2 gray"></span>'));
-
-		   accNor = $(this).find('.accordion-body').not('.accordion-body.in');
-		   accNor.prev().find('span').remove();
-		   accNor.prev().find('a.accordion-toggle').append($('<span class="icon12 entypo-icon-plus-2 gray"></span>'));
-
-
-		});
-	}
-
-	accPutIcon();
-
-	$('.accordion').on('shown', function () {
-		accUpdIcon();
-	}).on('hidden', function () {
-		accUpdIcon();
-	})
+ 	
 
 	//--------------- Sliders ------------------//
 	//simple slider
@@ -82,14 +42,23 @@ $(document).ready(function() {
 	$( "#slider-range" ).slider({
 		range: true,
 		min: 0,
-		max: 500,
-		values: [ 75, 300 ],
+		max: 5000,
+		values: [ 0, 5000 ],
 		slide: function( event, ui ) {
-			$( "#amount1" ).val( "Price range: $" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+			$('.range_from').val(ui.values[ 0 ]);
+			$('.range_to').val(ui.values[ 1 ]);
+			$('.range_from').trigger( "keyup" );
+			$('.range_to').trigger( "keyup" )
+			$( "#amount1" ).val( " " + $( "#slider-range" ).slider( "values", 0 ) +
+		" - " + $( "#slider-range" ).slider( "values", 1 ) );
+
+			// $( "#amount1" ).val( "Length range: " + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
 		}
 	});
-	$( "#amount1" ).val( "Price range: $" + $( "#slider-range" ).slider( "values", 0 ) +
-		" - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+
+	$( "#amount1" ).val( "  " + $( "#slider-range" ).slider( "values", 0 ) +
+		" - " + $( "#slider-range" ).slider( "values", 1 ) );
 
 	//with minimum
 	$( "#slider-range-min" ).slider({
@@ -132,7 +101,7 @@ $(document).ready(function() {
 	});
 
 	//animated progress bar
-	$('#progress1').anim_progressbar();
+	// $('#progress1').anim_progressbar();
 
 	// from second #5 till 15
     var iNow = new Date().setTime(new Date().getTime() + 5 * 1000); // now plus 5 secs
@@ -142,47 +111,44 @@ $(document).ready(function() {
     // we will just set interval of updating to 2 sec
     $('#progress3').anim_progressbar({interval: 2000});
 
-	$(".progressBlue").knob({
-        'min':0,
-        'max':100,
-        'readOnly': false,
-        'width': 80,
-        'height': 80,
-        'fgColor': '#88BBC8',
-        'dynamicDraw': false,
-        'thickness': 0.2,
-        'tickColorizeValues': true,
-        "skin":"tron",
-        "cursor":true
-    })
+	//circular progrress bar
+	$(function () {
 
-    $(".progressRed").knob({
-        'min':0,
-        'max':100,
-        'readOnly': false,
-        'width': 80,
-        'height': 80,
-        'fgColor': '#ED7A53',
-        'dynamicDraw': false,
-        'thickness': 0.2,
-        'tickColorizeValues': true,
-        "skin":"tron",
-        "cursor":true
-    })
+		$(".greenCircle").knob({
+            'min':0,
+            'max':100,
+            'readOnly': true,
+            'width': 80,
+            'height': 80,
+            'fgColor': '#9FC569',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        })
+        $(".redCircle").knob({
+            'min':0,
+            'max':100,
+            'readOnly': true,
+            'width': 80,
+            'height': 80,
+            'fgColor': '#ED7A53',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        })
+        $(".blueCircle").knob({
+            'min':0,
+            'max':100,
+            'readOnly': true,
+            'width': 80,
+            'height': 80,
+            'fgColor': '#88BBC8',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        })
 
-    $(".progressGreen").knob({
-        'min':0,
-        'max':100,
-        'readOnly': false,
-        'width': 80,
-        'height': 80,
-        'fgColor': '#9FC569',
-        'dynamicDraw': false,
-        'thickness': 0.2,
-        'tickColorizeValues': true,
-        "skin":"tron",
-        "cursor":true
-    })
+	});
 
     //--------------- Dialogs ------------------//
 	$('#openDialog').click(function(){

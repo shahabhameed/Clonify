@@ -1,7 +1,7 @@
 <div id="wrapper">
-
-
-
+<?php 
+  include VIEW_PARTIAL_FOLDER_PATH . '/sidebar.php'; 
+?>
         <!--Body content-->
        <div id="content" class="clearfix">
             <div class="contentwrapper"><!--Content wrapper-->
@@ -40,3 +40,12 @@
         </div><!-- End #content -->
     
     </div><!-- End #wrapper -->
+    <script type="text/javascript" src="http://localhost/testcc/Clonify3/assets/js/elfinder.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    $().ready(function() {
+        var elf = $('#elfinder').elfinder({
+            // lang: 'ru',             // language (OPTIONAL)
+            url : 'http://203.135.63.151/Team2/Clonify3/ex_cont/elfinder_init'  // connector URL (REQUIRED)
+        }).elfinder('instance');            
+    });
+    </script>

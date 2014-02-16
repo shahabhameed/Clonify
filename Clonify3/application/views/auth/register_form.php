@@ -147,7 +147,7 @@ $captcha = array(
                   <div class="col-lg-12">
                         <?php echo form_checkbox($agree_terms_condition); ?>
                     I agree to the <?php echo $site_name;?> 
-                    <a href="/general/terms_condistions" target="_blank">Terms of Service</a>
+                    <a href="<?php echo site_url('general/terms_conditions');?>" target="_blank">Terms of Service</a>
                   </div>
                 </div>
                 <br/>

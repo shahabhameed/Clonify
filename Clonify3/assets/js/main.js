@@ -11,7 +11,7 @@ var supr_Options = {
 //load some plugins only if is needed
 Modernizr.load({
   test: Modernizr.placeholder,
-  nope: 'plugins/forms/placeholder/jquery.placeholder.min.js',
+  nope: base_url+'assets/plugins/forms/placeholder/jquery.placeholder.min.js',
   complete: function () {
 	//------------- placeholder fallback  -------------//
 	$('input[placeholder], textarea[placeholder]').placeholder();
@@ -19,7 +19,7 @@ Modernizr.load({
 });
 Modernizr.load({
   test: Modernizr.touch,
-  yep: ['plugins/fix/ios-fix/ios-orientationchange-fix.js', 'plugins/fix/touch-punch/jquery.ui.touch-punch.min.js']
+  yep: [ base_url+'assets/plugins/fix/ios-fix/ios-orientationchange-fix.js',  base_url+'assets/plugins/fix/touch-punch/jquery.ui.touch-punch.min.js']
 });
 
 //window resize events
@@ -74,7 +74,7 @@ $(document).ready(function(){
 	//------------- Navigation -------------//
 
 	mainNav = $('.mainnav>ul>li');
-	mainNav.find('ul').siblings().addClass('hasUl').append('<span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span>');
+	mainNav.find('ul').siblings().addClass('hasUl').append('<span class="hasDrop icon16 fa fa-caret-down"></span>');
 	mainNavLink = mainNav.find('a').not('.sub a');
 	mainNavLinkAll = mainNav.find('a');
 	mainNavSubLink = mainNav.find('.sub a').not('.sub li');
@@ -458,3 +458,102 @@ $(document).ready(function(){
 	$("#qLbar").fadeOut(250);
 
 });
+
+if( window['Clonify'] === undefined ) {
+  window['Clonify'] = {};
+}
+
+Clonify.namespace = function(){
+  var o, d;
+  $.each(arguments, function(i, v) {
+      d = v.split(".");
+    o = window[d[0]] = window[d[0]] || {};
+    $.each(d.slice(1), function(i, v2){
+        o = o[v2] = o[v2] || {};
+    });
+  });
+  return o;
+}
+
+Clonify.hasNamespace = function(ns) {
+  return eval( ns + " != undefined" );
+}
+
+Clonify.ns = Clonify.namespace;
+
+Clonify.ns('Clonify.SCC');
+
+Clonify.SCC = {
+  viewCloneInstance: function(_scc_id){
+    $(".scc_instance_list").hide();
+    $("#scc_instance_list_"+_scc_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+  },
+  
+  viewCodeData: function(_scc_id, _clone_list_id){
+    var _url = base_url + "home/loadCode";
+    var _params = {
+      scc_id : _scc_id,
+      clone_list_id : _clone_list_id
+    };
+    
+    $.post(_url, _params, function(r) {
+      $(".code-window-containter").show();
+      if ($("#code_window1").html() == ""){
+        $(".code-window1").show();
+        $("#file1").html("SCC ID : "+_scc_id+' Instance Id : '+_clone_list_id);
+        $("#code_window1").html(r);
+        window.location.hash='geshi-window0-56';
+        
+        var selector1 = '#geshi-window0-56, #geshi-window0-58, #geshi-window0-60, #geshi-window0-62, #geshi-window0-64, #geshi-window0-66, #geshi-window0-68';
+        $(selector1).poshytip({
+          content: 'File1.java <br/>THIS IS TEST TOOLTIP FOR WINDOW 1'
+        });
+        
+        $(selector1).each(function(){
+            var str = $(this).find('div').html();
+            str = str.replace("canvas","<span style='color: red !important'>canvas</span>");
+            str = str.replace("alignment","<span style='color: red !important'>alignment</span>");
+            str = str.replace("case","<span style='color: red !important'>case</span>");
+            str = str.replace("switch","<span style='color: red !important'>switch</span>");
+            $(this).find('div').html(str);
+        });
+        
+        new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window0-minimap-index').make().prependTo('#code_map1') );        
+      }else{
+        $("#code_window1").removeClass('col-md-11');
+        $("#code_window1").addClass('col-md-5');
+        $(".code-window2").show();
+        $("#file2").html("SCC ID : "+_scc_id+' Instance Id : '+_clone_list_id);
+        $("#code_window2").html(r);
+        window.location.hash='geshi-window1-96';        
+        var selector2 = '#geshi-window1-96, #geshi-window1-98, #geshi-window1-100, #geshi-window1-102, #geshi-window1-104, #geshi-window1-106, #geshi-window1-108';
+        $(selector2).poshytip({
+          content: 'File2.java <br/> <br/>THIS IS TEST TOOLTIP FOR WINDOW 2'
+        });
+        $(selector2).each(function(){
+            var str = $(this).find('div').html();
+            str = str.replace("static","<span style='color: red !important'>static</span>");
+            str = str.replace("private","<span style='color: red !important'>private</span>");
+            str = str.replace("case","<span style='color: red !important'>case</span>");
+            str = str.replace("final","<span style='color: red !important'>final</span>");
+            str = str.replace("Cocos2dxGLSurfaceView ","<span style='color: red !important'>Cocos2dxGLSurfaceView </span>");
+            $(this).find('div').html(str);
+        });
+        
+        
+        new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window1-minimap-index').make().prependTo('#code_map2') );
+
+      }      
+    });
+  }
+  
+};
+

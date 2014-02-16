@@ -10,9 +10,7 @@ class Auth extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library('security');
 		$this->load->library('tank_auth');
-		$this->load->model('repository_model');
 		$this->lang->load('tank_auth');
-		//$this->load->library('repositoryModel');
 		$this->form_validation->set_error_delimiters('', '');
 	}
 
@@ -96,9 +94,9 @@ class Auth extends CI_Controller
                             }
                           }        
 			}
-			$this->load->view('partials/header');
+			$this->load->view('partials/main_header');
 			$this->load->view('auth/login_form', $data);
-			$this->load->view('partials/footer');
+			$this->load->view('partials/main_footer');
 		}
 	}
 
@@ -199,9 +197,9 @@ class Auth extends CI_Controller
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
                         $data['site_name'] = $this->config->item('website_name', 'tank_auth');
-			$this->load->view('partials/header');
+			$this->load->view('partials/main_header');
 			$this->load->view('auth/register_form', $data);
-			$this->load->view('partials/footer');
+			$this->load->view('partials/main_footer');
 		}
 	}
 
@@ -258,13 +256,6 @@ class Auth extends CI_Controller
 
 		// Activate user
 		if ($this->tank_auth->activate_user($user_id, $new_email_key)) {		// success
-			$username =  $this->tank_auth->get_username_by_id_mod($user_id);
-			if (!file_exists('C:\xampp\htdocs\Team2\Clonify3\files\\'.$username)) {
-				mkdir('C:\xampp\htdocs\Team2\Clonify3\files\\'.$username, 0777, true);
-			}
-			//insert into user_directory table
-			$path = 'C:/xampp/htdocs/Team2/Clonify3/files/'.$username.'/';
-			$this->repository_model->insertUserRepository($path,$user_id );
 			$this->tank_auth->logout();
                         $data = $this->tank_auth->get_user_by_id($user_id);
                         $data['site_name'] = $this->config->item('website_name', 'tank_auth');
@@ -517,9 +508,6 @@ class Auth extends CI_Controller
 		$this->email->message($this->load->view('email/'.$type.'-html', $data, TRUE));
 		$this->email->set_alt_message($this->load->view('email/'.$type.'-txt', $data, TRUE));
 		$this->email->send();
-		//print_r('yes');
-		//$this->email->print_debugger();exit;
-		
 	}
 
 	/**
@@ -667,13 +655,13 @@ class Auth extends CI_Controller
   function getUserProfile() {
     
     $this->load->library('facebook', array(
-      'appId'  => '645751038804918',
-      'secret' => 'b4b0784eb8dfb8cacb69be10c8a1210d',
+      'appId'  => '240862889425196',
+      'secret' => 'd7155365dbc8e56496edba1009d10ee2',
       'cookie' => true
     ));
     $facebook = new Facebook(array(
-      'appId'  => '645751038804918',
-      'secret' => 'b4b0784eb8dfb8cacb69be10c8a1210d',
+      'appId'  => '240862889425196',
+      'secret' => 'd7155365dbc8e56496edba1009d10ee2',
       'cookie' => true
     ));
     

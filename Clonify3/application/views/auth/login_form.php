@@ -7,7 +7,7 @@ $login = array(
 	'class' => 'form-control',
 	'placeholder' => 'Enter User Name ...',
 );
-if ($login_by_username AND $login_by_email) {
+if ($login_by_username && $login_by_email) {
 	$login_label = 'Email or login';
 } else if ($login_by_username) {
 	$login_label = 'Login';
@@ -47,8 +47,7 @@ $captcha = array(
                 <div class="form-group">
                     <label class="col-lg-12 control-label" for="username">Username/Email:</label>
                     <div class="col-lg-12">
-                        <?php echo form_input($login); ?>
-                        <span class="icon16 icomoon-icon-user right gray marginR10"></span>
+                        <?php echo form_input($login); ?>                        
                     </div>
                 </div><!-- End .form-group  -->
                 <div class="form-group">
@@ -57,8 +56,7 @@ $captcha = array(
                         <?php echo form_password($password); ?>
                         <div class="checkbox left">
                             <label style="font-size:11px;"><?php echo form_checkbox($remember); ?>Remember me</label>
-                        </div>
-                        <span class="icon16 icomoon-icon-lock right gray marginR10"></span>
+                        </div>                        
                         <span class="forgot help-block"><a href="<?=site_url('/auth/forgot_password/')?>">Forgot your password?</a></span>
                     </div>
                 </div>
@@ -81,6 +79,7 @@ $captcha = array(
                <?php } }?>
                 <div class="form-group">
                     <div class="col-lg-12 clearfix form-actions">
+                      <button type ="button" class="btn btn-facebook center" onclick="login_user()"><i class="fa fa-facebook"></i> | Connect with Facebook</button>
                         <button type="submit" class="btn btn-info center" id="loginBtn"><span class="fa fa-sign-in white"></span> Login</button>
                         <?php if ($this->config->item('allow_registration', 'tank_auth')){?>
                         <a href="<?=site_url('auth/register');?>" class="btn btn-success center" style="margin-top:10px;"><span class="fa fa-upload white" ></span> Sign up</a>
@@ -149,46 +148,50 @@ $captcha = array(
     <?php } ?>
   });
 </script>
-<br /><br /><br /><br />
-
-    <div id="fb-landing-page-data"><div id="fb-root"></div>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId: '240862889425196',
-            status: true,
-            cookie: true,
-            xfbml: true,
-            oauth: true
-          });
-
-        };
-        (function() {
-          var e = document.createElement('script');
-          e.async = true;
-          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-          document.getElementById('fb-root').appendChild(e);
-        }());
-        var login = function() {
-          FB.getLoginStatus(function(response) {
-            if (response.status === 'connected')
-            {
-              $.get("/auth/facebook_login", null, function(responseText) {
-                console.log(responseText);
-                var data = eval("(" + responseText + ')');
-                console.log(data);
-                if (data && data.status && data.status == "failure") {
-                  alert(data.msg);
-                  window.location = "/auth/register"
-                }else if (data && data.status && data.status == "success"){
-                  window.location = "/auth"
-                }
+<!-- <div id="fb-landing-page-data">
+      <div id="fb-root"></div>
+      <script type="text/javascript">
+          
+            window.fbAsyncInit = function() {
+              FB.init({
+                appId      : "240862889425196",
+                status     : true, 
+                cookie     : true,
+                xfbml      : true,
+                oauth      : true
               });
-            }
-          });
-        };
-      </script>
-     <center>
-	 <div  id="fb-login-button" class="fb-login-button" data-scope="email" data-onlogin="login();" size="large">Connect with Facebook</div>
-	 </center>
-  </div>
+                  
+            };
+
+            (function(d){
+               var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+               if (d.getElementById(id)) {return;}
+               js = d.createElement('script'); js.id = id; js.async = true;
+               js.src = "//connect.facebook.net/en_US/all.js";
+               ref.parentNode.insertBefore(js, ref);
+             }(document));
+             
+             function login_user(){
+              FB.login(function(response) {
+                 if (response.authResponse) {
+                   console.log('Welcome!  Fetching your information.... ');
+                   FB.api('/me', function(response) {
+                      if(response.email){
+                          window.location = "<?=base_url()?>auth/fb_login";
+                      }else{
+                           alert('You cancelled login or did not fully authorize.');
+                      }
+                   });
+                 } else {
+                   alert('You cancelled login or did not fully authorize.');
+                 }
+               }, {scope: 'email'});
+             }
+             function fb_invite(){
+              FB.ui({
+                  method: 'apprequests',
+                  message: 'Invite You to Clonify'
+                });
+             }
+      </script> 
+  </div> -->

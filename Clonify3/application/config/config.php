@@ -18,7 +18,7 @@ $config['site_title'] = 'Clonify';
 | path to your installation.
 |
 */
-$config['base_url'] = 'http://203.135.63.151/Team2/Clonify3/';
+$config['base_url'] = 'http://localhost/clonify/Clonify3/';
 
 /*
 |--------------------------------------------------------------------------

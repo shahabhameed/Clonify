@@ -16,7 +16,7 @@ if ($this->config->item('use_username', 'tank_auth')) {
 ?>
     
     <div class="container">
-            <div class="loginHeader"><h2>Forgot Password</h2></div>
+            <div class="loginHeader row"><h2>Forgot Password</h2></div>
         <div class="loginContainer">
 
 

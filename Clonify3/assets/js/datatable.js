@@ -1,26 +1,110 @@
 // document ready function
-$(document).ready(function() { 	
-
+$(document).ready(function() { 	        
 	//--------------- Data tables ------------------//
 	if($('table').hasClass('dynamicTable')){
-		$('.dynamicTable').dataTable({
-			"sPaginationType": "full_numbers",
+		$('.dynamicTable').dataTable( {
+			"sDom": "<'row'<'col-lg-6'l><'col-lg-6'f>r>t<'row'<'col-lg-6'i><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
 			"bJQueryUI": false,
 			"bAutoWidth": false,
-			"bLengthChange": false,
-			"fnInitComplete": function(oSettings, json) {
-		      $('.dataTables_filter>label>input').attr('id', 'search');
-		    }
+                        "iDisplayLength" : 5,
+                        "aLengthMenu" : [5,10,25,50],
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
 		});
+
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+                $('.dataTables_filter').hide();
+                
+	}
+	if($('table').hasClass('dynamicTable1')){
+		$('.dynamicTable1').dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({ sPlaceHolder: "head:after",
+                                         aoColumns: [
+                                                     null,
+                                                     null,
+                                                     { type: "number-range" }
+                                                     ]
+                });
+
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+                $('.dataTables_filter').hide();
+                
 	}
 
-	//Boostrap modal
-	$('#myModal').modal({ show: false});
-	
-	//add event to modal after closed
-	$('#myModal').on('hidden', function () {
-	  	console.log('modal is closed');
-	})
+	if($('table').hasClass('tableTools')){
+		$('.tableTools').dataTable( {
+			"sDom": "<'row'<'col-lg-4'l><'col-lg-4'T><'col-lg-4'f>r>t<'row'<'col-lg-4'i><'col-lg-4'i><'col-lg-4'p>>",
+			"oTableTools": {
+				"sSwfPath": "plugins/tables/dataTables/swf/copy_csv_xls_pdf.swf",
+				"aButtons": [
+				"copy",
+				"print",
+					{
+						"sExtends":    "collection",
+						"sButtonText": 'Save <span class="caret" />',
+						"aButtons":    [ "csv", "xls", "pdf" ]
+					}
+				]
+			},
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+	}
+
+	// Set the classes that TableTools uses to something suitable for Bootstrap
+	$.extend( true, $.fn.DataTable.TableTools.classes, {
+		"container": "btn-group",
+		"buttons": {
+			"normal": "btn",
+			"disabled": "btn disabled"
+		},
+		"collection": {
+			"container": "DTTT_dropdown dropdown-menu",
+			"buttons": {
+				"normal": "",
+				"disabled": "disabled"
+			}
+		}
+	} );
+
+	// Have the collection use a bootstrap compatible dropdown
+	$.extend( true, $.fn.DataTable.TableTools.DEFAULTS.oTags, {
+		"collection": {
+			"container": "ul",
+			"button": "li",
+			"liner": "a"
+		}
+	} );
+
 
 });//End document ready functions
 

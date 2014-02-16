@@ -36,7 +36,7 @@
 	zoom: 1; /* Feeling sorry for IE */
 }
 
-.box .dataTables_wrapper{
+.panel .dataTables_wrapper{
 	padding-top: 13px;
 }
 
@@ -61,22 +61,22 @@
 	float: right;
 }
 	.dataTables_length .selector {margin-left:10px;}
-	.dataTables_length .selector select {width:50px !important;}
-.box .dataTables_length {margin-right: 15px;}
+	.dataTables_length .selector select {width:50px !important;height: 30px;}
+.panel .dataTables_length {margin-right: 15px;}
 .dataTables_filter {
 	width: auto;
 	float: left;
 	text-align: left;
 }
 	.dataTables_filter input {margin-left:10px; background: url(../../../images/search.png) no-repeat 98% center;}
-.box .dataTables_filter {margin-left:15px;}
+.panel .dataTables_filter {margin-left:15px;}
 .dataTables_info {
 	width: auto;
 	float: left;
 	margin-top:10px;
 	padding-left:10px;
 }
-.box .dataTables_info {
+.panel .dataTables_info {
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
@@ -109,7 +109,7 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 );
 	min-height: 28px;
 	color: #717171;
-	box-shadow:0 1px 0 #eaeaea ,0 1px 0 #fff inset;
+	panel-shadow:0 1px 0 #eaeaea ,0 1px 0 #fff inset;
 	margin-right: 4px;
 	-webkit-border-radius: 2px 2px 2px 2px;
 	-moz-border-radius: 2px 2px 2px 2px;
@@ -195,9 +195,9 @@ table.display thead tr {
 	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
 	background: linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 );
-	-moz-box-shadow:0 1px 0px rgba(255, 255, 255, 1);
-	-webkit-box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
-	box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
+	-moz-panel-shadow:0 1px 0px rgba(255, 255, 255, 1);
+	-webkit-panel-shadow: 0 1px 0px rgba(255, 255, 255, 1);
+	panel-shadow: 0 1px 0px rgba(255, 255, 255, 1);
 }
 table.display thead th {
 	font-weight: bold;
@@ -214,15 +214,15 @@ table.display tfoot tr {
 	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
 	background: linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 );
-	-moz-box-shadow:0 1px 0px rgba(255, 255, 255, 1);
-	-webkit-box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
-	box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
+	-moz-panel-shadow:0 1px 0px rgba(255, 255, 255, 1);
+	-webkit-panel-shadow: 0 1px 0px rgba(255, 255, 255, 1);
+	panel-shadow: 0 1px 0px rgba(255, 255, 255, 1);
 	border-bottom: 1px solid #c4c4c4;
 }
 table.display tfoot th {
 	font-weight: bold;
 }
-.box table.display tfoot th {
+.panel table.display tfoot th {
 	border-bottom: 1px solid #c4c4c4;
 }
 
@@ -383,7 +383,7 @@ td.details {
 
 .paging_full_numbers a:active {
 	color: #f2f2f2;
-	box-shadow:0 1px 0 #eaeaea ,0 1px 0 #67c3da inset;
+	panel-shadow:0 1px 0 #eaeaea ,0 1px 0 #67c3da inset;
 	border-color: #5098aa;
 	background: #88BBC8;
 }
@@ -424,7 +424,7 @@ td.details {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 );
 	min-height: 28px;
 	color: #717171;
-	box-shadow:0 1px 0 #eaeaea ,0 1px 0 #fff inset;
+	panel-shadow:0 1px 0 #eaeaea ,0 1px 0 #fff inset;
 	margin-right: 4px;
 	-webkit-border-radius: 2px 2px 2px 2px;
 	-moz-border-radius: 2px 2px 2px 2px;
@@ -439,7 +439,7 @@ td.details {
 
 .paging_full_numbers a.paginate_active {
 	color: #f2f2f2;
-	box-shadow:0 1px 0 #eaeaea ,0 1px 0 #67c3da inset;
+	panel-shadow:0 1px 0 #eaeaea ,0 1px 0 #67c3da inset;
 	border-color: #5098aa;
 	background: #88BBC8;
 	float: left;
@@ -490,114 +490,6 @@ tr.even td.sorting_2 {
 tr.even td.sorting_3 {
 	/*background-color: #e0e0e0;*/
 }
-
-
-/* For the Conditional-CSS grading rows */
-/*
- 	Colour calculations (based off the main row colours)
-  Level 1:
-		dd > c4
-		ee > d5
-	Level 2:
-	  dd > d1
-	  ee > e2
- */
-/*tr.odd.gradeA td.sorting_1 {
-	background-color: #c4ffc4;
-}
-
-tr.odd.gradeA td.sorting_2 {
-	background-color: #d1ffd1;
-}
-
-tr.odd.gradeA td.sorting_3 {
-	background-color: #d1ffd1;
-}
-
-tr.even.gradeA td.sorting_1 {
-	background-color: #d5ffd5;
-}
-
-tr.even.gradeA td.sorting_2 {
-	background-color: #e2ffe2;
-}
-
-tr.even.gradeA td.sorting_3 {
-	background-color: #e2ffe2;
-}
-
-tr.odd.gradeC td.sorting_1 {
-	background-color: #c4c4ff;
-}
-
-tr.odd.gradeC td.sorting_2 {
-	background-color: #d1d1ff;
-}
-
-tr.odd.gradeC td.sorting_3 {
-	background-color: #d1d1ff;
-}
-
-tr.even.gradeC td.sorting_1 {
-	background-color: #d5d5ff;
-}
-
-tr.even.gradeC td.sorting_2 {
-	background-color: #e2e2ff;
-}
-
-tr.even.gradeC td.sorting_3 {
-	background-color: #e2e2ff;
-}
-
-tr.odd.gradeX td.sorting_1 {
-	background-color: #ffc4c4;
-}
-
-tr.odd.gradeX td.sorting_2 {
-	background-color: #ffd1d1;
-}
-
-tr.odd.gradeX td.sorting_3 {
-	background-color: #ffd1d1;
-}
-
-tr.even.gradeX td.sorting_1 {
-	background-color: #ffd5d5;
-}
-
-tr.even.gradeX td.sorting_2 {
-	background-color: #ffe2e2;
-}
-
-tr.even.gradeX td.sorting_3 {
-	background-color: #ffe2e2;
-}
-
-tr.odd.gradeU td.sorting_1 {
-	background-color: #c4c4c4;
-}
-
-tr.odd.gradeU td.sorting_2 {
-	background-color: #d1d1d1;
-}
-
-tr.odd.gradeU td.sorting_3 {
-	background-color: #d1d1d1;
-}
-
-tr.even.gradeU td.sorting_1 {
-	background-color: #d5d5d5;
-}
-
-tr.even.gradeU td.sorting_2 {
-	background-color: #e2e2e2;
-}
-
-tr.even.gradeU td.sorting_3 {
-	background-color: #e2e2e2;
-}*/
-
 
 /*
  * Row highlighting example
@@ -670,3 +562,132 @@ table.display tr.gradeU {
 	background-color: #ddd;
 }
 
+*
+ * TableTools styles
+ */
+.table tbody tr.active td,
+.table tbody tr.active th {
+	background-color: #08C;
+	color: white;
+}
+
+.table tbody tr.active:hover td,
+.table tbody tr.active:hover th {
+	background-color: #0075b0 !important;
+}
+
+.table-striped tbody tr.active:nth-child(odd) td,
+.table-striped tbody tr.active:nth-child(odd) th {
+	background-color: #017ebc;
+}
+
+table.DTTT_selectable tbody tr {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+div.DTTT .btn {
+	color: #333 !important;
+	font-size: 12px;
+}
+
+div.DTTT .btn:hover {
+	text-decoration: none !important;
+}
+
+
+ul.DTTT_dropdown.dropdown-menu a {
+	color: #333 !important; /* needed only when demo_page.css is included */
+}
+
+ul.DTTT_dropdown.dropdown-menu li:hover a {
+	background-color: #0088cc;
+	color: white !important;
+}
+
+/* TableTools information display */
+div.DTTT_print_info.modal {
+	height: 150px;
+	margin-top: -75px;
+	text-align: center;
+}
+
+div.DTTT_print_info h6 {
+	font-weight: normal;
+	font-size: 28px;
+	line-height: 28px;
+	margin: 1em;
+}
+
+div.DTTT_print_info p {
+	font-size: 14px;
+	line-height: 20px;
+}
+
+
+
+/*
+ * FixedColumns styles
+ */
+div.DTFC_LeftHeadWrapper table,
+div.DTFC_LeftFootWrapper table,
+table.DTFC_Cloned tr.even {
+	background-color: white;
+}
+
+div.DTFC_LeftHeadWrapper table {
+	margin-bottom: 0 !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.DTFC_LeftHeadWrapper table thead tr:last-child th:first-child,
+div.DTFC_LeftHeadWrapper table thead tr:last-child td:first-child {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.DTFC_LeftBodyWrapper table {
+	border-top: none;
+	margin-bottom: 0 !important;
+}
+
+div.DTFC_LeftBodyWrapper tbody tr:first-child th,
+div.DTFC_LeftBodyWrapper tbody tr:first-child td {
+	border-top: none;
+}
+
+div.DTFC_LeftFootWrapper table {
+	border-top: none;
+}
+
+
+/* Custom styles */
+.dataTables_length {
+	width: auto;
+	float: left;
+}
+
+.dataTables_filter {
+	width: auto;
+	float:right;
+	text-align: left;
+	margin-right: 15px;
+	margin-bottom: 10px;
+}
+
+div.dataTables_length select {
+	width: 75px;
+	height: auto;
+}
+
+div.dataTables_paginate {
+	margin-top: 10px;
+}
+div.dataTables_info {}
+
+div.dataTables_paginate {
+	margin-bottom: 0px;
+	margin-right: 15px;
+}
