@@ -6,6 +6,7 @@
 !/Clonify3/application/cache/index.html
 !/Clonify3/application/cache/.htaccess
 
+/Clonify/CMInvoker/config.properties
 /Clonify3/application/logs/*
 !/Clonify3/application/logs/index.html
 !/Clonify3/application/logs/.htaccess
