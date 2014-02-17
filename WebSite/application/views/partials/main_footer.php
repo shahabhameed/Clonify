@@ -5,6 +5,20 @@
     <script type="text/javascript" src="<?=asset_url('plugins/forms/uniform/jquery.uniform.min.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('plugins/forms/validate/jquery.validate.min.js');?>"></script>      
     
+    <script type="text/javascript" src="<?=asset_url('plugins/forms/elastic/jquery.elastic.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('plugins/forms/inputlimiter/jquery.inputlimiter.1.3.min.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('plugins/forms/maskedinput/jquery.maskedinput-1.3.min.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('plugins/forms/togglebutton/jquery.toggle.buttons.js');?>"></script>    
+    <script type="text/javascript" src="<?=asset_url('plugins/forms/globalize/globalize.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('plugins/forms/color-picker/colorpicker.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('plugins/forms/timeentry/jquery.timeentry.min.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('plugins/forms/select/select2.min.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('plugins/forms/dualselect/jquery.dualListBox-1.3.min.js');?>"></script>    
+
+     <script type="text/javascript" src="<?=asset_url('plugins/misc/search/tipuesearch_set.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('plugins/misc/search/tipuesearch_data.js');?>"></script><!-- JSON for searched results -->
+    <script type="text/javascript" src="<?=asset_url('plugins/misc/search/tipuesearch.js');?>"></script>
+    
     <script type="text/javascript" src="<?=asset_url('plugins/tables/dataTables/jquery.dataTables.min.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('plugins/tables/dataTables/jquery.dataTables.columnFilter.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('plugins/tables/dataTables/TableTools.min.js');?>"></script>
@@ -32,6 +46,7 @@
     <script type="text/javascript" src="<?=asset_url('js/jquery.poshytip.min.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('js/flexible-nav.min.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('js/jquery-ui.min.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('js/forms.js');?>"></script>
     
     
 

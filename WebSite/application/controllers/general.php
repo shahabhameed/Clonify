@@ -18,4 +18,11 @@ class General extends CI_Controller {
 	    $this->load->view('general/terms_condistions.php');
 	    $this->load->view('partials/main_footer');
           }
+          
+          public function wajj_khizar(){
+            $this->load->view('partials/main_header');
+            $this->load->view('partials/sidebar');
+	    $this->load->view('wajj_khizar');
+	    $this->load->view('partials/main_footer');
+          }
 }
