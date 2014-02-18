@@ -24,7 +24,10 @@ class SCC_model extends CI_Model
     $this->db->join('repository_directory AS tb4', 'tb3.directory_id = tb4.id', 'INNER');
     $this->db->where('tb1.invocation_id', $invocationId);
     $result = $this->db->get();
-    
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }
+    return NULL;    
   }
   
   

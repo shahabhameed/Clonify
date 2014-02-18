@@ -15,6 +15,14 @@ class SCC
   function getAllSCCRows($invocationId=3){
     $userId = $this->ci->tank_auth->get_user_id();
     
-    return $this->ci->scc_model->getAllSCCRows($invocationId, $userId);    
+    $data = $this->ci->scc_model->getAllSCCRows($invocationId, $userId);
+    if ($data){
+      $data = json_decode(json_encode($data), true); // Changing Obj in Array
+    }
+    $result = array();
+    
+    // PARSE DATA HERE AND PREPARE ARRAY NEEDED BY CONTROLLER    
+    
+    return $data;
   }
 }
