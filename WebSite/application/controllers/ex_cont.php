@@ -32,21 +32,9 @@ class Ex_cont extends CI_Controller
 			array( 
 				'driver' => 'LocalFileSystem', 
 				'path'   => $this->_path, 
-				'URL'    => site_url(),
-				'uploadOrder'=> array( 'deny', 'allow'),
-				'uploadAllow' => array('text', 'java'),
-				'uploadDeny' => array('all'),
-				'attributes' => array(
-					array(
-					'pattern' => '/.tmb/',
-					'read' => false,
-					'write' => false,
-					'hidden' => true,
-					'locked' => true
-					),
+				'URL'    => site_url()
 				// more elFinder options here
-				) 
-			)
+			) 
 			)
 		);
 		$this->load->library('elfinder_lib', $opts);

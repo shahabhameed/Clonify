@@ -44,10 +44,14 @@ function myValidate(){
                 </div><!-- End .heading-->
                 
 			<form method="post" accept-charset="utf-8" id="myForm" onsubmit="return myValidate();" action="<?php echo base_url();?>index.php/invoke/invoke_init" >
+			
+			
 			<table id="multi_select_tbl">
             	<tr>
                 	<td width="130px;"><label>Min Similarities for Simple Clone Class</label></td>
-                    <td><input type="text" name="sccMinSim" id="sccMinSim"/><label style="display:inline-block" class="myErrLbl" id="minTokErr"></label></td>
+                    <td><input id="spinner1" name="spinner1" type="text" value="1">
+
+					<label style="display:inline-block" class="myErrLbl" id="minTokErr"></label></td>
                     <td></td>
             	</tr>
 <!--                <tr>
@@ -81,7 +85,8 @@ function myValidate(){
                      <td><label id="filErr" class="myErrLbl"></label></td>
             	</tr>
                 <tr>
-                	<td><input type="submit" value="Next"/></td>
+                	<td>
+					<button class="btn btn-success pull-left" type="submit"> Next </button>
                     <td></td>
                     <td></td>
             	</tr>
