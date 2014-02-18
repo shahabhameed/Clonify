@@ -45,7 +45,21 @@
     $().ready(function() {
         var elf = $('#elfinder').elfinder({
             // lang: 'ru',             // language (OPTIONAL)
-            url : '<?php echo site_url("ex_cont/elfinder_init");?>'  // connector URL (REQUIRED)
-        }).elfinder('instance');            
+            url : '<?php echo site_url("ex_cont/elfinder_init");?>',  // connector URL (REQUIRED)
+            uiOptions: {
+                    toolbar : [
+                        // toolbar configuration
+                        ['open'],
+                        ['back', 'forward'],
+                        ['reload'],
+                        ['home', 'up'],
+                        ['mkdir', 'mkfile', 'upload'],
+                        ['info'],
+                        ['rm'],
+                        ['search'],
+                        ['view']
+                    ]
+                },
+	}).elfinder('instance');            
     });
     </script>
