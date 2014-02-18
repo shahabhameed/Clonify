@@ -42,14 +42,23 @@ $(document).ready(function() {
 	$( "#slider-range" ).slider({
 		range: true,
 		min: 0,
-		max: 500,
-		values: [ 75, 300 ],
+		max: 5000,
+		values: [ 0, 5000 ],
 		slide: function( event, ui ) {
-			$( "#amount1" ).val( "Price range: $" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+			$('.range_from').val(ui.values[ 0 ]);
+			$('.range_to').val(ui.values[ 1 ]);
+			$('.range_from').trigger( "keyup" );
+			$('.range_to').trigger( "keyup" )
+			$( "#amount1" ).val( " " + $( "#slider-range" ).slider( "values", 0 ) +
+		" - " + $( "#slider-range" ).slider( "values", 1 ) );
+
+			// $( "#amount1" ).val( "Length range: " + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
 		}
 	});
-	$( "#amount1" ).val( "Price range: $" + $( "#slider-range" ).slider( "values", 0 ) +
-		" - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+
+	$( "#amount1" ).val( "  " + $( "#slider-range" ).slider( "values", 0 ) +
+		" - " + $( "#slider-range" ).slider( "values", 1 ) );
 
 	//with minimum
 	$( "#slider-range-min" ).slider({
@@ -92,7 +101,7 @@ $(document).ready(function() {
 	});
 
 	//animated progress bar
-	$('#progress1').anim_progressbar();
+	// $('#progress1').anim_progressbar();
 
 	// from second #5 till 15
     var iNow = new Date().setTime(new Date().getTime() + 5 * 1000); // now plus 5 secs

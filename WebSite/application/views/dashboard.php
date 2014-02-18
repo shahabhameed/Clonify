@@ -34,7 +34,7 @@
                    </div><!-- End .row-fluid -->
 				<div>
 					<form method="post" accept-charset="utf-8" action="<?php echo base_url();?>index.php/ex_cont/saveFilesToDb" >
-					<button class="btn btn-success pull-right" type="submit"> Finish </button>
+					<input type="submit" value="Finish"/>
 				</div>
             </div><!-- End contentwrapper -->
         </div><!-- End #content -->
@@ -45,7 +45,21 @@
     $().ready(function() {
         var elf = $('#elfinder').elfinder({
             // lang: 'ru',             // language (OPTIONAL)
-            url : '<?php echo site_url("ex_cont/elfinder_init");?>'  // connector URL (REQUIRED)
-        }).elfinder('instance');            
+            url : '<?php echo site_url("ex_cont/elfinder_init");?>',  // connector URL (REQUIRED)
+            uiOptions: {
+                    toolbar : [
+                        // toolbar configuration
+                        ['open'],
+                        ['back', 'forward'],
+                        ['reload'],
+                        ['home', 'up'],
+                        ['mkdir', 'mkfile', 'upload'],
+                        ['info'],
+                        ['rm'],
+                        ['search'],
+                        ['view']
+                    ]
+                },
+	}).elfinder('instance');            
     });
     </script>

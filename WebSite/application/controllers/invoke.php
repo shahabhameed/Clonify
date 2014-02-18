@@ -49,14 +49,7 @@ class Invoke extends CI_Controller
 		$data['tokens']=$this->invoke_model->get_all_language_tokens();
 		$this->open_view('invoke_sup',$data);//loading success view
 	}
-	function test(){
-            
-		$data['usrfiles']=$this->invoke_model->get_all_user_files();
-		$data['languages']=$this->invoke_model->get_all_languages();
-		$this->open_view('test',$data);//loading success view
 	
-          }
-
 	function invoke_sup()
 	{
     	//echo "in invoke";
