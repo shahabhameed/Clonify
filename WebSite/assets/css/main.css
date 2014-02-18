@@ -3086,6 +3086,7 @@ form input.valid {border: 1px solid #9FC569 !important;}
 	float: left;
 	background: inherit;
 	border-top: 1px solid #c4c4c4;
+	border-bottom: 1px solid #c4c4c4;
 }
 .ui-formwizard .wizard-actions .btn.pull-left {margin-left: 15px;}
 .ui-formwizard .wizard-actions .btn.pull-right  {margin-right: 15px;}
@@ -3096,6 +3097,7 @@ form input.valid {border: 1px solid #9FC569 !important;}
 	height: auto;
 	padding: 0;
 	border-bottom: 1px solid #c4c4c4;
+	border-top: 1px solid #c4c4c4;
 	margin-bottom: 20px;
 }
 .wizard-steps.hide{display: none;}
