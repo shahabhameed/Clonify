@@ -33,7 +33,7 @@ class Ex_cont extends CI_Controller
 				'driver' => 'LocalFileSystem', 
 				'path'   => $this->_path, 
 				'URL'    => site_url(),
-				'uploadOrder'=> array( 'allow', 'deny'),
+				'uploadOrder'=> array( 'deny', 'allow'),
 				'uploadAllow' => array('text', 'java'),
 				'uploadDeny' => array('all'),
 				'attributes' => array(
