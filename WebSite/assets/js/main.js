@@ -49,25 +49,7 @@ $(document).ready(function(){
 		$('#header').addClass('container');
 		$('#wrapper').addClass('container');
 	}
-
-	//rtl version
-	if(supr_Options.rtl) {
-		localStorage.setItem('rtl', 1);
-		$('#bootstrap').attr('href', 'css/bootstrap/bootstrap.rtl.min.css');
-		$('#bootstrap-responsive').attr('href', 'css/bootstrap/bootstrap-responsive.rtl.min.css');
-		$('body').addClass('rtl');
-		if(!$('#content-two').length){
-			$('#sidebar').attr('id', 'sidebar-right');
-			$('#sidebarbg').attr('id', 'sidebarbg-right');
-			$('.collapseBtn').addClass('rightbar').removeClass('leftbar');
-			$('#content').attr('id', 'content-one');
-		}
-	} else {localStorage.setItem('rtl', 0);}
 	
-  	//Disable certain links
-    $('a[href^=#]').click(function (e) {
-      e.preventDefault()
-    })
 
     $('.search-btn').addClass('nostyle');//tell uniform to not style this element
  
@@ -448,10 +430,7 @@ $(document).ready(function(){
            	$('#sidebar-right').removeClass('hided showRb');
         }
     });
-	
-	//------------- Uniform  -------------//
-	//add class .nostyle if not want uniform to style field
-	$("input, textarea, select").not('.nostyle').uniform();
+
 
 	//remove overlay and show page
 	$("#qLoverlay").fadeOut(250);
