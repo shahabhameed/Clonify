@@ -85,7 +85,7 @@ width: 50% !important;
                              </div>
                             <?php } ?>
                           </td>
-                          <td><?php echo isset($data['total_clones']) ? $data['total_clones'] : '-';?></td>
+                          <td><?php echo isset($data['members']) ? $data['members'] : '-';?></td>
                           
                         </tr>
                         <?php }?>                        

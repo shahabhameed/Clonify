@@ -514,11 +514,16 @@ Clonify.SCC = {
         $(".code-window1").show();
         $("#file1").html("SCC ID : "+_scc_id+' Instance Id : '+_clone_list_id);
         $("#code_window1").html(r);
-        window.location.hash='geshi-window0-56';
+        window.location.hash='geshi-window0-'+start_line;
+        var selector1 = "";
+        for (var i = start_line; i <= end_line; i++){
+            selector1 += '#geshi-window0-'+i+",";
+        }
         
-        var selector1 = '#geshi-window0-56, #geshi-window0-58, #geshi-window0-60, #geshi-window0-62, #geshi-window0-64, #geshi-window0-66, #geshi-window0-68';
+        selector1 = selector1.substring(0, selector1.length-1);
+
         $(selector1).poshytip({
-          content: 'File1.java <br/>THIS IS TEST TOOLTIP FOR WINDOW 1'
+          content: 'THIS IS TEST TOOLTIP FOR WINDOW 1'
         });
         
         $(selector1).each(function(){
@@ -537,10 +542,15 @@ Clonify.SCC = {
         $(".code-window2").show();
         $("#file2").html("SCC ID : "+_scc_id+' Instance Id : '+_clone_list_id);
         $("#code_window2").html(r);
-        window.location.hash='geshi-window1-96';        
-        var selector2 = '#geshi-window1-96, #geshi-window1-98, #geshi-window1-100, #geshi-window1-102, #geshi-window1-104, #geshi-window1-106, #geshi-window1-108';
+        window.location.hash='geshi-window1-'+start_line;        
+        var selector2 = "";
+        for (var i = start_line; i <= end_line; i++){
+            selector2 += '#geshi-window1-'+i+",";
+        }
+        selector2 = selector2.substring(0, selector2.length-1);
+
         $(selector2).poshytip({
-          content: 'File2.java <br/> <br/>THIS IS TEST TOOLTIP FOR WINDOW 2'
+          content: '<br/>THIS IS TEST TOOLTIP FOR WINDOW 2'
         });
         $(selector2).each(function(){
             var str = $(this).find('div').html();

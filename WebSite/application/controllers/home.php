@@ -43,11 +43,11 @@
         }
         $miniMapLinks[] = $start_line;
         $miniMapLinkLable[$start_line] = array('text' => 'Clone 1', 'rows' => $end_line - $start_line);
-        for ($i = 156; $i <= 190; $i++) {
-          $lines[] = $i;
-        }
-        $miniMapLinks[] = 156;
-        $miniMapLinkLable[156] = array('text' => 'Clone 2', 'rows' => 12);
+//        for ($i = 156; $i <= 190; $i++) {
+//          $lines[] = $i;
+//        }
+//        $miniMapLinks[] = 156;
+//        $miniMapLinkLable[156] = array('text' => 'Clone 2', 'rows' => 12);
       } 
 //      else {
 //        $fileName = 'Cocos2dxGLSurfaceView.java';
