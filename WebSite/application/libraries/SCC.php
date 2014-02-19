@@ -18,11 +18,17 @@ class SCC
     $data = $this->ci->scc_model->getAllSCCRows($invocationId, $userId);
     if ($data){
       $data = json_decode(json_encode($data), true); // Changing Obj in Array
-    }
-    $result = array();
+    }    
+    return $data;
+  }
+  
+  function getAllSCCSecondaryTableRows($primary_table_row, $invocationId=3){
+    $userId = $this->ci->tank_auth->get_user_id();
     
-    // PARSE DATA HERE AND PREPARE ARRAY NEEDED BY CONTROLLER    
-    
+    $data = $this->ci->scc_model->getAllSCCSecondaryTableRows($primary_table_row['scc_id'], $invocationId, $userId);
+    if ($data){
+      $data = json_decode(json_encode($data), true); // Changing Obj in Array
+    }    
     return $data;
   }
 }

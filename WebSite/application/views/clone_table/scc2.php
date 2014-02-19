@@ -61,9 +61,13 @@ width: 50% !important;
                       </tr>
                     </thead>
                       <tbody>
-                        <?php foreach($scc_data as $data){?>
+                        <?php 
+                          $counter = 0;
+                          foreach($scc_data as $data){
+                            $counter++;
+                         ?>
                         <tr class="list_view" data-sccid="<?php echo $data['scc_id'];?>">
-                          <td><?php echo $data['no'];?>
+                          <td><?php echo $counter;?>
 
 
                           </td>
@@ -81,7 +85,7 @@ width: 50% !important;
                              </div>
                             <?php } ?>
                           </td>
-                          <td><?php echo $data['total_clones'];?></td>
+                          <td><?php echo isset($data['total_clones']) ? $data['total_clones'] : '-';?></td>
                           
                         </tr>
                         <?php }?>                        
@@ -124,15 +128,18 @@ width: 50% !important;
                       </tr>
                     </thead>
                       <tbody>
-                        <?php foreach($data as $d){?>
-                          <tr class="code_view" data-sccid= "<?php echo $scc_id;?>" data-clid= "<?php echo $d['clone_list_id'];?>">
-                            <td><?php echo $d['no'];?></td>
-                            <td><?php echo $d['gid'];?></td>
-                            <td><?php echo $d['did'];?></td>
+                        <?php $counter = 0;
+                        foreach($data as $d){
+                          $counter++;
+                        ?>
+                          <tr class="code_view" data-endline="<?php echo $d['endline'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-sccid= "<?php echo $scc_id;?>" data-clid= "<?php echo $d['scc_instance_id'];?>" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
+                            <td><?php echo $counter;?></td>
+                            <td><?php echo isset($d['group_id']) ? $d['group_id'] : "-";?></td>
+                            <td><?php echo isset($d['directory_id']) ? $d['directory_id'] : "-";?></td>
                             <td><?php echo $d['fid'];?></td>
-                            <td><?php echo $d['start_line'];?></td>
-                            <td><?php echo $d['end_line'];?></td>
-                            <td><?php echo $d['file_name'];?></td>
+                            <td><?php echo $d['startline'];?></td>
+                            <td><?php echo $d['endline'];?></td>
+                            <td><?php echo $d['directory_name'].$d['file_name'];?></td>
                             
                           </tr>
                         <?php }?>
@@ -222,7 +229,7 @@ $(document).ready(function(){
         return false;
     });
      $(".code_view").on("click",function(){
-            Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"));
+            Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"));
             event.preventDefault();
             // magic("pannel2");
         return false;

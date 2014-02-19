@@ -497,11 +497,15 @@ Clonify.SCC = {
     window.location.hash='';
   },
   
-  viewCodeData: function(_scc_id, _clone_list_id){
+  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line){
     var _url = base_url + "home/loadCode";
     var _params = {
       scc_id : _scc_id,
-      clone_list_id : _clone_list_id
+      clone_list_id : _clone_list_id,
+      file_path : path,
+      fid : fid,
+      start_line : start_line,
+      end_line : end_line
     };
     
     $.post(_url, _params, function(r) {
