@@ -127,5 +127,63 @@ class Repository_Model extends CI_Model
 		}
 		return true;
 	}
+	function checkDelete($user_id, $subPaths, $fileNames)
+	{
+		//get data from db from two tables
+		//compare and get id to delete if any file has been deleted.
+		//delete only the file
+		$data = $this->getIdFromUserRepository($user_id);
+		$id = $data->id;
+		$allFiles = $this->getAllFiles();
+		$allDirectories = $this->getAllDirectories();
+		$arrlength=count($fileNames);
+		//echo $arrlength;
+		echo $id;
+		$dirId = 0;
+		foreach ($allFiles as $newFile)
+		{
+			$del = true;
+			$xNumber = 0;
+			for($x=0;$x<$arrlength;$x++)
+			{
+				if (strcmp($newFile->file_name, $fileNames[$x])==0)
+				{
+					
+					$del = false;
+					break;
+				}
+				$xNumber = $x;
+			}
+			if ($del==true)
+			{
+				$dirPath = $subPaths[$xNumber];
+				echo $dirPath;
+				if ($dirPath=="")
+					$dirId =$this->getDirectoryId($dirPath, $id);
+				else
+					$dirId =$this->getDirectoryId($dirPath.'/', $id);
+				echo $dirId;
+				$query = "DELETE FROM repository_file WHERE file_name = '$newFile->file_name' and directory_id = $dirId ";
+				echo $query;
+				$this->db->query($query);
+				//$this->db->delete('repository_file', array('file_name' => $newFile->file_name, 'directory_id' => $dirId )); 
+			}
+			
+		}
+		
+		
+	}
+	function getAllFiles()
+	{
+		$query = "SELECT * FROM repository_file";
+		$results = $this->db->query($query);
+		return $results->result();
+	}
+	function getAllDirectories()
+	{
+		$query = "SELECT * FROM repository_directory";
+		$results = $this->db->query($query);
+		return $results->result();
+	}
 	
 }

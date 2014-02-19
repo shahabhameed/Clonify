@@ -72,6 +72,8 @@ class Ex_cont extends CI_Controller
 		//$user_id= $this->tank_auth->get_username();
 		$user_id = $this->session->userdata('user_id');
 		
+		$subPaths = array();
+		$fileNames = array();
 		// Basic loop displaying different messages based on file or folder
 		foreach ($it as $fileinfo) {
 			if ($fileinfo->isDir()) {
@@ -82,8 +84,14 @@ class Ex_cont extends CI_Controller
 				//echo  $fileinfo->getFilename();
 				//echo "FilePath: ".$it->getSubPath()."FileName: ".$fileinfo->getFilename()."<br/>";
 				$this->repository_model->insertFileName($user_id, $it->getSubPath(), $fileinfo->getFilename());
+				$subPaths[] = $it->getSubPath();
+				$fileNames[] = $fileinfo->getFilename();
+				
 			}
 		}
+		//print_r($subPaths);
+		//print_r($fileNames);
+		$this->repository_model->checkDelete($user_id, $subPaths, $fileNames);
 		$this->load->view('partials/main_header');
 		$this->load->view('dashboard');
 		$this->load->view('partials/main_footer');
