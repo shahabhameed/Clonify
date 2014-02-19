@@ -476,7 +476,7 @@ Clonify.SCC = {
     window.location.hash='';
   },
   
-  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line){
+  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, file_name){
     var _url = base_url + "home/loadCode";
     var _params = {
       scc_id : _scc_id,
@@ -484,6 +484,7 @@ Clonify.SCC = {
       file_path : path,
       fid : fid,
       start_line : start_line,
+      file_name : file_name,
       end_line : end_line
     };
     
@@ -491,7 +492,7 @@ Clonify.SCC = {
       $(".code-window-containter").show();
       if ($("#code_window1").html() == ""){
         $(".code-window1").show();
-        $("#file1").html("SCC ID : "+_scc_id+' Instance Id : '+_clone_list_id);
+        $("#file1").html('File Name : '+file_name);
         $("#code_window1").html(r);
         window.location.hash='geshi-window0-'+start_line;
         var selector1 = "";
@@ -519,7 +520,7 @@ Clonify.SCC = {
         $("#code_window1").removeClass('col-md-11');
         $("#code_window1").addClass('col-md-5');
         $(".code-window2").show();
-        $("#file2").html("SCC ID : "+_scc_id+' Instance Id : '+_clone_list_id);
+        $("#file2").html('File Name : '+file_name);
         $("#code_window2").html(r);
         window.location.hash='geshi-window1-'+start_line;        
         var selector2 = "";
