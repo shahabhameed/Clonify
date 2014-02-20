@@ -81,7 +81,8 @@ function myValidate(){
                      <td><label id="filErr" class="myErrLbl"></label></td>
             	</tr>
                 <tr>
-                	<td><input type="submit" value="Next"/></td>
+                	<td>
+					<button class="btn btn-success" type="submit">Next</button></td>
                     <td></td>
                     <td></td>
             	</tr>
