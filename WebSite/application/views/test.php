@@ -263,7 +263,7 @@ function myValidate(){
                                             <div class="form-group">
                                                 <label class="col-lg-2 control-label" for="username">Min Similarities:</label>
                                                 <div class="col-lg-8">
-                                                   <input id="spinner1" name="spinner1" type="text" value="1">
+                                                   <input id="spinner1" name="spinner1" type="text" value="1" class="form-control">
 
 												   <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                                 </div>
@@ -272,7 +272,7 @@ function myValidate(){
                                             <div class="form-group">
                                                 <label class="col-lg-2 control-label" >Grouping Mode:</label>
                                                 <div class="col-lg-2">
-                                                   <select style="width:120px;" name="groupingChoice" id="groupingChoice">
+                                                   <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2">
 													<option value="mixed">Mixed Mode</option>
 													<option value="across_groups">Across Groups</option>
 													</select>  
@@ -283,7 +283,7 @@ function myValidate(){
 											<div class="form-group">
                                                 <label class="col-lg-2 control-label" >Language:</label>
                                                 <div class="col-lg-2">
-															<select style="width:120px;" name="language" id="language">
+															<select  name="language" id="language" class="form-control col-lg-2">
 																		<?php foreach ($languages as $language){ ?>
 																			<option value="<?php echo $language->id ?>"><?php echo $language->language ?></option>
 																	    <?php } ?>
@@ -292,17 +292,7 @@ function myValidate(){
 										
 											</div><!-- End .form-group  -->
 											
-											<div class="form-group" style="display:none">
-                                                <label class="col-lg-2 control-label" >Files From DB:</label>
-                                                <div class="col-lg-2">
-															<select style="width:400px;height:150px;" multiple="multiple" id="files" name="files[]">
-															<?php foreach ($usrfiles as $usrfile){ ?>
-															<option value="<?php echo $usrfile->id ?>"><?php echo $usrfile->fname ?></option><?php } ?>
-															</select>
-															<label id="filErr" class="myErrLbl"></label>
-												</div>
 										
-											</div><!-- End .form-group  -->
 										
 										
 										
@@ -330,7 +320,7 @@ function myValidate(){
                                                     <br/>
 													<label id="filErr" class="myErrLbl"></label>
                                                     <span id="box1Counter" class="count"></span>
-                                                    <div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle"></select></div>
+                                                    <div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle form-control"></select></div>
                                                 
 												</div>
                                                     
