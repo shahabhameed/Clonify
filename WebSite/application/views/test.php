@@ -1,6 +1,30 @@
 <?php
 ?>
+<script type="text/javascript" src="<?=asset_url('js/myInvoke.js')?>"></script>
 <script>
+
+function SelectSort(SelList)
+{
+    var ID='';
+    var Text='';
+    for (x=0; x < SelList.length - 1; x++)
+    {
+        for (y=x + 1; y < SelList.length; y++)
+        {
+            if (SelList[x].text > SelList[y].text)
+            {
+                // Swap rows
+                ID=SelList[x].value;
+                Text=SelList[x].text;
+                SelList[x].value=SelList[y].value;
+                SelList[x].text=SelList[y].text;
+                SelList[y].value=ID;
+                SelList[y].text=Text;
+            }
+        }
+    }
+}
+
 function prependElement(parentID,child)
     {
         parent=document.getElementById(parentID);
@@ -26,7 +50,8 @@ function moveOptions(fromID,toID)
             SS1.options[i]=null;
         }
     }
-
+	SelectSort(SS2);
+	SelectSort(SS1);
 }
 
 function checkAndDelete(fromID,parentId,childID)
@@ -263,9 +288,10 @@ function myValidate(){
                                             <div class="form-group">
                                                 <label class="col-lg-2 control-label" for="username">Min Similarities:</label>
                                                 <div class="col-lg-8">
-                                                   <input id="spinner1" name="spinner1" type="text" value="1" class="form-control">
+                                                   <input id="spinner1" name="spinner1" type="text" value="<?php echo $minSimToks ?>" class="form-control">
 
 												   <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                   
                                                 </div>
                                             </div><!-- End .form-group  -->
 											
@@ -292,10 +318,24 @@ function myValidate(){
 										
 											</div><!-- End .form-group  -->
 											
-										
-										
-										
-										
+											<div class="form-group">
+                                                <label class="col-lg-2 control-label" for="username">Name:</label>
+                                                <div class="col-lg-2">
+                                                   <input  name="iName" id="iName" type="text" class="form-control">
+												   <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                	<span class="help-block blue">Enter a short name for this invocation.</span>
+                                                </div>
+                                            </div><!-- End .form-group  -->
+                                            
+											<div class="form-group">
+                                                <label class="col-lg-2 control-label" for="username">Comments:</label>
+                                                <div class="col-lg-6">
+                                                   <textarea rows="3" class="form-control" name="iComment" id="iComment"></textarea>
+												   <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                </div>
+                                            </div><!-- End .form-group  -->
 										
 										</div>
 										
@@ -326,10 +366,11 @@ function myValidate(){
                                                     
                                                 <div class="dualBtn">
                                                     
-                                                    <button id="to2" type="button" class="btn marginT2"  style="display:none"><span class="icon12 minia-icon-arrow-right-3"></span></button>
+                                                    <!--<button id="to2" type="button" class="btn marginT2"  style="display:none"><span class="icon12 minia-icon-arrow-right-3"></span></button>
                                                     <button id="allTo2" type="button" class="btn marginT2" style="display:none" ><span class="icon12 iconic-icon-last"></span></button>
                                                     <button id="to1" type="button" class="btn marginT5" style="display:none"><span class="icon12 minia-icon-arrow-left-3"></span></button>
                                                     <button id="allTo1" type="button"class="btn marginT5" style="display:none"><span class="icon12 iconic-icon-first"></span></button>
+                                                    -->
 													<button  type="button" class="btn btn-success btn marginT5" onclick="createNewElement('Group','box1View');">Create Group</button>
                                          
                                                 
@@ -408,46 +449,81 @@ function myValidate(){
 								</div><!-- End .panel -->
 												
 				
-                                        <div class="step" id="contact-details">
-                                            <span class="step-info" data-num="3" data-text="Suppressed Tokens"></span>
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label" for="email">Your email:</label>
-                                                <div class="col-lg-10">
-                                                    <input class="form-control" id="email1" name="email1" type="text" />
+                              <div class="step" id="sup-tokens">
+                                   <span class="step-info" data-num="3" data-text="Suppressed Tokens"></span>
+                                           
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <div class="leftBox">
+						                            <select multiple="multiple" id="suppresed" name="suppresed[]" class="multiple nostyle" style="height:300px; width:500px;">>
+                                                    <?php foreach ($tokens as $token){ ?>
+                                                      <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id." - ".$token->token_name ?></option>
+                                                    <?php } ?>
+                                                    </select>
+                                                    <br/>
+													<label id="filErr" class="myErrLbl"></label>
+                                                    <span id="box1Counter" class="count"></span>
+                                                    <div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle"></select></div>
                                                 </div>
-                                            </div><!-- End .form-group  -->
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label" for="phone">Your phone:</label>
-                                                <div class="col-lg-10">
-                                                    <input class="form-control" id="phone1" name="phone1" type="text" />
+                                                    
+                                                <div class="dualBtn">
+                                                    <button id="to2" type="button" class="btn marginT2" onclick="moveOptions('suppresed','suppresed2')"><span class="icon12 minia-icon-arrow-right-3"></span></button><br/>
+                                                    <button id="to1" type="button" class="btn marginT5" onclick="moveOptions('suppresed2','suppresed')"><span class="icon12 minia-icon-arrow-left-3"></span></button>
                                                 </div>
-                                            </div><!-- End .form-group  -->
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label" for="address">Your address:</label>
-                                                <div class="col-lg-10">
-                                                    <textarea class="form-control" id="address" rows="3"></textarea>
-                                                </div>
-                                            </div><!-- End .form-group  -->
-                                        </div>
+												
+												
+												<div class="col-lg-5 pull-right">
+                                                    <select multiple="multiple" id="suppresed2" name="suppresed2[]" class="multiple nostyle" style="height:300px; width:500px;">>
+													<?php foreach ($prev_sup_tokens as $prev_sup_token){ ?>
+                                                      <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo $prev_sup_token->token_id." - ".$prev_sup_token->token_name ?></option>
+                                                    <?php } ?>
+                                                    </select>													
+												</div><!-- End .span6 -->
+										</div>
+									</div><!-- End .form-group  -->
+                            </div>
 										
 										
 										
-                                        <div class="step submit_step" id="other-details"><span class="step-info" data-num="4" data-text="Equal Tokens"></span>
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label" for="hobies">Hobbies:</label>
-                                                <div class="col-lg-10">
-                                                    <input class="form-control" id="hobies" name="hobies" type="text" />
+							<div class="step" id="equal-tokens">
+								<span class="step-info" data-num="4" data-text="Equal Tokens"></span>
+									<div class="panel panel-default">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <div class="leftBox">
+                                                    <select multiple="multiple" id="equal" name="equal[]" class="multiple nostyle" style="height:300px; width:500px;">
+													<?php foreach ($alltokens as $token){ ?>
+													  <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id." = ".$token->token_name ?></option>
+													<?php } ?>
+													</select>
+                                                    <br/>
+													<label id="filErr" class="myErrLbl"></label>
+                                                    <span id="box1Counter" class="count"></span>
+                                                    <div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle"></select></div>
                                                 </div>
-                                            </div><!-- End .form-group  -->
-                                            <div class="form-group">
-                                                <label class="col-lg-2 control-label" for="hobies">About you:</label>
-                                                <div class="col-lg-10">
-                                                    <textarea class="form-control" id="aboutyou" rows="3"></textarea>
+                                                    
+                                                <div class="dualBtn">
+                                                    <!-- <button id="to2" type="button" class="btn marginT2" ><span class="icon12 minia-icon-arrow-right-3"></span></button>
+                                                    <button id="allTo2" type="button" class="btn marginT2" ><span class="icon12 iconic-icon-last"></span></button>
+                                                    <button id="to1" type="button" class="btn marginT5"><span class="icon12 minia-icon-arrow-left-3"></span></button>
+                                                    <button id="allTo1" type="button"class="btn marginT5" ><span class="icon12 iconic-icon-first"></span></button>
+                                                    -->
+													<button  type="button" class="btn btn-success btn marginT5" onclick="createNewElement('Rule','equal');">Add Rule</button>
                                                 </div>
-                                            </div><!-- End .form-group  -->
-                                            
-                                        </div>
-                                        
+												
+												
+												<div class="col-lg-5 pull-right">
+													<div class="page-header" id="code-header" style="display:none">
+													<h4>Rules</h4>
+												</div>
+
+												<div class="panel-group accordion" id="accordionRule">
+												</div>
+											</div><!-- End .span6 -->
+										</div>
+									</div><!-- End .form-group  -->
+								</div>
+							</div><!-- End .panel -->                                        
                                     </form>
                                 </div>
                             </div><!-- End .panel -->
@@ -465,3 +541,6 @@ function myValidate(){
 
 		</div> <!-- End content wrapper -->   
 </div> <!-- End content -->   
+<script>
+	SelectSort(document.getElementById("suppresed"));
+</script>

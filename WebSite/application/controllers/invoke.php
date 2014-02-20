@@ -18,21 +18,22 @@ class Invoke extends CI_Controller
 
 	function index()
 	{
+		$user_name = $this->tank_auth->get_username();
+		$this->session->set_userdata(array('user_name'=>$user_name));
 	
 		$this->session->set_userdata(array('scc_min_sim'=>'','method_analysis'=>'','grouping_choice'=>'','files'=>'','language'=>'','supTokens'=>'','eqTokens'=>''));
+		$this->session->set_userdata(array('language'=>'1'));
+		
 		$data['usrfiles']=$this->invoke_model->get_all_user_files();
 		$data['languages']=$this->invoke_model->get_all_languages();
-		$this->open_view('invoke_init',$data);
-/*		if ($message = $this->session->flashdata('message')) {
-					echo '1';					
-                  $this->load->view('partials/main_header');
-                  $this->load->view('invoke_init',$data);
-                  $this->load->view('partials/main_footer');
-		} else {
-			echo '2';
-                  redirect('/auth/login/');
-		}
-*/		
+		$data['alltokens']=$this->invoke_model->get_all_language_tokens();
+		$prev_invo_params = $this->invoke_model->get_latest_user_invocation_tokens_by_language();
+		$data['prev_sup_tokens']=$this->invoke_model->get_all_prev_sup_tokens($prev_invo_params);
+		$data['tokens']=$this->invoke_model->get_all_language_tokens_sup($prev_invo_params);
+		$data['minSimToks']=$this->invoke_model->get_prev_minSim($prev_invo_params);
+
+		
+		$this->open_view('test',$data);
 	}
 
 	/**
@@ -53,9 +54,9 @@ class Invoke extends CI_Controller
             
 		$data['usrfiles']=$this->invoke_model->get_all_user_files();
 		$data['languages']=$this->invoke_model->get_all_languages();
+		$data['tokens']=$this->invoke_model->get_all_language_tokens();
 		$this->open_view('test',$data);//loading success view
-	
-          }
+	}
 
 	function invoke_sup()
 	{
