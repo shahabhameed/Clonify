@@ -115,16 +115,20 @@ function createNewElement(newElement,baseElement){
 	
 	var newGroup=document.createElement('div');newGroup.setAttribute('class','panel panel-default');newGroup.setAttribute('id',newElement+(childCount+1));		
 	var newPanel=document.createElement('div'); newPanel.setAttribute('class','panel-heading'); 
-	var newHeading=document.createElement('h4');newHeading.setAttribute('class','panel-title');
-	var groupName=document.createElement('a'); groupName.setAttribute('class','accordion-toggle'); groupName.setAttribute('data-toggle','collapse');groupName.setAttribute('data-parent','#accordion'+newElement);
-	groupName.setAttribute('href',href);
-	groupName.innerHTML=newElement+" "+(childCount+1);
+	var newHeading=document.createElement('h4');//newHeading.setAttribute('class','panel-title');
+	var newSpan=document.createElement('span');newSpan.innerHTML=newElement+" "+(childCount+1);
 	
+	
+	var groupName=document.createElement('a'); groupName.setAttribute('class','minimize'); 
+	groupName.setAttribute('href','#');
+	//groupName.setAttribute('data-toggle','collapse');groupName.setAttribute('data-parent','#accordion'+newElement);
+	groupName.innerHTML="Minimize";
+	//newElement+" "+(childCount+1);
 	
 	var collapse=document.createElement('div'); collapse.setAttribute('class','panel-collapse collapse in'); collapse.setAttribute('id',id);
 	
-	var list=document.createElement('select'); list.setAttribute('id',newElement+'List'+(childCount+1)); list.setAttribute('multiple','multiple'); list.setAttribute('class','multiple nostyle pull-right');
-	list.setAttribute('style','height:150px; width:450px;')
+	var list=document.createElement('select'); list.setAttribute('id',newElement+'List'+(childCount+1)); list.setAttribute('multiple','multiple'); list.setAttribute('class','multiple form-control col-lg-12');
+	list.setAttribute('style','height:150px;')
 	
 
 	
@@ -149,7 +153,7 @@ function createNewElement(newElement,baseElement){
 	if(isSelected)
 	{
 	
-	var content=document.createElement('div'); content.setAttribute('class','panel-body');  content.appendChild(list);
+	var content=document.createElement('div'); content.setAttribute('class','panel-body');  
 	
 	var buttons=document.createElement('div'); buttons.setAttribute('class','panel-body');   buttons.setAttribute('id',newElement+'Button'+(childCount+1))
 	
@@ -159,9 +163,9 @@ function createNewElement(newElement,baseElement){
 	var del = document.createElement('input');
 	
 	//Setting Button Attributes
-	setAttributes(add,'button','Add','add'+childCount+1,'btn btn-primary pull-left col-lg-2','moveOptions(\''+baseElement+'\',\''+newElement+'List'+(childCount+1)+'\')');
-	setAttributes(remove,'button','Remove','remove'+childCount+1,'btn btn-warning col-lg-2','moveOptions(\''+newElement+'List'+(childCount+1)+'\',\''+baseElement+'\');	checkAndDelete(\''+newElement+'List'+(childCount+1)+'\',\''+rootDiv+'\',\''+newElement+(childCount+1)+'\');');
-	setAttributes(del,'button','Delete','delete'+childCount+1,'btn btn-danger pull-right','selectAllOptions(\''+newElement+'List'+(childCount+1)+'\');moveOptions(\''+newElement+'List'+(childCount+1)+'\',\''+baseElement+'\');deleteGroup(\''+rootDiv+'\',\''+newElement+(childCount+1)+'\');');
+	setAttributes(add,'button','Add','add'+childCount+1,'btn btn-primary pull-left col-lg-2 	','moveOptions(\''+baseElement+'\',\''+newElement+'List'+(childCount+1)+'\')');
+	setAttributes(remove,'button','Remove','remove'+childCount+1,'btn btn-warning col-lg-2 col-lg-offset-1','moveOptions(\''+newElement+'List'+(childCount+1)+'\',\''+baseElement+'\');	checkAndDelete(\''+newElement+'List'+(childCount+1)+'\',\''+rootDiv+'\',\''+newElement+(childCount+1)+'\');');
+	setAttributes(del,'button','Delete','delete'+childCount+1,'btn btn-danger col-lg-2 col-lg-offset-1' ,'selectAllOptions(\''+newElement+'List'+(childCount+1)+'\');moveOptions(\''+newElement+'List'+(childCount+1)+'\',\''+baseElement+'\');deleteGroup(\''+rootDiv+'\',\''+newElement+(childCount+1)+'\');');
 	
 	//Appending buttons to Buttons panel
 	buttons.appendChild(add);
@@ -169,12 +173,18 @@ function createNewElement(newElement,baseElement){
 	buttons.appendChild(del);
 
 	//Appending group to Accordion
-	newHeading.appendChild(groupName);
+	newHeading.appendChild(newSpan);
 	newPanel.appendChild(newHeading);
+	newPanel.appendChild(groupName);
+	content.appendChild(list);
+	content.appendChild(buttons);
+	
+	
 	newGroup.appendChild(newPanel);
-	collapse.appendChild(buttons);
-	collapse.appendChild(content);
-	newGroup.appendChild(collapse);
+	newGroup.appendChild(content);
+	//collapse.appendChild(buttons);
+	//collapse.appendChild(content);
+	
 	
 	
 	<!--	groups.appendChild(newGroup);  -->
@@ -186,7 +196,6 @@ function createNewElement(newElement,baseElement){
 	}
 
 }
-
 
 function selectAllOptions(elementID) {
 	obj = document.getElementById(elementID);
@@ -288,7 +297,7 @@ function myValidate(){
                                             <div class="form-group">
                                                 <label class="col-lg-2 control-label" for="username">Min Similarities:</label>
                                                 <div class="col-lg-8">
-                                                   <input id="spinner1" name="spinner1" type="text" value="<?php echo $minSimToks ?>" class="form-control">
+                                                   <input id="spinner1" class="form-control" name="spinner1" type="text" value="1" >
 
 												   <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                                    
@@ -341,117 +350,93 @@ function myValidate(){
 										
 
 										
-                                <div class="step" id="code-groups"><span class="step-info" data-num="2" data-text="Code Groups"></span>
+                                     <div class="step" id="code-groups"><span class="step-info" data-num="2" data-text="Code Groups"></span>
+
+                                   <div class="col-lg-12">
+								    <div class="row">
+
                                    <div class="panel panel-default">
                                 
                                
                                     
                                         <div class="form-group">
-                                            <div class="col-lg-12">
-											
-                                                <div class="leftBox">
-                                                   
-                                                    
-                                                    <select id="box1View" multiple="multiple" class="multiple nostyle" style="height:300px; width:500px;">
-                                                     	<?php foreach ($usrfiles as $usrfile){ ?>
-														<option value="<?php echo $usrfile->id ?>" selected="false"><?php echo $usrfile->fname ?></option><?php } ?>
-
-                                                    </select>
-                                                    <br/>
-													<label id="filErr" class="myErrLbl"></label>
-                                                    <span id="box1Counter" class="count"></span>
-                                                    <div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle form-control"></select></div>
-                                                
-												</div>
-                                                    
-                                                <div class="dualBtn">
-                                                    
-                                                    <!--<button id="to2" type="button" class="btn marginT2"  style="display:none"><span class="icon12 minia-icon-arrow-right-3"></span></button>
-                                                    <button id="allTo2" type="button" class="btn marginT2" style="display:none" ><span class="icon12 iconic-icon-last"></span></button>
-                                                    <button id="to1" type="button" class="btn marginT5" style="display:none"><span class="icon12 minia-icon-arrow-left-3"></span></button>
-                                                    <button id="allTo1" type="button"class="btn marginT5" style="display:none"><span class="icon12 iconic-icon-first"></span></button>
-                                                    -->
-													<button  type="button" class="btn btn-success btn marginT5" onclick="createNewElement('Group','box1View');">Create Group</button>
-                                         
-                                                
-												</div>
+                                            
 												
 												
-												<div class="col-lg-5 pull-right">
-                            
-														<div class="page-header" id="code-header" style="display:none">
-														<h4>Code Groups</h4>
-														</div>
 
-														<div class="panel-group accordion gradient" id="accordionGroup">
-                            
-                          
-                          
-														</div>
-														
-														
-														
-														
-														       <div class="col-lg-6">
-                           
 
-                            <div class="panel-group accordion gradient" id="accordion">
-                          
-                  
-                        
-                            </div>
-                            
-                        </div><!-- End .span6 -->
+										<div class="col-lg-6">
 
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-														
-                           
-												</div><!-- End .span6 -->
-												
-                                                
-											</div>
+												<div class="panel panel-default">
+
+													<div class="panel-heading">
+													<h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Files From Database</span> </h4><a href="#" class="minimize">Minimize</a>
+													</div>
 													
-										</div><!-- End .form-group  -->
+												<div class="panel-body">
+													<div class="form-group">
+						
+																<div class="col-lg-12">
+																<select id="box1View" multiple="multiple" class="form-control" style="height:300px;">
+																<?php foreach ($usrfiles as $usrfile){ ?>
+																<option value="<?php echo $usrfile->id ?>" selected="false"><?php echo $usrfile->fname ?></option><?php } ?>
 
-                                   </div>
+														</select>
+														<br/>
+														<label id="filErr" class="myErrLbl"></label>
+														<span id="box1Counter" class="count"></span>
+														
+														<div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle "></select></div>
+                                                
+															</div>
+														
+														<div align="right" class="col-lg-12"> 
+														<button  type="button" class="btn btn-success btn marginT6" onclick="createNewElement('Group','box1View');" >Create Group</button>
+														</div>
+														
+                                                
+														
+                                                    
+														</div>
+                                                </div><!-- End .panel body -->
+													</div>
+
+										</div><!-- End .span8 -->
+
+									<div class="col-lg-6">
+
+										<div class="panel panel-default">
+
+											<div class="panel-heading"> <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Code Groups</span></h4>
+											<a href="#" class="minimize">Minimize</a>
+										</div>
+										
+										<div class="panel-body">
+											<div class="form-group">
+
+												<div class="panel-group accordion gradient col-lg-12" id="accordionGroup"></div>
+
+											</div>  
+										</div>
+
+										</div><!-- End .panel -->
+
+									</div><!-- End .span4 -->
+</div>
+                    </div><!-- End .row -->
+</div>
+								   
+										
 								   
 								</div><!-- End .panel -->
 												
-				
+				</div>
                               <div class="step" id="sup-tokens">
                                    <span class="step-info" data-num="3" data-text="Suppressed Tokens"></span>
-                                           
+                                               <div class="panel panel-default">
+                                
+                               
+                                    
                                         <div class="form-group">
                                             <div class="col-lg-12">
                                                 <div class="leftBox">
@@ -483,7 +468,7 @@ function myValidate(){
 									</div><!-- End .form-group  -->
                             </div>
 										
-										
+									 </div>	
 										
 							<div class="step" id="equal-tokens">
 								<span class="step-info" data-num="4" data-text="Equal Tokens"></span>
