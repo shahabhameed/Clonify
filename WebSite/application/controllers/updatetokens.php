@@ -15,15 +15,18 @@ class Updatetokens extends CI_Controller
 		
 		$this->load->helper(array('form', 'url'));
 		$this->load->model('update_tokens_model');
-		
 	}
 
 	function index()
 	{
 		$data['languages']=$this->update_tokens_model->get_all_languages();
+		$data['tokenUpdated']= "false";
+		echo  "<br />". $data['tokenUpdated'] ."<br />";
+		
 		$this->load->view('partials/main_header');
+		$this->load->view('partials/sidebar');
 		$this->load->view('update_tokens',$data);
-		$this->load->view('partials/main_footer');		
+		$this->load->view('partials/main_footer');
 	}
 	
 	function update()
@@ -57,13 +60,18 @@ class Updatetokens extends CI_Controller
 		}
 		$this->update_tokens_model->update($fileName);
 	
-		$data['languages']=$this->update_tokens_model->get_all_languages();		
-		$data['results']= $result;
+		$data['languages']			= $this->update_tokens_model->get_all_languages();		
+		$data['results']			= $result;
+		$data['selectedLanguage']	= $language;
+		$data['tokens'] 			= $this->update_tokens_model->get_all_language_tokens($language);
+		$data['tokenUpdated']		= "true";
+		
+		echo  "<br /> 2 ". $data['tokenUpdated'] ."<br />";
 		
 		$this->load->view('partials/main_header');
+		$this->load->view('partials/sidebar');
 		$this->load->view('update_tokens', $data);
 		$this->load->view('partials/main_footer');	
-		
 		
 		unlink('./uploads/'.$fileName.'.txt');
 	}	
