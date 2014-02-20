@@ -34,8 +34,9 @@ class Ex_cont extends CI_Controller
 				'path'   => $this->_path, 
 				'URL'    => site_url(),
 				'uploadOrder'=> array( 'deny', 'allow'),
-				'uploadAllow' => array('text', 'java'),
+				'uploadAllow' => array('text', 'java', 'cpp', 'vb', 'cs', 'c', 'aspx', 'rb', 'rhtml', 'php'),
 				'uploadDeny' => array('all'),
+				'uploadMaxSize' => '6M',
 				'attributes' => array(
 					array(
 					'pattern' => '/.tmb/',
