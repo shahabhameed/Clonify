@@ -60,6 +60,19 @@
                         ['view']
                     ]
                 },
+			contextmenu : {
+				// navbarfolder menu
+			navbar : ['open', '|', 'rm', '|', 'info'],
+
+				// current directory menu
+			cwd    : ['reload', 'back', '|', 'upload', 'mkdir', '|', 'info'],
+
+			// current directory file menu
+			files  : [
+					'getfile', '|','open', 'quicklook', '|', 'download', '|',
+					'rm', '|',  'info'
+				]
+			},	
 	}).elfinder('instance');            
     });
     </script>
