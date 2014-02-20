@@ -34,7 +34,8 @@
                    </div><!-- End .row-fluid -->
 				<div>
 					<form method="post" accept-charset="utf-8" action="<?php echo base_url();?>index.php/ex_cont/saveFilesToDb" >
-					<input type="submit" value="Finish"/>
+					
+					<button class="btn btn-success" type="submit">Finish</button>
 				</div>
             </div><!-- End contentwrapper -->
         </div><!-- End #content -->

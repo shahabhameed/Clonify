@@ -78,13 +78,14 @@ function SelectSort(SelList)
                           <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id." - ".$token->token_name ?></option>
                         <?php } ?>
                         </select></td>
-                	<td><input type="button" value=">" onclick="SelectMoveRows(0)" /><br/>
-                    <input type="button" value="<" onclick="SelectMoveRows(1)" /></td>
+                	<td><input type="button" value=">" onclick="SelectMoveRows(0)" class="btn btn-default"/><br/>
+                    <input type="button" value="<" text="<" onclick="SelectMoveRows(1)" class="btn btn-default"/></td>
                 	<td><select multiple="multiple" id="suppresed2" name="suppresed2[]">
                         </select></td>
                 </tr>
                 <tr>
-                	<td><input type="submit" onclick="selectAllOptions();" value="Next"/></td>
+                	<td>
+					<button class="btn btn-success" onclick="selectAllOptions();">Next</button></td>
                 	<td></td>
                 	<td></td>                                        
                 </tr>
