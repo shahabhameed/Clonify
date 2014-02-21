@@ -329,19 +329,17 @@ function myValidate(){
 											
 											<div class="form-group">
                                                 <label class="col-lg-2 control-label" for="username">Name:</label>
-                                                <div class="col-lg-2">
-                                                   <input  name="iName" id="iName" type="text" class="form-control">
+                                                <div class="col-lg-3">
+                                                   <input  name="iName" id="iName" type="text" class="form-control" placeholder="Enter a short name for this invocation">
 												   <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                	<span class="help-block blue">Enter a short name for this invocation.</span>
-                                                </div>
+                                               
                                             </div><!-- End .form-group  -->
                                             
 											<div class="form-group">
                                                 <label class="col-lg-2 control-label" for="username">Comments:</label>
                                                 <div class="col-lg-6">
-                                                   <textarea rows="3" class="form-control" name="iComment" id="iComment"></textarea>
+                                                   <textarea rows="3" class="form-control" name="iComment" id="iComment" placeholder="Enter your comments"></textarea>
 												   <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                                 </div>
                                             </div><!-- End .form-group  -->
@@ -357,14 +355,8 @@ function myValidate(){
 
                                    <div class="panel panel-default">
                                 
-                               
-                                    
                                         <div class="form-group">
                                             
-												
-												
-
-
 										<div class="col-lg-6">
 
 												<div class="panel panel-default">
@@ -384,7 +376,7 @@ function myValidate(){
 														</select>
 														<br/>
 														<label id="filErr" class="myErrLbl"></label>
-														<span id="box1Counter" class="count"></span>
+														<!--<span id="box1Counter" class="count"></span>-->
 														
 														<div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle "></select></div>
                                                 
@@ -422,9 +414,9 @@ function myValidate(){
 										</div><!-- End .panel -->
 
 									</div><!-- End .span4 -->
-</div>
-                    </div><!-- End .row -->
-</div>
+								</div>
+								</div><!-- End .row -->
+						</div>
 								   
 										
 								   
@@ -440,14 +432,14 @@ function myValidate(){
                                         <div class="form-group">
                                             <div class="col-lg-12">
                                                 <div class="leftBox">
-						                            <select multiple="multiple" id="suppresed" name="suppresed[]" class="multiple nostyle" style="height:300px; width:500px;">>
+						                            <select multiple="multiple" id="suppresed" name="suppresed[]" class="multiple form-control" style="height:300px; width:500px;">>
                                                     <?php foreach ($tokens as $token){ ?>
                                                       <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id." - ".$token->token_name ?></option>
                                                     <?php } ?>
                                                     </select>
                                                     <br/>
 													<label id="filErr" class="myErrLbl"></label>
-                                                    <span id="box1Counter" class="count"></span>
+                                                   
                                                     <div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle"></select></div>
                                                 </div>
                                                     
@@ -458,7 +450,7 @@ function myValidate(){
 												
 												
 												<div class="col-lg-5 pull-right">
-                                                    <select multiple="multiple" id="suppresed2" name="suppresed2[]" class="multiple nostyle" style="height:300px; width:500px;">>
+                                                    <select multiple="multiple" id="suppresed2" name="suppresed2[]" class="multiple form-control" style="height:300px; width:500px;">>
 													<?php foreach ($prev_sup_tokens as $prev_sup_token){ ?>
                                                       <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo $prev_sup_token->token_id." - ".$prev_sup_token->token_name ?></option>
                                                     <?php } ?>
@@ -472,45 +464,82 @@ function myValidate(){
 										
 							<div class="step" id="equal-tokens">
 								<span class="step-info" data-num="4" data-text="Equal Tokens"></span>
-									<div class="panel panel-default">
+								                          <div class="col-lg-12">
+								    <div class="row">
+
+                                   <div class="panel panel-default">
+                                
                                         <div class="form-group">
-                                            <div class="col-lg-12">
-                                                <div class="leftBox">
-                                                    <select multiple="multiple" id="equal" name="equal[]" class="multiple nostyle" style="height:300px; width:500px;">
+                                            
+										<div class="col-lg-6">
+
+												<div class="panel panel-default">
+
+													<div class="panel-heading">
+													<h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Equal Tokens</span> </h4><a href="#" class="minimize">Minimize</a>
+													</div>
+													
+												<div class="panel-body">
+													<div class="form-group">
+						
+																<div class="col-lg-12">
+														   
+                                                    <select multiple="multiple" id="equal" name="equal[]" class="multiple form-control" style="height:300px; ">
 													<?php foreach ($alltokens as $token){ ?>
 													  <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id." = ".$token->token_name ?></option>
 													<?php } ?>
 													</select>
                                                     <br/>
 													<label id="filErr" class="myErrLbl"></label>
-                                                    <span id="box1Counter" class="count"></span>
-                                                    <div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle"></select></div>
-                                                </div>
                                                     
-                                                <div class="dualBtn">
-                                                    <!-- <button id="to2" type="button" class="btn marginT2" ><span class="icon12 minia-icon-arrow-right-3"></span></button>
-                                                    <button id="allTo2" type="button" class="btn marginT2" ><span class="icon12 iconic-icon-last"></span></button>
-                                                    <button id="to1" type="button" class="btn marginT5"><span class="icon12 minia-icon-arrow-left-3"></span></button>
-                                                    <button id="allTo1" type="button"class="btn marginT5" ><span class="icon12 iconic-icon-first"></span></button>
-                                                    -->
-													<button  type="button" class="btn btn-success btn marginT5" onclick="createNewElement('Rule','equal');">Add Rule</button>
-                                                </div>
-												
-												
-												<div class="col-lg-5 pull-right">
-													<div class="page-header" id="code-header" style="display:none">
-													<h4>Rules</h4>
-												</div>
+                                                    <div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle"></select></div>
+                                                
+															</div>
+														
+														<div align="right" class="col-lg-12"> 
+														<button  type="button" class="btn btn-success btn marginT6" onclick="createNewElement('Rule','equal');">Add Rule</button></div>
+														
+                                                
+														
+                                                    
+														</div>
+                                                </div><!-- End .panel body -->
+													</div>
+
+										</div><!-- End .span8 -->
+
+									<div class="col-lg-6">
+
+										<div class="panel panel-default">
+
+											<div class="panel-heading"> <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Rules</span></h4>
+											<a href="#" class="minimize">Minimize</a>
+										</div>
+										
+										<div class="panel-body">
+											<div class="form-group">
 
 												<div class="panel-group accordion" id="accordionRule">
 												</div>
-											</div><!-- End .span6 -->
+
+											</div>  
 										</div>
-									</div><!-- End .form-group  -->
+
+										</div><!-- End .panel -->
+
+									</div><!-- End .span4 -->
 								</div>
-							</div><!-- End .panel -->                                        
+								</div><!-- End .row -->
+						</div>
+								   
+										
+								   
+								</div><!-- End .panel -->
+								
+									
+							</div><!-- End .step -->                                        
                                     </form>
-                                </div>
+                                </div>  <!-- End .wizard -->
                             </div><!-- End .panel -->
 
                         </div><!-- End .span12 -->
