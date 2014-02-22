@@ -52,6 +52,7 @@ public class Database {
 	 * @return
 	 */
 	public static InvokeParameter getInvokeConfig(int uid) {
+		System.out.println("START getInvokeConfig(int uid)");
 		int id = -1;
 		InvokeParameter invokeParameter = null;
 		try {
@@ -76,13 +77,21 @@ public class Database {
 					
 					System.out.println(" \ninvokeParameter: " +invokeParameter.toString());
 					
-					results = s.executeQuery("select CONCAT(repository_name,directory_name,file_name) from repository_file f,repository_directory d," +
+					results = s.executeQuery("select f.id, CONCAT(repository_name,directory_name,file_name) from repository_file f,repository_directory d," +
 							"user_repository r where d.id=f.directory_id and d.repository_id=r.id and f.id IN " +
 							"(select file_id from invocation_files where invocation_id=" + id +");");
 					
+					
 					while (results.next()) {
-						String fileName = results.getString(1);
-						invokeParameter.getInput_files().add(fileName);
+						Integer fileId = results.getInt(1);
+						//a very bad way to get groupId. Should be refactored.
+						Statement st = dbConn.createStatement();
+						ResultSet result2 = st.executeQuery(" SELECT group_id from invocation_files where file_id ="+ fileId +";");
+						result2.next();
+						Integer groupId = result2.getInt(1);
+						String fileName = results.getString(2);
+						InvocationFileInfo invoFileInfo = new InvocationFileInfo(fileName, groupId);
+						invokeParameter.getInput_files().add(invoFileInfo);
 					}					
 					System.out.println("Input_files: " + invokeParameter.getInput_files());
 				}

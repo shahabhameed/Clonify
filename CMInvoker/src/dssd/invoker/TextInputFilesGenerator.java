@@ -5,11 +5,25 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import dssd.invoker.adapter.InputHelper;
 
-
-public class Helper {
-
-	public static boolean makeInputFile(InvokeParameter invokeParameter)
+public class TextInputFilesGenerator extends InputHelper{
+	@Override
+	public boolean writeToDisk() {
+		
+		boolean isMakeInputFileSuccessful = makeInputFile();
+		boolean isMakeEqualTokensFileSuccessful = makeEqualTokensFile();
+		boolean isMakeSuppressedTokenFileSuccessful = makeSuppressedTokenFile();
+		boolean isMakeClusterParametersFileSuccessful = makeClusterParametersFile();
+		
+		if(isMakeInputFileSuccessful && isMakeEqualTokensFileSuccessful && isMakeSuppressedTokenFileSuccessful && isMakeClusterParametersFileSuccessful){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private boolean makeInputFile()
 	{
 		try {
 			if(invokeParameter != null){
@@ -17,12 +31,22 @@ public class Helper {
 				System.out.println("\nfilePath: " + filePath);
 				PrintWriter writer = new PrintWriter(filePath, "UTF-8");
 				
-				ArrayList<String> iFiles = invokeParameter.getInput_files();
+				ArrayList<InvocationFileInfo> iFiles = invokeParameter.getInput_files();
 				
 				if(iFiles != null && iFiles.size() > 0){
-					for (String s : iFiles){
-						System.out.println("\nfilePathAdding: " + s);
-						writer.println(s);
+					Integer group = 1;
+					for (InvocationFileInfo file : iFiles){
+						System.out.println("\nfilePathAdding: " + file.getInputFileName());
+						if(file.getGroupId() == group)
+						{
+							writer.println(file.getInputFileName());
+						}
+						else
+						{
+							writer.println(file.getInputFileName()+";");
+							group = file.getGroupId();
+						}
+						
 					}
 				}
 				
@@ -37,7 +61,7 @@ public class Helper {
 		return true;
 	}
 
-	public static boolean makeEqualTokensFile(InvokeParameter invokeParameter)
+	private boolean makeEqualTokensFile()
 	{
 		try {
 			if(invokeParameter != null){
@@ -71,7 +95,7 @@ public class Helper {
 		return true;
 	}
 	
-	public static boolean makeSuppressedTokenFile(InvokeParameter invokeParameter)
+	private boolean makeSuppressedTokenFile()
 	{
 		try {
 			if(invokeParameter != null){
@@ -96,7 +120,7 @@ public class Helper {
 		return true;
 	}
 	
-	public static boolean makeClusterParametersFile(InvokeParameter invokeParameter)
+	private boolean makeClusterParametersFile()
 	{
 		try {
 			if(invokeParameter != null){
