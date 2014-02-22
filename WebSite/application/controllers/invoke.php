@@ -50,6 +50,15 @@ class Invoke extends CI_Controller
 		$data['tokens']=$this->invoke_model->get_all_language_tokens();
 		$this->open_view('invoke_sup',$data);//loading success view
 	}
+	function invoke_submit()
+	{
+
+		//$this->invoke_model->init();
+		$this->invoke_model->add_invocation_files_details();
+		$data['invocation_files']=$this->invoke_model->get_all_invocation_files();
+		$this->open_view('invoke_sup',$data);//loading success view
+		
+	}
 	function test(){
             
 		$data['usrfiles']=$this->invoke_model->get_all_user_files();

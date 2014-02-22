@@ -86,7 +86,10 @@ class Invoke_model extends CI_Model
         $grouping_choice = $_POST['groupingChoice'];
 		$files = $_POST['files'];
 		
-		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'files'=>$files,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment));
+		$groupList = $_POST['hiddenGroup']; //get hidden list
+		
+
+		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'files'=>$files,'groupList'=>$groupList,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment));
 	}
 
 	function sup()
@@ -167,11 +170,40 @@ class Invoke_model extends CI_Model
 
 		$this->db->query("INSERT INTO invocation_parameters(min_similatiry_SCC_tokens,grouping_choice,method_analysis,invocation_id,suppressed_tokens,equal_tokens,language_id) VALUES('$scc_min_sim','$grouping_choice','$grouping_choice','$invoke_id','$supTokens','$eqTokens','$language')");
 		
+		
+		add_invocation_files_details();
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	function add_invocation_files_details()
+	{
+		$files = $this->session->userdata('files');
+		$groupList = $this->session->userdata('groupList');
 		$count = 0;
-		foreach ($files as $selFil) {
-			$this->db->query("INSERT INTO invocation_files(invocation_id,file_id,cmfile_id) VALUES('$invoke_id','$selFil','$count')");
-			$count++;
-		}		
+		
+		if (!empty($groupList)){
+			foreach ($groupList as $list)
+			{
+				$group=$_POST[$list];
+				foreach ($group as $file_in_group)
+				{
+					$group_id=substr($group,9);
+					$this->db->query("INSERT INTO invocation_files(invocation_id,file_id,group_id,cmfile_id) VALUES('$invoke_id','$file_in_group',$group_id,'$count')");
+					$count++;
+					
+				}
+				
+			}
+		
+	
+	}
+	
 	}
 	
 	function get_all_user_files()
@@ -192,6 +224,12 @@ class Invoke_model extends CI_Model
 	function get_all_languages()
 	{
 		$query = "SELECT * FROM languages";
+		$results = $this->db->query($query);
+		return $results->result();
+	}
+	function get_all_invocation_files()
+	{
+		$query = "SELECT * FROM invocation_files";
 		$results = $this->db->query($query);
 		return $results->result();
 	}

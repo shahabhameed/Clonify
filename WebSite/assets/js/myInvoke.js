@@ -340,7 +340,7 @@ function createNewElement(newElement,baseElement){
 	
 	var collapse=document.createElement('div'); collapse.setAttribute('class','panel-collapse collapse in'); collapse.setAttribute('id',id);
 	
-	var list=document.createElement('select'); list.setAttribute('id',newElement+'List'+(childCount+1)); list.setAttribute('multiple','multiple'); list.setAttribute('class','multiple form-control col-lg-12');
+	var list=document.createElement('select'); list.setAttribute('name',newElement+'List[]'+(childCount+1)); list.setAttribute('id',newElement+'List'+(childCount+1)); list.setAttribute('multiple','multiple'); list.setAttribute('class','multiple form-control col-lg-12');
 	list.setAttribute('style','height:150px;')
 	
 
