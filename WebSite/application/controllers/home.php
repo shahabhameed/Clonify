@@ -10,6 +10,7 @@
       $this->load->library('tank_auth');
       $this->load->library('SyntaxHighlighter');
       $this->load->library('scc');
+      $this->load->library('common');
       if (!$this->tank_auth->is_logged_in()) {         // Not logged in
         redirect('/auth/login/');
       }
@@ -24,46 +25,19 @@
     }
 
     public function loadCode() {
-      $viewData = array();
-      $scc_id = $this->input->post('scc_id');
       $clone_list_id = $this->input->post('clone_list_id');
-      $file_path = $this->input->post('file_path');
-
-      $userId = 15;
-      $loadId = 1;
       $lines = array();
       $miniMapLinks = array();
       $miniMapLinkLable = array();
       $start_line = $this->input->post('start_line');
       $end_line = $this->input->post('end_line');
-      if (true){//$clone_list_id == 0) {
-        $fileName = 'Cocos2dxBitmap.java';
-        for ($i = $start_line; $i <= $end_line; $i++) {
-          $lines[] = $i;
-        }
-        $miniMapLinks[] = $start_line;
-        $miniMapLinkLable[$start_line] = array('text' => 'Clone 1', 'rows' => $end_line - $start_line);
-//        for ($i = 156; $i <= 190; $i++) {
-//          $lines[] = $i;
-//        }
-//        $miniMapLinks[] = 156;
-//        $miniMapLinkLable[156] = array('text' => 'Clone 2', 'rows' => 12);
-      } 
-//      else {
-//        $fileName = 'Cocos2dxGLSurfaceView.java';
-//        for ($i = 96; $i <= 108; $i++) {
-//          $lines[] = $i;
-//        }
-//        $miniMapLinks[] = 96;
-//        $miniMapLinkLable[96] = array('text' => 'Clone 1', 'rows' => 12);
-//        for ($i = 196; $i <= 208; $i++) {
-//          $lines[] = $i;
-//        }
-//        $miniMapLinks[] = 196;
-//        $miniMapLinkLable[196] = array('text' => 'Clone 2', 'rows' => 12);
-//      }
-
-//      $filePath = UPLOADED_FILES_FOLDER . $userId . "/" . $loadId . "/" . $fileName;
+      
+      for ($i = $start_line; $i <= $end_line; $i++) {
+        $lines[] = $i;
+      }
+      $miniMapLinks[] = $start_line;
+      $miniMapLinkLable[$start_line] = array('text' => 'Clone 1', 'rows' => $end_line - $start_line);
+      
       $filePath = $this->input->post('file_path');
       $obj = new SyntaxHighlighter($filePath, 'java');
       $obj->EnableLineNumbers();
@@ -92,6 +66,15 @@
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/scc2.php', $viewData);
       $this->load->view('partials/main_footer');
+    }
+    
+    function cloneDifference(){
+      $file1_clone_string = $this->common->extractClonedSubstring($this->input->post('file_1_path'), $this->input->post('file_1_start_line'), $this->input->post('file_1_end_line')) ;
+      $file2_clone_string = $this->common->extractClonedSubstring($this->input->post('file_2_path'), $this->input->post('file_2_start_line'), $this->input->post('file_2_end_line')) ;
+      $obj =  new StringCompare();      
+      $test_result = $obj->getDifferenceBetweenStrings($file1_clone_string, $file2_clone_string);      
+      $data = implode(",", $test_result);
+      echo $data;
     }
 
   }

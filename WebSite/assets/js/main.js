@@ -7,6 +7,15 @@ var supr_Options = {
 	rtl:false //activate rtl version with true
 }
 
+var code_compare_global_attributes = {
+    file_1_path : null,
+    file_1_start_line : null,
+    file_1_end_line : null,
+    file_2_path : null,
+    file_2_start_line : null,
+    file_2_end_line : null
+}
+
 //------------- Modernizr -------------//
 //load some plugins only if is needed
 Modernizr.load({
@@ -491,62 +500,101 @@ Clonify.SCC = {
     $.post(_url, _params, function(r) {
       $(".code-window-containter").show();
       if ($("#code_window1").html() == ""){
+        code_compare_global_attributes.file_1_path = path;
+        code_compare_global_attributes.file_1_start_line = start_line;
+        code_compare_global_attributes.file_1_end_line = end_line;
         $(".code-window1").show();
         $("#file1").html('File Name : '+file_name);
         $("#code_window1").html(r);
         window.location.hash='geshi-window0-'+start_line;
-        var selector1 = "";
-        for (var i = start_line; i <= end_line; i++){
-            selector1 += '#geshi-window0-'+i+",";
-        }
-        
-        selector1 = selector1.substring(0, selector1.length-1);
-
-        $(selector1).poshytip({
-          content: 'THIS IS TEST TOOLTIP FOR WINDOW 1'
-        });
-        
-        $(selector1).each(function(){
-            var str = $(this).find('div').html();
-            str = str.replace("canvas","<span style='color: red !important'>canvas</span>");
-            str = str.replace("alignment","<span style='color: red !important'>alignment</span>");
-            str = str.replace("case","<span style='color: red !important'>case</span>");
-            str = str.replace("switch","<span style='color: red !important'>switch</span>");
-            $(this).find('div').html(str);
-        });
+//        var selector1 = "";
+//        for (var i = start_line; i <= end_line; i++){
+//            selector1 += '#geshi-window0-'+i+",";
+//        }
+//        
+//        selector1 = selector1.substring(0, selector1.length-1);
+//
+//        $(selector1).poshytip({
+//          content: 'THIS IS TEST TOOLTIP FOR WINDOW 1'
+//        });
+//        
+//        $(selector1).each(function(){
+//            var str = $(this).find('div').html();
+//            str = str.replace("canvas","<span style='color: red !important'>canvas</span>");
+//            str = str.replace("alignment","<span style='color: red !important'>alignment</span>");
+//            str = str.replace("case","<span style='color: red !important'>case</span>");
+//            str = str.replace("switch","<span style='color: red !important'>switch</span>");
+//            $(this).find('div').html(str);
+//        });
         
         new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window0-minimap-index').make().prependTo('#code_map1') );        
       }else{
+        code_compare_global_attributes.file_2_path = path;
+        code_compare_global_attributes.file_2_start_line = start_line;
+        code_compare_global_attributes.file_2_end_line = end_line;
+          
         $("#code_window1").removeClass('col-md-11');
         $("#code_window1").addClass('col-md-5');
         $(".code-window2").show();
         $("#file2").html('File Name : '+file_name);
         $("#code_window2").html(r);
         window.location.hash='geshi-window1-'+start_line;        
-        var selector2 = "";
-        for (var i = start_line; i <= end_line; i++){
-            selector2 += '#geshi-window1-'+i+",";
-        }
-        selector2 = selector2.substring(0, selector2.length-1);
-
-        $(selector2).poshytip({
-          content: '<br/>THIS IS TEST TOOLTIP FOR WINDOW 2'
-        });
-        $(selector2).each(function(){
-            var str = $(this).find('div').html();
-            str = str.replace("static","<span style='color: red !important'>static</span>");
-            str = str.replace("private","<span style='color: red !important'>private</span>");
-            str = str.replace("case","<span style='color: red !important'>case</span>");
-            str = str.replace("final","<span style='color: red !important'>final</span>");
-            str = str.replace("Cocos2dxGLSurfaceView ","<span style='color: red !important'>Cocos2dxGLSurfaceView </span>");
-            $(this).find('div').html(str);
-        });
+//        var selector2 = "";
+//        for (var i = start_line; i <= end_line; i++){
+//            selector2 += '#geshi-window1-'+i+",";
+//        }
+//        selector2 = selector2.substring(0, selector2.length-1);
+//
+//        $(selector2).poshytip({
+//          content: '<br/>THIS IS TEST TOOLTIP FOR WINDOW 2'
+//        });
+//        $(selector2).each(function(){
+//            var str = $(this).find('div').html();
+//            str = str.replace("static","<span style='color: red !important'>static</span>");
+//            str = str.replace("private","<span style='color: red !important'>private</span>");
+//            str = str.replace("case","<span style='color: red !important'>case</span>");
+//            str = str.replace("final","<span style='color: red !important'>final</span>");
+//            str = str.replace("Cocos2dxGLSurfaceView ","<span style='color: red !important'>Cocos2dxGLSurfaceView </span>");
+//            $(this).find('div').html(str);
+//        });
         
         
         new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window1-minimap-index').make().prependTo('#code_map2') );
+        Clonify.SCC.calculateCloneDifferences();
 
       }      
     });
+  },
+  
+  calculateCloneDifferences : function(){
+      
+        var _url = base_url + "home/cloneDifference";
+        $.post(_url, code_compare_global_attributes, function(r) {
+            
+            var selector2 = "";
+            for (var i = code_compare_global_attributes.file_2_start_line; i <= code_compare_global_attributes.file_2_end_line; i++){
+                selector2 += '#geshi-window1-'+i+",";
+            }
+            selector2 = selector2.substring(0, selector2.length-1);
+
+            $(selector2).poshytip({
+              content: 'Clone Difference is : '+r
+            });
+
+            var selector1 = "";
+            for (var i = code_compare_global_attributes.file_1_start_line; i <= code_compare_global_attributes.file_1_end_line; i++){
+                selector1 += '#geshi-window0-'+i+",";
+            }
+
+            selector1 = selector1.substring(0, selector1.length-1);
+
+            $(selector1).poshytip({
+              content: 'Clone Difference is : '+r
+            });
+
+        });      
+    
+      
   }
   
 };
