@@ -326,7 +326,7 @@ function createNewElement(newElement,baseElement){
 	//     Group List : groupList#
 	//     Group Buttons Panel : groupButton#
 	
-	var newGroup=document.createElement('div');newGroup.setAttribute('class','panel panel-default');newGroup.setAttribute('id',newElement+(childCount+1));		
+	var newGroup=document.createElement('div');newGroup.setAttribute('class','panel panel-default');newGroup.setAttribute('id',newElement+(childCount+1));	newGroup.setAttribute('name',newElement+(childCount+1)+'[]');	
 	var newPanel=document.createElement('div'); newPanel.setAttribute('class','panel-heading'); 
 	var newHeading=document.createElement('h4');//newHeading.setAttribute('class','panel-title');
 	var newSpan=document.createElement('span');newSpan.innerHTML=newElement+" "+(childCount+1);
@@ -340,7 +340,7 @@ function createNewElement(newElement,baseElement){
 	
 	var collapse=document.createElement('div'); collapse.setAttribute('class','panel-collapse collapse in'); collapse.setAttribute('id',id);
 	
-	var list=document.createElement('select'); list.setAttribute('name',newElement+'List[]'+(childCount+1)); list.setAttribute('id',newElement+'List'+(childCount+1)); list.setAttribute('multiple','multiple'); list.setAttribute('class','multiple form-control col-lg-12');
+	var list=document.createElement('select'); list.setAttribute('name',newElement+'List'+(childCount+1)+'[]'); list.setAttribute('id',newElement+'List'+(childCount+1)); list.setAttribute('multiple','multiple'); list.setAttribute('class','multiple form-control col-lg-12');
 	list.setAttribute('style','height:150px;')
 	
 

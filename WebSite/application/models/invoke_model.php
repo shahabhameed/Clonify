@@ -86,10 +86,7 @@ class Invoke_model extends CI_Model
         $grouping_choice = $_POST['groupingChoice'];
 		$files = $_POST['files'];
 		
-		$groupList = $_POST['hiddenGroup']; //get hidden list
-		
-
-		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'files'=>$files,'groupList'=>$groupList,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment));
+		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'files'=>$files,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment));
 	}
 
 	function sup()
@@ -150,7 +147,7 @@ class Invoke_model extends CI_Model
 		$grouping_choice = $this->session->userdata('grouping_choice');
 		$method_analysis = $this->session->userdata('method_analysis');
 		$scc_min_sim = $this->session->userdata('scc_min_sim');
-		$files = $this->session->userdata('files');
+//		$files = $this->session->userdata('files');
 		$supTokens = $this->session->userdata('supTokens');
 		$eqTokens = $this->session->userdata('eqTokens');
 		$language = $this->session->userdata('language');
@@ -170,40 +167,36 @@ class Invoke_model extends CI_Model
 
 		$this->db->query("INSERT INTO invocation_parameters(min_similatiry_SCC_tokens,grouping_choice,method_analysis,invocation_id,suppressed_tokens,equal_tokens,language_id) VALUES('$scc_min_sim','$grouping_choice','$grouping_choice','$invoke_id','$supTokens','$eqTokens','$language')");
 		
-		
-		add_invocation_files_details();
-		
-		
-		
-		
-		
-		
-		
-	}
-	
-	function add_invocation_files_details()
-	{
-		$files = $this->session->userdata('files');
-		$groupList = $this->session->userdata('groupList');
+		//FILE GROUPS
+		$groupList = $_POST['hiddenGroup']; //get hidden list
+
 		$count = 0;
+		
 		
 		if (!empty($groupList)){
 			foreach ($groupList as $list)
 			{
 				$group=$_POST[$list];
+				$group_id=intval(substr($list,9));
 				foreach ($group as $file_in_group)
 				{
-					$group_id=substr($group,9);
-					$this->db->query("INSERT INTO invocation_files(invocation_id,file_id,group_id,cmfile_id) VALUES('$invoke_id','$file_in_group',$group_id,'$count')");
+					
+					$this->db->query("INSERT INTO invocation_files(invocation_id,file_id,group_id,cmfile_id) VALUES('$invoke_id','$file_in_group','$group_id','$count')");
 					$count++;
 					
 				}
 				
 			}
+
+		}
 		
-	
-	}
-	
+/*		
+		$count = 0;
+		foreach ($files as $selFil) {
+			$this->db->query("INSERT INTO invocation_files(invocation_id,file_id,cmfile_id) VALUES('$invoke_id','$selFil','$count')");
+			$count++;
+		}		
+*/
 	}
 	
 	function get_all_user_files()
@@ -224,12 +217,6 @@ class Invoke_model extends CI_Model
 	function get_all_languages()
 	{
 		$query = "SELECT * FROM languages";
-		$results = $this->db->query($query);
-		return $results->result();
-	}
-	function get_all_invocation_files()
-	{
-		$query = "SELECT * FROM invocation_files";
 		$results = $this->db->query($query);
 		return $results->result();
 	}
@@ -356,4 +343,86 @@ class Invoke_model extends CI_Model
 		}
 		return NULL;
 	}
+	
+	function myinit()
+    {
+		//Initial Params
+        $iName = $_POST['iName'];
+		$iComment = $_POST['iComment'];
+		$scc_min_sim = $_POST['spinner1'];
+		$language = $_POST['language'];
+		if(isset($_POST['methodAnalysis'])){
+	        $method_analysis = TRUE;
+		}
+		else{
+			$method_analysis = FALSE;
+		}
+        $grouping_choice = $_POST['groupingChoice'];
+		
+		//Suppressed Tokens
+		$supTokens = '';
+		if (!empty($_POST["suppresed2"]))
+		{
+			$suppresed = $_POST['suppresed2'];
+			
+			$first = true;
+			foreach ($_POST['suppresed2'] as $selSup) {
+				if($first){
+					$supTokens=$selSup;
+					$first = false;
+				}
+				else{
+					$supTokens=$supTokens.','.$selSup;
+				}
+			}
+		}
+		
+		//Equal Tokens
+
+		$eqTokens = '';
+		if (!empty($_POST["hiddenRule"]))
+		{
+			//$eqTokens = $eqTokens.'-'.'if hidden rule';
+			$equal = $_POST['hiddenRule'];
+			$firstIn = true;
+			$firstOut = true;
+			
+			foreach ($_POST["hiddenRule"] as $selEq)
+			{
+				$firstIn = true;
+				//$eqTokens = $eqTokens.'.'.$selEq;
+				if (!empty($_POST[$selEq]))
+				{
+					if($firstOut){
+						$firstOut = false;
+					}
+					else{
+						$eqTokens = $eqTokens.'|';
+					}
+					foreach ($_POST[$selEq] as $selEq2)
+					{
+						if($firstIn){
+							$eqTokens = $eqTokens.$selEq2;
+							$firstIn = false;
+						}
+						else{
+							$eqTokens = $eqTokens.'='.$selEq2;
+						}
+					}				
+				}
+			}
+		}
+		
+	
+		
+		//Session
+		
+		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment));
+		$this->session->set_userdata(array('supTokens'=>$supTokens));
+		$this->session->set_userdata(array('eqTokens'=>$eqTokens));
+
+		$this->invoke();
+	}
+
+	
 }

@@ -46,18 +46,10 @@ class Invoke extends CI_Controller
     	//echo "in invoke";
 		//$this->load->model('invoke_model');
 		//$this->invoke_model->new_invocation();
-		$this->invoke_model->init();
-		$data['tokens']=$this->invoke_model->get_all_language_tokens();
-		$this->open_view('invoke_sup',$data);//loading success view
-	}
-	function invoke_submit()
-	{
 
-		//$this->invoke_model->init();
-		$this->invoke_model->add_invocation_files_details();
-		$data['invocation_files']=$this->invoke_model->get_all_invocation_files();
-		$this->open_view('invoke_sup',$data);//loading success view
-		
+		$this->invoke_model->myinit();
+		//$data['tokens']=$this->invoke_model->get_all_language_tokens();
+		//$this->open_view('dashboard',$data);//loading success view
 	}
 	function test(){
             
@@ -93,7 +85,7 @@ class Invoke extends CI_Controller
                 }
 		$this->load->view($pagename,$data);
 		$this->load->view('partials/main_footer');		
-	}  
+	}
 }
 
 /* End of file auth.php */
