@@ -462,10 +462,12 @@ function setAttributes(element,type,value,id,childClass,onClick) {
 }	
 
 function SelectOnSubmit(){
+	selectAllOptions("suppresed2");
 	selectAllOptions("hiddenGroup");
 	selectAllOptions("hiddenRule");
 	selectAllSubLists("hiddenGroup");
 	selectAllSubLists("hiddenRule");
+//	document.wizard.submit();
 }
 
 function myValidate(){

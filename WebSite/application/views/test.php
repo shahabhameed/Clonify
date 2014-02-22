@@ -34,10 +34,10 @@
                             </div>
 							
                             <div class="panel-body noPad clearfix">
-                                <form id="wizard" class="form-horizontal" role="form" >
+                                <form id="wizard" name="wizard" class="form-horizontal" role="form" method="post" accept-charset="utf-8" action="<?php echo base_url();?>index.php/invoke/invoke_init"  onsubmit="alert();">
 								    <div class="wizard-actions">
                                             <button class="btn btn-default pull-left col-lg-1" type="reset"> Back </button>
-                                            
+
 											<button class="btn btn-primary pull-right col-lg-1" type="submit" onclick="SelectOnSubmit();"> Submit </button>
 											<button class="btn btn-success pull-right col-lg-1" > Next </button>
                                     </div><!-- End .form-group  -->
@@ -139,7 +139,7 @@
 														<div align="right" class="col-lg-12"> 
 														<button  type="button" class="btn btn-success btn marginT6" onclick="createNewElement('Group','box1View');" >Create Group</button>
 														</div>
-                                                        <select id="hiddenGroup" style="display:none" multiple="multiple"></select>
+                                                        <select id="hiddenGroup" name="hiddenGroup[]" style="display:none" multiple="multiple"></select>
 														
                                                 
 														
@@ -254,7 +254,7 @@
 														<div align="right" class="col-lg-12"> 
 														<button  type="button" class="btn btn-success btn marginT6" onclick="createNewElement('Rule','equal');">Add Rule</button>
                                                         </div>
-														<select id="hiddenRule" style="display:none" multiple="multiple"></select>
+														<select id="hiddenRule" name="hiddenRule[]" style="display:none" multiple="multiple"></select>
                                                 
 														
                                                     
@@ -293,7 +293,8 @@
 								</div><!-- End .panel -->
 								
 									
-							</div><!-- End .step -->                                        
+							</div><!-- End .step -->      
+                                                              
                                     </form>
                                 </div>  <!-- End .wizard -->
                             </div><!-- End .panel -->
