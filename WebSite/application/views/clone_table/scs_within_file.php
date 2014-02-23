@@ -20,15 +20,142 @@
             </ul>                   
         </div>
         
+         <!-- Modal -->
+        <div class="modal fade" id="qtable1" tabindex="-1" role="dialog" aria-labelledby="Table 1 Query" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Search SCC By File</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-10">
+                    <small>For multiple values use "[ ]", e.g for number 1 and 2 write [1,2]</small>
+                  </div>
+                  
+                </div>
+               <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>Group Id</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-10" id="ginumberfilter">
+                    </div>
+                </div>
+                <br>
+               <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>Directory Id</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-10" id="dinumberfilter">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>File Id</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-10" id="finumberfilter">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>Number Of Colones</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-4" id="sccnumberfilter">
+                    </div>
+                </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="qtable2" tabindex="-1" role="dialog" aria-labelledby="Table 2 Query" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Search SCC Clone Instance</h4>
+              </div>
+              <div class="modal-body">
+               <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>Clone Id</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-10" id="cidnumberfilter">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>SCS ID</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-4" id="scsidnumberfilter">
+                    </div>
+                </div>
+                <br>
+              <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>SCS Instance Id</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-4" id="scsinumberfilter">
+                    </div>
+                </div>
+              <br>
+              <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>SCS File Id</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-4" id="scsfidnumberfilter">
+                    </div>
+                </div>
+                <br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
         <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
                  <h4><span> <i class="fa fa-list-alt fa-2"></i> SCS Within File List</span></h4>
+                 <span class="loader" style="top:15px;cursor:pointer;">
+                  <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
+                </span>
                  <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
                 </div>
                 <div class="panel-body noPad clearfix">
-                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+                  <table cellpadding="0" cellspacing="0" border="0" class="responsive scswithinfile display table table-bordered" width="100%">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -53,6 +180,17 @@
                       </tr>
                       <?php }?>
                     </tbody>
+                     <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>SCS ID</th>
+                        <th>Structure (SCC ID)</th>                        
+                        <th>Group Id</th>
+                        <th>Directory ID</th>
+                        <th>File Id</th>
+                        <th>No. Clones</th>
+                      </tr>
+                    </tfoot>
                   </table>
                 </div>
               </div>
@@ -68,7 +206,15 @@
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i>SCS Clone Instance List - SCS ID - <?php echo $scs_infile_id;?></span></h4>
+                 <h4>
+                  <span> 
+                    <i class="fa fa-list-alt fa-2"></i>
+                      SCS Clone Instance List - SCS ID - <?php echo $scs_infile_id;?>
+                  </span>
+                </h4>
+                <span class="loader" style="top:15px;cursor:pointer;">
+                  <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
+                </span>
                  <a href="#"  id="pannel2" class="minimize" style="display: inline;">Minimize</a>
                 </div>
                 
@@ -99,6 +245,16 @@
                           </tr>
                         <?php }?>
                       </tbody>
+                    <tfoot>
+                      <tr>                        
+                        <th>No.</th>
+                        <th>Clone ID</th>
+                        <th>SCC ID</th>
+                        <th>SCC Instance Id</th>
+                        <th>File ID</th>
+                        <th>File Name</th>
+                      </tr>
+                    </tfoot>  
                   </table>
                 </div>
               </div>
@@ -149,6 +305,34 @@
 
 <script>
 $(document).ready(function(){
+  $('.scswithinfile').dataTable( {
+        "sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+        "sPaginationType": "bootstrap",
+        "bJQueryUI": false,
+        "bAutoWidth": false,
+                          "iDisplayLength" : 5,
+                          "aLengthMenu" : [5,10,25,50],
+        "oLanguage": {
+          "sSearch": "<span></span> _INPUT_",
+          "sLengthMenu": "<span>_MENU_</span>",
+          "oPaginate": { "sFirst": "First", "sLast": "Last" }
+        }
+      }).columnFilter({
+           aoColumns: [
+                       null,
+                       null,
+                       null,
+                       { sSelector: "#ginumberfilter",type: "number" },
+                       { sSelector: "#dinumberfilter",type: "number" },
+                       { sSelector: "#finumberfilter",type: "number" },
+                       { sSelector: "#sccnumberfilter",type: "number" }
+                       ]
+      });
+
+      $('.dataTables_length select').uniform();
+      $('.dataTables_paginate > ul').addClass('pagination');
+      $('.dataTables_filter>label>input').addClass('form-control');
+      $('.dataTables_filter').hide();
     $(".list_view").on("click",function(){
       Clonify.SCC.viewSCSCloneInstance($(this).data("scsid"));
       event.preventDefault();      

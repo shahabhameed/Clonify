@@ -512,7 +512,47 @@ Clonify.SCC = {
 		$('.dataTables_filter>label>input').addClass('form-control');
         $('.dataTables_filter').hide();
   },
-  
+  viewSCSAcrossCloneInstance: function(_scs_id){
+  	$(".scs_instance_list").hide();
+    $("#scs_instance_list_"+_scs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#scs_instance_list_"+_scs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+            "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#gidnumberfilter",type: "number" },
+                                     { sSelector: "#didnumberfilter",type: "number" },
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+                                     { sSelector: "#tcnumberfilter",type: "number" },
+                                     { sSelector: "#pcnumberfilter",type: "number" },
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+
+  },
   viewSCSCloneInstance: function(_scs_id){
     $(".scs_instance_list").hide();
     $("#scs_instance_list_"+_scs_id).show();
@@ -524,6 +564,34 @@ Clonify.SCC = {
     $(".code-window1").hide();
     $(".code-window2").hide();
     window.location.hash='';
+    $("#scs_instance_list_"+_scs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#cidnumberfilter",type: "number" },
+                                     { sSelector: "#scsidnumberfilter",type: "number" },
+                                     { sSelector: "#scsinumberfilter",type: "number" },
+                                     { sSelector: "#scsfidnumberfilter",type: "number" },
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
   },
   
   viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
