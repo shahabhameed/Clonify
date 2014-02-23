@@ -57,7 +57,7 @@ class SCC
       $result[$d['scs_infile_id']]['scc_id'][] = $d['scc_id'];      
     }
     foreach($result as $index => $r){
-      $result[$index]['scc_id_csv'] = implode(",", $result[$index]['scc_id']);
+      $result[$index]['scc_id_csv'] = implode(", ", $result[$index]['scc_id']);
       $child_data = $this->ci->scc_model->getAllSCSWithInFileChildTable($invocationId, $index);
       if ($child_data){
         $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
@@ -69,6 +69,35 @@ class SCC
         $child_data[$in]['endline'] = isset($instance_data['endline']) ? $instance_data['endline'] : "";
         $child_data[$in]['endcol'] = isset($instance_data['endcol']) ? $instance_data['endcol'] : "";
       }
+      
+      $result[$index]['child_rows'] = $child_data;      
+    }
+    
+    return $result;
+  }
+  
+   function getAllSCSAcrossFile($invocationId){
+    $userId = $this->ci->tank_auth->get_user_id();
+    
+    $data = $this->ci->scc_model->getSCSAcrossFileParentTable($invocationId, $userId);
+    if ($data){
+      $data = json_decode(json_encode($data), true); // Changing Obj in Array
+    }
+    $result = array();
+    
+    foreach($data as $d){
+      $result[$d['scs_crossfile_id']]['scs_crossfile_id'] = $d['scs_crossfile_id'];      
+      $result[$d['scs_crossfile_id']]['members'] = $d['members'];
+      $result[$d['scs_crossfile_id']]['atc'] = $d['atc'];
+      $result[$d['scs_crossfile_id']]['apc'] = $d['apc'];
+      $result[$d['scs_crossfile_id']]['scc_id'][] = $d['scc_id'];      
+    }
+    foreach($result as $index => $r){
+      $result[$index]['scc_id_csv'] = implode(", ", $result[$index]['scc_id']);
+      $child_data = $this->ci->scc_model->getSCSAcrossFileChildTable($invocationId, $index);
+      if ($child_data){
+        $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
+      }      
       
       $result[$index]['child_rows'] = $child_data;      
     }

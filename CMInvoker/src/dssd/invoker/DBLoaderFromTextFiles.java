@@ -47,7 +47,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		INSERT_SCSINFILE_SCC = "INSERT INTO scsinfile_scc(scc_id, scs_infile_id, invocation_id) values ";		
 		INSERT_SCSINFILE_FILE = "INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, members) values ";
 		INSERT_SCSINFILE_FRAGMENTS = "INSERT INTO scsinfile_fragments(scs_infile_id, fid, scc_id, scsinfile_instance_id, scc_instance_id, invocation_id) values ";
-		INSERT_SCSCROSSFILE_FILE = "INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc) values ";
+		INSERT_SCSCROSSFILE_FILE = "INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc, invocation_id) values ";
 		INSERT_SCSCROSSFILE_SCC = "INSERT INTO scscrossfile_scc(scc_id, scs_crossfile_id, invocation_id) values ";
 		INSERT_SCS_CROSSFILE = "INSERT INTO scs_crossfile(scs_crossfile_id,invocation_id, atc, apc, members) values ";
 	}
@@ -229,7 +229,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				while (st2.hasMoreTokens()) {
 					temp = st2.nextToken();
 					insertSCSCrossFile_SCC(Integer.parseInt(temp),
-							scs_crossfile_id, invocationId);
+							scs_crossfile_id, invocation_id);
 				}
 
 				int sup = (new Integer(support)).intValue();
@@ -245,7 +245,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					apc += Double.parseDouble(coverage);
 					insertSCSCrossFile_File(scs_crossfile_id, Integer
 							.parseInt(fid), Double.parseDouble(tk), Double
-							.parseDouble(coverage));
+							.parseDouble(coverage), invocation_id);
 				}
 				atc = atc / sup;
 				apc = apc / sup;
@@ -258,7 +258,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Database.executeTransaction(INSERT_SCSCROSSFILE_SCC);
 		}
 		if (!INSERT_SCSCROSSFILE_FILE
-				.equalsIgnoreCase("INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc) values ")) {
+				.equalsIgnoreCase("INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc, invocation_id) values ")) {
 			Database.executeTransaction(INSERT_SCSCROSSFILE_FILE);
 		}
 		if (!INSERT_SCS_CROSSFILE
@@ -457,9 +457,9 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	}
 	
 	private void insertSCSCrossFile_File(int scs_crossfile_id, int fid,
-			double tc, double pc) {
+			double tc, double pc, int invocationId) {
 		INSERT_SCSCROSSFILE_FILE += "( \"" + scs_crossfile_id + "\" , \"" + fid
-				+ "\" , \"" + tc + "\" , \"" + pc + "\"  ),";
+				+ "\" , \"" + tc + "\" , \"" + pc + "\" , \"" + invocationId + "\"  ),";
 	}
 	
 
