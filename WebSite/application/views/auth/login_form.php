@@ -78,8 +78,7 @@ $captcha = array(
                 </div>
                <?php } }?>
                 <div class="form-group">
-                    <div class="col-lg-12 clearfix form-actions">
-                      <button type ="button" class="btn btn-facebook center" onclick="login_user()"><i class="fa fa-facebook"></i> | Connect with Facebook</button>
+                    <div class="col-lg-12 clearfix form-actions">                      
                         <button type="submit" class="btn btn-info center" id="loginBtn"><span class="fa fa-sign-in white"></span> Login</button>
                         <?php if ($this->config->item('allow_registration', 'tank_auth')){?>
                         <a href="<?=site_url('auth/register');?>" class="btn btn-success center" style="margin-top:10px;"><span class="fa fa-upload white" ></span> Sign up</a>
