@@ -502,7 +502,8 @@ Clonify.SCC = {
     var _url = base_url + "home/loadCode";
     window_id = window_id + 1;
     $("#code_window1").css("overflow", "");
-    $("#code_window2").css("overflow", "");    
+    $("#code_window2").css("overflow", "");
+    var invocation_id = $("#sidebar_invocation_id").val();
     var _params = {
       scc_id : _scc_id,
       clone_list_id : _clone_list_id,
@@ -513,6 +514,7 @@ Clonify.SCC = {
       end_line : end_line,
       strt_col : strt_col,
       end_col : end_col,
+      invocation_id: invocation_id,
       window_id: window_id
     };
     

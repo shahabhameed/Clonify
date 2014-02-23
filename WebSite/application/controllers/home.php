@@ -26,17 +26,32 @@
 
     public function loadCode() {
       $clone_list_id = $this->input->post('clone_list_id');
+      $invocation_id = $this->input->post('invocation_id');
+      $scc_id = $this->input->post('scc_id');
+      $start_line = $this->input->post('start_line');
+      $end_line = $this->input->post('end_line');
       $lines = array();
       $miniMapLinks = array();
       $miniMapLinkLable = array();
-      $start_line = $this->input->post('start_line');
-      $end_line = $this->input->post('end_line');
       
-      for ($i = $start_line; $i <= $end_line; $i++) {
-        $lines[] = $i;
+      if (!$clone_list_id && !$start_line && !$start_line){
+        $scc_instances = $this->scc->getSCCInstancesBySCCId($invocation_id, $scc_id);
+        if ($scc_instances){
+          foreach($scc_instances as $scc_instance){
+            for ($i = $scc_instance['startline']; $i <= $scc_instance['endline']; $i++) {
+              $lines[] = $i;
+            }
+            $miniMapLinks[] = $scc_instance['startline'];
+            $miniMapLinkLable[$scc_instance['startline']] = array('text' => '  ', 'rows' => $scc_instance['endline'] - $scc_instance['startline']);
+          }
+        }
+      }else{
+        for ($i = $start_line; $i <= $end_line; $i++) {
+          $lines[] = $i;
+        }
+        $miniMapLinks[] = $start_line;
+        $miniMapLinkLable[$start_line] = array('text' => '  ', 'rows' => $end_line - $start_line);
       }
-      $miniMapLinks[] = $start_line;
-      $miniMapLinkLable[$start_line] = array('text' => '  ', 'rows' => $end_line - $start_line);
       
       $filePath = $this->input->post('file_path');
       $obj = new SyntaxHighlighter($filePath, 'java');

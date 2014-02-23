@@ -29,6 +29,7 @@
 				<?php } ?>
 				<li><a href="<?php echo site_url('load_results/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Load Results</a></li>
                 <?php if (isset($showCloneView) && $invocationId){?>
+                                <input type="hidden" id="sidebar_invocation_id" value="<?php echo $invocationId;?>"/>
                 <li>
                     <a href="#"><span class="icon16 fa fa-desktop"></span>Clone Table View</a>
                     <ul class="sub">

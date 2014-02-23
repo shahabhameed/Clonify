@@ -80,7 +80,21 @@ class SCC_model extends CI_Model
       return $result->row();
     }    
     return array();
-  }    
+  }
+  
+  public function getSCCInstancesBySCCId($invocationId, $scc_id, $userId){
+    $where = "tb1.invocation_id = $invocationId AND tb1.scc_id=$scc_id ";
+    
+    $this->db->select('*');
+    $this->db->from('scc_instance tb1');    
+    $this->db->where($where);
+
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }    
+    return array();
+  }
   
   public function getAllSCSWithInFileChildTable($invocationId, $scs_id){
     $where = "tb1.invocation_id = $invocationId AND tb1.scs_infile_id = $scs_id";

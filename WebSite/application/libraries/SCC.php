@@ -143,4 +143,14 @@ class SCC
     return $data;
   }
   
+  public function getSCCInstancesBySCCId($invocationId, $scc_id){
+    $userId = $this->ci->tank_auth->get_user_id();
+    $data = $this->ci->scc_model->getSCCInstancesBySCCId($invocationId, $scc_id, $userId);
+    if ($data){
+      $data = json_decode(json_encode($data), true); // Changing Obj in Array
+    }
+    
+    return $data;
+  }
+  
 }

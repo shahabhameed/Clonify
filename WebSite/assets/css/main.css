@@ -3836,6 +3836,10 @@ nav.flexible-nav ul li a.tnn-h3 {
   cursor: pointer;
 }
 
+#code_map1{
+  margin-left:5px;
+}
+
 .dataTables_length{
   padding-top: 10px;
 }
