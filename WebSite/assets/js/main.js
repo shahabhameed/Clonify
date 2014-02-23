@@ -554,9 +554,12 @@ Clonify.SCC = {
         code_compare_global_attributes.file_1_end_line = end_line;
         $(".code-window1").show();
         $("#file1").html('File Name : '+file_name);
-        $("#code_window1").html(r);
-        window.location.hash='geshi-window'+window_id+'-'+start_line;        
-        new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map1') );        
+        $("#code_window1").html(r);        
+        new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map1') );
+        if (start_line == null || start_line == ""){
+          start_line = $("#startline-"+window_id).val();
+        }
+        window.location.hash='geshi-window'+window_id+'-'+start_line;
       }else{
         code_compare_global_attributes.file_2_path = path;
         code_compare_global_attributes.file_2_start_line = start_line;
@@ -566,11 +569,13 @@ Clonify.SCC = {
         $("#code_window1").addClass('col-md-5');
         $(".code-window2").show();
         $("#file2").html('File Name : '+file_name);
-        $("#code_window2").html(r);
-        window.location.hash='geshi-window'+window_id+'-'+start_line;
+        $("#code_window2").html(r);        
         new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map2') );
-        Clonify.SCC.calculateCloneDifferences();
-
+        Clonify.SCC.calculateCloneDifferences();        
+        if (start_line == null || start_line == ""){
+          start_line = $("#startline-"+window_id).val();
+        }
+        window.location.hash='geshi-window'+window_id+'-'+start_line;
       }      
     });
 	

@@ -30,8 +30,8 @@ class SyntaxHighlighter{
     $this->isLangSourceSet = true;
   }
   
-  public function HighlightLines($lines){    
-    $this->geshi->highlight_lines_extra($lines);
+  public function HighlightLines($lines, $line_color){    
+    $this->geshi->highlight_lines_extra($lines, $line_color);
   }
   
   /*
