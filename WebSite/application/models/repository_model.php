@@ -35,6 +35,8 @@ class Repository_Model extends CI_Model
 	{
 		//insert into db tables: repository directory and repository file
 		//get username and then get the corresponding id of the user_repository 
+		$dirPath2 = str_replace("\\", "/", $dirPath);
+		$dirPath = $dirPath2;
 		$data = $this->getIdFromUserRepository($user_id);
 		$id = $data->id;
 		$date = date('Y-m-d H:i:s');
@@ -138,33 +140,38 @@ class Repository_Model extends CI_Model
 		$allDirectories = $this->getAllDirectories();
 		$arrlength=count($fileNames);
 		//echo $arrlength;
-		echo $id;
+		//echo $id;
 		$dirId = 0;
 		foreach ($allFiles as $newFile)
 		{
 			$del = true;
-			$xNumber = 0;
+			//$xNumber = 0;
+			//echo $newFile->file_name;
 			for($x=0;$x<$arrlength;$x++)
 			{
 				if (strcmp($newFile->file_name, $fileNames[$x])==0)
 				{
-					
 					$del = false;
 					break;
 				}
-				$xNumber = $x;
+				//$xNumber = $x;
 			}
 			if ($del==true)
 			{
-				$dirPath = $subPaths[$xNumber];
-				echo $dirPath;
-				if ($dirPath=="")
+				//$dirPath = $subPaths[$xNumber];
+				//$dirPath2 = str_replace("\\", "/", $dirPath);
+				//$dirPath = $dirPath2;
+				// get the dir id from repository using the file id and then delete!
+				//echo $dirPath;
+				/*if ($dirPath=="")
 					$dirId =$this->getDirectoryId($dirPath, $id);
 				else
 					$dirId =$this->getDirectoryId($dirPath.'/', $id);
 				echo $dirId;
-				$query = "DELETE FROM repository_file WHERE file_name = '$newFile->file_name' and directory_id = $dirId ";
-				echo $query;
+				*/
+				$fileID = $newFile->id;
+				$query = "DELETE FROM repository_file WHERE file_name = '$newFile->file_name' and id = $fileID ";
+				//echo $query;
 				$this->db->query($query);
 				//$this->db->delete('repository_file', array('file_name' => $newFile->file_name, 'directory_id' => $dirId )); 
 			}
@@ -178,6 +185,7 @@ class Repository_Model extends CI_Model
 		$query = "SELECT * FROM repository_file";
 		$results = $this->db->query($query);
 		return $results->result();
+		//return $results;
 	}
 	function getAllDirectories()
 	{
@@ -185,5 +193,19 @@ class Repository_Model extends CI_Model
 		$results = $this->db->query($query);
 		return $results->result();
 	}
-	
+	/*function getFileID($fileID)
+	{
+		$this->db->where('directory_name', $dirPath);
+		$this->db->where('repository_id', $id);
+		//$this->db->where('activated', $activated ? 1 : 0);
+
+		$query = $this->db->get('repository_directory');
+		if ($query->num_rows() == 1)
+		{ 
+			$newData = $query->row();
+			return $newData->id;
+		}
+		return NULL;
+	}
+	*/
 }
