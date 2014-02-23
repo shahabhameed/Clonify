@@ -184,7 +184,15 @@ width: 50% !important;
                           
                         </tr>
                         <?php }?>                        
-                      </tbody>                     
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>No</th>
+                          <th>SCC ID</th>
+                          <th>Length</th>                        
+                          <th>No. Clones</th>
+                        </tr>
+                    </tfoot>                     
                   </table>
                 </div>
 
@@ -237,7 +245,18 @@ width: 50% !important;
                             <td><?php echo $d['directory_name'].$d['file_name'];?></td>                            
                           </tr>
                         <?php }?>
-                      </tbody>                      
+                      </tbody> 
+                      <tfoot>
+                        <tr>
+                          <th>No.</th>
+                          <th>Group ID</th>
+                          <th>Directory ID</th>
+                          <th>File ID</th>
+                          <th>Start Line</th>
+                          <th>End Line</th>
+                          <th>File Name</th>
+                        </tr>
+                    </tfoot>                       
                   </table>
                 </div>
               </div>
