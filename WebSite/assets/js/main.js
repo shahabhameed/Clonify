@@ -472,7 +472,7 @@ Clonify.ns = Clonify.namespace;
 Clonify.ns('Clonify.SCC');
 
 Clonify.SCC = {
-  viewCloneInstance: function(_scc_id){
+  viewSCCCloneInstance: function(_scc_id){
     $(".scc_instance_list").hide();
     $("#scc_instance_list_"+_scc_id).show();
     $(".code-window-containter").hide();
@@ -513,7 +513,20 @@ Clonify.SCC = {
         $('.dataTables_filter').hide();
   },
   
-  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, file_name){
+  viewSCSCloneInstance: function(_scs_id){
+    $(".scs_instance_list").hide();
+    $("#scs_instance_list_"+_scs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+  },
+  
+  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
     var _url = base_url + "home/loadCode";
     window_id = window_id + 1;
     $("#code_window1").css("overflow", "");
@@ -526,6 +539,8 @@ Clonify.SCC = {
       start_line : start_line,
       file_name : file_name,
       end_line : end_line,
+      strt_col : strt_col,
+      end_col : end_col,
       window_id: window_id
     };
     
