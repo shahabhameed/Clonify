@@ -66,8 +66,7 @@
       $invocationId = $this->getInvocationIdFromURL();
       
       $results = $this->scc->getAllSCSWithInFile($invocationId);   
-      $viewData['results'] = $results;      
-      
+      $viewData['results'] = $results;
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');

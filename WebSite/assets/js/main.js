@@ -498,7 +498,7 @@ Clonify.SCC = {
     window.location.hash='';
   },
   
-  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, file_name){
+  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
     var _url = base_url + "home/loadCode";
     window_id = window_id + 1;
     $("#code_window1").css("overflow", "");
@@ -511,6 +511,8 @@ Clonify.SCC = {
       start_line : start_line,
       file_name : file_name,
       end_line : end_line,
+      strt_col : strt_col,
+      end_col : end_col,
       window_id: window_id
     };
     

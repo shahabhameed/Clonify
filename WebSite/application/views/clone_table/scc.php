@@ -117,7 +117,7 @@ width: 50% !important;
                         foreach($data as $d){
                           $counter++;
                         ?>
-                          <tr class="code_view" data-name = "<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="<?php echo $d['endline'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-sccid= "<?php echo $scc_id;?>" data-clid= "<?php echo $d['scc_instance_id'];?>" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
+                          <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo $d['endcol'];?>" data-startcol="<?php echo $d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-sccid= "<?php echo $scc_id;?>" data-clid= "<?php echo $d['scc_instance_id'];?>" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
                             <td><?php echo $counter;?></td>
                             <td><?php echo isset($d['group_id']) ? $d['group_id'] : "-";?></td>
                             <td><?php echo isset($d['directory_id']) ? $d['directory_id'] : "-";?></td>
@@ -182,7 +182,7 @@ $(document).ready(function(){
         return false;
     });
      $(".code_view").on("click",function(){
-        Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"),$(this).data("name"));
+        Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
         event.preventDefault();            
         return false;
     });

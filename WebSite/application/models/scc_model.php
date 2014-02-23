@@ -77,8 +77,8 @@ class SCC_model extends CI_Model
 
     $result = $this->db->get();
     if ($result->num_rows()> 0){      
-      return $result->result();
-    }
+      return $result->row();
+    }    
     return array();
   }
   

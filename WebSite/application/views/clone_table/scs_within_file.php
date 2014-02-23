@@ -89,7 +89,7 @@
                         foreach($data as $d){
                           $counter++;
                         ?>
-                          <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="<?php echo $d['endline'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-scsid= "<?php echo $scs_infile_id;?>" data-clid= "<?php echo $d['scsinfile_instance_id'];?>" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
+                          <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo $d['endcol'];?>" data-startcol="<?php echo $d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-scsid= "<?php echo $scs_infile_id;?>" data-clid= "<?php echo $d['scsinfile_instance_id'];?>" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
                             <td><?php echo $counter;?></td>
                             <td><?php echo $d['scsinfile_instance_id'];?></td>
                             <td><?php echo $d['scc_id'];?></td>
@@ -106,6 +106,41 @@
           </div>
         <?php } }?>
         
+        <div class="row code-window-containter">
+            <div class="col-md-12">
+              <div class="panel panel-default gradient">
+                <div class="panel-heading">
+                  <h4><span>Code Window</span></h4>
+                </div>
+                <div class="panel-body noPad clearfix">
+                  <div class="">
+                    <div class="col-md-6 panel-heading">
+                      <h4><span id="file1"></span></h4>
+                    </div>
+                     <div class="col-md-6 panel-heading">
+                      <h4><span id="file2"></span></h4>
+                    </div>
+                  </div>
+                  <div class="code-window1">
+                    <div class="col-md-11 padding15 code-window responsive" id="code_window1" >                    
+                    </div>
+
+                    <div class="col-md-1" id="code_map1" style="padding:0px;padding-right:5px;width:65px !important;">
+                    </div>
+                  </div>
+                                  
+                  <div class="code-window2">
+                    <div class="col-md-1" id="code_map2" style="padding:0px;width:65px !important;">
+                    </div>
+                    <div class="col-md-5 padding15 code-window" id="code_window2">
+
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
         
       </div><!-- End contentwrapper -->
     </div><!-- End #content -->
@@ -120,7 +155,7 @@ $(document).ready(function(){
       return false;
     });
      $(".code_view").on("click",function(){
-        Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"),$(this).data("name"));
+        Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
         event.preventDefault();        
         return false;
     });
