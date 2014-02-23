@@ -80,7 +80,7 @@ class SCC_model extends CI_Model
       return $result->row();
     }    
     return array();
-  }
+  }    
   
   public function getAllSCSWithInFileChildTable($invocationId, $scs_id){
     $where = "tb1.invocation_id = $invocationId AND tb1.scs_infile_id = $scs_id";
@@ -113,7 +113,7 @@ class SCC_model extends CI_Model
       return $result->result();
     }
     return array();
-  }
+  }    
   
   public function getSCSAcrossFileChildTable($invocationId, $scs_id){
     $where = "tb1.invocation_id = $invocationId AND tb1.scs_crossfile_id = $scs_id";
@@ -130,6 +130,43 @@ class SCC_model extends CI_Model
     if ($result->num_rows()> 0){      
       return $result->result();
     }
+    return array();
+  }
+  
+  public function getSCCBYFileParentTable($invocationId, $userId){
+    $where = "tb1.invocation_id = $invocationId";
+    
+    $this->db->select('*');
+    $this->db->from('scc_instance tb1');
+    $this->db->join('scc tb2', 'tb1.scc_id = tb2.scc_id AND tb1.invocation_id=tb2.invocation_id', 'INNER');    
+    $this->db->join('invocation_files tb3', 'tb1.fid = tb3.cmfile_id', 'INNER');
+    $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
+    $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
+    $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
+    $this->db->where($where);
+
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }
+    return array();
+  }
+  
+  public function getSCCByFileChildTable($invocationId, $file_id, $userId){
+    $where = "tb1.invocation_id = $invocationId AND tb1.fid=$file_id";
+    
+    $this->db->select('*');
+    $this->db->from('scc_instance tb1'); 
+    $this->db->join('invocation_files tb3', 'tb1.fid = tb3.cmfile_id', 'INNER');
+    $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
+    $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
+    $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
+    $this->db->where($where);
+
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }    
     return array();
   }
   

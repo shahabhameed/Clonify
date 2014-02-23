@@ -76,7 +76,7 @@ class SCC
     return $result;
   }
   
-   function getAllSCSAcrossFile($invocationId){
+  function getAllSCSAcrossFile($invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     
     $data = $this->ci->scc_model->getSCSAcrossFileParentTable($invocationId, $userId);
@@ -99,6 +99,35 @@ class SCC
         $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
       }      
       
+      $result[$index]['child_rows'] = $child_data;      
+    }
+    
+    return $result;
+  }
+  
+  function getSCSSByFileData($invocationId){
+    $userId = $this->ci->tank_auth->get_user_id();
+    
+    $data = $this->ci->scc_model->getSCCBYFileParentTable($invocationId, $userId);
+    if ($data){
+      $data = json_decode(json_encode($data), true); // Changing Obj in Array
+    }
+    $result = array();
+    
+    foreach($data as $d){      
+      $result[$d['fid']]['members'] = $d['members'];
+      $result[$d['fid']]['fid'] = $d['fid'];
+      $result[$d['fid']]['group_id'] = $d['group_id'];
+      $result[$d['fid']]['directory_id'] = $d['directory_id'];
+      $result[$d['fid']]['directory_name'] = $d['directory_name'];
+      $result[$d['fid']]['file_name'] = $d['file_name'];
+      $result[$d['fid']]['length'] = $d['length'];
+    }
+    foreach($result as $index => $r){      
+      $child_data = $this->ci->scc_model->getSCCByFileChildTable($invocationId, $d['fid'], $userId);
+      if ($child_data){
+        $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
+      }            
       $result[$index]['child_rows'] = $child_data;      
     }
     
