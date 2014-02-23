@@ -3835,3 +3835,7 @@ nav.flexible-nav ul li a.tnn-h3 {
 .code_view{
   cursor: pointer;
 }
+
+.dataTables_length{
+  padding-top: 10px;
+}

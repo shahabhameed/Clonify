@@ -28,7 +28,7 @@
                  <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
                 </div>
                 <div class="panel-body noPad clearfix">
-                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable1 display table table-bordered" width="100%">
+                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
                     <thead>
                       <tr>
                         <th>No</th>
