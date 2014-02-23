@@ -21,7 +21,7 @@ $(document).ready(function() {
 	
 	//add event to modal after closed
 	$('#myModal').on('hidden', function () {
-	  	console.log('modal is closed');
+	  	// console.log('modal is closed');
 	})
 
 });//End document ready functions

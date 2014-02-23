@@ -3,7 +3,7 @@ $(document).ready(function() {
 	//--------------- Data tables ------------------//
 	if($('table').hasClass('dynamicTable')){
 		$('.dynamicTable').dataTable( {
-			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sDom": "<'row'<'col-lg-6'l><'col-lg-6'f>r>t<'row'<'col-lg-6'i><'col-lg-6'p>>",
 			"sPaginationType": "bootstrap",
 			"bJQueryUI": false,
 			"bAutoWidth": false,
@@ -19,7 +19,7 @@ $(document).ready(function() {
 		$('.dataTables_length select').uniform();
 		$('.dataTables_paginate > ul').addClass('pagination');
 		$('.dataTables_filter>label>input').addClass('form-control');
-                $('.dataTables_filter').hide();
+        $('.dataTables_filter').hide();
                 
 	}
 	if($('table').hasClass('dynamicTable1')){
@@ -36,13 +36,14 @@ $(document).ready(function() {
 				"oPaginate": { "sFirst": "First", "sLast": "Last" }
 			}
 
-		}).columnFilter({ sPlaceHolder: "head:after",
-                                         aoColumns: [
-                                                     null,
-                                                     null,
-                                                     { type: "number-range" }
-                                                     ]
-                });
+		}).columnFilter({
+                         aoColumns: [
+                                     null,
+                                     null,
+                                     { sSelector: "#sccrangefilter",type: "number-range" },
+                                     { sSelector: "#sccnumberfilter",type: "number" }
+                                     ]
+                		});
 
 		$('.dataTables_length select').uniform();
 		$('.dataTables_paginate > ul').addClass('pagination');

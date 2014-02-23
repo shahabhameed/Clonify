@@ -483,6 +483,34 @@ Clonify.SCC = {
     $(".code-window1").hide();
     $(".code-window2").hide();
     window.location.hash='';
+    $("#scc_instance_list_"+_scc_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#gidnumberfilter",type: "number" },
+                                     { sSelector: "#didnumberfilter",type: "number" },
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+                                     { sSelector: "#slnumberfilter",type: "number" },
+                                     { sSelector: "#elnumberfilter",type: "number" }
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
   },
   
   viewSCSCloneInstance: function(_scs_id){
@@ -545,6 +573,18 @@ Clonify.SCC = {
 
       }      
     });
+	
+    	$('#code-window1').wrap('<div class="responsive" />');
+    	$('#code-window2').wrap('<div class="responsive" />');
+
+    	$("div.responsive").each(function(){
+    		$(this).niceScroll({
+				cursoropacitymax: 0.7,
+				cursorborderradius: 6,
+				cursorwidth: "4px"
+			});
+    	});
+    
   },
   
   calculateCloneDifferences : function(){
