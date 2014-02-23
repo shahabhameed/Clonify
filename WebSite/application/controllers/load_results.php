@@ -22,7 +22,7 @@ class Load_results extends CI_Controller
 		
 		$this->load->view('partials/main_header');
 		$this->load->view('partials/sidebar');
-		$this->load->view('update_tokens',$data);
+		$this->load->view('load_result',$data);
 		$this->load->view('partials/main_footer');
 	}
 	
@@ -55,7 +55,7 @@ class Load_results extends CI_Controller
 		$data['info_message'] = "Records Updated successfully!";
 		$this->load->view('partials/main_header');
 		$this->load->view('partials/sidebar');
-		$this->load->view('update_tokens', $data);
+		$this->load->view('load_result',$data);
 		$this->load->view('partials/main_footer');	
 		
 		unlink('./uploads/'.$fileName.'.txt');
