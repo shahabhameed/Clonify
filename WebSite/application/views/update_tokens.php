@@ -76,22 +76,24 @@ function myValidate(){
 								<tr>
 									<td style="float: right;">
 										<div style="height: 400px; overflow: auto;">
-										<?php if(strcmp($tokenUpdated, "true") == 0){ ?>
-											<table class="responsive table table-bordered">
-												<thead>
-													<th>Token ID</th>
-													<th>Token Label</th>
-												</thead>
-												<tbody>
-													<?php foreach ($tokens as $token){ ?>
-													<tr>
-														<td><?php echo $token->token_id; ?></td>
-														<td><?php echo $token->token_name; ?></td>
-													</tr>
-													<?php } ?>
-												</tbody>
-											</table>
-										<?php } ?>
+											<?php if(isset($tokenUpdated)){
+													if(strcmp($tokenUpdated, "true") == 0){ ?>
+														<table class="responsive table table-bordered">
+															<thead>
+																<th>Token ID</th>
+																<th>Token Label</th>
+															</thead>
+															<tbody>
+																<?php foreach ($tokens as $token){ ?>
+																<tr>
+																	<td><?php echo $token->token_id; ?></td>
+																	<td><?php echo $token->token_name; ?></td>
+																</tr>
+																<?php } ?>
+															</tbody>
+														</table>
+											<?php 	}
+												} ?>
 										</div>
 									</td>
 								</tr>
