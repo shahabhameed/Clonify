@@ -3,6 +3,16 @@
 ALTER TABLE users ADD COLUMN role_id int(11);
 ALTER TABLE invocation_parameters ADD COLUMN language_id int(11);
 
+CREATE TABLE IF NOT EXISTS `role` (
+  `id` int(11) NOT NULL,
+  `role_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `role` (`id`, `role_name`) VALUES
+(1, 'Admin');
+
+
 -- ADDED ON 2014-02-21, BY Shahram
 
 CREATE TABLE IF NOT EXISTS `scc_file` (
@@ -55,3 +65,4 @@ CREATE TABLE IF NOT EXISTS `scs_crossfile` (
   `members` int(11) NOT NULL,
   PRIMARY KEY (`scs_crossfile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

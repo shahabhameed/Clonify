@@ -15,7 +15,7 @@ var code_compare_global_attributes = {
     file_2_start_line : null,
     file_2_end_line : null
 }
-
+var window_id = 0;
 //------------- Modernizr -------------//
 //load some plugins only if is needed
 Modernizr.load({
@@ -487,6 +487,9 @@ Clonify.SCC = {
   
   viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, file_name){
     var _url = base_url + "home/loadCode";
+    window_id = window_id + 1;
+    $("#code_window1").css("overflow", "");
+    $("#code_window2").css("overflow", "");    
     var _params = {
       scc_id : _scc_id,
       clone_list_id : _clone_list_id,
@@ -494,7 +497,8 @@ Clonify.SCC = {
       fid : fid,
       start_line : start_line,
       file_name : file_name,
-      end_line : end_line
+      end_line : end_line,
+      window_id: window_id
     };
     
     $.post(_url, _params, function(r) {
@@ -506,28 +510,8 @@ Clonify.SCC = {
         $(".code-window1").show();
         $("#file1").html('File Name : '+file_name);
         $("#code_window1").html(r);
-        window.location.hash='geshi-window0-'+start_line;
-//        var selector1 = "";
-//        for (var i = start_line; i <= end_line; i++){
-//            selector1 += '#geshi-window0-'+i+",";
-//        }
-//        
-//        selector1 = selector1.substring(0, selector1.length-1);
-//
-//        $(selector1).poshytip({
-//          content: 'THIS IS TEST TOOLTIP FOR WINDOW 1'
-//        });
-//        
-//        $(selector1).each(function(){
-//            var str = $(this).find('div').html();
-//            str = str.replace("canvas","<span style='color: red !important'>canvas</span>");
-//            str = str.replace("alignment","<span style='color: red !important'>alignment</span>");
-//            str = str.replace("case","<span style='color: red !important'>case</span>");
-//            str = str.replace("switch","<span style='color: red !important'>switch</span>");
-//            $(this).find('div').html(str);
-//        });
-        
-        new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window0-minimap-index').make().prependTo('#code_map1') );        
+        window.location.hash='geshi-window'+window_id+'-'+start_line;        
+        new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map1') );        
       }else{
         code_compare_global_attributes.file_2_path = path;
         code_compare_global_attributes.file_2_start_line = start_line;
@@ -538,28 +522,8 @@ Clonify.SCC = {
         $(".code-window2").show();
         $("#file2").html('File Name : '+file_name);
         $("#code_window2").html(r);
-        window.location.hash='geshi-window1-'+start_line;        
-//        var selector2 = "";
-//        for (var i = start_line; i <= end_line; i++){
-//            selector2 += '#geshi-window1-'+i+",";
-//        }
-//        selector2 = selector2.substring(0, selector2.length-1);
-//
-//        $(selector2).poshytip({
-//          content: '<br/>THIS IS TEST TOOLTIP FOR WINDOW 2'
-//        });
-//        $(selector2).each(function(){
-//            var str = $(this).find('div').html();
-//            str = str.replace("static","<span style='color: red !important'>static</span>");
-//            str = str.replace("private","<span style='color: red !important'>private</span>");
-//            str = str.replace("case","<span style='color: red !important'>case</span>");
-//            str = str.replace("final","<span style='color: red !important'>final</span>");
-//            str = str.replace("Cocos2dxGLSurfaceView ","<span style='color: red !important'>Cocos2dxGLSurfaceView </span>");
-//            $(this).find('div').html(str);
-//        });
-        
-        
-        new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window1-minimap-index').make().prependTo('#code_map2') );
+        window.location.hash='geshi-window'+window_id+'-'+start_line;
+        new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map2') );
         Clonify.SCC.calculateCloneDifferences();
 
       }      

@@ -36,7 +36,7 @@
         $lines[] = $i;
       }
       $miniMapLinks[] = $start_line;
-      $miniMapLinkLable[$start_line] = array('text' => 'Clone 1', 'rows' => $end_line - $start_line);
+      $miniMapLinkLable[$start_line] = array('text' => '  ', 'rows' => $end_line - $start_line);
       
       $filePath = $this->input->post('file_path');
       $obj = new SyntaxHighlighter($filePath, 'java');
@@ -45,32 +45,47 @@
 
       $obj->HighlightLines($lines);
       $obj->AddMiniMapLinkLabel($miniMapLinkLable);
-      $obj->SetId("window" . $clone_list_id);
+      $window_id = $this->input->post('window_id');
+      $obj->SetId("window" . $window_id);
       echo $obj->getFormattedCode();
     }
 
-    public function SingleCloneClassByFile(){      
+    public function SingleCloneClassByFile(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
-      $this->load->view('clone_table/scc_file.php');
+      $this->load->view('clone_table/scc_file.php', $viewData);
       $this->load->view('partials/main_footer');
     }
     
     public function SingleCloneStructureWithinFile(){      
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
-      $this->load->view('clone_table/scs_within_file.php');
+      $this->load->view('clone_table/scs_within_file.php', $viewData);
       $this->load->view('partials/main_footer');
     }
     
     public function SingleCloneStructureAcrossFile(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();      
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
-      $this->load->view('clone_table/scs_across_file.php');
+      $this->load->view('clone_table/scs_across_file.php', $viewData);
       $this->load->view('partials/main_footer');
     }
     
     public function SingleCloneClass() {
       $viewData = array();
-
-      $result = $this->scc->getAllSCCRows();   
+      $invocationId = $this->getInvocationIdFromURL();
+      $result = $this->scc->getAllSCCRows($invocationId);   
       $viewData['scc_data'] = $result;
       $secondary_table_rows = array();
       if ($result){
@@ -79,10 +94,24 @@
         }
       }
       $viewData['scc_clone_list_data'] = $secondary_table_rows;
-
+      $viewData['invocationId'] = $invocationId;
+      $viewData['showCloneView'] = true;
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/scc.php', $viewData);
       $this->load->view('partials/main_footer');
+    }
+    
+    private function getInvocationIdFromURL($index=3){
+      $invocationId = $this->uri->segment($index);
+      $userId = $this->tank_auth->get_user_id();
+      if (!$invocationId){
+        redirect('/home/');
+      }
+      $data = $this->scc->getUserInvocationById($invocationId, $userId);
+      if (!$data){
+        redirect('/home/');
+      }
+      return $invocationId;
     }
     
     function cloneDifference(){

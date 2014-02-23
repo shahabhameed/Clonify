@@ -28,26 +28,27 @@
                 <li><a href="<?php echo site_url('updatetokens/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Update Tokens</a></li>
 				<?php } ?>
 				<li><a href="<?php echo site_url('load_results/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Load Results</a></li>
+                <?php if (isset($showCloneView) && $invocationId){?>
                 <li>
                     <a href="#"><span class="icon16 fa fa-desktop"></span>Clone Table View</a>
                     <ul class="sub">
                         <li>
-                            <a href="<?php echo site_url('home/SingleCloneClass');?>">
+                            <a href="<?php echo site_url('home/SingleCloneClass') . "/" . $invocationId;?>">
                                 <span class="icon16 fa fa fa-caret-right"></span>SCC
                             </a>
-                            <a href="<?php echo site_url('home/SingleCloneClassByFile');?>">
+                            <a href="<?php echo site_url('home/SingleCloneClassByFile') . "/" .  $invocationId;?>">
                                 <span class="icon16 fa fa fa-caret-right"></span>SCC By File
                             </a>
-                            <a href="<?php echo site_url('home/SingleCloneStructureWithinFile');?>">
+                            <a href="<?php echo site_url('home/SingleCloneStructureWithinFile') . "/" . $invocationId;?>">
                                 <span class="icon16 fa fa fa-caret-right"></span>SCS Within File
                             </a>
-                            <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile');?>">
+                            <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile') . "/" . $invocationId;?>">
                                 <span class="icon16 fa fa fa-caret-right"></span>SCS Across File
                             </a>
                         </li>
                     </ul>
                 </li>
-
+                <?php }?>
             </ul>
         </div>
     </div><!-- End sidenav --> 
