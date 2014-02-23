@@ -26,12 +26,12 @@ public abstract class InputHelper {
 	 * required by Clone Miner "clones.exe" in inputFolder
 	 */
 	public boolean makeCMInputFile(){
-		if(isDataSet()){
+		//if(isDataSet()){
 			writeToDisk();
 			return true;
-		}
+		//}
 		
-		return false;
+		//return false;
 	}
 	
 	public abstract boolean writeToDisk();
