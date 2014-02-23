@@ -36,21 +36,109 @@ width: 50% !important;
                 <li class="active">Single Clone Class 2</li>
             </ul>                   
         </div>
-        
+
+        <!-- Modal -->
+        <div class="modal fade" id="qtable1" tabindex="-1" role="dialog" aria-labelledby="Table 1 Query" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Search SCC</h4>
+              </div>
+              <div class="modal-body">
+               <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>SCC Length Range</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-10" id="sccrangefilter">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>Number Of Colones</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-4" id="sccnumberfilter">
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-10">
+                    <small>For multiple values use [], e.g for number 1 and 2 write [1,2]</small>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         <!-- Modal -->
+        <div class="modal fade" id="qtable2" tabindex="-1" role="dialog" aria-labelledby="Table 2 Query" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Search SCC Clone Instance</h4>
+              </div>
+              <div class="modal-body">
+               <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>GID</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-10" id="gidnumberfilter">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>DID</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-4" id="didnumberfilter">
+                    </div>
+                </div>
+                 <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>FID</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-4" id="fidnumberfilter">
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
                  <h4><span> <i class="fa fa-list-alt fa-2"></i> SCC List</span></h4>
+                 <span class="loader" style="top:15px;cursor:pointer;">
+                  <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
+                </span>
                  <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
+                 
                 </div>
                 <div class="panel-body noPad clearfix">
-                   <br clear="all">
-                <div class="myrange" style="width:210px;  margin-top:10px; margin:0 auto;">
-                          <div id="slider-range" class="slider"></div>
-                          <input type="text" id="amount1" style="border:0; color:#ED7A53; font-weight:bold; box-shadow:none;" />
-                </div>
-                
                   <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable1 display table table-bordered" width="100%">
                     <thead>
                       <tr>
@@ -63,6 +151,7 @@ width: 50% !important;
                       <tbody>
                         <?php 
                           $counter = 0;
+                          if($scc_data)
                           foreach($scc_data as $data){
                             $counter++;
                          ?>
@@ -72,20 +161,10 @@ width: 50% !important;
 
                           </td>
                           <td><?php echo $data['scc_id'];?></td>                          
-                          <td data-length="<?php echo $data['length'];?>">
-                            <span><?php echo $data['length'];?></span>
-                            <?php if($data['length']=="147"){ ?>
-                             <div class="progress progress-mini left" title="100%" style="width:100%;" >
-                              <div class="progress-bar progress-bar-danger" style="width: 95%;"></div>
-                             </div>
-                            <?php } ?>
-                            <?php if($data['length']=="38"){ ?>
-                             <div class="progress progress-mini left" title="20%" style="width:100%;" >
-                              <div class="progress-bar progress-bar-danger" style="width: 20%;"></div>
-                             </div>
-                            <?php } ?>
+                          <td >
+                            <?php echo $data['length'];?>
                           </td>
-                          <td><?php echo isset($data['total_clones']) ? $data['total_clones'] : '-';?></td>
+                          <td><?php echo isset($data['members']) ? $data['members'] : '-';?></td>
                           
                         </tr>
                         <?php }?>                        
@@ -104,7 +183,9 @@ width: 50% !important;
               </div>
             </div>
           </div>
-           <?php foreach($scc_clone_list_data as $scc_id => $data){?>
+           <?php 
+           if($scc_clone_list_data)
+           foreach($scc_clone_list_data as $scc_id => $data){?>
           <div class="row scc_instance_list" id="scc_instance_list_<?php echo $scc_id;?>">
             <div class="col-lg-12">
               <div class="panel panel-default gradient">

@@ -180,16 +180,16 @@ $(document).ready(function() {
 	//Boostrap modal
 	$('#myModal').modal({ show: false});
 	//add event to modal after closed
-	$('#myModal').on('hidden', function () {
-	  	$.pnotify({
-		    title: 'Modal',
-		    text: 'Modal window is closed',
-		    icon: 'picon icon16 entypo-icon-warning white',
-		    opacity: 0.95,
-		    sticker: false,
-		    history: false
-		});
-	})
+	// $('#myModal').on('hidden', function () {
+	//   	$.pnotify({
+	// 	    title: 'Modal',
+	// 	    text: 'Modal window is closed',
+	// 	    icon: 'picon icon16 entypo-icon-warning white',
+	// 	    opacity: 0.95,
+	// 	    sticker: false,
+	// 	    history: false
+	// 	});
+	// })
 
 	//--------------- Popovers ------------------//
 	//using data-placement trigger
@@ -324,7 +324,7 @@ $(document).ready(function() {
 	
 	//add event to modal after closed
 	$('#myModal').on('hidden', function () {
-	  	console.log('modal is closed');
+	  	// console.log('modal is closed');
 	})
 
 });//End document ready functions

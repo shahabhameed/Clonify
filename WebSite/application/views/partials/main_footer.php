@@ -26,6 +26,7 @@
 	<script type="text/javascript" src="<?=asset_url('plugins/misc/search/tipuesearch_set.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('plugins/misc/search/tipuesearch_data.js');?>"></script><!-- JSON for searched results -->
     <script type="text/javascript" src="<?=asset_url('plugins/misc/search/tipuesearch.js');?>"></script>
+     <script type="text/javascript" src="<?=asset_url('plugins/misc/pnotify/jquery.pnotify.min.js');?>"></script>
     
     <script type="text/javascript" src="<?=asset_url('plugins/tables/dataTables/jquery.dataTables.min.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('plugins/tables/dataTables/jquery.dataTables.columnFilter.js');?>"></script>
@@ -56,6 +57,7 @@
     <script type="text/javascript" src="<?=asset_url('js/jquery-ui.min.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('js/forms.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('js/form-validation.js');?>"></script>
+   
     
 
 </html>

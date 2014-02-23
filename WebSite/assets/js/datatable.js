@@ -36,13 +36,14 @@ $(document).ready(function() {
 				"oPaginate": { "sFirst": "First", "sLast": "Last" }
 			}
 
-		}).columnFilter({ sPlaceHolder: "head:after",
-                                         aoColumns: [
-                                                     null,
-                                                     null,
-                                                     { type: "number-range" }
-                                                     ]
-                });
+		}).columnFilter({
+                         aoColumns: [
+                                     null,
+                                     null,
+                                     { sSelector: "#sccrangefilter",type: "number-range" },
+                                     { sSelector: "#sccnumberfilter",type: "number" }
+                                     ]
+                		});
 
 		$('.dataTables_length select').uniform();
 		$('.dataTables_paginate > ul').addClass('pagination');
