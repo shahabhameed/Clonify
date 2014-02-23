@@ -3824,3 +3824,14 @@ nav.flexible-nav ul li a.tnn-h3 {
     border-right: 15px solid #690;
 }
  
+.list_view{
+  cursor: pointer;
+}
+
+.scs_instance_list{
+  display: none;
+}
+
+.code_view{
+  cursor: pointer;
+}

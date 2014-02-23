@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS `scscrossfile_file` (
 
 CREATE TABLE IF NOT EXISTS `scscrossfile_scc` (
   `scc_id` int(11) NOT NULL,
-  `scs_crossfile_id` int(11) NOT NULL
+  `scs_crossfile_id` int(11) NOT NULL,
+  `invocation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -52,7 +53,8 @@ CREATE TABLE IF NOT EXISTS `scsinfile_fragments` (
 
 CREATE TABLE IF NOT EXISTS `scsinfile_scc` (
   `scc_id` int(11) NOT NULL,
-  `scs_infile_id` int(11) NOT NULL
+  `scs_infile_id` int(11) NOT NULL,
+  `invocation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

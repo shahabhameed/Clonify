@@ -472,9 +472,22 @@ Clonify.ns = Clonify.namespace;
 Clonify.ns('Clonify.SCC');
 
 Clonify.SCC = {
-  viewCloneInstance: function(_scc_id){
+  viewSCCCloneInstance: function(_scc_id){
     $(".scc_instance_list").hide();
     $("#scc_instance_list_"+_scc_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+  },
+  
+  viewSCSCloneInstance: function(_scs_id){
+    $(".scs_instance_list").hide();
+    $("#scs_instance_list_"+_scs_id).show();
     $(".code-window-containter").hide();
     $("#code_window1").html("");
     $("#code_window2").html("");

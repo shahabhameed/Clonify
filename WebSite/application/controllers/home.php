@@ -65,6 +65,9 @@
       $viewData = array();      
       $invocationId = $this->getInvocationIdFromURL();
       
+      $results = $this->scc->getAllSCSWithInFile($invocationId);   
+      $viewData['results'] = $results;      
+      
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
@@ -74,7 +77,8 @@
     
     public function SingleCloneStructureAcrossFile(){
       $viewData = array();      
-      $invocationId = $this->getInvocationIdFromURL();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
@@ -90,9 +94,10 @@
       $secondary_table_rows = array();
       if ($result){
         foreach($result as $row){
-          $secondary_table_rows[$row['scc_id']] = $this->scc->getAllSCCSecondaryTableRows($row);
+          $secondary_table_rows[$row['scc_id']] = $this->scc->getAllSCCSecondaryTableRows($row, $invocationId);
         }
       }
+      
       $viewData['scc_clone_list_data'] = $secondary_table_rows;
       $viewData['invocationId'] = $invocationId;
       $viewData['showCloneView'] = true;
