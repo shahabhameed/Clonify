@@ -65,7 +65,7 @@
     <div id="header">
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/home/"><?=$this->config->item('site_title');?>.<span class="slogan">DSSD</span></a>                
+                <a class="navbar-brand" href="<?=site_url('home/');?>"><?=$this->config->item('site_title');?>.<span class="slogan">DSSD</span></a>                
             </div>
             <?php if ($this->tank_auth->is_logged_in()) {?>
             <div class="collapse navbar-collapse navbar-ex1-collapse">

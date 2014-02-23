@@ -31,8 +31,17 @@
                     <a href="#"><span class="icon16 fa fa-desktop"></span>Clone Class View</a>
                     <ul class="sub">
                         <li>
-                            <a href="<?php echo site_url('home/SingleCloneClass2');?>">
-                                <span class="icon16 fa fa fa-caret-right"></span>Single View 2
+                            <a href="<?php echo site_url('home/SingleCloneClass');?>">
+                                <span class="icon16 fa fa fa-caret-right"></span>Single Clone Class
+                            </a>
+                            <a href="<?php echo site_url('home/SingleCloneClassByFile');?>">
+                                <span class="icon16 fa fa fa-caret-right"></span>Single Clone Class By File
+                            </a>
+                            <a href="<?php echo site_url('home/SingleCloneStructureWithinFile');?>">
+                                <span class="icon16 fa fa fa-caret-right"></span>Single Clone Structure Within File
+                            </a>
+                            <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile');?>">
+                                <span class="icon16 fa fa fa-caret-right"></span>Single Clone Structure Across File
                             </a>
                         </li>
                     </ul>

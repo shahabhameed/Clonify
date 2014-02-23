@@ -49,7 +49,25 @@
       echo $obj->getFormattedCode();
     }
 
-    public function SingleCloneClass2() {
+    public function SingleCloneClassByFile(){      
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/scc_file.php');
+      $this->load->view('partials/main_footer');
+    }
+    
+    public function SingleCloneStructureWithinFile(){      
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/scs_within_file.php');
+      $this->load->view('partials/main_footer');
+    }
+    
+    public function SingleCloneStructureAcrossFile(){
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/scs_across_file.php');
+      $this->load->view('partials/main_footer');
+    }
+    
+    public function SingleCloneClass() {
       $viewData = array();
 
       $result = $this->scc->getAllSCCRows();   
@@ -57,14 +75,13 @@
       $secondary_table_rows = array();
       if ($result){
         foreach($result as $row){
-//          echo "<pre>",print_r($this->scc->getAllSCCSecondaryTableRows($row)),"</pre>";
           $secondary_table_rows[$row['scc_id']] = $this->scc->getAllSCCSecondaryTableRows($row);
         }
       }
       $viewData['scc_clone_list_data'] = $secondary_table_rows;
 
       $this->load->view('partials/main_header');
-      $this->load->view('clone_table/scc2.php', $viewData);
+      $this->load->view('clone_table/scc.php', $viewData);
       $this->load->view('partials/main_footer');
     }
     
