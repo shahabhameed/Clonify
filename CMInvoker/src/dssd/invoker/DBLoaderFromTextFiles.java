@@ -26,8 +26,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private static String INSERT_SCC_INSTANCE;
 	private static String INSERT_SCC_FILE;
 	private static String INSERT_SCC;
-	private static String INSERT_SCSINFILE_SCC;
-	private static String INSERT_SCS_INFILE;
+	private static String INSERT_SCSINFILE_SCC;	
 	private static String INSERT_SCSINFILE_FILE; 
 	private static String INSERT_SCSINFILE_FRAGMENTS;
 	private static String INSERT_SCSCROSSFILE_FILE;
@@ -45,9 +44,8 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		INSERT_SCC = "INSERT INTO scc(scc_id, length, members, invocation_id) values ";
 		INSERT_SCC_FILE = "INSERT INTO scc_file(scc_id, fid) values ";
 		INSERT_SCC_INSTANCE = "INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol) values ";
-		INSERT_SCSINFILE_SCC = "INSERT INTO scsinfile_scc(scc_id, scs_infile_id) values ";
-		INSERT_SCS_INFILE = "INSERT INTO scs_infile(scs_infile_id, members) values ";
-		INSERT_SCSINFILE_FILE = "INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, did, gid,members) values ";
+		INSERT_SCSINFILE_SCC = "INSERT INTO scsinfile_scc(scc_id, scs_infile_id) values ";		
+		INSERT_SCSINFILE_FILE = "INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, members) values ";
 		INSERT_SCSINFILE_FRAGMENTS = "INSERT INTO scsinfile_fragments(scs_infile_id, fid, scc_id, scsinfile_instance_id, scc_instance_id) values ";
 		INSERT_SCSCROSSFILE_FILE = "INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc) values ";
 		INSERT_SCSCROSSFILE_SCC = "INSERT INTO scscrossfile_scc(scc_id, scs_crossfile_id) values ";
@@ -111,7 +109,12 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				Database.executeTransaction(INSERT_SCC);
 			}
 			if (!INSERT_SCC_INSTANCE
-					.equalsIgnoreCase("INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, mid, did, gid) values ")) {
+					.equalsIgnoreCase("INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol) values ")) {
+				Database.executeTransaction(INSERT_SCC_INSTANCE);
+			}
+                        
+                        if (!INSERT_SCC_FILE
+					.equalsIgnoreCase("INSERT INTO scc_file(scc_id, fid) values ")) {
 				Database.executeTransaction(INSERT_SCC_INSTANCE);
 			}
 
@@ -132,7 +135,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			size = getFileSize(invocationId);
 			for (int i = 0; i < size; i++) {
 				line = stdin5.readLine();
-				if (!line.equalsIgnoreCase("")) {
+				if (line != null && !line.equalsIgnoreCase("")) {
 					st = new StringTokenizer(line, "()");
 					int loop = st.countTokens() / 2;
 					for (int j = 0; j < loop; j++) {
@@ -171,8 +174,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 									}
 								}
 							}
-						}
-						insertSCS_InFile(count, inst);
+						}						
 						insertSCSInFile_File(count, count0,invocationId,inst);
 						count++;
 					}
@@ -183,13 +185,9 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			if (!INSERT_SCSINFILE_SCC
 					.equalsIgnoreCase("INSERT INTO scsinfile_scc(scc_id, scs_infile_id) values ")) {
 				Database.executeTransaction(INSERT_SCSINFILE_SCC);
-			}
-			if (!INSERT_SCS_INFILE
-					.equalsIgnoreCase("INSERT INTO scs_infile(scs_infile_id, members) values ")) {
-				Database.executeTransaction(INSERT_SCS_INFILE);
-			}
+			}			
 			if (!INSERT_SCSINFILE_FILE
-					.equalsIgnoreCase("INSERT INTO scsinfile_file(scs_infile_id, fid, did, gid) values ")) {
+					.equalsIgnoreCase("INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, members) values ")) {
 				Database.executeTransaction(INSERT_SCSINFILE_FILE);
 			}
 			if (!INSERT_SCSINFILE_FRAGMENTS
@@ -210,12 +208,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		INSERT_SCC_INSTANCE += "( \"" + scc_instance_id + "\" , \"" + scc_id
 		+ "\", \"" + fid + "\", \"" + startline + "\", \"" + startcol
 		+ "\" , \"" + endline + "\", \"" + endcol + "\"),";
-	}
-	
-	private void insertSCS_InFile(int scs_infile, int members) {
-		INSERT_SCS_INFILE += "( \"" + scs_infile + "\" , \"" + members
-				+ "\"  ),";
-	}
+	}	
 
 	private void parse_file_clusters(int invocation_id) throws FileNotFoundException, IOException
 	{
@@ -265,7 +258,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Database.executeTransaction(INSERT_SCSCROSSFILE_SCC);
 		}
 		if (!INSERT_SCSCROSSFILE_FILE
-				.equalsIgnoreCase("INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc, did, gid) values ")) {
+				.equalsIgnoreCase("INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc) values ")) {
 			Database.executeTransaction(INSERT_SCSCROSSFILE_FILE);
 		}
 		if (!INSERT_SCS_CROSSFILE
@@ -363,8 +356,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	
 	private void insertSCSInFile_SCC(int scc_id, int scs_infile_id) {
 		INSERT_SCSINFILE_SCC += "( \"" + scc_id + "\" , \"" + scs_infile_id
-				+ "\"  ),";
-	 System.out.println("INSERT_SCSINFILE_SCC");
+				+ "\"  ),";	 
 	}
 
 	private void insertSCSInFile_Fragments(int scs_infile_id, int fid,
@@ -376,47 +368,8 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	
 	private void insertSCSInFile_File(int scs_infile_id, int fid,int invocationId, int members) {
 		INSERT_SCSINFILE_FILE += "( \"" + scs_infile_id +"\" , \"" + invocationId +"\" , \"" + fid
-				+ "\", \"" + getDidFromFid(fid) + "\" , \""
-				+ getGidFromFid(fid) + "\" , \"" + members + "\" ),";
-	}
-	
-	private int getDidFromFid(int fid) {
-		int did = -1;
-		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
-			s.execute("use "+databaseName+";");
-			ResultSet results = s.executeQuery("select did "
-					+ " from file_directory " + " where fid = " + fid + ";");
-			if (results.next()) {
-				did = results.getInt(1);
-			}
-			s.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return did;
-	}
-
-	private int getGidFromFid(int fid) {
-		int gid = -1;
-		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
-			s.execute("use "+databaseName+";");
-			ResultSet results = s.executeQuery("select file.gid "
-					+ " from file " + " where file.fid = " + fid + ";");
-			if (results.next()) {
-				gid = results.getInt(1);
-			}
-			s.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return gid;
-	}
+				+  "\" , \"" + members + "\" ),";
+	}		
 
 	/*
 	 * Returns the file objectName of a file given the file id
@@ -506,9 +459,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private void insertSCSCrossFile_File(int scs_crossfile_id, int fid,
 			double tc, double pc) {
 		INSERT_SCSCROSSFILE_FILE += "( \"" + scs_crossfile_id + "\" , \"" + fid
-				+ "\" , \"" + tc + "\" , \"" + pc + "\", \""
-				+ getDidFromFid(fid) + "\" , \"" + getGidFromFid(fid)
-				+ "\"  ),";
+				+ "\" , \"" + tc + "\" , \"" + pc + "\"  ),";
 	}
 	
 

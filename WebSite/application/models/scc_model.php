@@ -22,7 +22,7 @@ class SCC_model extends CI_Model
     $this->db->join('repository_file AS tb2', 'tb1.fid = tb2.id', 'INNER');
     $this->db->join('repository_directory AS tb3', 'tb2.directory_id = tb3.id', 'INNER');
     $this->db->join('user_repository AS tb4', 'tb4.id = tb3.repository_id', 'INNER');
-    $this->db->join(' invocation_files AS tb5', 'tb5.file_id = tb2.id', 'INNER');
+    $this->db->join('invocation_files AS tb5', 'tb5.file_id = tb2.id', 'INNER');
     $this->db->where('tb1.scc_id', $scc_id);
     $result = $this->db->get();
     if ($result->num_rows()> 0){      

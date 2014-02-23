@@ -1,3 +1,0 @@
-0,E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxAccelerometer.java
-1,E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxActivity.java
-2,E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/Folder1/Cocos2dxBitmap.java
