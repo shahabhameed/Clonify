@@ -54,6 +54,8 @@
       $viewData = array();      
       $invocationId = $this->getInvocationIdFromURL();
       
+      $results = $this->scc->getSCSSByFileData($invocationId);   
+      $viewData['results'] = $results;
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');

@@ -23,8 +23,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	int dlm;
 	private String databaseName ="";
 
-	private static String INSERT_SCC_INSTANCE;
-	private static String INSERT_SCC_FILE;
+	private static String INSERT_SCC_INSTANCE;	
 	private static String INSERT_SCC;
 	private static String INSERT_SCSINFILE_SCC;	
 	private static String INSERT_SCSINFILE_FILE; 
@@ -41,8 +40,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private static void initQuery() {
 		
 		
-		INSERT_SCC = "INSERT INTO scc(scc_id, length, members, invocation_id) values ";
-		INSERT_SCC_FILE = "INSERT INTO scc_file(scc_id, fid) values ";
+		INSERT_SCC = "INSERT INTO scc(scc_id, length, members, invocation_id) values ";		
 		INSERT_SCC_INSTANCE = "INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ";
 		INSERT_SCSINFILE_SCC = "INSERT INTO scsinfile_scc(scc_id, scs_infile_id, invocation_id) values ";		
 		INSERT_SCSINFILE_FILE = "INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, members) values ";
@@ -96,8 +94,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 								.parseInt(id), Integer.parseInt(fid), Integer
 								.parseInt(sl), Integer.parseInt(sc), Integer
 								.parseInt(el), Integer.parseInt(ec), invocationId);
-						scc_instance_id++;
-						insertSCC_File(sccId, Integer.parseInt(fid));
+						scc_instance_id++;						
 					}
 					insertSCC(sccId, Integer.parseInt(l), Integer.parseInt(m),
 							invocationId);
@@ -111,12 +108,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			if (!INSERT_SCC_INSTANCE
 					.equalsIgnoreCase("INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ")) {
 				Database.executeTransaction(INSERT_SCC_INSTANCE);
-			}
-                        
-                        if (!INSERT_SCC_FILE
-					.equalsIgnoreCase("INSERT INTO scc_file(scc_id, fid) values ")) {
-				Database.executeTransaction(INSERT_SCC_FILE);
-			}
+			}                                                
 
 			File file5 = new File(filePath_infilestructures);
 			FileInputStream filein5 = new FileInputStream(file5);
@@ -343,10 +335,6 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			e.printStackTrace();
 		}
 		return -1;
-	}
-
-	private void insertSCC_File(int scc_id, int fid) {
-		INSERT_SCC_FILE += "( \"" + scc_id + "\" , \"" + fid + "\"  ),";
 	}
 
 	private void insertSCC(int scc_id, int length, int members, int invocationId) {
