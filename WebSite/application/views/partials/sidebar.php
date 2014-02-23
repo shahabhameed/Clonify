@@ -25,24 +25,24 @@
                 </li>
                 <li><a href=" <?php echo site_url('invoke/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Invoke</a></li>
 				<?php if($this->tank_auth->get_role_id() == 1){?>
-					<li><a href="<?php echo base_url()?>index.php/updatetokens"><span class="icon16 icomoon-icon-stats-up"></span>Update Tokens</a></li>
+                <li><a href="<?php echo site_url('updatetokens/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Update Tokens</a></li>
 				<?php } ?>
-				<li><a href="<?php echo base_url()?>index.php/load_results"><span class="icon16 icomoon-icon-stats-up"></span>Load Results</a></li>
+				<li><a href="<?php echo site_url('load_results/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Load Results</a></li>
                 <li>
-                    <a href="#"><span class="icon16 fa fa-desktop"></span>Clone Class View</a>
+                    <a href="#"><span class="icon16 fa fa-desktop"></span>Clone Table View</a>
                     <ul class="sub">
                         <li>
                             <a href="<?php echo site_url('home/SingleCloneClass');?>">
-                                <span class="icon16 fa fa fa-caret-right"></span>Single Clone Class
+                                <span class="icon16 fa fa fa-caret-right"></span>SCC
                             </a>
                             <a href="<?php echo site_url('home/SingleCloneClassByFile');?>">
-                                <span class="icon16 fa fa fa-caret-right"></span>Single Clone Class By File
+                                <span class="icon16 fa fa fa-caret-right"></span>SCC By File
                             </a>
                             <a href="<?php echo site_url('home/SingleCloneStructureWithinFile');?>">
-                                <span class="icon16 fa fa fa-caret-right"></span>Single Clone Structure Within File
+                                <span class="icon16 fa fa fa-caret-right"></span>SCS Within File
                             </a>
                             <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile');?>">
-                                <span class="icon16 fa fa fa-caret-right"></span>Single Clone Structure Across File
+                                <span class="icon16 fa fa fa-caret-right"></span>SCS Across File
                             </a>
                         </li>
                     </ul>
