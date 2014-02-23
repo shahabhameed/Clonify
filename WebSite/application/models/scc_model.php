@@ -22,6 +22,7 @@ class SCC_model extends CI_Model
     $this->db->join('repository_file AS tb2', 'tb1.fid = tb2.id', 'INNER');
     $this->db->join('repository_directory AS tb3', 'tb2.directory_id = tb3.id', 'INNER');
     $this->db->join('user_repository AS tb4', 'tb4.id = tb3.repository_id', 'INNER');
+    $this->db->join(' invocation_files AS tb5', 'tb5.file_id = tb2.id', 'INNER');
     $this->db->where('tb1.scc_id', $scc_id);
     $result = $this->db->get();
     if ($result->num_rows()> 0){      
@@ -33,16 +34,13 @@ class SCC_model extends CI_Model
   
   
   public function getAllSCCRows($invocationId, $userId){
+    $where = "tb1.invocation_id = $invocationId AND tb2.user_id=$userId";
     
-    $this->db->select('*');
-    $this->db->from('scc');
-    $this->db->where('invocation_id', $invocationId);
+    $this->db->select('tb1.*');
+    $this->db->from('scc tb1');
+    $this->db->join('user_invocations tb2', 'tb1.invocation_id = tb2.id', 'INNER');    
+    $this->db->where($where);    
 
-//    $this->db->from('scc AS tb1');
-//    $this->db->join('scc_instance AS tb2', 'tb1.scc_id = tb2.scc_id', 'INNER');
-//    $this->db->join('repository_file AS tb3', 'tb2.fid = tb3.id', 'INNER');
-//    $this->db->join('repository_directory AS tb4', 'tb3.directory_id = tb4.id', 'INNER');
-//    $this->db->where('tb1.invocation_id', $invocationId);
     $result = $this->db->get();
     if ($result->num_rows()> 0){      
       return $result->result();

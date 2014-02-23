@@ -137,7 +137,7 @@ width: 50% !important;
                             <td><?php echo $counter;?></td>
                             <td><?php echo isset($d['group_id']) ? $d['group_id'] : "-";?></td>
                             <td><?php echo isset($d['directory_id']) ? $d['directory_id'] : "-";?></td>
-                            <td><?php echo $d['fid'];?></td>
+                            <td><?php echo $d['cmfile_id'];?></td>
                             <td><?php echo $d['startline'];?></td>
                             <td><?php echo $d['endline'];?></td>
                             <td><?php echo $d['directory_name'].$d['file_name'];?></td>
