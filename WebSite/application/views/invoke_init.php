@@ -43,7 +43,7 @@ function myValidate(){
                     <h3>Initial Invocation Parameters</h3>                                                                               
                 </div><!-- End .heading-->
                 
-			<form method="post" accept-charset="utf-8" id="myForm" onsubmit="return myValidate();" action="<?php echo base_url();?>index.php/invoke/invoke_init" >
+			<form method="post" accept-charset="utf-8" id="myForm"  action="<?php echo base_url();?>index.php/invoke/invoke_init" >
 			<table id="multi_select_tbl">
             	<tr>
                 	<td width="130px;"><label>Min Similarities for Simple Clone Class</label></td>
@@ -81,7 +81,8 @@ function myValidate(){
                      <td><label id="filErr" class="myErrLbl"></label></td>
             	</tr>
                 <tr>
-                	<td><input type="submit" value="Next"/></td>
+                	<td>
+					<button class="btn btn-success" type="submit">Next</button></td>
                     <td></td>
                     <td></td>
             	</tr>

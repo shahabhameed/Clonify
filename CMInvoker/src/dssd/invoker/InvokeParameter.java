@@ -10,7 +10,7 @@ public class InvokeParameter {
 	private Integer method_analysis;
 	private String suppressed_tokens; 
 	private String equal_tokens;
-	private ArrayList<String> input_files = new ArrayList<String>();
+	private ArrayList<InvocationFileInfo> input_files = new ArrayList<InvocationFileInfo>();
 	
 	
 	public InvokeParameter(){
@@ -32,7 +32,7 @@ public class InvokeParameter {
 	/**
 	 * This constructor also sets input_files
 	 */
-	public InvokeParameter(Integer invocation_id, Integer min_similatiry_SCC_tokens, Integer grouping_choice, Integer method_analysis, String suppressed_tokens, String equal_tokens, ArrayList<String> input_files)
+	public InvokeParameter(Integer invocation_id, Integer min_similatiry_SCC_tokens, Integer grouping_choice, Integer method_analysis, String suppressed_tokens, String equal_tokens, ArrayList<InvocationFileInfo> input_files)
 	{
 		this.invocation_id = invocation_id;
 		this.min_similatiry_SCC_tokens = min_similatiry_SCC_tokens;
@@ -57,8 +57,14 @@ public class InvokeParameter {
 			input_files != null && input_files.size()>0
 		)
 		{
-			for(String str: input_files){
-				if(str == null || str.length()<1){
+			for(InvocationFileInfo invocationFileInfo: input_files){
+				String tempFileName = invocationFileInfo.getInputFileName();
+				if(
+					invocationFileInfo == null ||
+					invocationFileInfo.getGroupId() == null ||
+					tempFileName == null || tempFileName.length()<1
+				)
+				{
 					return false;
 				}
 			}
@@ -106,11 +112,11 @@ public class InvokeParameter {
 		this.equal_tokens = equal_tokens;
 	}
 
-	public ArrayList<String> getInput_files() {
+	public ArrayList<InvocationFileInfo> getInput_files() {
 		return input_files;
 	}
 
-	public void setInput_files(ArrayList<String> input_files) {
+	public void setInput_files(ArrayList<InvocationFileInfo> input_files) {
 		// TODO : setInput_files is not called because we use getInput_files and then add files to that !
 		
 		this.input_files = input_files;

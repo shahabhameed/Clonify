@@ -1,0 +1,294 @@
+START getInvokeConfig(int uid)
+Invoke Config ID: 7
+ 
+invokeParameter:  invocation_id: 7  min_similatiry_SCC_tokens: 1  grouping_choice: 0  method_analysis: 0  suppressed_tokens: 10,100,101,102,103,104,105,106,107,108,109,11,110,111,112,113,114,12,13,14,15,16,17,18,19,20,21,22,2  equal_tokens: 99=98=97=96=95=94=93=92=91=90=9=89=88=87=86=85=84=83=82=81=80=8=79=78=77=76=75=74=73=72=71=70=7=69=68=67=66=65=64=63=62=61=60=6=59=58=57=56=55=54=53=52=51=50=5=49=48=47=46=45=44=43=42=41=40=4=39=38=37=36=35=34=33=32=31=30=29=28=27=26=25=24=23=22=21=20=19=18=17=16=15=14=13=12=114=113=112=111=110=11=109=108=107=106=105=104=103=102=101=100=10  input_files: []
+Input_files: [dssd.invoker.InvocationFileInfo@54088e9b, dssd.invoker.InvocationFileInfo@7dca8d36, dssd.invoker.InvocationFileInfo@7cfd14be, dssd.invoker.InvocationFileInfo@4b5d060d, dssd.invoker.InvocationFileInfo@48386622, dssd.invoker.InvocationFileInfo@6eb96738, dssd.invoker.InvocationFileInfo@4e27c652, dssd.invoker.InvocationFileInfo@154d5994, dssd.invoker.InvocationFileInfo@9340e79, dssd.invoker.InvocationFileInfo@38a22ea7, dssd.invoker.InvocationFileInfo@1fa4f2fd, dssd.invoker.InvocationFileInfo@64cd046, dssd.invoker.InvocationFileInfo@1cfda6e5, dssd.invoker.InvocationFileInfo@50d81341, dssd.invoker.InvocationFileInfo@19d839de, dssd.invoker.InvocationFileInfo@42bf2b13, dssd.invoker.InvocationFileInfo@14a50ea1, dssd.invoker.InvocationFileInfo@6063769d, dssd.invoker.InvocationFileInfo@22006edb, dssd.invoker.InvocationFileInfo@4a6dfd4d, dssd.invoker.InvocationFileInfo@7b10f067, dssd.invoker.InvocationFileInfo@15173950, dssd.invoker.InvocationFileInfo@27b3be01, dssd.invoker.InvocationFileInfo@97f4804, dssd.invoker.InvocationFileInfo@351037b, dssd.invoker.InvocationFileInfo@3bbb81f0, dssd.invoker.InvocationFileInfo@134fd233, dssd.invoker.InvocationFileInfo@5d711c2c, dssd.invoker.InvocationFileInfo@2cf0bca1, dssd.invoker.InvocationFileInfo@70f00513, dssd.invoker.InvocationFileInfo@1ddd5c52, dssd.invoker.InvocationFileInfo@2fd81acf, dssd.invoker.InvocationFileInfo@14c82493, dssd.invoker.InvocationFileInfo@5fd9398d, dssd.invoker.InvocationFileInfo@2e518924, dssd.invoker.InvocationFileInfo@6b02b23d, dssd.invoker.InvocationFileInfo@7e03f9ad, dssd.invoker.InvocationFileInfo@36fd0d7d, dssd.invoker.InvocationFileInfo@1f80a5bf, dssd.invoker.InvocationFileInfo@3701aec1, dssd.invoker.InvocationFileInfo@4f781d1d, dssd.invoker.InvocationFileInfo@56bf83ad, dssd.invoker.InvocationFileInfo@375dff59, dssd.invoker.InvocationFileInfo@7c274874, dssd.invoker.InvocationFileInfo@7705f759, dssd.invoker.InvocationFileInfo@28b2311b, dssd.invoker.InvocationFileInfo@4ab5f87c, dssd.invoker.InvocationFileInfo@70ccbb35, dssd.invoker.InvocationFileInfo@1116ce6e, dssd.invoker.InvocationFileInfo@704aa085, dssd.invoker.InvocationFileInfo@3370b55b, dssd.invoker.InvocationFileInfo@2c9283bf, dssd.invoker.InvocationFileInfo@47078775, dssd.invoker.InvocationFileInfo@3f4e36c1, dssd.invoker.InvocationFileInfo@27ecd95f, dssd.invoker.InvocationFileInfo@2eb30073, dssd.invoker.InvocationFileInfo@69e295f8, dssd.invoker.InvocationFileInfo@1ae40317, dssd.invoker.InvocationFileInfo@6f86e8cb, dssd.invoker.InvocationFileInfo@21da0a1, dssd.invoker.InvocationFileInfo@671cab1c, dssd.invoker.InvocationFileInfo@b25f027, dssd.invoker.InvocationFileInfo@67b99628, dssd.invoker.InvocationFileInfo@4931514b, dssd.invoker.InvocationFileInfo@44d03877, dssd.invoker.InvocationFileInfo@422b2fec, dssd.invoker.InvocationFileInfo@215750e4, dssd.invoker.InvocationFileInfo@6b7fb9d5, dssd.invoker.InvocationFileInfo@e818616, dssd.invoker.InvocationFileInfo@598a15ca, dssd.invoker.InvocationFileInfo@789caeb2, dssd.invoker.InvocationFileInfo@769165fa, dssd.invoker.InvocationFileInfo@43be3ce6, dssd.invoker.InvocationFileInfo@7e9042c8, dssd.invoker.InvocationFileInfo@31109962, dssd.invoker.InvocationFileInfo@38c60a18, dssd.invoker.InvocationFileInfo@51c0cac6, dssd.invoker.InvocationFileInfo@4840b718, dssd.invoker.InvocationFileInfo@10b4adb7, dssd.invoker.InvocationFileInfo@45f8d1f2, dssd.invoker.InvocationFileInfo@529f8ac1, dssd.invoker.InvocationFileInfo@684eaf47, dssd.invoker.InvocationFileInfo@5d593d1, dssd.invoker.InvocationFileInfo@8db8155, dssd.invoker.InvocationFileInfo@307f7fe, dssd.invoker.InvocationFileInfo@2a4640, dssd.invoker.InvocationFileInfo@576a13d5, dssd.invoker.InvocationFileInfo@753c31c8, dssd.invoker.InvocationFileInfo@42e87d99, dssd.invoker.InvocationFileInfo@2d8dea20, dssd.invoker.InvocationFileInfo@4005f23d, dssd.invoker.InvocationFileInfo@4662a3a1, dssd.invoker.InvocationFileInfo@75e4c320, dssd.invoker.InvocationFileInfo@7dc6a657, dssd.invoker.InvocationFileInfo@7cd2da43, dssd.invoker.InvocationFileInfo@76f7a4ba, dssd.invoker.InvocationFileInfo@7c5fec5a, dssd.invoker.InvocationFileInfo@7d964880, dssd.invoker.InvocationFileInfo@15720bea, dssd.invoker.InvocationFileInfo@726c3aa5, dssd.invoker.InvocationFileInfo@1f7e6153, dssd.invoker.InvocationFileInfo@2227a04c, dssd.invoker.InvocationFileInfo@578cef18, dssd.invoker.InvocationFileInfo@65a53d8f, dssd.invoker.InvocationFileInfo@436cab6b, dssd.invoker.InvocationFileInfo@136a2062, dssd.invoker.InvocationFileInfo@1c740be3, dssd.invoker.InvocationFileInfo@6b872ad, dssd.invoker.InvocationFileInfo@3770bf4d, dssd.invoker.InvocationFileInfo@4b1f74aa, dssd.invoker.InvocationFileInfo@7e246b6d, dssd.invoker.InvocationFileInfo@90901ce, dssd.invoker.InvocationFileInfo@2e558004, dssd.invoker.InvocationFileInfo@6f479e5f, dssd.invoker.InvocationFileInfo@46eea80c, dssd.invoker.InvocationFileInfo@5e5ad035, dssd.invoker.InvocationFileInfo@1c1b77f8, dssd.invoker.InvocationFileInfo@4f614932, dssd.invoker.InvocationFileInfo@7c0c9a54, dssd.invoker.InvocationFileInfo@1f68406c, dssd.invoker.InvocationFileInfo@755d828f, dssd.invoker.InvocationFileInfo@4e26b67b, dssd.invoker.InvocationFileInfo@4f966d52, dssd.invoker.InvocationFileInfo@1ce34b50, dssd.invoker.InvocationFileInfo@e658001, dssd.invoker.InvocationFileInfo@29b6c909, dssd.invoker.InvocationFileInfo@1f488344, dssd.invoker.InvocationFileInfo@51a1f567, dssd.invoker.InvocationFileInfo@5ff6670f, dssd.invoker.InvocationFileInfo@29e83b01, dssd.invoker.InvocationFileInfo@4d79d425, dssd.invoker.InvocationFileInfo@7956f0df]
+Invoke Config ID: 7
+
+filePath: ./CloneMiner\input\InputFiles.txt
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/AbstractInterruptibleChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/AbstractSelectableChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/AbstractSelectionKey.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/AbstractSelector.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/AlreadyConnectedException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/AsynchronousCloseException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/Bits.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/Buffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/BufferOverflowException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/BufferUnderflowException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsCharBufferB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsCharBufferL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsCharBufferRB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsCharBufferRL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsDoubleBufferB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsDoubleBufferL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsDoubleBufferRB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsDoubleBufferRL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsFloatBufferB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsFloatBufferL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsFloatBufferRB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsFloatBufferRL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsIntBufferB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsIntBufferL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsIntBufferRB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsIntBufferRL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsLongBufferB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsLongBufferL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsLongBufferRB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsLongBufferRL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsShortBufferB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsShortBufferL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsShortBufferRB.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteBufferAsShortBufferRL.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ByteOrder.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/CancelledKeyException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/Channel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/Channels.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/CharacterCodingException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/CharBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/Charset.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/CharsetDecoder.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/CharsetEncoder.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/CharsetProvider.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ClosedByInterruptException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ClosedChannelException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ClosedSelectorException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/CoderMalfunctionError.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/CoderResult.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/CodingErrorAction.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ConnectionPendingException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DatagramChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectByteBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectByteBufferR.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectCharBufferRS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectCharBufferRU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectCharBufferS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectCharBufferU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectDoubleBufferRS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectDoubleBufferRU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectDoubleBufferS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectDoubleBufferU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectFloatBufferRS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectFloatBufferRU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectFloatBufferS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectFloatBufferU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectIntBufferRS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectIntBufferRU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectIntBufferS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectIntBufferU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectLongBufferRS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectLongBufferRU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectLongBufferS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectLongBufferU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectShortBufferRS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectShortBufferRU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectShortBufferS.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DirectShortBufferU.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/DoubleBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/FileChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/FileLock.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/FileLockInterruptionException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/FloatBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/GatheringByteChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapByteBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapByteBufferR.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapCharBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapCharBufferR.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapDoubleBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapDoubleBufferR.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapFloatBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapFloatBufferR.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapIntBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapIntBufferR.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapLongBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapLongBufferR.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapShortBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/HeapShortBufferR.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/IllegalBlockingModeException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/IllegalCharsetNameException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/IllegalSelectorException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/IntBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/InterruptibleChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/InvalidMarkException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/LongBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/MalformedInputException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/MappedByteBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/NoConnectionPendingException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/NonReadableChannelException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/NonWritableChannelException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/NotYetBoundException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/NotYetConnectedException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/OverlappingFileLockException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/Pipe.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ReadableByteChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ReadOnlyBufferException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ScatteringByteChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/SelectableChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/SelectionKey.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/Selector.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/SelectorProvider.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ServerSocketChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/ShortBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/SocketChannel.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/StringCharBuffer.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/UnmappableCharacterException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/UnresolvedAddressException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/UnsupportedAddressTypeException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/UnsupportedCharsetException.java
+
+filePathAdding: E:/xampp/htdocs/Clonify/WebSite/files/shahramjaved75/nio/WritableByteChannel.java
+
+filePath: ./CloneMiner\input\EqualTokens.txt
+99=98=97=96=95=94=93=92=91=90=9=89=88=87=86=85=84=83=82=81=80=8=79=78=77=76=75=74=73=72=71=70=7=69=68=67=66=65=64=63=62=61=60=6=59=58=57=56=55=54=53=52=51=50=5=49=48=47=46=45=44=43=42=41=40=4=39=38=37=36=35=34=33=32=31=30=29=28=27=26=25=24=23=22=21=20=19=18=17=16=15=14=13=12=114=113=112=111=110=11=109=108=107=106=105=104=103=102=101=100=10
+
+filePath: ./CloneMiner\input\Suppressed.txt
+10,100,101,102,103,104,105,106,107,108,109,11,110,111,112,113,114,12,13,14,15,16,17,18,19,20,21,22,2
+
+filePath: ./CloneMiner\input\ClusterParameters.txt
+Start Time = Sun Feb 23 20:41:30 2014
+Total Groups 1
+Java Language Handler
+input size : 36229 tokens
+alphabet size : 524
+Time Taken to read input files = 1 seconds
+Time Taken to mark repetitions= 0 seconds
+Total Clone Classes : 14
+Time Taken to detect SCC = 13 seconds
+*** Sleeping for 5 Sec
+START getInvokeConfig(int uid)
+Invoke Config ID: -1
+No active user invocation found. System will try again Later
+*** Sleeping for 5 Sec

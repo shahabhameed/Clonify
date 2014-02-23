@@ -24,17 +24,31 @@
                     <a href="<?php echo site_url();?>"><span class="icon16 fa fa-cloud-upload"></span>File Manager</a>
                 </li>
                 <li><a href=" <?php echo site_url('invoke/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Invoke</a></li>
+				<?php if($this->tank_auth->get_role_id() == 1){?>
+                <li><a href="<?php echo site_url('updatetokens/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Update Tokens</a></li>
+				<?php } ?>
+				<li><a href="<?php echo site_url('load_results/');?>"><span class="icon16 icomoon-icon-stats-up"></span>Load Results</a></li>
+                <?php if (isset($showCloneView) && $invocationId){?>
                 <li>
-                    <a href="#"><span class="icon16 fa fa-desktop"></span>Clone Class View</a>
+                    <a href="#"><span class="icon16 fa fa-desktop"></span>Clone Table View</a>
                     <ul class="sub">
                         <li>
-                            <a href="<?php echo site_url('home/SingleCloneClass2');?>">
-                                <span class="icon16 fa fa fa-caret-right"></span>Single View 2
+                            <a href="<?php echo site_url('home/SingleCloneClass') . "/" . $invocationId;?>">
+                                <span class="icon16 fa fa fa-caret-right"></span>SCC
+                            </a>
+                            <a href="<?php echo site_url('home/SingleCloneClassByFile') . "/" .  $invocationId;?>">
+                                <span class="icon16 fa fa fa-caret-right"></span>SCC By File
+                            </a>
+                            <a href="<?php echo site_url('home/SingleCloneStructureWithinFile') . "/" . $invocationId;?>">
+                                <span class="icon16 fa fa fa-caret-right"></span>SCS Within File
+                            </a>
+                            <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile') . "/" . $invocationId;?>">
+                                <span class="icon16 fa fa fa-caret-right"></span>SCS Across File
                             </a>
                         </li>
                     </ul>
                 </li>
-
+                <?php }?>
             </ul>
         </div>
     </div><!-- End sidenav --> 

@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import dssd.invoker.adapter.InputHelper;
+import dssd.invoker.adapter.OutputHelper;
+
 public class InvokeService {
 	public static String CM_ROOT = "";
 
@@ -39,9 +42,7 @@ public class InvokeService {
 
 		PrintStream ps = new PrintStream("log.txt");
 		System.setOut(ps);
-		InvokeParameter invokeParameter = null;;
-
-
+		InvokeParameter invokeParameter = null;
 
 		while (!stopProcess){
 			try {
@@ -50,62 +51,61 @@ public class InvokeService {
 
 				if(invokeParameter != null && invokeParameter.getInvocation_id()>-1)
 				{
-				Helper.makeInputFile(invokeParameter);
-				Helper.makeEqualTokensFile(invokeParameter);
-				Helper.makeSuppressedTokenFile(invokeParameter);
-				Helper.makeClusterParametersFile(invokeParameter);
+					InputHelper helper = new TextInputFilesGenerator();
+					helper.setData(invokeParameter);
+					helper.makeCMInputFile();
 
-				//Update status to in process/Active
-				Database.updateInvocationStatus(invokeParameter.getInvocation_id(), 1);
+					//Update status to in process/Active
+					Database.updateInvocationStatus(invokeParameter.getInvocation_id(), 1);
 
+					String pathStr = CM_ROOT  +File.separatorChar + Constants.CM_EXEC_FILE_NAME;
+					pathStr = "\"" + pathStr + "\"";
+					final String[] strArray = new String[4];
+					strArray[0] = pathStr;
+					strArray[1] = "" + invokeParameter.getMin_similatiry_SCC_tokens();//stc;
+					strArray[2] = "" + invokeParameter.getMethod_analysis();
+					strArray[3] = "" + invokeParameter.getGrouping_choice();//groupIndex;
 
-				String pathStr = CM_ROOT  +File.separatorChar + Constants.CM_EXEC_FILE_NAME;
-				pathStr = "\"" + pathStr + "\"";
-				final String[] strArray = new String[4];
-				strArray[0] = pathStr;
-				strArray[1] = "" + invokeParameter.getMin_similatiry_SCC_tokens();//stc;
-				strArray[2] = "" + invokeParameter.getMethod_analysis();
-				strArray[3] = "" + invokeParameter.getGrouping_choice();//groupIndex;
+					// execute clone miner
+					long startTime = System.currentTimeMillis();
+					String dirStr = CM_ROOT;
+					String dirOutput = CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER;
+					deleteDir(new File(dirOutput));
 
-				// execute clone miner
-				long startTime = System.currentTimeMillis();
-				String dirStr = CM_ROOT;
-				String dirOutput = CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER;
-				deleteDir(new File(dirOutput));
+					File dir = new File(dirStr);
+					miner = Runtime.getRuntime().exec(strArray, null, dir);
+					errStream = new MyExternalThread(miner.getErrorStream());
+					outputStream = new MyExternalThread(miner.getInputStream());
+					errStream.start();
+					outputStream.start();
+					int result = miner.waitFor();
+					if (result != 0) {
+						System.err
+						.println("Clone Miner terminates with problems...");
+					} else {
+						long endTime = System.currentTimeMillis();
+						long elapsed = endTime - startTime;
+						long milli = elapsed % 1000;
+						long sec = (elapsed / 1000) % 60;
+						long mins = elapsed / 60000;
+						System.out.println("Elapsed Time for CM: "
+								+ mins + " mins " + sec + " secs "
+								+ milli + " millisec");
+						errStream.join();
+						outputStream.join();
+					}
+					//Update status to Finished
+					Database.updateInvocationStatus(invokeParameter.getInvocation_id(), 2);
 
-				File dir = new File(dirStr);
-				miner = Runtime.getRuntime().exec(strArray, null, dir);
-				errStream = new MyExternalThread(miner.getErrorStream());
-				outputStream = new MyExternalThread(miner.getInputStream());
-				errStream.start();
-				outputStream.start();
-				int result = miner.waitFor();
-				if (result != 0) {
-					System.err
-					.println("Clone Miner terminates with problems...");
-				} else {
-					long endTime = System.currentTimeMillis();
-					long elapsed = endTime - startTime;
-					long milli = elapsed % 1000;
-					long sec = (elapsed / 1000) % 60;
-					long mins = elapsed / 60000;
-					System.out.println("Elapsed Time for CM: "
-							+ mins + " mins " + sec + " secs "
-							+ milli + " millisec");
-					errStream.join();
-					outputStream.join();
-				}
-				//Update status to Finished
-				Database.updateInvocationStatus(invokeParameter.getInvocation_id(), 2);
-
-				LoadOutputInDB loadOutputInDB = new LoadOutputInDB();
-				loadOutputInDB.loadDBFromFiles(invokeParameter.getInvocation_id());
+					OutputHelper outputHelper = new DBLoaderFromTextFiles();
+					outputHelper.setData(invokeParameter.getInvocation_id());
+					outputHelper.loadDBFromFiles();
 				}
 				else
 				{
 					System.out.println("No active user invocation found. System will try again Later");
 				}
-				
+
 				System.out.println("*** Sleeping for 5 Sec");
 				Thread.sleep(5*1000);
 

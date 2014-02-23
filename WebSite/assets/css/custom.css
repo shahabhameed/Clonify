@@ -106,3 +106,6 @@ form .control-group .controls-row .btn.special {margin-left: 10px;}
 	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+#geshi-window1, #geshi-window2{
+	min-width: 960px;
+}

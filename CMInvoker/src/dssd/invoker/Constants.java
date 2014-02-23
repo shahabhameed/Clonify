@@ -16,6 +16,7 @@ public class Constants {
 	
 	public static final String SIMPLE_CLONE_CLASSES_FILE_NAME = "Clones";
 	public static final String INFILE_STRUCTURES_FILE_NAME = "InfileStructures";
+	public static final String FILE_CLUSTERS_FILE_NAME ="FileClusters";
 	public static final String CLONES_METHOD_FILE_NAME = "ClonesByMethod";
 	
 	public static final int DIR_FILE_VIEW = 0;

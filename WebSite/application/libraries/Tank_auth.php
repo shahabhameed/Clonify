@@ -84,6 +84,7 @@ class Tank_auth
                                                                 'email'       	=> $user->email,
                                                                 'first_name'	=> $user->first_name,
                                                                 'last_name'	=> $user->last_name,
+																'role_id'	=> $user->role_id,
 								'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 						));
 
@@ -126,7 +127,7 @@ class Tank_auth
 		$this->delete_autologin();
 
 		// See http://codeigniter.com/forums/viewreply/662369/ as the reason for the next line
-		$this->ci->session->set_userdata(array('user_id' => '', 'email' => '', 'username' => '', 'first_name' => '', 'last_name' => '', 'status' => ''));
+		$this->ci->session->set_userdata(array('user_id' => '', 'email' => '', 'username' => '', 'first_name' => '', 'last_name' => '', 'status' => '', 'role_id' => ''));
 
 		$this->ci->session->sess_destroy();
 	}
@@ -175,6 +176,10 @@ class Tank_auth
         function get_last_name()
 	{
 		return $this->ci->session->userdata('last_name');
+	}
+	function get_role_id()
+	{
+		return $this->ci->session->userdata('role_id');
 	}
 
 	/**
@@ -622,6 +627,7 @@ class Tank_auth
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
 								'status'	=> STATUS_ACTIVATED,
+								'role_id'	=> $user->role_id,
 						));
 
 						// Renew users cookie to prevent it from expiring
@@ -711,6 +717,8 @@ class Tank_auth
                                                                 'email'       	=> $user->email,
                                                                 'first_name'	=> $user->first_name,
                                                                 'last_name'	=> $user->last_name,
+																'role_id'	=> $user->role_id,
+																
 								'status'	=> STATUS_ACTIVATED
       )
       );

@@ -12,7 +12,6 @@ class Load_results extends CI_Controller
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
 		$this->form_validation->set_error_delimiters('', '');
-		
 		$this->load->model('load_results_model');
 	}
 
@@ -20,7 +19,9 @@ class Load_results extends CI_Controller
 	{
 		$data['user_name'] = $this->tank_auth->get_username();
 		$data['results']=$this->load_results_model->get_all_results();
+		
 		$this->load->view('partials/main_header');
+		$this->load->view('partials/sidebar');
 		$this->load->view('load_result',$data);
 		$this->load->view('partials/main_footer');
 	}
@@ -47,14 +48,18 @@ class Load_results extends CI_Controller
 			}
 			
 		}
+		
 		$data['user_name'] = $this->tank_auth->get_username();
 		$data['results']=$this->load_results_model->get_all_results();
 		$data['isUpdated'] = $isUpdated;
 		$data['info_message'] = "Records Updated successfully!";
 		$this->load->view('partials/main_header');
+		$this->load->view('partials/sidebar');
 		$this->load->view('load_result',$data);
-		$this->load->view('partials/main_footer');
-	}
+		$this->load->view('partials/main_footer');	
+		
+		unlink('./uploads/'.$fileName.'.txt');
+	}	
 }
 
 /* End of file auth.php */

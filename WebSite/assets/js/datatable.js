@@ -19,7 +19,7 @@ $(document).ready(function() {
 		$('.dataTables_length select').uniform();
 		$('.dataTables_paginate > ul').addClass('pagination');
 		$('.dataTables_filter>label>input').addClass('form-control');
-                $('.dataTables_filter').hide();
+        $('.dataTables_filter').hide();
                 
 	}
 	if($('table').hasClass('dynamicTable1')){
