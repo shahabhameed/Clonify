@@ -102,3 +102,14 @@ CREATE TABLE IF NOT EXISTS `scs_crossfile` (
   `members` int(11) NOT NULL,
   PRIMARY KEY (`scs_crossfile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ADDED ON 2014-02-24 0, BY Hafeez
+ALTER TABLE invocation_files ADD COLUMN group_id int(11) NOT NULL;
+ALTER TABLE user_invocations ADD COLUMN language_id int(11) NOT NULL;
+ALTER TABLE user_invocations ADD COLUMN invocation_name varchar(250) NOT NULL;
+ALTER TABLE user_invocations ADD COLUMN comments varchar(1024) NOT NULL;
+
+CREATE TABLE IF NOT EXISTS `role` (
+  `id` int(11) NOT NULL,
+  `role_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
