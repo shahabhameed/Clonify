@@ -381,7 +381,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		return fileName;
 	}
 	
-	private int getFileSize(Integer invocationId) {
+	public int getFileSize(Integer invocationId) {
 		int size = -1;
 		try {
 			Connection dbConn = Database.openConnection();

@@ -15,6 +15,7 @@ public class AllTests {
 		suite.addTestSuite(TestCMProperties.class);
 		suite.addTestSuite(TestHelper.class);
 		suite.addTestSuite(TestConstants.class);
+                suite.addTestSuite(TestLoadFromTextFile.class);
 		//$JUnit-END$
 		return suite;
 	}
