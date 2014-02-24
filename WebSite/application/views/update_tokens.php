@@ -1,5 +1,28 @@
 <?php include("include_newcss.php"); ?>
 <script>
+
+var val = '';
+
+function HandleFileButtonClick(a)
+{
+	if(a)
+	{
+		document.frmUpload.userfile.click();
+		val = document.frmUpload.userfile.value;
+		val = val.split(/(\\|\/)/g).pop();
+		//document.frmUpload.txtFakeText.value = val;
+		//alert(val);
+		document.getElementById('txtFakeText').innerHTML = val;
+	}
+	else
+	{
+		//alert(val);
+		val = document.frmUpload.userfile.value;
+		val = val.split(/(\\|\/)/g).pop();
+		document.getElementById('txtFakeText').innerHTML = val;
+	}
+}
+
 function myValidate(){
 
 	var isValidated = true;
@@ -31,7 +54,7 @@ function myValidate(){
                     <h3>Update Tokens</h3>                                                                               
                 </div><!-- End .heading-->
 				
-			<form enctype="multipart/form-data" accept-charset="utf-8" method="post" onsubmit="return myValidate();" action="<?php echo base_url();?>updatetokens/update">
+			<form name="frmUpload" enctype="multipart/form-data" accept-charset="utf-8" method="post" onsubmit="return myValidate();" action="<?php echo base_url();?>updatetokens/update">
 				
 					<table width="100%">
 						<tr>
@@ -42,8 +65,25 @@ function myValidate(){
 									<label>File</label>
 								</td>
 								<td>
-									<div class="fUp btn">
-										<input class="tokFil" type="file" name="userfile" size="20"></input>
+                                	<!-- Real Input field, but hidden
+                                    <input type="file" name="myFile" style="display:none;">
+	                                -->
+                                    <!-- Fake field to fool the user 
+                                    <input type="text" name="txtFakeText" readonly="true">
+                                    <br/>
+                                    -->
+                                
+                                    <!-- Button to invoke the click of the File Input -->
+                                    <div style="float:left;">
+                                    <input type="button" onclick="HandleFileButtonClick(1);" value="Browse" class="btn">
+                                    </div>
+                                    <div style="float:left; margin-left:5px; margin-top:6px;">
+                                    <label for="txtFakeText" id="txtFakeText"></label>
+                                    </div>
+                                </td>
+                                <td>
+ 									<div>
+										<input type="file" name="userfile" onchange="HandleFileButtonClick(0);" style="display:none" size="20"></input>
 									</div>
 									<label style="display:inline-block" class="myErrLbl" id="userfileErr"></label>
 								</td>
