@@ -337,9 +337,12 @@ class Invoke_model extends CI_Model
 			{
 				$token_ids = $row->suppressed_tokens;
 			}
+			if(sizeof($token_ids)>0){
 			$query = "SELECT * FROM tokens WHERE language_id='$language_id' and token_id in($token_ids)";
 			$results = $this->db->query($query);
 			return $results->result();
+			}
+			return null;
 		}
 		return NULL;
 	}
