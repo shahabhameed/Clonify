@@ -580,6 +580,19 @@ Clonify.SCC = {
             $(selector2).poshytip({
               content: 'Clone Difference is : '+r
             });
+            
+            var temp = r.split(",");
+            var file_1_difference_arr = temp[0].split(" ");
+            var file_2_difference_arr = temp[1].split(" ");
+                        
+            $(selector2).each(function(){
+                for(var i = 0; i < file_2_difference_arr.length; i++){
+                    var temp = $.trim(file_2_difference_arr[i]);
+                    var str = $(this).find('div').html();
+                    str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+                }
+                $(this).find('div').html(str);
+            });            
 
             var selector1 = "";
             for (var i = code_compare_global_attributes.file_1_start_line; i <= code_compare_global_attributes.file_1_end_line; i++){
@@ -587,6 +600,16 @@ Clonify.SCC = {
             }
 
             selector1 = selector1.substring(0, selector1.length-1);
+            
+            $(selector1).each(function(){
+                for(var i = 0; i < file_1_difference_arr.length; i++){
+                    var temp = $.trim(file_1_difference_arr[i]);
+                    var str = $(this).find('div').html();
+                    str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+                }
+                $(this).find('div').html(str);
+            });            
+            
 
             $(selector1).poshytip({
               content: 'Clone Difference is : '+r
