@@ -13,7 +13,8 @@ public class Constants {
 	public static final String CM_TEXT_FILE_EXTENSION = ".txt";
 	
 	public static final String CM_EXEC_FILE_NAME = "clones.exe";
-	
+	public static final String TEST_FILE_NAME ="FileClusters_test";
+        
 	public static final String SIMPLE_CLONE_CLASSES_FILE_NAME = "Clones";
 	public static final String INFILE_STRUCTURES_FILE_NAME = "InfileStructures";
 	public static final String FILE_CLUSTERS_FILE_NAME ="FileClusters";

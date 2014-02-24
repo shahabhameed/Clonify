@@ -10,14 +10,6 @@ $(document).ready(function() {
         }, 3000);
      })
 
-	//Boostrap modal
-	$('#myModal').modal({ show: false});
-	
-	//add event to modal after closed
-	$('#myModal').on('hidden', function () {
-	  	console.log('modal is closed');
-	})
-
 });//End document ready functions
 
 //sparkline in sidebar area

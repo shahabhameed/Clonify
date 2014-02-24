@@ -15,7 +15,7 @@ var code_compare_global_attributes = {
     file_2_start_line : null,
     file_2_end_line : null
 }
-
+var window_id = 0;
 //------------- Modernizr -------------//
 //load some plugins only if is needed
 Modernizr.load({
@@ -472,7 +472,7 @@ Clonify.ns = Clonify.namespace;
 Clonify.ns('Clonify.SCC');
 
 Clonify.SCC = {
-  viewCloneInstance: function(_scc_id){
+  viewSCCCloneInstance: function(_scc_id){
     $(".scc_instance_list").hide();
     $("#scc_instance_list_"+_scc_id).show();
     $(".code-window-containter").hide();
@@ -483,10 +483,123 @@ Clonify.SCC = {
     $(".code-window1").hide();
     $(".code-window2").hide();
     window.location.hash='';
+    $("#scc_instance_list_"+_scc_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#gidnumberfilter",type: "number" },
+                                     { sSelector: "#didnumberfilter",type: "number" },
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+                                     { sSelector: "#slnumberfilter",type: "number" },
+                                     { sSelector: "#elnumberfilter",type: "number" }
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+  },
+  viewSCSAcrossCloneInstance: function(_scs_id){
+  	$(".scs_instance_list").hide();
+    $("#scs_instance_list_"+_scs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#scs_instance_list_"+_scs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+            "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#gidnumberfilter",type: "number" },
+                                     { sSelector: "#didnumberfilter",type: "number" },
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+                                     { sSelector: "#tcnumberfilter",type: "number" },
+                                     { sSelector: "#pcnumberfilter",type: "number" },
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+
+  },
+  viewSCSCloneInstance: function(_scs_id){
+    $(".scs_instance_list").hide();
+    $("#scs_instance_list_"+_scs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#scs_instance_list_"+_scs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#cidnumberfilter",type: "number" },
+                                     { sSelector: "#scsidnumberfilter",type: "number" },
+                                     { sSelector: "#scsinumberfilter",type: "number" },
+                                     { sSelector: "#scsfidnumberfilter",type: "number" },
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
   },
   
-  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, file_name){
+  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
     var _url = base_url + "home/loadCode";
+    window_id = window_id + 1;
+    $("#code_window1").css("overflow", "");
+    $("#code_window2").css("overflow", "");
+    var invocation_id = $("#sidebar_invocation_id").val();
     var _params = {
       scc_id : _scc_id,
       clone_list_id : _clone_list_id,
@@ -494,7 +607,11 @@ Clonify.SCC = {
       fid : fid,
       start_line : start_line,
       file_name : file_name,
-      end_line : end_line
+      end_line : end_line,
+      strt_col : strt_col,
+      end_col : end_col,
+      invocation_id: invocation_id,
+      window_id: window_id
     };
     
     $.post(_url, _params, function(r) {
@@ -505,29 +622,12 @@ Clonify.SCC = {
         code_compare_global_attributes.file_1_end_line = end_line;
         $(".code-window1").show();
         $("#file1").html('File Name : '+file_name);
-        $("#code_window1").html(r);
-        window.location.hash='geshi-window0-'+start_line;
-//        var selector1 = "";
-//        for (var i = start_line; i <= end_line; i++){
-//            selector1 += '#geshi-window0-'+i+",";
-//        }
-//        
-//        selector1 = selector1.substring(0, selector1.length-1);
-//
-//        $(selector1).poshytip({
-//          content: 'THIS IS TEST TOOLTIP FOR WINDOW 1'
-//        });
-//        
-//        $(selector1).each(function(){
-//            var str = $(this).find('div').html();
-//            str = str.replace("canvas","<span style='color: red !important'>canvas</span>");
-//            str = str.replace("alignment","<span style='color: red !important'>alignment</span>");
-//            str = str.replace("case","<span style='color: red !important'>case</span>");
-//            str = str.replace("switch","<span style='color: red !important'>switch</span>");
-//            $(this).find('div').html(str);
-//        });
-        
-        new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window0-minimap-index').make().prependTo('#code_map1') );        
+        $("#code_window1").html(r);        
+        new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map1') );
+        if (start_line == null || start_line == ""){
+          start_line = $("#startline-"+window_id).val();
+        }
+        window.location.hash='geshi-window'+window_id+'-'+start_line;
       }else{
         code_compare_global_attributes.file_2_path = path;
         code_compare_global_attributes.file_2_start_line = start_line;
@@ -537,33 +637,27 @@ Clonify.SCC = {
         $("#code_window1").addClass('col-md-5');
         $(".code-window2").show();
         $("#file2").html('File Name : '+file_name);
-        $("#code_window2").html(r);
-        window.location.hash='geshi-window1-'+start_line;        
-//        var selector2 = "";
-//        for (var i = start_line; i <= end_line; i++){
-//            selector2 += '#geshi-window1-'+i+",";
-//        }
-//        selector2 = selector2.substring(0, selector2.length-1);
-//
-//        $(selector2).poshytip({
-//          content: '<br/>THIS IS TEST TOOLTIP FOR WINDOW 2'
-//        });
-//        $(selector2).each(function(){
-//            var str = $(this).find('div').html();
-//            str = str.replace("static","<span style='color: red !important'>static</span>");
-//            str = str.replace("private","<span style='color: red !important'>private</span>");
-//            str = str.replace("case","<span style='color: red !important'>case</span>");
-//            str = str.replace("final","<span style='color: red !important'>final</span>");
-//            str = str.replace("Cocos2dxGLSurfaceView ","<span style='color: red !important'>Cocos2dxGLSurfaceView </span>");
-//            $(this).find('div').html(str);
-//        });
-        
-        
-        new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window1-minimap-index').make().prependTo('#code_map2') );
-        Clonify.SCC.calculateCloneDifferences();
-
+        $("#code_window2").html(r);        
+        new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map2') );
+        Clonify.SCC.calculateCloneDifferences();        
+        if (start_line == null || start_line == ""){
+          start_line = $("#startline-"+window_id).val();
+        }
+        window.location.hash='geshi-window'+window_id+'-'+start_line;
       }      
     });
+	
+    	$('#code-window1').wrap('<div class="responsive" />');
+    	$('#code-window2').wrap('<div class="responsive" />');
+
+    	$("div.responsive").each(function(){
+    		$(this).niceScroll({
+				cursoropacitymax: 0.7,
+				cursorborderradius: 6,
+				cursorwidth: "4px"
+			});
+    	});
+    
   },
   
   calculateCloneDifferences : function(){

@@ -42,9 +42,7 @@ public class InvokeService {
 
 		PrintStream ps = new PrintStream("log.txt");
 		System.setOut(ps);
-		InvokeParameter invokeParameter = null;;
-
-
+		InvokeParameter invokeParameter = null;
 
 		while (!stopProcess){
 			try {

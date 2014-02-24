@@ -34,7 +34,13 @@
 										<tr>
 											
                                             <td style="text-align:center;"><?php echo $count+1;?></td>
-                                            <td><a href=#><?php echo $result->invoked_time; ?><a></td>
+                                            <td>
+                                              <?php if ($result->status == 2){?>
+                                                <a href="<?php echo site_url('home/SingleCloneClass') . "/" . $result->id;?>"><?php echo $result->invoked_time; ?></a>
+                                              <?php }else{?>
+                                                    <?php echo $result->invoked_time; ?>
+                                              <?php }?>      
+                                            </td>
                                             <td  style="text-align:left;"><input style="width:99%;margin-bottom:0px;border:none;background:#fafafa;webkit-box-shadow: none;-moz-box-shadow: none;box-shadow:none;" type="text" name="<?php echo 'iname'.$count;?>" value="<?php echo $result->invocation_name;?>">
 											<input type="hidden" name ="<?php echo 'iid'.$count;?>" value="<?php echo $result->id; ?>"></input>
 											</td>
