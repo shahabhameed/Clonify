@@ -64,7 +64,7 @@
         }
         $miniMapLinks[] = $start_line;
         $miniMapLinkLable[$start_line] = array('text' => '  ', 'rows' => $end_line - $start_line);
-        $obj->HighlightLines($lines);
+        $obj->HighlightLines($lines,null);
       }
 
       $obj->AddMiniMapLinkLabel($miniMapLinkLable);
