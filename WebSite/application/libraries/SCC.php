@@ -37,6 +37,14 @@ class SCC
     return $this->ci->load_results_model->get($invocationId, $userId);
   }
   
+  function getUserInvocations(){    
+    $data = $this->ci->load_results_model->get_all_results();    
+    if ($data){
+      return json_decode(json_encode($data), true); // Changing Obj in Array
+    }
+    return array();
+  }
+  
   function getAllSCSWithInFile($invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     
