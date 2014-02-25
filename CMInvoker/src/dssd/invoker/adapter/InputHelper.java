@@ -7,8 +7,8 @@ public abstract class InputHelper {
 	
 	public boolean isDataSet(){
 		if(
-			invokeParameter != null && 
-			invokeParameter.isAllSet()
+			invokeParameter != null 
+			//&& invokeParameter.isAllSet()
 		)
 		{
 			return true;

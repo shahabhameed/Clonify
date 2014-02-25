@@ -11,11 +11,11 @@ public class AllTests {
 		suite.addTestSuite(TestInvokeService.class);
 		suite.addTestSuite(TestDatabase.class);
 		suite.addTestSuite(TestMyExternalThread.class);
-		suite.addTestSuite(TestInvokeParameter.class);
+		//suite.addTestSuite(TestInvokeParameter.class);
 		suite.addTestSuite(TestCMProperties.class);
 		suite.addTestSuite(TestHelper.class);
 		suite.addTestSuite(TestConstants.class);
-        suite.addTestSuite(TestLoadFromTextFile.class);
+        //suite.addTestSuite(TestLoadFromTextFile.class);
 		//$JUnit-END$
 		return suite;
 	}

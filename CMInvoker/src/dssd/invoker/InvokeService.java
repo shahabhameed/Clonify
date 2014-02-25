@@ -23,7 +23,7 @@ public class InvokeService {
 	public static void main(String[] args) {
 		init();
 		try {
-			awain();
+			invokeCloneMiner();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,7 +38,7 @@ public class InvokeService {
 		
 	}
 
-	public static void awain() throws IOException{		
+	public static void invokeCloneMiner() throws IOException{		
 
 		PrintStream ps = new PrintStream("log.txt");
 		System.setOut(ps);

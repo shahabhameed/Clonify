@@ -1,5 +1,6 @@
 package dssd.invoker;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class InvokeParameter {
@@ -10,7 +11,7 @@ public class InvokeParameter {
 	private Integer method_analysis;
 	private String suppressed_tokens; 
 	private String equal_tokens;
-	private ArrayList<InvocationFileInfo> input_files = new ArrayList<InvocationFileInfo>();
+	private List<List<InvocationFileInfo>> input_files = new ArrayList<List<InvocationFileInfo>>();
 	
 	
 	public InvokeParameter(){
@@ -46,7 +47,7 @@ public class InvokeParameter {
 			Integer method_analysis,
 			String suppressed_tokens,
 			String equal_tokens,
-			ArrayList<InvocationFileInfo> input_files
+			List<List<InvocationFileInfo>> input_files
 	)
 	{
 		this.invocation_id = invocation_id;
@@ -61,34 +62,34 @@ public class InvokeParameter {
 	/**
 	 * This function is written for testing purposes please note any change in this functoin may effect the test cases
 	 */
-	public boolean isAllSet(){
-		if(
-			invocation_id != null && invocation_id > -1 && 
-			min_similatiry_SCC_tokens != null && min_similatiry_SCC_tokens > -1 &&
-			grouping_choice != null && grouping_choice > -1 &&
-			method_analysis != null && method_analysis > -1 &&
-			suppressed_tokens != null && suppressed_tokens.length()>0 && 
-			equal_tokens != null && suppressed_tokens.length()>0 &&
-			input_files != null && input_files.size()>0
-		)
-		{
-			for(InvocationFileInfo invocationFileInfo: input_files){
-				//String tempFileName = invocationFileInfo.getInputFileName();
-				if(
-					invocationFileInfo == null// ||
-					//invocationFileInfo.getGroupId() == null ||
-					//tempFileName == null || tempFileName.length()<1
-				)
-				{
-					return false;
-				}
-			}
-			
-			return true;
-		}
-		
-		return false;
-	}
+//	public boolean isAllSet(){
+//		if(
+//			invocation_id != null && invocation_id > -1 && 
+//			min_similatiry_SCC_tokens != null && min_similatiry_SCC_tokens > -1 &&
+//			grouping_choice != null && grouping_choice > -1 &&
+//			method_analysis != null && method_analysis > -1 &&
+//			suppressed_tokens != null && suppressed_tokens.length()>0 && 
+//			equal_tokens != null && suppressed_tokens.length()>0 &&
+//			input_files != null && input_files.size()>0
+//		)
+//		{
+//			for(InvocationFileInfo invocationFileInfo: input_files){
+//				//String tempFileName = invocationFileInfo.getInputFileName();
+//				if(
+//					invocationFileInfo == null// ||
+//					//invocationFileInfo.getGroupId() == null ||
+//					//tempFileName == null || tempFileName.length()<1
+//				)
+//				{
+//					return false;
+//				}
+//			}
+//			
+//			return true;
+//		}
+//		
+//		return false;
+//	}
 	
 	public Integer getInvocation_id() {
 		return invocation_id;
@@ -127,15 +128,15 @@ public class InvokeParameter {
 		this.equal_tokens = equal_tokens;
 	}
 
-	public ArrayList<InvocationFileInfo> getInput_files() {
+	
+	public List<List<InvocationFileInfo>> getInput_files() {
 		return input_files;
 	}
 
-	public void setInput_files(ArrayList<InvocationFileInfo> input_files) {
-		// TODO : setInput_files is not called because we use getInput_files and then add files to that !
-		
+	public void setInput_files(List<List<InvocationFileInfo>> input_files) {
 		this.input_files = input_files;
 	}
+
 	public String generateFileName(String rep, String dir, String File)
 	{
 		return rep + dir + File;

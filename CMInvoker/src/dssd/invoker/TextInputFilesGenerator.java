@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import dssd.invoker.adapter.InputHelper;
@@ -31,22 +32,29 @@ public class TextInputFilesGenerator extends InputHelper{
 				System.out.println("\nfilePath: " + filePath);
 				PrintWriter writer = new PrintWriter(filePath, "UTF-8");
 				
-				ArrayList<InvocationFileInfo> iFiles = invokeParameter.getInput_files();
+				List<List<InvocationFileInfo>> groupList = invokeParameter.getInput_files();
 				
-				if(iFiles != null && iFiles.size() > 0){
-					Integer group = 1;
-					for (InvocationFileInfo file : iFiles){
-						System.out.println("\nfilePathAdding: " + file.getInputFileName());
-						if(file.getGroupId() == group)
-						{
-							writer.println(file.getInputFileName());
-						}
-						else
-						{
-							writer.println(file.getInputFileName()+";");
-							group = file.getGroupId();
-						}
+				
+				if(groupList != null && groupList.size() > 0)
+				{		
+					Integer groupCount = 0;
+					for (List <InvocationFileInfo> fileList : groupList)
+					{
+						Integer fileCount = 0;
 						
+						for(InvocationFileInfo file : fileList)
+						{
+							if(fileCount == fileList.size()-1 && groupCount != groupList.size()-1)
+							{
+								writer.println(file.getInputFileName()+";");
+							}
+							else
+							{
+								writer.println(file.getInputFileName());
+							}
+							fileCount++;
+						}
+						groupCount++;
 					}
 				}
 				
