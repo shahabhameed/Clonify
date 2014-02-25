@@ -20,11 +20,13 @@ public abstract class OutputHelper {
 	 * Implementation of this function should save any number of input files
 	 * required by Clone Miner "clones.exe" in inputFolder
 	 */
-	public void loadFromFilesToDB(){
+	public boolean loadFromFilesToDB(){
 		if(isDataSet()){
-			loadDBFromFiles();
+			return loadDBFromFiles();
 		}
+		
+		return false;
 	}
 	
-	public abstract void loadDBFromFiles();
+	public abstract boolean loadDBFromFiles();
 }

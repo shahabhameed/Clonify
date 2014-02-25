@@ -15,7 +15,13 @@ public class AllTests {
 		suite.addTestSuite(TestCMProperties.class);
 		suite.addTestSuite(TestHelper.class);
 		suite.addTestSuite(TestConstants.class);
+<<<<<<< HEAD
         //suite.addTestSuite(TestLoadFromTextFile.class);
+=======
+        suite.addTestSuite(TestLoadFromTextFile.class);
+        suite.addTestSuite(TestInputHelper.class);
+        suite.addTestSuite(TestOutHelper.class);
+>>>>>>> 5cf31db0492fc7ff2604219c77bdc5fe56447433
 		//$JUnit-END$
 		return suite;
 	}

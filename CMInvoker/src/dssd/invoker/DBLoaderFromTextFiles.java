@@ -51,7 +51,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	}
 	
 	@Override
-	public void loadDBFromFiles() {
+	public boolean loadDBFromFiles() {
 		try{
 			String filePath = "";
 			String filePath_infilestructures = "";
@@ -191,7 +191,10 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 		} catch(Exception e){
 			e.printStackTrace();
+			return false;
 		}
+		
+		return true;
 	} //function end bracket
 
 	//delete mid

@@ -60,7 +60,7 @@ public class InvokeParameter {
 	}
 	
 	/**
-	 * This function is written for testing purposes please note any change in this functoin may effect the test cases
+	 * This function is written for testing purposes please note any change in this function may effect the test cases
 	 */
 //	public boolean isAllSet(){
 //		if(
