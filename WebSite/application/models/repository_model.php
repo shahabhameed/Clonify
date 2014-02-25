@@ -12,6 +12,8 @@ class Repository_Model extends CI_Model
 	{
 		//insert 
 		//$user_id = $this->session->userdata('user_id');
+		$path2 = str_replace("\\", "/", $path);
+		$path = $path2;
 		$date = date('Y-m-d H:i:s');
 		//$this->db->update()
 		$this->db->query("INSERT INTO user_repository(user_id,repository_name,creation_time) VALUES('$user_id','$path','$date')");
