@@ -179,7 +179,7 @@ class Invoke_model extends CI_Model
 		//FILE GROUPS
 		$groupList = $_POST['hiddenGroup']; //get hidden list
 
-		$count = 0;
+		$count = 1;
 		
 		
 		if (!empty($groupList)){
