@@ -21,6 +21,7 @@ import junit.framework.TestCase;
 import dssd.invoker.Constants;
 import dssd.invoker.DBLoaderFromTextFiles;
 import dssd.invoker.InvokeService;
+
 public class TestLoadFromTextFile extends TestCase{
 
 	public void testOpen_InfileStructure()

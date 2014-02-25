@@ -16,6 +16,8 @@ public class AllTests {
 		suite.addTestSuite(TestHelper.class);
 		suite.addTestSuite(TestConstants.class);
         suite.addTestSuite(TestLoadFromTextFile.class);
+        suite.addTestSuite(TestInputHelper.class);
+        suite.addTestSuite(TestOutHelper.class);
 		//$JUnit-END$
 		return suite;
 	}
