@@ -19,7 +19,14 @@ public class InvokeParameter {
 	
 	@Deprecated
 	// @see InvokeParameter(Integer invocation_id, Integer min_similatiry_SCC_tokens, Integer grouping_choice, Integer method_analysis, String suppressed_tokens, String equal_tokens, ArrayList<String> input_files) 
-	public InvokeParameter(Integer invocation_id, Integer min_similatiry_SCC_tokens, Integer grouping_choice, Integer method_analysis, String suppressed_tokens, String equal_tokens)
+	public InvokeParameter(
+			Integer invocation_id,
+			Integer min_similatiry_SCC_tokens,
+			Integer grouping_choice,
+			Integer method_analysis,
+			String suppressed_tokens,
+			String equal_tokens
+	)
 	{
 		this.invocation_id = invocation_id;
 		this.min_similatiry_SCC_tokens = min_similatiry_SCC_tokens;
@@ -30,9 +37,17 @@ public class InvokeParameter {
 	}
 	
 	/**
-	 * This constructor also sets input_files
+	 * This constructor sets input_files also
 	 */
-	public InvokeParameter(Integer invocation_id, Integer min_similatiry_SCC_tokens, Integer grouping_choice, Integer method_analysis, String suppressed_tokens, String equal_tokens, ArrayList<InvocationFileInfo> input_files)
+	public InvokeParameter(
+			Integer invocation_id,
+			Integer min_similatiry_SCC_tokens,
+			Integer grouping_choice,
+			Integer method_analysis,
+			String suppressed_tokens,
+			String equal_tokens,
+			ArrayList<InvocationFileInfo> input_files
+	)
 	{
 		this.invocation_id = invocation_id;
 		this.min_similatiry_SCC_tokens = min_similatiry_SCC_tokens;
@@ -58,11 +73,11 @@ public class InvokeParameter {
 		)
 		{
 			for(InvocationFileInfo invocationFileInfo: input_files){
-				String tempFileName = invocationFileInfo.getInputFileName();
+				//String tempFileName = invocationFileInfo.getInputFileName();
 				if(
-					invocationFileInfo == null ||
-					invocationFileInfo.getGroupId() == null ||
-					tempFileName == null || tempFileName.length()<1
+					invocationFileInfo == null// ||
+					//invocationFileInfo.getGroupId() == null ||
+					//tempFileName == null || tempFileName.length()<1
 				)
 				{
 					return false;
