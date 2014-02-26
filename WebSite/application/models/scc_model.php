@@ -16,7 +16,7 @@ class SCC_model extends CI_Model
   }
   
   function getAllSCCSecondaryTableRows($scc_id, $invocationId, $user_id){
-    $where = "tb1.invocation_id = $invocationId and tb1.scc_id= $scc_id";
+    $where = "tb1.invocation_id = $invocationId and tb1.scc_id= $scc_id and tb21.invocation_id = $invocationId";
     
     $this->db->select('*');    
     $this->db->from('scc_instance AS tb1');    
@@ -27,7 +27,7 @@ class SCC_model extends CI_Model
    
     $this->db->where($where);
     $result = $this->db->get();
-    echo $this->db->last_query();exit;
+    // echo $this->db->last_query();exit;
     if ($result->num_rows()> 0){      
       return $result->result();
     }        
@@ -171,7 +171,7 @@ class SCC_model extends CI_Model
   }
   
   public function getSCCByFileChildTable($invocationId, $file_id, $userId){
-    $where = "tb1.invocation_id = $invocationId AND tb1.fid=$file_id";
+    $where = "tb1.invocation_id = $invocationId AND tb1.fid=$file_id and tb3.invocation_id = $invocationId";
     
     $this->db->select('*');
     $this->db->from('scc_instance tb1'); 
