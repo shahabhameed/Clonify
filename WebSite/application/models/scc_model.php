@@ -61,8 +61,8 @@ class SCC_model extends CI_Model
     $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
     $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');    
     $this->db->where($where);
-
     $result = $this->db->get();
+
     if ($result->num_rows()> 0){      
       return $result->result();
     }
@@ -98,7 +98,7 @@ class SCC_model extends CI_Model
   }
   
   public function getAllSCSWithInFileChildTable($invocationId, $scs_id){
-    $where = "tb1.invocation_id = $invocationId AND tb1.scs_infile_id = $scs_id";
+    $where = "tb1.invocation_id = $invocationId AND tb1.scs_infile_id = $scs_id AND tb3.invocation_id = $invocationId";
     
     $this->db->select('*');
     $this->db->from('scsinfile_fragments tb1');
@@ -109,6 +109,7 @@ class SCC_model extends CI_Model
     $this->db->where($where);
 
     $result = $this->db->get();
+     // echo $this->db->last_query();exit;
     if ($result->num_rows()> 0){      
       return $result->result();
     }
@@ -131,7 +132,7 @@ class SCC_model extends CI_Model
   }    
   
   public function getSCSAcrossFileChildTable($invocationId, $scs_id){
-    $where = "tb1.invocation_id = $invocationId AND tb1.scs_crossfile_id = $scs_id";
+    $where = "tb1.invocation_id = $invocationId AND tb1.scs_crossfile_id = $scs_id AND tb3.invocation_id = $invocationId";
     
     $this->db->select('*');
     $this->db->from('scscrossfile_file tb1');
