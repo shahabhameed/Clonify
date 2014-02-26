@@ -8,13 +8,17 @@ class Ex_cont extends CI_Controller
 		parent::__construct();
 		$this->load->library('tank_auth');
 		$this->load->helper('path');
+		$this->load->model('repository_model');
 		if (!$this->tank_auth->is_logged_in()) {         // Not logged in
         redirect('/auth/login/');
       	}
       	$username = $this->tank_auth->get_username();
+		$user_id = $this->tank_auth->get_user_id();
       	$this->_path = set_realpath(FCPATH.'files/'.$username);
       	if (!file_exists($this->_path)) {
 		    mkdir($this->_path, 0777, true);
+			//$path = 'C:/xampp/htdocs/Clonify3/files/'.$username.'/';
+			$this->repository_model->insertUserRepository($this->_path,$user_id );
 		}
       	// print_r($this->_path);exit;
 		//$this->ci->load->library('session');

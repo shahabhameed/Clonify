@@ -187,7 +187,7 @@
                                         <div class="form-group">
                                             <div class="col-lg-12">
                                                 <div class="leftBox">
-						                            <select multiple="multiple" id="suppresed" name="suppresed[]" class="multiple form-control" style="height:300px; width:500px;">>
+						                            <select multiple="multiple" id="suppresed" name="suppresed[]" class="multiple form-control" style="height:300px;">>
                                                     <?php foreach ($tokens as $token){ ?>
                                                       <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id." - ".$token->token_name ?></option>
                                                     <?php } ?>
@@ -205,7 +205,7 @@
 												
 												
 												<div class="col-lg-5 pull-right">
-                                                    <select multiple="multiple" id="suppresed2" name="suppresed2[]" class="multiple form-control" style="height:300px; width:500px;">>
+                                                    <select multiple="multiple" id="suppresed2" name="suppresed2[]" class="multiple form-control" style="height:300px; ">>
 													<?php foreach ($prev_sup_tokens as $prev_sup_token){ ?>
                                                       <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo $prev_sup_token->token_id." - ".$prev_sup_token->token_name ?></option>
                                                     <?php } ?>

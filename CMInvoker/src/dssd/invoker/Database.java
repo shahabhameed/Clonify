@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Umer
@@ -82,6 +84,9 @@ public class Database {
 							"(select file_id from invocation_files where invocation_id=" + id +");");
 					
 					
+					List<List<InvocationFileInfo>> groupList = new ArrayList<List<InvocationFileInfo>>();
+					Integer group = -1;
+					List<InvocationFileInfo> invocationFileList = new ArrayList<InvocationFileInfo>();
 					while (results.next()) {
 						Integer fileId = results.getInt(1);
 						//a very bad way to get groupId. Should be refactored.
@@ -91,8 +96,24 @@ public class Database {
 						Integer groupId = result2.getInt(1);
 						String fileName = results.getString(2);
 						InvocationFileInfo invoFileInfo = new InvocationFileInfo(fileName, groupId);
-						invokeParameter.getInput_files().add(invoFileInfo);
-					}					
+						if(group == groupId || group==-1 ){
+							invocationFileList.add(invoFileInfo);
+							group = groupId;
+						}
+						else
+						{
+							groupList.add(invocationFileList);
+							invocationFileList = new ArrayList<InvocationFileInfo>();
+							invocationFileList.add(invoFileInfo);
+							group = groupId;
+						}
+						
+					}
+					if(!invocationFileList.isEmpty())
+					{
+						groupList.add(invocationFileList);
+					}
+					invokeParameter.setInput_files(groupList);
 					System.out.println("Input_files: " + invokeParameter.getInput_files());
 				}
 			}

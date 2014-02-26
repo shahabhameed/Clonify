@@ -263,21 +263,22 @@ function updateHiddenOnDelete(hiddenListId, deletedListId)
 	 }	
 }
 
-function checkAndDelete(fromID,parentId,childID)
+function checkAndDelete(fromID,parentId,childID,hiddenListId, deletedListId)
 {
 	SS1 = document.getElementById(fromID);
 	if (SS1.options.length == 0)
         {
-			deleteGroup(parentId,childID);	
+			deleteGroup(parentId,childID,hiddenListId, deletedListId);	
 		}
 }
 
-function deleteGroup(parentId,childID)
+function deleteGroup(parentId,childID,hiddenListId, deletedListId)
 {
 	if (document.getElementById(childID)) {     
           var child = document.getElementById(childID);
           var parent = document.getElementById(parentId);
           parent.removeChild(child);
+		  updateHiddenOnDelete(hiddenListId, deletedListId);
      }
 }
 function addControl(parentID,type,value,id,childClass,onClick) {
@@ -385,8 +386,8 @@ function createNewElement(newElement,baseElement){
 		
 		//Setting Button Attributes
 		setAttributes(add,'button','Add','add'+childCount+1,'btn btn-primary pull-left col-lg-2 	','moveOptions(\''+baseElement+'\',\''+newElement+'List'+(childCount+1)+'\')');
-		setAttributes(remove,'button','Remove','remove'+childCount+1,'btn btn-warning col-lg-2 col-lg-offset-1','moveOptions(\''+newElement+'List'+(childCount+1)+'\',\''+baseElement+'\');	checkAndDelete(\''+newElement+'List'+(childCount+1)+'\',\''+rootDiv+'\',\''+newElement+(childCount+1)+'\');');
-		setAttributes(del,'button','Delete','delete'+childCount+1,'btn btn-danger col-lg-2 col-lg-offset-1' ,'selectAllOptions(\''+newElement+'List'+(childCount+1)+'\');moveOptions(\''+newElement+'List'+(childCount+1)+'\',\''+baseElement+'\');updateHiddenOnDelete(\'hidden'+newElement+'\',\''+newElement+'List'+(childCount+1)+'\');deleteGroup(\''+rootDiv+'\',\''+newElement+(childCount+1)+'\');');
+		setAttributes(remove,'button','Remove','remove'+childCount+1,'btn btn-warning col-lg-2 col-lg-offset-1','moveOptions(\''+newElement+'List'+(childCount+1)+'\',\''+baseElement+'\');	checkAndDelete(\''+newElement+'List'+(childCount+1)+'\',\''+rootDiv+'\',\''+newElement+(childCount+1)+'\',\'hidden'+newElement+'\',\''+newElement+'List'+(childCount+1)+'\');');
+		setAttributes(del,'button','Delete','delete'+childCount+1,'btn btn-danger col-lg-2 col-lg-offset-1' ,'selectAllOptions(\''+newElement+'List'+(childCount+1)+'\');moveOptions(\''+newElement+'List'+(childCount+1)+'\',\''+baseElement+'\');deleteGroup(\''+rootDiv+'\',\''+newElement+(childCount+1)+'\',\'hidden'+newElement+'\',\''+newElement+'List'+(childCount+1)+'\');');
 		
 		//Appending buttons to Buttons panel
 		buttons.appendChild(add);

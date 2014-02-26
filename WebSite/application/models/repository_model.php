@@ -12,6 +12,8 @@ class Repository_Model extends CI_Model
 	{
 		//insert 
 		//$user_id = $this->session->userdata('user_id');
+		$path2 = str_replace("\\", "/", $path);
+		$path = $path2;
 		$date = date('Y-m-d H:i:s');
 		//$this->db->update()
 		$this->db->query("INSERT INTO user_repository(user_id,repository_name,creation_time) VALUES('$user_id','$path','$date')");
@@ -115,7 +117,34 @@ class Repository_Model extends CI_Model
 		}
 		return NULL;
 	}
-	
+	function getDirectoryIdbyRepoId($id)
+	{
+		//$this->db->where('directory_name', $dirPath);
+		$this->db->where('id', $id);
+		//$this->db->where('activated', $activated ? 1 : 0);
+
+		$query = $this->db->get('repository_file');
+		if ($query->num_rows() == 1)
+		{ 
+			$newData = $query->row();
+			return $newData->directory_id;
+		}
+		return NULL;
+	}
+	function getRepoIdbyDirId($id)
+	{
+		//$this->db->where('directory_name', $dirPath);
+		$this->db->where('id', $id);
+		//$this->db->where('activated', $activated ? 1 : 0);
+
+		$query = $this->db->get('repository_directory');
+		if ($query->num_rows() == 1)
+		{ 
+			$newData = $query->row();
+			return $newData->repository_id;
+		}
+		return NULL;
+	}
 	function isExistFileName($newId, $fileName)
 	{
 		$this->db->where('file_name', $fileName);
@@ -156,6 +185,7 @@ class Repository_Model extends CI_Model
 				}
 				//$xNumber = $x;
 			}
+			
 			if ($del==true)
 			{
 				//$dirPath = $subPaths[$xNumber];
@@ -170,10 +200,17 @@ class Repository_Model extends CI_Model
 				echo $dirId;
 				*/
 				$fileID = $newFile->id;
-				$query = "DELETE FROM repository_file WHERE file_name = '$newFile->file_name' and id = $fileID ";
-				//echo $query;
-				$this->db->query($query);
-				//$this->db->delete('repository_file', array('file_name' => $newFile->file_name, 'directory_id' => $dirId )); 
+				//get directory details
+				$dirIDCheck = $this->getDirectoryIdbyRepoId($fileID);
+				//get user repo id - if match then delete!
+				$userRepoID = $this->getRepoIdbyDirId($dirIDCheck);
+				if ($id==$userRepoID)
+				{
+					$query = "DELETE FROM repository_file WHERE file_name = '$newFile->file_name' and id = $fileID ";
+					//echo $query;
+					$this->db->query($query);
+					//$this->db->delete('repository_file', array('file_name' => $newFile->file_name, 'directory_id' => $dirId )); 
+				}
 			}
 			
 		}

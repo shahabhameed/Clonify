@@ -152,9 +152,18 @@ class Invoke_model extends CI_Model
 		$eqTokens = $this->session->userdata('eqTokens');
 		$language = $this->session->userdata('language');
 		$icomment = $this->session->userdata('icomment');
+		$langName = $language;
+		
+		$queryT = "select language from languages where id = '$language'";
+		$resultT = $this->db->query($queryT);
+		$langs = $resultT->result();
+		foreach ($langs as $langN)
+		{
+			$langName = $langN->language;
+		}
 		
 		if(empty($icomment)){
-			$icomment = 'Min Sim Tokens: '.$scc_min_sim.'. Language: '.$language.'.\nSuppressed Tokens:'.$supTokens.'.\nEqual Tokens:'.$eqTokens.'.';
+			$icomment = 'Min Sim Tokens: '.$scc_min_sim.'. Language: '.$langName.'.\nSuppressed Tokens:'.$supTokens.'.\nEqual Tokens:'.$eqTokens.'.';
 		}
 		if(empty($iname)){
 			$iname = $user_name.'_'.$user_id.'_'.$date;
@@ -170,7 +179,7 @@ class Invoke_model extends CI_Model
 		//FILE GROUPS
 		$groupList = $_POST['hiddenGroup']; //get hidden list
 
-		$count = 0;
+		$count = 1;
 		
 		
 		if (!empty($groupList)){
@@ -337,9 +346,12 @@ class Invoke_model extends CI_Model
 			{
 				$token_ids = $row->suppressed_tokens;
 			}
-			$query = "SELECT * FROM tokens WHERE language_id='$language_id' and token_id in($token_ids)";
-			$results = $this->db->query($query);
-			return $results->result();
+			
+			if($token_ids){
+				$query = "SELECT * FROM tokens WHERE language_id='$language_id' and token_id in($token_ids)";
+				$results = $this->db->query($query);
+				return $results->result();
+			}
 		}
 		return NULL;
 	}

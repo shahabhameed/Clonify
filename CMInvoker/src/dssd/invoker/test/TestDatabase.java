@@ -4,7 +4,6 @@ import java.sql.Connection;
 
 import junit.framework.TestCase;
 import dssd.invoker.Database;
-import dssd.invoker.InvokeParameter;
 import dssd.invoker.InvokeService;
 
 public class TestDatabase extends TestCase {
