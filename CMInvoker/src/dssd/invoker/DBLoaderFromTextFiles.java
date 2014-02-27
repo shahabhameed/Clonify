@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -23,32 +24,22 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	int dlm;
 	private String databaseName ="";
 
-	private static String INSERT_SCC_INSTANCE;	
-	private static String INSERT_SCC;
-	private static String INSERT_SCSINFILE_SCC;	
-	private static String INSERT_SCSINFILE_FILE; 
-	private static String INSERT_SCSINFILE_FRAGMENTS;
-	private static String INSERT_SCSCROSSFILE_FILE;
-	private static String INSERT_SCSCROSSFILE_SCC;
-	private static String INSERT_SCS_CROSSFILE;
+	private static String INSERT_SCC = "INSERT INTO scc(scc_id, length, members, invocation_id) values ";		
+	private static String INSERT_SCC_INSTANCE = "INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ";
+	private static String INSERT_SCSINFILE_SCC = "INSERT INTO scsinfile_scc(scc_id, scs_infile_id, invocation_id) values ";		
+	private static String INSERT_SCSINFILE_FILE = "INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, members) values ";
+	private static String INSERT_SCSINFILE_FRAGMENTS = "INSERT INTO scsinfile_fragments(scs_infile_id, fid, scc_id, scsinfile_instance_id, scc_instance_id, invocation_id) values ";
+	private static String INSERT_SCSCROSSFILE_FILE = "INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc, invocation_id) values ";
+	private static String INSERT_SCSCROSSFILE_SCC = "INSERT INTO scscrossfile_scc(scc_id, scs_crossfile_id, invocation_id) values ";
+	private static String INSERT_SCS_CROSSFILE = "INSERT INTO scs_crossfile(scs_crossfile_id, invocation_id, atc, apc, members) values ";
 	
 	public DBLoaderFromTextFiles(){
-		initQuery();
+		//initQuery();
 		databaseName = CMProperties.getDatabaseName();
 	}
 	
-	private static void initQuery() {
-		
-		
-		INSERT_SCC = "INSERT INTO scc(scc_id, length, members, invocation_id) values ";		
-		INSERT_SCC_INSTANCE = "INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ";
-		INSERT_SCSINFILE_SCC = "INSERT INTO scsinfile_scc(scc_id, scs_infile_id, invocation_id) values ";		
-		INSERT_SCSINFILE_FILE = "INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, members) values ";
-		INSERT_SCSINFILE_FRAGMENTS = "INSERT INTO scsinfile_fragments(scs_infile_id, fid, scc_id, scsinfile_instance_id, scc_instance_id, invocation_id) values ";
-		INSERT_SCSCROSSFILE_FILE = "INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc, invocation_id) values ";
-		INSERT_SCSCROSSFILE_SCC = "INSERT INTO scscrossfile_scc(scc_id, scs_crossfile_id, invocation_id) values ";
-		INSERT_SCS_CROSSFILE = "INSERT INTO scs_crossfile(scs_crossfile_id,invocation_id, atc, apc, members) values ";
-	}
+	//private static void initQuery() {
+	//}
 	
 	@Override
 	public boolean loadDBFromFiles() {
@@ -106,9 +97,17 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				Database.executeTransaction(INSERT_SCC);
 			}
 			if (!INSERT_SCC_INSTANCE
-					.equalsIgnoreCase("INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol) values ")) {
+					.equalsIgnoreCase("INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ")) {
 				Database.executeTransaction(INSERT_SCC_INSTANCE);
 			}                                                
+			
+			/**
+			 * Please note this function loads 4 files to DB.
+			 */
+			loadMoreFiles(invocationId, Constants.CLONES_BY_FILE_FILE_NAME, Constants.CLONES_BY_FILE_TABLE_NAME);
+			loadMoreFiles(invocationId, Constants.CLONES_BY_FILE_NORMAL_FILE_NAME, Constants.CLONES_BY_FILE_NORMAL_TABLE_NAME);
+			loadMoreFiles(invocationId, Constants.CLONES_BY_METHOD_FILE_NAME, Constants.CLONES_BY_METHOD_TABLE_NAME);
+			loadMoreFiles(invocationId, Constants.CLONES_BY_METHOD_NORMAL_FILE_NAME, Constants.CLONES_BY_METHOD_NORMAL_TABLE_NAME);
 
 			File file5 = new File(filePath_infilestructures);
 			FileInputStream filein5 = new FileInputStream(file5);
@@ -197,12 +196,46 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		return true;
 	} //function end bracket
 
+	private void loadMoreFiles(Integer pInvocationId, String pFileName, String pTableName) throws NumberFormatException, IOException{
+		String filePath = "";
+
+		filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + pFileName + Constants.CM_TEXT_FILE_EXTENSION; 
+		
+		File file = new File(filePath);
+		FileInputStream filein = new FileInputStream(file);
+		BufferedReader stdin = new BufferedReader(new InputStreamReader(filein));
+		int lineNumber = 0;
+		ArrayList<String> values = new ArrayList<String>();
+		while ((line = stdin.readLine()) != null) {
+			lineNumber++;
+			
+			if (!line.equalsIgnoreCase("")) {
+				st = new StringTokenizer(line, ",");
+				
+				for(;st.hasMoreTokens();){
+					String value = "(\"" + pInvocationId +"\",\""  + lineNumber + "\",\"" + st.nextToken() + "\"),";
+					values.add(value);
+				}
+			}
+		}
+		String value = "(\"" + pInvocationId +"\",\""  + (lineNumber+1) + "\",\"LAST_LINE\"),";
+		values.add(value);
+		
+		
+		String query = "INSERT INTO " + pTableName + "(invocation_id, line_num, value) values ";
+		for(String str : values){
+			query += str;
+		}
+		
+		Database.executeTransaction(query);
+	}
+	
 	//delete mid
 	private void insertSCC_Instance(int scc_instance_id, int scc_id, int fid,
 			int startline, int startcol, int endline, int endcol, int invocationId) {
 		INSERT_SCC_INSTANCE += "( \"" + scc_instance_id + "\" , \"" + scc_id
 		+ "\", \"" + fid + "\", \"" + startline + "\", \"" + startcol
-		+ "\" , \"" + endline + "\", \"" + endcol  + "\" ),";
+		+ "\" , \"" + endline + "\", \"" + endcol  + "\",\"" + invocationId + "\"),";
 	}	
 
 	private void parse_file_clusters(int invocation_id) throws FileNotFoundException, IOException
