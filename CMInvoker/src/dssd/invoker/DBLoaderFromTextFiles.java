@@ -102,11 +102,11 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			}
 
 			if (!INSERT_SCC
-					.equalsIgnoreCase("INSERT INTO scc(scc_id, length, members, benefit) values ")) {
+					.equalsIgnoreCase("INSERT INTO scc(scc_id, length, members, invocation_id) values ")) {
 				Database.executeTransaction(INSERT_SCC);
 			}
 			if (!INSERT_SCC_INSTANCE
-					.equalsIgnoreCase("INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ")) {
+					.equalsIgnoreCase("INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol) values ")) {
 				Database.executeTransaction(INSERT_SCC_INSTANCE);
 			}                                                
 
@@ -202,7 +202,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			int startline, int startcol, int endline, int endcol, int invocationId) {
 		INSERT_SCC_INSTANCE += "( \"" + scc_instance_id + "\" , \"" + scc_id
 		+ "\", \"" + fid + "\", \"" + startline + "\", \"" + startcol
-		+ "\" , \"" + endline + "\", \"" + endcol  + "\" , \"" + invocationId + "\"),";
+		+ "\" , \"" + endline + "\", \"" + endcol  + "\" ),";
 	}	
 
 	private void parse_file_clusters(int invocation_id) throws FileNotFoundException, IOException
@@ -257,7 +257,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Database.executeTransaction(INSERT_SCSCROSSFILE_FILE);
 		}
 		if (!INSERT_SCS_CROSSFILE
-				.equalsIgnoreCase("INSERT INTO scs_crossfile(scs_crossfile_id, atc, apc, members) values ")) {
+				.equalsIgnoreCase("INSERT INTO scs_crossfile(scs_crossfile_id, invocation_id, atc, apc, members) values ")) {
 			Database.executeTransaction(INSERT_SCS_CROSSFILE);
 		}
 
