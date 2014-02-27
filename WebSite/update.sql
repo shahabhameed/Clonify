@@ -140,3 +140,11 @@ CREATE TABLE IF NOT EXISTS `clones_by_method_normal` (
   `line_num` int(11) NOT NULL,
   `value` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ADDED ON 2014-02-27 1, BY HAFEEZ
+
+CREATE TABLE IF NOT EXISTS `clones_rnr` (
+  `invocation_id` int(11) NOT NULL,
+  `line_num` int(11) NOT NULL,
+  `value` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

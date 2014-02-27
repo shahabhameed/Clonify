@@ -108,6 +108,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			loadMoreFiles(invocationId, Constants.CLONES_BY_FILE_NORMAL_FILE_NAME, Constants.CLONES_BY_FILE_NORMAL_TABLE_NAME);
 			loadMoreFiles(invocationId, Constants.CLONES_BY_METHOD_FILE_NAME, Constants.CLONES_BY_METHOD_TABLE_NAME);
 			loadMoreFiles(invocationId, Constants.CLONES_BY_METHOD_NORMAL_FILE_NAME, Constants.CLONES_BY_METHOD_NORMAL_TABLE_NAME);
+			loadMoreFiles(invocationId, Constants.CLONES_RNR_FILE_NAME, Constants.CLONES_RNR_TABLE_NAME);
 
 			File file5 = new File(filePath_infilestructures);
 			FileInputStream filein5 = new FileInputStream(file5);
