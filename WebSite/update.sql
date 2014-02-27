@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   `role_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- ADDED ON 2014-02-14 0, BY HAFEEZ
+-- ADDED ON 2014-02-27 0, BY HAFEEZ
 ALTER TABLE scc_instance ADD COLUMN invocation_id int(11);
 
 CREATE TABLE IF NOT EXISTS `clones_by_file` (
