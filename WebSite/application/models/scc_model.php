@@ -52,7 +52,7 @@ class SCC_model extends CI_Model
   }
   
   public function getAllSCSWithInFile($invocationId, $userId){
-    $where = "tb2.invocation_id = $invocationId AND tb3.invocation_id=$invocationId";
+    $where = "tb1.invocation_id = $invocationId AND tb2.invocation_id = $invocationId AND tb3.invocation_id=$invocationId";
     
     $this->db->select('*');
     $this->db->from('scsinfile_file tb1');
@@ -150,7 +150,7 @@ class SCC_model extends CI_Model
   }
   
   public function getSCCBYFileParentTable($invocationId, $userId){
-    $where = "tb1.invocation_id = $invocationId";
+    $where = "tb1.invocation_id = $invocationId AND tb3.invocation_id=$invocationId";
     
     $this->db->select('*');
     $this->db->from('scc_instance tb1');
