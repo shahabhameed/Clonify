@@ -27,7 +27,7 @@ width: 50% !important;
                         <span class="icon16 fa fa-caret-right"></span>
                     </span>
                 </li>
-                <li class="active">Single Clone Class 2</li>
+                <li class="active">Single Clone Class</li>
             </ul>                   
         </div>
 
