@@ -113,3 +113,30 @@ CREATE TABLE IF NOT EXISTS `role` (
   `id` int(11) NOT NULL,
   `role_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ADDED ON 2014-02-27 0, BY HAFEEZ
+ALTER TABLE scc_instance ADD COLUMN invocation_id int(11);
+
+CREATE TABLE IF NOT EXISTS `clones_by_file` (
+  `invocation_id` int(11) NOT NULL,
+  `line_num` int(11) NOT NULL,
+  `value` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `clones_by_file_normal` (
+  `invocation_id` int(11) NOT NULL,
+  `line_num` int(11) NOT NULL,
+  `value` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `clones_by_method` (
+  `invocation_id` int(11) NOT NULL,
+  `line_num` int(11) NOT NULL,
+  `value` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `clones_by_method_normal` (
+  `invocation_id` int(11) NOT NULL,
+  `line_num` int(11) NOT NULL,
+  `value` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
