@@ -181,7 +181,7 @@ class SCC_model extends CI_Model
     $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
     $this->db->where($where);
 
-    $result = $this->db->get();
+    $result = $this->db->get();    
     if ($result->num_rows()> 0){      
       return $result->result();
     }    
