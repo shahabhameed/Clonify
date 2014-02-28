@@ -26,15 +26,10 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Search SCC By File</h4>
+                <h4 class="modal-title" id="myModalLabel">Select * From SCC Across File List Where</h4>
               </div>
               <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-10">
-                    <small>For multiple values use "[ ]", e.g for number 1 and 2 write [1,2]</small>
-                  </div>
-                  
-                </div>
+               
                <div class="row">
                   <div class="col-md-4">
                     <u><h4>SCS Id</h4></u>
@@ -67,18 +62,21 @@
                 <br>
                 <div class="row">
                   <div class="col-md-4">
-                    <u><h4>Number Of Colones</h4></u>
+                    <u><h4>No Of Colones</h4></u>
                   </div>
                </div>
                <div class="row">
                     <div class="col-md-4" id="sccnumberfilter">
                     </div>
                 </div>
-                
+                 <div class="row">
+                  <div class="col-md-10">
+                    <small>For multiple values use "[ ]", e.g for number 1 and 2 write [1,2]</small>
+                  </div>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </div>
@@ -90,7 +88,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Search SCC Clone Instance</h4>
+                <h4 class="modal-title" id="myModalLabel">Select * From SCC Clone Instance List where</h4>
               </div>
               <div class="modal-body">
                <div class="row">
@@ -146,7 +144,6 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </div>

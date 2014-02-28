@@ -27,7 +27,7 @@ width: 50% !important;
                         <span class="icon16 fa fa-caret-right"></span>
                     </span>
                 </li>
-                <li class="active">Single Clone Class 2</li>
+                <li class="active">Single Clone Class</li>
             </ul>                   
         </div>
 
@@ -37,12 +37,13 @@ width: 50% !important;
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Search SCC</h4>
+                <h4 class="modal-title" id="myModalLabel">Select * From SCC Where</h4>
               </div>
               <div class="modal-body">
+                
                <div class="row">
                   <div class="col-md-4">
-                    <u><h4>SCC Length Range</h4></u>
+                    <h4>Length</h4>
                   </div>
                </div>
                <div class="row">
@@ -52,23 +53,22 @@ width: 50% !important;
                 <br>
                 <div class="row">
                   <div class="col-md-4">
-                    <u><h4>Number Of Colones</h4></u>
+                    <u><h4>No.Colones</h4></u>
                   </div>
                </div>
                <div class="row">
                     <div class="col-md-4" id="sccnumberfilter">
                     </div>
                 </div>
+                <br>
                 <div class="row">
                   <div class="col-md-10">
                     <small>For multiple values use [], e.g for number 1 and 2 write [1,2]</small>
                   </div>
-                  
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </div>
@@ -80,63 +80,35 @@ width: 50% !important;
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Search SCC Clone Instance</h4>
+                <h4 class="modal-title" id="myModalLabel">Search * From SCC Clone Instance List Where</h4>
               </div>
               <div class="modal-body">
                <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <u><h4>GID</h4></u>
                   </div>
-               </div>
-               <div class="row">
-                    <div class="col-md-10" id="gidnumberfilter">
+                  <div class="col-md-4" id="gidnumberfilter">
                     </div>
-                </div>
-                <br>
+               </div>
+                <br class="clear_all"/>
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <u><h4>DID</h4></u>
                   </div>
-               </div>
-               <div class="row">
-                    <div class="col-md-4" id="didnumberfilter">
+                  <div class="col-md-4" id="didnumberfilter">
                     </div>
-                </div>
-                <br>
+               </div>
+                <br class="clear_all"/>
               <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <u><h4>FID</h4></u>
                   </div>
-               </div>
-               <div class="row">
-                    <div class="col-md-4" id="fidnumberfilter">
+                  <div class="col-md-4" id="fidnumberfilter">
                     </div>
-                </div>
-              <br>
-              <div class="row">
-                  <div class="col-md-4">
-                    <u><h4>Start Line</h4></u>
-                  </div>
                </div>
-               <div class="row">
-                    <div class="col-md-4" id="slnumberfilter">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                  <div class="col-md-4">
-                    <u><h4>End Line</h4></u>
-                  </div>
-               </div>
-               <div class="row">
-                    <div class="col-md-4" id="elnumberfilter">
-                    </div>
-                </div>
-
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </div>

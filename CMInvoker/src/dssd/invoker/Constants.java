@@ -16,6 +16,22 @@ public class Constants {
 	public static final String TEST_FILE_NAME ="FileClusters_test";
         
 	public static final String SIMPLE_CLONE_CLASSES_FILE_NAME = "Clones";
+	
+	public static final String CLONES_BY_FILE_FILE_NAME = "ClonesByFile";
+	public static final String CLONES_BY_FILE_TABLE_NAME = "clones_by_file";
+	
+	public static final String CLONES_BY_FILE_NORMAL_FILE_NAME = "ClonesByFileNormal";
+	public static final String CLONES_BY_FILE_NORMAL_TABLE_NAME = "clones_by_file_normal";
+	
+	public static final String CLONES_BY_METHOD_FILE_NAME = "ClonesByMethod";
+	public static final String CLONES_BY_METHOD_TABLE_NAME = "clones_by_method";
+	
+	public static final String CLONES_BY_METHOD_NORMAL_FILE_NAME = "ClonesByMethodNormal";
+	public static final String CLONES_BY_METHOD_NORMAL_TABLE_NAME = "clones_by_method_normal";
+	
+	public static final String CLONES_RNR_FILE_NAME = "ClonesRNR";
+	public static final String CLONES_RNR_TABLE_NAME = "clones_rnr";
+	
 	public static final String INFILE_STRUCTURES_FILE_NAME = "InfileStructures";
 	public static final String FILE_CLUSTERS_FILE_NAME ="FileClusters";
 	public static final String CLONES_METHOD_FILE_NAME = "ClonesByMethod";
