@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label" for="username">Min Similarities:</label>
                                     <div class="col-lg-8">
-                                        <input id="spinner1" class="form-control" name="spinner1" type="text" value="1" >
+                                        <input id="spinner1" class="form-control" name="spinner1" type="text" value="30" >
 
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
 
