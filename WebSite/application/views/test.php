@@ -9,16 +9,13 @@
                 <li>You are here:</li>
                 <li>
                 </li>
-                <li class="active">Configuration Settings</li>
+                <li class="active">Configuration</li>
             </ul>
         </div>
 
         <div class="row">
 
-            <div class="col-lg-6">
 
-
-            </div><!-- End .span6 -->
 
         </div><!-- End .row -->           
 
@@ -30,15 +27,22 @@
 
                     </div>
 
+                    <div class="col-lg-4">
+
+                    </div><!-- End .span6 -->
+                    
+                    
                     <div class="panel-body noPad clearfix">
                         <form id="wizard" name="wizard" class="form-horizontal" role="form" method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
                             <div class="wizard-actions">
                                 <button class="btn btn-default pull-left col-lg-1" type="reset"> Back </button>
-                                <button class="btn btn-primary pull-right col-lg-1" type="submit" onclick="SelectOnSubmit();"> Submit </button>
-                                <button class="btn btn-success pull-right col-lg-1" > Next </button>
+                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="SelectOnSubmit();"> Next </button>
+                                <!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> -->
                             </div><!-- End .form-group  -->
 
-                            <div class="msg"></div>
+                                                            <div class="msg"></div>
+
+
 
                             <div class="wizard-steps clearfix"></div>
 
@@ -254,7 +258,7 @@
                                 </div ><!-- End .Main col  -->
 
                             </div>	<!-- End .Row  -->			
-                            <div class="step" id="equal-tokens">
+                            <div class="step submit_step " id="equal-tokens">
                                 <span class="step-info" data-num="4" data-text="Equal Tokens"></span>
                                 <div class="col-lg-12">
                                     <div class="row">

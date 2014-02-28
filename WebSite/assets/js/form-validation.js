@@ -7,7 +7,7 @@ $(document).ready(function() {
 	//create success msg for wizard
 	function createSuccessMsg (loc, msg) {
 		loc.append(
-			'<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><strong><i class="icon24 i-checkmark-circle"></i> Well done!</strong> '+ msg + ' </div>'
+			'<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><strong><i class="icon24 i-checkmark-circle"></i> Clone Configuration </strong> '+ msg + ' </div>'
 		);
 	}
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
 	 	formOptions :{
 			success: function(data){
 				//produce success message
-				createSuccessMsg($("#wizard .msg"), "You successfully submit this form");
+				createSuccessMsg($("#wizard .msg"), "Form sucessfully submitted! ");
 			},
 			resetForm: false
 	 	},
