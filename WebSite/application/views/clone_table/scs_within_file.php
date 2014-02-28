@@ -330,12 +330,12 @@ $(document).ready(function(){
       $('.dataTables_paginate > ul').addClass('pagination');
       $('.dataTables_filter>label>input').addClass('form-control');
       $('.dataTables_filter').hide();
-    $(".list_view").on("click",function(){
+    $(".list_view").live("click",function(){
       Clonify.SCC.viewSCSCloneInstance($(this).data("scsid"));
       event.preventDefault();      
       return false;
     });
-     $(".code_view").on("click",function(){
+     $(".code_view").live("click",function(){
         Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
         event.preventDefault();        
         return false;
