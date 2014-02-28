@@ -158,7 +158,7 @@
                         <td><?php echo $result['group_id'];?></td>
                         <td><?php echo $result['directory_id'];?></td>
                         <td><?php echo $result['fid'];?></td>
-                        <td><?php echo $result['file_name'];?></td>
+                        <td><?php echo $result['directory_name'] . $result['file_name'];?></td>
                         <td><?php echo $result['members'];?></td>
                       </tr>
                       <?php }?>
