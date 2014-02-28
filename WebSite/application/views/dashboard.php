@@ -20,6 +20,8 @@
                 </ul>
             </div><!-- End .heading-->
 
+<div>
+                <form method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/ex_cont/saveFilesToDb" >
 
             <div class="row">
                 <div class="col-lg-12">
@@ -60,9 +62,7 @@
 
 
 
-            <div>
-                <form method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/ex_cont/saveFilesToDb" >
-
+                </form>
 
             </div>
         </div><!-- End contentwrapper -->
