@@ -505,8 +505,8 @@ Clonify.SCC = {
                                      { sSelector: "#gidnumberfilter",type: "number" },
                                      { sSelector: "#didnumberfilter",type: "number" },
                                      { sSelector: "#fidnumberfilter",type: "number" },
-                                     { sSelector: "#slnumberfilter",type: "number" },
-                                     { sSelector: "#elnumberfilter",type: "number" }
+                                     null,
+                                     null
                                      ]
                 		});
 		$('.dataTables_length select').uniform();
