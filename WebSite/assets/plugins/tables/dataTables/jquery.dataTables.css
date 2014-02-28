@@ -221,6 +221,7 @@ table.display tfoot tr {
 }
 table.display tfoot th {
 	font-weight: bold;
+        text-align: center;
 }
 .panel table.display tfoot th {
 	border-bottom: 1px solid #c4c4c4;

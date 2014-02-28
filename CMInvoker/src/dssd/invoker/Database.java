@@ -91,7 +91,7 @@ public class Database {
 						Integer fileId = results.getInt(1);
 						//a very bad way to get groupId. Should be refactored.
 						Statement st = dbConn.createStatement();
-						ResultSet result2 = st.executeQuery(" SELECT group_id from invocation_files where file_id ="+ fileId +";");
+						ResultSet result2 = st.executeQuery(" SELECT group_id from invocation_files where file_id ="+ fileId +" and invocation_id="+ id +";");
 						result2.next();
 						Integer groupId = result2.getInt(1);
 						String fileName = results.getString(2);

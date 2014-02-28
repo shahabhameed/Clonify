@@ -364,6 +364,7 @@ body, p {font-family: 'Droid Sans', Helvetica, Arial, sans-serif;}
   -webkit-border-top-left-radius: 2px;
           border-top-left-radius: 2px;
   -moz-border-radius-topleft: 2px;
+  text-align: center;
 }
 .table-bordered thead:first-child tr:first-child th:last-child,.table-bordered tbody:first-child tr:first-child td:last-child {
   -webkit-border-top-right-radius: 2px;

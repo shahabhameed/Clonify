@@ -178,21 +178,26 @@ class Invoke_model extends CI_Model
 		
 		//FILE GROUPS
 		$groupList = $_POST['hiddenGroup']; //get hidden list
-
-		$count = 1;
-		
 		
 		if (!empty($groupList)){
+			$count = 0;
+			foreach ($groupList as $list)
+			{
+				$group=$_POST[$list];
+				foreach ($group as $file_in_group)
+				{
+					$count++;
+				}
+			}
+			$count--;
 			foreach ($groupList as $list)
 			{
 				$group=$_POST[$list];
 				$group_id=intval(substr($list,9));
 				foreach ($group as $file_in_group)
 				{
-					
 					$this->db->query("INSERT INTO invocation_files(invocation_id,file_id,group_id,cmfile_id) VALUES('$invoke_id','$file_in_group','$group_id','$count')");
-					$count++;
-					
+					$count--;					
 				}
 				
 			}
