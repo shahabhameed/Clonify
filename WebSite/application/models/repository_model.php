@@ -197,8 +197,8 @@ class Repository_Model extends CI_Model
 				//echo $fileID;
 				$dirIDCheck = $this->getDirectoryIdbyRepoId($fileID);
 				$dirPathTemp = $this->getDirectoryPathById($dirIDCheck);
-				echo $dirPathTemp."</br>";
-				echo $subPaths[$x]."</br>";
+				//echo $dirPathTemp."</br>";
+				//echo $subPaths[$x]."</br>";
 				$dirPath2 = str_replace("\\", "/", $subPaths[$x]);
 				$dirPath = $dirPath2;
 				if (strcmp($newFile->file_name, $fileNames[$x])==0) 
