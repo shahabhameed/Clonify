@@ -117,6 +117,20 @@ class Repository_Model extends CI_Model
 		}
 		return NULL;
 	}
+	function getDirectoryPathById($id)
+	{
+		$this->db->where('id', $id);
+		//$this->db->where('repository_id', $id);
+		//$this->db->where('activated', $activated ? 1 : 0);
+
+		$query = $this->db->get('repository_directory');
+		if ($query->num_rows() == 1)
+		{ 
+			$newData = $query->row();
+			return $newData->directory_name;
+		}
+		return NULL;
+	}
 	function getDirectoryIdbyRepoId($id)
 	{
 		//$this->db->where('directory_name', $dirPath);
@@ -131,6 +145,7 @@ class Repository_Model extends CI_Model
 		}
 		return NULL;
 	}
+	
 	function getRepoIdbyDirId($id)
 	{
 		//$this->db->where('directory_name', $dirPath);
@@ -178,10 +193,31 @@ class Repository_Model extends CI_Model
 			//echo $newFile->file_name;
 			for($x=0;$x<$arrlength;$x++)
 			{
-				if (strcmp($newFile->file_name, $fileNames[$x])==0)
+				$fileID = $newFile->id;
+				//echo $fileID;
+				$dirIDCheck = $this->getDirectoryIdbyRepoId($fileID);
+				$dirPathTemp = $this->getDirectoryPathById($dirIDCheck);
+				echo $dirPathTemp."</br>";
+				echo $subPaths[$x]."</br>";
+				$dirPath2 = str_replace("\\", "/", $subPaths[$x]);
+				$dirPath = $dirPath2;
+				if (strcmp($newFile->file_name, $fileNames[$x])==0) 
 				{
-					$del = false;
-					break;
+					if ($dirPath=="")
+					{
+						if(strcmp($dirPathTemp, $dirPath)==0)
+						{
+							$del = false;
+							break;
+						}
+					}
+					else {
+						if(strcmp($dirPathTemp, $dirPath.'/')==0)
+						{
+							$del = false;
+							break;
+						}
+					}
 				}
 				//$xNumber = $x;
 			}

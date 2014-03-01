@@ -97,9 +97,9 @@ class Ex_cont extends CI_Controller
 		//print_r($subPaths);
 		//print_r($fileNames);
 		$this->repository_model->checkDelete($user_id, $subPaths, $fileNames);
-		$this->load->view('partials/main_header');
-		$this->load->view('dashboard');
-		$this->load->view('partials/main_footer');
+	//	$this->load->view('partials/main_header');
+	//	$this->load->view('dashboard');
+	//	$this->load->view('partials/main_footer');
 	}
 }
 ?>
