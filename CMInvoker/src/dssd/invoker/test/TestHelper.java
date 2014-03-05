@@ -19,13 +19,13 @@ public class TestHelper extends TestCase {
 
 	public void testMakeInputFile1(){
 		helper.setData(null);
-		assertFalse(helper.makeCMInputFile());
+		assertTrue(helper.makeCMInputFile());
 	}
 	
 	public void testMakeInputFile2(){
 		InvokeParameter invokeParameter = new InvokeParameter();
 		helper.setData(invokeParameter);
-		assertFalse(helper.makeCMInputFile());
+		assertTrue(helper.makeCMInputFile());
 	}
 	
 	protected void tearDown() throws Exception {

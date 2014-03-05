@@ -62,34 +62,34 @@ public class InvokeParameter {
 	/**
 	 * This function is written for testing purposes please note any change in this function may effect the test cases
 	 */
-//	public boolean isAllSet(){
-//		if(
-//			invocation_id != null && invocation_id > -1 && 
-//			min_similatiry_SCC_tokens != null && min_similatiry_SCC_tokens > -1 &&
-//			grouping_choice != null && grouping_choice > -1 &&
-//			method_analysis != null && method_analysis > -1 &&
-//			suppressed_tokens != null && suppressed_tokens.length()>0 && 
-//			equal_tokens != null && suppressed_tokens.length()>0 &&
-//			input_files != null && input_files.size()>0
-//		)
-//		{
-//			for(InvocationFileInfo invocationFileInfo: input_files){
-//				//String tempFileName = invocationFileInfo.getInputFileName();
-//				if(
-//					invocationFileInfo == null// ||
-//					//invocationFileInfo.getGroupId() == null ||
-//					//tempFileName == null || tempFileName.length()<1
-//				)
-//				{
-//					return false;
-//				}
-//			}
-//			
-//			return true;
-//		}
-//		
-//		return false;
-//	}
+	public boolean isAllSet(){
+		if(
+			invocation_id != null && invocation_id > -1 && 
+			min_similatiry_SCC_tokens != null && min_similatiry_SCC_tokens > -1 &&
+			grouping_choice != null && grouping_choice > -1 &&
+			method_analysis != null && method_analysis > -1 &&
+			suppressed_tokens != null && suppressed_tokens.length()>0 && 
+			equal_tokens != null && suppressed_tokens.length()>0 &&
+			input_files != null && input_files.size()>0
+		)
+		{
+			for(List<InvocationFileInfo> invocationFileInfo: input_files){
+				//String tempFileName = invocationFileInfo.getInputFileName();
+				if(
+					invocationFileInfo == null// ||
+					//invocationFileInfo.getGroupId() == null ||
+					//tempFileName == null || tempFileName.length()<1
+				)
+				{
+					return false;
+				}
+			}
+			
+			return true;
+		}
+		
+		return false;
+	}
 	
 	public Integer getInvocation_id() {
 		return invocation_id;
