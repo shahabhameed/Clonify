@@ -1,6 +1,95 @@
 <?php ?>
 <script type="text/javascript" src="<?= asset_url('js/myInvoke.js') ?>"></script>
 
+<script type="text/javascript">
+
+    function changeText()
+    {
+        var finalStep = document.getElementById("equal-tokens").getAttribute("style");
+        var nextButton = document.getElementById("next");
+        if (finalStep == "display: block")
+        {
+            nextButton.innerHTML = "Submit";
+        }
+
+    }
+    function changeTextonBack()
+    {
+
+        var nextButton = document.getElementById("next");
+        if (nextButton.value == "Submit")
+        {
+            nextButton.innerHTML = "Next";
+        }
+
+    }
+    function hideWizard()
+    {
+        var button = document.getElementById("submitButton");
+        var wizardBody = document.getElementById("wizard-body");
+        var wizardHeading = document.getElementById("wizard-heading");
+        if (button.value == "Submit")
+        {
+            wizardBody.setAttribute("style", 'display:none');
+            wizardHeading.setAttribute("style", 'display:none');
+        }
+    }
+
+
+
+    function showProgress()
+    {
+
+
+        var progressBar = document.getElementById("barRow");
+
+        var iNow = new Date().setTime(new Date().getTime() + 1 * 1000); // now plus 2 secs
+        var iEnd = new Date().setTime(new Date().getTime() + 8 * 1000); // now plus 8 secs
+        var iEnd2 = new Date().setTime(new Date().getTime() + 9.5 * 1000); // now plus 8 secs
+
+        var button = document.getElementById("submitButton");
+
+        if (button.value == "Submit")
+        {
+            progressBar.setAttribute("style", 'display:block');
+            $('#progressRow').anim_progressbar({start: iNow, finish: iEnd, interval: 200});
+            // var iNow = new Date().setTime(new Date().getTime() + 2 * 1000); // now plus 2 secs
+            setTimeout(showMessage, iEnd2 - iNow);
+
+        }
+
+
+    }
+    function redirect()
+    {
+        window.location.href = "/Clonify/WebSite/index.php/load_results/";
+    }
+
+
+    function showMessage()
+    {
+        var finishButton = document.createElement("button");
+        var label = document.createElement("label");
+        label.innerHTML = "Your form has been submitted successfully!";
+
+        var messageBox = document.getElementById("message");
+
+        finishButton.setAttribute("class", "btn btn-success pull-right col-lg-2");
+        finishButton.setAttribute("onclick", "redirect()");
+        finishButton.innerHTML = "Proceed";
+        messageBox.appendChild(finishButton);
+
+        messageBox.setAttribute("style", "display:block");
+
+
+    }
+    function enable_text(status) {
+        status = (status) ? false : true; //convert status boolean to text 'disabled'
+        document.wizard.min_mcc_token.disabled = status;
+        document.wizard.min_mcc_percent.disabled = status;
+    }
+
+</script>
 <div id="content" class="clearfix">
     <div class="contentwrapper">
         <div class="heading">
@@ -19,28 +108,62 @@
 
         </div><!-- End .row -->           
 
-        <div class="row">
+ <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default gradient">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="wizard-heading">
                         <h4><span>Configuration Wizard</span></h4>
 
                     </div>
 
-                    <div class="col-lg-4">
-
-                    </div><!-- End .span6 -->
-                    
-                    
-                    <div class="panel-body noPad clearfix">
-                        <form id="wizard" name="wizard" class="form-horizontal" role="form" method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
-                            <div class="wizard-actions">
-                                <button class="btn btn-default pull-left col-lg-1" type="reset"> Back </button>
-                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="SelectOnSubmit();"> Next </button>
-                                <!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> -->
+                    <div class="col-lg-12" >
+                        <div class="row"   id="barRow" style="display:none">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="animatedbar">Applying Configuration:</label>
+                                <div class="col-lg-12">
+                                    <div id="progressRow">
+                                        <div class="pbar"></div>
+                                        <span class="percent1"></span>
+                                        <div class="elapsed"></div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
                             </div><!-- End .form-group  -->
 
-                                                            <div class="msg"></div>
+
+                        </div>
+
+
+                        <div class="row" id="message" style="display:none">
+
+                            <div class="alert alert-success" >
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Clonify Configuration!</strong> form has been submitted successfully.
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div><!-- End .span6 -->
+
+
+
+                    <div class="panel-body noPad clearfix" id="wizard-body">
+                        <form id="wizard" name="wizard" class="form-horizontal" role="form" method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
+                            <div class="wizard-actions">
+                                 <!--
+                                <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack();"> Back </button>
+                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="SelectOnSubmit(); changeText();" id="next"> Next</button>
+                                -->
+
+                                <input type="reset" class="btn btn-default pull-left col-lg-1" value="Back"/>
+                                <input type="submit" class="btn btn-success pull-right col-lg-1" value="Next" id="submitButton" onclick="hideWizard();
+                                        showProgress()"/><!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> -->
+                            </div><!-- End .form-group  -->
+
+                            <div class="msg"></div>
 
 
 
