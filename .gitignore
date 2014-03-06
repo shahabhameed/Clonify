@@ -16,3 +16,4 @@
 /CMInvoker/dist/
 /CMInvoker/config.properties
 /WebSite/files/
+*.class
