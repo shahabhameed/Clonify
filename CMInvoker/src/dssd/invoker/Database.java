@@ -74,7 +74,9 @@ public class Database {
 								results.getInt("grouping_choice"),
 								results.getInt("method_analysis"),
 								results.getString("suppressed_tokens"),
-								results.getString("equal_tokens")
+								results.getString("equal_tokens"),
+								results.getInt("min_similatiry_MCC_tokens"),
+								results.getInt("min_similatiry_MCC_percentage")
                                                             );
 					
 					System.out.println(" \ninvokeParameter: " +invokeParameter.toString());

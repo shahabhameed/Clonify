@@ -11,6 +11,8 @@ public class InvokeParameter {
 	private Integer method_analysis;
 	private String suppressed_tokens; 
 	private String equal_tokens;
+	private Integer min_similatiry_MCC_tokens;
+	private Integer min_similatiry_MCC_percent;
 	private List<List<InvocationFileInfo>> input_files = new ArrayList<List<InvocationFileInfo>>();
 	
 	
@@ -18,7 +20,6 @@ public class InvokeParameter {
 		//TODO Write your code here 
 	}
 	
-	@Deprecated
 	// @see InvokeParameter(Integer invocation_id, Integer min_similatiry_SCC_tokens, Integer grouping_choice, Integer method_analysis, String suppressed_tokens, String equal_tokens, ArrayList<String> input_files) 
 	public InvokeParameter(
 			Integer invocation_id,
@@ -26,7 +27,9 @@ public class InvokeParameter {
 			Integer grouping_choice,
 			Integer method_analysis,
 			String suppressed_tokens,
-			String equal_tokens
+			String equal_tokens,
+			Integer min_similatiry_MCC_tokens,
+			Integer min_similatiry_MCC_percent
 	)
 	{
 		this.invocation_id = invocation_id;
@@ -35,6 +38,8 @@ public class InvokeParameter {
 		this.method_analysis = method_analysis;
 		this.suppressed_tokens = suppressed_tokens;
 		this.equal_tokens = equal_tokens;
+		this.min_similatiry_MCC_tokens = min_similatiry_MCC_tokens;
+		this.min_similatiry_MCC_percent = min_similatiry_MCC_percent;
 	}
 	
 	/**
@@ -142,6 +147,22 @@ public class InvokeParameter {
 		return rep + dir + File;
 	}
 	
+	public Integer getMin_similatiry_MCC_tokens() {
+		return min_similatiry_MCC_tokens;
+	}
+
+	public void setMin_similatiry_MCC_tokens(Integer min_similatiry_MCC_tokens) {
+		this.min_similatiry_MCC_tokens = min_similatiry_MCC_tokens;
+	}
+
+	public Integer getMin_similatiry_MCC_percent() {
+		return min_similatiry_MCC_percent;
+	}
+
+	public void setMin_similatiry_MCC_percent(Integer min_similatiry_MCC_percent) {
+		this.min_similatiry_MCC_percent = min_similatiry_MCC_percent;
+	}
+
 	public String toString(){
 		return 
 		" invocation_id: " + invocation_id + " "+ 
