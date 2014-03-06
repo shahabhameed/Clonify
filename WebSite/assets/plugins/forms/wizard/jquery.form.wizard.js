@@ -73,6 +73,7 @@
 			this.firstStep = this.steps.eq(0).attr("id");
 			this.activatedSteps = new Array();
 			this.isLastStep = false;
+                        this.isSecondLastStep = false;
 			this.previousStep = undefined;
 			this.currentStep = this.steps.eq(0).attr("id");
 			this.nextButton	= this.element.find(this.options.next)
@@ -314,13 +315,25 @@
 					this.steps.filter("#" + this.activatedSteps[i]).find(":input").not(".wizard-ignore").removeAttr("disabled");
 				}
 				if(!this.options.formPluginEnabled){
-					return true;
+					
+                                        
+                                        return true;
 				}else{
+                                        
 					this._disableNavigation();
 					this.element.ajaxSubmit(this.options.formOptions);
 					return false;
 				}
+                                
+                                
 			}
+                        
+                        else if(this.isSecondLastStep)
+                        {
+                            this.nextButton.val(this.options.textSecondLastStep);
+    
+                        }
+                        
 
 			var step = this._navigate(this.currentStep);
 			if(step == this.currentStep){
@@ -352,7 +365,10 @@
 		_enableNavigation : function(){
 			if(this.isLastStep){
 				this.nextButton.val(this.options.textSubmit);
-			}else{
+			}else if(this.isSecondLastStep){
+				this.nextButton.val(this.options.textSecondLastStep);
+			}
+                        else{
 				this.nextButton.val(this.options.textNext);
 			}
 
@@ -392,6 +408,14 @@
 			this.isLastStep = false;
 			if($("#" + step).hasClass(this.options.submitStepClass) || this.steps.filter(":last").attr("id") == step){
 				this.isLastStep = true;
+                                
+			}
+		},
+                _checkIfSecondlastStep : function(step){
+			this.isSecondLastStep = false;
+			if($("#" + step).hasClass(this.options.secondLastStepClass) || this.steps.filter(":last").attr("id") == step){
+				this.isSecondLastStep = true;
+                                
 			}
 		},
 
@@ -416,7 +440,7 @@
 					return link;
 				}
 				return this.currentStep;
-			}else if(link == undefined && !this.isLastStep){
+			}else if(link == undefined && !this.isLastStep ||this.isSecondLastStep  ){ 
 				var step1 =  this.steps.filter("#" + step).next().attr("id");
 				return step1;
 			}
@@ -441,6 +465,7 @@
 			if(this.currentStep !== step || step === this.firstStep){
 				this.previousStep = this.currentStep;
 				this._checkIflastStep(step);
+                                this._checkIfSecondlastStep(step);
 				this.currentStep = step;
 				var stepShownCallback = function(){if(triggerStepShown){$(this.element).trigger('step_shown', $.extend({"isBackNavigation" : backwards},this._state()));}}
 				if(triggerStepShown){
@@ -461,6 +486,7 @@
 			this.activatedSteps = new Array();
 			this.previousStep = undefined;
 			this.isLastStep = false;
+                        this.isSecondLastStep = false;
 			if(this.options.historyEnabled){
 				this._updateHistory(this.firstStep);
 			}else{
@@ -473,6 +499,7 @@
 			var currentState = { "settings" : this.options,
 				"activatedSteps" : this.activatedSteps,
 				"isLastStep" : this.isLastStep,
+                                "isSecondLastStep" : this.isSecondLastStep,
 				"isFirstStep" : this.currentStep === this.firstStep,
 				"previousStep" : this.previousStep,
 				"currentStep" : this.currentStep,
@@ -524,6 +551,7 @@
 			this.previousStep = undefined;
 			this.currentStep = undefined;
 			this.isLastStep = undefined;
+                        this.isSecondLastStep = undefined;
 			this.options = undefined;
 			this.nextButton = undefined;
 			this.backButton = undefined;
@@ -538,6 +566,7 @@
 			this.firstStep = this.steps.eq(0).attr("id");
 			this.steps.not("#" + this.currentStep).hide().find(":input").addClass("ui-wizard-content").attr("disabled","disabled");
 			this._checkIflastStep(this.currentStep);
+                        this._checkIfSecondlastStep(this.currentStep);
 			this._enableNavigation();
 			if(!this.options.disableUIStyles){
 				this.steps.addClass("ui-helper-reset ui-corner-all");
@@ -546,15 +575,17 @@
 		},
 
 		options: {
-	   		historyEnabled	: false,
-			validationEnabled : false,
+	   		historyEnabled	: true,
+			validationEnabled : true,
 			validationOptions : undefined,
 			formPluginEnabled : false,
 			linkClass	: ".link",
 			submitStepClass : "submit_step",
+                        secondLastStepClass : "secondLast_step",
 			back : ":reset",
 			next : ":submit",
 			textSubmit : 'Submit',
+                        textSecondLastStep : 'SecondLast',
 			textNext : 'Next',
 			textBack : 'Back',
 			remoteAjax : undefined,
@@ -563,7 +594,7 @@
 			inDuration : 400,
 			outDuration: 400,
 			easing: 'swing',
-			focusFirstInput : false,
+			focusFirstInput : true,
 			disableInputFields : true,
 			formOptions : { reset: true, success: function(data) { if( (window['console'] !== undefined) ){console.log("%s", "form submit successful");}},
 			disableUIStyles : false,

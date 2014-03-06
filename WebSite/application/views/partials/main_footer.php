@@ -50,6 +50,7 @@
     <script type="text/javascript" src="<?=asset_url('js/jRespond.min.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('js/main.js');?>"></script><!-- Core js functions -->
     <script type="text/javascript" src="<?=asset_url('js/tables.js');?>"></script>
+    <script type="text/javascript" src="<?=asset_url('js/buttons.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('js/datatable.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('js/elements.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('js/jquery.poshytip.min.js');?>"></script>
