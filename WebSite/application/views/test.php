@@ -1,6 +1,12 @@
 <?php ?>
 <script type="text/javascript" src="<?= asset_url('js/myInvoke.js') ?>"></script>
-
+<script>
+function enable_text(status) {
+    status = (status) ? false : true; //convert status boolean to text 'disabled'
+    document.wizard.min_mcc_token.disabled = status;
+	document.wizard.min_mcc_percent.disabled = status;
+}
+</script>
 <div id="content" class="clearfix">
     <div class="contentwrapper">
         <div class="heading">
@@ -49,17 +55,56 @@
                             <div class="step" id="invocation-details"><span class="step-info" data-num="1" data-text="Invocation Parameters"></span>
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="username">Min Similarities:</label>
+                                    <label class="col-lg-4 control-label" for="username">Min Similarities for Simple Clone Class:</label>
+                                    <div class="col-lg-2">
+                                        <input id="min_scc_token" class="form-control" name="min_scc_token" type="text" value="30" >
+
+                                        <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                    </div>
+									
+									<label class="col-lg-1 control-label" for="username">Token(s)</label>
+                                </div><!-- End .form-group  -->
+								<div class="form-group">
+                                    <label class="col-lg-4 control-label" for="username">Method Analysis:</label>
                                     <div class="col-lg-8">
-                                        <input id="spinner1" class="form-control" name="spinner1" type="text" value="30" >
+                                        <input type="checkbox" name="methodAnalysis" id="methodAnalysis" checked="checked" onclick="enable_text(this.checked)"/>
 
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
 
                                     </div>
-                                </div><!-- End .form-group  -->
+                                </div><!-- End .form-group  -->	
 
+								<div class="form-group">
+                                    <label class="col-lg-4 control-label" for="username">Min Similarities for Methods Clone Class:</label>
+                                    <div class="col-lg-2">
+                                        <input id="min_mcc_token" class="form-control" name="min_mcc_token" type="text" value="30">
+										
+                                        <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                    </div>
+									<div class="col-lg-1">
+										<label class="col-lg-1 control-label" for="username">Token(s)</label>
+									</div>
+									<div class="col-lg-2">
+                                        <input id="min_mcc_percent" class="form-control" name="min_mcc_percent" type="text" value="30">
+
+                                        <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+
+                                    </div>
+									<label class="col-lg-0 control-label" for="username">%</label>
+                                </div><!-- End .form-group  -->
+								<!--
+								<div class="form-group">
+                                    <label class="col-lg-4 control-label" for="username">Percentage:</label>
+                                    <div class="col-lg-2">
+                                        <input id="min_mcc_percent" class="form-control" name="min_mcc_percent" type="text" value="30">
+
+                                        <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+
+                                    </div>
+									<label class="col-lg-0 control-label" for="username">%</label>
+                                </div> --><!-- End .form-group  -->
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" >Grouping Mode:</label>
+                                    <label class="col-lg-4 control-label" >Grouping Mode:</label>
                                     <div class="col-lg-2">
                                         <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2">
                                             <option value="mixed">Mixed Mode</option>
@@ -70,7 +115,7 @@
                                 </div><!-- End .form-group  -->
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" >Language:</label>
+                                    <label class="col-lg-4 control-label" >Language:</label>
                                     <div class="col-lg-2">
                                         <select  name="language" id="language" class="form-control col-lg-2">
                                             <?php foreach ($languages as $language) { ?>
@@ -82,7 +127,7 @@
                                 </div><!-- End .form-group  -->
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="username">Name:</label>
+                                    <label class="col-lg-4 control-label" for="username">Name:</label>
                                     <div class="col-lg-3">
                                         <input  name="iName" id="iName" type="text" class="form-control" placeholder="Enter a short name for this invocation">
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
@@ -91,7 +136,7 @@
                                 </div><!-- End .form-group  -->
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="username">Comments:</label>
+                                    <label class="col-lg-4 control-label" for="username">Comments:</label>
                                     <div class="col-lg-6">
                                         <textarea rows="3" class="form-control" name="iComment" id="iComment" placeholder="Enter your comments"></textarea>
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
