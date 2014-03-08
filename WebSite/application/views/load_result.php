@@ -44,7 +44,7 @@
                                             <td  style="text-align:left;"><input style="width:99%;margin-bottom:0px;border:none;background:#fafafa;webkit-box-shadow: none;-moz-box-shadow: none;box-shadow:none;" type="text" name="<?php echo 'iname'.$count;?>" value="<?php echo $result->invocation_name;?>">
 											<input type="hidden" name ="<?php echo 'iid'.$count;?>" value="<?php echo $result->id; ?>"></input>
 											</td>
-											<?php if($result->status == 1){ ?>
+											<?php if($result->status == 1 ||$result->status == 0 ){ ?>
                                             <td><a href="#" oldtitle="Tooltip in the right" title="" data-hasqtip="true" aria-describedby="qtip-22"><img src="<?=asset_url('images/Info.png') ?>" height ="24" width="24" /></a></td>
 											<?php } ?>
 											<?php if($result->status == 2){ ?>
