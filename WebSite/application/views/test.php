@@ -158,8 +158,8 @@
                                 <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="SelectOnSubmit(); changeText();" id="next"> Next</button>
                                 -->
 
-                                <input type="reset" class="btn btn-default pull-left col-lg-1" value="Back"/>
-                                <input type="submit" class="btn btn-success pull-right col-lg-1" value="Next" id="submitButton" onclick="hideWizard();
+                                <input type="reset"  form="wizard" class="btn btn-default pull-left col-lg-1" value="Back"/>
+                                <input type="submit" formmethod="post" autofocus="true" tabindex="0"   form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submitButton" onclick="hideWizard();
                                         showProgress()"/><!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> -->
                             </div><!-- End .form-group  -->
 
@@ -174,7 +174,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label" for="username">Min Similarities:</label>
                                     <div class="col-lg-8">
-                                        <input id="spinner1" class="form-control" name="spinner1" type="text" value="30" >
+                                        <input id="spinner1" class="form-control" name="spinner1" type="text" value="30" maxlength="4" max="9999" min="0">
 
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
 
