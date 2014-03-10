@@ -255,8 +255,7 @@ width: 50% !important;
                     </div>
                   </div>
                   <div class="code-window1">
-                    <div class="col-md-11 padding15 code-window responsive" id="code_window1" >                    
-                    </div>
+                    <div class="col-md-11 padding15 code-window responsive" id="code_window1" >                    </div>
 
                     <div class="col-md-1" id="code_map1" style="padding:0px;padding-right:5px;width:65px !important;">
                     </div>
