@@ -159,8 +159,8 @@
                                 -->
 
                                 <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
-                                <input type="submit" formmethod="post" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submitButton" onclick="hideWizard();
-                                        showProgress()"/><!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> -->
+                                <input type="submit" formmethod="post" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submitButton" onclick="hideWizard();showProgress()"/>
+                                <!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> -->
                             </div><!-- End .form-group  -->
 
                             <div class="msg"></div>
@@ -175,7 +175,7 @@
 
                                 <div class="form-group">
                                    
-                                    <label class="col-lg-4 control-label" for="username">Min Similarities for Simple Clone Class:</label>
+                                    <label class="col-lg-4 control-label" for="min_sim_scc">Min Similarities for Simple Clone Class:</label>
                                     <div class="col-lg-2">
                                         
                                         <input id="min_sim_scc" class="form-control spinner" name="min_sim_scc" type="text" value="30" max="9999" min="0" style="height: 25px">
@@ -189,7 +189,7 @@
                                 </div><!-- End .form-group  -->
                                 
                                 <div class="form-group">
-                                    <label class="col-lg-4 control-label" for="username">Method Analysis:</label>
+                                    <label class="col-lg-4 control-label" for="methodAnalysis">Method Analysis:</label>
                                     <div class="col-lg-8">
                                         
                                         <input type="checkbox" name="methodAnalysis" id="methodAnalysis" checked="checked" onclick="enable_text(this.checked)"/>
@@ -205,7 +205,7 @@
 
 
                                 <div class="form-group">
-                                    <label class="col-lg-4 control-label" for="username">Min Similarities for Methods Clone Class:</label>
+                                    <label class="col-lg-4 control-label" for="min_sim_mcc">Min Similarities for Methods Clone Class:</label>
                                     <div class="col-lg-2">
                                         
                                         <input id="min_sim_mcc" class="form-control spinner" name="min_sim_mcc"   type="text" value="30" max="9999" min="0" style="height: 25px">
@@ -216,7 +216,7 @@
                                         <label class="col-lg-1 control-label" for="min_sim_mcc">Token(s)</label>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input id="min_mcc_percent" class="form-control" name="min_mcc_percent" type="text" value="30">
+                                        <input id="min_mcc_percent" class="form-control" name="min_mcc_percent" type="text" value="30" min="0"  max="100" >
 
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
 
@@ -248,9 +248,9 @@
                                 </div><!-- End .form-group  -->
 
                                 <div class="form-group">
-                                    <label class="col-lg-4 control-label" for="username">Name:</label>
+                                    <label class="col-lg-4 control-label" for="name">Name:</label>
                                     <div class="col-lg-3">
-                                        <input  name="iName" id="iName" type="text" class="form-control" placeholder="Enter a short name for this invocation">
+                                        <input  name="name" id="name"  type="text" class="form-control" placeholder="Enter a short name for this invocation">
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                     </div>
 
@@ -324,7 +324,7 @@
                                                         <div class="panel-body">
                                                             <div class="form-group">
 
-                                                                <div class="panel-group accordion gradient col-lg-12" id="accordionGroup"></div>
+                                                                <div class="panel-group accordion gradient col-lg-12 " id="grouplist1" name="grouplist1"></div>
 
                                                             </div>  
                                                         </div>

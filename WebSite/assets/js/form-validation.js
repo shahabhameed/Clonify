@@ -35,7 +35,7 @@ $(document).ready(function() {
 	 			}
 	 		},    
 	 		rules: {
-	    		fname: {
+                                name: {
 					required: true,
 					minlength: 4
 				},
@@ -62,10 +62,22 @@ $(document).ready(function() {
 				email1: {
 					required: true,
 					email: true
+				},
+                                hiddenGroup: {
+					required: true,
+					minlength: 1
+       
+				},
+                                min_mcc_percent:{
+					required: true,
+					min:0,
+                                        max:100
+                                        
 				}
+                                
 			},
 			messages: {
-				fname: {
+				name: {
 					required: "This field is required",
 					minlength: "This field must consist of at least 4 characters"
 				},
@@ -82,8 +94,18 @@ $(document).ready(function() {
 					minlength: "Your password must be at least 5 characters long",
 					equalTo: "Please enter the same password as above"
 				},
+                                hiddenGroup: {
+					required: "Please create a group",
+					minlength: "At least 1 group is required"
+				},
+                                 min_mcc_percent:{
+					required: true,
+                                        min:"Enter value between 0-100",
+					max:"Enter value between 0-100"
+                                        
+				},
 				email1: "Please enter a valid email address",
-				gender: "Choise a gender"
+				gender: "Choose a gender"
 			}	
 	 	}
 	});
