@@ -108,7 +108,7 @@
 
         </div><!-- End .row -->           
 
- <div class="row">
+        <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default gradient">
                     <div class="panel-heading" id="wizard-heading">
@@ -153,13 +153,13 @@
                     <div class="panel-body noPad clearfix" id="wizard-body">
                         <form id="wizard" name="wizard" class="form-horizontal" role="form" method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
                             <div class="wizard-actions">
-                                 <!--
-                                <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack();"> Back </button>
-                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="SelectOnSubmit(); changeText();" id="next"> Next</button>
+                                <!--
+                               <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack();"> Back </button>
+                               <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="SelectOnSubmit(); changeText();" id="next"> Next</button>
                                 -->
 
-                                <input type="reset" class="btn btn-default pull-left col-lg-1" value="Back"/>
-                                <input type="submit" class="btn btn-success pull-right col-lg-1" value="Next" id="submitButton" onclick="hideWizard();
+                                <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
+                                <input type="submit" formmethod="post" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submitButton" onclick="hideWizard();
                                         showProgress()"/><!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> -->
                             </div><!-- End .form-group  -->
 
@@ -171,18 +171,61 @@
 
                             <div class="step" id="invocation-details"><span class="step-info" data-num="1" data-text="Invocation Parameters"></span>
 
+                              
+
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="username">Min Similarities:</label>
+                                   
+                                    <label class="col-lg-4 control-label" for="username">Min Similarities for Simple Clone Class:</label>
+                                    <div class="col-lg-2">
+                                        
+                                        <input id="min_sim_scc" class="form-control spinner" name="min_sim_scc" type="text" value="30" max="9999" min="0" style="height: 25px">
+                                        <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                    </div>
+
+                                    <div class="col-lg-1">
+                                        <label class="col-lg-1 control-label" for="min_sim_mcc">Token(s)</label>
+                                    </div>
+                                   
+                                </div><!-- End .form-group  -->
+                                
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label" for="username">Method Analysis:</label>
                                     <div class="col-lg-8">
-                                        <input id="spinner1" class="form-control" name="spinner1" type="text" value="30" >
+                                        
+                                        <input type="checkbox" name="methodAnalysis" id="methodAnalysis" checked="checked" onclick="enable_text(this.checked)"/>
 
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
 
                                     </div>
+                                </div><!-- End .form-group  -->	
+
+
+
+
+
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label" for="username">Min Similarities for Methods Clone Class:</label>
+                                    <div class="col-lg-2">
+                                        
+                                        <input id="min_sim_mcc" class="form-control spinner" name="min_sim_mcc"   type="text" value="30" max="9999" min="0" style="height: 25px">
+                                        
+                                        <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <label class="col-lg-1 control-label" for="min_sim_mcc">Token(s)</label>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input id="min_mcc_percent" class="form-control" name="min_mcc_percent" type="text" value="30">
+
+                                        <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+
+                                    </div>
+                                    <label class="col-lg-0 control-label" for="username">%</label>
                                 </div><!-- End .form-group  -->
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" >Grouping Mode:</label>
+                                    <label class="col-lg-4 control-label" >Grouping Mode:</label>
                                     <div class="col-lg-2">
                                         <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2">
                                             <option value="mixed">Mixed Mode</option>
@@ -193,7 +236,7 @@
                                 </div><!-- End .form-group  -->
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" >Language:</label>
+                                    <label class="col-lg-4 control-label" >Language:</label>
                                     <div class="col-lg-2">
                                         <select  name="language" id="language" class="form-control col-lg-2">
                                             <?php foreach ($languages as $language) { ?>
@@ -205,7 +248,7 @@
                                 </div><!-- End .form-group  -->
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="username">Name:</label>
+                                    <label class="col-lg-4 control-label" for="username">Name:</label>
                                     <div class="col-lg-3">
                                         <input  name="iName" id="iName" type="text" class="form-control" placeholder="Enter a short name for this invocation">
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
@@ -214,7 +257,7 @@
                                 </div><!-- End .form-group  -->
 
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="username">Comments:</label>
+                                    <label class="col-lg-4 control-label" for="username">Comments:</label>
                                     <div class="col-lg-6">
                                         <textarea rows="3" class="form-control" name="iComment" id="iComment" placeholder="Enter your comments"></textarea>
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
