@@ -157,6 +157,26 @@
       $data = implode(",", $test_result);
       echo $data;
     }
+	
+	public function MethodCloneClass() {
+      $viewData = array();
+      $invocationId = $this->getInvocationIdFromURL();
+      $result = $this->scc->getAllSCCRows($invocationId);   
+      $viewData['scc_data'] = $result;
+      $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['scc_id']] = $this->scc->getAllSCCSecondaryTableRows($row, $invocationId);
+        }
+      }
+      
+      $viewData['scc_clone_list_data'] = $secondary_table_rows;
+      $viewData['invocationId'] = $invocationId;
+      $viewData['showCloneView'] = true;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/scc.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
 
   }
   
