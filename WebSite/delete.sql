@@ -27,5 +27,3 @@ DELETE FROM user_profiles WHERE 1;
 DELETE FROM user_repository WHERE 1;
 DELETE FROM method_file WHERE 1;
 DELETE FROM method WHERE 1;
-DELETE FROM directory WHERE 1;
-DELETE FROM file_directory WHERE 1;
