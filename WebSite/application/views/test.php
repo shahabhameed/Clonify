@@ -326,7 +326,8 @@
                                                         <div class="panel-body">
                                                             <div class="form-group">
 
-                                                                <div class="panel-group accordion gradient col-lg-12 " id="grouplist1" name="grouplist1"></div>
+                                                                <!-- <div class="panel-group accordion gradient col-lg-12 " id="grouplist1" name="grouplist1"></div> -->
+                                                                <div class="panel-group accordion gradient col-lg-12 " id="accordionGroup" name="accordionGroup"></div>
 
                                                             </div>  
                                                         </div>

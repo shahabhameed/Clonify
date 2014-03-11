@@ -148,3 +148,7 @@ CREATE TABLE IF NOT EXISTS `clones_rnr` (
   `line_num` int(11) NOT NULL,
   `value` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 06 Mar 2014
+ALTER TABLE  `invocation_parameters` ADD  `min_similarity_MCC_tokens` INT NULL ,
+ADD  `min_similarity_MCC_percentage` INT NULL ;
