@@ -66,6 +66,10 @@ public class Constants {
 	public static final int TOOLTIP_CLONE_CLASS = 22;
 	public static final int TOOLTIP_CLONE_INSTANCE = 23;
 	public static final int TOOLTIP_CLONE_STRUCTURE = 24;
+	
+	/**
+	 * In order to run normally the value of SHOULD_USE_OLD_RESULTS should be false
+	 */
 	public static final boolean SHOULD_USE_OLD_RESULTS = false;
 
 	
