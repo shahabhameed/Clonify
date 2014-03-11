@@ -73,7 +73,17 @@ $(document).ready(function() {
 					min:0,
                                         max:100
                                         
-				}
+                                },
+                                language:{
+                                    
+                                    required:true
+                                },
+                                mode:{
+                                    
+                                    required:true
+                                }
+                              
+                                
                                 
 			},
 			messages: {
@@ -104,8 +114,15 @@ $(document).ready(function() {
 					max:"Enter value between 0-100"
                                         
 				},
+                                language:{
+                                            required:"Please select a programming language"
+                                },
+                                mode:{
+                                     required:"Please select a grouping mode "
+                                },
 				email1: "Please enter a valid email address",
 				gender: "Choose a gender"
+                                
 			}	
 	 	}
 	});
@@ -114,7 +131,8 @@ $(document).ready(function() {
     
 	//--------------- Form validation ------------------//
 	$('#select1').select2({placeholder: "Select"});
-    $("#form-validate").validate({
+        $('.select1').select2({placeholder: "Select"});
+    $(".form-validate").validate({
     	ignore: null,
     	ignore: 'input[type="hidden"]',
     	errorPlacement: function(error, element) {
@@ -126,7 +144,8 @@ $(document).ready(function() {
  			}
  		},  
     	rules: {
-    		select1: "required",
+                        language:"required",
+                        select1: "required",
 			required: "required",
 			requiredArea: "required",
 			required1: {

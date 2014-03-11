@@ -151,7 +151,7 @@
 
 
                     <div class="panel-body noPad clearfix" id="wizard-body">
-                        <form id="wizard" name="wizard" class="form-horizontal" role="form" method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
+                        <form id="wizard" name="wizard" class="form-horizontal form-validate" role="form" method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
                             <div class="wizard-actions">
                                 <!--
                                <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack();"> Back </button>
@@ -176,7 +176,7 @@
                                 <div class="form-group">
                                    
                                     <label class="col-lg-4 control-label" for="min_sim_scc">Min Similarities for Simple Clone Class:</label>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-1">
                                         
                                         <input id="min_sim_scc" class="form-control spinner" name="min_sim_scc" type="text" value="30" max="9999" min="0" style="height: 25px">
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
@@ -206,7 +206,7 @@
 
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label" for="min_sim_mcc">Min Similarities for Methods Clone Class:</label>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-1">
                                         
                                         <input id="min_sim_mcc" class="form-control spinner" name="min_sim_mcc"   type="text" value="30" max="9999" min="0" style="height: 25px">
                                         
@@ -215,7 +215,7 @@
                                     <div class="col-lg-1">
                                         <label class="col-lg-1 control-label" for="min_sim_mcc">Token(s)</label>
                                     </div>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-1">
                                         <input id="min_mcc_percent" class="form-control" name="min_mcc_percent" type="text" value="30" min="0"  max="100" >
 
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
@@ -227,7 +227,8 @@
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label" >Grouping Mode:</label>
                                     <div class="col-lg-2">
-                                        <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2">
+                                        <select  name="mode" id="mode" class="nostyle form-control col-lg-2">
+                                           <option></option>
                                             <option value="mixed">Mixed Mode</option>
                                             <option value="across_groups">Across Groups</option>
                                         </select>  
@@ -237,8 +238,9 @@
 
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label" >Language:</label>
-                                    <div class="col-lg-2">
-                                        <select  name="language" id="language" class="form-control col-lg-2">
+                                    <div class="col-lg-3">
+                                        <select  name="language" id="language" class="nostyle form-control col-lg-2">
+                                            <option></option>
                                             <?php foreach ($languages as $language) { ?>
                                                 <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option>
                                             <?php } ?>

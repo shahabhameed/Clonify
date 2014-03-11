@@ -202,7 +202,7 @@ table.display thead tr {
 table.display thead th {
 	font-weight: bold;
 	cursor: pointer;
-	* cursor: hand;
+	cursor: hand;
 }
 table.display tfoot tr {
 	background: rgb(255,255,255);
@@ -564,8 +564,7 @@ table.display tr.gradeU {
 }
 
 *
- * TableTools styles
- */
+ * TableTools style 
 .table tbody tr.active td,
 .table tbody tr.active th {
 	background-color: #08C;
