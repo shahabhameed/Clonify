@@ -153,6 +153,35 @@ CREATE TABLE IF NOT EXISTS `clones_rnr` (
 ALTER TABLE  `invocation_parameters` ADD  `min_similarity_MCC_tokens` INT NULL ,
 ADD  `min_similarity_MCC_percentage` INT NULL ;
 
+--
+-- Table structure for table `mcc_instance`
+--
+
+CREATE TABLE IF NOT EXISTS `mcc_instance` (
+  `mcc_instance_id` int(11) NOT NULL,
+  `mcc_id` int(11) NOT NULL,
+  `mid` int(11) NOT NULL,
+  `tc` double NOT NULL,
+  `pc` double NOT NULL,
+  `fid` int(11) NOT NULL,
+  `did` int(11) NOT NULL,
+  `gid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `mcc_scc` (
+  `mcc_id` int(11) NOT NULL,
+  `scc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `mcc` (
+  `mcc_id` int(11) NOT NULL,
+  `atc` double NOT NULL,
+  `apc` double NOT NULL,
+  PRIMARY KEY (`mcc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE  `mcc` ADD  `invocation_id` INT( 11 ) NOT NULL ;
+
 -- ADDED ON 2014-03-11 0, BY HAFEEZ
 ALTER TABLE scs_crossfile DROP PRIMARY KEY;
 
