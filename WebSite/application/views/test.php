@@ -44,8 +44,8 @@
         var progressBar = document.getElementById("barRow");
 
         var iNow = new Date().setTime(new Date().getTime() + 1 * 1000); // now plus 2 secs
-        var iEnd = new Date().setTime(new Date().getTime() + 8 * 1000); // now plus 8 secs
-        var iEnd2 = new Date().setTime(new Date().getTime() + 9.5 * 1000); // now plus 8 secs
+        var iEnd = new Date().setTime(new Date().getTime() + 4 * 1000); // now plus 8 secs
+        var iEnd2 = new Date().setTime(new Date().getTime() + 5.5 * 1000); // now plus 8 secs
 
         var button = document.getElementById("submitButton");
 
@@ -111,6 +111,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default gradient">
+                 
                     <div class="panel-heading" id="wizard-heading">
                         <h4><span>Configuration Wizard</span></h4>
 
@@ -146,52 +147,50 @@
 
 
 
-                    </div><!-- End .span6 -->
-
-
+                    </div><!-- End Progress Bar -->
 
                     <div class="panel-body noPad clearfix" id="wizard-body">
-                        <form id="wizard" name="wizard" class="form-horizontal form-validate" role="form" method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
+                        
+                        <form id="wizard" name="wizard" class="form-horizontal " role="form"    method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
+                          
                             <div class="wizard-actions">
-                                <!--
-                               <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack();"> Back </button>
-                               <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="SelectOnSubmit(); changeText();" id="next"> Next</button>
-                                -->
 
+                                <button class="btn btn-default pull-left col-lg-1" type="reset" > Back </button>
+                                <button  formmethod="post" class="btn btn-success pull-right col-lg-1" type="submit" onclick="" id="submitButton"> Next</button>
+
+                                <!--
                                 <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
                                 <input type="submit" formmethod="post" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submitButton" onclick="hideWizard();showProgress()"/>
-                                <!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> -->
+                                <!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> 
+                                -->
+
                             </div><!-- End .form-group  -->
 
                             <div class="msg"></div>
-
-
 
                             <div class="wizard-steps clearfix"></div>
 
                             <div class="step" id="invocation-details"><span class="step-info" data-num="1" data-text="Invocation Parameters"></span>
 
-                              
-
                                 <div class="form-group">
-                                   
+
                                     <label class="col-lg-4 control-label" for="min_sim_scc">Min Similarities for Simple Clone Class:</label>
                                     <div class="col-lg-1">
-                                        
-                                        <input id="min_sim_scc" class="form-control spinner" name="min_sim_scc" type="text" value="30" max="9999" min="0" style="height: 25px">
+
+                                        <input id="min_scc_token" class="form-control spinner" name="min_scc_token" type="text" value="30" max="9999" min="0" style="height: 25px">
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                     </div>
 
                                     <div class="col-lg-1">
                                         <label class="col-lg-1 control-label" for="min_sim_mcc">Token(s)</label>
                                     </div>
-                                   
+
                                 </div><!-- End .form-group  -->
-                                
+
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label" for="methodAnalysis">Method Analysis:</label>
                                     <div class="col-lg-8">
-                                        
+
                                         <input type="checkbox" name="methodAnalysis" id="methodAnalysis" checked="checked" onclick="enable_text(this.checked)"/>
 
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
@@ -207,13 +206,13 @@
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label" for="min_sim_mcc">Min Similarities for Methods Clone Class:</label>
                                     <div class="col-lg-1">
-                                        
-                                        <input id="min_sim_mcc" class="form-control spinner" name="min_sim_mcc"   type="text" value="30" max="9999" min="0" style="height: 25px">
-                                        
+
+                                        <input id="min_mcc_token" class="form-control spinner" name="min_mcc_token"   type="text" value="30" max="9999" min="0" style="height: 25px">
+
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                     </div>
                                     <div class="col-lg-1">
-                                        <label class="col-lg-1 control-label" for="min_sim_mcc">Token(s)</label>
+                                        <label class="col-lg-1 control-label" for="min_mcc_token">Token(s)</label>
                                     </div>
                                     <div class="col-lg-1">
                                         <input id="min_mcc_percent" class="form-control" name="min_mcc_percent" type="text" value="30" min="0"  max="100" >
@@ -227,8 +226,8 @@
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label" >Grouping Mode:</label>
                                     <div class="col-lg-2">
-                                        <select  name="mode" id="mode" class="nostyle form-control col-lg-2">
-                                           <option></option>
+                                        <select  name="groupingChoice" id="groupingChoice" class="nostyle form-control col-lg-2">
+                                            <option></option>
                                             <option value="mixed">Mixed Mode</option>
                                             <option value="across_groups">Across Groups</option>
                                         </select>  
@@ -242,8 +241,7 @@
                                         <select  name="language" id="language" class="nostyle form-control col-lg-2">
                                             <option></option>
                                             <?php foreach ($languages as $language) { ?>
-                                                <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option>
-                                            <?php } ?>
+                                                <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option><?php } ?>
                                         </select>
                                     </div>
 
@@ -252,7 +250,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label" for="name">Name:</label>
                                     <div class="col-lg-3">
-                                        <input  name="name" id="name"  type="text" class="form-control" placeholder="Enter a short name for this invocation">
+                                        <input  name="iName" id="iName"  type="text" class="form-control" placeholder="Enter a short name for this invocation">
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                     </div>
 
@@ -289,7 +287,7 @@
 
                                                                 <div class="col-lg-12">
                                                                     <select id="box1View" multiple="multiple" class="form-control" style="height:300px;">
-                                                                        <?php foreach ($usrfiles as $usrfile) { ?>
+<?php foreach ($usrfiles as $usrfile) { ?>
                                                                             <option value="<?php echo $usrfile->id ?>" selected="false"><?php echo $usrfile->fname ?></option><?php } ?>
 
                                                                     </select>
@@ -365,7 +363,7 @@
                                                                 <select multiple="multiple" id="suppresed" name="suppresed[]" class="form-control" style="height:300px;">>
                                                                     <?php foreach ($tokens as $token) { ?>
                                                                         <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " - " . $token->token_name ?></option>
-                                                                    <?php } ?>
+<?php } ?>
                                                                 </select>
                                                                 <br/>
                                                                 <label id="filErr" class="myErrLbl"></label>
@@ -408,7 +406,7 @@
                                                                 <select multiple="multiple" id="suppresed2" name="suppresed2[]" class=" form-control" style="height:300px; ">>
                                                                     <?php foreach ($prev_sup_tokens as $prev_sup_token) { ?>
                                                                         <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo $prev_sup_token->token_id . " - " . $prev_sup_token->token_name ?></option>
-                                                                    <?php } ?>
+<?php } ?>
                                                                 </select>													
                                                             </div>
                                                         </div><!-- End .span4 -->
@@ -427,8 +425,7 @@
                                 </div ><!-- End .Main col  -->
 
                             </div>	<!-- End .Row  -->			
-                            <div class="step submit_step " id="equal-tokens">
-                                <span class="step-info" data-num="4" data-text="Equal Tokens"></span>
+                            <div class="step submit_step " id="equal-tokens">  <span class="step-info" data-num="4" data-text="Equal Tokens"></span>
                                 <div class="col-lg-12">
                                     <div class="row">
 
@@ -452,7 +449,7 @@
                                                                     <select multiple="multiple" id="equal" name="equal[]" class="multiple form-control" style="height:300px; ">
                                                                         <?php foreach ($alltokens as $token) { ?>
                                                                             <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " = " . $token->token_name ?></option>
-                                                                        <?php } ?>
+<?php } ?>
                                                                     </select>
                                                                     <br/>
                                                                     <label id="filErr" class="myErrLbl"></label>
@@ -506,7 +503,9 @@
                             </div><!-- End .step -->      
 
                         </form>
+                        
                     </div>  <!-- End .wizard -->
+                    
                 </div><!-- End .panel -->
 
             </div><!-- End .span12 -->

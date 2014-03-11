@@ -367,7 +367,7 @@ class Invoke_model extends CI_Model
 	function myinit()
     {
 		//Initial Params
-        $iName = $_POST['iName'];
+                $iName = $_POST['iName'];
 		$iComment = $_POST['iComment'];
 		$scc_min_sim = $_POST['min_scc_token'];
 		$mcc_min_sim_tok = $_POST['min_mcc_token'];
@@ -380,7 +380,7 @@ class Invoke_model extends CI_Model
 		else{
 			$method_analysis = FALSE;
 		}
-        $grouping_choice = $_POST['groupingChoice'];
+                $grouping_choice = $_POST['groupingChoice'];
 		
 		//Suppressed Tokens
 		$supTokens = '';
