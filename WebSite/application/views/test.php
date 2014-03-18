@@ -111,7 +111,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default gradient">
-                 
+
                     <div class="panel-heading" id="wizard-heading">
                         <h4><span>Configuration Wizard</span></h4>
 
@@ -150,23 +150,23 @@
                     </div><!-- End Progress Bar -->
 
                     <div class="panel-body noPad clearfix" id="wizard-body">
-                        
+
                         <form id="wizard" name="wizard" class="form-horizontal " role="form" method="POST" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
                             <div class="msg"></div>
                             <div class="wizard-actions">
 
-                                <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack()"> Back </button>
-                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="changeText()" id="submitButton"> Next</button>
-
                                 <!--
-                                <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
-                                <input type="submit" formmethod="post" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submitButton" onclick="hideWizard();showProgress()"/>
-                                <!-- <button class="btn btn-success pull-right col-lg-1" type="next" > Next </button> 
+                                <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack()"> Back </button>
+                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="changeText();SelectOnSubmit()" id="submitButton"> Next</button>
                                 -->
+
+                                <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
+                                <input type="submit" formmethod="POST" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submit" onclick="SelectOnSubmit()"/>
+                               
 
                             </div><!-- End .form-group  -->
 
-                            
+
 
                             <div class="wizard-steps clearfix"></div>
 
@@ -178,7 +178,7 @@
                                     <div class="col-lg-1">
 
                                         <input READONLY id="min_scc_token" class="nostyle form-control spinner" name="min_scc_token" type="text" value="30" max="9999" min="0" style="height: 25px">
-                                       
+
                                     </div>
 
                                     <div class="col-lg-1">
@@ -287,7 +287,7 @@
 
                                                                 <div class="col-lg-12">
                                                                     <select id="box1View" multiple="multiple" class="form-control" style="height:300px;">
-<?php foreach ($usrfiles as $usrfile) { ?>
+                                                                        <?php foreach ($usrfiles as $usrfile) { ?>
                                                                             <option value="<?php echo $usrfile->id ?>" selected="false"><?php echo $usrfile->fname ?></option><?php } ?>
 
                                                                     </select>
@@ -363,7 +363,7 @@
                                                                 <select multiple="multiple" id="suppresed" name="suppresed[]" class="form-control" style="height:300px;">>
                                                                     <?php foreach ($tokens as $token) { ?>
                                                                         <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " - " . $token->token_name ?></option>
-<?php } ?>
+                                                                    <?php } ?>
                                                                 </select>
                                                                 <br/>
                                                                 <label id="filErr" class="myErrLbl"></label>
@@ -406,7 +406,7 @@
                                                                 <select multiple="multiple" id="suppresed2" name="suppresed2[]" class=" form-control" style="height:300px; ">>
                                                                     <?php foreach ($prev_sup_tokens as $prev_sup_token) { ?>
                                                                         <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo $prev_sup_token->token_id . " - " . $prev_sup_token->token_name ?></option>
-<?php } ?>
+                                                                    <?php } ?>
                                                                 </select>													
                                                             </div>
                                                         </div><!-- End .span4 -->
@@ -449,7 +449,7 @@
                                                                     <select multiple="multiple" id="equal" name="equal[]" class="multiple form-control" style="height:300px; ">
                                                                         <?php foreach ($alltokens as $token) { ?>
                                                                             <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " = " . $token->token_name ?></option>
-<?php } ?>
+                                                                        <?php } ?>
                                                                     </select>
                                                                     <br/>
                                                                     <label id="filErr" class="myErrLbl"></label>
@@ -501,7 +501,7 @@
 
 
                             </div><!-- End .step -->      
-                            
+
                             <div class="step submit_step " id="final-step">  <span class="step-info" data-num="5" data-text="Finish"></span>
                                 <div class="col-lg-12">
                                     <div class="row">
@@ -523,7 +523,7 @@
 
                                                                 <div class="col-lg-12">
 
-                                                                  
+
 
                                                                 </div>
 
@@ -534,7 +534,7 @@
 
                                                 </div><!-- End .span8 -->
 
-                                                
+
                                             </div>
                                         </div><!-- End .row -->
                                     </div>
@@ -546,9 +546,9 @@
 
                             </div><!-- End .step -->    
                         </form>
-                        
+
                     </div>  <!-- End .wizard -->
-                    
+
                 </div><!-- End .panel -->
 
             </div><!-- End .span12 -->
