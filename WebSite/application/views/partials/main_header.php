@@ -26,7 +26,8 @@
     <link href="<?=asset_url('plugins/tables/dataTables/TableTools.css')?>" rel="stylesheet" type="text/css"/>    
     <link href="<?=asset_url('plugins/tables/responsive-tables/responsive-tables.css')?>" rel="stylesheet" type="text/css"/>  
     <link href="<?=asset_url('plugins/misc/qtip/jquery.qtip.css')?>" rel="stylesheet" type="text/css"/> 
-	<link href="<?=asset_url('plugins/misc/prettify/prettify.css')?>" type="text/css" rel="stylesheet" />
+    <link href="<?=asset_url('plugins/misc/prettify/prettify.css')?>" type="text/css" rel="stylesheet" />
+	<link href="<?=asset_url('plugins/tree/css/zTreeStyle/zTreeStyle.css')?>" type="text/css" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css"  href="<?=asset_url('plugins/files/elfinder/elfinder.css')?>">
    

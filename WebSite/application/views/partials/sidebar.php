@@ -46,6 +46,9 @@
                                 <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCS Across File
                                 </a>
+                                <a href="<?php echo site_url('home/fcswithindirectory') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>FCS Within Directory
+                                </a>
                             </li>
                         </ul>
                     </li>
