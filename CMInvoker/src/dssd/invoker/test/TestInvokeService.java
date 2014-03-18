@@ -12,9 +12,6 @@ import dssd.invoker.InvokeService;
  */
 public class TestInvokeService extends TestCase {
 
-	/**
-	 * @param name
-	 */
 	public TestInvokeService(String name) {
 		super(name);
 	}

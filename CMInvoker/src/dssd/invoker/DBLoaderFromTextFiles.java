@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -23,35 +24,28 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	int dlm;
 	private String databaseName ="";
 
-	private static String INSERT_SCC_INSTANCE;	
-	private static String INSERT_SCC;
-	private static String INSERT_SCSINFILE_SCC;	
-	private static String INSERT_SCSINFILE_FILE; 
-	private static String INSERT_SCSINFILE_FRAGMENTS;
-	private static String INSERT_SCSCROSSFILE_FILE;
-	private static String INSERT_SCSCROSSFILE_SCC;
-	private static String INSERT_SCS_CROSSFILE;
+	private static String INSERT_SCC = "INSERT INTO scc(scc_id, length, members, invocation_id) values ";		
+	private static String INSERT_SCC_INSTANCE = "INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ";
+	private static String INSERT_SCSINFILE_SCC = "INSERT INTO scsinfile_scc(scc_id, scs_infile_id, invocation_id) values ";		
+	private static String INSERT_SCSINFILE_FILE = "INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, members) values ";
+	private static String INSERT_SCSINFILE_FRAGMENTS = "INSERT INTO scsinfile_fragments(scs_infile_id, fid, scc_id, scsinfile_instance_id, scc_instance_id, invocation_id) values ";
+	private static String INSERT_SCSCROSSFILE_FILE = "INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc, invocation_id) values ";
+	private static String INSERT_SCSCROSSFILE_SCC = "INSERT INTO scscrossfile_scc(scc_id, scs_crossfile_id, invocation_id) values ";
+	private static String INSERT_SCS_CROSSFILE = "INSERT INTO scs_crossfile(scs_crossfile_id, invocation_id, atc, apc, members) values ";
+	
+	private static String INSERT_MCC = "INSERT INTO mcc(mcc_id, atc, apc, invocation_id, members) values ";
+	private static String INSERT_MCC_INSTANCE = "INSERT INTO mcc_instance(mcc_instance_id, mcc_id, mid, tc, pc, fid, did, gid) values ";
+	private static String INSERT_MCC_SCC = "INSERT INTO mcc_scc(mcc_id, scc_id) values ";
+	
+	private static String INSERT_METHOD = "INSERT INTO method(mid, mname, tokens, startline, endline) values ";
+	private static String INSERT_METHOD_FILE = "INSERT INTO method_file(mid, fid, startline, endline) values ";
 	
 	public DBLoaderFromTextFiles(){
-		initQuery();
 		databaseName = CMProperties.getDatabaseName();
 	}
 	
-	private static void initQuery() {
-		
-		
-		INSERT_SCC = "INSERT INTO scc(scc_id, length, members, invocation_id) values ";		
-		INSERT_SCC_INSTANCE = "INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ";
-		INSERT_SCSINFILE_SCC = "INSERT INTO scsinfile_scc(scc_id, scs_infile_id, invocation_id) values ";		
-		INSERT_SCSINFILE_FILE = "INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, members) values ";
-		INSERT_SCSINFILE_FRAGMENTS = "INSERT INTO scsinfile_fragments(scs_infile_id, fid, scc_id, scsinfile_instance_id, scc_instance_id, invocation_id) values ";
-		INSERT_SCSCROSSFILE_FILE = "INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc, invocation_id) values ";
-		INSERT_SCSCROSSFILE_SCC = "INSERT INTO scscrossfile_scc(scc_id, scs_crossfile_id, invocation_id) values ";
-		INSERT_SCS_CROSSFILE = "INSERT INTO scs_crossfile(scs_crossfile_id,invocation_id, atc, apc, members) values ";
-	}
-	
 	@Override
-	public void loadDBFromFiles() {
+	public boolean loadDBFromFiles() {
 		try{
 			String filePath = "";
 			String filePath_infilestructures = "";
@@ -102,13 +96,22 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			}
 
 			if (!INSERT_SCC
-					.equalsIgnoreCase("INSERT INTO scc(scc_id, length, members, benefit) values ")) {
+					.equalsIgnoreCase("INSERT INTO scc(scc_id, length, members, invocation_id) values ")) {
 				Database.executeTransaction(INSERT_SCC);
 			}
 			if (!INSERT_SCC_INSTANCE
 					.equalsIgnoreCase("INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ")) {
 				Database.executeTransaction(INSERT_SCC_INSTANCE);
 			}                                                
+			
+			/**
+			 * Please note this function loads 4 files to DB.
+			 */
+			loadMoreFiles(invocationId, Constants.CLONES_BY_FILE_FILE_NAME, Constants.CLONES_BY_FILE_TABLE_NAME);
+			loadMoreFiles(invocationId, Constants.CLONES_BY_FILE_NORMAL_FILE_NAME, Constants.CLONES_BY_FILE_NORMAL_TABLE_NAME);
+			loadMoreFiles(invocationId, Constants.CLONES_BY_METHOD_FILE_NAME, Constants.CLONES_BY_METHOD_TABLE_NAME);
+			loadMoreFiles(invocationId, Constants.CLONES_BY_METHOD_NORMAL_FILE_NAME, Constants.CLONES_BY_METHOD_NORMAL_TABLE_NAME);
+			loadMoreFiles(invocationId, Constants.CLONES_RNR_FILE_NAME, Constants.CLONES_RNR_TABLE_NAME);
 
 			File file5 = new File(filePath_infilestructures);
 			FileInputStream filein5 = new FileInputStream(file5);
@@ -188,18 +191,57 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			}
 
 			parse_file_clusters(invocationId);
+			
+			sprint04FilesToDB(invocationId);
 
 		} catch(Exception e){
 			e.printStackTrace();
+			return false;
 		}
+		
+		return true;
 	} //function end bracket
 
+	private void loadMoreFiles(Integer pInvocationId, String pFileName, String pTableName) throws NumberFormatException, IOException{
+		String filePath = "";
+
+		filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + pFileName + Constants.CM_TEXT_FILE_EXTENSION; 
+		
+		File file = new File(filePath);
+		FileInputStream filein = new FileInputStream(file);
+		BufferedReader stdin = new BufferedReader(new InputStreamReader(filein));
+		int lineNumber = 0;
+		ArrayList<String> values = new ArrayList<String>();
+		while ((line = stdin.readLine()) != null) {
+			lineNumber++;
+			
+			if (!line.equalsIgnoreCase("")) {
+				st = new StringTokenizer(line, ",");
+				
+				for(;st.hasMoreTokens();){
+					String value = "(\"" + pInvocationId +"\",\""  + lineNumber + "\",\"" + st.nextToken() + "\"),";
+					values.add(value);
+				}
+			}
+		}
+		String value = "(\"" + pInvocationId +"\",\""  + (lineNumber+1) + "\",\"LAST_LINE\"),";
+		values.add(value);
+		
+		
+		String query = "INSERT INTO " + pTableName + "(invocation_id, line_num, value) values ";
+		for(String str : values){
+			query += str;
+		}
+		
+		Database.executeTransaction(query);
+	}
+	
 	//delete mid
 	private void insertSCC_Instance(int scc_instance_id, int scc_id, int fid,
 			int startline, int startcol, int endline, int endcol, int invocationId) {
 		INSERT_SCC_INSTANCE += "( \"" + scc_instance_id + "\" , \"" + scc_id
 		+ "\", \"" + fid + "\", \"" + startline + "\", \"" + startcol
-		+ "\" , \"" + endline + "\", \"" + endcol  + "\" , \"" + invocationId + "\"),";
+		+ "\" , \"" + endline + "\", \"" + endcol  + "\",\"" + invocationId + "\"),";
 	}	
 
 	private void parse_file_clusters(int invocation_id) throws FileNotFoundException, IOException
@@ -254,14 +296,219 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Database.executeTransaction(INSERT_SCSCROSSFILE_FILE);
 		}
 		if (!INSERT_SCS_CROSSFILE
-				.equalsIgnoreCase("INSERT INTO scs_crossfile(scs_crossfile_id, atc, apc, members) values ")) {
+				.equalsIgnoreCase("INSERT INTO scs_crossfile(scs_crossfile_id, invocation_id, atc, apc, members) values ")) {
 			Database.executeTransaction(INSERT_SCS_CROSSFILE);
 		}
-
-		
-		
 	}
 	
+	private void sprint04FilesToDB(int pInvocationId) throws NumberFormatException, IOException{
+		filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO + Constants.CM_TEXT_FILE_EXTENSION;
+		
+		File file6 = new File(filePath);
+		FileInputStream filein6 = new FileInputStream(file6);
+		BufferedReader stdin6 = new BufferedReader(
+				new InputStreamReader(filein6));
+		while ((line = stdin6.readLine()) != null) {
+			if (!line.equalsIgnoreCase("")) {
+				st = new StringTokenizer(line, ",");
+				mid = st.nextToken().trim();
+				fid = st.nextToken().trim();
+				mName = st.nextToken().trim();
+				sLine = st.nextToken().trim();
+				eLine = st.nextToken().trim();
+				token = st.nextToken().trim();
+				insertMethod(Integer.parseInt(mid), mName, Integer
+						.parseInt(token), Integer.parseInt(sLine),
+						Integer.parseInt(eLine));
+				insertMethod_File(Integer.parseInt(mid), Integer
+						.parseInt(fid), Integer.parseInt(sLine),
+						Integer.parseInt(eLine));
+			}
+		}
+
+		if (!INSERT_METHOD
+				.equalsIgnoreCase("INSERT INTO method(mid, mname, tokens, startline, endline) values ")) {
+			Database.executeTransaction(INSERT_METHOD);
+		}
+		if (!INSERT_METHOD_FILE
+				.equalsIgnoreCase("INSERT INTO method_file(mid, fid, startline, endline) values ")) {
+			Database.executeTransaction(INSERT_METHOD_FILE);
+		}
+
+		filein6.close();
+		
+		
+		Vector<String> sccs = new Vector<String>();
+		String temp;
+		double atc = 0;
+		double apc = 0;
+		
+		filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_CLUSTER_XX + Constants.CM_TEXT_FILE_EXTENSION;
+		File file9 = new File(filePath);
+		FileInputStream filein9 = new FileInputStream(file9);
+		BufferedReader stdin9 = new BufferedReader(
+				new InputStreamReader(filein9));
+		while ((line = stdin9.readLine()) != null) {
+			if (!line.equalsIgnoreCase("")) {
+				st = new StringTokenizer(line, ";");
+				String mCid = st.nextToken().trim();
+				String mSupport = st.nextToken().trim();
+				temp = stdin9.readLine();
+				sccs = new Vector<String>();
+				st2 = new StringTokenizer(temp, ",");
+				while (st2.hasMoreTokens()) {
+					sccs.add(st2.nextToken());
+				}
+				int mcc_id = Integer.parseInt(mCid);
+				int mSup = (new Integer(mSupport)).intValue();
+				atc = 0;
+				apc = 0;
+				for (int i = 0; i < mSup; i++) {
+					line = stdin9.readLine();
+					st1 = new StringTokenizer(line, ";,");
+					mid = st1.nextToken().trim();
+					String mTk = st1.nextToken().trim();
+					String mCoverage = st1.nextToken().trim();
+					mName = getMethodName(new Integer(mid).intValue());
+					atc += Double.parseDouble(mTk);
+					apc += Double.parseDouble(mCoverage);
+					insertMCC_Instance(i, mcc_id,
+							Integer.parseInt(mid), Double
+									.parseDouble(mTk), Double
+									.parseDouble(mCoverage));
+				}
+				atc = atc / mSup;
+				apc = apc / mSup;
+				for (int i = 0; i < sccs.size(); i++) {
+					insertMCC_SCC(mcc_id, Integer.parseInt(sccs.get(i)));
+				}
+				insertMCC(mcc_id, atc, apc, invocationId, mSup);
+			}
+		}
+		
+		if (!INSERT_MCC.equalsIgnoreCase("INSERT INTO mcc(mcc_id, atc, apc, invocation_id, members) values ")) {
+			System.out.println("\nINSERT_MCC: " + INSERT_MCC);
+			Database.executeTransaction(INSERT_MCC);
+		}
+		if (!INSERT_MCC_INSTANCE.equalsIgnoreCase("INSERT INTO mcc_instance(mcc_instance_id, mcc_id, mid, tc, pc, fid, did, gid) values ")) {
+			System.out.println("\nINSERT_MCC_INSTANCE: " + INSERT_MCC_INSTANCE);
+			Database.executeTransaction(INSERT_MCC_INSTANCE);
+		}
+		if (!INSERT_MCC_SCC.equalsIgnoreCase("INSERT INTO mcc_scc(mcc_id, scc_id) values ")) {
+			System.out.println("\nINSERT_MCC_SCC: " + INSERT_MCC_SCC);
+			Database.executeTransaction(INSERT_MCC_SCC);
+		}
+	}
+	
+	public void insertMethod_File(int mid, int fid, int startline, int endline) {
+		INSERT_METHOD_FILE += "( \"" + mid + "\" , \"" + fid + "\", \""
+				+ startline + "\", \"" + endline + "\"  ),";
+	}
+	
+	/* Methods for insert data into the database using SQL Statements */
+	public void insertMethod(int mid, String mname, int tokens, int startline,
+			int endline) {
+		INSERT_METHOD += "( \"" + mid + "\" , \"" + mname + "\", \"" + tokens
+				+ "\", \"" + startline + "\", \"" + endline + "\"  ),";
+	}
+
+	
+	public void insertMCC(int mcc_id, double atc, double apc, int pInvocationId, int members) {
+		INSERT_MCC += "( \"" + mcc_id + "\" , \"" + atc + "\", \"" + apc
+				+ "\", \"" + pInvocationId + "\", \"" + members + "\"  ),";
+	}
+	
+	public void insertMCC_Instance(int mcc_instance_id, int mcc_id, int mid,
+			double tc, double pc) {
+		int fid = getFidFromMid(mid);
+		INSERT_MCC_INSTANCE += "( \"" + mcc_instance_id + "\" , \"" + mcc_id
+				+ "\", \"" + mid + "\", \"" + tc + "\", \"" + pc + "\", \""
+				+ fid + "\", \"" + getDidFromFid(fid) + "\", \""
+				+ getGidFromFid(fid) + "\"  ),";
+	}
+	
+	public int getGidFromFid(int fid) {
+		int gid = -1;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use clonedatabase;");
+			ResultSet results = s.executeQuery("select file.gid "
+					+ " from file " + " where file.fid = " + fid + ";");
+			if (results.next()) {
+				gid = results.getInt(1);
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return gid;
+	}
+	
+	public int getDidFromFid(int fid) {
+		int did = -1;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use clonedatabase;");
+			ResultSet results = s.executeQuery("select did "
+					+ " from file_directory " + " where fid = " + fid + ";");
+			if (results.next()) {
+				did = results.getInt(1);
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return did;
+	}
+	
+	public void insertMCC_SCC(int mcc_id, int scc_id) {
+		INSERT_MCC_SCC += "( \"" + mcc_id + "\" , \"" + scc_id + "\"  ),";
+	}
+	
+	public int getFidFromMid(int mid) {
+		int fid = -1;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use clonedatabase;");
+			ResultSet results = s.executeQuery("select fid "
+					+ " from method_file " + " where mid = " + mid + ";");
+			if (results.next()) {
+				fid = results.getInt(1);
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return fid;
+	}
+	
+	/*
+	 * Returns the method objectName of a method given the method id
+	 */
+	public String getMethodName(int mid) {
+		String methodName = null;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use clonedatabase;");
+			ResultSet results = s
+					.executeQuery("select mname from method where mid = " + mid
+							+ ";");
+			if (results.next()) {
+				methodName = results.getString("mname");
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return methodName;
+	}
 	
 	private int getMethodId(int fid, int sl, int el) {
 		try {
@@ -397,7 +644,27 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		}
 		return size;
 	}
-	
+
+	/*
+	 * Returns the size of the input file list
+	 */
+	public int getFileSize() {
+		int size = -1;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use clonedatabase;");
+			ResultSet results = s.executeQuery("select count(*) from file;");
+			if (results.next()) {
+				size = results.getInt(1);
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return size;
+	}
+
 	private Vector<String> getSCS_Fragments(int cid, int scc_id, int type) {
 		Vector<String> list = null;
 		String frag = null;

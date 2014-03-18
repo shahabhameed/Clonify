@@ -16,9 +16,29 @@ public class Constants {
 	public static final String TEST_FILE_NAME ="FileClusters_test";
         
 	public static final String SIMPLE_CLONE_CLASSES_FILE_NAME = "Clones";
+	
+	public static final String CLONES_BY_FILE_FILE_NAME = "ClonesByFile";
+	public static final String CLONES_BY_FILE_TABLE_NAME = "clones_by_file";
+	
+	public static final String CLONES_BY_FILE_NORMAL_FILE_NAME = "ClonesByFileNormal";
+	public static final String CLONES_BY_FILE_NORMAL_TABLE_NAME = "clones_by_file_normal";
+	
+	public static final String CLONES_BY_METHOD_FILE_NAME = "ClonesByMethod";
+	public static final String CLONES_BY_METHOD_TABLE_NAME = "clones_by_method";
+	
+	public static final String CLONES_BY_METHOD_NORMAL_FILE_NAME = "ClonesByMethodNormal";
+	public static final String CLONES_BY_METHOD_NORMAL_TABLE_NAME = "clones_by_method_normal";
+	
+	public static final String CLONES_RNR_FILE_NAME = "ClonesRNR";
+	public static final String CLONES_RNR_TABLE_NAME = "clones_rnr";
+	
 	public static final String INFILE_STRUCTURES_FILE_NAME = "InfileStructures";
 	public static final String FILE_CLUSTERS_FILE_NAME ="FileClusters";
 	public static final String CLONES_METHOD_FILE_NAME = "ClonesByMethod";
+	
+	public static final String METHOD_CLUSTER_XX = "MethodClustersXX";
+
+	public static final String METHOD_INFO = "MethodsInfo";
 	
 	public static final int DIR_FILE_VIEW = 0;
 	public static final int FILE_METHOD_VIEW = 1;
@@ -46,6 +66,11 @@ public class Constants {
 	public static final int TOOLTIP_CLONE_CLASS = 22;
 	public static final int TOOLTIP_CLONE_INSTANCE = 23;
 	public static final int TOOLTIP_CLONE_STRUCTURE = 24;
+	
+	/**
+	 * In order to run normally the value of SHOULD_USE_OLD_RESULTS should be false
+	 */
+	public static final boolean SHOULD_USE_OLD_RESULTS = false;
 
 	
 	public static boolean isClassPresent(){

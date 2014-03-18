@@ -16,7 +16,7 @@ class SCC_model extends CI_Model
   }
   
   function getAllSCCSecondaryTableRows($scc_id, $invocationId, $user_id){
-    $where = "tb1.invocation_id = $invocationId and tb1.scc_id= $scc_id";
+    $where = "tb1.invocation_id = $invocationId and tb1.scc_id= $scc_id and tb21.invocation_id = $invocationId";
     
     $this->db->select('*');    
     $this->db->from('scc_instance AS tb1');    
@@ -24,9 +24,10 @@ class SCC_model extends CI_Model
     $this->db->join('repository_file AS tb2', 'tb21.file_id = tb2.id', 'INNER');
     $this->db->join('repository_directory AS tb3', 'tb2.directory_id = tb3.id', 'INNER');
     $this->db->join('user_repository AS tb4', 'tb4.id = tb3.repository_id', 'INNER');
-    $this->db->join('invocation_files AS tb5', 'tb5.file_id = tb2.id', 'INNER');
+   
     $this->db->where($where);
     $result = $this->db->get();
+    // echo $this->db->last_query();exit;
     if ($result->num_rows()> 0){      
       return $result->result();
     }        
@@ -51,7 +52,7 @@ class SCC_model extends CI_Model
   }
   
   public function getAllSCSWithInFile($invocationId, $userId){
-    $where = "tb2.invocation_id = $invocationId AND tb3.invocation_id=$invocationId";
+    $where = "tb1.invocation_id = $invocationId AND tb2.invocation_id = $invocationId AND tb3.invocation_id=$invocationId";
     
     $this->db->select('*');
     $this->db->from('scsinfile_file tb1');
@@ -60,8 +61,8 @@ class SCC_model extends CI_Model
     $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
     $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');    
     $this->db->where($where);
-
     $result = $this->db->get();
+
     if ($result->num_rows()> 0){      
       return $result->result();
     }
@@ -97,7 +98,7 @@ class SCC_model extends CI_Model
   }
   
   public function getAllSCSWithInFileChildTable($invocationId, $scs_id){
-    $where = "tb1.invocation_id = $invocationId AND tb1.scs_infile_id = $scs_id";
+    $where = "tb1.invocation_id = $invocationId AND tb1.scs_infile_id = $scs_id AND tb3.invocation_id = $invocationId";
     
     $this->db->select('*');
     $this->db->from('scsinfile_fragments tb1');
@@ -108,6 +109,7 @@ class SCC_model extends CI_Model
     $this->db->where($where);
 
     $result = $this->db->get();
+     // echo $this->db->last_query();exit;
     if ($result->num_rows()> 0){      
       return $result->result();
     }
@@ -130,7 +132,7 @@ class SCC_model extends CI_Model
   }    
   
   public function getSCSAcrossFileChildTable($invocationId, $scs_id){
-    $where = "tb1.invocation_id = $invocationId AND tb1.scs_crossfile_id = $scs_id";
+    $where = "tb1.invocation_id = $invocationId AND tb1.scs_crossfile_id = $scs_id AND tb3.invocation_id = $invocationId";
     
     $this->db->select('*');
     $this->db->from('scscrossfile_file tb1');
@@ -148,7 +150,7 @@ class SCC_model extends CI_Model
   }
   
   public function getSCCBYFileParentTable($invocationId, $userId){
-    $where = "tb1.invocation_id = $invocationId";
+    $where = "tb1.invocation_id = $invocationId AND tb3.invocation_id=$invocationId";
     
     $this->db->select('*');
     $this->db->from('scc_instance tb1');
@@ -159,7 +161,9 @@ class SCC_model extends CI_Model
     $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
     $this->db->where($where);
 
+
     $result = $this->db->get();
+    // echo $this->db->last_query();exit;
     if ($result->num_rows()> 0){      
       return $result->result();
     }
@@ -167,7 +171,7 @@ class SCC_model extends CI_Model
   }
   
   public function getSCCByFileChildTable($invocationId, $file_id, $userId){
-    $where = "tb1.invocation_id = $invocationId AND tb1.fid=$file_id";
+    $where = "tb1.invocation_id = $invocationId AND tb1.fid=$file_id and tb3.invocation_id = $invocationId";
     
     $this->db->select('*');
     $this->db->from('scc_instance tb1'); 
@@ -177,7 +181,7 @@ class SCC_model extends CI_Model
     $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
     $this->db->where($where);
 
-    $result = $this->db->get();
+    $result = $this->db->get();    
     if ($result->num_rows()> 0){      
       return $result->result();
     }    

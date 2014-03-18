@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 	//------------- Spinners with steps  -------------//
 	$( "#spinner1" ).spinner();
-
+        $( ".spinner" ).spinner();
 	/*Demacial*/
 	$( "#spinner2" ).spinner({
       step: 0.01,

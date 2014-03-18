@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Umer
@@ -67,12 +69,14 @@ public class Database {
 				results = s.executeQuery("select * from invocation_parameters u where u.invocation_id  =" + id + ";");
 				if (results.next()) {					
 					invokeParameter = new InvokeParameter(
-                                                                results.getInt("invocation_id"),
-								results.getInt("min_similatiry_SCC_tokens"), 
-								results.getInt("grouping_choice"),
-								results.getInt("method_analysis"),
-								results.getString("suppressed_tokens"),
-								results.getString("equal_tokens")
+							                                results.getInt("invocation_id"),
+															results.getInt("min_similatiry_SCC_tokens"), 
+															results.getInt("grouping_choice"),
+															results.getInt("method_analysis"),
+															results.getString("suppressed_tokens"),
+															results.getString("equal_tokens"),
+															results.getInt("min_similarity_MCC_tokens"),
+															results.getInt("min_similarity_MCC_percentage")
                                                             );
 					
 					System.out.println(" \ninvokeParameter: " +invokeParameter.toString());
@@ -82,17 +86,36 @@ public class Database {
 							"(select file_id from invocation_files where invocation_id=" + id +");");
 					
 					
+					List<List<InvocationFileInfo>> groupList = new ArrayList<List<InvocationFileInfo>>();
+					Integer group = -1;
+					List<InvocationFileInfo> invocationFileList = new ArrayList<InvocationFileInfo>();
 					while (results.next()) {
 						Integer fileId = results.getInt(1);
 						//a very bad way to get groupId. Should be refactored.
 						Statement st = dbConn.createStatement();
-						ResultSet result2 = st.executeQuery(" SELECT group_id from invocation_files where file_id ="+ fileId +";");
+						ResultSet result2 = st.executeQuery(" SELECT group_id from invocation_files where file_id ="+ fileId +" and invocation_id="+ id +";");
 						result2.next();
 						Integer groupId = result2.getInt(1);
 						String fileName = results.getString(2);
 						InvocationFileInfo invoFileInfo = new InvocationFileInfo(fileName, groupId);
-						invokeParameter.getInput_files().add(invoFileInfo);
-					}					
+						if(group == groupId || group==-1 ){
+							invocationFileList.add(invoFileInfo);
+							group = groupId;
+						}
+						else
+						{
+							groupList.add(invocationFileList);
+							invocationFileList = new ArrayList<InvocationFileInfo>();
+							invocationFileList.add(invoFileInfo);
+							group = groupId;
+						}
+						
+					}
+					if(!invocationFileList.isEmpty())
+					{
+						groupList.add(invocationFileList);
+					}
+					invokeParameter.setInput_files(groupList);
 					System.out.println("Input_files: " + invokeParameter.getInput_files());
 				}
 			}
