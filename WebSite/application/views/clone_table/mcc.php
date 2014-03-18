@@ -145,7 +145,7 @@ width: 50% !important;
                           foreach($mcc_data as $data){
                             $counter++;
                          ?>
-                        <tr class="list_view" data-sccid="<?php echo $data['mcc_id'];?>">
+                        <tr class="list_view" data-mccid="<?php echo $data['mcc_id'];?>">
                           <td><?php echo $counter;?></td>
                           <td><?php echo $data['mcc_id'];?></td>                          
                           <td><?php echo $data['scc'];?></td>
@@ -208,9 +208,8 @@ width: 50% !important;
                         ?>
 <!-- 
 Khizer + Umer: Yakki
-                          <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo $d['endcol'];?>" data-startcol="<?php echo $d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-sccid= "<?php echo $scc_id;?>" data-clid= "<?php echo $d['scc_instance_id'];?>" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
 -->
-						  <tr>
+                          <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo 1;//$d['endcol'];?>" data-startcol="<?php echo 1;//$d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-mccid= "<?php echo $mcc_id;?>" data-clid= "<?php echo $d['mcc_instance_id'];?>" data-path="<?php echo $d['filename']?>">
                             <td><?php echo $counter;?></td>
                             <td><?php echo isset($d['gid']) ? $d['gid'] : "-";?></td>
                             <td><?php echo isset($d['did']) ? $d['did'] : "-";?></td>
@@ -282,12 +281,12 @@ Khizer + Umer: Yakki
 <script>
 $(document).ready(function(){
     $(".list_view").on("click",function(){
-        Clonify.MCC.viewMCCCloneInstance($(this).data("sccid"));
+        Clonify.MCC.viewMCCCloneInstance($(this).data("mccid"));
         event.preventDefault();            
         return false;
     });
      $(".code_view").on("click",function(){
-        Clonify.MCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+        Clonify.MCC.viewCodeData($(this).data("mccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
         event.preventDefault();            
         return false;
     });
