@@ -60,11 +60,22 @@
 
 
     }
+
     function redirect()
     {
         window.location.href = "/Clonify/WebSite/index.php/load_results/";
     }
 
+    function loadResults()
+    {
+        var iNow = new Date().setTime(new Date().getTime() + 1 * 1000); // now plus 2 secs
+        var iEnd = new Date().setTime(new Date().getTime() + 3 * 1000); // now plus 4 secs
+        var submitValue = document.getElementById("submit").value;
+        if (submitValue == "Submit")
+        {
+            setTimeout(redirect, iEnd - iNow);
+        }
+    }
 
     function showMessage()
     {
@@ -161,8 +172,9 @@
                                 -->
 
                                 <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
-                                <input type="submit" formmethod="POST" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submit" onclick="SelectOnSubmit()"/>
-                               
+                                <input type="submit" formmethod="POST" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submit" onclick="SelectOnSubmit();
+                                        loadResults()"/>
+
 
                             </div><!-- End .form-group  -->
 
@@ -240,7 +252,7 @@
                                     <div class="col-lg-3">
                                         <select  name="language" id="language" class="nostyle form-control col-lg-2">
                                             <option></option>
-                                            <?php foreach ($languages as $language) { ?>
+<?php foreach ($languages as $language) { ?>
                                                 <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option><?php } ?>
                                         </select>
                                     </div>
@@ -287,7 +299,7 @@
 
                                                                 <div class="col-lg-12">
                                                                     <select id="box1View" multiple="multiple" class="form-control" style="height:300px;">
-                                                                        <?php foreach ($usrfiles as $usrfile) { ?>
+<?php foreach ($usrfiles as $usrfile) { ?>
                                                                             <option value="<?php echo $usrfile->id ?>" selected="false"><?php echo $usrfile->fname ?></option><?php } ?>
 
                                                                     </select>
@@ -363,7 +375,7 @@
                                                                 <select multiple="multiple" id="suppresed" name="suppresed[]" class="form-control" style="height:300px;">>
                                                                     <?php foreach ($tokens as $token) { ?>
                                                                         <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " - " . $token->token_name ?></option>
-                                                                    <?php } ?>
+<?php } ?>
                                                                 </select>
                                                                 <br/>
                                                                 <label id="filErr" class="myErrLbl"></label>
@@ -406,7 +418,7 @@
                                                                 <select multiple="multiple" id="suppresed2" name="suppresed2[]" class=" form-control" style="height:300px; ">>
                                                                     <?php foreach ($prev_sup_tokens as $prev_sup_token) { ?>
                                                                         <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo $prev_sup_token->token_id . " - " . $prev_sup_token->token_name ?></option>
-                                                                    <?php } ?>
+<?php } ?>
                                                                 </select>													
                                                             </div>
                                                         </div><!-- End .span4 -->
@@ -425,7 +437,7 @@
                                 </div ><!-- End .Main col  -->
 
                             </div>	<!-- End .Row  -->			
-                            <div class="step " id="equal-tokens">  <span class="step-info" data-num="4" data-text="Equal Tokens"></span>
+                            <div class="step submit_step" id="equal-tokens">  <span class="step-info" data-num="4" data-text="Equal Tokens"></span>
                                 <div class="col-lg-12">
                                     <div class="row">
 
@@ -449,7 +461,7 @@
                                                                     <select multiple="multiple" id="equal" name="equal[]" class="multiple form-control" style="height:300px; ">
                                                                         <?php foreach ($alltokens as $token) { ?>
                                                                             <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " = " . $token->token_name ?></option>
-                                                                        <?php } ?>
+<?php } ?>
                                                                     </select>
                                                                     <br/>
                                                                     <label id="filErr" class="myErrLbl"></label>
@@ -502,49 +514,6 @@
 
                             </div><!-- End .step -->      
 
-                            <div class="step submit_step " id="final-step">  <span class="step-info" data-num="5" data-text="Finish"></span>
-                                <div class="col-lg-12">
-                                    <div class="row">
-
-                                        <div class="panel panel-default">
-
-                                            <div class="form-group">
-
-                                                <div class="col-lg-12">
-
-                                                    <div class="panel panel-default">
-
-                                                        <div class="panel-heading">
-                                                            <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Configuration</span> </h4><a href="#" class="minimize">Minimize</a>
-                                                        </div>
-
-                                                        <div class="panel-body">
-                                                            <div class="form-group">
-
-                                                                <div class="col-lg-12">
-
-
-
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div><!-- End .panel body -->
-                                                    </div>
-
-                                                </div><!-- End .span8 -->
-
-
-                                            </div>
-                                        </div><!-- End .row -->
-                                    </div>
-
-
-
-                                </div><!-- End .panel -->
-
-
-                            </div><!-- End .step -->    
                         </form>
 
                     </div>  <!-- End .wizard -->
