@@ -472,8 +472,10 @@ Clonify.hasNamespace = function(ns) {
 Clonify.ns = Clonify.namespace;
 
 Clonify.ns('Clonify.SCC');
+Clonify.ns('Clonify.MCC');
 
 Clonify.SCC = {
+    
   viewSCCCloneInstance: function(_scc_id){
     $(".scc_instance_list").hide();
     $("#scc_instance_list_"+_scc_id).show();
@@ -595,7 +597,6 @@ Clonify.SCC = {
 		$('.dataTables_filter>label>input').addClass('form-control');
         $('.dataTables_filter').hide();
   },
-  
   viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
     var _url = base_url + "home/loadCode";
     window_id = window_id + 1;
@@ -663,7 +664,256 @@ Clonify.SCC = {
     	});
     
   },
+  calculateCloneDifferences : function(){
+      
+        var _url = base_url + "home/cloneDifference";
+        $.post(_url, code_compare_global_attributes, function(r) {
+            
+
+        	console.log(code_compare_global_attributes.file_2_window_id);
+        	console.log(code_compare_global_attributes.file_1_window_id);
+
+            var selector2 = "";
+            for (var i = code_compare_global_attributes.file_2_start_line; i <= code_compare_global_attributes.file_2_end_line; i++){
+                selector2 += '#geshi-window'+code_compare_global_attributes.file_2_window_id+'-'+i+",";
+            }
+            selector2 = selector2.substring(0, selector2.length-1);
+
+            $(selector2).poshytip({
+              content: 'Clone Difference is : '+r
+            });
+            
+            var temp = r.split(",");
+            var file_1_difference_arr = temp[0].split(" ");
+            var file_2_difference_arr = temp[1].split(" ");
+                        
+            $(selector2).each(function(){
+                for(var i = 0; i < file_2_difference_arr.length; i++){
+                    var temp = $.trim(file_2_difference_arr[i]);
+                    var str = $(this).find('div').html();
+                    str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+                }
+                $(this).find('div').html(str);
+            });            
+
+            var selector1 = "";
+            for (var i = code_compare_global_attributes.file_1_start_line; i <= code_compare_global_attributes.file_1_end_line; i++){
+                selector1 += '#geshi-window'+code_compare_global_attributes.file_1_window_id+'-'+i+",";
+            }
+
+            selector1 = selector1.substring(0, selector1.length-1);
+            
+            $(selector1).each(function(){
+                for(var i = 0; i < file_1_difference_arr.length; i++){
+                    var temp = $.trim(file_1_difference_arr[i]);
+                    var str = $(this).find('div').html();
+                    str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+                }
+                $(this).find('div').html(str);
+            });            
+            
+
+            $(selector1).poshytip({
+              content: 'Clone Difference is : '+r
+            });
+
+        });      
+    
+      
+  }
   
+};
+
+Clonify.MCC = {
+    
+  viewMCCCloneInstance: function(_scc_id){
+    $(".scc_instance_list").hide();
+    $("#scc_instance_list_"+_scc_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#scc_instance_list_"+_scc_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#gidnumberfilter",type: "number" },
+                                     { sSelector: "#didnumberfilter",type: "number" },
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+                                     null,
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+  },
+  viewMCSAcrossCloneInstance: function(_scs_id){
+  	$(".scs_instance_list").hide();
+    $("#scs_instance_list_"+_scs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#scs_instance_list_"+_scs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+            "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#gidnumberfilter",type: "number" },
+                                     { sSelector: "#didnumberfilter",type: "number" },
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+                                     { sSelector: "#tcnumberfilter",type: "number" },
+                                     { sSelector: "#pcnumberfilter",type: "number" },
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+
+  },
+  viewMCSCloneInstance: function(_scs_id){
+    $(".scs_instance_list").hide();
+    $("#scs_instance_list_"+_scs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#scs_instance_list_"+_scs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#cidnumberfilter",type: "number" },
+                                     { sSelector: "#scsidnumberfilter",type: "number" },
+                                     { sSelector: "#scsinumberfilter",type: "number" },
+                                     { sSelector: "#scsfidnumberfilter",type: "number" },
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+  },
+  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
+    var _url = base_url + "home/loadCode";
+    window_id = window_id + 1;
+    $("#code_window1").css("overflow", "");
+    $("#code_window2").css("overflow", "");
+    var invocation_id = $("#sidebar_invocation_id").val();
+    var _params = {
+      scc_id : _scc_id,
+      clone_list_id : _clone_list_id,
+      file_path : path,
+      fid : fid,
+      start_line : start_line,
+      file_name : file_name,
+      end_line : end_line,
+      strt_col : strt_col,
+      end_col : end_col,
+      invocation_id: invocation_id,
+      window_id: window_id
+    };
+    
+    $.post(_url, _params, function(r) {
+      $(".code-window-containter").show();
+      if ($("#code_window1").html() == ""){
+        code_compare_global_attributes.file_1_path = path;
+        code_compare_global_attributes.file_1_start_line = start_line;
+        code_compare_global_attributes.file_1_end_line = end_line;
+        code_compare_global_attributes.file_1_window_id = window_id;
+        $(".code-window1").show();
+        $("#file1").html('File Name : '+file_name);
+        $("#code_window1").html(r);        
+        new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map1') );
+        if (start_line == null || start_line == ""){
+          start_line = $("#startline-"+window_id).val();
+        }
+        window.location.hash='geshi-window'+window_id+'-'+start_line;
+      }else{
+        code_compare_global_attributes.file_2_path = path;
+        code_compare_global_attributes.file_2_start_line = start_line;
+        code_compare_global_attributes.file_2_end_line = end_line;
+        code_compare_global_attributes.file_2_window_id = window_id;
+          
+        $("#code_window1").removeClass('col-md-11');
+        $("#code_window1").addClass('col-md-5');
+        $(".code-window2").show();
+        $("#file2").html('File Name : '+file_name);
+        $("#code_window2").html(r);        
+        new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map2') );
+        Clonify.SCC.calculateCloneDifferences();        
+        if (start_line == null || start_line == ""){
+          start_line = $("#startline-"+window_id).val();
+        }
+        window.location.hash='geshi-window'+window_id+'-'+start_line;
+      }      
+    });
+	
+    	$('#code-window1').wrap('<div class="responsive" />');
+    	$('#code-window2').wrap('<div class="responsive" />');
+
+    	$("div.responsive").each(function(){
+    		$(this).niceScroll({
+				cursoropacitymax: 0.7,
+				cursorborderradius: 6,
+				cursorwidth: "4px"
+			});
+    	});
+    
+  },
   calculateCloneDifferences : function(){
       
         var _url = base_url + "home/cloneDifference";

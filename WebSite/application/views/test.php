@@ -177,8 +177,8 @@
                                     <label class="col-lg-4 control-label" for="min_sim_scc">Min Similarities for Simple Clone Class:</label>
                                     <div class="col-lg-1">
 
-                                        <input id="min_scc_token" class="form-control spinner" name="min_scc_token" type="text" value="30" max="9999" min="0" style="height: 25px">
-                                        <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                        <input READONLY id="min_scc_token" class="nostyle form-control spinner" name="min_scc_token" type="text" value="30" max="9999" min="0" style="height: 25px">
+                                       
                                     </div>
 
                                     <div class="col-lg-1">
@@ -207,7 +207,7 @@
                                     <label class="col-lg-4 control-label" for="min_sim_mcc">Min Similarities for Methods Clone Class:</label>
                                     <div class="col-lg-1">
 
-                                        <input id="min_mcc_token" class="form-control spinner" name="min_mcc_token"   type="text" value="30" max="9999" min="0" style="height: 25px">
+                                        <input  READONLY id="min_mcc_token" class="form-control spinner" name="min_mcc_token"   type="text" value="30" max="9999" min="0" style="height: 25px">
 
                                         <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                     </div>
