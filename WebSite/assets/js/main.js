@@ -726,9 +726,9 @@ Clonify.SCC = {
 
 Clonify.MCC = {
     
-  viewMCCCloneInstance: function(_scc_id){
-    $(".scc_instance_list").hide();
-    $("#scc_instance_list_"+_scc_id).show();
+  viewMCCCloneInstance: function(_mcc_id){
+    $(".mcc_instance_list").hide();
+    $("#mcc_instance_list_"+_mcc_id).show();
     $(".code-window-containter").hide();
     $("#code_window1").html("");
     $("#code_window2").html("");
@@ -737,7 +737,7 @@ Clonify.MCC = {
     $(".code-window1").hide();
     $(".code-window2").hide();
     window.location.hash='';
-    $("#scc_instance_list_"+_scc_id+" table").dataTable( {
+    $("#mcc_instance_list_"+_mcc_id+" table").dataTable( {
 			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
 			"sPaginationType": "bootstrap",
 			"bJQueryUI": false,
@@ -847,14 +847,14 @@ Clonify.MCC = {
 		$('.dataTables_filter>label>input').addClass('form-control');
         $('.dataTables_filter').hide();
   },
-  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
+  viewCodeData: function(_mcc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
     var _url = base_url + "home/loadCode";
     window_id = window_id + 1;
     $("#code_window1").css("overflow", "");
     $("#code_window2").css("overflow", "");
     var invocation_id = $("#sidebar_invocation_id").val();
     var _params = {
-      scc_id : _scc_id,
+      mcc_id : _mcc_id,
       clone_list_id : _clone_list_id,
       file_path : path,
       fid : fid,

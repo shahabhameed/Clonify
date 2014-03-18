@@ -282,7 +282,7 @@ Khizer + Umer: Yakki
 <script>
 $(document).ready(function(){
     $(".list_view").on("click",function(){
-        Clonify.MCC.viewSCCCloneInstance($(this).data("sccid"));
+        Clonify.MCC.viewMCCCloneInstance($(this).data("sccid"));
         event.preventDefault();            
         return false;
     });
