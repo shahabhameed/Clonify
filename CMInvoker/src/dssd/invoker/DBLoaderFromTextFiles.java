@@ -33,7 +33,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private static String INSERT_SCSCROSSFILE_SCC = "INSERT INTO scscrossfile_scc(scc_id, scs_crossfile_id, invocation_id) values ";
 	private static String INSERT_SCS_CROSSFILE = "INSERT INTO scs_crossfile(scs_crossfile_id, invocation_id, atc, apc, members) values ";
 	
-	private static String INSERT_MCC = "INSERT INTO mcc(mcc_id, atc, apc, members) values ";
+	private static String INSERT_MCC = "INSERT INTO mcc(mcc_id, atc, apc, invocation_id, members) values ";
 	private static String INSERT_MCC_INSTANCE = "INSERT INTO mcc_instance(mcc_instance_id, mcc_id, mid, tc, pc, fid, did, gid) values ";
 	private static String INSERT_MCC_SCC = "INSERT INTO mcc_scc(mcc_id, scc_id) values ";
 	
@@ -382,11 +382,11 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				for (int i = 0; i < sccs.size(); i++) {
 					insertMCC_SCC(mcc_id, Integer.parseInt(sccs.get(i)));
 				}
-				insertMCC(mcc_id, atc, apc, mSup);
+				insertMCC(mcc_id, atc, apc, invocationId, mSup);
 			}
 		}
 		
-		if (!INSERT_MCC.equalsIgnoreCase("INSERT INTO mcc(mcc_id, atc, apc, members) values ")) {
+		if (!INSERT_MCC.equalsIgnoreCase("INSERT INTO mcc(mcc_id, atc, apc, invocation_id, members) values ")) {
 			System.out.println("\nINSERT_MCC: " + INSERT_MCC);
 			Database.executeTransaction(INSERT_MCC);
 		}
@@ -413,9 +413,9 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	}
 
 	
-	public void insertMCC(int mcc_id, double atc, double apc, int members) {
+	public void insertMCC(int mcc_id, double atc, double apc, int pInvocationId, int members) {
 		INSERT_MCC += "( \"" + mcc_id + "\" , \"" + atc + "\", \"" + apc
-				+ "\", \"" + members + "\"  ),";
+				+ "\", \"" + pInvocationId + "\", \"" + members + "\"  ),";
 	}
 	
 	public void insertMCC_Instance(int mcc_instance_id, int mcc_id, int mid,
