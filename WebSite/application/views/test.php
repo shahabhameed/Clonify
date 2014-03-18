@@ -6,8 +6,8 @@
     function changeText()
     {
         var finalStep = document.getElementById("equal-tokens").getAttribute("style");
-        var nextButton = document.getElementById("next");
-        if (finalStep == "display: block")
+        var nextButton = document.getElementById("submitButton").value;
+        if (finalStep == "display: block;")
         {
             nextButton.innerHTML = "Submit";
         }
@@ -16,7 +16,7 @@
     function changeTextonBack()
     {
 
-        var nextButton = document.getElementById("next");
+        var nextButton = document.getElementById("submitButton");
         if (nextButton.value == "Submit")
         {
             nextButton.innerHTML = "Next";
@@ -151,12 +151,12 @@
 
                     <div class="panel-body noPad clearfix" id="wizard-body">
                         
-                        <form id="wizard" name="wizard" class="form-horizontal " role="form"    method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
-                          
+                        <form id="wizard" name="wizard" class="form-horizontal " role="form" method="POST" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
+                            <div class="msg"></div>
                             <div class="wizard-actions">
 
-                                <button class="btn btn-default pull-left col-lg-1" type="reset" > Back </button>
-                                <button  formmethod="post" class="btn btn-success pull-right col-lg-1" type="submit" onclick="" id="submitButton"> Next</button>
+                                <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack()"> Back </button>
+                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="changeText()" id="submitButton"> Next</button>
 
                                 <!--
                                 <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
@@ -166,7 +166,7 @@
 
                             </div><!-- End .form-group  -->
 
-                            <div class="msg"></div>
+                            
 
                             <div class="wizard-steps clearfix"></div>
 
@@ -425,7 +425,7 @@
                                 </div ><!-- End .Main col  -->
 
                             </div>	<!-- End .Row  -->			
-                            <div class="step submit_step " id="equal-tokens">  <span class="step-info" data-num="4" data-text="Equal Tokens"></span>
+                            <div class="step " id="equal-tokens">  <span class="step-info" data-num="4" data-text="Equal Tokens"></span>
                                 <div class="col-lg-12">
                                     <div class="row">
 
@@ -501,7 +501,50 @@
 
 
                             </div><!-- End .step -->      
+                            
+                            <div class="step submit_step " id="final-step">  <span class="step-info" data-num="5" data-text="Finish"></span>
+                                <div class="col-lg-12">
+                                    <div class="row">
 
+                                        <div class="panel panel-default">
+
+                                            <div class="form-group">
+
+                                                <div class="col-lg-12">
+
+                                                    <div class="panel panel-default">
+
+                                                        <div class="panel-heading">
+                                                            <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Configuration</span> </h4><a href="#" class="minimize">Minimize</a>
+                                                        </div>
+
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+
+                                                                <div class="col-lg-12">
+
+                                                                  
+
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div><!-- End .panel body -->
+                                                    </div>
+
+                                                </div><!-- End .span8 -->
+
+                                                
+                                            </div>
+                                        </div><!-- End .row -->
+                                    </div>
+
+
+
+                                </div><!-- End .panel -->
+
+
+                            </div><!-- End .step -->    
                         </form>
                         
                     </div>  <!-- End .wizard -->

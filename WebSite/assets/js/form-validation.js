@@ -77,7 +77,7 @@ $(document).ready(function() {
                 language: {
                     required: true
                 },
-                mode: {
+                groupingChoice: {
                     required: true
                 },
                 min_scc_token: {
@@ -127,7 +127,7 @@ $(document).ready(function() {
                 language: {
                     required: "Please select a programming language"
                 },
-                mode: {
+                groupingChoice: {
                     required: "Please select a grouping mode "
                 },
                 min_scc_token: {
