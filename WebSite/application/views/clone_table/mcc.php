@@ -119,7 +119,7 @@ width: 50% !important;
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i> SCC List</span></h4>
+                 <h4><span> <i class="fa fa-list-alt fa-2"></i> MCC List</span></h4>
                  <span class="loader" style="top:15px;cursor:pointer;">
                   <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
                 </span>
@@ -187,17 +187,17 @@ width: 50% !important;
                 </div>
                 
                 <div class="panel-body noPad clearfix">
-                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dataTable display table table-bordered" width="100%">
+                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dataTable display table table-bordered col-lg-12" width="100%">
                     <thead>
                       <tr>                        
-                        <th>No.</th>
-                        <th>Group ID</th>
-                        <th>Directory ID</th>
-                        <th>File ID</th>
-                        <th>TC</th>
-                        <th>PC</th>
-                        <th>Method Name</th>
-                        <th>File Name</th>
+                        <th class="col-lg-1">No.</th>
+                        <th class="col-lg-2">Group ID</th>
+                        <th class="col-lg-2">Directory ID</th>
+                        <th class="col-lg-2">File ID</th>
+                        <th class="col-lg-1">TC</th>
+                        <th class="col-lg-1">PC</th>
+                        <th class="col-lg-3">Method Name</th>
+                        <th class="col-lg-4">File Name</th>
                       </tr>
                     </thead>
                       <tbody>

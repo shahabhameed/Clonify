@@ -894,7 +894,7 @@ Clonify.MCC = {
         $("#file2").html('File Name : '+file_name);
         $("#code_window2").html(r);        
         new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map2') );
-        Clonify.SCC.calculateCloneDifferences();        
+        Clonify.MCC.calculateCloneDifferences();        
         if (start_line == null || start_line == ""){
           start_line = $("#startline-"+window_id).val();
         }
