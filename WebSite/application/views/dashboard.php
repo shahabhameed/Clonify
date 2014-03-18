@@ -9,7 +9,7 @@
             <div class="heading">
 
                 <h3>
-                    
+
 
                 </h3>    
                 <ul class="breadcrumb">
@@ -20,45 +20,45 @@
                 </ul>
             </div><!-- End .heading-->
 
-<div>
+            <div>
                 <form method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/ex_cont/saveFilesToDb" >
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default gradient">
-                        <div class="panel-heading">
-                            <h4><span class="icon16 fa fa-cloud-upload"></span>
-                    <span >File Manager</span></h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default gradient">
+                                <div class="panel-heading">
+                                    <h4><span class="icon16 fa fa-cloud-upload"></span>
+                                        <span >File Manager</span></h4>
 
-                        </div>
-                        <div class="panel-body noPad clearfix">
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    
-                                    <button class=" btn btn-success  pull-right col-lg-1" type="submit">Finish</button>
-                                    
                                 </div>
-                            </div>
+                                <div class="panel-body noPad clearfix">
 
-
-
-                            <div class="row-fluid">
-
-                                <div class="box gradient col-lg-12 ">
-
-                                    <div class="content noPad ">
-                                        <div id="elfinder"></div>
+                                    <div class="row ">
+                                        <div class=" box gradient col-lg-12">
+                                            <div class="content noPad col-lg-12">
+                                                <button class=" btn btn-success  pull-right col-lg-1" type="submit">Finish</button>
+                                            </div>  
+                                        </div>
                                     </div>
 
-                                </div><!-- End .box -->
+                                   
 
-                            </div><!-- End .row-fluid -->
+                                    <div class="row">
+
+                                        <div class="box gradient col-lg-12 ">
+
+                                            <div class="content noPad col-lg-12">
+                                                <div id="elfinder"></div>
+                                            </div>
+
+                                        </div><!-- End .box -->
+
+                                    </div><!-- End .row-fluid -->
+                                </div>
+
+                            </div>
                         </div>
-
                     </div>
-                </div>
-            </div>
 
 
 
