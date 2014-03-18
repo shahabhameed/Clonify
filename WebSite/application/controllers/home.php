@@ -10,7 +10,7 @@
       $this->load->library('tank_auth');
       $this->load->library('SyntaxHighlighter');
       $this->load->library('scc');
-	  $this->load->library('mcc');
+      $this->load->library('mcc');
       $this->load->library('common');
       if (!$this->tank_auth->is_logged_in()) {         // Not logged in
         redirect('/auth/login/');
@@ -159,7 +159,7 @@
       echo $data;
     }
 	
-	public function MethodCloneClass() {
+    public function MethodCloneClass() {
       $viewData = array();
       $invocationId = $this->getInvocationIdFromURL();
       $result = $this->mcc->getAllMCCRows($invocationId);   

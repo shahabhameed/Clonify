@@ -28,7 +28,9 @@
                 <?php } ?>
 
                 <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Load Results</a></li>
-
+                <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Load Results</a></li>
+                
+                
                 <?php if (isset($showCloneView) && $invocationId) { ?>
                     <input type="hidden" id="sidebar_invocation_id" value="<?php echo $invocationId; ?>"/>
                     <li>
@@ -46,6 +48,9 @@
                                 </a>
                                 <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCS Across File
+                                </a>
+                                 <a href="<?php echo site_url('home/MethodCloneClass') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>MCC
                                 </a>
                             </li>
                         </ul>
