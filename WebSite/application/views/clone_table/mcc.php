@@ -10,22 +10,24 @@ width: 50% !important;
 </style>
 <div id="wrapper">
   
-<?php  include VIEW_PARTIAL_FOLDER_PATH . '/sidebar.php'; ?>
+<?php 
+  include VIEW_PARTIAL_FOLDER_PATH . '/sidebar.php'; 
+?>
     <div id="content" class="clearfix">
       <div class="contentwrapper">
         <div class="heading">
-          <h3>Single Clone Class</h3> 
+          <h3>Method Clone Class</h3> 
           <ul class="breadcrumb">
                 <li>You are here:</li>
                 <li>
-                    <a href="<?php echo base_url();?>" class="tip" title="Back to dashboard">
+                    <a href="<?php echo base_url();?>" class="tip" title="back to dashboard">
                         <span class="icon16 fa fa-desktop"></span>
                     </a> 
                     <span class="divider">
                         <span class="icon16 fa fa-caret-right"></span>
                     </span>
                 </li>
-                <li class="active">Single Clone Class</li>
+                <li class="active">Method Clone Class</li>
             </ul>                   
         </div>
 
@@ -129,39 +131,39 @@ width: 50% !important;
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>SCC ID</th>
-                        <th>Length</th>                        
+                        <th>MCC ID</th>
+                        <th>Structure(SCC ID,...)</th>
+                        <th>ATC</th>                        
+                        <th>APC</th>                        
                         <th>No. Clones</th>
                       </tr>
                     </thead>
                       <tbody>
                         <?php 
                           $counter = 0;
-                          if($scc_data)
-                          foreach($scc_data as $data){
+                          if($mcc_data)
+                          foreach($mcc_data as $data){
                             $counter++;
                          ?>
-                        <tr class="list_view" data-sccid="<?php echo $data['scc_id'];?>">
-                          <td><?php echo $counter;?>
-
-
-                          </td>
-                          <td><?php echo $data['scc_id'];?></td>                          
-                          <td >
-                            <?php echo $data['length'];?>
-                          </td>
-                          <td><?php echo isset($data['members']) ? $data['members'] : '-';?></td>
-                          
+                        <tr class="list_view" data-sccid="<?php echo $data['mcc_id'];?>">
+                          <td><?php echo $counter;?></td>
+                          <td><?php echo $data['mcc_id'];?></td>                          
+                          <td><?php echo $data['scc'];?></td>
+                          <td><?php echo isset($data['atc']) ? $data['atc'] : '-';?></td>
+                          <td><?php echo isset($data['apc']) ? $data['apc'] : '-';?></td>
+                          <td><?php echo isset($data['length']) ? $data['length'] : '-';?></td>
                         </tr>
                         <?php }?>                        
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>No</th>
-                          <th>SCC ID</th>
-                          <th>Length</th>                        
-                          <th>No. Clones</th>
-                        </tr>
+                        <th>No</th>
+                        <th>MCC ID</th>
+                        <th>Structure(SCC ID,...)</th>
+                        <th>ATC</th>                        
+                        <th>APC</th>                        
+                        <th>No. Clones</th>
+                      </tr>
                     </tfoot>                     
                   </table>
                 </div>
@@ -170,14 +172,14 @@ width: 50% !important;
             </div>
           </div>
            <?php 
-           if($scc_clone_list_data)
-            $scc_clone_list_data = $scc_clone_list_data ? $scc_clone_list_data : array();
-           foreach($scc_clone_list_data as $scc_id => $data){?>
-          <div class="row scc_instance_list" id="scc_instance_list_<?php echo $scc_id;?>">
+           if($mcc_clone_list_data)
+            $mcc_clone_list_data = $mcc_clone_list_data ? $mcc_clone_list_data : array();
+           foreach($mcc_clone_list_data as $mcc_id => $data){?>
+          <div class="row mcc_instance_list" id="mcc_instance_list_<?php echo $mcc_id;?>">
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i>SCC Clone Instance List - SCC ID - <?php echo $scc_id;?></span></h4>
+                 <h4><span> <i class="fa fa-list-alt fa-2"></i>MCC Clone Instance List - MCC ID - <?php echo $mcc_id;?></span></h4>
                  <span class="loader" style="top:15px;cursor:pointer;">
                   <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                 </span>
@@ -192,10 +194,10 @@ width: 50% !important;
                         <th>Group ID</th>
                         <th>Directory ID</th>
                         <th>File ID</th>
-                        <th>Start Line</th>
-                        <th>End Line</th>
+                        <th>TC</th>
+                        <th>PC</th>
+                        <th>Method Name</th>
                         <th>File Name</th>
-                        
                       </tr>
                     </thead>
                       <tbody>
@@ -204,28 +206,33 @@ width: 50% !important;
                         foreach($data as $d){
                           $counter++;
                         ?>
-
+<!-- 
+Khizer + Umer: Yakki
                           <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo $d['endcol'];?>" data-startcol="<?php echo $d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-sccid= "<?php echo $scc_id;?>" data-clid= "<?php echo $d['scc_instance_id'];?>" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
+-->
+						  <tr>
                             <td><?php echo $counter;?></td>
-                            <td><?php echo isset($d['group_id']) ? $d['group_id'] : "-";?></td>
-                            <td><?php echo isset($d['directory_id']) ? $d['directory_id'] : "-";?></td>
+                            <td><?php echo isset($d['gid']) ? $d['gid'] : "-";?></td>
+                            <td><?php echo isset($d['did']) ? $d['did'] : "-";?></td>
                             <td><?php echo $d['fid'];?></td>
-                            <td><?php echo $d['startline'];?></td>
-                            <td><?php echo $d['endline'];?></td>
-                            <td><?php echo $d['directory_name'].$d['file_name'];?></td>                            
+                            <td><?php echo $d['tc'];?></td>
+                            <td><?php echo $d['pc'];?></td>
+                            <td><?php echo $d['methodname'];?></td>                            
+                            <td><?php echo $d['filename'];?></td>                            
                           </tr>
                         <?php }?>
                       </tbody> 
                       <tfoot>
-                        <tr>
-                          <th>No.</th>
-                          <th>Group ID</th>
-                          <th>Directory ID</th>
-                          <th>File ID</th>
-                          <th>Start Line</th>
-                          <th>End Line</th>
-                          <th>File Name</th>
-                        </tr>
+                      <tr>                        
+                        <th>No.</th>
+                        <th>Group ID</th>
+                        <th>Directory ID</th>
+                        <th>File ID</th>
+                        <th>TC</th>
+                        <th>PC</th>
+                        <th>Method Name</th>
+                        <th>File Name</th>
+                      </tr>
                     </tfoot>                       
                   </table>
                 </div>

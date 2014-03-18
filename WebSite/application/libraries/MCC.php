@@ -23,10 +23,10 @@ class MCC
     return $data;
   }
   
-  function getAllSCCSecondaryTableRows($primary_table_row, $invocationId){
+  function getAllMCCSecondaryTableRows($primary_table_row, $invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     
-    $data = $this->ci->scc_model->getAllSCCSecondaryTableRows($primary_table_row['scc_id'], $invocationId, $userId);
+    $data = $this->ci->mcc_model->getAllMCCSecondaryTableRows($primary_table_row['mcc_id'], $invocationId, $userId);
     if ($data){
       $data = json_decode(json_encode($data), true); // Changing Obj in Array
     }    

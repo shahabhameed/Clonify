@@ -149,9 +149,35 @@ CREATE TABLE IF NOT EXISTS `clones_rnr` (
   `value` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- ADDED ON 2014-03-06 0, BY KHIZER
+-- 06 Mar 2014
 ALTER TABLE  `invocation_parameters` ADD  `min_similarity_MCC_tokens` INT NULL ,
 ADD  `min_similarity_MCC_percentage` INT NULL ;
+
+-- 11 Mar 2014
+-- MCC Tables Added
+-- phpMyAdmin SQL Dump
+-- version 4.0.9
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 11, 2014 at 01:11 PM
+-- Server version: 5.5.34
+-- PHP Version: 5.4.22
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `dssd`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `mcc_instance`
@@ -199,5 +225,10 @@ CREATE TABLE IF NOT EXISTS `method` (
   `mname` varchar(100) NOT NULL,
   `tokens` int(11) NOT NULL,
   `startline` int(11) NOT NULL,
-  `endline` int(11) NOT NULL
+  `endline` int(11) NOT NULL,
+  PRIMARY KEY (`mid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

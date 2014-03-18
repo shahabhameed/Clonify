@@ -10,6 +10,7 @@
       $this->load->library('tank_auth');
       $this->load->library('SyntaxHighlighter');
       $this->load->library('scc');
+	  $this->load->library('mcc');
       $this->load->library('common');
       if (!$this->tank_auth->is_logged_in()) {         // Not logged in
         redirect('/auth/login/');
@@ -161,20 +162,20 @@
 	public function MethodCloneClass() {
       $viewData = array();
       $invocationId = $this->getInvocationIdFromURL();
-      $result = $this->scc->getAllSCCRows($invocationId);   
-      $viewData['scc_data'] = $result;
+      $result = $this->mcc->getAllMCCRows($invocationId);   
+      $viewData['mcc_data'] = $result;
       $secondary_table_rows = array();
       if ($result){
         foreach($result as $row){
-          $secondary_table_rows[$row['scc_id']] = $this->scc->getAllSCCSecondaryTableRows($row, $invocationId);
+          $secondary_table_rows[$row['mcc_id']] = $this->mcc->getAllMCCSecondaryTableRows($row, $invocationId);
         }
       }
       
-      $viewData['scc_clone_list_data'] = $secondary_table_rows;
+      $viewData['mcc_clone_list_data'] = $secondary_table_rows;
       $viewData['invocationId'] = $invocationId;
       $viewData['showCloneView'] = true;
       $this->load->view('partials/main_header');
-      $this->load->view('clone_table/scc.php', $viewData);
+      $this->load->view('clone_table/mcc.php', $viewData);
       $this->load->view('partials/main_footer');
     }
 
