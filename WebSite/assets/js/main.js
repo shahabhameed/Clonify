@@ -11,9 +11,11 @@ var code_compare_global_attributes = {
     file_1_path : null,
     file_1_start_line : null,
     file_1_end_line : null,
+    file_1_window_id : null,
     file_2_path : null,
     file_2_start_line : null,
-    file_2_end_line : null
+    file_2_end_line : null,
+    file_2_window_id : null
 }
 var window_id = 0;
 //------------- Modernizr -------------//
@@ -620,6 +622,7 @@ Clonify.SCC = {
         code_compare_global_attributes.file_1_path = path;
         code_compare_global_attributes.file_1_start_line = start_line;
         code_compare_global_attributes.file_1_end_line = end_line;
+        code_compare_global_attributes.file_1_window_id = window_id;
         $(".code-window1").show();
         $("#file1").html('File Name : '+file_name);
         $("#code_window1").html(r);        
@@ -632,6 +635,7 @@ Clonify.SCC = {
         code_compare_global_attributes.file_2_path = path;
         code_compare_global_attributes.file_2_start_line = start_line;
         code_compare_global_attributes.file_2_end_line = end_line;
+        code_compare_global_attributes.file_2_window_id = window_id;
           
         $("#code_window1").removeClass('col-md-11');
         $("#code_window1").addClass('col-md-5');
@@ -667,7 +671,7 @@ Clonify.SCC = {
             
             var selector2 = "";
             for (var i = code_compare_global_attributes.file_2_start_line; i <= code_compare_global_attributes.file_2_end_line; i++){
-                selector2 += '#geshi-window1-'+i+",";
+                selector2 += '#geshi-window'+code_compare_global_attributes.file_2_window_id+'-'+i+",";
             }
             selector2 = selector2.substring(0, selector2.length-1);
 
@@ -690,7 +694,7 @@ Clonify.SCC = {
 
             var selector1 = "";
             for (var i = code_compare_global_attributes.file_1_start_line; i <= code_compare_global_attributes.file_1_end_line; i++){
-                selector1 += '#geshi-window0-'+i+",";
+                selector1 += '#geshi-window'+code_compare_global_attributes.file_2_window_id+'-'+i+",";
             }
 
             selector1 = selector1.substring(0, selector1.length-1);
