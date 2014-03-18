@@ -2,7 +2,6 @@ package dssd.invoker;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -136,8 +135,11 @@ public class TextInputFilesGenerator extends InputHelper{
 				System.out.println("\nfilePath: " + filePath);
 				
 				PrintWriter writer = new PrintWriter(filePath, "UTF-8");
+				//Comment for Team1: Please replace "50,50" with appropriate field.
+				String tempString = "50"+"," + "50"+"," + invokeParameter.getMin_similatiry_MCC_percent()+"," + invokeParameter.getMin_similatiry_MCC_tokens();
 				
-				//TODO out of scope at the moment
+				System.out.println(tempString);
+				writer.println(tempString);
 				
 				writer.close();
 			}

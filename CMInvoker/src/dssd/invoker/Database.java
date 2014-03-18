@@ -69,12 +69,14 @@ public class Database {
 				results = s.executeQuery("select * from invocation_parameters u where u.invocation_id  =" + id + ";");
 				if (results.next()) {					
 					invokeParameter = new InvokeParameter(
-                                                                results.getInt("invocation_id"),
-								results.getInt("min_similatiry_SCC_tokens"), 
-								results.getInt("grouping_choice"),
-								results.getInt("method_analysis"),
-								results.getString("suppressed_tokens"),
-								results.getString("equal_tokens")
+							                                results.getInt("invocation_id"),
+															results.getInt("min_similatiry_SCC_tokens"), 
+															results.getInt("grouping_choice"),
+															results.getInt("method_analysis"),
+															results.getString("suppressed_tokens"),
+															results.getString("equal_tokens"),
+															results.getInt("min_similarity_MCC_tokens"),
+															results.getInt("min_similarity_MCC_percentage")
                                                             );
 					
 					System.out.println(" \ninvokeParameter: " +invokeParameter.toString());

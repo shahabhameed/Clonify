@@ -143,6 +143,9 @@ class Invoke_model extends CI_Model
 		$status = '0';// 0 - Inactive (Not Started Yet)
 		$date = date('Y-m-d H:i:s');
 		
+		$mcc_min_sim_tok = $this->session->userdata('mcc_min_sim_tok');
+		$mcc_min_sim_per = $this->session->userdata('mcc_min_sim_per');
+
 		$iname = $this->session->userdata('iname');
 		$grouping_choice = $this->session->userdata('grouping_choice');
 		$method_analysis = $this->session->userdata('method_analysis');
@@ -174,7 +177,7 @@ class Invoke_model extends CI_Model
 		$invoke_id = mysql_insert_id();
 		$this->session->set_userdata(array('invoke_id'=>$invoke_id));
 
-		$this->db->query("INSERT INTO invocation_parameters(min_similatiry_SCC_tokens,grouping_choice,method_analysis,invocation_id,suppressed_tokens,equal_tokens,language_id) VALUES('$scc_min_sim','$grouping_choice','$grouping_choice','$invoke_id','$supTokens','$eqTokens','$language')");
+		$this->db->query("INSERT INTO invocation_parameters(min_similatiry_SCC_tokens,grouping_choice,method_analysis,invocation_id,suppressed_tokens,equal_tokens,language_id,min_similarity_MCC_tokens,min_similarity_MCC_percentage) VALUES('$scc_min_sim','$grouping_choice','$method_analysis','$invoke_id','$supTokens','$eqTokens','$language','$mcc_min_sim_tok','$mcc_min_sim_per')");
 		
 		//FILE GROUPS
 		$groupList = $_POST['hiddenGroup']; //get hidden list
@@ -364,9 +367,12 @@ class Invoke_model extends CI_Model
 	function myinit()
     {
 		//Initial Params
-        $iName = $_POST['iName'];
+                $iName = $_POST['iName'];
 		$iComment = $_POST['iComment'];
-		$scc_min_sim = $_POST['spinner1'];
+		$scc_min_sim = $_POST['min_scc_token'];
+		$mcc_min_sim_tok = $_POST['min_mcc_token'];
+		$mcc_min_sim_per = $_POST['min_mcc_percent'];
+
 		$language = $_POST['language'];
 		if(isset($_POST['methodAnalysis'])){
 	        $method_analysis = TRUE;
@@ -374,7 +380,7 @@ class Invoke_model extends CI_Model
 		else{
 			$method_analysis = FALSE;
 		}
-        $grouping_choice = $_POST['groupingChoice'];
+                $grouping_choice = $_POST['groupingChoice'];
 		
 		//Suppressed Tokens
 		$supTokens = '';
@@ -434,7 +440,7 @@ class Invoke_model extends CI_Model
 		
 		//Session
 		
-		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment));
+		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment,'mcc_min_sim_tok'=>$mcc_min_sim_tok,'mcc_min_sim_per'=>$mcc_min_sim_per));
 		$this->session->set_userdata(array('supTokens'=>$supTokens));
 		$this->session->set_userdata(array('eqTokens'=>$eqTokens));
 

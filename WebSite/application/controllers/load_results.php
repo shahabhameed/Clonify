@@ -58,7 +58,7 @@ class Load_results extends CI_Controller
 		$this->load->view('load_result',$data);
 		$this->load->view('partials/main_footer');	
 		
-		unlink('./uploads/'.$fileName.'.txt');
+		//unlink('./uploads/'.$fileName.'.txt');
 	}	
 }
 

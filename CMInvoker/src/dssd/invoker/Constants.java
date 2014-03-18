@@ -36,6 +36,10 @@ public class Constants {
 	public static final String FILE_CLUSTERS_FILE_NAME ="FileClusters";
 	public static final String CLONES_METHOD_FILE_NAME = "ClonesByMethod";
 	
+	public static final String METHOD_CLUSTER_XX = "MethodClustersXX";
+
+	public static final String METHOD_INFO = "MethodsInfo";
+	
 	public static final int DIR_FILE_VIEW = 0;
 	public static final int FILE_METHOD_VIEW = 1;
 	public static final int SCC_VIEW = 2;
@@ -62,6 +66,11 @@ public class Constants {
 	public static final int TOOLTIP_CLONE_CLASS = 22;
 	public static final int TOOLTIP_CLONE_INSTANCE = 23;
 	public static final int TOOLTIP_CLONE_STRUCTURE = 24;
+	
+	/**
+	 * In order to run normally the value of SHOULD_USE_OLD_RESULTS should be false
+	 */
+	public static final boolean SHOULD_USE_OLD_RESULTS = false;
 
 	
 	public static boolean isClassPresent(){

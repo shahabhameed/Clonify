@@ -158,7 +158,7 @@
                         <td><?php echo $result['group_id'];?></td>
                         <td><?php echo $result['directory_id'];?></td>
                         <td><?php echo $result['fid'];?></td>
-                        <td><?php echo $result['file_name'];?></td>
+                        <td><?php echo $result['directory_name'] . $result['file_name'];?></td>
                         <td><?php echo $result['members'];?></td>
                       </tr>
                       <?php }?>
@@ -310,12 +310,12 @@ $(document).ready(function(){
       $('.dataTables_filter>label>input').addClass('form-control');
       $('.dataTables_filter').hide();
                   
-    $(".list_view").on("click",function(){
+    $(".list_view").live("click",function(){        
         Clonify.SCC.viewSCCCloneInstance($(this).data("sccfileid"));
         event.preventDefault();            
         return false;
     });
-     $(".code_view").on("click",function(){
+     $(".code_view").live("click",function(){
         Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
         event.preventDefault();            
         return false;

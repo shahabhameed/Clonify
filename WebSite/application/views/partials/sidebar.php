@@ -20,14 +20,17 @@
 
         <div class="mainnav">
             <ul>
-                <li>
-                    <a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>File Manager</a>
-                </li>
+                <li><a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>File Manager</a></li>
                 <li><a href=" <?php echo site_url('invoke/'); ?>"><span class="icon16  icomoon-icon-equalizer-2"></span>Invoke</a></li>
+
                 <?php if ($this->tank_auth->get_role_id() == 1) { ?>
                     <li><a href="<?php echo site_url('updatetokens/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Update Tokens</a></li>
                 <?php } ?>
+
                 <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Load Results</a></li>
+                <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Load Results</a></li>
+                
+                
                 <?php if (isset($showCloneView) && $invocationId) { ?>
                     <input type="hidden" id="sidebar_invocation_id" value="<?php echo $invocationId; ?>"/>
                     <li>
@@ -48,6 +51,9 @@
                                 </a>
                                 <a href="<?php echo site_url('home/fcswithindirectory') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Within Directory
+                                </a>
+                                 <a href="<?php echo site_url('home/MethodCloneClass') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>MCC
                                 </a>
                             </li>
                         </ul>

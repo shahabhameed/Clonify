@@ -27,8 +27,7 @@ public abstract class InputHelper {
 	 * required by Clone Miner "clones.exe" in inputFolder
 	 */
 	public boolean makeCMInputFile(){
-			writeToDisk();
-			return true;
+			return writeToDisk();
 	}
 	
 	public abstract boolean writeToDisk();
