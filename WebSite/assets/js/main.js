@@ -15,7 +15,8 @@ var code_compare_global_attributes = {
     file_2_window_id: null,
     file_2_path : null,
     file_2_start_line : null,
-    file_2_end_line : null
+    file_2_end_line : null,
+    file_2_window_id : null
 }
 var window_id = 0;
 //------------- Modernizr -------------//
@@ -948,7 +949,11 @@ Clonify.MCC = {
 
             var selector1 = "";
             for (var i = code_compare_global_attributes.file_1_start_line; i <= code_compare_global_attributes.file_1_end_line; i++){
-                selector1 += '#geshi-window'+code_compare_global_attributes.file_1_window_id+'-'+i+",";
+// <<<<<<< HEAD
+                selector1 += '#geshi-window'+code_compare_global_attributes.file_2_window_id+'-'+i+",";
+// =======
+//                 selector1 += '#geshi-window'+code_compare_global_attributes.file_1_window_id+'-'+i+",";
+// >>>>>>> 1bee5778711ae865d03caaf1167b776b38c6f4f1
             }
 
             selector1 = selector1.substring(0, selector1.length-1);
