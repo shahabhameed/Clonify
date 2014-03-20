@@ -162,7 +162,7 @@ width: 50% !important;
                         <th>Structure(SCC ID,...)</th>
                         <th>ATC</th>                        
                         <th>APC</th>                        
-                        <th>No. Clones</th>
+                        <th>No. of Instances</th>
                       </tr>
                     </tfoot>                     
                   </table>
@@ -216,8 +216,8 @@ Khizer + Umer: Yakki
                             <td><?php echo $d['fid'];?></td>
                             <td><?php echo $d['tc'];?></td>
                             <td><?php echo $d['pc'];?></td>
-                            <td><?php echo $d['methodname'];?></td>                            
-                            <td><?php echo $d['filename'];?></td>                            
+                            <td style="text-align:left"><?php echo $d['methodname'];?></td>                            
+                            <td style="text-align:left"><?php echo $d['filename'];?></td>                            
                           </tr>
                         <?php }?>
                       </tbody> 

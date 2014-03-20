@@ -216,7 +216,7 @@
                                                 <td><?php echo $d['fid']; ?></td>
                                                 <td><?php echo $d['startline']; ?></td>
                                                 <td><?php echo $d['endline']; ?></td>
-                                                <td><?php echo $d['directory_name'] . $d['file_name']; ?></td>                            
+                                                <td style="text-align:left" ><?php echo $d['directory_name'] . $d['file_name']; ?></td>                            
                                             </tr>
     <?php } ?>
                                     </tbody> 
