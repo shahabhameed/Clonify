@@ -16,7 +16,23 @@
         }
     }
 
+    function validateGroup()
+    {
+        var groupListCount = document.getElementById("hiddenGroup").options.length;
+        var error = document.getElementById("groupErr");
 
+        if (groupListCount < 1)
+        {
+            error.innerHTML = "Please add a group"
+            return false
+        }
+        else
+        {
+            error.innerHTML = "";
+            return true
+        }
+
+    }
 
     function showProgress()
     {
@@ -44,7 +60,7 @@
 
     function redirect()
     {
-        window.location.href = "/Clonify/WebSite/index.php/load_results/";
+        window.location.href = "<?php echo base_url(); ?>index.php/load_results/";
     }
 
     function loadResults()
@@ -162,9 +178,8 @@
                                 -->
 
                                 <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
-                                <input type="submit" formmethod="POST" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submit" onclick="SelectOnSubmit();
+                                <input type="submit" formmethod="POST" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submit"   onclick="SelectOnSubmit();
                                         loadResults()"/>
-
 
                             </div><!-- End .form-group  -->
 
@@ -187,7 +202,7 @@
                                                     <div class="panel panel-default">
 
                                                         <div class="panel-heading">
-                                                            <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Invocation Configuration</span> </h4><a href="#" class="minimize">Minimize</a>
+                                                            <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Tokens Configuration</span> </h4><a href="#" class="minimize">Minimize</a>
                                                         </div>
 
                                                         <div class="panel-body">
@@ -196,29 +211,24 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="form-group">
 
-                                                                        <label class="col-lg-6 control-label" for="min_sim_scc">Min Similarities for Simple Clone Class:</label>
-                                                                        <div class="col-lg-2">
+                                                                        <label class="col-lg-6 control-label" for="min_scc_token">Min Similarities for Simple Clone Class:</label>
+                                                                        <div class="col-lg-1">
 
-                                                                            <INPUT id="min_scc_token" onkeypress="return isNumberKey(event)" type="text" name="min_scc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3">
+                                                                            <INPUT id="min_scc_token" onkeypress="return isNumberKey(event)" type="text" name="min_scc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
 
                                                                         </div>
 
 
-                                                                        <label class="col-lg-0 control-label" for="min_sim_mcc">Tokens</label>
+                                                                        <label class="col-lg-1 control-label" for="min_sim_mcc">Tokens</label>
 
 
                                                                     </div><!-- End .form-group  -->
                                                                     <div class="form-group">
                                                                         <label class="col-lg-6 control-label" for="methodAnalysis">Method Analysis:</label>
 
-                                                                        <div class="col-lg-2">
-                                                                            <label class="checkbox-inline">
+                                                                        <div class="col-lg-1 " >
 
-                                                                                <input type="checkbox" name="methodAnalysis" id="methodAnalysis" checked="checked" onclick="enable_text(this.checked)"/>
-                                                                            </label>
-
-
-
+                                                                            <input class="nostyle" type="checkbox" name="methodAnalysis" id="methodAnalysis" checked="checked" onclick="enable_text(this.checked)" style="width: 1.5em;height: 1.5em; horizontal-align:middle;vertical-align:middle"/>
 
                                                                             <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
 
@@ -231,28 +241,57 @@
 
 
                                                                     <div class="form-group">
-                                                                        <label class="col-lg-6 control-label" for="min_sim_mcc">Min Similarities for Methods Clone Class:</label>
-                                                                        <div class="col-lg-2">
+                                                                        <label class="col-lg-6 control-label" for="min_mcc_token">Min Similarities for Methods Clone Class:</label>
+                                                                        <div class="col-lg-1">
 
-                                        <!--<input  READONLY id="min_mcc_token" class="form-control spinner" name="min_mcc_token"   type="text" value="30" max="9999" min="0" style="height: 25px">-->
-                                                                            <INPUT id="min_mcc_token" onkeypress="return isNumberKey(event)" type="text" name="min_mcc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3">
+
+                                                                            <INPUT id="min_mcc_token" onkeypress="return isNumberKey(event)" type="text" name="min_mcc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
 
                                                                             <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                                                         </div>
-                                                                        <div class="col-lg-0">
+                                                                        <div class="col-lg-1">
                                                                             <label class="col-lg-0 control-label" for="min_mcc_token">Tokens</label>
                                                                         </div>
 
 
                                                                     </div><!-- End .form-group  -->
                                                                     <div class="form-group">
-                                                                        <label class="col-lg-6 control-label" for="min_sim_mcc">Token Percentage:</label>
-                                                                        <div class="col-lg-2">
-                                                                            <input id="min_mcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_mcc_percent" type="text" value="30" min="0"  max="100" maxlength="3">
+                                                                        <label class="col-lg-6 control-label" for="min_mcc_percent">MCC Token Percentage:</label>
+                                                                        <div class="col-lg-1">
+                                                                            <input id="min_mcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_mcc_percent" type="text" value="30" min="0"  max="100" maxlength="3" style="width:50px">
 
                                                                         </div>
+                                                                        <div class="col-lg-1">
+                                                                            <label class="col-lg-1 control-label" for="min_mcc_percent">%</label>
+                                                                            <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-lg-6 control-label" for="min_fcc_token">Min Similarities for File Clone Class:</label>
+                                                                        <div class="col-lg-1">
+
+                                        <!--<input  READONLY id="min_mcc_token" class="form-control spinner" name="min_mcc_token"   type="text" value="30" max="9999" min="0" style="height: 25px">-->
+                                                                            <INPUT id="min_fcc_token" onkeypress="return isNumberKey(event)" type="text" name="min_fcc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
+
+                                                                            <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                                        </div>
                                                                         <div class="col-lg-0">
-                                                                            <label class="col-lg-0 control-label" for="min_mcc_percent">%</label>
+                                                                            <label class="col-lg-1 control-label" for="min_fcc_token">Tokens</label>
+                                                                        </div>
+
+
+                                                                    </div><!-- End .form-group  -->
+                                                                    <div class="form-group">
+                                                                        <label class="col-lg-6 control-label" for="min_fcc_percent">FCC Token Percentage:</label>
+                                                                        <div class="col-lg-1">
+                                                                            <input id="min_fcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_fcc_percent" type="text" value="30" min="0"  max="100" maxlength="3" style="width:50px">
+
+                                                                        </div>
+                                                                        <div class="col-lg-1">
+                                                                            <label class="col-lg-1 control-label" for="min_fcc_percent">%</label>
                                                                             <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
 
                                                                         </div>
@@ -260,29 +299,7 @@
                                                                     </div>
 
 
-                                                                    <div class="form-group">
-                                                                        <label class="col-lg-6 control-label" >Grouping Mode:</label>
-                                                                        <div class="col-lg-3">
-                                                                            <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2">
-                                                                                <option></option>
-                                                                                <option value="mixed">Mixed Mode</option>
-                                                                                <option value="across_groups">Across Groups</option>
-                                                                            </select>  
-                                                                        </div>
 
-                                                                    </div><!-- End .form-group  -->
-
-                                                                    <div class="form-group">
-                                                                        <label class="col-lg-6 control-label" >Language:</label>
-                                                                        <div class="col-lg-3">
-                                                                            <select  name="language" id="language" class="nostyle form-control col-lg-2">
-                                                                                <option></option>
-                                                                                <?php foreach ($languages as $language) { ?>
-                                                                                    <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option><?php } ?>
-                                                                            </select>
-                                                                        </div>
-
-                                                                    </div><!-- End .form-group  -->
 
 
                                                                 </div>
@@ -297,13 +314,37 @@
 
                                                     <div class="panel panel-default">
 
-                                                        <div class="panel-heading"> <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span></span></h4>
+                                                        <div class="panel-heading"> <h4><span class="icon16 icomoon-icon-user-plus"></span><span>Invocation Configuration</span></h4>
                                                             <a href="#" class="minimize">Minimize</a>
                                                         </div>
 
                                                         <div class="panel-body">
                                                             <div class="form-group">
-                                                                <label class="col-lg-2 control-label" for="name">Name:</label>
+                                                                <label class="col-lg-3 control-label" >Language:</label>
+                                                                <div class="col-lg-6">
+                                                                    <select  name="language" id="language" class="nostyle form-control col-lg-2" style="width:auto">
+                                                                        <option></option>
+                                                                        <?php foreach ($languages as $language) { ?>
+                                                                            <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option><?php } ?>
+                                                                    </select>
+                                                                </div>
+
+                                                            </div><!-- End .form-group  -->
+                                                            <div class="form-group">
+                                                                <label class="col-lg-3 control-label" >Grouping Mode:</label>
+                                                                <div class="col-lg-6">
+                                                                    <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2" style="width:auto">
+                                                                        <option></option>
+                                                                        <option value="mixed">Mixed Mode</option>
+                                                                        <option value="across_groups">Across Groups</option>
+                                                                    </select>  
+                                                                </div>
+
+                                                            </div><!-- End .form-group  -->
+
+                                                            
+                                                            <div class="form-group">
+                                                                <label class="col-lg-3 control-label" for="name">Invocation Name:</label>
                                                                 <div class="col-lg-6">
                                                                     <input  name="iName" id="iName"  type="text" class="form-control" placeholder="Enter a short name for this invocation">
                                                                     <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
@@ -311,14 +352,14 @@
 
                                                             </div><!-- End .form-group  -->
                                                             <div class="form-group">
-                                                                <label class="col-lg-2 control-label" for="username">Comments:</label>
-                                                                <div class="col-lg-10">
-                                                                    <textarea rows="3" class="form-control " name="iComment" id="iComment" placeholder="Enter your comments"></textarea>
+                                                                <label class="col-lg-3 control-label" for="username">Comments:</label>
+                                                                <div class="col-lg-9">
+                                                                    <textarea rows="6" class="form-control " name="iComment" id="iComment" placeholder="Enter your comments"></textarea>
                                                                     <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                                                 </div>
                                                             </div><!-- End .form-group  -->
 
-                                                           
+
 
 
                                                         </div>
@@ -337,31 +378,6 @@
 
 
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                             <div class="step" id="code-groups"><span class="step-info" data-num="2" data-text="Code Groups"></span>
@@ -398,10 +414,25 @@
 
                                                                 </div>
 
-                                                                <div align="right" class="col-lg-12"> 
-                                                                    <button  type="button" class="btn btn-success btn marginT6" onclick="createNewElement('Group', 'box1View');" >Create Group</button>
+                                                                <div  class="col-lg-12"> 
+                                                                    <div class="form-group" >
+                                                                        <label class="col-lg-0 marginL20 control-label pull-left" >Group Count:</label>
+                                                                        <div class="col-lg-5">
+                                                                            <input  READONLY name="groupCount" id="groupCount"   type="text"  class="form-control" value="0" style="width:50px">
+                                                                            <select id="hiddenGroup" name="hiddenGroup[]" style="display:none" multiple="multiple"></select>
+                                                                        </div>
+                                                                        
+                                                                        <div  class="col-lg-5"> 
+                                                                        <button  type="button" class="btn btn-success btn marginT6 pull-right" onclick="createNewElement('Group', 'box1View');" >Create Group</button>
+
+                                                                    </div>
+
+                                                                    </div><!-- End .form-group  -->
+                                                                   
+                                                                    
+
                                                                 </div>
-                                                                <select id="hiddenGroup" name="hiddenGroup[]" style="display:none" multiple="multiple"></select>
+
 
 
 

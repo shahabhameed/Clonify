@@ -63,9 +63,10 @@ $(document).ready(function() {
                     required: true,
                     email: true
                 },
-                hiddenGroup: {
-                    required: true,
-                    minlength: 1
+                groupCount: {
+                    
+                    min: 1
+                    
 
                 },
                 min_mcc_percent: {
@@ -87,6 +88,12 @@ $(document).ready(function() {
                     max: 9999
                 },
                 min_mcc_token: {
+                    required: true,
+                    digits:true,
+                    min: 0,
+                    max: 9999
+                },
+                 min_fcc_token: {
                     required: true,
                     digits:true,
                     min: 0,
@@ -114,9 +121,9 @@ $(document).ready(function() {
                     minlength: "Your password must be at least 5 characters long",
                     equalTo: "Please enter the same password as above"
                 },
-                hiddenGroup: {
-                    required: "Please create a group",
-                    minlength: "At least 1 group is required"
+                groupCount: {
+                    
+                    min: "Please create a Code Group to proceed"
                 },
                 min_mcc_percent: {
                     required:  "Please enter a value",
@@ -136,6 +143,11 @@ $(document).ready(function() {
                     max: "Enter value between 0-999"
                 },
                 min_mcc_token: {
+                    required: "Please enter a value",
+                    min: "Enter value between 0-999",
+                    max: "Enter value between 0-999"
+                },
+                 min_fcc_token: {
                     required: "Please enter a value",
                     min: "Enter value between 0-999",
                     max: "Enter value between 0-999"
