@@ -148,7 +148,7 @@
                         <th>Directory ID</th>
                         <th>File Id</th>
                         <th>File Name</th>
-                        <th>No. Clones</th>
+                        <th>No. of Instances</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -170,7 +170,7 @@
                         <th>Directory ID</th>
                         <th>File Id</th>
                         <th>File Name</th>
-                        <th>No. Clones</th>
+                        <th>No. of Instances</th>
                       </tr>
                     </tfoot>
                   </table>

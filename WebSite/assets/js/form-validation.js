@@ -119,7 +119,7 @@ $(document).ready(function() {
                     minlength: "At least 1 group is required"
                 },
                 min_mcc_percent: {
-                    required: true,
+                    required:  "Please enter a value",
                     min: "Enter value between 0-100",
                     max: "Enter value between 0-100"
 
@@ -131,14 +131,14 @@ $(document).ready(function() {
                     required: "Please select a grouping mode "
                 },
                 min_scc_token: {
-                    required: "Please enter a value ",
-                    min: "Enter value between 0-9999",
-                    max: "Enter value between 0-9999"
+                    required: "Please enter a value",
+                    min: "Enter value between 0-999",
+                    max: "Enter value between 0-999"
                 },
                 min_mcc_token: {
-                    required: "Please enter a value ",
-                    min: "Enter value between 0-9999",
-                    max: "Enter value between 0-9999"
+                    required: "Please enter a value",
+                    min: "Enter value between 0-999",
+                    max: "Enter value between 0-999"
                 },
                 email1: "Please enter a valid email address",
                 gender: "Choose a gender"

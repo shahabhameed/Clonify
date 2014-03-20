@@ -168,7 +168,7 @@
                         <th>Structure (SCC ID)</th>                        
                         <th>ATC</th>
                         <th>APC</th>                        
-                        <th>No. Clones</th>
+                        <th>No. of Instances</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -190,7 +190,7 @@
                         <th>Structure (SCC ID)</th>                        
                         <th>ATC</th>
                         <th>APC</th>                        
-                        <th>No. Clones</th>
+                        <th>No. of Instances</th>
                       </tr>
                     </tfoot>
                   </table>

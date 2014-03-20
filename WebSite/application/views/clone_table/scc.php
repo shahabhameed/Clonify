@@ -53,7 +53,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <u><h4>No.Colones</h4></u>
+                                    <u><h4>No. of Instances</h4></u>
                                 </div>
                             </div>
                             <div class="row">
@@ -133,7 +133,7 @@
                                         <th>No</th>
                                         <th>SCC ID</th>
                                         <th>Length</th>                        
-                                        <th>No. Clones</th>
+                                        <th>No. of Instances</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -162,7 +162,7 @@
                                         <th>No</th>
                                         <th>SCC ID</th>
                                         <th>Length</th>                        
-                                        <th>No. Clones</th>
+                                        <th>No. of Instances</th>
                                     </tr>
                                 </tfoot>                     
                             </table>
