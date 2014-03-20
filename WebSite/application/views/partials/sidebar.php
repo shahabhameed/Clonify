@@ -52,8 +52,14 @@
                                 <a href="<?php echo site_url('home/fcswithindirectory') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Within Directory
                                 </a>
-                                 <a href="<?php echo site_url('home/MethodCloneClass') . "/" . $invocationId; ?>">
+                                <a href="<?php echo site_url('home/MethodCloneClass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>MCC
+                                </a>
+                                <a href="<?php echo site_url('home/MethodCloneClassByFile') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>MCC By File
+                                </a>
+                                <a href="<?php echo site_url('home/MethodCloneClassAcrossFile') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>MCS Across File
                                 </a>
                             </li>
                         </ul>
