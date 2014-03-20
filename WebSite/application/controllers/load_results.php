@@ -20,7 +20,7 @@ class Load_results extends CI_Controller
 		$data['user_name'] = $this->tank_auth->get_username();
 		$data['results']=$this->load_results_model->get_all_results();
 		
-		$this->load->view('partials/main_header');
+		$this->load->view('partials/main_header_refresh');
 		$this->load->view('partials/sidebar');
 		$this->load->view('load_result',$data);
 		$this->load->view('partials/main_footer');
@@ -53,7 +53,7 @@ class Load_results extends CI_Controller
 		$data['results']=$this->load_results_model->get_all_results();
 		$data['isUpdated'] = $isUpdated;
 		$data['info_message'] = "Records Updated successfully!";
-		$this->load->view('partials/main_header');
+		$this->load->view('partials/main_header_refresh');
 		$this->load->view('partials/sidebar');
 		$this->load->view('load_result',$data);
 		$this->load->view('partials/main_footer');	
