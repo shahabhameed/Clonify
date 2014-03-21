@@ -43,13 +43,17 @@ public class TextInputFilesGenerator extends InputHelper{
 						
 						for(InvocationFileInfo file : fileList)
 						{
-							if(fileCount == fileList.size()-1 && groupCount != groupList.size()-1)
-							{
-								writer.println(file.getInputFileName()+";");
-							}
-							else
-							{
-								writer.println(file.getInputFileName());
+							String str = file.getInputFileName();
+							if(str != null && str.length() > 0){
+								str = str.replace("/", "\\");
+								if(fileCount == fileList.size()-1 && groupCount != groupList.size()-1)
+								{
+									writer.println(str+";");
+								}
+								else
+								{
+									writer.println(str);
+								}
 							}
 							fileCount++;
 						}

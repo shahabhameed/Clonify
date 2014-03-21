@@ -39,6 +39,7 @@ public class Constants {
 	public static final String METHOD_CLUSTER_XX = "MethodClustersXX";
 
 	public static final String METHOD_INFO = "MethodsInfo";
+	public static final String FILE_INFO_FILE_NAME = "FilesInfo";
 	
 	public static final int DIR_FILE_VIEW = 0;
 	public static final int FILE_METHOD_VIEW = 1;

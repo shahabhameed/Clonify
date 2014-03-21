@@ -38,10 +38,27 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private static String INSERT_MCC_SCC = "INSERT INTO mcc_scc(mcc_id, scc_id) values ";
 	
 	private static String INSERT_METHOD = "INSERT INTO method(mid, mname, tokens, startline, endline) values ";
-	private static String INSERT_METHOD_FILE = "INSERT INTO method_file(mid, fid, startline, endline) values ";
-	
+	private static String INSERT_METHOD_FILE = "INSERT INTO method_file(mid, cmfile_id, startline, endline) values ";
+		
 	public DBLoaderFromTextFiles(){
 		databaseName = CMProperties.getDatabaseName();
+	}
+	
+	public void populateCMDirectoryIDs(Integer invokId) throws IOException{
+		filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.FILE_INFO_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
+		File file3 = new File(filePath);
+		FileInputStream filein3 = new FileInputStream(file3);
+		BufferedReader stdin3 = new BufferedReader(new InputStreamReader(
+				filein3));
+		int size = getFileSize();
+		for (int i = 0; i < size; i++) {
+			line = stdin3.readLine();
+			st = new StringTokenizer(line, ",");
+			st.nextToken();
+			int tempId = new Integer(st.nextToken().trim()).intValue();
+			int length = new Integer(st.nextToken().trim()).intValue();
+			Database.executeTransaction("UPDATE invocation_files SET cmdirectory_id=\"" + tempId + "\" WHERE cmfile_id=\"" + i + "\" AND invocation_id=\"" + invokId+"\";");
+		}
 	}
 	
 	@Override
@@ -50,6 +67,8 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			String filePath = "";
 			String filePath_infilestructures = "";
 
+			populateCMDirectoryIDs(invocationId);
+			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.SIMPLE_CLONE_CLASSES_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION; 
 			filePath_infilestructures = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.INFILE_STRUCTURES_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
 
@@ -331,7 +350,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Database.executeTransaction(INSERT_METHOD);
 		}
 		if (!INSERT_METHOD_FILE
-				.equalsIgnoreCase("INSERT INTO method_file(mid, fid, startline, endline) values ")) {
+				.equalsIgnoreCase("INSERT INTO method_file(mid, cmfile_id, startline, endline) values ")) {
 			Database.executeTransaction(INSERT_METHOD_FILE);
 		}
 
@@ -432,9 +451,9 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		try {
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
-			s.execute("use clonedatabase;");
-			ResultSet results = s.executeQuery("select file.gid "
-					+ " from file " + " where file.fid = " + fid + ";");
+			s.execute("use dssd;");
+			ResultSet results = s.executeQuery("select group_id"
+					+ " from invocation_files " + "where cmfile_id = " + fid + ";");
 			if (results.next()) {
 				gid = results.getInt(1);
 			}
@@ -446,17 +465,25 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		return gid;
 	}
 	
-	public int getDidFromFid(int fid) {
+	public int getDidFromFid(int pFid) {
 		int did = -1;
 		try {
+			int fid = -1;
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
-			s.execute("use clonedatabase;");
-			ResultSet results = s.executeQuery("select did "
-					+ " from file_directory " + " where fid = " + fid + ";");
+			s.execute("use dssd;");
+			ResultSet results = s.executeQuery("select file_id "
+					+ " from invocation_files " + " where cmfile_id = " + pFid + ";");
+			if (results.next()) {
+				fid = results.getInt(1);
+			}
+			
+			results = s.executeQuery("select directory_id"
+					+ " from repository_file " + "where id = " + fid + ";");
 			if (results.next()) {
 				did = results.getInt(1);
 			}
+
 			s.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -474,8 +501,8 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		try {
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
-			s.execute("use clonedatabase;");
-			ResultSet results = s.executeQuery("select fid "
+			s.execute("use dssd;");
+			ResultSet results = s.executeQuery("select cmfile_id "
 					+ " from method_file " + " where mid = " + mid + ";");
 			if (results.next()) {
 				fid = results.getInt(1);
@@ -496,7 +523,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		try {
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
-			s.execute("use clonedatabase;");
+			s.execute("use dssd;");
 			ResultSet results = s
 					.executeQuery("select mname from method where mid = " + mid
 							+ ";");
