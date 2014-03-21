@@ -234,3 +234,6 @@ CREATE TABLE IF NOT EXISTS `method` (
 
 -- ADDED ON 2014-03-18 0
 ALTER TABLE  `mcc` ADD `members` INT( 11 ) NOT NULL ;
+
+-- ADDED ON 2014-03-21 0 Directory ID related
+ALTER TABLE invocation_files ADD cmdirectory_id int(11);
