@@ -59,7 +59,7 @@
 <script type="text/javascript" src="<?= asset_url('js/jquery-ui.min.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('js/forms.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('js/form-validation.js'); ?>"></script>
-<!--<script type="text/javascript" src="<?= asset_url('js/widgets.js'); ?>"></script> -->
+
 
 
 </html>
