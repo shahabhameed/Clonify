@@ -271,29 +271,14 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					.equalsIgnoreCase("INSERT INTO scsinfile_fragments(scs_infile_id, fid, scc_id, scsinfile_instance_id, scc_instance_id, invocation_id) values ")) {
 				Database.executeTransaction(INSERT_SCSINFILE_FRAGMENTS);
 			}
-<<<<<<< HEAD
 			
-                        Parse_FileClustersXX(invocationId);
-                        
-=======
-
->>>>>>> e932360877371a04723d94484d0c56a397917410
+                        Parse_FileClustersXX(invocationId);                        
 			parse_file_clusters(invocationId);
 			parse_InDirs_CloneFileStructures(invocationId );
 			Parse_CrossDirsCloneFileStructuresEx(invocationId);
 			Parse_InGroupCloneFileStructures(invocationId);
 			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
-<<<<<<< HEAD
-			
-
-			
-			
-			
 			sprint04FilesToDB(invocationId);
-
-=======
-			Parse_FileClustersXX(invocationId);
->>>>>>> e932360877371a04723d94484d0c56a397917410
 			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
 			
@@ -1021,9 +1006,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		if (!INSERT_FCS_CROSSGROUP
 				.equalsIgnoreCase("INSERT INTO fcscrossgroup_fcc(invocation_id,fcs_crossgroup_id, fcc_id ) values ")) {
 			Database.executeTransaction(INSERT_FCS_CROSSGROUP);
-		}
-<<<<<<< HEAD
-	
+		}	
     }
     	
 	
@@ -1135,9 +1118,6 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		}
 	}
 
-=======
-    }
->>>>>>> e932360877371a04723d94484d0c56a397917410
 	
 	public void insertMethod_File(int mid, int fid, int startline, int endline) {
 		INSERT_METHOD_FILE += "( \"" + mid + "\" , \"" + fid + "\", \""
