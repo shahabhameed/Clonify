@@ -137,10 +137,6 @@
         }
       }
       
-//      print_r($secondary_table_rows);
-//      die;
-      $secondary_table_rows = array();
-      
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       
       $viewData['showCloneView'] = true;
@@ -163,9 +159,6 @@
         }
       }
       
-      print_r($secondary_table_rows);
-      die;
-      
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       
       $viewData['showCloneView'] = true;
@@ -187,10 +180,7 @@
           $secondary_table_rows[$row['fcs_indir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
         }
       }
-      
-      print_r($secondary_table_rows);
-      die;
-      
+            
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       
       $viewData['showCloneView'] = true;
@@ -212,9 +202,6 @@
           $secondary_table_rows[$row['fcs_crossdir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
         }
       }
-      
-      print_r($secondary_table_rows);
-      die;
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       

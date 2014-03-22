@@ -208,49 +208,65 @@ class SCC
   function getAllFCSWithinGroupSecondaryTableRows($primary_table_row, $invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     $data = null;
+    $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
       $data = $this->ci->scc_model->getAllFCSWithinGroupSecondaryTableRows($primary_table_row['fcs_ingroup_id'], $primary_table_row['fcc_ids'], $invocationId, $userId);
       if ($data){
-        $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        $data = json_decode(json_encode($data), true);
+        foreach($data as $d){
+          $result[$d['fcsingroup_instance_id']][] = $d['fid'];
+        }
       }    
     }
-    return $data;
+    return $result;
   }  
   
   function getAllFCSCrossGroupSecondaryTableRows($primary_table_row, $invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     $data = null;
+    $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
       $data = $this->ci->scc_model->getAllFCSCrossGroupSecondaryTableRows($primary_table_row['fcs_crossgroup_id'], $primary_table_row['fcc_ids'], $invocationId, $userId);
       if ($data){
-        $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        $data = json_decode(json_encode($data), true);
+        foreach($data as $d){
+          $result[$d['group_id']][] = $d['fid'];
+        }        
       }    
     }
-    return $data;
+    return $result;
   }  
   
   function getAllFCSWithinDirectorySecondaryTableRows($primary_table_row, $invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     $data = null;
+    $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
       $data = $this->ci->scc_model->getAllFCSWithinDirectorySecondaryTableRows($primary_table_row['fcs_indir_id'], $primary_table_row['fcc_ids'], $invocationId, $userId);
       if ($data){
-        $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        $data = json_decode(json_encode($data), true);
+        foreach($data as $d){
+          $result[$d['fcsindir_instance_id']][] = $d['fid'];
+        }                
       }    
     }
-    return $data;
+    return $result;
   }  
   
   function getAllFCSCrossDirectorySecondaryTableRows($primary_table_row, $invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     $data = null;
+    $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
       $data = $this->ci->scc_model->getAllFCSCrossDirectorySecondaryTableRows($primary_table_row['fcs_crossdir_id'], $primary_table_row['fcc_ids'], $invocationId, $userId);
       if ($data){
-        $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        $data = json_decode(json_encode($data), true);
+        foreach($data as $d){
+          $result[$d['directory_id']][] = $d['fid'];
+        }                        
       }    
     }
-    return $data;
+    return $result;
   }  
   
   function getSCSSByFileData($invocationId){

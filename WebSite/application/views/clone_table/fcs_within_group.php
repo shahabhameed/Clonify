@@ -119,7 +119,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default gradient">
                         <div class="panel-heading min">
-                            <h4><span> <i class="fa fa-list-alt fa-2"></i> SCC List</span></h4>
+                            <h4><span> <i class="fa fa-list-alt fa-2"></i> FCS Table</span></h4>
                             <span class="loader" style="top:15px;cursor:pointer;">
                                 <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
                             </span>
@@ -171,13 +171,13 @@
             <?php
             if ($secondary_table_rows)
                 $secondary_table_rows = $secondary_table_rows ? $secondary_table_rows : array();
-            foreach ($secondary_table_rows as $scc_id => $data) {
+            foreach ($secondary_table_rows as $fcs_id => $data) {
                 ?>
-                <div class="row scc_instance_list" id="scc_instance_list_<?php echo $scc_id; ?>">
+                <div class="row scc_instance_list" id="fcs_instance_list_<?php echo $fcs_id; ?>">
                     <div class="col-md-12">
                         <div class="panel panel-default gradient">
                             <div class="panel-heading min">
-                                <h4><span> <i class="fa fa-list-alt fa-2"></i>SCC Clone Instance List - SCC ID - <?php echo $scc_id; ?></span></h4>
+                                <h4><span> <i class="fa fa-list-alt fa-2"></i>FCS Secondary Table</span></h4>
                                 <span class="loader" style="top:15px;cursor:pointer;">
                                     <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                                 </span>
@@ -197,16 +197,16 @@
                                         <?php
                                         $counter = 0;
                                         $data = $data ? $data : array();
-                                        foreach ($data as $d) {
+                                        foreach ($data as $ingroup_id => $fids) {
                                             $counter++;
+                                              $fids = join(",", $fids);
                                             ?>
-
-                                            <tr class="code_view" data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>" data-endline="<?php echo $d['endline']; ?>" data-endcol="<?php echo $d['endcol']; ?>" data-startcol="<?php echo $d['startcol']; ?>" data-startline="<?php echo $d['startline']; ?>" data-fid="<?php echo $d['fid']; ?>" data-sccid= "<?php echo $scc_id; ?>" data-clid= "<?php echo $d['scc_instance_id']; ?>" data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
+                                            <tr class="code_view">
                                                 <td><?php echo $counter; ?></td>
-                                                <td><?php echo isset($d['clone_id']) ? $d['clone_id'] : "-"; ?></td>
-                                                <td><?php echo isset($d['structure_fids']) ? $d['structure_fids'] : "-"; ?></td>
+                                                <td><?php echo $ingroup_id; ?></td>
+                                                <td><?php echo $fids; ?></td>
                                             </tr>
-    <?php } ?>
+                                          <?php } ?>
                                     </tbody> 
                                     <tfoot>
                                         <tr>
@@ -263,15 +263,9 @@
 <script>
     $(document).ready(function() {
         $(".list_view").on("click", function() {
-            Clonify.SCC.viewSCCCloneInstance($(this).data("sccid"));
+            Clonify.FCS.viewInstanceWithinGroup($(this).data("sccid"));
             event.preventDefault();
             return false;
         });
-        $(".code_view").on("click", function() {
-            Clonify.SCC.viewCodeData($(this).data("sccid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
-            event.preventDefault();
-            return false;
-        });
-
     });
 </script>
