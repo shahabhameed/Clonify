@@ -769,7 +769,7 @@ Clonify.FCS = {
         $('.dataTables_filter').hide();
   },
   viewInstanceAcrossGroup: function(_fcs_id){
-  	$(".scs_instance_list").hide();
+  	$(".scc_instance_list").hide();
     $("#fcs_instance_list_"+_fcs_id).show();
     $(".code-window-containter").hide();
     $("#code_window1").html("");
@@ -810,7 +810,7 @@ Clonify.FCS = {
 
   },
   viewInstanceWithinDirectory: function(_fcs_id){
-    $(".scs_instance_list").hide();
+    $(".scc_instance_list").hide();
     $("#fcs_instance_list_"+_fcs_id).show();
     $(".code-window-containter").hide();
     $("#code_window1").html("");
@@ -851,7 +851,7 @@ Clonify.FCS = {
   },
   
   viewInstanceCrossDirectory: function(_fcs_id){
-    $(".scs_instance_list").hide();
+    $(".scc_instance_list").hide();
     $("#fcs_instance_list_"+_fcs_id).show();
     $(".code-window-containter").hide();
     $("#code_window1").html("");
