@@ -114,36 +114,18 @@ class MCC {
         return $result;
     }
 
-    function getMCSSByFileData($invocationId) {
+    function getMCCByFileData($invocationId) {
         $userId = $this->ci->tank_auth->get_user_id();
 
-        $data = $this->ci->scc_model->getSCCBYFileParentTable($invocationId, $userId);
+        $data = $this->ci->mcc_model->getMCCBYFile($invocationId, $userId);
         if ($data) {
             $data = json_decode(json_encode($data), true); // Changing Obj in Array
         }
-        $result = array();
-
-        foreach ($data as $d) {
-            $result[$d['fid']]['members'] = $d['members'];
-            $result[$d['fid']]['fid'] = $d['fid'];
-            $result[$d['fid']]['group_id'] = $d['group_id'];
-            $result[$d['fid']]['directory_id'] = $d['directory_id'];
-            $result[$d['fid']]['directory_name'] = $d['directory_name'];
-            $result[$d['fid']]['file_name'] = $d['file_name'];
-            $result[$d['fid']]['length'] = $d['length'];
-        }
-        foreach ($result as $index => $r) {
-            $child_data = $this->ci->scc_model->getSCCByFileChildTable($invocationId, $r['fid'], $userId);
-            if ($child_data) {
-                $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
-            }
-            $result[$index]['child_rows'] = $child_data;
-        }
-
-        return $result;
+		
+		return $data;
     }
 
-    public function getMCCInstanceData($invocationId, $scc_id, $scc_instance_id, $userId) {
+    public function getSCCInstanceData($invocationId, $scc_id, $scc_instance_id, $userId) {
         $data = $this->ci->scc_model->getSCCInstanceData($invocationId, $scc_id, $scc_instance_id, $userId);
         if ($data) {
             $data = json_decode(json_encode($data), true); // Changing Obj in Array
@@ -152,13 +134,44 @@ class MCC {
         return $data;
     }
 
-    public function getMCCInstancesBySCCId($invocationId, $scc_id) {
+    public function getSCCInstancesBySCCId($invocationId, $scc_id) {
         $userId = $this->ci->tank_auth->get_user_id();
         $data = $this->ci->scc_model->getSCCInstancesBySCCId($invocationId, $scc_id, $userId);
         if ($data) {
             $data = json_decode(json_encode($data), true); // Changing Obj in Array
         }
 
+        return $data;
+    }
+	
+	function getMCCByFileSecondaryTableRows($primary_table_row, $invocationId) {
+        $userId = $this->ci->tank_auth->get_user_id();
+
+        $data = $this->ci->mcc_model->getMCCByFileSecondaryTableRows($primary_table_row['fid'], $invocationId, $userId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
+        return $data;
+    }
+	
+   function getMethodByFileData($invocationId) {
+        $userId = $this->ci->tank_auth->get_user_id();
+
+        $data = $this->ci->mcc_model->getMethodByFilePrimaryData($invocationId, $userId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
+		
+		return $data;
+    }
+	
+	function getMethodByFileSecondaryTableRows($primary_table_row, $invocationId) {
+        $userId = $this->ci->tank_auth->get_user_id();
+
+        $data = $this->ci->mcc_model->getMethodByFileSecondaryData($primary_table_row['fid'], $invocationId, $userId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
         return $data;
     }
 
