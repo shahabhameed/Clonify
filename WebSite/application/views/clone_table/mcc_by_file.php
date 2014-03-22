@@ -16,7 +16,7 @@ width: 50% !important;
     <div id="content" class="clearfix">
       <div class="contentwrapper">
         <div class="heading">
-          <h3>Method Clone Class</h3> 
+          <h3>Method Clone Class By File</h3> 
           <ul class="breadcrumb">
                 <li>You are here:</li>
                 <li>
@@ -27,7 +27,7 @@ width: 50% !important;
                         <span class="icon16 fa fa-caret-right"></span>
                     </span>
                 </li>
-                <li class="active">Method Clone Class</li>
+                <li class="active">Method Clone Class By File</li>
             </ul>                   
         </div>
 
@@ -119,7 +119,7 @@ width: 50% !important;
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i> MCC List</span></h4>
+                 <h4><span> <i class="fa fa-list-alt fa-2"></i> File List</span></h4>
                  <span class="loader" style="top:15px;cursor:pointer;">
                   <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
                 </span>
@@ -131,10 +131,10 @@ width: 50% !important;
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>MCC ID</th>
-                        <th>Structure(SCC ID,...)</th>
-                        <th>ATC</th>                        
-                        <th>APC</th>                        
+                        <th>FID</th>
+                        <th>DID</th>
+                        <th>GID</th>                        
+                        <th>File Name</th>                        
                         <th>No. Clones</th>
                       </tr>
                     </thead>
@@ -145,23 +145,23 @@ width: 50% !important;
                           foreach($mcc_data as $data){
                             $counter++;
                          ?>
-                        <tr class="list_view" data-mccid="<?php echo $data['mcc_id'];?>">
+                        <tr class="list_view" data-fid="<?php echo $data['fid'];?>">
                           <td><?php echo $counter;?></td>
-                          <td><?php echo $data['mcc_id'];?></td>                          
-                          <td><?php echo $data['scc'];?></td>
-                          <td><?php echo isset($data['atc']) ? $data['atc'] : '-';?></td>
-                          <td><?php echo isset($data['apc']) ? $data['apc'] : '-';?></td>
-                          <td><?php echo isset($data['length']) ? $data['length'] : '-';?></td>
+                          <td><?php echo $data['fid'];?></td>                          
+                          <td><?php echo $data['did'];?></td>
+                          <td><?php echo $data['gid'];?></td>
+                          <td><?php echo $data['filename'];?></td>
+                          <td><?php echo $data['clones'];?></td>
                         </tr>
                         <?php }?>                        
                       </tbody>
                       <tfoot>
                         <tr>
                         <th>No</th>
-                        <th>MCC ID</th>
-                        <th>Structure(SCC ID,...)</th>
-                        <th>ATC</th>                        
-                        <th>APC</th>                        
+                        <th>FID</th>
+                        <th>DID</th>
+                        <th>GID</th>                        
+                        <th>File Name</th>                        
                         <th>No. Clones</th>
                       </tr>
                     </tfoot>                     
@@ -172,14 +172,14 @@ width: 50% !important;
             </div>
           </div>
            <?php 
-           if($mcc_clone_list_data)
-            $mcc_clone_list_data = $mcc_clone_list_data ? $mcc_clone_list_data : array();
-           foreach($mcc_clone_list_data as $mcc_id => $data){?>
-          <div class="row mcc_instance_list" id="mcc_instance_list_<?php echo $mcc_id;?>">
+           if($mcc_file_data)
+            $mcc_clone_list_data = $mcc_file_data ? $mcc_file_data : array();
+           foreach($mcc_clone_list_data as $fid => $data){?>
+          <div class="row mcc_instance_list" id="mcc_instance_list_<?php echo $fid;?>">
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i>MCC Clone Instance List - MCC ID - <?php echo $mcc_id;?></span></h4>
+                 <h4><span> <i class="fa fa-list-alt fa-2"></i>FID - <?php echo $fid;?></span></h4>
                  <span class="loader" style="top:15px;cursor:pointer;">
                   <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                 </span>
@@ -191,13 +191,9 @@ width: 50% !important;
                     <thead>
                       <tr>                        
                         <th class="col-lg-1">No.</th>
-                        <th class="col-lg-2">Group ID</th>
-                        <th class="col-lg-2">Directory ID</th>
-                        <th class="col-lg-2">File ID</th>
-                        <th class="col-lg-1">TC</th>
-                        <th class="col-lg-1">PC</th>
+                        <th class="col-lg-2">MCC ID</th>
+                        <th class="col-lg-2">MID</th>
                         <th class="col-lg-3">Method Name</th>
-                        <th class="col-lg-4">File Name</th>
                       </tr>
                     </thead>
                       <tbody>
@@ -206,31 +202,20 @@ width: 50% !important;
                         foreach($data as $d){
                           $counter++;
                         ?>
-<!-- 
-Khizer + Umer: Yakki
--->
-                          <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo 1;//$d['endcol'];?>" data-startcol="<?php echo 1;//$d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-mccid= "<?php echo $mcc_id;?>" data-clid= "<?php echo $d['mcc_instance_id'];?>" data-path="<?php echo $d['filepath']?>">
+                          <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo 1;//$d['endcol'];?>" data-startcol="<?php echo 1;//$d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $fid;?>" data-mccid= "<?php echo $d['mcc_id'];?>" data-clid= "<?php echo $d['mcc_instance_id'];?>" data-path="<?php echo $d['filepath']?>">
                             <td><?php echo $counter;?></td>
-                            <td><?php echo isset($d['gid']) ? $d['gid'] : "-";?></td>
-                            <td><?php echo isset($d['did']) ? $d['did'] : "-";?></td>
-                            <td><?php echo $d['fid'];?></td>
-                            <td><?php echo $d['tc'];?></td>
-                            <td><?php echo $d['pc'];?></td>
-                            <td><?php echo $d['methodname'];?></td>                            
-                            <td><?php echo $d['filename'];?></td>                            
+                            <td><?php echo $d['mcc_id'];?></td>
+                            <td><?php echo $d['mid'];?></td>
+                            <td><?php echo $d['methodname'];?></td>
                           </tr>
                         <?php }?>
                       </tbody> 
                       <tfoot>
                       <tr>                        
-                        <th>No.</th>
-                        <th>Group ID</th>
-                        <th>Directory ID</th>
-                        <th>File ID</th>
-                        <th>TC</th>
-                        <th>PC</th>
-                        <th>Method Name</th>
-                        <th>File Name</th>
+                        <th class="col-lg-1">No.</th>
+                        <th class="col-lg-2">MCC ID</th>
+                        <th class="col-lg-2">MID</th>
+                        <th class="col-lg-3">Method Name</th>
                       </tr>
                     </tfoot>                       
                   </table>
@@ -281,7 +266,7 @@ Khizer + Umer: Yakki
 <script>
 $(document).ready(function(){
     $(".list_view").on("click",function(){
-        Clonify.MCC.viewMCCCloneInstance($(this).data("mccid"));
+        Clonify.MCC.viewMCCCloneInstance($(this).data("fid"));
         event.preventDefault();            
         return false;
     });
