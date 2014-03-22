@@ -117,6 +117,107 @@
       $this->load->view('partials/main_footer');
     }
     
+    public function SingleCloneStructureFCSWithinGroup(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $result = $this->scc->getAllFCSWithinGroup($invocationId);   
+      $viewData['parent_table_data'] = $result;
+      $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['fcs_ingroup_id']] = $this->scc->getAllFCSWithinGroupSecondaryTableRows($row, $invocationId);
+        }
+      }
+      
+//      print_r($secondary_table_rows);
+//      die;
+      $secondary_table_rows = array();
+      
+      $viewData['secondary_table_rows'] = $secondary_table_rows;      
+      
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/fcs_within_group.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+    
+    public function SingleCloneStructureFCSCrossGroup(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $result = $this->scc->getAllFCSCrossGroup($invocationId);   
+      $viewData['parent_table_data'] = $result;
+      $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['fcs_crossgroup_id']] = $this->scc->getAllFCSCrossGroupSecondaryTableRows($row, $invocationId);
+        }
+      }
+      
+      print_r($secondary_table_rows);
+      die;
+      
+      $viewData['secondary_table_rows'] = $secondary_table_rows;      
+      
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/fcs_cross_group.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+    
+    public function SingleCloneStructureFCSWithinDirectory(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $result = $this->scc->getAllFCSWithinDirectory($invocationId);   
+      $viewData['parent_table_data'] = $result;
+      $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['fcs_indir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
+        }
+      }
+      
+      print_r($secondary_table_rows);
+      die;
+      
+      $viewData['secondary_table_rows'] = $secondary_table_rows;      
+      
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/fcs_within_directory.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+    
+    public function SingleCloneStructureFCSCrossDirectory(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $result = $this->scc->getAllFCSCrossDirectory($invocationId);   
+      $viewData['parent_table_data'] = $result;
+      $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['fcs_crossdir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
+        }
+      }
+      
+      print_r($secondary_table_rows);
+      die;
+      
+      $viewData['secondary_table_rows'] = $secondary_table_rows;      
+      
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/fcs_cross_directory.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+    
     public function SingleCloneClass() {
       $viewData = array();
       $invocationId = $this->getInvocationIdFromURL();

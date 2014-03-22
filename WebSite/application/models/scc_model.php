@@ -35,6 +35,150 @@ class SCC_model extends CI_Model
     
   }
   
+  function getAllFCSWithinGroupSecondaryTableRows($fcs_ingroup_id, $fcc_ids, $invocationId, $user_id){
+    $where = "invocation_id = $invocationId and fcs_ingroup_id= $fcs_ingroup_id and fcc_id IN ($fcc_ids) and invocation_id = $invocationId";
+    $this->db->select('*');    
+    $this->db->from('fcs_withingroup_files');       
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;    
+  }
+  
+  function getAllFCSCrossGroupSecondaryTableRows($fcs_crossgroup_id, $fcc_ids, $invocationId, $user_id){
+    $where = "invocation_id = $invocationId and fcs_crossgroup_id= $fcs_crossgroup_id and fcc_id IN ($fcc_ids) and invocation_id = $invocationId";
+    $this->db->select('*');    
+    $this->db->from('fcs_crossgroup_files');       
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;    
+  }
+  
+  function getAllFCSWithinDirectorySecondaryTableRows($fcs_indir_id, $fcc_ids, $invocationId, $user_id){
+    $where = "invocation_id = $invocationId and fcs_indir_id= $fcs_indir_id and fcc_id IN ($fcc_ids) and invocation_id = $invocationId";
+    $this->db->select('*');    
+    $this->db->from('fcs_withindir_files');       
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;    
+  }
+  
+  function getAllFCSCrossDirectorySecondaryTableRows($fcs_crossdir_id, $fcc_ids, $invocationId, $user_id){
+    $where = "invocation_id = $invocationId and fcs_crossdir_id= $fcs_crossdir_id and fcc_id IN ($fcc_ids) and invocation_id = $invocationId";
+    $this->db->select('*');    
+    $this->db->from('fcs_crossdir_files');       
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;    
+  }
+  
+  function getAllFCSWithinGroupRows($invocationId, $user_id){
+    $where = "invocation_id = $invocationId";
+    $this->db->select('*');    
+    $this->db->from('fcs_withingroup');    
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;     
+  }
+  
+  function getAllFCSCrossGroupRows($invocationId, $user_id){
+    $where = "invocation_id = $invocationId";
+    $this->db->select('*');    
+    $this->db->from('fcs_crossgroup');    
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;     
+  }
+  
+  function getAllFCSWithinDirectoryRows($invocationId, $user_id){
+    $where = "invocation_id = $invocationId";
+    $this->db->select('*');    
+    $this->db->from('fcs_withindir');    
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;     
+  }
+  
+  function getAllFCSCrossDirectoryRows($invocationId, $user_id){
+    $where = "invocation_id = $invocationId";
+    $this->db->select('*');    
+    $this->db->from('fcs_crossdir');    
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;     
+  }
+  
+  function getFCSWithinGroupStructureIDS($invocationId, $fcs_ingroup_id, $user_id){
+    $where = "invocation_id = $invocationId AND fcs_ingroup_id = $fcs_ingroup_id";    
+    $this->db->select('*');    
+    $this->db->from('fcs_withingroup_fcc');   
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;    
+  }
+  
+  function getFCSCrossGroupStructureIDS($invocationId, $fcs_crossgroup_id, $user_id){
+    $where = "invocation_id = $invocationId AND fcs_crossgroup_id = $fcs_crossgroup_id";    
+    $this->db->select('*');    
+    $this->db->from('fcs_crossgroup_fcc');   
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;    
+  }
+  
+  function getFCSWithinDirectoryStructureIDS($invocationId, $fcs_indir_id, $user_id){
+    $where = "invocation_id = $invocationId AND fcs_indir_id = $fcs_indir_id";    
+    $this->db->select('*');    
+    $this->db->from('fcs_withindir_fcc');   
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;    
+  }
+  
+  function getFCSCrossDirectoryStructureIDS($invocationId, $fcs_crossdir_id, $user_id){
+    $where = "invocation_id = $invocationId AND fcs_crossdir_id = $fcs_crossdir_id";    
+    $this->db->select('*');    
+    $this->db->from('fcs_crossdir_fcc');   
+    $this->db->where($where);
+    $result = $this->db->get();
+    if ($result->num_rows()> 0){      
+      return $result->result();
+    }        
+    return NULL;    
+  }
+  
   
   public function getAllSCCRows($invocationId, $userId){
     $where = "tb1.invocation_id = $invocationId AND tb2.user_id=$userId";

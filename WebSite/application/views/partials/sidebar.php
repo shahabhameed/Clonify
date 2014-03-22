@@ -49,6 +49,18 @@
                                 <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCS Across File
                                 </a>
+                                <a href="<?php echo site_url('home/SingleCloneStructureFCSWithinGroup') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>FCS Within Group
+                                </a>
+                                <a href="<?php echo site_url('home/SingleCloneStructureFCSCrossGroup') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>FCS Across Group
+                                </a>
+                                <a href="<?php echo site_url('home/SingleCloneStructureFCSWithinDirectory') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>FCS Within Directory
+                                </a>
+                                <a href="<?php echo site_url('home/SingleCloneStructureFCSCrossDirectory') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>FCS Cross Directory
+                                </a>
                                  <a href="<?php echo site_url('home/MethodCloneClass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>MCC
                                 </a>
