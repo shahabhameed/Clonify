@@ -245,11 +245,11 @@ class SCC
     $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
       $fcc_ids = join(",", array_unique(explode(",", $primary_table_row['fcc_ids'])));
-      $data = $this->ci->scc_model->getAllFCSWithinDirectorySecondaryTableRows($primary_table_row['fcs_indir_id'], $fcc_ids, $invocationId, $userId);
+      $data = $this->ci->scc_model->getAllFCSWithinDirectorySecondaryTableRows($primary_table_row['fcs_crossdir_id'], $fcc_ids, $invocationId, $userId);
       if ($data){
         $data = json_decode(json_encode($data), true);
         foreach($data as $d){
-          $result[$d['fcsindir_instance_id']][] = $d['fid'];
+          $result[$d['directory_id']][] = $d['fid'];
         }                
       }    
     }
