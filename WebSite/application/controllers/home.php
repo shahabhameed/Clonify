@@ -137,10 +137,6 @@
         }
       }
       
-//      print_r($secondary_table_rows);
-//      die;
-      $secondary_table_rows = array();
-      
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       
       $viewData['showCloneView'] = true;
@@ -163,9 +159,6 @@
         }
       }
       
-      print_r($secondary_table_rows);
-      die;
-      
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       
       $viewData['showCloneView'] = true;
@@ -187,10 +180,7 @@
           $secondary_table_rows[$row['fcs_indir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
         }
       }
-      
-      print_r($secondary_table_rows);
-      die;
-      
+            
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       
       $viewData['showCloneView'] = true;
@@ -212,9 +202,6 @@
           $secondary_table_rows[$row['fcs_crossdir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
         }
       }
-      
-      print_r($secondary_table_rows);
-      die;
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       
@@ -284,6 +271,52 @@
       $viewData['showCloneView'] = true;
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/mcc.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+
+    public function MethodCloneClassByFile(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $result = $this->mcc->getMCCByFileData($invocationId);   
+      $viewData['mcc_data'] = $result;
+
+	  $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['fid']] = $this->mcc->getMCCByFileSecondaryTableRows($row, $invocationId);
+        }
+      }
+	  
+	  $viewData['mcc_file_data'] = $secondary_table_rows;
+
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/mcc_by_file.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+	
+   public function MethodByFile(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $result = $this->mcc->getMethodByFileData($invocationId);   
+      $viewData['file_data'] = $result;
+
+	  $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['fid']] = $this->mcc->getMethodByFileSecondaryTableRows($row, $invocationId);
+        }
+      }
+	  
+	  $viewData['file_method_data'] = $secondary_table_rows;
+
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/method_by_file.php', $viewData);
       $this->load->view('partials/main_footer');
     }
 

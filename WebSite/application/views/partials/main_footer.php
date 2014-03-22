@@ -46,20 +46,20 @@
     <script type="text/javascript" src="<?=asset_url('plugins/misc/totop/jquery.ui.totop.min.js');?>"></script> <!-- Back to top plugin -->
     <script type="text/javascript" src="<?=asset_url('plugins/files/elfinder/elfinder.min.js');?>"></script>
 
-    
-    <!-- Init plugins -->
-    <script type="text/javascript" src="<?=asset_url('js/jquery.mousewheel.js');?>"></script>
-    <script type="text/javascript" src="<?=asset_url('js/jRespond.min.js');?>"></script>
-    <script type="text/javascript" src="<?=asset_url('js/main.js');?>"></script><!-- Core js functions -->
-    <script type="text/javascript" src="<?=asset_url('js/tables.js');?>"></script>
-    <script type="text/javascript" src="<?=asset_url('js/datatable.js');?>"></script>
-    <script type="text/javascript" src="<?=asset_url('js/elements.js');?>"></script>
-    <script type="text/javascript" src="<?=asset_url('js/jquery.poshytip.min.js');?>"></script>
-    <script type="text/javascript" src="<?=asset_url('js/flexible-nav.min.js');?>"></script>
-    <script type="text/javascript" src="<?=asset_url('js/jquery-ui.min.js');?>"></script>
-    <script type="text/javascript" src="<?=asset_url('js/forms.js');?>"></script>
-    <script type="text/javascript" src="<?=asset_url('js/form-validation.js');?>"></script>
-   
-    
+
+<!-- Init plugins -->
+<script type="text/javascript" src="<?= asset_url('js/jquery.mousewheel.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/jRespond.min.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/main.js'); ?>"></script><!-- Core js functions -->
+<script type="text/javascript" src="<?= asset_url('js/tables.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/datatable.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/elements.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/jquery.poshytip.min.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/flexible-nav.min.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/jquery-ui.min.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/forms.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/form-validation.js'); ?>"></script>
+
+
 
 </html>

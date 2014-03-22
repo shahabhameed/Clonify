@@ -58,6 +58,11 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private static String INSERT_MCSCROSSFILE_MCC = "INSERT INTO mcscrossfile_mcc(mcs_crossfile_id, mcc_id) values ";
 	private static String INSERT_MCS_CROSSFILE = "INSERT INTO mcs_crossfile(mcs_crossfile_id, members) values ";
 	private static String INSERT_MCSCROSSFILE_FILE = "INSERT INTO mcscrossfile_file(mcs_crossfile_id, fid, did, gid) values ";
+	
+	private static String INSERT_SCSCROSSMETHOD_SCC = "INSERT INTO scscrossmethod_scc(scs_crossmethod_id, scc_id) values ";
+	private static String INSERT_SCSCROSSMETHOD_METHOD = "INSERT INTO scscrossmethod_method(scs_crossmethod_id, mid, tc, pc, fid, did, gid) values ";
+	private static String INSERT_SCS_CROSSMETHOD = "INSERT INTO scs_crossmethod(scs_crossmethod_id, atc, apc, members) values ";
+	private static String INSERT_MCC_FILE = "INSERT INTO mcc_file(mcc_id, fid) values ";
 		
 	public DBLoaderFromTextFiles(){
 		databaseName = CMProperties.getDatabaseName();
@@ -267,23 +272,16 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				Database.executeTransaction(INSERT_SCSINFILE_FRAGMENTS);
 			}
 			
-                        Parse_FileClustersXX(invocationId);
                         
+                        Parse_FileClustersXX(invocationId);                        
 			parse_file_clusters(invocationId);
 			parse_InDirs_CloneFileStructures(invocationId );
 			Parse_CrossDirsCloneFileStructuresEx(invocationId);
 			Parse_InGroupCloneFileStructures(invocationId);
 			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
-			
-
-			
-			
-			
 			sprint04FilesToDB(invocationId);
-
 			
-
-			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO + Constants.CM_TEXT_FILE_EXTENSION;
+			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
 			
 			File file6 = new File(filePath);
 			FileInputStream filein6 = new FileInputStream(file6);
@@ -318,9 +316,67 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 			filein6.close();
 			
+			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_CLUSTER_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;  
+			File file8 = new File(filePath);
+			FileInputStream filein8 = new FileInputStream(file8);
+			BufferedReader stdin8 = new BufferedReader(
+					new InputStreamReader(filein8));
 			double atc = 0;
 			double apc = 0;
-			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_CLUSTER_XX + Constants.CM_TEXT_FILE_EXTENSION;
+			String temp2 = null;
+			while ((line = stdin8.readLine()) != null) {
+				if (!line.equalsIgnoreCase("")) {
+					st = new StringTokenizer(line, ";");
+					String mCid = st.nextToken().trim();
+					int scs_crossmethod_id = Integer.parseInt(mCid);
+					String mSupport = st.nextToken().trim();
+					temp = stdin8.readLine();
+					sccs = new Vector<String>();
+					st2 = new StringTokenizer(temp, ",");
+					while (st2.hasMoreTokens()) {
+						temp2 = st2.nextToken();
+						insertSCSCrossMethod_SCC(scs_crossmethod_id,
+								Integer.parseInt(temp2));
+					}
+
+					int mSup = (new Integer(mSupport)).intValue();
+					atc = 0;
+					apc = 0;
+					for (int i = 0; i < mSup; i++) {
+						line = stdin8.readLine();
+						st1 = new StringTokenizer(line, ";,");
+						mid = st1.nextToken().trim();
+						String mTk = st1.nextToken().trim();
+						String mCoverage = st1.nextToken().trim();
+						atc += Double.parseDouble(mTk);
+						apc += Double.parseDouble(mCoverage);
+						mName = getMethodName(Integer.parseInt(mid));
+						insertSCSCrossMethod_Method(scs_crossmethod_id,
+								Integer.parseInt(mid), Double
+										.parseDouble(mTk), Double
+										.parseDouble(mCoverage));
+					}
+					atc = atc / mSup;
+					apc = apc / mSup;
+					insertSCS_CrossMethod(scs_crossmethod_id, atc, apc,
+							mSup);
+				}
+			}
+
+			if (!INSERT_SCSCROSSMETHOD_METHOD
+					.equalsIgnoreCase("INSERT INTO scscrossmethod_method(scs_crossmethod_id, mid, tc, pc, fid, did, gid) values ")) {
+				Database.executeTransaction(INSERT_SCSCROSSMETHOD_METHOD);
+			}
+			if (!INSERT_SCSCROSSMETHOD_SCC
+					.equalsIgnoreCase("INSERT INTO scscrossmethod_scc(scs_crossmethod_id, scc_id) values ")) {
+				Database.executeTransaction(INSERT_SCSCROSSMETHOD_SCC);
+			}
+			if (!INSERT_SCS_CROSSMETHOD
+					.equalsIgnoreCase("INSERT INTO scs_crossmethod(scs_crossmethod_id, atc, apc, members) values ")) {
+				Database.executeTransaction(INSERT_SCS_CROSSMETHOD);
+			}
+			
+			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_CLUSTER_XX_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
 			File file9 = new File(filePath);
 			FileInputStream filein9 = new FileInputStream(file9);
 			BufferedReader stdin9 = new BufferedReader(
@@ -383,6 +439,31 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			if (!INSERT_MCC_SCC.equalsIgnoreCase("INSERT INTO mcc_scc(mcc_id, scc_id) values ")) {
 				System.out.println("\nINSERT_MCC_SCC: " + INSERT_MCC_SCC);
 				Database.executeTransaction(INSERT_MCC_SCC);
+			}
+			
+			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_CLONES_BY_FILE_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
+			File file10 = new File(filePath);
+			FileInputStream filein10 = new FileInputStream(file10);
+			BufferedReader stdin10 = new BufferedReader(
+					new InputStreamReader(filein10));
+
+			int filePosn = 0;
+			while ((line = stdin10.readLine()) != null) {
+				if (!line.equalsIgnoreCase("")) {
+					st = new StringTokenizer(line, ",");
+					while (st.hasMoreTokens()) {
+						String s2 = st.nextToken().trim();
+						if (!s2.equalsIgnoreCase("")) {
+							insertMCC_File(Integer.parseInt(s2), filePosn);
+						}
+					}
+				}
+				filePosn++;
+			}
+
+			if (!INSERT_MCC_FILE
+					.equalsIgnoreCase("INSERT INTO mcc_file(mcc_id, fid) values ")) {
+				Database.executeTransaction(INSERT_MCC_FILE);
 			}
 			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_STRUCTURE + Constants.CM_TEXT_FILE_EXTENSION;
@@ -453,7 +534,6 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					.equalsIgnoreCase("INSERT INTO mcscrossfile_methods(mcs_crossfile_id, fid, mcc_id, mid) values ")) {
 				Database.executeTransaction(INSERT_MCSCROSSFILE_METHODS);
 			}
-
 
 		} catch(Exception e){
 			e.printStackTrace();
@@ -927,8 +1007,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		if (!INSERT_FCS_CROSSGROUP
 				.equalsIgnoreCase("INSERT INTO fcscrossgroup_fcc(invocation_id,fcs_crossgroup_id, fcc_id ) values ")) {
 			Database.executeTransaction(INSERT_FCS_CROSSGROUP);
-		}
-	
+		}	
     }
     	
 	
@@ -1357,7 +1436,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	/*
 	 * Returns the size of the input file list
 	 */
-	/*
+	
 	public int getFileSize(int invocation_id) {
 		int size = -1;
 		try {
@@ -1374,7 +1453,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		}
 		return size;
 	}
-	*/
+	
 	
 	public int getGroupSize(int invocation_id) {
 		int size = -1;
@@ -1596,7 +1675,28 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				+ "\", \"" + getDidFromFid(fid) + "\", \"" + getGidFromFid(fid)
 				+ "\"  ),";
 	}
-
-
 	
+	public void insertSCSCrossMethod_SCC(int scs_crossmethod_id, int scc_id) {
+		INSERT_SCSCROSSMETHOD_SCC += "( \"" + scs_crossmethod_id + "\" , \""
+				+ scc_id + "\"  ),";
+	}
+	
+	public void insertSCSCrossMethod_Method(int scs_crossmethod_id, int mid,
+			double tc, double pc) {
+		int fid = getFidFromMid(mid);
+		INSERT_SCSCROSSMETHOD_METHOD += "( \"" + scs_crossmethod_id + "\" , \""
+				+ mid + "\" , \"" + tc + "\" , \"" + pc + "\", \"" + fid
+				+ "\", \"" + getDidFromFid(fid) + "\" , \""
+				+ getGidFromFid(fid) + "\"  ),";
+	}
+	
+	public void insertSCS_CrossMethod(int scs_crossmethod_id, double atc,
+			double apc, int members) {
+		INSERT_SCS_CROSSMETHOD += "( \"" + scs_crossmethod_id + "\" , \"" + atc
+				+ "\", \"" + apc + "\", \"" + members + "\"  ),";
+	}
+	
+	public void insertMCC_File(int mcc_id, int fid) {
+		INSERT_MCC_FILE += "( \"" + mcc_id + "\" , \"" + fid + "\"  ),";
+	}
 }

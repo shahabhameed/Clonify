@@ -437,7 +437,7 @@ select {width: 150px;}
 
 /*Tabs*/
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {border: 1px solid #c4c4c4; border-top: 1px solid transparent;border-bottom-color: transparent;
-}}
+}
 
 .tabs-below > .nav-tabs {
   border-top: 1px solid #c4c4c4;
@@ -2030,7 +2030,15 @@ select {width: 150px;}
 		border:1px solid #c4c4c4;
 		border-bottom-left-radius: 2px;
 		border-bottom-right-radius: 2px;
-		border-top: none;
+		
+		background-color: #fff;
+		position: relative;
+	}
+        .panel .panel-body1 {
+		border:1px solid #c4c4c4;
+		border-bottom-left-radius: 2px;
+		border-bottom-right-radius: 2px;
+		
 		background-color: #fff;
 		position: relative;
 	}
@@ -3115,7 +3123,7 @@ form input.valid {border: 1px solid #9FC569 !important;}
 		min-width: 176px;
 		border-right: 1px solid #c4c4c4;
 	}
-	.wizard-steps .wstep.current {color: #737373;}
+	.wizard-steps .wstep.current {color: #527BCB;}
 	.wizard-steps .wstep.done {color: #72b110;}
 	.wizard-steps .wstep .donut { 
 		margin-top: 10px;
@@ -3139,9 +3147,9 @@ form input.valid {border: 1px solid #9FC569 !important;}
 		color: #c9c9c9;
 		display: inline-block;
 	}
-	.wizard-steps .wstep.current .donut span.icon16 {color: #737373;}
+	.wizard-steps .wstep.current .donut span.icon16 {color: #527BCB;}
 	.wizard-steps .wstep.done .donut span.icon16 {color: #9fc569;}
-	.wizard-steps .wstep.current .donut {border-color: #737373; color: #737373;}
+	.wizard-steps .wstep.current .donut {border-color: #527BCB; color: #527BCB;}
 	.wizard-steps .wstep.done .donut {border-color: #9fc569;}
 
 	.wizard-steps .wstep .txt {

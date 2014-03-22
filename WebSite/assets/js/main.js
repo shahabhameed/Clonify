@@ -474,6 +474,7 @@ Clonify.ns = Clonify.namespace;
 
 Clonify.ns('Clonify.SCC');
 Clonify.ns('Clonify.MCC');
+Clonify.ns('Clonify.FCS');
 
 Clonify.SCC = {
     
@@ -721,6 +722,173 @@ Clonify.SCC = {
         });      
     
       
+  }
+  
+};
+
+Clonify.FCS = {
+    
+  viewInstanceWithinGroup: function(_fcs_id){
+    $(".scc_instance_list").hide();
+    $("#fcs_instance_list_"+_fcs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#fcs_instance_list_"+_fcs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#gidnumberfilter",type: "number" },
+                                     { sSelector: "#didnumberfilter",type: "number" },
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+                                     null,
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+  },
+  viewInstanceAcrossGroup: function(_fcs_id){
+  	$(".scs_instance_list").hide();
+    $("#fcs_instance_list_"+_fcs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#fcs_instance_list_"+_fcs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+            "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#gidnumberfilter",type: "number" },
+                                     { sSelector: "#didnumberfilter",type: "number" },
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+                                     { sSelector: "#tcnumberfilter",type: "number" },
+                                     { sSelector: "#pcnumberfilter",type: "number" },
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+
+  },
+  viewInstanceWithinDirectory: function(_fcs_id){
+    $(".scs_instance_list").hide();
+    $("#fcs_instance_list_"+_fcs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#fcs_instance_list_"+_fcs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#cidnumberfilter",type: "number" },
+                                     { sSelector: "#scsidnumberfilter",type: "number" },
+                                     { sSelector: "#scsinumberfilter",type: "number" },
+                                     { sSelector: "#scsfidnumberfilter",type: "number" },
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+  },
+  
+  viewInstanceCrossDirectory: function(_fcs_id){
+    $(".scs_instance_list").hide();
+    $("#fcs_instance_list_"+_fcs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#fcs_instance_list_"+_fcs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#cidnumberfilter",type: "number" },
+                                     { sSelector: "#scsidnumberfilter",type: "number" },
+                                     { sSelector: "#scsinumberfilter",type: "number" },
+                                     { sSelector: "#scsfidnumberfilter",type: "number" },
+                                     null
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
   }
   
 };
