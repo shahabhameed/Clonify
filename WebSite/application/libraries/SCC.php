@@ -126,7 +126,8 @@ class SCC
           $temp = json_decode(json_encode($r), true);
           if ($temp){
             foreach($temp as $t){
-              $fcc_ids[] = $t['fcc_id'];
+              if (!in_array($t['fcc_id'], $fcc_ids))
+                $fcc_ids[] = $t['fcc_id'];
             }
           }
         }
@@ -149,7 +150,8 @@ class SCC
           $temp = json_decode(json_encode($r), true);
           if ($temp){
             foreach($temp as $t){
-              $fcc_ids[] = $t['fcc_id'];
+              if (!in_array($t['fcc_id'], $fcc_ids))
+                $fcc_ids[] = $t['fcc_id'];
             }
           }
         }
@@ -172,7 +174,8 @@ class SCC
           $temp = json_decode(json_encode($r), true);
           if ($temp){
             foreach($temp as $t){
-              $fcc_ids[] = $t['fcc_id'];
+              if (!in_array($t['fcc_id'], $fcc_ids))
+                $fcc_ids[] = $t['fcc_id'];
             }
           }
         }
@@ -195,7 +198,8 @@ class SCC
           $temp = json_decode(json_encode($r), true);
           if ($temp){
             foreach($temp as $t){
-              $fcc_ids[] = $t['fcc_id'];
+              if (!in_array($t['fcc_id'], $fcc_ids))
+                $fcc_ids[] = $t['fcc_id'];
             }
           }
         }
