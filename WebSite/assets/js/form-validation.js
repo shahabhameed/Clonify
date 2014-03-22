@@ -75,6 +75,12 @@ $(document).ready(function() {
                     max: 100
 
                 },
+                min_fcc_percent: {
+                    required: true,
+                    min: 0,
+                    max: 100
+
+                },
                 language: {
                     required: true
                 },
@@ -126,6 +132,12 @@ $(document).ready(function() {
                     min: "Please create a Code Group to proceed"
                 },
                 min_mcc_percent: {
+                    required:  "Please enter a value",
+                    min: "Enter value between 0-100",
+                    max: "Enter value between 0-100"
+
+                },
+                 min_fcc_percent: {
                     required:  "Please enter a value",
                     min: "Enter value between 0-100",
                     max: "Enter value between 0-100"

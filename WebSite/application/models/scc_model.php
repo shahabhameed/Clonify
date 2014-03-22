@@ -264,7 +264,7 @@ class SCC_model extends CI_Model
     $where = "tb1.invocation_id = $invocationId";
     
     $this->db->select('*');
-    $this->db->from('scs_crossfile tb1');
+    $this->db->from('scscrossfile_file tb1');
     $this->db->join('scscrossfile_scc tb2', 'tb1.scs_crossfile_id = tb2.scs_crossfile_id AND tb1.invocation_id = tb2.invocation_id', 'INNER');        
     $this->db->where($where);
 

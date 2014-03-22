@@ -1,444 +1,460 @@
+// make console.log safe to use
+window.console||(console={log:function(){}});
+
+//------------- Options for Supr - admin tempalte -------------//
+var supr_Options = {
+	fixedWidth: false, //activate fixed version with true
+	rtl:false //activate rtl version with true
+}
+
+//------------- Modernizr -------------//
+//load some plugins only if is needed
+Modernizr.load({
+  test: Modernizr.placeholder,
+  nope: 'plugins/forms/placeholder/jquery.placeholder.min.js',
+  complete: function () {
+	//------------- placeholder fallback  -------------//
+	$('input[placeholder], textarea[placeholder]').placeholder();
+  }
+});
+Modernizr.load({
+  test: Modernizr.touch,
+  yep: ['plugins/fix/ios-fix/ios-orientationchange-fix.js', 'plugins/fix/touch-punch/jquery.ui.touch-punch.min.js']
+});
+
+//window resize events
+$(window).resize(function(){
+	//get the window size
+	var wsize =  $(window).width();
+	if (wsize > 980 ) {
+		$('.shortcuts.hided').removeClass('hided').attr("style","");
+		$('.sidenav.hided').removeClass('hided').attr("style","");
+	}
+
+	var size ="Window size is:" + $(window).width();
+	//console.log(size);
+});
+
+$(window).load(function(){
+	var wheight = $(window).height();
+	$('#sidebar.scrolled').css('height', wheight-63+'px');
+});
+
 // document ready function
-$(document).ready(function() { 	
+$(document).ready(function(){ 	
 
-	//------------- Check all checkboxes  -------------//
+	//make template fixed width
+	if(supr_Options.fixedWidth) {
+		$('body').addClass('fixedWidth');
+		$('#header').addClass('container');
+		$('#wrapper').addClass('container');
+	}
+
+	//rtl version
+	if(supr_Options.rtl) {
+		localStorage.setItem('rtl', 1);
+		$('#bootstrap').attr('href', 'css/bootstrap/bootstrap.rtl.min.css');
+		$('#bootstrap-responsive').attr('href', 'css/bootstrap/bootstrap-responsive.rtl.min.css');
+		$('body').addClass('rtl');
+		if(!$('#content-two').length){
+			$('#sidebar').attr('id', 'sidebar-right');
+			$('#sidebarbg').attr('id', 'sidebarbg-right');
+			$('.collapseBtn').addClass('rightbar').removeClass('leftbar');
+			$('#content').attr('id', 'content-one');
+		}
+	} else {localStorage.setItem('rtl', 0);}
 	
-	$("#masterCh").click(function() {
-		var checkedStatus = $(this).find('span').hasClass('checked');
-		$("#checkAll tr .chChildren input:checkbox").each(function() {
-			this.checked = checkedStatus;
-				if (checkedStatus == this.checked) {
-					$(this).closest('.checker > span').removeClass('checked');
-				}
-				if (this.checked) {
-					$(this).closest('.checker > span').addClass('checked');
-				}
-		});
-	});
+  	//Disable certain links
+    $('a[href^=#]').click(function (e) {
+      e.preventDefault()
+    })
 
-	//------------- I button  -------------//
-	$(".ibuttonCheck").iButton({
-		 labelOn: "<span class='icon16 icomoon-icon-checkmark-2 white'></span>",
-		 labelOff: "<span class='icon16 icomoon-icon-cancel-3 white'></span>",
-		 enableDrag: false
-	});
+    $('.search-btn').addClass('nostyle');//tell uniform to not style this element
+ 
+	//------------- Navigation -------------//
 
-	//------------- Custom scroll in widget box  -------------//
-	if($(".scroll").length) {
-		$(".scroll").niceScroll({
-			cursoropacitymax: 0.7,
-			cursorborderradius: 6,
-			cursorwidth: "7px"
-		});
+	mainNav = $('.mainnav>ul>li');
+	mainNav.find('ul').siblings().addClass('hasUl').append('<span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span>');
+	mainNavLink = mainNav.find('a').not('.sub a');
+	mainNavLinkAll = mainNav.find('a');
+	mainNavSubLink = mainNav.find('.sub a').not('.sub li');
+	mainNavCurrent = mainNav.find('a.current');
+
+	//add hasSub to first element
+	if(mainNavLink.hasClass('hasUl')) {
+		$(this).closest('li').addClass('hasSub');
 	}
-	if($(".scrolled").length) {
-		$(".scrolled").niceScroll({
-			cursoropacitymax: 0.7,
-			cursorborderradius: 6,
-			cursorwidth: "4px"
-		});
-	}
+	
+	/*Auto current system in main navigation */
+	var domain = document.domain;
+	var folder ='';//if you put site in folder not in main domain you need to specify it. example http://www.host.com/folder/site
+	var absoluteUrl = 0; //put value of 1 if use absolute path links. example http://www.host.com/dashboard instead of /dashboard
 
-	//--------------- Typeahead ------------------//
-	$('.typeahead').typeahead({
-		source: ['jonh','carlos','arcos','stoner']
-	})
+	function setCurrentClass(mainNavLinkAll, url) {
+		mainNavLinkAll.each(function(index) {
+			//convert href to array and get last element
+			var href= $(this).attr('href');
 
-	$('.findUser').typeahead({
-		source: ['Sammy','Jonny','Sugge Elson','Elenna','Rayan','Dimitrios','Sidarh','Jana','Daniel','Morerira','Stoichkov']
-	})
+			if(href == url) {
+				//set new current class
+				$(this).addClass('current');
 
-	//------------- Datepicker -------------//
-
-	if($('#datepicker-inline').length) {
-		$('#datepicker-inline').datepicker({
-	        inline: true,
-			showOtherMonths:true
-	    });
-	}
-
-	//--------------- carousel ------------------//
-	$('.carousel').carousel({
-	  interval: 5000
-	})
-
-	//--------------- Prettyphoto ------------------//
-	$("a[rel^='prettyPhoto']").prettyPhoto({
-		default_width: 800,
-		default_height: 600,
-		theme: 'facebook',
-		social_tools: false,
-		show_title: false
-	});
-	//--------------- Gallery & lazzy load & jpaginate ------------------//
-	$(function() {
-		//hide the action buttons
-		$('.actionBtn').hide();
-		//show action buttons on hover image
-		$('.galleryView>li').hover(
-			function () {
-			   $(this).find('.actionBtn').stop(true, true).show();
-			},
-			function () {
-			    $(this).find('.actionBtn').stop(true, true).hide();
+				parents = $(this).parentsUntil('li.hasSub');
+				parents.each(function() {
+					if($(this).hasClass('sub')) {
+						//its a part of sub menu need to expand this menu
+						$(this).prev('a.hasUl').addClass('drop');
+						$(this).addClass('expand');
+					} 
+				});
 			}
-		);
-		//remove the gallery item after press delete
-		$('.actionBtn>.delete').click(function(){
-			$(this).closest('li').remove();
-			/* destroy and recreate gallery */
-		    $("div.holder").jPages("destroy").jPages({
-		        containerID : "itemContainer",
-		        animation   : "fadeInUp",
-		        perPage		: 16,
-		        scrollBrowse   : true, //use scroll to change pages
-		        keyBrowse   : true,
-		        callback    : function( pages ,items ){
-		            /* lazy load current images */
-		            items.showing.find("img").trigger("turnPage");
-		            /* lazy load next page images */
-		            items.oncoming.find("img").trigger("turnPage");
-		        }
-		    });
-		    // add notificaton 
-			$.pnotify({
-				type: 'success',
-			    title: 'Done',
-	    		text: 'You just delete this picture.',
-			    icon: 'picon icon16 brocco-icon-info white',
-			    opacity: 0.95,
-			    history: false,
-			    sticker: false
-			});
-
-		});
-
-	    /* initiate lazyload defining a custom event to trigger image loading  */
-	    $("ul#itemContainer li img").lazyload({
-	        event : "turnPage",
-	        effect : "fadeIn"
-	    });
-	    /* initiate plugin */
-	    $("div.holder").jPages({
-	        containerID : "itemContainer",
-	        animation   : "fadeInUp",
-	        perPage		: 16,
-	        scrollBrowse   : true, //use scroll to change pages
-	        keyBrowse   : true,
-	        callback    : function( pages ,items ){
-	            /* lazy load current images */
-	            items.showing.find("img").trigger("turnPage");
-	            /* lazy load next page images */
-	            items.oncoming.find("img").trigger("turnPage");
-	        }
-	    });
-	});
-
-//------------- Smart Wizzard  -------------//	
-  	$('#wizard').smartWizard({
-  		transitionEffect: 'fade', // Effect on navigation, none/fade/slide/
-  		onLeaveStep:leaveAStepCallback,
-        onFinish:onFinishCallback
-    });
-
-    function leaveAStepCallback(obj){
-        var step = obj;
-        step.find('.stepNumber').stop(true, true).remove();
-        step.find('.stepDesc').stop(true, true).before('<span class="stepNumber"><span class="icon16 iconic-icon-checkmark"></span></span>');
-        return true;
-    }
-    function onFinishCallback(obj){
-    	var step = obj;
-    	step.find('.stepNumber').stop(true, true).remove();
-        step.find('.stepDesc').stop(true, true).before('<span class="stepNumber"><span class="icon16 iconic-icon-checkmark"></span></span>');
-      	$.pnotify({
-			type: 'success',
-		    title: 'Done',
-    		text: 'You finish the wizzard',
-		    icon: 'picon icon16 iconic-icon-check-alt white',
-		    opacity: 0.95,
-		    history: false,
-		    sticker: false
-		});
-    }
-
-    /*Vertical wizard*/
-    $('#wizard-vertical').smartWizard({
-  		transitionEffect: 'fade', // Effect on navigation, none/fade/slide/
-  		onLeaveStep:leaveAStepCallback,
-        onFinish:onFinishCallback
-    });
-
-    function leaveAStepCallback(obj){
-        var step = obj;
-        step.find('.stepNumber').stop(true, true).remove();
-        step.find('.stepDesc').stop(true, true).before('<span class="stepNumber"><span class="icon16 iconic-icon-checkmark"></span></span>');
-        return true;
-    }
-    function onFinishCallback(obj){
-    	var step = obj;
-    	step.find('.stepNumber').stop(true, true).remove();
-        step.find('.stepDesc').stop(true, true).before('<span class="stepNumber"><span class="icon16 iconic-icon-checkmark"></span></span>');
-      	$.pnotify({
-			type: 'success',
-		    title: 'Done',
-    		text: 'You finish the wizzard',
-		    icon: 'picon icon16 iconic-icon-check-alt white',
-		    opacity: 0.95,
-		    history: false,
-		    sticker: false
-		});
-    }
-
-    //--------------- Data tables ------------------//
-
-	if($('table').hasClass('contactTable')){
-		$('.contactTable').dataTable({
-			"bJQueryUI": false,
-			"bAutoWidth": false,
-			"iDisplayLength": 5,
-			"bLengthChange": false,
-			"aoColumnDefs": [{ 
-				"bSortable": false, "aTargets": [ 0, 1, 2, 3 ] 
-			}],
 		});
 	}
 
-	//------------- JQuery Autocomplete -------------//
-    $(function() {
-		var availableTags = [
-			"ActionScript",
-			"AppleScript",
-			"Asp",
-			"BASIC",
-			"C",
-			"C++",
-			"Clojure",
-			"COBOL",
-			"ColdFusion",
-			"Erlang",
-			"Fortran",
-			"Groovy",
-			"Haskell",
-			"Java",
-			"JavaScript",
-			"Lisp",
-			"Perl",
-			"PHP",
-			"Python",
-			"Ruby",
-			"Scala",
-			"Scheme"
-		];
-		$( "#autocomplete" ).autocomplete({
-			source: availableTags
-		});
-	});
 
-	//------------- File tree plugin  -------------//
-	if($('#file-tree').length) {
-	     $('#file-tree').fileTree({
-	        root: '/images/',
-	        script: 'php/filetree/jqueryFileTree.php',
-	        expandSpeed: 1000,
-	        collapseSpeed: 1000,
-	        multiFolder: false
-	    }, function(file) {
-	        alert(file);
-	    });
+	if(domain === '') {
+		//domain not found looks like is in testing phase
+		var pageUrl = window.location.pathname.split( '/' );
+		var winLoc = pageUrl.pop(); // get last item
+		setCurrentClass(mainNavLinkAll, winLoc);
+
+	} else {
+		if(absoluteUrl === 0) {
+			//absolute url is disabled
+			var afterDomain = window.location.pathname;
+			if(folder !='') {
+				afterDomain = afterDomain.replace(folder + '/','');
+			} else {
+				afterDomain = afterDomain.replace('/','');
+			}
+			setCurrentClass(mainNavLinkAll, afterDomain);
+		} else {
+			//absolute url is enabled
+			var newDomain = 'http://' + domain + window.location.pathname;
+			setCurrentClass(mainNavLinkAll, newDomain);
+		}
 	}
 
-	//------------- Combobox  -------------//
-    (function( $ ) {
-        $.widget( "ui.combobox", {
-            _create: function() {
-                var input,
-                    self = this,
-                    select = this.element.hide(),
-                    selected = select.children( ":selected" ),
-                    value = selected.val() ? selected.text() : "",
-                    wrapper = this.wrapper = $( "<span>" )
-                        .addClass( "ui-combobox" )
-                        .insertAfter( select );
+	//hover magic add blue color to icons when hover - remove or change the class if not you like.
+	mainNavLinkAll.hover(
+	  function () {
+	    $(this).find('span.icon16').addClass('blue');
+	  }, 
+	  function () {
+	    $(this).find('span.icon16').removeClass('blue');
+	  }
+	);
 
-                input = $( "<input>" )
-                    .appendTo( wrapper )
-                    .val( value )
-                    .addClass( "ui-state-default ui-combobox-input" )
-                    .autocomplete({
-                        delay: 0,
-                        minLength: 0,
-                        source: function( request, response ) {
-                            var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-                            response( select.children( "option" ).map(function() {
-                                var text = $( this ).text();
-                                if ( this.value && ( !request.term || matcher.test(text) ) )
-                                    return {
-                                        label: text.replace(
-                                            new RegExp(
-                                                "(?![^&;]+;)(?!<[^<>]*)(" +
-                                                $.ui.autocomplete.escapeRegex(request.term) +
-                                                ")(?![^<>]*>)(?![^&;]+;)", "gi"
-                                            ), "<strong>$1</strong>" ),
-                                        value: text,
-                                        option: this
-                                    };
-                            }) );
-                        },
-                        select: function( event, ui ) {
-                            ui.item.option.selected = true;
-                            self._trigger( "selected", event, {
-                                item: ui.item.option
-                            });
-                        },
-                        change: function( event, ui ) {
-                            if ( !ui.item ) {
-                                var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( $(this).val() ) + "$", "i" ),
-                                    valid = false;
-                                select.children( "option" ).each(function() {
-                                    if ( $( this ).text().match( matcher ) ) {
-                                        this.selected = valid = true;
-                                        return false;
-                                    }
-                                });
-                                if ( !valid ) {
-                                    // remove invalid value, as it didn't match anything
-                                    $( this ).val( "" );
-                                    select.val( "" );
-                                    input.data( "autocomplete" ).term = "";
-                                    return false;
-                                }
-                            }
-                        }
-                    })
-                    .addClass( "ui-widget ui-widget-content ui-corner-left" );
+	//click magic
+	mainNavLink.click(function(event) {
+		$this = $(this);
+		if($this.hasClass('hasUl')) {
+			event.preventDefault();
+			if($this.hasClass('drop')) {
+				$(this).siblings('ul.sub').slideUp(250).siblings().toggleClass('drop');
+			} else {
+				$(this).siblings('ul.sub').slideDown(250).siblings().toggleClass('drop');
+			}			
+		} 
+	});
+	mainNavSubLink.click(function(event) {
+		$this = $(this);
+		if($this.hasClass('hasUl')) {
+			event.preventDefault();
+			if($this.hasClass('drop')) {
+				$(this).siblings('ul.sub').slideUp(250).siblings().toggleClass('drop');
+			} else {
+				$(this).siblings('ul.sub').slideDown(250).siblings().toggleClass('drop');
+			}			
+		} 
+	});
 
-                input.data( "autocomplete" )._renderItem = function( ul, item ) {
-                    return $( "<li></li>" )
-                        .data( "item.autocomplete", item )
-                        .append( "<a>" + item.label + "</a>" )
-                        .appendTo( ul );
-                };
+	//responsive buttons
+	$('.resBtn>a').click(function(event) {
+		$this = $(this);
+		if($this.hasClass('drop')) {
+			$this.removeClass('drop');
+		} else {
+			$this.addClass('drop');
+		}
+		if($('#sidebar').length) {
+			$('#sidebar').toggleClass('offCanvas');
+			$('#sidebarbg').toggleClass('offCanvas');
+			if($('#sidebar-right').length) {
+				$('#sidebar-right').toggleClass('offCanvas');
+			}
+		}
+		if($('#sidebar-right').length) {
+			$('#sidebar-right').toggleClass('offCanvas');
+			$('#sidebarbg-right').toggleClass('offCanvas');
+		}
+		$('#content').toggleClass('offCanvas');
+		if($('#content-one').length) {
+			$('#content-one').toggleClass('offCanvas');
+		}
+		if($('#content-two').length) {
+			$('#content-two').toggleClass('offCanvas');
+			$('#sidebar-right').removeClass('offCanvas');
+			$('#sidebarbg-right').removeClass('offCanvas');
+		}
+	});
 
-                $( "<a>" )
-                    .attr( "tabIndex", -1 )
-                    .attr( "title", "Show All Items" )
-                    .appendTo( wrapper )
-                    .button({
-                        icons: {
-                            primary: "ui-icon-triangle-1-s"
-                        },
-                        text: false
-                    })
-                    .removeClass( "ui-corner-all" )
-                    .addClass( "ui-corner-right ui-combobox-toggle" )
-                    .click(function() {
-                        // close if already visible
-                        if ( input.autocomplete( "widget" ).is( ":visible" ) ) {
-                            input.autocomplete( "close" );
-                            return;
-                        }
-
-                        // work around a bug (likely same cause as #5265)
-                        $( this ).blur();
-
-                        // pass empty string as value to search for, displaying all results
-                        input.autocomplete( "search", "" );
-                        input.focus();
-                    });
-            },
-
-            destroy: function() {
-                this.wrapper.remove();
-                this.element.show();
-                $.Widget.prototype.destroy.call( this );
-            }
-        });
-    })( jQuery );
-
-    if($("#combobox").length) {
-    	$( "#combobox" ).combobox();
-    }
-
-	//Boostrap modal
-	$('#myModal').modal({ show: false});
+	$('.resBtnSearch>a').click(function(event) {
+		$this = $(this);
+		if($this.hasClass('drop')) {
+			$('.search').slideUp(250);
+		} else {
+			$('.search').slideDown(250);
+		}
+		$this.toggleClass('drop');
+	});
 	
-	//add event to modal after closed
-	$('#myModal').on('hidden', function () {
-	  	console.log('modal is closed');
+	//Hide and show sidebar btn
+
+	$(function () {
+		//var pages = ['grid.html','charts.html'];
+		var pages = [];
+	
+		for ( var i = 0, j = pages.length; i < j; i++ ) {
+
+		    if($.cookie("currentPage") == pages[i]) {
+				var cBtn = $('.collapseBtn.leftbar');
+				cBtn.children('a').attr('title','Show Left Sidebar');
+				cBtn.addClass('shadow hide');
+				cBtn.css({'top': '20px', 'left':'200px'});
+				$('#sidebarbg').css('margin-left','-299'+'px');
+				$('#sidebar').css('margin-left','-299'+'px');
+				if($('#content').length) {
+					$('#content').css('margin-left', '0');
+				}
+				if($('#content-two').length) {
+					$('#content-two').css('margin-left', '0');
+				}
+		    }
+
+		}
+		
+	});
+
+	$( '.collapseBtn' ).bind( 'click', function(){
+		$this = $(this);
+
+		//left sidbar clicked
+		if ($this.hasClass('leftbar')) {
+			
+			if($(this).hasClass('hide-sidebar')) {
+				//show sidebar
+				$this.removeClass('hide-sidebar');
+				$this.children('a').attr('title','Hide Left Sidebar');
+
+			} else {
+				//hide sidebar
+				$this.addClass('hide-sidebar');
+				$this.children('a').attr('title','Show Left Sidebar');		
+			}
+			$('#sidebarbg').toggleClass('hided');
+			$('#sidebar').toggleClass('hided')
+			$('.collapseBtn.leftbar').toggleClass('top shadow');
+			//expand content
+			
+			if($('#content').length) {
+				$('#content').toggleClass('hided');
+			}
+			if($('#content-two').length) {
+				$('#content-two').toggleClass('hided');
+			}	
+
+		}
+
+		//right sidebar clicked
+		if ($this.hasClass('rightbar')) {
+			
+			if($(this).hasClass('hide-sidebar')) {
+				//show sidebar
+				$this.removeClass('hide-sidebar');
+				$this.children('a').attr('title','Hide Right Sidebar');
+				
+			} else {
+				//hide sidebar
+				$this.addClass('hide-sidebar');
+				$this.children('a').attr('title','Show Right Sidebar');
+			}
+			$('#sidebarbg-right').toggleClass('hided');
+			$('#sidebar-right').toggleClass('hided');
+			if($('#content').length) {
+				$('#content').toggleClass('hided-right');
+			}
+			if($('#content-one').length) {
+				$('#content-one').toggleClass('hided');
+			}
+			if($('#content-two').length) {
+				$('#content-two').toggleClass('hided-right');
+			}	
+			$('.collapseBtn.rightbar').toggleClass('top shadow')
+		}
+	});
+
+
+	//------------- widget panel magic -------------//
+
+	var widget = $('div.panel');
+	var widgetOpen = $('div.panel').not('div.panel.closed');
+	var widgetClose = $('div.panel.closed');
+	//close all widgets with class "closed"
+	widgetClose.find('div.panel-body').hide();
+	widgetClose.find('.panel-heading>.minimize').removeClass('minimize').addClass('maximize');
+
+	widget.find('.panel-heading>a').click(function (event) {
+		event.preventDefault();
+		var $this = $(this);
+		if($this .hasClass('minimize')) {
+			//minimize content
+			$this.removeClass('minimize').addClass('maximize');
+			$this.parent('div').addClass('min');
+			cont = $this.parent('div').next('div.panel-body')
+			cont.slideUp(500, 'easeOutExpo'); //change effect if you want :)
+			
+		} else  
+		if($this .hasClass('maximize')) {
+			//minimize content
+			$this.removeClass('maximize').addClass('minimize');
+			$this.parent('div').removeClass('min');
+			cont = $this.parent('div').next('div.panel-body');
+			cont.slideDown(500, 'easeInExpo'); //change effect if you want :)
+		} 
+		
 	})
 
-});//End document ready functions
-
-//generate random number for charts
-randNum = function(){
-	//return Math.floor(Math.random()*101);
-	return (Math.floor( Math.random()* (1+40-20) ) ) + 20;
-}
-
-//sparkline in sidebar area
-var positive = [1,5,3,7,8,6,10];
-var negative = [10,6,8,7,3,5,1]
-var negative1 = [7,6,8,7,6,5,4]
-
-$('#stat1').sparkline(positive,{
-	height:15,
-	spotRadius: 0,
-	barColor: '#9FC569',
-	type: 'bar'
-});
-$('#stat2').sparkline(negative,{
-	height:15,
-	spotRadius: 0,
-	barColor: '#ED7A53',
-	type: 'bar'
-});
-$('#stat3').sparkline(negative1,{
-	height:15,
-	spotRadius: 0,
-	barColor: '#ED7A53',
-	type: 'bar'
-});
-$('#stat4').sparkline(positive,{
-	height:15,
-	spotRadius: 0,
-	barColor: '#9FC569',
-	type: 'bar'
-});
-//sparkline in widget
-$('#stat5').sparkline(positive,{
-	height:15,
-	spotRadius: 0,
-	barColor: '#9FC569',
-	type: 'bar'
-});
-
-$('#stat6').sparkline(positive, { 
-	width: 70,//Width of the chart - Defaults to 'auto' - May be any valid css width - 1.5em, 20px, etc (using a number without a unit specifier won't do what you want) - This option does nothing for bar and tristate chars (see barWidth)
-	height: 20,//Height of the chart - Defaults to 'auto' (line height of the containing tag)
-	lineColor: '#88bbc8',//Used by line and discrete charts to specify the colour of the line drawn as a CSS values string
-	fillColor: '#f2f7f9',//Specify the colour used to fill the area under the graph as a CSS value. Set to false to disable fill
-	spotColor: '#e72828',//The CSS colour of the final value marker. Set to false or an empty string to hide it
-	maxSpotColor: '#005e20',//The CSS colour of the marker displayed for the maximum value. Set to false or an empty string to hide it
-	minSpotColor: '#f7941d',//The CSS colour of the marker displayed for the mimum value. Set to false or an empty string to hide it
-	spotRadius: 3,//Radius of all spot markers, In pixels (default: 1.5) - Integer
-	lineWidth: 2//In pixels (default: 1) - Integer
-});
-
-//sparklines (making loop with random data for all 7 sparkline)
-i=1;
-for (i=1; i<8; i++) {
- 	var data = [[1, 3+randNum()], [2, 5+randNum()], [3, 8+randNum()], [4, 11+randNum()],[5, 14+randNum()],[6, 17+randNum()],[7, 20+randNum()], [8, 15+randNum()], [9, 18+randNum()], [10, 22+randNum()]];
- 	placeholder = '.sparkLine' + i;
-	$(placeholder).sparkline(data, { 
-		width: 100,//Width of the chart - Defaults to 'auto' - May be any valid css width - 1.5em, 20px, etc (using a number without a unit specifier won't do what you want) - This option does nothing for bar and tristate chars (see barWidth)
-		height: 30,//Height of the chart - Defaults to 'auto' (line height of the containing tag)
-		lineColor: '#88bbc8',//Used by line and discrete charts to specify the colour of the line drawn as a CSS values string
-		fillColor: '#f2f7f9',//Specify the colour used to fill the area under the graph as a CSS value. Set to false to disable fill
-		spotColor: '#467e8c',//The CSS colour of the final value marker. Set to false or an empty string to hide it
-		maxSpotColor: '#9FC569',//The CSS colour of the marker displayed for the maximum value. Set to false or an empty string to hide it
-		minSpotColor: '#ED7A53',//The CSS colour of the marker displayed for the mimum value. Set to false or an empty string to hide it
-		spotRadius: 3,//Radius of all spot markers, In pixels (default: 1.5) - Integer
-		lineWidth: 2//In pixels (default: 1) - Integer
+	//show minimize and maximize icons
+	widget.hover(function() {
+		    $(this).find('.panel-heading>a').show(50);	
+		}
+		, function(){
+			$(this).find('.panel-heading>a').hide();	
 	});
-}
+
+	//add shadow if hover panel
+	widget.not('.drag').hover(function() {
+		    $(this).addClass('hover');	
+		}
+		, function(){
+			$(this).removeClass('hover');	
+	});
+
+	//------------- Search forms  submit handler  -------------//
+	if($('#tipue_search_input').length) {
+		$('#tipue_search_input').tipuesearch({
+          'show': 5
+	     });
+		$('#search-form').submit(function() {
+		  return false;
+		});
+
+		//make custom redirect for search form in .heading
+		$('#searchform').submit(function() {
+			var sText = $('.top-search').val();
+			var sAction = $(this).attr('action');
+			var sUrl = sAction + '?q=' + sText;
+			$(location).attr('href',sUrl);
+			return false;
+		});
+	}
+	//------------- To top plugin  -------------//
+	$().UItoTop({ easingType: 'easeOutQuart' });
+
+	//------------- Tooltips -------------//
+
+	//top tooltip
+	$('.tip').qtip({
+		content: false,
+		position: {
+			my: 'bottom center',
+			at: 'top center',
+			viewport: $(window)
+		},
+		style: {
+			classes: 'qtip-tipsy'
+		}
+	});
+
+	//tooltip in right
+	$('.tipR').qtip({
+		content: false,
+		position: {
+			my: 'left center',
+			at: 'right center',
+			viewport: $(window)
+		},
+		style: {
+			classes: 'qtip-tipsy'
+		}
+	});
+
+	//tooltip in bottom
+	$('.tipB').qtip({
+		content: false,
+		position: {
+			my: 'top center',
+			at: 'bottom center',
+			viewport: $(window)
+		},
+		style: {
+			classes: 'qtip-tipsy'
+		}
+	});
+
+	//tooltip in left
+	$('.tipL').qtip({
+		content: false,
+		position: {
+			my: 'right center',
+			at: 'left center',
+			viewport: $(window)
+		},
+		style: {
+			classes: 'qtip-tipsy'
+		}
+	});
+
+	//------------- Jrespond -------------//
+	var jRes = jRespond([
+        {
+            label: 'small',
+            enter: 0,
+            exit: 1000
+        },{
+            label: 'desktop',
+            enter: 1001,
+            exit: 10000
+        }
+    ]);
+
+    jRes.addFunc({
+        breakpoint: 'small',
+        enter: function() {
+            $('#sidebarbg,#sidebar,#content').removeClass('hided');
+            if($('#content-two').length > 0) {
+           		$('.collapseBtn.rightbar').addClass('offCanvas hide-sidebar').find('a').attr('title','Show Right Sidebar');
+           		$('#content-two').addClass('hided-right showRb');
+           		$('#sidebarbg-right').addClass('hided showRb');
+           		$('#sidebar-right').addClass('hided showRb');
+            }
+        },
+        exit: function() {
+            $('.collapseBtn.top.hide').removeClass('top hide');
+            $('.collapseBtn.rightbar').removeClass('offCanvas');
+            $('#content-two').removeClass('hided-right showRb');
+            $('#sidebarbg-right').removeClass('hided showRb');
+           	$('#sidebar-right').removeClass('hided showRb');
+        }
+    });
+	
+	//------------- Uniform  -------------//
+	//add class .nostyle if not want uniform to style field
+	$("input, textarea, select").not('.nostyle').uniform();
+
+	//remove overlay and show page
+	$("#qLoverlay").fadeOut(250);
+	$("#qLbar").fadeOut(250);
+
+});

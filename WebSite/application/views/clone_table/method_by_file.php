@@ -16,7 +16,7 @@ width: 50% !important;
     <div id="content" class="clearfix">
       <div class="contentwrapper">
         <div class="heading">
-          <h3>Method Clone Class By File</h3> 
+          <h3>Methods By File</h3> 
           <ul class="breadcrumb">
                 <li>You are here:</li>
                 <li>
@@ -27,7 +27,7 @@ width: 50% !important;
                         <span class="icon16 fa fa-caret-right"></span>
                     </span>
                 </li>
-                <li class="active">Method Clone Class By File</li>
+                <li class="active">Methods By File</li>
             </ul>                   
         </div>
 
@@ -135,14 +135,14 @@ width: 50% !important;
                         <th>DID</th>
                         <th>GID</th>                        
                         <th>File Name</th>                        
-                        <th>No. Clones</th>
+                        <th>No. Methods</th>
                       </tr>
                     </thead>
                       <tbody>
                         <?php 
                           $counter = 0;
-                          if($mcc_data)
-                          foreach($mcc_data as $data){
+                          if($file_data)
+                          foreach($file_data as $data){
                             $counter++;
                          ?>
                         <tr class="list_view" data-fid="<?php echo $data['fid'];?>">
@@ -151,7 +151,7 @@ width: 50% !important;
                           <td><?php echo $data['did'];?></td>
                           <td><?php echo $data['gid'];?></td>
                           <td><?php echo $data['filename'];?></td>
-                          <td><?php echo $data['clones'];?></td>
+                          <td><?php echo $data['methods'];?></td>
                         </tr>
                         <?php }?>                        
                       </tbody>
@@ -162,7 +162,7 @@ width: 50% !important;
                         <th>DID</th>
                         <th>GID</th>                        
                         <th>File Name</th>                        
-                        <th>No. Clones</th>
+                        <th>No. Methods</th>
                       </tr>
                     </tfoot>                     
                   </table>
@@ -172,8 +172,8 @@ width: 50% !important;
             </div>
           </div>
            <?php 
-           if($mcc_file_data)
-            $mcc_clone_list_data = $mcc_file_data ? $mcc_file_data : array();
+           if($file_method_data)
+            $mcc_clone_list_data = $file_method_data ? $file_method_data : array();
            foreach($mcc_clone_list_data as $fid => $data){?>
           <div class="row mcc_instance_list" id="mcc_instance_list_<?php echo $fid;?>">
             <div class="col-md-12">
@@ -191,9 +191,10 @@ width: 50% !important;
                     <thead>
                       <tr>                        
                         <th class="col-lg-1">No.</th>
-                        <th class="col-lg-2">MCC ID</th>
                         <th class="col-lg-2">MID</th>
                         <th class="col-lg-3">Method Name</th>
+                        <th class="col-lg-2">Start Line</th>
+                        <th class="col-lg-2">End Line</th>
                       </tr>
                     </thead>
                       <tbody>
@@ -202,20 +203,22 @@ width: 50% !important;
                         foreach($data as $d){
                           $counter++;
                         ?>
-                          <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo 1;//$d['endcol'];?>" data-startcol="<?php echo 1;//$d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $fid;?>" data-mccid= "<?php echo $d['mcc_id'];?>" data-clid= "<?php echo $d['mcc_instance_id'];?>" data-path="<?php echo $d['filepath']?>">
+                          <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo 1;//$d['endcol'];?>" data-startcol="<?php echo 1;//$d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $fid;?>" data-path="<?php echo $d['filepath']?>">
                             <td><?php echo $counter;?></td>
-                            <td><?php echo $d['mcc_id'];?></td>
                             <td><?php echo $d['mid'];?></td>
-                            <td><?php echo $d['methodname'];?></td>
+                            <td><?php echo $d['mname'];?></td>
+                            <td><?php echo $d['startline'];?></td>
+                            <td><?php echo $d['endline'];?></td>
                           </tr>
                         <?php }?>
                       </tbody> 
                       <tfoot>
                       <tr>                        
                         <th class="col-lg-1">No.</th>
-                        <th class="col-lg-2">MCC ID</th>
                         <th class="col-lg-2">MID</th>
                         <th class="col-lg-3">Method Name</th>
+                        <th class="col-lg-2">Start Line</th>
+                        <th class="col-lg-2">End Line</th>
                       </tr>
                     </tfoot>                       
                   </table>
@@ -271,7 +274,7 @@ $(document).ready(function(){
         return false;
     });
      $(".code_view").on("click",function(){
-        Clonify.MCC.viewCodeData($(this).data("mccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+        Clonify.MCC.viewCodeData('','',$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
         event.preventDefault();            
         return false;
     });

@@ -5,7 +5,7 @@
     <div id="content" class="clearfix">
       <div class="contentwrapper">
         <div class="heading">
-          <h3>Single Clone Structure Across File</h3> 
+          <h3>Method Clone Structure Across File</h3> 
           <ul class="breadcrumb">
                 <li>You are here:</li>
                 <li>
@@ -16,7 +16,7 @@
                         <span class="icon16 fa fa-caret-right"></span>
                     </span>
                 </li>
-                <li class="active">Single Clone Structure Across File</li>
+                <li class="active">Method Clone Structure Across File</li>
             </ul>                   
         </div>
         
@@ -26,13 +26,13 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Select * From SCC Across File List Where</h4>
+                <h4 class="modal-title" id="myModalLabel">Select * From MCC Across File List Where</h4>
               </div>
               <div class="modal-body">
                
                <div class="row">
                   <div class="col-md-4">
-                    <u><h4>SCS Id</h4></u>
+                    <u><h4>MCS Id</h4></u>
                   </div>
                </div>
                <div class="row">
@@ -62,7 +62,7 @@
                 <br>
                 <div class="row">
                   <div class="col-md-4">
-                    <u><h4>No Of Colones</h4></u>
+                    <u><h4>No Of Instances</h4></u>
                   </div>
                </div>
                <div class="row">
@@ -337,7 +337,7 @@ $(document).ready(function(){
       event.preventDefault();      
       return false;
     });
-    $(".code_view").live("click",function(){
+    $(".code_view").on("click",function(){
         Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
         event.preventDefault();        
         return false;
