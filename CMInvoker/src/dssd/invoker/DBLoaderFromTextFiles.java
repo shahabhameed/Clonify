@@ -272,7 +272,6 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				Database.executeTransaction(INSERT_SCSINFILE_FRAGMENTS);
 			}
 			
-                        
                         Parse_FileClustersXX(invocationId);                        
 			parse_file_clusters(invocationId);
 			parse_InDirs_CloneFileStructures(invocationId );
