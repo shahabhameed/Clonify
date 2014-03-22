@@ -67,7 +67,6 @@
                                 <a href="<?php echo site_url('home/MethodCloneClassByFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>MCC By File
                                 </a>
-                              adasd
                                 <a href="<?php echo site_url('home/MethodCloneStructureAcrossFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>MCS Across File
                                 </a>
