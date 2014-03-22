@@ -126,8 +126,7 @@ class SCC
           $temp = json_decode(json_encode($r), true);
           if ($temp){
             foreach($temp as $t){
-              if (!in_array($t['fcc_id'], $fcc_ids))
-                $fcc_ids[] = $t['fcc_id'];
+              $fcc_ids[] = $t['fcc_id'];
             }
           }
         }
@@ -150,8 +149,7 @@ class SCC
           $temp = json_decode(json_encode($r), true);
           if ($temp){
             foreach($temp as $t){
-              if (!in_array($t['fcc_id'], $fcc_ids))
-                $fcc_ids[] = $t['fcc_id'];
+              $fcc_ids[] = $t['fcc_id'];
             }
           }
         }
@@ -174,8 +172,7 @@ class SCC
           $temp = json_decode(json_encode($r), true);
           if ($temp){
             foreach($temp as $t){
-              if (!in_array($t['fcc_id'], $fcc_ids))
-                $fcc_ids[] = $t['fcc_id'];
+              $fcc_ids[] = $t['fcc_id'];
             }
           }
         }
@@ -198,8 +195,7 @@ class SCC
           $temp = json_decode(json_encode($r), true);
           if ($temp){
             foreach($temp as $t){
-              if (!in_array($t['fcc_id'], $fcc_ids))
-                $fcc_ids[] = $t['fcc_id'];
+              $fcc_ids[] = $t['fcc_id'];
             }
           }
         }
@@ -214,7 +210,8 @@ class SCC
     $data = null;
     $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
-      $data = $this->ci->scc_model->getAllFCSWithinGroupSecondaryTableRows($primary_table_row['fcs_ingroup_id'], $primary_table_row['fcc_ids'], $invocationId, $userId);
+      $fcc_ids = join(",", array_unique(explode(",", $primary_table_row['fcc_ids'])));
+      $data = $this->ci->scc_model->getAllFCSWithinGroupSecondaryTableRows($primary_table_row['fcs_ingroup_id'], $fcc_ids, $invocationId, $userId);
       if ($data){
         $data = json_decode(json_encode($data), true);
         foreach($data as $d){
@@ -230,7 +227,8 @@ class SCC
     $data = null;
     $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
-      $data = $this->ci->scc_model->getAllFCSCrossGroupSecondaryTableRows($primary_table_row['fcs_crossgroup_id'], $primary_table_row['fcc_ids'], $invocationId, $userId);
+      $fcc_ids = join(",", array_unique(explode(",", $primary_table_row['fcc_ids'])));
+      $data = $this->ci->scc_model->getAllFCSCrossGroupSecondaryTableRows($primary_table_row['fcs_crossgroup_id'], $fcc_ids, $invocationId, $userId);
       if ($data){
         $data = json_decode(json_encode($data), true);
         foreach($data as $d){
@@ -246,7 +244,8 @@ class SCC
     $data = null;
     $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
-      $data = $this->ci->scc_model->getAllFCSWithinDirectorySecondaryTableRows($primary_table_row['fcs_indir_id'], $primary_table_row['fcc_ids'], $invocationId, $userId);
+      $fcc_ids = join(",", array_unique(explode(",", $primary_table_row['fcc_ids'])));
+      $data = $this->ci->scc_model->getAllFCSWithinDirectorySecondaryTableRows($primary_table_row['fcs_indir_id'], $fcc_ids, $invocationId, $userId);
       if ($data){
         $data = json_decode(json_encode($data), true);
         foreach($data as $d){
@@ -262,7 +261,8 @@ class SCC
     $data = null;
     $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
-      $data = $this->ci->scc_model->getAllFCSCrossDirectorySecondaryTableRows($primary_table_row['fcs_crossdir_id'], $primary_table_row['fcc_ids'], $invocationId, $userId);
+      $fcc_ids = join(",", array_unique(explode(",", $primary_table_row['fcc_ids'])));
+      $data = $this->ci->scc_model->getAllFCSCrossDirectorySecondaryTableRows($primary_table_row['fcs_crossdir_id'], $fcc_ids, $invocationId, $userId);
       if ($data){
         $data = json_decode(json_encode($data), true);
         foreach($data as $d){
