@@ -29,19 +29,25 @@
                                 <div class="panel-heading">
                                     <h4><span class="icon16 fa fa-cloud-upload"></span>
                                         <span >File Manager</span></h4>
-
+                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 </div>
                                 <div class="panel-body noPad clearfix">
 
                                     <div class="row ">
                                         <div class=" box gradient col-lg-12">
                                             <div class="content noPad col-lg-12">
-                                                <button class=" btn btn-success  pull-right col-lg-1" type="submit">Finish</button>
+
+                                              <div class="alert alert-info">
+                                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                            <strong>Press Update to update your database!</strong>
+                                                        </div>
+
+                                                        <button class=" btn btn-success  pull-right col-lg-1" type="submit">Update</button>
                                             </div>  
                                         </div>
                                     </div>
 
-                                   
+
 
                                     <div class="row">
 

@@ -234,3 +234,55 @@ CREATE TABLE IF NOT EXISTS `method` (
 
 -- ADDED ON 2014-03-18 0
 ALTER TABLE  `mcc` ADD `members` INT( 11 ) NOT NULL ;
+
+-- ADDED ON 2014-03-21 0 Directory ID related
+ALTER TABLE invocation_files ADD cmdirectory_id int(11);
+
+-- ADDED ON 2014-03-22 0 By Hafeez
+
+CREATE TABLE IF NOT EXISTS `mcscrossfile_methods` (
+  `mcs_crossfile_id` int(11) NOT NULL,
+  `fid` int(11) NOT NULL,
+  `mcc_id` int(11) NOT NULL,
+  `mid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `scscrossmethod_scc` (
+  `scs_crossmethod_id` int(11) NOT NULL,
+  `scc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `scs_crossmethod` (
+  `scs_crossmethod_id` int(11) NOT NULL,
+  `atc` double NOT NULL,
+  `apc` double NOT NULL,
+  `members` int(11) NOT NULL,
+  PRIMARY KEY (`scs_crossmethod_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `scscrossmethod_method` (
+  `scs_crossmethod_id` int(11) NOT NULL,
+  `mid` int(11) NOT NULL,
+  `tc` double NOT NULL,
+  `pc` double NOT NULL,
+  `fid` int(11) NOT NULL,
+  `did` int(11) NOT NULL,
+  `gid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `mcc_file` (
+  `mcc_id` int(11) NOT NULL,
+  `fid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `mcscrossfile_file` (
+  `mcs_crossfile_id` int(11) NOT NULL,
+  `fid` int(11) NOT NULL,
+  `did` int(11) NOT NULL,
+  `gid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `mcscrossfile_mcc` (
+  `mcs_crossfile_id` int(11) NOT NULL,
+  `mcc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

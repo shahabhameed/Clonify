@@ -3,9 +3,9 @@
   include VIEW_PARTIAL_FOLDER_PATH . '/sidebar.php'; 
 ?>
     <div id="content" class="clearfix">
-      <div class="contentwrapper">
+      <div class="contentwrapper" >
         <div class="heading">
-          <h3>Single Clone Structure Across File</h3> 
+          <h3>FCS Within Directory</h3> 
           <ul class="breadcrumb">
                 <li>You are here:</li>
                 <li>
@@ -16,7 +16,7 @@
                         <span class="icon16 fa fa-caret-right"></span>
                     </span>
                 </li>
-                <li class="active">Single Clone Structure Across File</li>
+                <li class="active">FCS Within Directory</li>
             </ul>                   
         </div>
         
@@ -148,119 +148,158 @@
             </div>
           </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-12">
-              <div class="panel panel-default gradient">
-                <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i> SCS Across File List</span></h4>
-                 <span class="loader" style="top:15px;cursor:pointer;">
-                  <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
-                </span>
-                 <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
-                </div>
-                <div class="panel-body noPad clearfix">
-                  <table cellpadding="0" cellspacing="0" border="0" class="responsive scsafiletable display table table-bordered" width="100%">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>SCS ID</th>
-                        <th>Structure (SCC ID)</th>                        
-                        <th>ATC</th>
-                        <th>APC</th>                        
-                        <th>No. of Instances</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php $counter=0;foreach($results as $result){$counter++;?>
-                      <tr class="list_view" data-scsid="<?php echo $result['scs_crossfile_id'];?>">
-                        <td><?php echo $counter;?></td>
-                        <td><?php echo $result['scs_crossfile_id'];?></td>
-                        <td><?php echo $result['scc_id_csv'];?></td>
-                        <td><?php echo $result['atc'];?></td>
-                        <td><?php echo $result['apc'];?></td>                        
-                        <td><?php echo $result['members'];?></td>
-                      </tr>
-                      <?php }?>
-                    </tbody>
-                     <tfoot>
-                      <tr>
-                        <th>No</th>
-                        <th>SCS ID</th>
-                        <th>Structure (SCC ID)</th>                        
-                        <th>ATC</th>
-                        <th>APC</th>                        
-                        <th>No. of Instances</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <?php 
-          if ($results){
-          foreach($results as $scs_acrossfile_id => $data){
-            $data = $data['child_rows'];
-          ?>
-          <div class="row scs_instance_list" id="scs_instance_list_<?php echo $scs_acrossfile_id;?>">
-            <div class="col-md-12">
-              <div class="panel panel-default gradient">
-                <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i>SCS Clone Instance List - SCS ID - <?php echo $scs_acrossfile_id;?></span></h4>
-                  <span class="loader" style="top:15px;cursor:pointer;">
-                  <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
-                </span>
-                 <a href="#"  id="pannel2" class="minimize" style="display: inline;">Minimize</a>
-                </div>
-                
-                <div class="panel-body noPad clearfix">
-                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dataTable display table table-bordered" width="100%">
-                    <thead>
-                      <tr>
-                        <th>No.</th>                        
-                        <th>Group ID</th>
-                        <th>Directory ID</th>
-                        <th>File ID</th>
-                        <th>TC</th>
-                        <th>PC</th>
-                        <th>File Name</th>
-                      </tr>
-                    </thead>
+        <div class="row-fluid">
+          <div class="col-md-9">
+            <div class="row ">
+              <div class="col-md-12">
+                <div class="panel panel-default gradient">
+                  <div class="panel-heading min">
+                   <h4><span> <i class="fa fa-list-alt fa-2"></i> FCS Within Directory List</span></h4>
+                   <span class="loader" style="top:15px;cursor:pointer;">
+                    <!-- <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i> -->
+                  </span>
+                   <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
+                  </div>
+                  <div class="panel-body noPad clearfix">
+                    <table cellpadding="0" cellspacing="0" border="0" class="responsive scsafiletable display table table-bordered" width="100%">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>FCS ID</th>
+                          <th>Structure (FCS ID)</th>                        
+                          <th>Directory</th>
+                          <th>Members</th>                        
+                        </tr>
+                      </thead>
                       <tbody>
-                        <?php $counter = 0;
-                        foreach($data as $d){
-                          $counter++;
-                        ?>
-                          <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="<?php echo $d['fid'];?>" data-scsid= "<?php echo $scs_acrossfile_id;?>" data-clid="" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
-                            <td><?php echo $counter;?></td>
-                            <td><?php echo $d['group_id'];?></td>
-                            <td><?php echo $d['directory_id'];?></td>
-                            <td><?php echo $d['fid'];?></td>
-                            <td><?php echo $d['tc'];?></td>
-                            <td><?php echo $d['pc'];?></td>
-                            <td><?php echo $d['directory_name'].$d['file_name'];?></td>                            
-                          </tr>
-                        <?php }?>
+                       <tr class="list_view" data-scsid="1">
+                          <td>1</td>
+                          <td>1</td>
+                          <td>70,70,70,68,68,68</td>
+                          <td>0</td>
+                          <td>2</td>
+                       </tr>
+                        <tr class="list_view" data-scsid="2">
+                          <td>2</td>
+                          <td>2</td>
+                          <td>70,70,68,68</td>
+                          <td>0</td>
+                          <td>3</td>
+                       </tr>
                       </tbody>
-                      <tfoot>
-                      <tr>
-                        <th>No.</th>                        
-                        <th>Group ID</th>
-                        <th>Directory ID</th>
-                        <th>File ID</th>
-                        <th>TC</th>
-                        <th>PC</th>
-                        <th>File Name</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                       <tfoot>
+                        <tr>
+                          <th>No</th>
+                          <th>FCS ID</th>
+                          <th>Structure (FCS ID)</th>                        
+                          <th>Directory</th>
+                          <th>Members</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+            <div class="row scs_instance_list" id="scs_instance_list_1">
+              <div class="col-md-12">
+                <div class="panel panel-default gradient">
+                  <div class="panel-heading min">
+                   <h4><span> <i class="fa fa-list-alt fa-2"></i>FCS Clone Instance List</span></h4>
+                    <span class="loader" style="top:15px;cursor:pointer;">
+                    <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
+                  </span>
+                   <a href="#"  id="pannel2" class="minimize" style="display: inline;">Minimize</a>
+                  </div>
+                  
+                  <div class="panel-body noPad clearfix">
+                    <table cellpadding="0" cellspacing="0" border="0" class="responsive dataTable display table table-bordered" width="100%">
+                      <thead>
+                        <tr>
+                          <th>No.</th>                        
+                          <th>Clone ID</th>
+                          <th>Structure(FID)</th>
+                         
+                        </tr>
+                      </thead>
+                        <tbody>
+                            <tr class="code_view" data-folders="12,14" data-name="" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="1" data-scsid= "1" data-clid="" data-path="">
+                              <td>1</td>
+                              <td>1</td>
+                              <td>2,4</td>
+                            </tr>
+                             <tr class="code_view" data-folders="13,15" data-name="" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="2" data-scsid= "2" data-clid="" data-path="">
+                              <td>2</td>
+                              <td>2</td>
+                              <td>3,5</td>
+                            </tr>
+                          
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                           <th>No.</th>                        
+                          <th>Clone ID</th>
+                          <th>Structure(FID)</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row scs_instance_list" id="scs_instance_list_2">
+              <div class="col-md-12">
+                <div class="panel panel-default gradient">
+                  <div class="panel-heading min">
+                   <h4><span> <i class="fa fa-list-alt fa-2"></i>FCS Clone Instance List</span></h4>
+                    <span class="loader" style="top:15px;cursor:pointer;">
+                    <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
+                  </span>
+                   <a href="#"  id="pannel2" class="minimize" style="display: inline;">Minimize</a>
+                  </div>
+                  
+                  <div class="panel-body noPad clearfix">
+                    <table cellpadding="0" cellspacing="0" border="0" class="responsive dataTable display table table-bordered" width="100%">
+                      <thead>
+                        <tr>
+                          <th>No.</th>                        
+                          <th>Clone ID</th>
+                          <th>Structure(FID)</th>
+                         
+                        </tr>
+                      </thead>
+                        <tbody>
+                            <tr class="code_view" data-folders="21" data-name="" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="1" data-scsid= "1" data-clid="" data-path="">
+                              <td>1</td>
+                              <td>1</td>
+                              <td>1</td>
+                            </tr>
+                            <tr class="code_view" data-folders="22,23" data-name="" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="2" data-scsid= "2" data-clid="" data-path="">
+                              <td>2</td>
+                              <td>2</td>
+                              <td>2,3</td>
+                            </tr>
+                          
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                           <th>No.</th>                        
+                          <th>Clone ID</th>
+                          <th>Structure(FID)</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        <?php } }?>
+          <div class="col-md-3" style="border-left:1px solid;">
+            <ul id="treeDemo" class="ztree"></ul>
+          </div>
+        </div>  
+        
         
         <div class="row code-window-containter">
             <div class="col-md-12">
@@ -332,15 +371,14 @@ $(document).ready(function(){
     $('.dataTables_paginate > ul').addClass('pagination');
     $('.dataTables_filter>label>input').addClass('form-control');
     $('.dataTables_filter').hide();
-    $(".list_view").live("click",function(){
-      Clonify.SCC.viewSCSAcrossCloneInstance($(this).data("scsid"));
-      event.preventDefault();      
+    $(".list_view").on("click",function(){
+      $('.scs_instance_list').hide();
+      expand($(this).data("scsid"));
+      $("#scs_instance_list_"+$(this).data("scsid")).show();
       return false;
     });
-    $(".code_view").live("click",function(){
-        Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
-        event.preventDefault();        
-        return false;
+    $(".code_view").on("click",function(){
+       mysearch($(this).data("folders"));
     });
     
   });

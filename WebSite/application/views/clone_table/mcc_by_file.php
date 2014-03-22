@@ -53,7 +53,7 @@ width: 50% !important;
                 <br>
                 <div class="row">
                   <div class="col-md-4">
-                    <u><h4>No. of Instances</h4></u>
+                    <u><h4>No.Colones</h4></u>
                   </div>
                </div>
                <div class="row">
@@ -135,7 +135,7 @@ width: 50% !important;
                         <th>Structure(SCC ID,...)</th>
                         <th>ATC</th>                        
                         <th>APC</th>                        
-                        <th>No. of Instances</th>
+                        <th>No. Clones</th>
                       </tr>
                     </thead>
                       <tbody>
@@ -162,7 +162,7 @@ width: 50% !important;
                         <th>Structure(SCC ID,...)</th>
                         <th>ATC</th>                        
                         <th>APC</th>                        
-                        <th>No. of Instances</th>
+                        <th>No. Clones</th>
                       </tr>
                     </tfoot>                     
                   </table>
@@ -216,8 +216,8 @@ Khizer + Umer: Yakki
                             <td><?php echo $d['fid'];?></td>
                             <td><?php echo $d['tc'];?></td>
                             <td><?php echo $d['pc'];?></td>
-                            <td style="text-align:left"><?php echo $d['methodname'];?></td>                            
-                            <td style="text-align:left"><?php echo $d['filename'];?></td>                            
+                            <td><?php echo $d['methodname'];?></td>                            
+                            <td><?php echo $d['filename'];?></td>                            
                           </tr>
                         <?php }?>
                       </tbody> 

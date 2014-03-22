@@ -36,9 +36,16 @@ public class Constants {
 	public static final String FILE_CLUSTERS_FILE_NAME ="FileClusters";
 	public static final String CLONES_METHOD_FILE_NAME = "ClonesByMethod";
 	
+	public static final String IN_DIR_STRUCTURE = "InDirsCloneFileStructures";
+	public static final String IN_GROUP_STRUCTURE = "InGroupCloneFileStructures";
+	public static final String CROSS_DIR_FILE_EX = "CrossDirsCloneFileStructuresEx";
+	public static final String FILE_STRUCTURE_CROSS_GROUP = "CrossGroupsCloneFileStructuresEx";
+	public static final String FILE_CLUSTER_XX = "FileClustersXX";
+	
 	public static final String METHOD_CLUSTER_XX = "MethodClustersXX";
 
 	public static final String METHOD_INFO = "MethodsInfo";
+	public static final String FILE_INFO_FILE_NAME = "FilesInfo";
 	
 	public static final int DIR_FILE_VIEW = 0;
 	public static final int FILE_METHOD_VIEW = 1;

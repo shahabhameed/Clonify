@@ -28,7 +28,7 @@
                 <?php } ?>
 
                 <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Load Results</a></li>
-                <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Load Results</a></li>
+                
                 
                 
                 <?php if (isset($showCloneView) && $invocationId) { ?>
@@ -61,8 +61,14 @@
                                 <a href="<?php echo site_url('home/SingleCloneStructureFCSCrossDirectory') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Cross Directory
                                 </a>
-                                 <a href="<?php echo site_url('home/MethodCloneClass') . "/" . $invocationId; ?>">
+                                <a href="<?php echo site_url('home/MethodCloneClass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>MCC
+                                </a>
+                                <a href="<?php echo site_url('home/MethodCloneClassByFile') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>MCC By File
+                                </a>
+                                <a href="<?php echo site_url('home/MethodCloneStructureAcrossFile') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>MCS Across File
                                 </a>
                             </li>
                         </ul>

@@ -949,7 +949,7 @@ Clonify.MCC = {
 
             var selector1 = "";
             for (var i = code_compare_global_attributes.file_1_start_line; i <= code_compare_global_attributes.file_1_end_line; i++){
-                selector1 += '#geshi-window'+code_compare_global_attributes.file_1_window_id+'-'+i+",";
+                selector1 += '#geshi-window'+code_compare_global_attributes.file_2_window_id+'-'+i+",";
             }
 
             selector1 = selector1.substring(0, selector1.length-1);

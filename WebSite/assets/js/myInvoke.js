@@ -279,7 +279,14 @@ function deleteGroup(parentId, childID, hiddenListId, deletedListId)
         var parent = document.getElementById(parentId);
         parent.removeChild(child);
         updateHiddenOnDelete(hiddenListId, deletedListId);
+        decrementGroupCount();
     }
+}
+function decrementGroupCount()
+{
+    var groupCount=document.getElementById('groupCount');
+    var  count=parseInt(groupCount.value)-1;
+    groupCount.value=count
 }
 function addControl(parentID, type, value, id, childClass, onClick) {
 
@@ -435,10 +442,18 @@ function createNewElement(newElement, baseElement) {
             var newHiddenRow = new Option(list.id, list.id)
             //alert(hiddenId + " - " + hiddenBox.length);
             hiddenBox.options[hiddenBox.length] = newHiddenRow;
+            incrementGroupCount();
         }
 
     }
 
+}
+
+function incrementGroupCount()
+{
+    var groupCount=document.getElementById('groupCount');
+    var  count=parseInt(groupCount.value)+1;
+    groupCount.value=count
 }
 
 function selectAllOptions(elementID) {

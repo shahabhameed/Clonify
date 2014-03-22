@@ -161,7 +161,7 @@
                         <th>Group Id</th>
                         <th>Directory ID</th>
                         <th>File Id</th>
-                        <th>No. Clones</th>
+                        <th>No. of Instances</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -185,7 +185,7 @@
                         <th>Group Id</th>
                         <th>Directory ID</th>
                         <th>File Id</th>
-                        <th>No. Clones</th>
+                        <th>No. of Instances</th>
                       </tr>
                     </tfoot>
                   </table>
