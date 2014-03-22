@@ -437,7 +437,7 @@ select {width: 150px;}
 
 /*Tabs*/
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {border: 1px solid #c4c4c4; border-top: 1px solid transparent;border-bottom-color: transparent;
-}}
+}
 
 .tabs-below > .nav-tabs {
   border-top: 1px solid #c4c4c4;
@@ -2030,7 +2030,15 @@ select {width: 150px;}
 		border:1px solid #c4c4c4;
 		border-bottom-left-radius: 2px;
 		border-bottom-right-radius: 2px;
-		border-top: none;
+		
+		background-color: #fff;
+		position: relative;
+	}
+        .panel .panel-body1 {
+		border:1px solid #9fc569;
+		border-bottom-left-radius: 2px;
+		border-bottom-right-radius: 2px;
+		
 		background-color: #fff;
 		position: relative;
 	}

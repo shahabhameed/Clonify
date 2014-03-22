@@ -39,7 +39,9 @@
 
                                               <div class="alert alert-info">
                                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                            <strong>Press Update to update your database!</strong>
+                                                            <strong>Press Update to upload files to database</strong>
+                                                            
+
                                                         </div>
 
                                                         <button class=" btn btn-success  pull-right col-lg-1" type="submit">Update</button>
