@@ -401,7 +401,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					.equalsIgnoreCase("INSERT INTO mcscrossfile_methods(mcs_crossfile_id, fid, mcc_id, mid) values ")) {
 				Database.executeTransaction(INSERT_MCSCROSSFILE_METHODS);
 			}
->>>>>>> 930c21670a4fe26967cb318b365f03e66d0a674d
+
 
 		} catch(Exception e){
 			e.printStackTrace();
@@ -643,7 +643,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
     	
     	
     }
-<<<<<<< HEAD
+
     ///Above File Completed////
 	
 	private void Parse_CrossDirsCloneFileStructuresEx(int invocation_id)throws FileNotFoundException, IOException
@@ -1005,8 +1005,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Database.executeTransaction(INSERT_MCC_SCC);
 		}
 	}
-=======
->>>>>>> 930c21670a4fe26967cb318b365f03e66d0a674d
+
 	
 	public void insertMethod_File(int mid, int fid, int startline, int endline) {
 		INSERT_METHOD_FILE += "( \"" + mid + "\" , \"" + fid + "\", \""
@@ -1513,7 +1512,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				+ fid + "\", \"" + mcc_id + "\" , \"" + mid + "\" ),";
 	}
 	
-<<<<<<< HEAD
+
 	public void insertFCSInGroup_FCC(int invocation_id,int fcs_ingroup_id, int fcc_id) {
 		INSERT_FCSINGROUP_FCC += "(\"" + invocation_id + "\", \"" + fcs_ingroup_id + "\" , \"" + fcc_id
 				+ "\"  ),";
@@ -1546,7 +1545,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		INSERT_FCS_CROSSGROUP += "( \"" + invocation_id + "\",\"" + fcs_crossgroup_id + "\", \""
 				+ members + "\",\"" + gid+ "\"  ),";
 	}
-=======
+
 
 	public void insertMCS_CrossFile(int mcs_crossfile_id, int members) {
 		INSERT_MCS_CROSSFILE += "( \"" + mcs_crossfile_id + "\" , \"" + members
@@ -1564,6 +1563,6 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				+ "\"  ),";
 	}
 
->>>>>>> 930c21670a4fe26967cb318b365f03e66d0a674d
+
 	
 }
