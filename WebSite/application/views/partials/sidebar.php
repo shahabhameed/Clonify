@@ -70,6 +70,9 @@
                                 <a href="<?php echo site_url('home/MethodCloneStructureAcrossFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>MCS Across File
                                 </a>
+                                <a href="<?php echo site_url('home/MethodByFile') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>Methods By File
+                                </a>
                             </li>
                         </ul>
                     </li>

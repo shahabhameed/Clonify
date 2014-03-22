@@ -161,20 +161,10 @@ class MCC_model extends CI_Model {
         return array();
     }
 
-    public function getMCCBYFileParentTable($invocationId, $userId) {
-        $where = "tb1.invocation_id = $invocationId AND tb3.invocation_id=$invocationId";
+    public function getMCCBYFile($invocationId, $userId) {
+		$query = "SELECT fid,did,gid,count(*) clones,CONCAT(directory_name,file_name) filename FROM mcc_instance,repository_file f,repository_directory d,	user_repository r where mcc_id in (select mcc_id from mcc where invocation_id=$invocationId) and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=fid and invocation_id=$invocationId) group by fid";
+		$result = $this->db->query($query);
 
-        $this->db->select('*');
-        $this->db->from('scc_instance tb1');
-        $this->db->join('scc tb2', 'tb1.scc_id = tb2.scc_id AND tb1.invocation_id=tb2.invocation_id', 'INNER');
-        $this->db->join('invocation_files tb3', 'tb1.fid = tb3.cmfile_id', 'INNER');
-        $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
-        $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
-        $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
-        $this->db->where($where);
-
-
-        $result = $this->db->get();
         // echo $this->db->last_query();exit;
         if ($result->num_rows() > 0) {
             return $result->result();
@@ -199,5 +189,40 @@ class MCC_model extends CI_Model {
         }
         return array();
     }
+	
+	function getMCCByFileSecondaryTableRows($fid, $invocationId, $user_id) {
+	//$query = "SELECT t1.mcc_id, t1.mid, t2.mname methodname, t2.startline, t2.endline FROM mcc_instance t1, method t2 WHERE fid=$fid and t1.mid=t2.mid and invocation_id=$invocationId";
+	
+	$query = "SELECT t1.mcc_instance_id,t1.mcc_id, t1.mid, t2.mname methodname, t2.startline, t2.endline, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath FROM mcc_instance t1, method t2, repository_file f,repository_directory d,	user_repository r WHERE fid=$fid and t1.mid=t2.mid and invocation_id=$invocationId and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=$fid and invocation_id=$invocationId)";
+        $result = $this->db->query($query);
+        // echo $this->db->last_query();exit;
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return NULL;
+    }
+	
+    public function getMethodByFileSecondaryData($fid, $invocationId, $userId) {
+		$query = "SELECT t2.mid, t2.startline, t2.endline, t2.mname, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath FROM method_file t1, method t2, repository_file f,repository_directory d, user_repository r WHERE t1.mid=t2.mid and t1.fid = $fid and t1.invocation_id=$invocationId and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=$fid and invocation_id=$invocationId) group by t2.mid";
+		$result = $this->db->query($query);
+
+        // echo $this->db->last_query();exit;
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return array();
+    }
+	
+	public function getMethodByFilePrimaryData($invocationId, $userId) {
+		$query = "SELECT t1.group_id gid, t1.cmfile_id fid, t1.cmdirectory_id did, CONCAT(directory_name,file_name) filename, count(t2.fid) methods FROM repository_file f,repository_directory d, user_repository r, invocation_files t1 left join method_file t2 on t1.cmfile_id=t2.fid WHERE d.id=f.directory_id and d.repository_id=r.id and f.id = t1.file_id and t1.invocation_id=$invocationId group by t1.cmfile_id having count(t2.fid)>0";
+		$result = $this->db->query($query);
+
+        // echo $this->db->last_query();exit;
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return array();
+    }
+
 
 }
