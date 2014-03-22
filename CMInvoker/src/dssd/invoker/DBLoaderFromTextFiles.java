@@ -53,11 +53,13 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		int size = getFileSize();
 		for (int i = 0; i < size; i++) {
 			line = stdin3.readLine();
-			st = new StringTokenizer(line, ",");
-			st.nextToken();
-			int tempId = new Integer(st.nextToken().trim()).intValue();
-			int length = new Integer(st.nextToken().trim()).intValue();
-			Database.executeTransaction("UPDATE invocation_files SET cmdirectory_id=\"" + tempId + "\" WHERE cmfile_id=\"" + i + "\" AND invocation_id=\"" + invokId+"\";");
+			if(line != null){
+				st = new StringTokenizer(line, ",");
+				st.nextToken();
+				int tempId = new Integer(st.nextToken().trim()).intValue();
+				int length = new Integer(st.nextToken().trim()).intValue();
+				Database.executeTransaction("UPDATE invocation_files SET cmdirectory_id=\"" + tempId + "\" WHERE cmfile_id=\"" + i + "\" AND invocation_id=\"" + invokId+"\";");
+			}
 		}
 	}
 	
@@ -453,7 +455,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Statement s = dbConn.createStatement();
 			s.execute("use dssd;");
 			ResultSet results = s.executeQuery("select group_id"
-					+ " from invocation_files " + "where cmfile_id = " + fid + ";");
+					+ " from invocation_files " + "where cmfile_id=\"" + fid + "\" AND invocation_id=\"" + invocationId + "\";");
 			if (results.next()) {
 				gid = results.getInt(1);
 			}
@@ -472,14 +474,14 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
 			s.execute("use dssd;");
-			ResultSet results = s.executeQuery("select file_id "
-					+ " from invocation_files " + " where cmfile_id = " + pFid + ";");
+			ResultSet results = s.executeQuery("select file_id"
+					+ " from invocation_files " + " where cmfile_id=\"" + pFid + "\" AND invocation_id=\"" + invocationId + "\";");
 			if (results.next()) {
 				fid = results.getInt(1);
 			}
 			
 			results = s.executeQuery("select directory_id"
-					+ " from repository_file " + "where id = " + fid + ";");
+					+ " from repository_file " + "where id=\"" + fid + "\";");
 			if (results.next()) {
 				did = results.getInt(1);
 			}
