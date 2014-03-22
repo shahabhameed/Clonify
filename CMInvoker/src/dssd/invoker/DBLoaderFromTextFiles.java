@@ -66,7 +66,8 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		FileInputStream filein3 = new FileInputStream(file3);
 		BufferedReader stdin3 = new BufferedReader(new InputStreamReader(
 				filein3));
-		int size = getFileSize();
+		///changed by Danish, i added invokID as argument thus calling the overloaded function.
+		int size = getFileSize(invokId);
 		for (int i = 0; i < size; i++) {
 			line = stdin3.readLine();
 			if(line != null){
@@ -898,7 +899,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	/*
 	 * Returns the size of the input file list
 	 */
-	public int getFileSize($invocation_id) {
+	public int getFileSize(int invocation_id) {
 		int size = -1;
 		try {
 			Connection dbConn = Database.openConnection();
