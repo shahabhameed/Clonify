@@ -229,7 +229,11 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			}
 
 			parse_file_clusters(invocationId);
-			
+			parse_InDirs_CloneFileStructures(invocationId );
+			Parse_CrossDirsCloneFileStructuresEx(invocationId);
+			Parse_InGroupCloneFileStructures(invocationId);
+			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
+			Parse_FileClustersXX(invocationId);
 			sprint04FilesToDB(invocationId);
 
 		} catch(Exception e){
@@ -472,11 +476,261 @@ public class DBLoaderFromTextFiles extends OutputHelper{
     	
     	
     }
-    
-    
-    
+    ///Above File Completed////
 	
+	private void Parse_CrossDirsCloneFileStructuresEx(int invocation_id)throws FileNotFoundException, IOException
+    {
+    	String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.CROSS_DIR_FILE_EX+ Constants.CM_TEXT_FILE_EXTENSION;  
+		File file3 = new File(filePath);
+		FileInputStream filein13 = new FileInputStream(file3);
+		BufferedReader stdin13 = new BufferedReader(new InputStreamReader(
+				filein13));
+		int fccId;
+		int dId = -1;
+		Vector<String> fccs = null;
+		while ((line = stdin13.readLine()) != null) {
+			if (!line.equalsIgnoreCase("")) {
+				st = new StringTokenizer(line);
+				String sid = st.nextToken();
+				String number = st.nextToken();
+				int nm = Integer.parseInt(number);
+				line = stdin13.readLine();
+				st1 = new StringTokenizer(line, ",");
+				int size = st1.countTokens();
+				fccs = new Vector<String>();
+				int cluster_size = 0;
+				String pre = "", temp1;
+				for (int i = 0; i < size; i++) {
+					temp1 = st1.nextToken();
+					if (!pre.equalsIgnoreCase(temp1)) {
+						fccs.add(temp1);
+						cluster_size++;
+					}
+					insertFCSCrossDir_FCC(invocation_id,Integer.parseInt(sid), Integer
+							.parseInt(temp1));
+					pre = temp1;
+				}
+				for (int i = 0; i < nm; i++) {
+					line = stdin13.readLine();
+					line = stdin13.readLine();
+					 dId = Integer.parseInt(line.trim());
+					//insertFCSCrossDir_Dir(Integer.parseInt(sid), dId);
+					for (int j = 0; j < cluster_size; j++) {
+						fccId = Integer.parseInt(fccs.get(j).trim());
+						line = stdin13.readLine();
+						st2 = new StringTokenizer(line, ",");
+						while (st2.hasMoreTokens()) {
+							fid = st2.nextToken();
+							insertFCSCrossDir_Files(invocation_id,Integer.parseInt(sid),
+									dId, fccId, Integer.parseInt(fid));
+						}
+					}
+				}
+				line = stdin13.readLine();
+				insertFCS_CrossDir(invocation_id,Integer.parseInt(sid), nm,dId);
+			}
+		}
+
+		
+		
+		if (!INSERT_FCSCROSSDIR_FCC
+				.equalsIgnoreCase("INSERT INTO fcscrossdir_fcc(invocation_id,fcs_crossdir_id, fcc_id ) values ")) {
+			Database.executeTransaction(INSERT_FCSCROSSDIR_FCC);
+		}
+		/*
+		if (!INSERT_FCSCROSSDIR_DIR
+				.equalsIgnoreCase("INSERT INTO fcscrossdir_dir(fcs_crossdir_id, did) values ")) {
+			executeTransaction(INSERT_FCSCROSSDIR_DIR);
+		}
+		*/
+		if (!INSERT_FCSCROSSDIR_FILES
+				.equalsIgnoreCase("INSERT INTO fcscrossdir_files(invocation_id,fcs_crossdir_id,fcc_id, did,fid) values ")) {
+			Database.executeTransaction(INSERT_FCSCROSSDIR_FILES);
+		}
+		if (!INSERT_FCS_CROSSDIR
+				.equalsIgnoreCase("INSERT INTO fcs_crossdir(invocation_id,fcs_crossdir_id, members,did) values ")) {
+			Database.executeTransaction(INSERT_FCS_CROSSDIR);
+		}
 	
+    	
+    	
+    	
+    	
+    
+    }
+    
+/////Above file completed////
+	
+
+	private void Parse_InGroupCloneFileStructures(int invocation_id)throws FileNotFoundException, IOException
+    {
+    	String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.IN_GROUP_STRUCTURE+ Constants.CM_TEXT_FILE_EXTENSION;  
+		File file7 = new File(filePath);
+		FileInputStream filein17 = new FileInputStream(file7);
+		BufferedReader stdin17 = new BufferedReader(new InputStreamReader(filein17));
+		String temp = null;
+		int count = 0;
+		int count0 = 0;
+		int count1 = 0;
+		int gId = -1;
+		int fccId = -1;
+		int fileSize = -1;
+		Vector<String> fccs = null;
+		int size = getGroupSize(invocation_id);
+		for (int i = 0; i < size; i++) {
+			line = stdin17.readLine();
+			if (!line.equalsIgnoreCase("")) {
+				st = new StringTokenizer(line, "()");
+				int loop = st.countTokens() / 2;
+				for (int j = 0; j < loop; j++) {
+					int inst = (new Integer(st.nextToken())).intValue();
+					String pat = st.nextToken();
+					StringTokenizer stPat = new StringTokenizer(pat, ",");
+					int cluster_size = 0;
+					String pre = "";
+					fccs = new Vector<String>();
+					while (stPat.hasMoreTokens()) {
+						temp = stPat.nextToken();
+						if (!pre.equalsIgnoreCase(temp)) {
+							fccs.add(temp);
+							cluster_size++;
+						}
+						insertFCSInGroup_FCC(invocation_id,count, Integer.parseInt(temp));
+						pre = temp;
+					}
+
+					Vector<String> files = null;
+					gId = count0;
+					for (int k = 0; k < cluster_size; k++) {
+						fccId = Integer.parseInt(fccs.get(k));
+						files = getFCSInGroup_Files(invocation_id,gId, fccId);
+						if (files != null) {
+							fileSize = files.size();
+							count1 = 0;
+							for (int n = 0; n < inst; n++) {
+								for (int q = 0; q < fileSize / inst; q++) {
+									insertFCSInGroup_Files(invocation_id,count,
+											fccId, n, Integer
+													.parseInt(files
+															.get(count1)));
+									count1++;
+								}
+							}
+						}
+					}
+					insertFCS_InGroup(invocation_id,count, inst,count0);
+					//insertFCSInGroup_Group(count, count0);
+					count++;
+				}
+			}
+			count0++;
+		}
+
+		if (!INSERT_FCS_INGROUP
+				.equalsIgnoreCase("INSERT INTO fcs_ingroup(invocation_id,fcs_ingroup_id, members,gid) values ")) {
+			Database.executeTransaction(INSERT_FCS_INGROUP);
+		}
+		
+		if (!INSERT_FCSINGROUP_FCC
+				.equalsIgnoreCase("INSERT INTO fcsingroup_fcc(invocation_id,fcs_ingroup_id, fcc_id) values ")) {
+			Database.executeTransaction(INSERT_FCSINGROUP_FCC);
+		}
+		/*
+		if (!INSERT_FCSINGROUP_GROUP
+				.equalsIgnoreCase("INSERT INTO fcsingroup_group(fcs_ingroup_id, gid) values ")) {
+			Database.executeTransaction(INSERT_FCSINGROUP_GROUP);
+		}
+		*/
+		if (!INSERT_FCSINGROUP_FILES
+				.equalsIgnoreCase("INSERT INTO fcsingroup_files(fcs_ingroup_id, gid, fcc_id, fcsingroup_instance_id, fid) values ")) {
+			Database.executeTransaction(INSERT_FCSINGROUP_FILES);
+		}
+	
+    	
+    	
+    	
+    	
+    }
+ ////Above File Completed////////////
+	
+
+	private void Parse_CrossGroupsCloneFileStructuresEx(int invocation_id)throws FileNotFoundException, IOException
+    {
+    	String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.FILE_STRUCTURE_CROSS_GROUP+ Constants.CM_TEXT_FILE_EXTENSION;
+    	File file6 = new File(filePath);
+		FileInputStream filein16 = new FileInputStream(file6);
+		BufferedReader stdin16 = new BufferedReader(new InputStreamReader(filein16));
+		Vector<String> fccs = null;
+		int gId = -1;
+		int fccId= -1;
+		while ((line = stdin16.readLine()) != null) {
+			if (!line.equalsIgnoreCase("")) {
+				st = new StringTokenizer(line);
+				String sid = st.nextToken();
+				String number = st.nextToken();
+				int nm = Integer.parseInt(number);
+				line = stdin16.readLine();
+				st1 = new StringTokenizer(line, ",");
+				int size = st1.countTokens();
+				fccs = new Vector<String>();
+				int cluster_size = 0;
+				String pre = "", temp1;
+				for (int i = 0; i < size; i++) {
+					temp1 = st1.nextToken();
+					if (!pre.equalsIgnoreCase(temp1)) {
+						fccs.add(temp1);
+						cluster_size++;
+					}
+					insertFCSCrossGroup_FCC(invocation_id,Integer.parseInt(sid), Integer.parseInt(temp1));
+					pre = temp1;
+				}
+				for (int i = 0; i < nm; i++) {
+					line = stdin16.readLine();
+					line = stdin16.readLine();
+					gId = Integer.parseInt(line.trim());
+					//insertFCSCrossGroup_Group(Integer.parseInt(sid), gId);
+					for (int j = 0; j < cluster_size; j++) {
+						fccId = Integer.parseInt(fccs.get(j).trim());
+						line = stdin16.readLine();
+						st2 = new StringTokenizer(line, ",");
+						while (st2.hasMoreTokens()) {
+							fid = st2.nextToken();
+							insertFCSCrossGroup_Files(
+									invocation_id,Integer.parseInt(sid), gId, fccId,
+									Integer.parseInt(fid));
+						}
+					}
+				}
+				line = stdin16.readLine();
+				insertFCS_CrossGroup(invocation_id,Integer.parseInt(sid), nm,gId);
+			}
+		}
+
+		
+		
+		if (!INSERT_FCSCROSSGROUP_FCC
+				.equalsIgnoreCase("INSERT INTO fcs_crossgroup(invocation_id,fcs_crossgroup_id, members,gid) values ")) {
+			Database.executeTransaction(INSERT_FCSCROSSGROUP_FCC);
+		}
+		/*
+		if (!INSERT_FCSCROSSGROUP_GROUP
+				.equalsIgnoreCase("INSERT INTO fcscrossgroup_group(fcs_crossgroup_id, gid) values ")) {
+			Database.executeTransaction(INSERT_FCSCROSSGROUP_GROUP);
+		}
+		*/
+		if (!INSERT_FCSCROSSGROUP_FILES
+				.equalsIgnoreCase("INSERT INTO fcscrossgroup_files(invocation_id,fcs_crossgroup_id,fcc_id,gid, fid) values ")) {
+			Database.executeTransaction(INSERT_FCSCROSSGROUP_FILES);
+		}
+		if (!INSERT_FCS_CROSSGROUP
+				.equalsIgnoreCase("INSERT INTO fcscrossgroup_fcc(invocation_id,fcs_crossgroup_id, fcc_id ) values ")) {
+			Database.executeTransaction(INSERT_FCS_CROSSGROUP);
+		}
+	
+    	
+    	
+    }
+    	
 	
 	
 	
@@ -899,6 +1153,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	/*
 	 * Returns the size of the input file list
 	 */
+	/*
 	public int getFileSize(int invocation_id) {
 		int size = -1;
 		try {
@@ -915,7 +1170,55 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		}
 		return size;
 	}
+	*/
+	
+	public int getGroupSize(int invocation_id) {
+		int size = -1;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement st = dbConn.createStatement();
+			st.execute("use "+databaseName+";");
+			ResultSet results = st
+					.executeQuery("select count(distinct gid)from invocation_files where invocation_id = " + invocation_id + ";");
+			if (results.next()) {
+				size = results.getInt(1);
+			}
+			st.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return size;
+	}
 
+	public Vector<String> getFCSInGroup_Files(int invocation_id,int gid, int fcc_id) {
+		Vector<String> list = null;
+		String fid = null;
+
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use "+databaseName+";");
+			ResultSet results = s
+					.executeQuery("select distinct fcc_instance.fid from fcc_instance where fcc_instance.gid = " + gid
+							+ " and fcc_instance.invocation_id = " + invocation_id
+							+ " and fcc_instance.fcc_id = " + fcc_id + ";");
+			list = new Vector<String>();
+			while (results.next()) {
+				fid = results.getString("fid");
+				list.add(fid);
+			}
+
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+
+		return list;
+	}
+	
+	
 	public Vector<String> getFCSInDir_Files(int invocation_id,int did, int fcc_id) {
 		Vector<String> list = null;
 		String fid = null;
@@ -993,6 +1296,21 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				+ "\" , \"" + tc + "\" , \"" + pc + "\" , \"" + invocationId + "\"  ),";
 	}
 	
+	public void insertFCSCrossDir_FCC(int invocation_id,int fcs_crossdir_id, int fcc_id) {
+		INSERT_FCSCROSSDIR_FCC += "( \"" + invocation_id + "\",\"" + fcs_crossdir_id + "\" , \"" + fcc_id
+				+ "\"  ),";
+	}
+	
+	public void insertFCSCrossDir_Files(int invocation_id,int fcs_crossdir_id, int did,
+			int fcc_id, int fid) {
+		INSERT_FCSCROSSDIR_FILES += "( \"" + invocation_id + "\",\"" + fcs_crossdir_id + "\" , \"" + fcc_id
+				+ "\" , \"" + did + "\" , \"" + fid + "\" ),";
+	}
+	
+	public void insertFCS_CrossDir(int invocation_id,int fcs_crossdir_id, int members,int did) {
+		INSERT_FCS_CROSSDIR += "( \"" + invocation_id + "\",\"" + fcs_crossdir_id + "\", \"" + members
+				+ "\",\"" + did + "\"  ),";
+	}
 	
 	public void insertFCSInDir_Files(int invocation_id,int fcs_indir_id,int fcc_id,
 			int fcsindir_instance_id, int fid) {
@@ -1019,5 +1337,37 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				+ "\"  ),";
 	}
 	
+	public void insertFCSInGroup_FCC(int invocation_id,int fcs_ingroup_id, int fcc_id) {
+		INSERT_FCSINGROUP_FCC += "(\"" + invocation_id + "\", \"" + fcs_ingroup_id + "\" , \"" + fcc_id
+				+ "\"  ),";
+	}
+
+	public void insertFCSInGroup_Files(int invocation_id,int fcs_ingroup_id, int fcc_id,
+			int fcsingroup_instance_id, int fid) {
+		INSERT_FCSINGROUP_FILES += "(\"" + invocation_id + "\", \"" + fcs_ingroup_id + "\" , \"" + fcc_id + "\" ,\"" + fcsingroup_instance_id
+				+ "\" , \"" + fid + "\"  ),";
+	}
+
+	public void insertFCS_InGroup(int invocation_id,int fcs_ingroup_id, int members,int gid) {
+		INSERT_FCS_INGROUP += "( \"" + invocation_id + "\",\"" + fcs_ingroup_id + "\" , \"" + members
+				+ "\",\"" + gid + "\"  ),";
+	}
+	
+	public void insertFCSCrossGroup_FCC(int invocation_id,int fcs_crossgroup_id, int fcc_id) {
+		INSERT_FCSCROSSGROUP_FCC += "( \"" +invocation_id + "\",\"" + fcs_crossgroup_id + "\" , \""
+				+ fcc_id + "\"  ),";
+	}
+	
+	public void insertFCSCrossGroup_Files(int invocation_id,int fcs_crossgroup_id, int gid,
+			int fcc_id, int fid) {
+		INSERT_FCSCROSSGROUP_FILES += "( \"" + invocation_id + "\"+\"" + fcs_crossgroup_id + "\" , \""
+				+ fcc_id + "\" , \"" + gid + "\" , \"" + fid + "\" ),";
+	}
+
+	
+	public void insertFCS_CrossGroup(int invocation_id,int fcs_crossgroup_id, int members,int gid) {
+		INSERT_FCS_CROSSGROUP += "( \"" + invocation_id + "\",\"" + fcs_crossgroup_id + "\", \""
+				+ members + "\",\"" + gid+ "\"  ),";
+	}
 	
 }
