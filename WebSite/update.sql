@@ -288,3 +288,11 @@ CREATE TABLE IF NOT EXISTS `mcscrossfile_mcc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE mcc_instance ADD COLUMN invocation_id int(11);
+
+CREATE TABLE IF NOT EXISTS `mcs_crossfile` (
+  `mcs_crossfile_id` int(11) NOT NULL,
+  `members` int(11) NOT NULL,
+  PRIMARY KEY (`mcs_crossfile_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE mcs_crossfile DROP PRIMARY KEY;
