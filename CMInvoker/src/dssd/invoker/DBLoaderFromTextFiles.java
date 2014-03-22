@@ -33,6 +33,22 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private static String INSERT_SCSCROSSFILE_SCC = "INSERT INTO scscrossfile_scc(scc_id, scs_crossfile_id, invocation_id) values ";
 	private static String INSERT_SCS_CROSSFILE = "INSERT INTO scs_crossfile(scs_crossfile_id, invocation_id, atc, apc, members) values ";
 	
+	private static String  INSERT_FCS_INDIR = "INSERT INTO fcs_indir(invocation_id,fcs_indir_id, members,did) values ";
+	private static String INSERT_FCSINDIR_FCC = "INSERT INTO fcsindir_fcc(invocation_id,fcs_indir_id, fcc_id) values ";
+	private static String INSERT_FCSINDIR_FILES = "INSERT INTO fcsindir_files(invocation_id,fcs_indir_id,fcc_id, fcsindir_instance_id, fid) values ";
+	private static String INSERT_FCS_CROSSDIR = "INSERT INTO fcs_crossdir(inovcation_id,fcs_crossdir_id, members,did) values ";
+	private static String INSERT_FCSCROSSDIR_FILES = "INSERT INTO fcscrossdir_files(invocation_id,fcs_crossdir_id,fcc_id, did,fid) values ";
+	private static String INSERT_FCSCROSSDIR_FCC = "INSERT INTO fcscrossdir_fcc(invocation_id,fcs_crossdir_id, fcc_id ) values ";
+	private static String INSERT_FCS_INGROUP = "INSERT INTO fcs_ingroup(invocation_id,fcs_ingroup_id, members,gid) values ";
+	private static String INSERT_FCSINGROUP_FCC = "INSERT INTO fcsingroup_fcc(invocation_id,fcs_ingroup_id, fcc_id) values ";
+	private static String INSERT_FCSINGROUP_FILES = "INSERT INTO fcsingroup_files(invocation_id,fcs_ingroup_id,fcc_id, fcsingroup_instance_id, fid) values";
+	private static String INSERT_FCS_CROSSGROUP = "INSERT INTO fcs_crossgroup(invocation_id,fcs_crossgroup_id, members,gid) values ";
+	private static String INSERT_FCSCROSSGROUP_FILES = "INSERT INTO fcscrossgroup_files(invocation_id,fcs_crossgroup_id,fcc_id,gid, fid) values ";
+	private static String INSERT_FCSCROSSGROUP_FCC = "INSERT INTO fcscrossgroup_fcc(invocation_id,fcs_crossgroup_id, fcc_id ) values ";
+	private static String INSERT_FCC_INSTANCE = "INSERT INTO fcc_instance(invocation_id,fcc_instance_id, fcc_id, fid, tc, pc, did, gid) values ";
+
+	
+	
 	private static String INSERT_MCC = "INSERT INTO mcc(mcc_id, atc, apc, invocation_id, members) values ";
 	private static String INSERT_MCC_INSTANCE = "INSERT INTO mcc_instance(mcc_instance_id, mcc_id, mid, tc, pc, fid, did, gid) values ";
 	private static String INSERT_MCC_SCC = "INSERT INTO mcc_scc(mcc_id, scc_id) values ";
@@ -319,6 +335,152 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Database.executeTransaction(INSERT_SCS_CROSSFILE);
 		}
 	}
+	
+	/////Team1 Parsing////////
+	private void parse_InDirs_CloneFileStructures(int invocation_id )throws FileNotFoundException, IOException
+    {
+    	String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.IN_DIR_STRUCTURE+ Constants.CM_TEXT_FILE_EXTENSION; 
+    	File file3 = new File(filePath);
+    	FileInputStream filein14 = new FileInputStream(file3);
+		BufferedReader stdin14 = new BufferedReader(new InputStreamReader(filein14));
+		String temp = null;
+		int count = 0;
+		int count0 = 0;
+		int count1 = 0;
+		Vector<String>fccs = null;
+		int size = getDirectorySize(invocation_id);
+		int fileSize = 0;
+		for (int i = 0; i < size; i++) {
+			line = stdin14.readLine();
+			if (!line.equalsIgnoreCase("")) {
+				st = new StringTokenizer(line, "()");
+				int loop = st.countTokens() / 2;
+				for (int j = 0; j < loop; j++) {
+					int inst = (new Integer(st.nextToken())).intValue();
+					String pat = st.nextToken();
+					StringTokenizer stPat = new StringTokenizer(pat, ",");
+					int cluster_size = 0;
+					String pre = "";
+					fccs = new Vector<String>();
+					while (stPat.hasMoreTokens()) {
+						temp = stPat.nextToken();
+						if (!pre.equalsIgnoreCase(temp)) {
+							fccs.add(temp);
+							cluster_size++;
+						}
+						insertFCSInDir_FCC(invocation_id,count, Integer.parseInt(temp));
+						pre = temp;
+					}
+
+					Vector<String> files = null;
+					int dId = count0;
+					for (int k = 0; k < cluster_size; k++) {
+						int fccId = Integer.parseInt(fccs.get(k));
+						files = getFCSInDir_Files(invocation_id,dId, fccId);
+						if (files != null) {
+							fileSize = files.size();
+							count1 = 0;
+							for (int n = 0; n < inst; n++) {
+								for (int q = 0; q < fileSize / inst; q++) {
+									insertFCSInDir_Files(invocation_id,count, fccId,
+											n, Integer.parseInt(files
+													.get(count1)));
+									count1++;
+								}
+							}
+						}
+					}
+					insertFCS_InDir(invocation_id,count, inst,count0);
+					//insertFCSInDir_Dir(count, count0);
+					count++;
+				}
+			}
+			count0++;
+		}
+		
+		
+		
+		
+		if (!INSERT_FCS_INDIR
+				.equalsIgnoreCase("INSERT INTO fcs_indir(invocation_id,fcs_indir_id, members,did) values ")) {
+			Database.executeTransaction(INSERT_FCS_INDIR);
+		}
+		
+		if (!INSERT_FCSINDIR_FCC
+				.equalsIgnoreCase("INSERT INTO fcsindir_fcc(invocation_id,fcs_indir_id, fcc_id) values ")) {
+			Database.executeTransaction(INSERT_FCSINDIR_FCC);
+		}
+		
+		if (!INSERT_FCSINDIR_FILES
+				.equalsIgnoreCase("INSERT INTO fcsingroup_files(invocation_id,fcs_ingroup_id,fcc_id, fcsingroup_instance_id, fid) values")) {
+			Database.executeTransaction(INSERT_FCSINDIR_FILES);
+		}
+
+    	
+    	
+    }
+    ///Above file Completed////
+	
+	private void Parse_FileClustersXX(int invocation_id)throws FileNotFoundException, IOException{    	
+    	String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.FILE_CLUSTER_XX+ Constants.CM_TEXT_FILE_EXTENSION; 
+		File file4 = new File(filePath);
+		FileInputStream filein4 = new FileInputStream(file4);
+		BufferedReader stdin4 = new BufferedReader(new InputStreamReader(filein4));
+		while ((line = stdin4.readLine()) != null) {
+			if (!line.equalsIgnoreCase("")) {
+				st = new StringTokenizer(line, ";");
+				String cid = st.nextToken();
+				int fcc_id = Integer.parseInt(cid);
+				String support = st.nextToken();
+				String sccs = stdin4.readLine();
+				st2 = new StringTokenizer(sccs, ",");
+				Vector<String> sccVector = new Vector<String>();
+				while (st2.hasMoreTokens()) {
+					sccVector.add(st2.nextToken());
+				}
+				
+				int sup = (new Integer(support)).intValue();
+				double atc = 0;
+				double apc = 0;
+				for (int i = 0; i < sup; i++) {
+					line = stdin4.readLine();
+					st1 = new StringTokenizer(line, ";,");
+					fid = st1.nextToken();
+					String tk = st1.nextToken();
+					String coverage = st1.nextToken();
+					atc += Double.parseDouble(tk);
+					apc += Double.parseDouble(coverage);
+					insertFCC_Instance(invocation_id,i, fcc_id, Integer.parseInt(fid),
+							Double.parseDouble(tk), Double
+									.parseDouble(coverage));
+				}
+				atc = atc / sup;
+				apc = apc / sup;
+				
+			}
+		}
+
+		
+		if (!INSERT_FCC_INSTANCE
+				.equalsIgnoreCase("INSERT INTO fcc_instance(invocation_id,fcc_instance_id, fcc_id, fid, tc, pc, did, gid) values ")) {
+			Database.executeTransaction(INSERT_FCC_INSTANCE);
+		}
+		
+    	
+    	
+    }
+    
+    
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	private void sprint04FilesToDB(int pInvocationId) throws NumberFormatException, IOException{
 		filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO + Constants.CM_TEXT_FILE_EXTENSION;
@@ -655,6 +817,45 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		return fileName;
 	}
 	
+	
+	public int getDirectorySize(int invocation_id) {
+		int size = -1;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use "+databaseName+";");
+			ResultSet results = s
+					.executeQuery("select count(distinct(cmdirectory_id)) from invocation_files where invocation_id = " + invocation_id + ";");
+			if (results.next()) {
+				size = results.getInt(1);
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return size;
+	}
+	
+	public int getDidFromFid(int invocation_id,int fid) {
+		
+		int did = -1;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use "+databaseName+";");
+			ResultSet results = s.executeQuery("select cmdirectory_id from invocation_files where cmfile_id = " + fid + "and invocation_id = "+invocation_id+";");
+			if (results.next()) {
+				did = results.getInt(1);
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return did;
+	
+	}
+	
 	public int getFileSize(Integer invocationId) {
 		int size = -1;
 		try {
@@ -672,10 +873,30 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		return size;
 	}
 
+	
+	public int getGidFromFid(int invocation_id,int fid) {
+		int gid = -1;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use "+databaseName+";");
+			ResultSet results = s.executeQuery("select invocation_files.group_id "
+					+ " from invocation_files " + " where invocation_files.file_id = " + fid + "and invocation_files.invocation_id = " +invocation_id+ ";");
+			if (results.next()) {
+				gid = results.getInt(1);
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return gid;
+	}
+    
 	/*
 	 * Returns the size of the input file list
 	 */
-	public int getFileSize() {
+	public int getFileSize($invocation_id) {
 		int size = -1;
 		try {
 			Connection dbConn = Database.openConnection();
@@ -692,6 +913,31 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		return size;
 	}
 
+	public Vector<String> getFCSInDir_Files(int invocation_id,int did, int fcc_id) {
+		Vector<String> list = null;
+		String fid = null;
+
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use clonedatabase;");
+			ResultSet results = s.executeQuery("select distinct fcc_instance.fid from fcc_instance where fcc_instance.did = " + did+ " and fcc_instance.fcc_id = " + fcc_id + "and invocation_id =" +invocation_id+ ";");
+			list = new Vector<String>();
+			while (results.next()) {
+				fid = results.getString("fid");
+				list.add(fid);
+			}
+
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+
+		return list;
+	}
+	
+	
 	private Vector<String> getSCS_Fragments(int cid, int scc_id, int type) {
 		Vector<String> list = null;
 		String frag = null;
@@ -744,5 +990,31 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				+ "\" , \"" + tc + "\" , \"" + pc + "\" , \"" + invocationId + "\"  ),";
 	}
 	
+	
+	public void insertFCSInDir_Files(int invocation_id,int fcs_indir_id,int fcc_id,
+			int fcsindir_instance_id, int fid) {
+		INSERT_FCSINDIR_FILES += "( \"" + invocation_id + "\",\"" + fcs_indir_id + "\" , \"" + fcc_id + "\" ,\"" + fcsindir_instance_id
+				+ "\" , \"" + fid + "\"  ),";
+	}
 
+	
+	private void insertFCSInDir_FCC(int invocation_id,int fcs_indir_id, int fcc_id) {
+		INSERT_FCSINDIR_FCC += "( \"" + invocation_id + "\",\"" + fcs_indir_id + "\" , \"" + fcc_id
+				+ "\"  ),";
+	}
+
+	public void insertFCS_InDir(int invocation_id,int fcs_indir_id, int members,int did) {
+		INSERT_FCS_INDIR += "( \"" + invocation_id + "\",\"" + fcs_indir_id + "\" , \"" + members
+				+ "\",\"" + did + "\"  ),";
+	}
+	
+	public void insertFCC_Instance(int invocation_id,int fcc_instance_id, int fcc_id, int fid,
+			double tc, double pc) {
+		INSERT_FCC_INSTANCE += "( \"" + invocation_id + "\",\"" + fcc_instance_id + "\" ,\"" + fcc_id
+				+ "\" , \"" + fid + "\" , \"" + tc + "\" , \"" + pc + "\", \""
+				+ getDidFromFid(invocation_id,fid) + "\" , \"" + getGidFromFid(invocation_id,fid)
+				+ "\"  ),";
+	}
+	
+	
 }
