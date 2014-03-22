@@ -132,8 +132,8 @@ class MCC_model extends CI_Model {
         $where = "tb1.invocation_id = $invocationId";
 
         $this->db->select('*');
-        $this->db->from('scs_crossfile tb1');
-        $this->db->join('scscrossfile_scc tb2', 'tb1.scs_crossfile_id = tb2.scs_crossfile_id AND tb1.invocation_id = tb2.invocation_id', 'INNER');
+        $this->db->from('mcs_crossfile tb1');
+        $this->db->join('mcscrossfile_scc tb2', 'tb1.scs_crossfile_id = tb2.scs_crossfile_id AND tb1.invocation_id = tb2.invocation_id', 'INNER');
         $this->db->where($where);
 
         $result = $this->db->get();
@@ -147,7 +147,7 @@ class MCC_model extends CI_Model {
         $where = "tb1.invocation_id = $invocationId AND tb1.scs_crossfile_id = $scs_id AND tb3.invocation_id = $invocationId";
 
         $this->db->select('*');
-        $this->db->from('scscrossfile_file tb1');
+        $this->db->from('mcscrossfile_file tb1');
         $this->db->join('invocation_files tb3', 'tb1.fid = tb3.cmfile_id', 'INNER');
         $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
         $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');

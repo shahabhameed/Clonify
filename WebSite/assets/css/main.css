@@ -3115,7 +3115,7 @@ form input.valid {border: 1px solid #9FC569 !important;}
 		min-width: 176px;
 		border-right: 1px solid #c4c4c4;
 	}
-	.wizard-steps .wstep.current {color: #737373;}
+	.wizard-steps .wstep.current {color: #527BCB;}
 	.wizard-steps .wstep.done {color: #72b110;}
 	.wizard-steps .wstep .donut { 
 		margin-top: 10px;
@@ -3139,9 +3139,9 @@ form input.valid {border: 1px solid #9FC569 !important;}
 		color: #c9c9c9;
 		display: inline-block;
 	}
-	.wizard-steps .wstep.current .donut span.icon16 {color: #737373;}
+	.wizard-steps .wstep.current .donut span.icon16 {color: #527BCB;}
 	.wizard-steps .wstep.done .donut span.icon16 {color: #9fc569;}
-	.wizard-steps .wstep.current .donut {border-color: #737373; color: #737373;}
+	.wizard-steps .wstep.current .donut {border-color: #527BCB; color: #527BCB;}
 	.wizard-steps .wstep.done .donut {border-color: #9fc569;}
 
 	.wizard-steps .wstep .txt {

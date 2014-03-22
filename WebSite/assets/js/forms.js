@@ -28,6 +28,7 @@ $(document).ready(function() {
 	$("#mask-productKey").mask("a*-999-a999", { placeholder: "*" });
 	$("#mask-eyeScript").mask("~9.99 ~9.99 999");
 	$("#mask-percent").mask("99%");
+       
 
 	//------------- Toggle button  -------------//
 

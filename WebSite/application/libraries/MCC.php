@@ -46,7 +46,7 @@ class MCC {
         return array();
     }
 
-    function getAllSCSWithInFile($invocationId) {
+    function getAllMCSWithInFile($invocationId) {
         $userId = $this->ci->tank_auth->get_user_id();
 
         $data = $this->ci->scc_model->getAllSCSWithInFile($invocationId, $userId);
@@ -85,25 +85,25 @@ class MCC {
         return $result;
     }
 
-    function getAllSCSAcrossFile($invocationId) {
+    function getAllMCSAcrossFile($invocationId) {
         $userId = $this->ci->tank_auth->get_user_id();
 
-        $data = $this->ci->scc_model->getSCSAcrossFileParentTable($invocationId, $userId);
+        $data = $this->ci->mcc_model->getMCSAcrossFileParentTable($invocationId, $userId);
         if ($data) {
             $data = json_decode(json_encode($data), true); // Changing Obj in Array
         }
         $result = array();
 
         foreach ($data as $d) {
-            $result[$d['scs_crossfile_id']]['scs_crossfile_id'] = $d['scs_crossfile_id'];
-            $result[$d['scs_crossfile_id']]['members'] = $d['members'];
-            $result[$d['scs_crossfile_id']]['atc'] = $d['atc'];
-            $result[$d['scs_crossfile_id']]['apc'] = $d['apc'];
-            $result[$d['scs_crossfile_id']]['scc_id'][] = $d['scc_id'];
+            $result[$d['mcs_crossfile_id']]['mcs_crossfile_id'] = $d['mcs_crossfile_id'];
+            $result[$d['mcs_crossfile_id']]['members'] = $d['members'];
+            $result[$d['mcs_crossfile_id']]['atc'] = $d['atc'];
+            $result[$d['mcs_crossfile_id']]['apc'] = $d['apc'];
+            $result[$d['mcs_crossfile_id']]['mcc_id'][] = $d['scc_id'];
         }
         foreach ($result as $index => $r) {
             $result[$index]['scc_id_csv'] = implode(", ", $result[$index]['scc_id']);
-            $child_data = $this->ci->scc_model->getSCSAcrossFileChildTable($invocationId, $index);
+            $child_data = $this->ci->mcc_model->getMCSAcrossFileChildTable($invocationId, $index);
             if ($child_data) {
                 $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
             }
@@ -114,7 +114,7 @@ class MCC {
         return $result;
     }
 
-    function getSCSSByFileData($invocationId) {
+    function getMCSSByFileData($invocationId) {
         $userId = $this->ci->tank_auth->get_user_id();
 
         $data = $this->ci->scc_model->getSCCBYFileParentTable($invocationId, $userId);
@@ -143,7 +143,7 @@ class MCC {
         return $result;
     }
 
-    public function getSCCInstanceData($invocationId, $scc_id, $scc_instance_id, $userId) {
+    public function getMCCInstanceData($invocationId, $scc_id, $scc_instance_id, $userId) {
         $data = $this->ci->scc_model->getSCCInstanceData($invocationId, $scc_id, $scc_instance_id, $userId);
         if ($data) {
             $data = json_decode(json_encode($data), true); // Changing Obj in Array
@@ -152,7 +152,7 @@ class MCC {
         return $data;
     }
 
-    public function getSCCInstancesBySCCId($invocationId, $scc_id) {
+    public function getMCCInstancesBySCCId($invocationId, $scc_id) {
         $userId = $this->ci->tank_auth->get_user_id();
         $data = $this->ci->scc_model->getSCCInstancesBySCCId($invocationId, $scc_id, $userId);
         if ($data) {

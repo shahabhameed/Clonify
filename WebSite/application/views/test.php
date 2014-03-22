@@ -192,18 +192,28 @@
 
                                 <div class="col-lg-12">
                                     <div class="row">
+                                        <div class="col-lg-12">
 
-                                        <div class="panel panel-default">
+                                            <div class="panel panel-default plain">
 
-                                            <div class="form-group">
+                                                <div class="panel-heading">
+
+                                                    <h4>
+                                                        <span>Invocation Parameters</span>
+                                                    </h4>
+
+                                                </div>
+                                                <div class="panel-body">
+
+                                                    <div class="form-group">
 
                                                 <div class="col-lg-6">
 
                                                     <div class="panel panel-default">
 
-                                                        <div class="panel-heading">
-                                                            <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Tokens Configuration</span> </h4><a href="#" class="minimize">Minimize</a>
-                                                        </div>
+                                                                <div class="panel-heading">
+                                                                    <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span></span> </h4>
+                                                                </div>
 
                                                         <div class="panel-body">
                                                             <div class="form-group">
@@ -211,15 +221,15 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="form-group">
 
-                                                                        <label class="col-lg-6 control-label" for="min_scc_token">Min Similarities for Simple Clone Class:</label>
-                                                                        <div class="col-lg-1">
+                                                                                <label class="col-lg-6 control-label" for="min_scc_token">Min Similarities for Simple Clone Class:</label>
+                                                                                <div class="col-lg-4">
 
                                                                             <INPUT id="min_scc_token" onkeypress="return isNumberKey(event)" type="text" name="min_scc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
 
                                                                         </div>
 
 
-                                                                        <label class="col-lg-1 control-label" for="min_sim_mcc">Tokens</label>
+                                                                        
 
 
                                                                     </div><!-- End .form-group  -->
@@ -240,61 +250,64 @@
 
 
 
-                                                                    <div class="form-group">
-                                                                        <label class="col-lg-6 control-label" for="min_mcc_token">Min Similarities for Methods Clone Class:</label>
-                                                                        <div class="col-lg-1">
+                                                                            <div class="form-group">
+                                                                                <label class="col-lg-6 control-label" for="min_mcc_token">Min Similarities for Methods Clone Class:</label>
+                                                                                <div class="col-lg-4">
 
 
                                                                             <INPUT id="min_mcc_token" onkeypress="return isNumberKey(event)" type="text" name="min_mcc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
 
                                                                             <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                                                         </div>
-                                                                        <div class="col-lg-1">
-                                                                            <label class="col-lg-0 control-label" for="min_mcc_token">Tokens</label>
-                                                                        </div>
+                                                                        
 
 
-                                                                    </div><!-- End .form-group  -->
-                                                                    <div class="form-group">
-                                                                        <label class="col-lg-6 control-label" for="min_mcc_percent">MCC Token Percentage:</label>
-                                                                        <div class="col-lg-1">
-                                                                            <input id="min_mcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_mcc_percent" type="text" value="30" min="0"  max="100" maxlength="3" style="width:50px">
+                                                                            </div><!-- End .form-group  -->
+                                                                            <div class="form-group">
+                                                                                <label class="col-lg-6 control-label" for="min_mcc_percent">MCC Token Percentage:</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <label class="checkbox-inline">
+                                                                                        <input id="min_mcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_mcc_percent" type="text" value="30" min="0"  max="100" maxlength="3" style="width:50px">
+                                                                                        
+                                                                                    </label>
 
-                                                                        </div>
-                                                                        <div class="col-lg-1">
-                                                                            <label class="col-lg-1 control-label" for="min_mcc_percent">%</label>
-                                                                            <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-lg-offset-2">
+
+                                                                                    <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
 
                                                                         </div>
 
                                                                     </div>
 
-                                                                    <div class="form-group">
-                                                                        <label class="col-lg-6 control-label" for="min_fcc_token">Min Similarities for File Clone Class:</label>
-                                                                        <div class="col-lg-1">
+                                                                            <div class="form-group">
+                                                                                <label class="col-lg-6 control-label" for="min_fcc_token">Min Similarities for File Clone Class:</label>
+                                                                                <div class="col-lg-4">
 
                                         <!--<input  READONLY id="min_mcc_token" class="form-control spinner" name="min_mcc_token"   type="text" value="30" max="9999" min="0" style="height: 25px">-->
                                                                             <INPUT id="min_fcc_token" onkeypress="return isNumberKey(event)" type="text" name="min_fcc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
 
                                                                             <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                                                         </div>
-                                                                        <div class="col-lg-0">
-                                                                            <label class="col-lg-1 control-label" for="min_fcc_token">Tokens</label>
-                                                                        </div>
+                                                                       
 
 
-                                                                    </div><!-- End .form-group  -->
-                                                                    <div class="form-group">
-                                                                        <label class="col-lg-6 control-label" for="min_fcc_percent">FCC Token Percentage:</label>
-                                                                        <div class="col-lg-1">
-                                                                            <input id="min_fcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_fcc_percent" type="text" value="30" min="0"  max="100" maxlength="3" style="width:50px">
-
-                                                                        </div>
-                                                                        <div class="col-lg-1">
-                                                                            <label class="col-lg-1 control-label" for="min_fcc_percent">%</label>
-                                                                            <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
-
-                                                                        </div>
+                                                                            </div><!-- End .form-group  -->
+                                                                            <div class="form-group">
+                                                                                <label class="col-lg-6 control-label" for="min_fcc_percent">FCC Token Percentage:</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <label class="checkbox-inline">
+                                                                                        <input id="min_fcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_fcc_percent" type="text" value="30" min="0"  max="100" maxlength="3" style="width:50px">
+                                                                                        <br></br>
+                                                                                    </label>
+                                                                                    
+                                                                                </div>
+                                                                                <div class="col-lg-1">
+                                                                                    
+                                                                                    <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                                                    
+                                                                                </div>
 
                                                                     </div>
 
@@ -314,9 +327,9 @@
 
                                                     <div class="panel panel-default">
 
-                                                        <div class="panel-heading"> <h4><span class="icon16 icomoon-icon-user-plus"></span><span>Invocation Configuration</span></h4>
-                                                            <a href="#" class="minimize">Minimize</a>
-                                                        </div>
+                                                                <div class="panel-heading"> <h4><span class="icon16 icomoon-icon-user-plus"></span><span></span></h4>
+
+                                                                </div>
 
                                                         <div class="panel-body">
                                                             <div class="form-group">
@@ -350,14 +363,15 @@
                                                                     <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
                                                                 </div>
 
-                                                            </div><!-- End .form-group  -->
-                                                            <div class="form-group">
-                                                                <label class="col-lg-3 control-label" for="username">Comments:</label>
-                                                                <div class="col-lg-9">
-                                                                    <textarea rows="6" class="form-control " name="iComment" id="iComment" placeholder="Enter your comments"></textarea>
-                                                                    <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
-                                                                </div>
-                                                            </div><!-- End .form-group  -->
+                                                                    </div><!-- End .form-group  -->
+                                                                    <div class="form-group">
+                                                                        <label class="col-lg-3 control-label" for="username">Comments:</label>
+                                                                        <div class="col-lg-9">
+                                                                            <textarea rows="7" class="form-control " name="iComment" id="iComment" placeholder="Enter your comments"></textarea>
+                                                                            <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                                            <br></br>
+                                                                        </div>
+                                                                    </div><!-- End .form-group  -->
 
 
 
@@ -366,8 +380,17 @@
 
                                                     </div><!-- End .panel -->
 
-                                                </div><!-- End .span4 -->
-                                            </div>
+                                                        </div><!-- End .span4 -->
+                                                    </div>
+                                                </div>
+
+                                            </div><!-- End .panel -->
+
+                                        </div><!-- End .span4 -->
+
+                                        <div class="panel panel-default">
+
+
                                         </div><!-- End .row -->
                                     </div>
 
