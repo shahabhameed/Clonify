@@ -16,7 +16,7 @@
     <div id="content" class="clearfix">
         <div class="contentwrapper">
             <div class="heading">
-                <h3>Single Clone Class</h3> 
+                <h3>File Clone Structure</h3> 
                 <ul class="breadcrumb">
                     <li>You are here:</li>
                     <li>
@@ -27,7 +27,7 @@
                             <span class="icon16 fa fa-caret-right"></span>
                         </span>
                     </li>
-                    <li class="active">Single Clone Class</li>
+                    <li class="active">File Clone Structure</li>
                 </ul>                   
             </div>
 
@@ -119,7 +119,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default gradient">
                         <div class="panel-heading min">
-                            <h4><span> <i class="fa fa-list-alt fa-2"></i> FCS Table</span></h4>
+                            <h4><span> <i class="fa fa-list-alt fa-2"></i> FCS Across Directory</span></h4>
                             <span class="loader" style="top:15px;cursor:pointer;">
                                 <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
                             </span>

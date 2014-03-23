@@ -116,6 +116,7 @@
       $this->load->view('clone_table/scs_across_file.php', $viewData);
       $this->load->view('partials/main_footer');
     }
+    
     public function fcswithindirectory(){
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $this->getInvocationIdFromURL();
