@@ -199,7 +199,7 @@
       $secondary_table_rows = array();
       if ($result){
         foreach($result as $row){
-          $secondary_table_rows[$row['fcs_crossdir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
+          $secondary_table_rows[$row['fcs_crossdir_id']] = $this->scc->getAllFCSCrossDirectorySecondaryTableRows($row, $invocationId);
         }
       }
       
