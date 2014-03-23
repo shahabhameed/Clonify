@@ -144,16 +144,16 @@ width: 50% !important;
                         <?php 
                           $counter = 0;
                           if($scc_Method_data)
-                          foreach($sccMethod_data as $data){
+                          foreach($scc_Method_data as $data){
                             $counter++;
                          ?>
                         <tr class="list_view" data-mid="<?php echo $data['mid'];?>">
                           <td><?php echo $counter;?></td>
                           <td><?php echo $data['mid'];?></td>                          
                           <td><?php echo $data['fid'];?></td>
-                          <td><?php echo isset($data['did']) ? $data['atc'] : '-';?></td>
-                          <td><?php echo isset($data['gid']) ? $data['apc'] : '-';?></td>
-                          <td><?php echo isset($data['methodname']) ? $data['length'] : '-';?></td>
+                          <td><?php echo isset($data['did']) ? $data['did'] : '-';?></td>
+                          <td><?php echo isset($data['gid']) ? $data['gid'] : '-';?></td>
+                          <td><?php echo isset($data['methodname']) ? $data['methodname'] : '-';?></td>
 						  <td><?php echo $data['filename'];?></td>
 						  <<td></td>
                         </tr>
@@ -186,7 +186,7 @@ width: 50% !important;
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i>SCC Clone Instance List - SCC ID - <?php echo $mcc_id;?></span></h4>
+                 <h4><span> <i class="fa fa-list-alt fa-2"></i>SCC Clone Instance List - MID - <?php echo $mid;?></span></h4>
                  <span class="loader" style="top:15px;cursor:pointer;">
                   <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                 </span>
@@ -211,7 +211,7 @@ width: 50% !important;
                         foreach($data as $d){
                           $counter++;
                         ?>
-                          <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo $d['endcol'];?>" data-startcol="<?php echo $d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-sccid= "<?php echo $scc_id;?>" data-clid= "<?php echo $d['scc_instance_id'];?>" data-path="<?php echo $d['filepath']?>">
+                          <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo $d['endcol'];?>" data-startcol="<?php echo $d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-sccid= "<?php echo $d['scc_id'];?>" data-clid= "<?php echo $d['scc_instance_id'];?>" data-path="<?php echo $d['filepath']?>">
                             <td><?php echo $counter;?></td>
                             <td><?php echo isset($d['scc_id']) ? $d['scc_id'] : "-";?></td>
                             <td><?php echo isset($d['scc_instance_id']) ? $d['scc_instance_id'] : "-";?></td>
