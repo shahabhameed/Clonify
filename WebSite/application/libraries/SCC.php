@@ -70,6 +70,7 @@ class SCC
       if ($child_data){
         $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
       }
+       $result[$index]['members'] = count($child_data);
       foreach($child_data as $in => $data){
         $instance_data = $this->getSCCInstanceData($invocationId, $data['scc_id'], $data['scc_instance_id'], $userId);
         $child_data[$in]['startline'] = isset($instance_data['startline']) ? $instance_data['startline'] : "";
