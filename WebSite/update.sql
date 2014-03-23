@@ -296,3 +296,16 @@ CREATE TABLE IF NOT EXISTS `mcs_crossfile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE mcs_crossfile DROP PRIMARY KEY;
+
+-- ADDED ON 2014-03-23 0 By Hafeez
+ALTER TABLE mcscrossfile_methods ADD COLUMN invocation_id int(11);
+ALTER TABLE scscrossmethod_scc ADD COLUMN invocation_id int(11);
+ALTER TABLE scs_crossmethod ADD COLUMN invocation_id int(11);
+ALTER TABLE scscrossmethod_method ADD COLUMN invocation_id int(11);
+ALTER TABLE mcc_file ADD COLUMN invocation_id int(11);
+ALTER TABLE mcscrossfile_file ADD COLUMN invocation_id int(11);
+ALTER TABLE mcscrossfile_mcc ADD COLUMN invocation_id int(11);
+ALTER TABLE mcs_crossfile ADD COLUMN invocation_id int(11);
+ALTER TABLE method ADD COLUMN invocation_id int(11);
+ALTER TABLE mcc_scc ADD COLUMN invocation_id int(11);
+ALTER TABLE method_file ADD COLUMN invocation_id int(11);
