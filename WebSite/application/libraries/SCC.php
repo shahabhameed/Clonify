@@ -322,4 +322,21 @@ class SCC
     return $data;
   }
   
+  function getMethodByClassPrimaryRows($invocationId) {
+        //$userId = $this->ci->tank_auth->get_user_id();
+        $data = $this->ci->scc_model->getSCCByMethodPrimaryTable($invocationId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
+        return $data;
+    }
+	function getMethodByClassSecondaryRows($mid, $invocationId) {
+        //$userId = $this->ci->tank_auth->get_user_id();
+        $data = $this->ci->scc_model->getSCCByMethodPrimaryTable($invocationId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
+        return $data;
+    }
+  
 }
