@@ -309,3 +309,8 @@ ALTER TABLE mcs_crossfile ADD COLUMN invocation_id int(11);
 ALTER TABLE method ADD COLUMN invocation_id int(11);
 ALTER TABLE mcc_scc ADD COLUMN invocation_id int(11);
 ALTER TABLE method_file ADD COLUMN invocation_id int(11);
+
+-- 
+ALTER TABLE mcc DROP PRIMARY KEY;
+ALTER TABLE scs_crossmethod DROP PRIMARY KEY;
+ALTER TABLE method DROP PRIMARY KEY;

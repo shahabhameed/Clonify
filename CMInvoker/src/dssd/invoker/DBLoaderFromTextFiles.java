@@ -54,7 +54,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private static String INSERT_MCC_SCC = "INSERT INTO mcc_scc(mcc_id, scc_id, invocation_id) values ";
 	
 	private static String INSERT_METHOD = "INSERT INTO method(mid, mname, tokens, startline, endline, invocation_id) values ";
-	private static String INSERT_METHOD_FILE = "INSERT INTO method_file(mid, cmfile_id, startline, endline, invocation_id) values ";
+	private static String INSERT_METHOD_FILE = "INSERT INTO method_file(mid, fid, startline, endline, invocation_id) values ";
 	
 	private static String INSERT_MCSCROSSFILE_METHODS = "INSERT INTO mcscrossfile_methods(mcs_crossfile_id, fid, mcc_id, mid, invocation_id) values ";
 	private static String INSERT_MCSCROSSFILE_MCC = "INSERT INTO mcscrossfile_mcc(mcs_crossfile_id, mcc_id, invocation_id) values ";
@@ -274,13 +274,13 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				Database.executeTransaction(INSERT_SCSINFILE_FRAGMENTS);
 			}
 			
-                        Parse_FileClustersXX(invocationId);                        
-			parse_file_clusters(invocationId);
-			parse_InDirs_CloneFileStructures(invocationId );
-			Parse_CrossDirsCloneFileStructuresEx(invocationId);
-			Parse_InGroupCloneFileStructures(invocationId);
-			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
-			sprint04FilesToDB(invocationId);
+//                        Parse_FileClustersXX(invocationId);                        
+//			parse_file_clusters(invocationId);
+//			parse_InDirs_CloneFileStructures(invocationId );
+//			Parse_CrossDirsCloneFileStructuresEx(invocationId);
+//			Parse_InGroupCloneFileStructures(invocationId);
+//			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
+			//sprint04FilesToDB(invocationId);
 			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
 			
@@ -311,7 +311,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				Database.executeTransaction(INSERT_METHOD);
 			}
 			if (!INSERT_METHOD_FILE
-					.equalsIgnoreCase("INSERT INTO method_file(mid, cmfile_id, startline, endline, invocation_id) values ")) {
+					.equalsIgnoreCase("INSERT INTO method_file(mid, fid, startline, endline, invocation_id) values ")) {
 				Database.executeTransaction(INSERT_METHOD_FILE);
 			}
 
@@ -1102,7 +1102,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
 			s.execute("use "+databaseName+";");
-			ResultSet results = s.executeQuery("select cmfile_id "
+			ResultSet results = s.executeQuery("select fid "
 					+ " from method_file " + " where mid = " + mid + ";");
 			if (results.next()) {
 				fid = results.getInt(1);
@@ -1281,7 +1281,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
 			s.execute("use "+databaseName+";");
-			ResultSet results = s.executeQuery("select cmdirectory_id from invocation_files where cmfile_id = " + fid + "and invocation_id = "+invocation_id+";");
+			ResultSet results = s.executeQuery("select cmdirectory_id from invocation_files where fid = " + fid + "and invocation_id = "+invocation_id+";");
 			if (results.next()) {
 				did = results.getInt(1);
 			}
