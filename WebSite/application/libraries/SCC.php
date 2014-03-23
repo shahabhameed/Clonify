@@ -291,8 +291,9 @@ class SCC
       $result[$d['fid']]['file_name'] = $d['file_name'];
       $result[$d['fid']]['length'] = $d['length'];
     }
-    foreach($result as $index => $r){      
+    foreach($result as $index => $r){
       $child_data = $this->ci->scc_model->getSCCByFileChildTable($invocationId, $r['fid'], $userId);
+      $result[$index]['members'] = count($child_data);
       if ($child_data){
         $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
       }            
@@ -320,5 +321,22 @@ class SCC
     
     return $data;
   }
+  
+  function getMethodByClassPrimaryRows($invocationId) {
+        //$userId = $this->ci->tank_auth->get_user_id();
+        $data = $this->ci->scc_model->getSCCByMethodPrimaryTable($invocationId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
+        return $data;
+    }
+	function getMethodByClassSecondaryRows($mid, $invocationId) {
+        //$userId = $this->ci->tank_auth->get_user_id();
+        $data = $this->ci->scc_model->getSCCByMethodPrimaryTable($invocationId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
+        return $data;
+    }
   
 }
