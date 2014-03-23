@@ -199,7 +199,7 @@
       $secondary_table_rows = array();
       if ($result){
         foreach($result as $row){
-          $secondary_table_rows[$row['fcs_crossdir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
+          $secondary_table_rows[$row['fcs_crossdir_id']] = $this->scc->getAllFCSCrossDirectorySecondaryTableRows($row, $invocationId);
         }
       }
       
@@ -317,6 +317,40 @@
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/method_by_file.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+	public function SCCByMethod() {
+      $viewData = array();
+      $invocationId = $this->getInvocationIdFromURL();
+      $result = $this->scc->getMethodByClassPrimaryRows($invocationId);   
+      $viewData['scc_Method_data'] = $result;
+	  
+      $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['mid']] = $this->scc->getMethodByClassSecondaryRows($row['mid'], $invocationId);
+        }
+      }
+      
+      $viewData['scc_Method_secondary_data'] = $secondary_table_rows;
+	  
+      $viewData['invocationId'] = $invocationId;
+      $viewData['showCloneView'] = true;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/scc_by_method.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+	public function MethodCloneStructureAcrossFile(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $results = $this->mcc->getAllMCSAcrossFile($invocationId);   
+      $viewData['results'] = $results;
+      
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/mcs_across_file.php', $viewData);
       $this->load->view('partials/main_footer');
     }
 

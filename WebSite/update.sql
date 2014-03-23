@@ -309,3 +309,161 @@ ALTER TABLE mcs_crossfile ADD COLUMN invocation_id int(11);
 ALTER TABLE method ADD COLUMN invocation_id int(11);
 ALTER TABLE mcc_scc ADD COLUMN invocation_id int(11);
 ALTER TABLE method_file ADD COLUMN invocation_id int(11);
+
+-- 
+ALTER TABLE mcc DROP PRIMARY KEY;
+ALTER TABLE scs_crossmethod DROP PRIMARY KEY;
+ALTER TABLE method DROP PRIMARY KEY;
+
+-- ADDED ON 2014-04-23
+
+--
+-- Table structure for table `fcs_crossdir`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_crossdir` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_crossdir_id` int(11) NOT NULL,
+  `members` int(11) NOT NULL,
+  `directory_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_crossdir_fcc`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_crossdir_fcc` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_crossdir_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_crossdir_files`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_crossdir_files` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_crossdir_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL,
+  `directory_id` int(11) NOT NULL,
+  `fid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_crossgroup`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_crossgroup` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_crossgroup_id` int(11) NOT NULL,
+  `members` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_crossgroup_fcc`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_crossgroup_fcc` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_crossgroup_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_crossgroup_files`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_crossgroup_files` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_crossgroup_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `fid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_withindir`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_withindir` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_indir_id` int(11) NOT NULL,
+  `members` int(11) NOT NULL,
+  `directory_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_withindir_fcc`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_withindir_fcc` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_indir_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_withindir_files`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_withindir_files` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_indir_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL,
+  `fcsindir_instance_id` int(11) NOT NULL,
+  `fid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_withingroup`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_withingroup` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_ingroup_id` int(11) NOT NULL,
+  `members` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `fcs_withingroup_fcc`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_withingroup_fcc` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_ingroup_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- Table structure for table `fcs_withingroup_files`
+--
+
+CREATE TABLE IF NOT EXISTS `fcs_withingroup_files` (
+  `invocation_id` int(11) NOT NULL,
+  `fcs_ingroup_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL,
+  `fcsingroup_instance_id` int(11) NOT NULL,
+  `fid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

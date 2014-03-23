@@ -40,6 +40,9 @@
                                 <a href="<?php echo site_url('home/SingleCloneClass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCC
                                 </a>
+								<a href="<?php echo site_url('home/SCCByMethod') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>SCC By Method
+                                </a>
                                 <a href="<?php echo site_url('home/SingleCloneClassByFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCC By File
                                 </a>

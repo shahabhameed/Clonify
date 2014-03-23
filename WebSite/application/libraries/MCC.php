@@ -96,13 +96,11 @@ class MCC {
 
         foreach ($data as $d) {
             $result[$d['mcs_crossfile_id']]['mcs_crossfile_id'] = $d['mcs_crossfile_id'];
-            $result[$d['mcs_crossfile_id']]['members'] = $d['members'];
-            $result[$d['mcs_crossfile_id']]['atc'] = $d['atc'];
-            $result[$d['mcs_crossfile_id']]['apc'] = $d['apc'];
-            $result[$d['mcs_crossfile_id']]['mcc_id'][] = $d['scc_id'];
+            $result[$d['mcs_crossfile_id']]['members'] = $d['members'];          
+            $result[$d['mcs_crossfile_id']]['mcc_id'][] = $d['mcc_id'];
         }
         foreach ($result as $index => $r) {
-            $result[$index]['scc_id_csv'] = implode(", ", $result[$index]['scc_id']);
+            $result[$index]['mcc_id_csv'] = implode(", ", $result[$index]['mcc_id']);
             $child_data = $this->ci->mcc_model->getMCSAcrossFileChildTable($invocationId, $index);
             if ($child_data) {
                 $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array

@@ -236,7 +236,7 @@
                                         foreach ($data as $d) {
                                             $counter++;
                                             ?>
-                                            <tr class="code_view" data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="<?php echo $d['fid']; ?>" data-scsid= "<?php echo $scs_acrossfile_id; ?>" data-clid="" data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
+                                            <tr class="code_view" data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>" data-endline="<?php echo $d['endline']; ?>" data-endcol="<?php echo $d['endcol']; ?>" data-startcol="<?php echo $d['startcol']; ?>" data-startline="<?php echo $d['startline']; ?>" data-fid="<?php echo $d['fid']; ?>" data-scsid= "<?php echo $scs_acrossfile_id; ?>" data-clid="" data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo isset($d['group_id']) ? $d['group_id'] : "-"; ?></td>
                                                 <td><?php echo isset($d['directory_id']) ? $d['directory_id'] : "-"; ?></td>

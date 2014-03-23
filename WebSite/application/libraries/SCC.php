@@ -97,8 +97,8 @@ class SCC
     foreach($data as $d){
       $result[$d['scs_crossfile_id']]['scs_crossfile_id'] = $d['scs_crossfile_id'];      
       $result[$d['scs_crossfile_id']]['members'] = $d['members'];
-      $result[$d['scs_crossfile_id']]['atc'] = $d['atc'];
-      $result[$d['scs_crossfile_id']]['apc'] = $d['apc'];
+      $result[$d['scs_crossfile_id']]['atc'] = $d['tc'];
+      $result[$d['scs_crossfile_id']]['apc'] = $d['pc'];
       $result[$d['scs_crossfile_id']]['scc_id'][] = $d['scc_id'];      
     }
     foreach($result as $index => $r){
@@ -322,5 +322,22 @@ class SCC
     
     return $data;
   }
+  
+  function getMethodByClassPrimaryRows($invocationId) {
+        //$userId = $this->ci->tank_auth->get_user_id();
+        $data = $this->ci->scc_model->getSCCByMethodPrimaryTable($invocationId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
+        return $data;
+    }
+	function getMethodByClassSecondaryRows($mid, $invocationId) {
+        //$userId = $this->ci->tank_auth->get_user_id();
+        $data = $this->ci->scc_model->getSCCByMethodSecondaryTable($mid,$invocationId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
+        return $data;
+    }
   
 }

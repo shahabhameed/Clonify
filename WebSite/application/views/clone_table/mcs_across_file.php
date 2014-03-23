@@ -5,7 +5,7 @@
     <div id="content" class="clearfix">
       <div class="contentwrapper">
         <div class="heading">
-          <h3>Method Clone Structure Across File</h3> 
+          <h3>Method Clone Class Across File</h3> 
           <ul class="breadcrumb">
                 <li>You are here:</li>
                 <li>
@@ -16,7 +16,7 @@
                         <span class="icon16 fa fa-caret-right"></span>
                     </span>
                 </li>
-                <li class="active">Method Clone Structure Across File</li>
+                <li class="active">Method Clone Class Across File</li>
             </ul>                   
         </div>
         
@@ -26,13 +26,13 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Select * From MCC Across File List Where</h4>
+                <h4 class="modal-title" id="myModalLabel">Select * From SCC Across File List Where</h4>
               </div>
               <div class="modal-body">
                
                <div class="row">
                   <div class="col-md-4">
-                    <u><h4>MCS Id</h4></u>
+                    <u><h4>SCS Id</h4></u>
                   </div>
                </div>
                <div class="row">
@@ -62,7 +62,7 @@
                 <br>
                 <div class="row">
                   <div class="col-md-4">
-                    <u><h4>No Of Instances</h4></u>
+                    <u><h4>No Of Colones</h4></u>
                   </div>
                </div>
                <div class="row">
@@ -153,7 +153,7 @@
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i> SCS Across File List</span></h4>
+                 <h4><span> <i class="fa fa-list-alt fa-2"></i> MCS Across File List</span></h4>
                  <span class="loader" style="top:15px;cursor:pointer;">
                   <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
                 </span>
@@ -163,34 +163,28 @@
                   <table cellpadding="0" cellspacing="0" border="0" class="responsive scsafiletable display table table-bordered" width="100%">
                     <thead>
                       <tr>
-                        <th>No</th>
-                        <th>SCS ID</th>
-                        <th>Structure (SCC ID)</th>                        
-                        <th>ATC</th>
-                        <th>APC</th>                        
-                        <th>No. of Instances</th>
+                        <th>No.</th>
+                        <th>MCS ID</th>
+                        <th>Structure(MCC ID, ...)</th>                                         
+                        <th>No of Clones</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php $counter=0;foreach($results as $result){$counter++;?>
-                      <tr class="list_view" data-scsid="<?php echo $result['scs_crossfile_id'];?>">
+                      <tr class="list_view" data-scsid="<?php echo $result['mcs_crossfile_id'];?>">
                         <td><?php echo $counter;?></td>
-                        <td><?php echo $result['scs_crossfile_id'];?></td>
-                        <td><?php echo $result['scc_id_csv'];?></td>
-                        <td><?php echo $result['atc'];?></td>
-                        <td><?php echo $result['apc'];?></td>                        
+                        <td><?php echo $result['mcs_crossfile_id'];?></td>
+                        <td><?php echo $result['mcc_id_csv'];?></td>                    
                         <td><?php echo $result['members'];?></td>
                       </tr>
                       <?php }?>
                     </tbody>
                      <tfoot>
                       <tr>
-                        <th>No</th>
-                        <th>SCS ID</th>
-                        <th>Structure (SCC ID)</th>                        
-                        <th>ATC</th>
-                        <th>APC</th>                        
-                        <th>No. of Instances</th>
+                        <th>No.</th>
+                        <th>MCS ID</th>
+                        <th>Structure(MCC ID, ...)</th>                                         
+                        <th>No of Clones</th>>
                       </tr>
                     </tfoot>
                   </table>
@@ -208,7 +202,7 @@
             <div class="col-md-12">
               <div class="panel panel-default gradient">
                 <div class="panel-heading min">
-                 <h4><span> <i class="fa fa-list-alt fa-2"></i>SCS Clone Instance List - SCS ID - <?php echo $scs_acrossfile_id;?></span></h4>
+                 <h4><span> <i class="fa fa-list-alt fa-2"></i>MCS Clone Instance List <?php echo $scs_acrossfile_id;?></span></h4>
                   <span class="loader" style="top:15px;cursor:pointer;">
                   <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                 </span>
@@ -220,11 +214,10 @@
                     <thead>
                       <tr>
                         <th>No.</th>                        
-                        <th>Group ID</th>
-                        <th>Directory ID</th>
-                        <th>File ID</th>
-                        <th>TC</th>
-                        <th>PC</th>
+                        <th>GID</th>
+                        <th>DID</th>
+                        <th>FID</th>
+                        <th>Structure (MID, ...)</th>
                         <th>File Name</th>
                       </tr>
                     </thead>
@@ -233,25 +226,23 @@
                         foreach($data as $d){
                           $counter++;
                         ?>
-                          <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="<?php echo $d['fid'];?>" data-scsid= "<?php echo $scs_acrossfile_id;?>" data-clid="" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
+                          <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="$d['endline'];" data-endcol="" data-startcol="" data-startline="$d['startline'];" data-fid="<?php echo $d['fid'];?>" data-scsid= "<?php echo $scs_acrossfile_id;?>" data-clid="" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
                             <td><?php echo $counter;?></td>
                             <td><?php echo $d['group_id'];?></td>
                             <td><?php echo $d['directory_id'];?></td>
                             <td><?php echo $d['fid'];?></td>
-                            <td><?php echo $d['tc'];?></td>
-                            <td><?php echo $d['pc'];?></td>
+                            <td><?php echo $d['mid'];?></td>
                             <td><?php echo $d['directory_name'].$d['file_name'];?></td>                            
                           </tr>
                         <?php }?>
                       </tbody>
                       <tfoot>
                       <tr>
-                        <th>No.</th>                        
-                        <th>Group ID</th>
-                        <th>Directory ID</th>
-                        <th>File ID</th>
-                        <th>TC</th>
-                        <th>PC</th>
+						<th>No.</th>                        
+                        <th>GID</th>
+                        <th>DID</th>
+                        <th>FID</th>
+                        <th>Structure (MID, ...)</th>
                         <th>File Name</th>
                       </tr>
                     </tfoot>
@@ -337,7 +328,7 @@ $(document).ready(function(){
       event.preventDefault();      
       return false;
     });
-    $(".code_view").on("click",function(){
+    $(".code_view").live("click",function(){
         Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
         event.preventDefault();        
         return false;
