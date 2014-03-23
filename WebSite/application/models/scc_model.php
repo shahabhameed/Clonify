@@ -348,7 +348,7 @@ class SCC_model extends CI_Model
         //$query = "SELECT t1.mcc_id,t1.atc,t1.apc,count(t2.mcc_id) length, (select GROUP_CONCAT(scc_id) from mcc_scc where mcc_id = t1.mcc_id group by t1.mcc_id) scc FROM mcc t1 INNER JOIN mcc_instance t2 on t1.mcc_id = t2.mcc_id where t1.invocation_id=$invocationId group by t2.mcc_id";
 
 		$query  = "SELECT t3.mcc_instance_id, t3.mcc_id, t3.mid, t3.tc, t3.pc, t3.fid, t3.did, t3.gid, t2.mname methodname, CONCAT( directory_name, file_name ) filename, CONCAT( repository_name, directory_name, file_name ) filepath, t2.startline, t2.endline, COUNT( t3.mcc_id ) length, (SELECT GROUP_CONCAT( scc_id ) FROM mcc_scc WHERE mcc_id = t1.mcc_id
-GROUP BY t1.mcc_id)scc FROM mcc t1, mcc_instance t3, method t2, repository_file f, repository_directory d, user_repository r WHERE t1.mcc_id = t3.mcc_id AND t1.invocation_id =8 AND t3.mid = t2.mid AND d.id = f.directory_id AND d.repository_id = r.id AND f.id = t3.fid GROUP BY t3.mcc_id";
+GROUP BY t1.mcc_id)scc FROM mcc t1, mcc_instance t3, method t2, repository_file f, repository_directory d, user_repository r WHERE t1.mcc_id = t3.mcc_id AND t1.invocation_id =$invocationId AND t3.mid = t2.mid AND d.id = f.directory_id AND d.repository_id = r.id AND f.id = t3.fid GROUP BY t3.mcc_id";
 //      $result = $this->db->get();
         $result = $this->db->query($query);
         if ($result->num_rows() > 0) {
