@@ -291,8 +291,9 @@ class SCC
       $result[$d['fid']]['file_name'] = $d['file_name'];
       $result[$d['fid']]['length'] = $d['length'];
     }
-    foreach($result as $index => $r){      
+    foreach($result as $index => $r){
       $child_data = $this->ci->scc_model->getSCCByFileChildTable($invocationId, $r['fid'], $userId);
+      $result[$index]['members'] = count($child_data);
       if ($child_data){
         $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
       }            
