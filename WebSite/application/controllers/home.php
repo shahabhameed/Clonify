@@ -340,6 +340,19 @@
       $this->load->view('clone_table/scc_by_method.php', $viewData);
       $this->load->view('partials/main_footer');
     }
+	public function MethodCloneStructureAcrossFile(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $results = $this->mcc->getAllMCSAcrossFile($invocationId);   
+      $viewData['results'] = $results;
+      
+      $viewData['showCloneView'] = true;
+      $viewData['invocationId'] = $invocationId;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/mcs_across_file.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
 
   }
   
