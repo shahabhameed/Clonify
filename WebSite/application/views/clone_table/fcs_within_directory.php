@@ -202,7 +202,7 @@
                                         $data = $data ? $data : array();
                                         foreach ($data as $ingroup_id => $fids) {
                                             $counter++;
-                                              $fids = join(",", $fids);
+                                              $fids = join(", ", $fids);
                                             ?>
                                             <tr class="code_view">
                                                 <td><?php echo $counter; ?></td>
