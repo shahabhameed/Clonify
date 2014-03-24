@@ -19,12 +19,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+import java.util.Vector;
 
 import junit.framework.TestCase;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.ResultSet;
+import com.mysql.jdbc.Statement;
+
 import dssd.invoker.Constants;
 import dssd.invoker.DBLoaderFromTextFiles;
+import dssd.invoker.Database;
 import dssd.invoker.InvokeService;
-import java.util.Vector;
 
 public class TestLoadFromTextFile extends TestCase{
 
@@ -165,11 +171,11 @@ public class TestLoadFromTextFile extends TestCase{
        
        
                
-        public void testgetFileName_invalidInput(){
+/*        public void testgetFileName_invalidInput(){
            DBLoaderFromTextFiles dbt = new DBLoaderFromTextFiles();
            String filename = dbt.getFileName(-134);
            assertNull(filename);
-       }
+       }*/
        
        public void testgetDidFromFid_invalid() {
          DBLoaderFromTextFiles dbt = new DBLoaderFromTextFiles();
@@ -371,10 +377,10 @@ public class TestLoadFromTextFile extends TestCase{
 	public int getNumberOfRows(String pQuery) {
 		int size = -1;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			java.sql.Connection dbConn = Database.openConnection();
+			java.sql.Statement s = dbConn.createStatement();
 			s.execute("use " + "dssd" + ";");
-			ResultSet results = s.executeQuery(pQuery);
+			java.sql.ResultSet results = s.executeQuery(pQuery);
 			if (results.next()) {
 				size = results.getInt(1);
 			}
