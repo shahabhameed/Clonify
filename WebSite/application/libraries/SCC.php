@@ -211,7 +211,7 @@ class SCC
     $data = null;
     $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
-      $fcc_ids = join(",", array_unique(explode(",", $primary_table_row['fcc_ids'])));
+      $fcc_ids = join(", ", array_unique(explode(",", $primary_table_row['fcc_ids'])));
       $data = $this->ci->scc_model->getAllFCSWithinGroupSecondaryTableRows($primary_table_row['fcs_ingroup_id'], $fcc_ids, $invocationId, $userId);
       if ($data){
         $data = json_decode(json_encode($data), true);
@@ -228,7 +228,7 @@ class SCC
     $data = null;
     $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
-      $fcc_ids = join(",", array_unique(explode(",", $primary_table_row['fcc_ids'])));
+      $fcc_ids = join(", ", array_unique(explode(",", $primary_table_row['fcc_ids'])));
       $data = $this->ci->scc_model->getAllFCSCrossGroupSecondaryTableRows($primary_table_row['fcs_crossgroup_id'], $fcc_ids, $invocationId, $userId);
       if ($data){
         $data = json_decode(json_encode($data), true);
@@ -245,7 +245,7 @@ class SCC
     $data = null;
     $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
-      $fcc_ids = join(",", array_unique(explode(",", $primary_table_row['fcc_ids'])));
+      $fcc_ids = join(", ", array_unique(explode(",", $primary_table_row['fcc_ids'])));
       $data = $this->ci->scc_model->getAllFCSWithinDirectorySecondaryTableRows($primary_table_row['fcs_indir_id'], $fcc_ids, $invocationId, $userId);
       if ($data){
         $data = json_decode(json_encode($data), true);
@@ -262,7 +262,7 @@ class SCC
     $data = null;
     $result = array();
     if (!empty($primary_table_row['fcc_ids'])){
-      $fcc_ids = join(",", array_unique(explode(",", $primary_table_row['fcc_ids'])));
+      $fcc_ids = join(", ", array_unique(explode(",", $primary_table_row['fcc_ids'])));
       $data = $this->ci->scc_model->getAllFCSCrossDirectorySecondaryTableRows($primary_table_row['fcs_crossdir_id'], $fcc_ids, $invocationId, $userId);
       if ($data){
         $data = json_decode(json_encode($data), true);
