@@ -16,5 +16,6 @@
 /CMInvoker/dist/
 /CMInvoker/config.properties
 /WebSite/files/
-CMInvoker/log.txt
+/CMInvoker/log.txt
+/CMInvoker/CloneMiner/
 *.txt
