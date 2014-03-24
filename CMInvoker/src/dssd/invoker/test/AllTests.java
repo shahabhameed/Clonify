@@ -1,11 +1,14 @@
 package dssd.invoker.test;
 
+import dssd.invoker.CMProperties;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 public class AllTests {
 
 	public static Test suite() {
+		CMProperties.loadProperties();
+		
 		TestSuite suite = new TestSuite("Test for dssd.invoker.test");
 		//$JUnit-BEGIN$
 		suite.addTestSuite(TestInvokeService.class);

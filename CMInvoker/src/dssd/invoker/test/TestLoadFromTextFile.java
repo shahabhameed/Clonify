@@ -219,6 +219,171 @@ public class TestLoadFromTextFile extends TestCase{
          assertEquals("zero size of the list returned  since id not in db", 0, 0);
        }
        
+	public void testMCCInsertions(){
+		assertTrue(getNumberOfRows("SELECT COUNT(mcc_id) FROM mcc;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(mid) FROM method_file;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(mid) FROM method;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(invocation_id) FROM invocation_files;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(mcs_crossfile_id) FROM mcscrossfile_methods;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(scs_crossmethod_id) FROM scscrossmethod_scc;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(scs_crossmethod_id) FROM scs_crossmethod;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(scs_crossmethod_id) FROM scscrossmethod_method;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(mcc_id) FROM mcc_file;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(mcs_crossfile_id) FROM mcscrossfile_file;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(mcs_crossfile_id) FROM mcscrossfile_mcc;") > 0);
+		assertTrue(getNumberOfRows("SELECT COUNT(mcs_crossfile_id) FROM mcs_crossfile;") > 0);
+	}
+	
+	public void testInvocationIdColumnExistsInMCC(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM mcc_instance;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	
+	public void testInvocationIdColumnExistsIn_mcscrossfile_methods(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM mcscrossfile_methods;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_scscrossmethod_scc(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM scscrossmethod_scc;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_scs_crossmethod(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM scs_crossmethod;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_scscrossmethod_method(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM scscrossmethod_method;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_mcc_file(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM mcc_file;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_mcscrossfile_file(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM mcscrossfile_file;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_mcscrossfile_mcc(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM mcscrossfile_mcc;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_mcs_crossfile(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM mcs_crossfile;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_method(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM method;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_mcc_scc(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM mcc_scc;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	public void testInvocationIdColumnExistsIn_method_file(){
+		try{
+			getNumberOfRows("SELECT invocation_id FROM method_file;");
+		}
+		catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
+		
+		assertTrue(true);
+	}
+	
+	public int getNumberOfRows(String pQuery) {
+		int size = -1;
+		try {
+			Connection dbConn = Database.openConnection();
+			Statement s = dbConn.createStatement();
+			s.execute("use " + "dssd" + ";");
+			ResultSet results = s.executeQuery(pQuery);
+			if (results.next()) {
+				size = results.getInt(1);
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return size;
+	}
        
        
        
