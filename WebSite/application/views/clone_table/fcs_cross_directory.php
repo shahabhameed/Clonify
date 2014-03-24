@@ -114,7 +114,7 @@
                 </div>
             </div>
 
-
+            
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default gradient">
@@ -157,8 +157,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>SCC ID</th>
-                                        <th>Length</th>                        
+                                        <th>FCS ID</th>
+                                        <th>FCS Across Directory List</th>                        
+                                        <th>DID</th>
                                         <th>No. Clones</th>
                                     </tr>
                                 </tfoot>                     

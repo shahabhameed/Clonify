@@ -114,7 +114,8 @@
                 </div>
             </div>
 
-
+            <div class="row-fluid">
+            <div class="col-md-9">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default gradient">
@@ -157,8 +158,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>SCC ID</th>
-                                        <th>Length</th>                        
+                                        <th>FCS ID</th>
+                                        <th>FCS Across Group List</th>                        
+                                        <th>GID</th>
                                         <th>No. Clones</th>
                                     </tr>
                                 </tfoot>                     
@@ -254,6 +256,15 @@
                         </div>
                     </div>
                 </div>
+            </div>
+             </div>
+              <div class="col-md-3" style="border-left:1px solid;">
+                <div class="todo">
+                    <h4>Navigation <a href="#" class="icon tip" oldtitle="Add task" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-plus"></span></a></h4>
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+                
+              </div>
             </div>
         </div><!-- End contentwrapper -->
     </div><!-- End #content -->

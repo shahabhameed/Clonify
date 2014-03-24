@@ -14,19 +14,11 @@ var setting = {
 				fontCss: getFontCss
 			}
 		};
+				// var zNodes =[
+		// 	{ "id":1, "pId":0, "name":"Directory 1", "t":"id=1", "open":false},
+		// 	{ "id":11, "pId":1, "name":"File 1-1", "t":"id=11"},
 
-		var zNodes =[
-			{ id:1, pId:0, name:"Directory 1", t:"id=1", open:false},
-			{ id:11, pId:1, name:"File 1-1", t:"id=11"},
-			{ id:12, pId:1, name:"File 1-2", t:"id=12"},
-			{ id:13, pId:1, name:"File 1-3", t:"id=13"},
-			{ id:14, pId:1, name:"File 1-4", t:"id=14"},
-			{ id:15, pId:1, name:"File 1-5", t:"id=15"},
-			{ id:2, pId:0, name:"Directory 2", t:"id=2", open:false},
-			{ id:21, pId:2, name:"File 2-1", t:"id=21"},
-			{ id:22, pId:2, name:"File 2-2", t:"id=22"},
-			{ id:23, pId:2, name:"File 2-3", t:"id=23"},
-		];
+		// ];
 
 		function focusKey(e) {
 			if (key.hasClass("empty")) {
@@ -148,6 +140,7 @@ var setting = {
 		
 		var key;
 		$(document).ready(function(){
-			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-			
+			if(zNodes!=undefined){
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			}
 		});
