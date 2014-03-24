@@ -250,7 +250,7 @@ class SCC
       if ($data){
         $data = json_decode(json_encode($data), true);
         foreach($data as $d){
-          $result[$d['directory_id']][] = $d['fid'];
+          $result[$d['fcsindir_instance_id']][] = $d['fid'];
         }                
       }    
     }
