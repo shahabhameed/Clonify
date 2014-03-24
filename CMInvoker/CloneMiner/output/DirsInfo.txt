@@ -1,9 +1,6 @@
-0,C:/xampp/htdocs/Clonify3/files/umerhayat/umer/Cocos2dxAccelerometer.java
-1,C:/xampp/htdocs/Clonify3/files/umerhayat/umer/Cocos2dxActivity.java
-2,C:/xampp/htdocs/Clonify3/files/umerhayat/umer/Cocos2dxBitmap.java
-3,C:/xampp/htdocs/Clonify3/files/umerhayat/umer/Cocos2dxGLSurfaceView.java
-4,C:/xampp/htdocs/Clonify3/files/umerhayat/umer/Cocos2dxMusic.java
-5,C:/xampp/htdocs/Clonify3/files/umerhayat/umer/Cocos2dxRenderer.java
-6,C:/xampp/htdocs/Clonify3/files/umerhayat/umer/Cocos2dxSound.java
-7,C:/xampp/htdocs/Clonify3/files/umerhayat/umer/SCICopy.java
-8,C:/xampp/htdocs/Clonify3/files/umerhayat/umer/SCSInFileInstance.java
+0,G:\LUMS\DSSD\nio
+1,G:\LUMS\DSSD\nio\channels
+2,G:\LUMS\DSSD\nio\channels\spi
+3,G:\LUMS\DSSD\nio\charset
+4,G:\LUMS\DSSD\nio\charset\spi
+5,G:\LUMS\DSSD\nio1
