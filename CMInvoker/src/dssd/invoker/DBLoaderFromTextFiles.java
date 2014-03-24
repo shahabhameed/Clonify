@@ -1076,7 +1076,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			ResultSet results = s.executeQuery("select group_id"
 					+ " from invocation_files " + "where cmfile_id=\"" + fid + "\" AND invocation_id=\"" + invocationId + "\";");
 			if (results.next()) {
-				gid = results.getInt(1) - 1;
+				gid = results.getInt(1);
 			}
 			s.close();
 		} catch (Exception e) {
@@ -1342,7 +1342,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			ResultSet results = s.executeQuery("select group_id "
 					+ " from invocation_files " + " where cmfile_id = " + fid + " and invocation_id = " +invocation_id+ ";");
 			if (results.next()) {
-				gid = results.getInt(1);
+				gid = results.getInt(1) - 1;
 			}
 			s.close();
 		} catch (Exception e) {
