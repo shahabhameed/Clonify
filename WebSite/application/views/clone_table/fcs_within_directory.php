@@ -156,10 +156,13 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                    <tr>
                                         <th>No</th>
-                                        <th>SCC ID</th>
-                                        <th>Length</th>                        
+                                        <th>FCS ID</th>
+                                        <th>FCS Within Directory List</th>                        
+                                        <th>DID</th>
                                         <th>No. Clones</th>
+                                    </tr>
                                     </tr>
                                 </tfoot>                     
                             </table>

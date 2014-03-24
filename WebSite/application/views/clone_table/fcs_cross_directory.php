@@ -157,8 +157,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>SCC ID</th>
-                                        <th>Length</th>                        
+                                        <th>FCS ID</th>
+                                        <th>FCS Across Directory List</th>                        
+                                        <th>DID</th>
                                         <th>No. Clones</th>
                                     </tr>
                                 </tfoot>                     
