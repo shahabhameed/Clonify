@@ -19,13 +19,13 @@ public class TestDatabase extends TestCase {
 	}
 	
 	public void testOpenConnection(){
-		conn = Database.openConnection();
+		conn = Database.getInstance().getDBConn();
 		assertNotNull(conn);
 		
 	}
 	
 	public void testCloseConnection1(){
-		conn = Database.openConnection();
+		conn = Database.getInstance().getDBConn();
 		assertTrue(Database.closeConnection(conn));
 	}
 	
@@ -34,7 +34,7 @@ public class TestDatabase extends TestCase {
 	}
 	
 	public void testGetInvokeConfig1(){
-		assertNull(Database.getInvokeConfig(-1));
+		assertNull(Database.getInstance().getInvokeConfig(-1));
 	}
 	
 	public void testGetInvokeConfig2(){
@@ -47,16 +47,16 @@ public class TestDatabase extends TestCase {
 	}
 
 	public void testExecuteTransaction(){
-		assertTrue(Database.executeTransaction("select * from user_invocations;"));
+		assertTrue(Database.getInstance().executeTransaction("select * from user_invocations;"));
 	}
 
 	public void testUpdateInvocationStatus(){
-		assertTrue(Database.updateInvocationStatus(1,1));
+		assertTrue(Database.getInstance().updateInvocationStatus(1,1));
 	}
 	
 	public void testUpdateInvocationStatus2(){
 		// get and store the value for comparison 
-		Database.updateInvocationStatus(1,1);
+		Database.getInstance().updateInvocationStatus(1,1);
 		assertTrue(true);
 		// check if the value has been changed 
 	}
@@ -64,7 +64,7 @@ public class TestDatabase extends TestCase {
 	public void testUpdateInvocationStatus3(){
 		// save new value
 		// get and store the value for comparison 
-		Database.updateInvocationStatus(1,1);
+		Database.getInstance().updateInvocationStatus(1,1);
 		assertTrue(true);
 		// check if the new value is actually the value that is saved in the table 
 	}

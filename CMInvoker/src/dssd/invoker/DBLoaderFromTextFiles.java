@@ -101,7 +101,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 				int length = new Integer(st.nextToken().trim()).intValue();
 
-				Database.executeTransaction("UPDATE invocation_files SET cmdirectory_id=\"" + tempId + "\" WHERE cmfile_id=\"" + i + "\" AND invocation_id=\"" + invokId+"\";");
+				Database.getInstance().executeTransaction("UPDATE invocation_files SET cmdirectory_id=\"" + tempId + "\" WHERE cmfile_id=\"" + i + "\" AND invocation_id=\"" + invokId+"\";");
 
 			}
 
@@ -128,7 +128,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					st.nextToken();
 					int tempId = new Integer(st.nextToken().trim()).intValue();
 					int length = new Integer(st.nextToken().trim()).intValue();
-					Database.executeTransaction("UPDATE invocation_files SET cmdirectory_id=" + tempId + " WHERE cmfile_id=" + i + " AND invocation_id=" + invocationId + ";");
+					Database.getInstance().executeTransaction("UPDATE invocation_files SET cmdirectory_id=" + tempId + " WHERE cmfile_id=" + i + " AND invocation_id=" + invocationId + ";");
 				}
 			}
 			
@@ -179,11 +179,11 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 			if (!INSERT_SCC
 					.equalsIgnoreCase("INSERT INTO scc(scc_id, length, members, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_SCC);
+				Database.getInstance().executeTransaction(INSERT_SCC);
 			}
 			if (!INSERT_SCC_INSTANCE
 					.equalsIgnoreCase("INSERT INTO scc_instance(scc_instance_id, scc_id, fid, startline, startcol, endline, endcol, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_SCC_INSTANCE);
+				Database.getInstance().executeTransaction(INSERT_SCC_INSTANCE);
 			}                                                
 			
 			/**
@@ -261,18 +261,17 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 			if (!INSERT_SCSINFILE_SCC
 					.equalsIgnoreCase("INSERT INTO scsinfile_scc(scc_id, scs_infile_id, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_SCSINFILE_SCC);
+				Database.getInstance().executeTransaction(INSERT_SCSINFILE_SCC);
 			}			
 			if (!INSERT_SCSINFILE_FILE
 					.equalsIgnoreCase("INSERT INTO scsinfile_file(scs_infile_id,invocation_id, fid, members) values ")) {
-				Database.executeTransaction(INSERT_SCSINFILE_FILE);
+				Database.getInstance().executeTransaction(INSERT_SCSINFILE_FILE);
 			}
 			if (!INSERT_SCSINFILE_FRAGMENTS
 					.equalsIgnoreCase("INSERT INTO scsinfile_fragments(scs_infile_id, fid, scc_id, scsinfile_instance_id, scc_instance_id, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_SCSINFILE_FRAGMENTS);
-			}			                        
+				Database.getInstance().executeTransaction(INSERT_SCSINFILE_FRAGMENTS);
+			}
 
-                        //sprint04FilesToDB(invocationId);
 			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
 			
@@ -300,11 +299,11 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 			if (!INSERT_METHOD
 					.equalsIgnoreCase("INSERT INTO method(mid, mname, tokens, startline, endline, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_METHOD);
+				Database.getInstance().executeTransaction(INSERT_METHOD);
 			}
 			if (!INSERT_METHOD_FILE
 					.equalsIgnoreCase("INSERT INTO method_file(mid, fid, startline, endline, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_METHOD_FILE);
+				Database.getInstance().executeTransaction(INSERT_METHOD_FILE);
 			}
 
 			filein6.close();
@@ -358,15 +357,15 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 			if (!INSERT_SCSCROSSMETHOD_METHOD
 					.equalsIgnoreCase("INSERT INTO scscrossmethod_method(scs_crossmethod_id, mid, tc, pc, fid, did, gid) values ")) {
-				Database.executeTransaction(INSERT_SCSCROSSMETHOD_METHOD);
+				Database.getInstance().executeTransaction(INSERT_SCSCROSSMETHOD_METHOD);
 			}
 			if (!INSERT_SCSCROSSMETHOD_SCC
 					.equalsIgnoreCase("INSERT INTO scscrossmethod_scc(scs_crossmethod_id, scc_id) values ")) {
-				Database.executeTransaction(INSERT_SCSCROSSMETHOD_SCC);
+				Database.getInstance().executeTransaction(INSERT_SCSCROSSMETHOD_SCC);
 			}
 			if (!INSERT_SCS_CROSSMETHOD
 					.equalsIgnoreCase("INSERT INTO scs_crossmethod(scs_crossmethod_id, atc, apc, members) values ")) {
-				Database.executeTransaction(INSERT_SCS_CROSSMETHOD);
+				Database.getInstance().executeTransaction(INSERT_SCS_CROSSMETHOD);
 			}
 			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_CLUSTER_XX_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
@@ -423,15 +422,15 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			
 			if (!INSERT_MCC.equalsIgnoreCase("INSERT INTO mcc(mcc_id, atc, apc, invocation_id, members) values ")) {
 				System.out.println("\nINSERT_MCC: " + INSERT_MCC);
-				Database.executeTransaction(INSERT_MCC);
+				Database.getInstance().executeTransaction(INSERT_MCC);
 			}
 			if (!INSERT_MCC_INSTANCE.equalsIgnoreCase("INSERT INTO mcc_instance(mcc_instance_id, mcc_id, mid, tc, pc, fid, did, gid, invocation_id) values ")) {
 				System.out.println("\nINSERT_MCC_INSTANCE: " + INSERT_MCC_INSTANCE);
-				Database.executeTransaction(INSERT_MCC_INSTANCE);
+				Database.getInstance().executeTransaction(INSERT_MCC_INSTANCE);
 			}
 			if (!INSERT_MCC_SCC.equalsIgnoreCase("INSERT INTO mcc_scc(mcc_id, scc_id, invocation_id) values ")) {
 				System.out.println("\nINSERT_MCC_SCC: " + INSERT_MCC_SCC);
-				Database.executeTransaction(INSERT_MCC_SCC);
+				Database.getInstance().executeTransaction(INSERT_MCC_SCC);
 			}
 			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_CLONES_BY_FILE_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
@@ -456,7 +455,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 			if (!INSERT_MCC_FILE
 					.equalsIgnoreCase("INSERT INTO mcc_file(mcc_id, fid, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_MCC_FILE);
+				Database.getInstance().executeTransaction(INSERT_MCC_FILE);
 			}
 			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_STRUCTURE + Constants.CM_TEXT_FILE_EXTENSION;
@@ -513,19 +512,19 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 			if (!INSERT_MCS_CROSSFILE
 					.equalsIgnoreCase("INSERT INTO mcs_crossfile(mcs_crossfile_id, members, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_MCS_CROSSFILE);
+				Database.getInstance().executeTransaction(INSERT_MCS_CROSSFILE);
 			}
 			if (!INSERT_MCSCROSSFILE_MCC
 					.equalsIgnoreCase("INSERT INTO mcscrossfile_mcc(mcs_crossfile_id, mcc_id, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_MCSCROSSFILE_MCC);
+				Database.getInstance().executeTransaction(INSERT_MCSCROSSFILE_MCC);
 			}
 			if (!INSERT_MCSCROSSFILE_FILE
 					.equalsIgnoreCase("INSERT INTO mcscrossfile_file(mcs_crossfile_id, fid, did, gid, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_MCSCROSSFILE_FILE);
+				Database.getInstance().executeTransaction(INSERT_MCSCROSSFILE_FILE);
 			}
 			if (!INSERT_MCSCROSSFILE_METHODS
 					.equalsIgnoreCase("INSERT INTO mcscrossfile_methods(mcs_crossfile_id, fid, mcc_id, mid, invocation_id) values ")) {
-				Database.executeTransaction(INSERT_MCSCROSSFILE_METHODS);
+				Database.getInstance().executeTransaction(INSERT_MCSCROSSFILE_METHODS);
 			}
 
                         
@@ -575,7 +574,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			query += str;
 		}
 		
-		Database.executeTransaction(query);
+		Database.getInstance().executeTransaction(query);
 	}
 	
 	//delete mid
@@ -631,15 +630,15 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 		if (!INSERT_SCSCROSSFILE_SCC
 				.equalsIgnoreCase("INSERT INTO scscrossfile_scc(scc_id, scs_crossfile_id, invocation_id) values ")) {
-			Database.executeTransaction(INSERT_SCSCROSSFILE_SCC);
+			Database.getInstance().executeTransaction(INSERT_SCSCROSSFILE_SCC);
 		}
 		if (!INSERT_SCSCROSSFILE_FILE
 				.equalsIgnoreCase("INSERT INTO scscrossfile_file(scs_crossfile_id, fid, tc, pc, invocation_id) values ")) {
-			Database.executeTransaction(INSERT_SCSCROSSFILE_FILE);
+			Database.getInstance().executeTransaction(INSERT_SCSCROSSFILE_FILE);
 		}
 		if (!INSERT_SCS_CROSSFILE
 				.equalsIgnoreCase("INSERT INTO scs_crossfile(scs_crossfile_id, invocation_id, atc, apc, members) values ")) {
-			Database.executeTransaction(INSERT_SCS_CROSSFILE);
+			Database.getInstance().executeTransaction(INSERT_SCS_CROSSFILE);
 		}
 	}
 	
@@ -720,17 +719,17 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		
 		if (!INSERT_FCS_INDIR
 				.equalsIgnoreCase("INSERT INTO fcs_withindir(invocation_id,fcs_indir_id, members,directory_id) values ")) {
-			Database.executeTransaction(INSERT_FCS_INDIR);
+			Database.getInstance().executeTransaction(INSERT_FCS_INDIR);
 		}
 		
 		if (!INSERT_FCSINDIR_FCC
 				.equalsIgnoreCase("INSERT INTO fcs_withindir_fcc(invocation_id,fcs_indir_id, fcc_id) values ")) {
-			Database.executeTransaction(INSERT_FCSINDIR_FCC);
+			Database.getInstance().executeTransaction(INSERT_FCSINDIR_FCC);
 		}
 		
 		if (!INSERT_FCSINDIR_FILES
 				.equalsIgnoreCase("INSERT INTO fcs_withindir_files(invocation_id,fcs_ingroup_id,fcc_id, fcsingroup_instance_id, fid) values")) {
-			Database.executeTransaction(INSERT_FCSINDIR_FILES);
+			Database.getInstance().executeTransaction(INSERT_FCSINDIR_FILES);
 		}
 
     	
@@ -780,7 +779,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		
 		if (!INSERT_FCC_INSTANCE
 				.equalsIgnoreCase("INSERT INTO fcc_instance(invocation_id,fcc_instance_id, fcc_id, fid, tc, pc, did, gid) values ")) {
-			Database.executeTransaction(INSERT_FCC_INSTANCE);
+			Database.getInstance().executeTransaction(INSERT_FCC_INSTANCE);
 		}
 		
     	
@@ -846,16 +845,16 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		
 		if (!INSERT_FCSCROSSDIR_FCC
 				.equalsIgnoreCase("INSERT INTO fcs_crossdir_fcc(invocation_id,fcs_crossdir_id, fcc_id ) values ")) {
-			Database.executeTransaction(INSERT_FCSCROSSDIR_FCC);
+			Database.getInstance().executeTransaction(INSERT_FCSCROSSDIR_FCC);
 		}
 		
 		if (!INSERT_FCSCROSSDIR_FILES
 				.equalsIgnoreCase("INSERT INTO fcs_crossdir_files(invocation_id,fcs_crossdir_id,fcc_id, directory_id,fid) values ")) {
-			Database.executeTransaction(INSERT_FCSCROSSDIR_FILES);
+			Database.getInstance().executeTransaction(INSERT_FCSCROSSDIR_FILES);
 		}
 		if (!INSERT_FCS_CROSSDIR
 				.equalsIgnoreCase("INSERT INTO fcs_crossdir(invocation_id,fcs_crossdir_id, members,directory_id) values ")) {
-			Database.executeTransaction(INSERT_FCS_CROSSDIR);
+			Database.getInstance().executeTransaction(INSERT_FCS_CROSSDIR);
 		}
 	
     }
@@ -940,17 +939,17 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 		if (!INSERT_FCS_INGROUP
 				.equalsIgnoreCase("INSERT INTO fcs_withingroup(invocation_id,fcs_ingroup_id, members,group_id) values ")) {
-			Database.executeTransaction(INSERT_FCS_INGROUP);
+			Database.getInstance().executeTransaction(INSERT_FCS_INGROUP);
 		}
 		
 		if (!INSERT_FCSINGROUP_FCC
 				.equalsIgnoreCase("INSERT INTO fcs_withingroup_fcc(invocation_id,fcs_ingroup_id, fcc_id) values ")) {
-			Database.executeTransaction(INSERT_FCSINGROUP_FCC);
+			Database.getInstance().executeTransaction(INSERT_FCSINGROUP_FCC);
 		}
 		
 		if (!INSERT_FCSINGROUP_FILES
 				.equalsIgnoreCase("INSERT INTO fcs_withingroup_files(fcs_ingroup_id, gid, fcc_id, fcsingroup_instance_id, fid) values ")) {
-			Database.executeTransaction(INSERT_FCSINGROUP_FILES);
+			Database.getInstance().executeTransaction(INSERT_FCSINGROUP_FILES);
 		}
 	
     	
@@ -1017,16 +1016,16 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		
 		if (!INSERT_FCSCROSSGROUP_FCC
 				.equalsIgnoreCase("INSERT INTO fcs_crossgroup(invocation_id,fcs_crossgroup_id, members,group_id) values ")) {
-			Database.executeTransaction(INSERT_FCSCROSSGROUP_FCC);
+			Database.getInstance().executeTransaction(INSERT_FCSCROSSGROUP_FCC);
 		}
 		
 		if (!INSERT_FCSCROSSGROUP_FILES
 				.equalsIgnoreCase("INSERT INTO fcscrossgroup_files(invocation_id,fcs_crossgroup_id,fcc_id,group_id, fid) values ")) {
-			Database.executeTransaction(INSERT_FCSCROSSGROUP_FILES);
+			Database.getInstance().executeTransaction(INSERT_FCSCROSSGROUP_FILES);
 		}
 		if (!INSERT_FCS_CROSSGROUP
 				.equalsIgnoreCase("INSERT INTO fcscrossgroup_fcc(invocation_id,fcs_crossgroup_id, fcc_id ) values ")) {
-			Database.executeTransaction(INSERT_FCS_CROSSGROUP);
+			Database.getInstance().executeTransaction(INSERT_FCS_CROSSGROUP);
 		}	
     }
     	
@@ -1070,8 +1069,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public int getGidFromFid(int fid) {
 		int gid = -1;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s.executeQuery("select group_id"
 					+ " from invocation_files " + "where cmfile_id=\"" + fid + "\" AND invocation_id=\"" + invocationId + "\";");
@@ -1090,8 +1088,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		int did = -1;
 		try {
 			int fid = -1;
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s.executeQuery("select file_id"
 					+ " from invocation_files " + " where cmfile_id=\"" + pFid + "\" AND invocation_id=\"" + invocationId + "\";");
@@ -1120,8 +1117,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public int getFidFromMid(int mid) {
 		int fid = -1;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s.executeQuery("select fid "
 					+ " from method_file " + " where mid = " + mid + ";");
@@ -1142,8 +1138,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public String getMethodName(int mid) {
 		String methodName = null;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s
 					.executeQuery("select mname from method where mid = " + mid
@@ -1204,8 +1199,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					break;
 				}
 			}
-			Connection dbConn = Database.openConnection();
-			Statement st = dbConn.createStatement();
+			Statement st = Database.getInstance().getDBConn().createStatement();
 			st.execute("use "+databaseName+";");
 			ResultSet results = st.executeQuery("select method.startline, "
 					+ "method.endline, method.mid "
@@ -1260,8 +1254,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private String getFileName(int fid) {
 		String fileName = null;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s
 			.executeQuery("select fname from file where fid = " + fid
@@ -1280,8 +1273,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public int getDirectorySize(int invocation_id) {
 		int size = -1;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s
 					.executeQuery("select count(distinct(cmdirectory_id)) from invocation_files where invocation_id = " + invocation_id + ";");
@@ -1299,8 +1291,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		
 		int did = -1;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s.executeQuery("select cmdirectory_id from invocation_files where cmfile_id = " + fid + " and invocation_id = "+invocation_id+";");
 			if (results.next()) {
@@ -1318,8 +1309,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public int getFileSize(Integer invocationId) {
 		int size = -1;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s.executeQuery("select count(*) from invocation_files where invocation_id = " + invocationId + ";");
 			if (results.next()) {
@@ -1336,8 +1326,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public int getGidFromFid(int invocation_id,int fid) {
 		int gid = -1;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s.executeQuery("select group_id "
 					+ " from invocation_files " + " where cmfile_id = " + fid + " and invocation_id = " +invocation_id+ ";");
@@ -1359,8 +1348,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public int getFileSize(int invocation_id) {
 		int size = -1;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = dbConn.getInstance().createStatement();
 			s.execute("use "+databaseName+";");			
                         ResultSet results = s.executeQuery("select count(*) from invocation_files where invocation_id = " + invocation_id + ";");
 			if (results.next()) {
@@ -1377,8 +1365,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public int getGroupSize(int invocation_id) {
 		int size = -1;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement st = dbConn.createStatement();
+			Statement st = Database.getInstance().getDBConn().createStatement();
 			st.execute("use "+databaseName+";");
 			ResultSet results = st
 					.executeQuery("select count(distinct group_id)from invocation_files where invocation_id = " + invocation_id + ";");
@@ -1402,8 +1389,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
                 
                 String Data = null;
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s.executeQuery("select distinct fid, gid, did, fcc_id from fcc_instance where invocation_id = " + invocation_id + ";");
 			list = new Vector<String>();
@@ -1432,8 +1418,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		String frag = null;
 
 		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = null;
 			if (type == Constants.FILE_TYPE) {
