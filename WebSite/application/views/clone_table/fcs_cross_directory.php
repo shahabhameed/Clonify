@@ -37,7 +37,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Select * From SCC Where</h4>
+                            <h4 class="modal-title" id="myModalLabel">Select * From FCS Across Directory Where</h4>
                         </div>
                         <div class="modal-body">
 
@@ -53,7 +53,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <u><h4>No.Colones</h4></u>
+                                    <u><h4>No. Of Instance</h4></u>
                                 </div>
                             </div>
                             <div class="row">
@@ -119,8 +119,8 @@
                                         <th>No</th>
                                         <th>FCS ID</th>
                                         <th>FCS Across Directory List</th>                        
-                                        <th>DID</th>
-                                        <th>No. Clones</th>
+                                        <th>Directory Id</th>
+                                        <th>No. Of Instance</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -145,8 +145,8 @@
                                         <th>No</th>
                                         <th>FCS ID</th>
                                         <th>FCS Across Directory List</th>                        
-                                        <th>DID</th>
-                                        <th>No. Clones</th>
+                                        <th>Directory Id</th>
+                                        <th>No. Of Instance</th>
                                     </tr>
                                 </tfoot>                     
                             </table>

@@ -16,7 +16,7 @@
     <div id="content" class="clearfix">
         <div class="contentwrapper">
             <div class="heading">
-                <h3>Single Clone Class</h3> 
+                <h3>Simple Clone Class</h3> 
                 <ul class="breadcrumb">
                     <li>You are here:</li>
                     <li>
@@ -27,7 +27,7 @@
                             <span class="icon16 fa fa-caret-right"></span>
                         </span>
                     </li>
-                    <li class="active">Single Clone Class</li>
+                    <li class="active">Simple Clone Class</li>
                 </ul>                   
             </div>
 
