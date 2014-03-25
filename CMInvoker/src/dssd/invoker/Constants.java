@@ -43,7 +43,7 @@ public class Constants {
 	public static final String FILE_CLUSTER_XX = "FileClustersXX";
 	
 	public static final String METHOD_CLUSTER_XX_FILE_NAME = "MethodClustersXX";
-	public static final String METHOD_STRUCTURE = "CrossFileCloneMethodStructuresEx";
+	public static final String METHOD_STRUCTURE_FILE_NAME = "CrossFileCloneMethodStructuresEx";
 
 	public static final String METHOD_INFO_FILE_NAME = "MethodsInfo";
 	public static final String FILE_INFO_FILE_NAME = "FilesInfo";

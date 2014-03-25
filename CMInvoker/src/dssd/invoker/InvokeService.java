@@ -17,6 +17,8 @@ public class InvokeService {
 	//	private static Controller con;// = new Controller();
 	//	private static CloneManager cloneManager = new CloneManager(con);
 
+	public static InvokeParameter sInvokeParameter = null;
+	
 	/**
 	 * @param args
 	 */
@@ -42,29 +44,28 @@ public class InvokeService {
 
 		PrintStream ps = new PrintStream("log.txt");
 		System.setOut(ps);
-		InvokeParameter invokeParameter = null;
 
 		while (!stopProcess){
 			try {
-				invokeParameter = Database.getInstance().getInvokeConfig(1);
+				sInvokeParameter = Database.getInstance().getInvokeConfig(1);
 
-				if(invokeParameter != null && invokeParameter.getInvocation_id()>-1)
+				if(sInvokeParameter != null && sInvokeParameter.getInvocation_id()>-1)
 				{
 					if(Constants.SHOULD_USE_OLD_RESULTS == false){
 						InputHelper helper = new TextInputFilesGenerator();
-						helper.setData(invokeParameter);
+						helper.setData(sInvokeParameter);
 						helper.makeCMInputFile();
 
 						//Update status to in process/Active
-						Database.getInstance().updateInvocationStatus(invokeParameter.getInvocation_id(), 1);
+						Database.getInstance().updateInvocationStatus(sInvokeParameter.getInvocation_id(), 1);
 
 						String pathStr = CM_ROOT  +File.separatorChar + Constants.CM_EXEC_FILE_NAME;
 						pathStr = "\"" + pathStr + "\"";
 						final String[] strArray = new String[4];
 						strArray[0] = pathStr;
-						strArray[1] = "" + invokeParameter.getMin_similatiry_SCC_tokens();//stc;
-						strArray[2] = "" + invokeParameter.getMethod_analysis();
-						strArray[3] = "" + invokeParameter.getGrouping_choice();//groupIndex;
+						strArray[1] = "" + sInvokeParameter.getMin_similatiry_SCC_tokens();//stc;
+						strArray[2] = "" + sInvokeParameter.getMethod_analysis();
+						strArray[3] = "" + sInvokeParameter.getGrouping_choice();//groupIndex;
 
 						// execute clone miner
 						long startTime = System.currentTimeMillis();
@@ -97,10 +98,10 @@ public class InvokeService {
 						}
 					}
 					//Update status to Finished
-					Database.getInstance().updateInvocationStatus(invokeParameter.getInvocation_id(), 2);
+					Database.getInstance().updateInvocationStatus(sInvokeParameter.getInvocation_id(), 2);
 					
 					OutputHelper outputHelper = new DBLoaderFromTextFiles();
-					outputHelper.setData(invokeParameter.getInvocation_id());
+					outputHelper.setData(sInvokeParameter.getInvocation_id());
 					outputHelper.loadDBFromFiles();
 				}
 				else
@@ -119,10 +120,10 @@ public class InvokeService {
 				}
 				System.err.println(ie.getMessage());
 				ie.printStackTrace();
-				if(invokeParameter != null)
+				if(sInvokeParameter != null)
 				{
 					//Update status to Crashed/error
-					Database.getInstance().updateInvocationStatus(invokeParameter.getInvocation_id(), 3);
+					Database.getInstance().updateInvocationStatus(sInvokeParameter.getInvocation_id(), 3);
 				}
 			}	
 		}
