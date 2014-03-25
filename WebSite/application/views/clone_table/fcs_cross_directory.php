@@ -114,7 +114,8 @@
                 </div>
             </div>
 
-            
+            <div class="row-fluid">
+            <div class="col-md-9">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default gradient">
@@ -200,9 +201,9 @@
                                         $data = $data ? $data : array();
                                         foreach ($data as $ingroup_id => $fids) {
                                             $counter++;
-                                              $fids = join(", ", $fids);
+                                              $fids = join(",", $fids);
                                             ?>
-                                            <tr class="code_view">
+                                             <tr class="code_view" data-files="<?php echo $fids?>">
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $ingroup_id; ?></td>
                                                 <td><?php echo $fids; ?></td>
@@ -256,12 +257,22 @@
                     </div>
                 </div>
             </div>
+            </div>
+              <div class="col-md-3" style="border-left:1px solid;max-height:600px;overflow-y:scroll;overflow-x:hidden;">
+                <div class="todo">
+                    <h4>Navigation <a href="#" class="icon tip" oldtitle="Add task" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-plus"></span></a></h4>
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+                
+              </div>
+            </div>
         </div><!-- End contentwrapper -->
     </div><!-- End #content -->
 
 </div><!-- End #wrapper -->
 
 <script>
+    var zNodes = <?=$treedata?>;
     $(document).ready(function() {
         $(".list_view").on("click", function() {
             Clonify.FCS.viewInstanceCrossDirectory($(this).data("sccid"));

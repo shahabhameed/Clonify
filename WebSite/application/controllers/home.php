@@ -140,7 +140,7 @@
       }
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
-      
+      $viewData['treedata'] = create_tree($invocationId);
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
@@ -162,7 +162,7 @@
       }
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
-      
+      $viewData['treedata'] = create_tree($invocationId);
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
@@ -207,7 +207,7 @@
       }
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
-      
+      $viewData['treedata'] = create_tree($invocationId);
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');

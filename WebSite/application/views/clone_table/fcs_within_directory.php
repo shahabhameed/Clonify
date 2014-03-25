@@ -258,7 +258,7 @@
                 </div>
             </div>
             </div>
-              <div class="col-md-3" style="border-left:1px solid;max-height:600px;overflow:auto;">
+              <div class="col-md-3" style="border-left:1px solid;max-height:600px;overflow-y:scroll;overflow-x:hidden;">
                 <div class="todo">
                     <h5>Navigation</h5>
                     <ul id="treeDemo" class="ztree"></ul>

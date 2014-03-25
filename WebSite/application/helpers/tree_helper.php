@@ -54,14 +54,11 @@ if (!function_exists('create_tree')) {
                                 'isParent'=>true
                             );
             }
-            else{
-                 $tree[] = array(
+            $tree[] = array(
                                 'id'=>"f_".intval($res['cmfile_id']),
                                 'pId'=>"p_".intval($parent_id),
-                                'name'=>intval($res['cmfile_id']),
+                                'name'=>$res['file_name'],
                             );
-
-            }
             // print_r($res);
         }
         // echo (json_encode($tree));exit;
