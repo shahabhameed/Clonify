@@ -18,15 +18,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Statement;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
 import junit.framework.TestCase;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.ResultSet;
-import com.mysql.jdbc.Statement;
-
 import dssd.invoker.Constants;
 import dssd.invoker.DBLoaderFromTextFiles;
 import dssd.invoker.Database;
@@ -377,8 +373,7 @@ public class TestLoadFromTextFile extends TestCase{
 	public int getNumberOfRows(String pQuery) {
 		int size = -1;
 		try {
-			java.sql.Connection dbConn = Database.openConnection();
-			java.sql.Statement s = dbConn.createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use " + "dssd" + ";");
 			java.sql.ResultSet results = s.executeQuery(pQuery);
 			if (results.next()) {

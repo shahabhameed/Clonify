@@ -46,7 +46,7 @@ public class InvokeService {
 
 		while (!stopProcess){
 			try {
-				invokeParameter = Database.getInvokeConfig(1);
+				invokeParameter = Database.getInstance().getInvokeConfig(1);
 
 				if(invokeParameter != null && invokeParameter.getInvocation_id()>-1)
 				{
@@ -56,7 +56,7 @@ public class InvokeService {
 						helper.makeCMInputFile();
 
 						//Update status to in process/Active
-						Database.updateInvocationStatus(invokeParameter.getInvocation_id(), 1);
+						Database.getInstance().updateInvocationStatus(invokeParameter.getInvocation_id(), 1);
 
 						String pathStr = CM_ROOT  +File.separatorChar + Constants.CM_EXEC_FILE_NAME;
 						pathStr = "\"" + pathStr + "\"";
@@ -97,7 +97,7 @@ public class InvokeService {
 						}
 					}
 					//Update status to Finished
-					Database.updateInvocationStatus(invokeParameter.getInvocation_id(), 2);
+					Database.getInstance().updateInvocationStatus(invokeParameter.getInvocation_id(), 2);
 					
 					OutputHelper outputHelper = new DBLoaderFromTextFiles();
 					outputHelper.setData(invokeParameter.getInvocation_id());
@@ -122,7 +122,7 @@ public class InvokeService {
 				if(invokeParameter != null)
 				{
 					//Update status to Crashed/error
-					Database.updateInvocationStatus(invokeParameter.getInvocation_id(), 3);
+					Database.getInstance().updateInvocationStatus(invokeParameter.getInvocation_id(), 3);
 				}
 			}	
 		}
