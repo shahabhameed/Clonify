@@ -315,7 +315,27 @@ ALTER TABLE mcc DROP PRIMARY KEY;
 ALTER TABLE scs_crossmethod DROP PRIMARY KEY;
 ALTER TABLE method DROP PRIMARY KEY;
 
--- ADDED ON 2014-04-23
+
+
+-- ADDED ON 2014-03-23
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fcs_crossdir_fcc`
+--
+
+CREATE TABLE IF NOT EXISTS `fcc_instance` (
+  `invocation_id` int(11) NOT NULL,
+  `fcc_instance_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL,
+  `fid` int(11) NOT NULL,
+  `tc` double NOT NULL,
+  `pc` double NOT NULL,
+  `did` int(11) NOT NULL,
+  `gid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Table structure for table `fcs_crossdir`

@@ -203,7 +203,7 @@
                                             $counter++;
                                               $fids = join(",", $fids);
                                             ?>
-                                            <tr class="code_view">
+                                            <tr class="code_view" data-files="<?php echo $fids?>">
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $ingroup_id; ?></td>
                                                 <td><?php echo $fids; ?></td>
@@ -258,9 +258,9 @@
                 </div>
             </div>
             </div>
-              <div class="col-md-3" style="border-left:1px solid;">
+              <div class="col-md-3" style="border-left:1px solid;max-height:600px;overflow:auto;">
                 <div class="todo">
-                    <h4>Navigation <a href="#" class="icon tip" oldtitle="Add task" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-plus"></span></a></h4>
+                    <h5>Navigation</h5>
                     <ul id="treeDemo" class="ztree"></ul>
                 </div>
                 
@@ -268,10 +268,10 @@
             </div>
         </div><!-- End contentwrapper -->
     </div><!-- End #content -->
-
 </div><!-- End #wrapper -->
 
 <script>
+     var zNodes = <?=$treedata?>;
     $(document).ready(function() {
         $(".list_view").on("click", function() {
             Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));

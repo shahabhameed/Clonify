@@ -157,8 +157,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>SCC ID</th>
-                                        <th>Length</th>                        
+                                        <th>FCS ID</th>
+                                        <th>FCS Within Group List</th>                        
+                                        <th>GID</th>
                                         <th>No. Clones</th>
                                     </tr>
                                 </tfoot>                     
@@ -199,7 +200,7 @@
                                         $data = $data ? $data : array();
                                         foreach ($data as $ingroup_id => $fids) {
                                             $counter++;
-                                              $fids = join(",", $fids);
+                                              $fids = join(", ", $fids);
                                             ?>
                                             <tr class="code_view">
                                                 <td><?php echo $counter; ?></td>

@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.regex.Pattern;
 
 import dssd.invoker.adapter.OutputHelper;
 
@@ -107,9 +108,6 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		}
 
 	}
-	
-	
-	
 	
 	@Override
 	public boolean loadDBFromFiles() {
@@ -272,15 +270,9 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			if (!INSERT_SCSINFILE_FRAGMENTS
 					.equalsIgnoreCase("INSERT INTO scsinfile_fragments(scs_infile_id, fid, scc_id, scsinfile_instance_id, scc_instance_id, invocation_id) values ")) {
 				Database.executeTransaction(INSERT_SCSINFILE_FRAGMENTS);
-			}
-			
-//                        Parse_FileClustersXX(invocationId);                        
-//			parse_file_clusters(invocationId);
-//			parse_InDirs_CloneFileStructures(invocationId );
-//			Parse_CrossDirsCloneFileStructuresEx(invocationId);
-//			Parse_InGroupCloneFileStructures(invocationId);
-//			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
-			//sprint04FilesToDB(invocationId);
+			}			                        
+
+                        //sprint04FilesToDB(invocationId);
 			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
 			
@@ -536,6 +528,14 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				Database.executeTransaction(INSERT_MCSCROSSFILE_METHODS);
 			}
 
+                        
+                        Parse_FileClustersXX(invocationId);
+			parse_file_clusters(invocationId);
+			parse_InDirs_CloneFileStructures(invocationId );
+			Parse_CrossDirsCloneFileStructuresEx(invocationId);
+			Parse_InGroupCloneFileStructures(invocationId);
+			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
+                        
 		} catch(Exception e){
 			e.printStackTrace();
 			return false;
@@ -657,6 +657,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		Vector<String>fccs = null;
 		int size = getDirectorySize(invocation_id);
 		int fileSize = 0;
+                Vector<String> fcc_instance_data = getFCC_InstanceData(invocation_id);
 		for (int i = 0; i < size; i++) {
 			line = stdin14.readLine();
 			if (!line.equalsIgnoreCase("")) {
@@ -680,10 +681,19 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					}
 
 					Vector<String> files = null;
+                                        files = new Vector<String>();                               
 					int dId = count0;
 					for (int k = 0; k < cluster_size; k++) {
-						int fccId = Integer.parseInt(fccs.get(k));
-						files = getFCSInDir_Files(invocation_id,dId, fccId);
+						int fccId = Integer.parseInt(fccs.get(k));						
+                                                for (int xx = 0; xx < fcc_instance_data.size() ; xx++){
+                                                   String _obj = fcc_instance_data.get(xx);
+                                                   String[] parts = _obj.split("\\|\\|");
+                                                                                                      
+                                                   if (Integer.parseInt(parts[3]) == dId && Integer.parseInt(parts[2]) == fccId){
+                                                     files.add(parts[0]);
+                                                   }
+                                                }
+                                                
 						if (files != null) {
 							fileSize = files.size();
 							count1 = 0;
@@ -868,6 +878,8 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		int fileSize = -1;
 		Vector<String> fccs = null;
 		int size = getGroupSize(invocation_id);
+                Vector<String> fcc_instance_data = getFCC_InstanceData(invocation_id);
+                
 		for (int i = 0; i < size; i++) {
 			line = stdin17.readLine();
 			if (!line.equalsIgnoreCase("")) {
@@ -892,9 +904,18 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 
 					Vector<String> files = null;
 					gId = count0;
+                                        String _obj = null;
+                                        files = new Vector<String>();
 					for (int k = 0; k < cluster_size; k++) {
-						fccId = Integer.parseInt(fccs.get(k));
-						files = getFCSInGroup_Files(invocation_id,gId, fccId);
+						fccId = Integer.parseInt(fccs.get(k));						
+                                                for (int xx = 0; xx < fcc_instance_data.size() ; xx++){
+                                                   _obj = fcc_instance_data.get(xx);
+                                                   String[] parts = _obj.split("\\|\\|");
+                                                   if (Integer.parseInt(parts[1]) == gId && Integer.parseInt(parts[2]) == fccId){
+                                                     files.add(parts[0]);
+                                                   }
+                                                }
+                                                
 						if (files != null) {
 							fileSize = files.size();
 							count1 = 0;
@@ -1281,7 +1302,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
 			s.execute("use "+databaseName+";");
-			ResultSet results = s.executeQuery("select cmdirectory_id from invocation_files where fid = " + fid + "and invocation_id = "+invocation_id+";");
+			ResultSet results = s.executeQuery("select cmdirectory_id from invocation_files where cmfile_id = " + fid + " and invocation_id = "+invocation_id+";");
 			if (results.next()) {
 				did = results.getInt(1);
 			}
@@ -1318,8 +1339,8 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
 			s.execute("use "+databaseName+";");
-			ResultSet results = s.executeQuery("select invocation_files.group_id "
-					+ " from invocation_files " + " where invocation_files.file_id = " + fid + "and invocation_files.invocation_id = " +invocation_id+ ";");
+			ResultSet results = s.executeQuery("select group_id "
+					+ " from invocation_files " + " where cmfile_id = " + fid + " and invocation_id = " +invocation_id+ ";");
 			if (results.next()) {
 				gid = results.getInt(1);
 			}
@@ -1340,8 +1361,8 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		try {
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
-			s.execute("use "+databaseName+";");
-			ResultSet results = s.executeQuery("select count(*) from file;");
+			s.execute("use "+databaseName+";");			
+                        ResultSet results = s.executeQuery("select count(*) from invocation_files where invocation_id = " + invocation_id + ";");
 			if (results.next()) {
 				size = results.getInt(1);
 			}
@@ -1372,22 +1393,28 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		return size;
 	}
 
-	public Vector<String> getFCSInGroup_Files(int invocation_id,int gid, int fcc_id) {
+	public Vector<String> getFCC_InstanceData(int invocation_id) {
 		Vector<String> list = null;
 		String fid = null;
-
+                String gid = null;
+                String fcc_id = null;
+                String did = null;
+                
+                String Data = null;
 		try {
 			Connection dbConn = Database.openConnection();
 			Statement s = dbConn.createStatement();
 			s.execute("use "+databaseName+";");
-			ResultSet results = s
-					.executeQuery("select distinct fcc_instance.fid from fcc_instance where fcc_instance.gid = " + gid
-							+ " and fcc_instance.invocation_id = " + invocation_id
-							+ " and fcc_instance.fcc_id = " + fcc_id + ";");
+			ResultSet results = s.executeQuery("select distinct fid, gid, did, fcc_id from fcc_instance where invocation_id = " + invocation_id + ";");
 			list = new Vector<String>();
 			while (results.next()) {
 				fid = results.getString("fid");
-				list.add(fid);
+                                gid = results.getString("gid");
+                                fcc_id = results.getString("fcc_id");
+				did = results.getString("did");
+                                
+                                Data = fid + "||" +  gid  + "||" + fcc_id + "||" + did;
+                                list.add(Data);
 			}
 
 			s.close();
@@ -1397,32 +1424,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		}
 
 		return list;
-	}
-	
-	
-	public Vector<String> getFCSInDir_Files(int invocation_id,int did, int fcc_id) {
-		Vector<String> list = null;
-		String fid = null;
-
-		try {
-			Connection dbConn = Database.openConnection();
-			Statement s = dbConn.createStatement();
-			s.execute("use "+databaseName+";");
-			ResultSet results = s.executeQuery("select distinct fcc_instance.fid from fcc_instance where fcc_instance.did = " + did+ " and fcc_instance.fcc_id = " + fcc_id + " and invocation_id=\"" +invocation_id+ "\";");
-			list = new Vector<String>();
-			while (results.next()) {
-				fid = results.getString("fid");
-				list.add(fid);
-			}
-
-			s.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-		}
-
-		return list;
-	}
+	}			
 	
 	
 	private Vector<String> getSCS_Fragments(int cid, int scc_id, int type) {
