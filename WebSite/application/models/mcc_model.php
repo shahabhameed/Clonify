@@ -135,7 +135,8 @@ class MCC_model extends CI_Model {
         $this->db->from('mcs_crossfile tb1');
         $this->db->join('mcscrossfile_mcc tb2', 'tb1.mcs_crossfile_id = tb2.mcs_crossfile_id', 'INNER');
         $this->db->where($where);
-
+		
+		//$query = "SELECT * FROM mcc tb1, mcs_crossfile tb2, mcscrossfile_mcc tb3 WHERE tb1.invocation_id = 71 AND tb1.mcs_crossfile_id = 0 AND tb3.invocation_id = 71 AND tb1.fid = tb3.cmfile_id AND tb3.file_id = tb4.id AND tb4.directory_id = tb5.id AND tb6.id = tb5.repository_id AND tb7.mid = tb8.mid";
         $result = $this->db->get();
         if ($result->num_rows() > 0) {
             return $result->result();
@@ -144,7 +145,7 @@ class MCC_model extends CI_Model {
     }
 
     public function getMCSAcrossFileChildTable($invocationId, $mcs_id) {
-       /* $where = "tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId ";
+     /*   $where = "tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId ";
 
         $this->db->select('*');
         $this->db->from('mcscrossfile_file tb1');
@@ -156,7 +157,7 @@ class MCC_model extends CI_Model {
         $this->db->where($where);
 	*/
 	
-		$query = "SELECT * FROM mcscrossfile_file tb1, invocation_files tb3, repository_file tb4,repository_directory tb5, user_repository tb6, mcscrossfile_methods tb7, method tb8 WHERE tb1.invocation_id = 71 AND tb1.mcs_crossfile_id = 0 AND tb3.invocation_id = 71 AND tb1.fid = tb3.cmfile_id AND tb3.file_id = tb4.id AND tb4.directory_id = tb5.id AND tb6.id = tb5.repository_id AND tb7.mid = tb8.mid";
+		$query = "SELECT * FROM mcscrossfile_file tb1, invocation_files tb3, repository_file tb4,repository_directory tb5, user_repository tb6, mcscrossfile_methods tb7, method tb8 WHERE tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId AND tb1.fid = tb3.cmfile_id AND tb3.file_id = tb4.id AND tb4.directory_id = tb5.id AND tb6.id = tb5.repository_id AND tb7.mid = tb8.mid";
        // $result = $this->db->get();
 	     $result = $this->db->query($query);
         if ($result->num_rows() > 0) {
