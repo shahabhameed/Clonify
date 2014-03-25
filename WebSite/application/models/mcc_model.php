@@ -117,15 +117,16 @@ class MCC_model extends CI_Model {
     }
 
     public function getMCSAcrossFileParentTable($invocationId, $userId) {
-        $where = "tb2.mcc_id in (select mcc_id from mcc where invocation_id = $invocationId)";
+      /*  $where = "tb2.mcc_id in (select mcc_id from mcc where invocation_id = $invocationId)";
 
         $this->db->select('*');
         $this->db->from('mcs_crossfile tb1');
         $this->db->join('mcscrossfile_mcc tb2', 'tb1.mcs_crossfile_id = tb2.mcs_crossfile_id', 'INNER');
         $this->db->where($where);
-		
-		//$query = "SELECT * FROM mcc tb1, mcs_crossfile tb2, mcscrossfile_mcc tb3 WHERE tb1.invocation_id = 71 AND tb1.mcs_crossfile_id = 0 AND tb3.invocation_id = 71 AND tb1.fid = tb3.cmfile_id AND tb3.file_id = tb4.id AND tb4.directory_id = tb5.id AND tb6.id = tb5.repository_id AND tb7.mid = tb8.mid";
-        $result = $this->db->get();
+		*/
+		$query = "SELECT tb2.mcs_crossfile_id, tb2.members, (select GROUP_CONCAT(mcc_id) from mcscrossfile_mcc where invocation_id=$invocationId and mcs_crossfile_id = tb2.mcs_crossfile_id group by mcs_crossfile_id ) mcc_id FROM mcc tb1, mcs_crossfile tb2, mcscrossfile_mcc tb3 WHERE tb1.invocation_id = $invocationId AND tb2.mcs_crossfile_id = tb3.mcs_crossfile_id AND tb1.mcc_id = tb3.mcc_id GROUP BY tb2.mcs_crossfile_id";
+      //  $result = $this->db->get();
+		$result = $this->db->query($query);
         if ($result->num_rows() > 0) {
             return $result->result();
         }
@@ -133,7 +134,7 @@ class MCC_model extends CI_Model {
     }
 
     public function getMCSAcrossFileChildTable($invocationId, $mcs_id) {
-     /*   $where = "tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId ";
+    /*    $where = "tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId GROUP BY tb1.mcs_crossfile_id";
 
         $this->db->select('*');
         $this->db->from('mcscrossfile_file tb1');
@@ -141,13 +142,15 @@ class MCC_model extends CI_Model {
         $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
         $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
         $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
-		//$this->db->join('mcscrossfile_methods AS tb2', 'tb1.mcs_crossfile_id = tb2.mcs_crossfile_id', 'INNER');
+		$this->db->join('mcscrossfile_methods AS tb7', 'tb1.mcs_crossfile_id = tb7.mcs_crossfile_id', 'INNER');
+	//	$this->db->join('method AS tb8', 'tb7.mid = tb8.mid', 'INNER');
         $this->db->where($where);
 	*/
 	
-		$query = "SELECT * FROM mcscrossfile_file tb1, invocation_files tb3, repository_file tb4,repository_directory tb5, user_repository tb6, mcscrossfile_methods tb7, method tb8 WHERE tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId AND tb1.fid = tb3.cmfile_id AND tb3.file_id = tb4.id AND tb4.directory_id = tb5.id AND tb6.id = tb5.repository_id AND tb7.mid = tb8.mid";
-       // $result = $this->db->get();
-	     $result = $this->db->query($query);
+	//	$query = "SELECT * FROM mcscrossfile_file tb1, invocation_files tb3, repository_file tb4,repository_directory tb5, user_repository tb6, mcscrossfile_methods tb7, method tb8 WHERE tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId AND tb1.fid = tb3.cmfile_id AND tb3.file_id = tb4.id AND tb4.directory_id = tb5.id AND tb6.id = tb5.repository_id AND tb7.mid = tb8.mid";
+      //  $result = $this->db->get();
+		$query = "SELECT tb1.mcs_crossfile_id, tb1.fid, tb1.did, tb1.gid,tb4.file_name, tb7.mcc_id, tb5.directory_name,  tb4.directory_id,tb6.repository_name, (select GROUP_CONCAT(mid) from mcscrossfile_methods where  mcs_crossfile_id = tb1.mcs_crossfile_id and fid=tb1.fid ) mid FROM mcscrossfile_file tb1, invocation_files tb3, repository_file tb4,repository_directory tb5, user_repository tb6, mcscrossfile_methods tb7 WHERE tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId AND tb1.fid = tb3.cmfile_id AND tb3.file_id = tb4.id AND tb4.directory_id = tb5.id AND tb6.id = tb5.repository_id GROUP BY tb1.fid";
+	    $result = $this->db->query($query);
         if ($result->num_rows() > 0) {
             return $result->result();
         }

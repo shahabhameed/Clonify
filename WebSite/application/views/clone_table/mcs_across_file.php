@@ -228,7 +228,7 @@
                         ?>
                           <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="$d['endline'];" data-endcol="" data-startcol="" data-startline="$d['startline'];" data-fid="<?php echo $d['fid'];?>" data-scsid= "<?php echo $scs_acrossfile_id;?>" data-clid="" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
                             <td><?php echo $counter;?></td>
-                            <td><?php echo $d['group_id'];?></td>
+                            <td><?php echo $d['gid'];?></td>
                             <td><?php echo $d['directory_id'];?></td>
                             <td><?php echo $d['fid'];?></td>
                             <td><?php echo $d['mid'];?></td>
