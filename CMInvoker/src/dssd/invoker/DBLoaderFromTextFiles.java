@@ -1348,7 +1348,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public int getFileSize(int invocation_id) {
 		int size = -1;
 		try {
-			Statement s = dbConn.getInstance().createStatement();
+			Statement s = Database.getInstance().getDBConn().createStatement();
 			s.execute("use "+databaseName+";");			
                         ResultSet results = s.executeQuery("select count(*) from invocation_files where invocation_id = " + invocation_id + ";");
 			if (results.next()) {

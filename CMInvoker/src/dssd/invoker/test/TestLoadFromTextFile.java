@@ -18,15 +18,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Statement;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
 import junit.framework.TestCase;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.ResultSet;
-import com.mysql.jdbc.Statement;
-
 import dssd.invoker.Constants;
 import dssd.invoker.DBLoaderFromTextFiles;
 import dssd.invoker.Database;
