@@ -190,7 +190,7 @@ class SCC
     if ($data){
       $data = json_decode(json_encode($data), true); // Changing Obj in Array
       foreach($data as &$d){
-        $r = $this->ci->scc_model->getFCSWithinDirectoryStructureIDS($invocationId, $d['fcs_crossdir_id'], $userId);
+        $r = $this->ci->scc_model->getFCSCrossGroupStructureIDS($invocationId, $d['fcs_crossdir_id'], $userId);
         $fcc_ids = array();
         if ($r){
           $temp = json_decode(json_encode($r), true);
@@ -250,7 +250,7 @@ class SCC
       if ($data){
         $data = json_decode(json_encode($data), true);
         foreach($data as $d){
-          $result[$d['directory_id']][] = $d['fid'];
+          $result[$d['fcsindir_instance_id']][] = $d['fid'];
         }                
       }    
     }

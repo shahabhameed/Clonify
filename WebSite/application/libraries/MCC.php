@@ -93,7 +93,7 @@ class MCC {
             $data = json_decode(json_encode($data), true); // Changing Obj in Array
         }
         $result = array();
-
+		//ini_set('memory_limit', '-1');
         foreach ($data as $d) {
             $result[$d['mcs_crossfile_id']]['mcs_crossfile_id'] = $d['mcs_crossfile_id'];
             $result[$d['mcs_crossfile_id']]['members'] = $d['members'];          

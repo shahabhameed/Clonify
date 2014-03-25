@@ -25,3 +25,4 @@ DELETE FROM mcs_crossfile WHERE 1;
 DELETE FROM scscrossmethod_method WHERE 1;
 DELETE FROM scscrossmethod_scc WHERE 1;
 DELETE FROM scs_crossmethod WHERE 1;
+DELETE FROM scc_method WHERE 1;

@@ -17,7 +17,28 @@ public class Database {
 	private static String username;
 	private static String password;
 		
-	public static Connection openConnection() {
+	public static int numOfConnections = 0;
+	
+	private static Database sDatabase;
+	private Connection dbConn; 
+	
+	private Database(){
+		dbConn = openConnection();
+	}
+	
+	public static Database getInstance(){
+		if(sDatabase == null){
+			synchronized(Database.class){
+				if(sDatabase == null){
+					sDatabase = new Database(); 
+				}
+			}
+		}
+		
+		return sDatabase;
+	}
+	
+	private Connection openConnection() {
 		Connection conn = null;
 		try {
 			username = CMProperties.getDatabaseUsername();
@@ -27,6 +48,10 @@ public class Database {
 			String url = "jdbc:mysql://localhost/";
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection(url, username, password);
+		
+			numOfConnections++;
+			System.out.println("\n numOfConnections: " + numOfConnections + "\n");
+			
 		} catch (Exception e) {
 			System.err.println("Cannot connect to database server"
 					+ e.getMessage());
@@ -39,6 +64,10 @@ public class Database {
 		if (conn != null) {
 			try {
 				conn.close();
+				
+				numOfConnections--;
+				System.out.println("\n numOfConnections: " + numOfConnections + "\n");
+
 			} catch (Exception e) { /* ignore close errors */
 				e.printStackTrace();
 				return false;
@@ -53,14 +82,12 @@ public class Database {
 	 * @param fid
 	 * @return
 	 */
-	public static InvokeParameter getInvokeConfig(int uid) {
+	public InvokeParameter getInvokeConfig(int uid) {
 		System.out.println("START getInvokeConfig(int uid)");
 		int id = -1;
 		InvokeParameter invokeParameter = null;
 		try {
-
-			Connection dbConn = openConnection();
-			Statement s = dbConn.createStatement();
+			Statement s = sDatabase.dbConn.createStatement();
 			s.execute("use "+databaseName+";");
 			ResultSet results = s.executeQuery("select id from user_invocations u where u.status  =" + 0 + ";");
 			if (results.next()) {
@@ -92,7 +119,7 @@ public class Database {
 					while (results.next()) {
 						Integer fileId = results.getInt(1);
 						//a very bad way to get groupId. Should be refactored.
-						Statement st = dbConn.createStatement();
+						Statement st = sDatabase.dbConn.createStatement();
 						ResultSet result2 = st.executeQuery(" SELECT group_id from invocation_files where file_id ="+ fileId +" and invocation_id="+ id +";");
 						result2.next();
 						Integer groupId = result2.getInt(1);
@@ -121,7 +148,6 @@ public class Database {
 			}
 			System.out.println("Invoke Config ID: "+id);
 			s.close();
-			closeConnection(dbConn);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -130,18 +156,18 @@ public class Database {
 	}
 
 	/* Execute the database transactions */
-	public static boolean executeTransaction(String sql) {
+	public boolean executeTransaction(String sql) {
 		try {
 			if (sql.indexOf("\"") != -1) {
 				sql = sql.substring(0, sql.length() - 1);
 			}
 			sql = sql + ";";
 
-			Connection dbConn = openConnection();
-			Statement st = dbConn.createStatement();
+			Statement st = sDatabase.dbConn.createStatement();
 			st.execute("use "+databaseName+";");
 			st.execute(sql);
 			st.close();
+			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
@@ -153,9 +179,8 @@ public class Database {
 	}
 	
 	/* Execute the database transactions */
-	public static boolean updateInvocationStatus(Integer iid, Integer astatus) {
+	public boolean updateInvocationStatus(Integer iid, Integer astatus) {
 		try {
-			Connection dbConn = openConnection();
 			Statement s = dbConn.createStatement();
 			s.execute("use "+databaseName+";");
 		
@@ -171,4 +196,7 @@ public class Database {
 		return true;
 	}
 
+	public Connection getDBConn(){
+		return dbConn;
+	}
 }

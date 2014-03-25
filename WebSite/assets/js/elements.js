@@ -246,6 +246,17 @@ $(document).ready(function() {
 		    sticker: false
 		});
 	});
+        $('.updateDataInfo').click(function(){
+		$.pnotify({
+                    type: 'info',
+		    title: 'Info',
+                    text: 'Your database is being updated.',
+		    icon: 'picon icon16 brocco-icon-info white',
+		    opacity: 0.95,
+		    history: false,
+		    sticker: false
+		});
+	});
 
 	//Sticky info
     $('#infoS').click(function(){
@@ -266,7 +277,18 @@ $(document).ready(function() {
 		$.pnotify({
 			type: 'success',
 		    title: 'Regular Success',
-    		text: 'That thing that you were trying to do worked!',
+                    text: 'That thing that you were trying to do worked!',
+		    icon: 'picon icon16 iconic-icon-check-alt white',
+		    opacity: 0.95,
+		    history: false,
+		    sticker: false
+		});
+	});
+        $('.saveSuccess').click(function(){
+		$.pnotify({
+			type: 'success',
+		    title: 'Success',
+                    text: 'Records updated successfully!',
 		    icon: 'picon icon16 iconic-icon-check-alt white',
 		    opacity: 0.95,
 		    history: false,

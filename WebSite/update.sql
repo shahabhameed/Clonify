@@ -487,3 +487,10 @@ CREATE TABLE IF NOT EXISTS `fcs_withingroup_files` (
   `fcsingroup_instance_id` int(11) NOT NULL,
   `fid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 2014-03-25 0 By HAFEEZ
+
+CREATE TABLE IF NOT EXISTS `scc_method` (
+  `scc_id` int(11) NOT NULL,
+  `mid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
