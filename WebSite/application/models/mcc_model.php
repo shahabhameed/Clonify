@@ -155,7 +155,21 @@ class MCC_model extends CI_Model {
     }
 
     public function getMCCBYFile($invocationId, $userId) {
-		$query = "SELECT fid,did,gid,count(*) clones,CONCAT(directory_name,file_name) filename FROM mcc_instance,repository_file f,repository_directory d,	user_repository r where mcc_id in (select mcc_id from mcc where invocation_id=$invocationId) and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=fid and invocation_id=$invocationId) group by fid";
+		$query = "SELECT fid,did,gid,count(*) clones,CONCAT(directory_name,file_name) filename 
+FROM 
+mcc_instance m,
+repository_file f,
+repository_directory d,
+user_repository r,
+invocation_files i 
+where
+m.invocation_id=i.invocation_id and
+i.invocation_id=$invocationId and 
+i.cmfile_id=m.fid and 
+f.id=i.file_id and 
+d.id=f.directory_id and 
+d.repository_id=r.id
+group by i.cmfile_id";
 		$result = $this->db->query($query);
 
         // echo $this->db->last_query();exit;
@@ -186,7 +200,8 @@ class MCC_model extends CI_Model {
 	function getMCCByFileSecondaryTableRows($fid, $invocationId, $user_id) {
 	//$query = "SELECT t1.mcc_id, t1.mid, t2.mname methodname, t2.startline, t2.endline FROM mcc_instance t1, method t2 WHERE fid=$fid and t1.mid=t2.mid and invocation_id=$invocationId";
 	
-	$query = "SELECT t1.mcc_instance_id,t1.mcc_id, t1.mid, t2.mname methodname, t2.startline, t2.endline, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath FROM mcc_instance t1, method t2, repository_file f,repository_directory d,	user_repository r WHERE fid=$fid and t1.mid=t2.mid and t1.invocation_id=$invocationId and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=$fid and invocation_id=$invocationId)";
+	$query = "SELECT t1.mcc_instance_id,t1.mcc_id, t1.mid, t2.mname methodname, t2.startline, t2.endline, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath FROM mcc_instance t1, method t2, repository_file f,repository_directory d,	user_repository r WHERE fid=$fid and t1.mid=t2.mid and t1.invocation_id=t2.invocation_id and t1.invocation_id=$invocationId and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=$fid and invocation_id=$invocationId)
+ORDER BY `t1`.`mcc_id` ASC";
         $result = $this->db->query($query);
         // echo $this->db->last_query();exit;
         if ($result->num_rows() > 0) {
