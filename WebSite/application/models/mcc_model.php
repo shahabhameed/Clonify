@@ -196,7 +196,7 @@ class MCC_model extends CI_Model {
     }
 	
     public function getMethodByFileSecondaryData($fid, $invocationId, $userId) {
-		$query = "SELECT t2.mid, t2.startline, t2.endline, t2.mname, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath FROM method_file t1, method t2, repository_file f,repository_directory d, user_repository r WHERE t1.mid=t2.mid and t1.fid = $fid and t1.invocation_id=$invocationId and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=$fid and invocation_id=$invocationId) group by t2.mid";
+		$query = "SELECT t2.mid, t2.startline, t2.endline, t2.mname, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath FROM method_file t1, method t2, repository_file f,repository_directory d, user_repository r WHERE t1.mid=t2.mid and t1.invocation_id=t2.invocation_id and t1.fid = $fid and t1.invocation_id=$invocationId and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=$fid and invocation_id=$invocationId) group by t2.mid";
 		$result = $this->db->query($query);
 
         // echo $this->db->last_query();exit;
@@ -207,7 +207,7 @@ class MCC_model extends CI_Model {
     }
 	
 	public function getMethodByFilePrimaryData($invocationId, $userId) {
-		$query = "SELECT t1.group_id gid, t1.cmfile_id fid, t1.cmdirectory_id did, CONCAT(directory_name,file_name) filename, count(t2.fid) methods FROM repository_file f,repository_directory d, user_repository r, invocation_files t1 left join method_file t2 on t1.cmfile_id=t2.fid WHERE d.id=f.directory_id and d.repository_id=r.id and f.id = t1.file_id and t1.invocation_id=$invocationId group by t1.cmfile_id having count(t2.fid)>0";
+		$query = "SELECT t1.group_id gid, t1.cmfile_id fid, t1.cmdirectory_id did, CONCAT(directory_name,file_name) filename, count(t2.mid) methods FROM repository_file f,repository_directory d, user_repository r, invocation_files t1 inner join method_file t2 on t1.cmfile_id=t2.fid and t1.invocation_id=t2.invocation_id WHERE d.id=f.directory_id and d.repository_id=r.id and f.id = t1.file_id and t2.invocation_id=$invocationId group by t1.cmfile_id";
 		$result = $this->db->query($query);
 
         // echo $this->db->last_query();exit;
