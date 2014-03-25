@@ -293,7 +293,7 @@ class SCC_model extends CI_Model {
     public function getSCSAcrossFileChildTable($invocationId, $scs_id) {
         
         
-        $query ="select tb1.scs_crossfile_id,tb1.fid,tb1.tc,tb1.pc,tb2.startline,tb2.startcol,tb2.endline,tb2.endcol,tb2.invocation_id,tb3.group_id,tb4.file_name,tb5.directory_name
+        $query ="select tb1.scs_crossfile_id,tb1.fid,tb1.tc,tb1.pc,tb2.startline,tb2.startcol,tb2.endline,tb2.endcol,tb2.invocation_id,tb3.group_id,tb4.file_name,tb5.directory_name,tb6.repository_name
                 from 
                 scscrossfile_file as tb1 
                 inner join 
@@ -304,6 +304,8 @@ class SCC_model extends CI_Model {
                 repository_file as tb4 on tb3.file_id = tb4.id
                 inner join 
                 repository_directory as tb5 on tb4.directory_id = tb5.id
+				inner join
+				user_repository AS tb6 on tb6.id = tb5.repository_id
                 where tb1.invocation_id=$invocationId and scs_crossfile_id=$scs_id
                 group by tb1.fid";
                 
