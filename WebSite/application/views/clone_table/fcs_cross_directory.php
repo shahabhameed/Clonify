@@ -31,7 +31,7 @@
                 </ul>                   
             </div>
 
-            <!-- Modal -->
+              <!-- Modal 1-->
             <div class="modal fade" id="qtable1" tabindex="-1" role="dialog" aria-labelledby="Table 1 Query" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -43,11 +43,11 @@
 
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h4>Length</h4>
+                                    <u><h4>FCS ID</h4></u>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-10" id="sccrangefilter">
+                                <div class="col-md-4" id="fcsidfilter">
                                 </div>
                             </div>
                             <br>
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4" id="sccnumberfilter">
+                                <div class="col-md-4" id="noofclones">
                                 </div>
                             </div>
                             <br>
@@ -74,7 +74,8 @@
                 </div>
             </div>
 
-            <!-- Modal -->
+
+            <!-- Modal 2 -->
             <div class="modal fade" id="qtable2" tabindex="-1" role="dialog" aria-labelledby="Table 2 Query" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -85,25 +86,9 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <u><h4>GID</h4></u>
+                                    <u><h4>Clone Id</h4></u>
                                 </div>
-                                <div class="col-md-4" id="gidnumberfilter">
-                                </div>
-                            </div>
-                            <br class="clear_all"/>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <u><h4>DID</h4></u>
-                                </div>
-                                <div class="col-md-4" id="didnumberfilter">
-                                </div>
-                            </div>
-                            <br class="clear_all"/>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <u><h4>FID</h4></u>
-                                </div>
-                                <div class="col-md-4" id="fidnumberfilter">
+                                <div class="col-md-4" id="cloneId">
                                 </div>
                             </div>
                         </div>
@@ -128,7 +113,7 @@
 
                         </div>
                         <div class="panel-body noPad clearfix">
-                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable1 display table table-bordered" width="100%">
+                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTablefcs display table table-bordered" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
