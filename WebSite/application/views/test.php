@@ -175,6 +175,7 @@
                                 <!--
                                 <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack()"> Back </button>
                                 <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="changeText();SelectOnSubmit()" id="submitButton"> Next</button>
+                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="changeText();SelectOnSubmit()" id="submitButton"> Next</button>
                                 -->
 
                                 <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
