@@ -272,14 +272,6 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				Database.getInstance().executeTransaction(INSERT_SCSINFILE_FRAGMENTS);
 			}
 
-                        Parse_FileClustersXX(invocationId);
-			parse_file_clusters(invocationId);
-			parse_InDirs_CloneFileStructures(invocationId );
-			Parse_CrossDirsCloneFileStructuresEx(invocationId);
-			Parse_InGroupCloneFileStructures(invocationId);
-			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
-                        
-			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
 			
 			File file6 = new File(filePath);
@@ -440,13 +432,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 									.parseDouble(mTk), Double
 									.parseDouble(mCoverage), invocationId);
 
-							/*
-						Commented since Team1 accidentally deleted this during merging issues
-						insertMCC_Instance(i, mcc_id,
-								Integer.parseInt(mid), Double
-										.parseDouble(mTk), Double
-										.parseDouble(mCoverage), invocationId);
-							 */
+							
 						}
 						atc = atc / mSup;
 						apc = apc / mSup;
@@ -570,6 +556,16 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					Database.getInstance().executeTransaction(INSERT_MCSCROSSFILE_METHODS);
 				}
 			}
+                        
+                        parse_file_clusters(invocationId);
+                        
+                        Parse_FileClustersXX(invocationId);
+                        Parse_InGroupCloneFileStructures(invocationId);
+                        
+                        	
+			parse_InDirs_CloneFileStructures(invocationId);
+			Parse_CrossDirsCloneFileStructuresEx(invocationId);			
+			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
 
 		} catch(Exception e){
 			e.printStackTrace();
@@ -1577,7 +1573,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	
 	public void insertFCSCrossGroup_Files(int invocation_id,int fcs_crossgroup_id, int gid,
 			int fcc_id, int fid) {
-		INSERT_FCSCROSSGROUP_FILES += "( \"" + invocation_id + "\"+\"" + fcs_crossgroup_id + "\" , \""
+		INSERT_FCSCROSSGROUP_FILES += "( \"" + invocation_id + "\",\"" + fcs_crossgroup_id + "\" , \""
 				+ fcc_id + "\" , \"" + gid + "\" , \"" + fid + "\" ),";
 	}
 
