@@ -950,7 +950,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
                                                 for (int xx = 0; xx < fcc_instance_data.size() ; xx++){
                                                    _obj = fcc_instance_data.get(xx);
                                                    String[] parts = _obj.split("\\|\\|");
-                                                   if (Integer.parseInt(parts[1]) == gId && Integer.parseInt(parts[2]) == fccId){
+                                                   if (Integer.parseInt(parts[1]) == (gId - 1) && Integer.parseInt(parts[2]) == fccId){
                                                      files.add(parts[0]);
                                                    }
                                                 }
