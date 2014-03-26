@@ -168,18 +168,18 @@
 
                     <div class="panel-body noPad clearfix" id="wizard-body">
 
-                        <form id="wizard" name="wizard" class="form-horizontal " role="form" method="POST" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert();">
+                        <form id="wizard" name="wizard" class="form-horizontal " role="form" method="POST" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/invoke/invoke_init"  onsubmit="alert()">
                             <div class="msg"></div>
                             <div class="wizard-actions">
 
                                 <!--
                                 <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack()"> Back </button>
                                 <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="changeText();SelectOnSubmit()" id="submitButton"> Next</button>
+                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="changeText();SelectOnSubmit()" id="submitButton"> Next</button>
                                 -->
 
                                 <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
-                                <input type="submit" formmethod="POST" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submit"   onclick="SelectOnSubmit();
-                                        loadResults()"/>
+                                <input type="submit" formmethod="POST" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submit"   onclick="SelectOnSubmit(); loadResults()"/>
 
                             </div><!-- End .form-group  -->
 
@@ -303,7 +303,7 @@
                                                                                 <div class="col-lg-4">
                                                                                     <div class="input-group">
                                                                                         <input id="min_fcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_fcc_percent" type="text" value="30" min="0"  max="100" maxlength="3" style="width:50px">
-                                                                                        
+
 
                                                                                     </div>
 
@@ -382,7 +382,7 @@
                                                                         <div class="col-lg-8">
                                                                             <textarea rows="7" class="form-control col-lg-8 " name="iComment" id="iComment" placeholder="Enter your comments" ></textarea>
                                                                             <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
-                                                                            
+
                                                                         </div>
                                                                     </div><!-- End .form-group  -->
 
@@ -414,8 +414,6 @@
 
 
                             </div>
-
-
                             <div class="step" id="code-groups"><span class="step-info" data-num="2" data-text="Invocation Files"></span>
 
                                 <div class="col-lg-12">

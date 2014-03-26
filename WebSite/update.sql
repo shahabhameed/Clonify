@@ -494,3 +494,6 @@ CREATE TABLE IF NOT EXISTS `scc_method` (
   `scc_id` int(11) NOT NULL,
   `mid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 2014-03-25 0 By UMER
+ALTER TABLE  `scc_method` ADD  `invocation_id` INT NOT NULL ;
