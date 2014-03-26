@@ -755,14 +755,11 @@ Clonify.FCS = {
 
 		}).columnFilter({
                          aoColumns: [
-                         			 null,
-                                     { sSelector: "#gidnumberfilter",type: "number" },
-                                     { sSelector: "#didnumberfilter",type: "number" },
-                                     { sSelector: "#fidnumberfilter",type: "number" },
-                                     null,
+                               null,
+                                     { sSelector: "#cloneId",type: "number" },
                                      null
                                      ]
-                		});
+                    });
 		$('.dataTables_length select').uniform();
 		$('.dataTables_paginate > ul').addClass('pagination');
 		$('.dataTables_filter>label>input').addClass('form-control');
@@ -794,15 +791,11 @@ Clonify.FCS = {
 			}
 		}).columnFilter({
                          aoColumns: [
-                         			 null,
-                                     { sSelector: "#gidnumberfilter",type: "number" },
-                                     { sSelector: "#didnumberfilter",type: "number" },
-                                     { sSelector: "#fidnumberfilter",type: "number" },
-                                     { sSelector: "#tcnumberfilter",type: "number" },
-                                     { sSelector: "#pcnumberfilter",type: "number" },
+                               null,
+                                     { sSelector: "#cloneId",type: "number" },
                                      null
                                      ]
-                		});
+                    });;
 		$('.dataTables_length select').uniform();
 		$('.dataTables_paginate > ul').addClass('pagination');
 		$('.dataTables_filter>label>input').addClass('form-control');
@@ -837,10 +830,7 @@ Clonify.FCS = {
 		}).columnFilter({
                          aoColumns: [
                          			 null,
-                                     { sSelector: "#cidnumberfilter",type: "number" },
-                                     { sSelector: "#scsidnumberfilter",type: "number" },
-                                     { sSelector: "#scsinumberfilter",type: "number" },
-                                     { sSelector: "#scsfidnumberfilter",type: "number" },
+                                     { sSelector: "#cloneId",type: "number" },
                                      null
                                      ]
                 		});
@@ -877,14 +867,11 @@ Clonify.FCS = {
 
 		}).columnFilter({
                          aoColumns: [
-                         			 null,
-                                     { sSelector: "#cidnumberfilter",type: "number" },
-                                     { sSelector: "#scsidnumberfilter",type: "number" },
-                                     { sSelector: "#scsinumberfilter",type: "number" },
-                                     { sSelector: "#scsfidnumberfilter",type: "number" },
+                               null,
+                                     { sSelector: "#cloneId",type: "number" },
                                      null
                                      ]
-                		});
+                    });;
 		$('.dataTables_length select').uniform();
 		$('.dataTables_paginate > ul').addClass('pagination');
 		$('.dataTables_filter>label>input').addClass('form-control');

@@ -12,6 +12,7 @@
       $this->load->library('scc');
       $this->load->library('mcc');
       $this->load->library('common');
+      $this->load->helper('tree');
       if (!$this->tank_auth->is_logged_in()) {         // Not logged in
         redirect('/auth/login/');
       }
@@ -139,7 +140,7 @@
       }
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
-      
+      $viewData['treedata'] = create_tree($invocationId);
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
@@ -161,7 +162,7 @@
       }
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
-      
+      $viewData['treedata'] = create_tree($invocationId);
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
@@ -186,6 +187,7 @@
       
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
+      $viewData['treedata'] = create_tree($invocationId);
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/fcs_within_directory.php', $viewData);
       $this->load->view('partials/main_footer');
@@ -205,7 +207,7 @@
       }
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
-      
+      $viewData['treedata'] = create_tree($invocationId);
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');

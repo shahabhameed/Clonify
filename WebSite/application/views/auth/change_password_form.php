@@ -51,7 +51,12 @@ $confirm_new_password = array(
             </div>          
             <div class="form-group">
               <div class="col-lg-12 clearfix form-actions">
-                <a href="<?php echo site_url('auth/login');?>" class="btn btn-danger center" style="margin-bottom:10px;"> <span class="fa fa-times white"> Cancel</a>
+                <a href="<?php echo site_url('auth/login');?>" > 
+                    <button type="submit" class="btn btn-danger center" id="loginBtn" style="margin-bottom:10px;">
+                        <span class="fa fa-times white">
+                        </span> Cancel
+                    </button>
+                </a>
                 <button type="submit" class="btn btn-info center" id="loginBtn"><span class="fa fa-sign-in white"></span> Change Password</button>                
                </div>
             </div>

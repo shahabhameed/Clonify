@@ -272,6 +272,13 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				Database.getInstance().executeTransaction(INSERT_SCSINFILE_FRAGMENTS);
 			}
 
+                        Parse_FileClustersXX(invocationId);
+			parse_file_clusters(invocationId);
+			parse_InDirs_CloneFileStructures(invocationId );
+			Parse_CrossDirsCloneFileStructuresEx(invocationId);
+			Parse_InGroupCloneFileStructures(invocationId);
+			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
+                        
 			
 			filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.METHOD_INFO_FILE_NAME + Constants.CM_TEXT_FILE_EXTENSION;
 			
@@ -564,14 +571,6 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				}
 			}
 
-                        
-                        Parse_FileClustersXX(invocationId);
-			parse_file_clusters(invocationId);
-			parse_InDirs_CloneFileStructures(invocationId );
-			Parse_CrossDirsCloneFileStructuresEx(invocationId);
-			Parse_InGroupCloneFileStructures(invocationId);
-			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
-                        
 		} catch(Exception e){
 			e.printStackTrace();
 			return false;

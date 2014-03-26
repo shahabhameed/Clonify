@@ -264,6 +264,7 @@
               <div class="panel panel-default gradient">
                 <div class="panel-heading">
                   <h4><span>Code Window</span></h4>
+                  <a href="#"  class="minimize" style="display: inline;">Minimize</a>
                 </div>
                 <div class="panel-body noPad clearfix">
                   <div class="">

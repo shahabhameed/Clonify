@@ -31,33 +31,33 @@
                 </ul>                   
             </div>
 
-            <!-- Modal -->
+            <!-- Modal 1-->
             <div class="modal fade" id="qtable1" tabindex="-1" role="dialog" aria-labelledby="Table 1 Query" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Select * From SCC Where</h4>
+                            <h4 class="modal-title" id="myModalLabel">Select * From FCS Within Directory Where</h4>
                         </div>
                         <div class="modal-body">
 
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h4>Length</h4>
+                                    <u><h4>FCS ID</h4></u>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-10" id="sccrangefilter">
+                                <div class="col-md-4" id="fcsidfilter">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <u><h4>No.Colones</h4></u>
+                                    <u><h4>No. Of Instances</h4></u>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4" id="sccnumberfilter">
+                                <div class="col-md-4" id="noofclones">
                                 </div>
                             </div>
                             <br>
@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <!-- Modal -->
+            <!-- Modal2 -->
             <div class="modal fade" id="qtable2" tabindex="-1" role="dialog" aria-labelledby="Table 2 Query" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -85,25 +85,9 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <u><h4>GID</h4></u>
+                                    <u><h4>Clone Id</h4></u>
                                 </div>
-                                <div class="col-md-4" id="gidnumberfilter">
-                                </div>
-                            </div>
-                            <br class="clear_all"/>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <u><h4>DID</h4></u>
-                                </div>
-                                <div class="col-md-4" id="didnumberfilter">
-                                </div>
-                            </div>
-                            <br class="clear_all"/>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <u><h4>FID</h4></u>
-                                </div>
-                                <div class="col-md-4" id="fidnumberfilter">
+                                <div class="col-md-4" id="cloneId">
                                 </div>
                             </div>
                         </div>
@@ -114,7 +98,8 @@
                 </div>
             </div>
 
-
+            <div class="row-fluid">
+            <div class="col-md-9">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default gradient">
@@ -127,14 +112,14 @@
 
                         </div>
                         <div class="panel-body noPad clearfix">
-                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable1 display table table-bordered" width="100%">
+                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTablefcs display table table-bordered" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>FCS ID</th>
                                         <th>FCS Within Directory List</th>                        
-                                        <th>DID</th>
-                                        <th>No. Clones</th>
+                                        <th>Directory Id</th>
+                                        <th>No. Of Instances</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -156,13 +141,11 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                    <tr>
-                                        <th>No</th>
+                                       <th>No</th>
                                         <th>FCS ID</th>
                                         <th>FCS Within Directory List</th>                        
-                                        <th>DID</th>
-                                        <th>No. Clones</th>
-                                    </tr>
+                                        <th>Directory Id</th>
+                                        <th>No. Of Instances</th>
                                     </tr>
                                 </tfoot>                     
                             </table>
@@ -202,9 +185,9 @@
                                         $data = $data ? $data : array();
                                         foreach ($data as $ingroup_id => $fids) {
                                             $counter++;
-                                              $fids = join(", ", $fids);
+                                              $fids = join(",", $fids);
                                             ?>
-                                            <tr class="code_view">
+                                            <tr class="code_view" data-files="<?php echo $fids?>">
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $ingroup_id; ?></td>
                                                 <td><?php echo $fids; ?></td>
@@ -258,12 +241,21 @@
                     </div>
                 </div>
             </div>
+            </div>
+              <div class="col-md-3" style="border-left:1px solid;max-height:600px;overflow-y:scroll;overflow-x:hidden;">
+                <div class="todo">
+                    <h5>Navigation</h5>
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+                
+              </div>
+            </div>
         </div><!-- End contentwrapper -->
     </div><!-- End #content -->
-
 </div><!-- End #wrapper -->
 
 <script>
+     var zNodes = <?=$treedata?>;
     $(document).ready(function() {
         $(".list_view").on("click", function() {
             Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));

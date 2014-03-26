@@ -28,7 +28,9 @@
     <script type="text/javascript" src="<?=asset_url('plugins/misc/search/tipuesearch.js');?>"></script>
      <script type="text/javascript" src="<?=asset_url('plugins/misc/pnotify/jquery.pnotify.min.js');?>"></script>
      <script type="text/javascript" src="<?=asset_url('plugins/tree/js/jquery.ztree.core-3.5.js');?>"></script>
-     <script type="text/javascript" src="<?=asset_url('plugins/tree/js/custom.js');?>"></script>
+     <?if(isset($treedata)){?>
+        <script type="text/javascript" src="<?=asset_url('plugins/tree/js/custom.js');?>"></script>
+     <?}?>
     
     <script type="text/javascript" src="<?=asset_url('plugins/tables/dataTables/jquery.dataTables.min.js');?>"></script>
     <script type="text/javascript" src="<?=asset_url('plugins/tables/dataTables/jquery.dataTables.columnFilter.js');?>"></script>

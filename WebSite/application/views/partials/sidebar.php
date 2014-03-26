@@ -62,7 +62,7 @@
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Within Directory
                                 </a>
                                 <a href="<?php echo site_url('home/SingleCloneStructureFCSCrossDirectory') . "/" . $invocationId; ?>">
-                                    <span class="icon16 fa fa fa-caret-right"></span>FCS Cross Directory
+                                    <span class="icon16 fa fa fa-caret-right"></span>FCS Across Directory
                                 </a>
                                 <a href="<?php echo site_url('home/MethodCloneClass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>MCC
