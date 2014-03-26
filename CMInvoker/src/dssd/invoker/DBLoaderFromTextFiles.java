@@ -1372,6 +1372,9 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					+ " from invocation_files " + " where cmfile_id = " + fid + " and invocation_id = " +invocation_id+ ";");
 			if (results.next()) {
 				gid = results.getInt(1);
+                                if (gid > 0){
+                                  gid = gid - 1;
+                                } 
 			}
 			s.close();
 		} catch (Exception e) {
