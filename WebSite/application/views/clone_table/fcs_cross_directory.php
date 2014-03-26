@@ -186,12 +186,13 @@
                                         $data = $data ? $data : array();
                                         foreach ($data as $ingroup_id => $fids) {
                                             $counter++;
-                                              $fids = join(",", $fids);
+                                              $new_fids = join(", ", $fids);
+                                              $temp_filds = join(",", $fids);
                                             ?>
-                                             <tr class="code_view" data-files="<?php echo $fids?>">
+                                            <tr class="code_view" data-files="<?php echo $temp_filds; ?>">
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $ingroup_id; ?></td>
-                                                <td><?php echo $fids; ?></td>
+                                                <td><?php echo $new_fids; ?></td>
                                             </tr>
                                           <?php } ?>
                                     </tbody> 
