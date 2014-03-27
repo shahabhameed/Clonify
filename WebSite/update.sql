@@ -500,3 +500,6 @@ ALTER TABLE  `scc_method` ADD  `invocation_id` INT NOT NULL ;
 
 -- 2014-03-27 0 By UMER
 ALTER TABLE  `user_invocations` ADD  `repository_version` INT NOT NULL AFTER  `invocation_name` ;
+
+-- 2014-03-27 0 By ABDULLAH
+ALTER TABLE  `user_repository` ADD  `version` INT NOT NULL ;
