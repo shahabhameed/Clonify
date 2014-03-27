@@ -28,7 +28,7 @@
                 <?php } ?>
 
                 <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Load Results</a></li>
-                
+                 <li><a href="<?php echo site_url('general/tree_map/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Tree Map</a></li>
                 
                 
                 <?php if (isset($showCloneView) && $invocationId) { ?>

@@ -19,10 +19,10 @@ class General extends CI_Controller {
 	    $this->load->view('partials/main_footer');
           }
           
-          public function wajj_khizar(){
+          public function tree_map(){
             $this->load->view('partials/main_header');
-            $this->load->view('partials/sidebar');
-	    $this->load->view('wajj_khizar');
+     
+	    $this->load->view('TreeMaps/TreeMap');
 	    $this->load->view('partials/main_footer');
           }
 }
