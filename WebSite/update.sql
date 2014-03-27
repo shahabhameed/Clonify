@@ -497,3 +497,6 @@ CREATE TABLE IF NOT EXISTS `scc_method` (
 
 -- 2014-03-25 0 By UMER
 ALTER TABLE  `scc_method` ADD  `invocation_id` INT NOT NULL ;
+
+-- 2014-03-27 0 By UMER
+ALTER TABLE  `user_invocations` ADD  `repository_version` INT NOT NULL AFTER  `invocation_name` ;

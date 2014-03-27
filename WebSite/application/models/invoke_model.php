@@ -219,7 +219,8 @@ class Invoke_model extends CI_Model
 	function get_all_user_files()
 	{
 		$user_id = $this->session->userdata('user_id');
-		$query = "select f.id, CONCAT(repository_name,directory_name,file_name) as fname from repository_file f,repository_directory d,user_repository r where d.repository_id=r.id and f.directory_id=d.id and r.user_id = '$user_id' order by fname";
+		//$query = "select f.id, CONCAT(repository_name,directory_name,file_name) as fname from repository_file f,repository_directory d,user_repository r where d.repository_id=r.id and f.directory_id=d.id and r.user_id = '$user_id' order by fname";
+		$query = "select f.id, CONCAT(directory_name,file_name) as fname from repository_file f,repository_directory d,user_repository r where d.repository_id=r.id and f.directory_id=d.id and r.user_id = '$user_id' order by fname";
 		$query_lang = " and f.file_name like '%.java'";
 		//echo $query;
 		$results = $this->db->query($query);

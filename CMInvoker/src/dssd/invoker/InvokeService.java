@@ -97,12 +97,13 @@ public class InvokeService {
 							outputStream.join();
 						}
 					}
-					//Update status to Finished
-					Database.getInstance().updateInvocationStatus(sInvokeParameter.getInvocation_id(), 2);
 					
 					OutputHelper outputHelper = new DBLoaderFromTextFiles();
 					outputHelper.setData(sInvokeParameter.getInvocation_id());
 					outputHelper.loadDBFromFiles();
+					
+					//Update status to Finished
+					Database.getInstance().updateInvocationStatus(sInvokeParameter.getInvocation_id(), 2);
 				}
 				else
 				{
