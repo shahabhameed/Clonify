@@ -516,7 +516,7 @@
 
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading"> 
-                                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Equal Tokens</span></h4>
+                                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Suppressed Tokens</span></h4>
                                                         <a href="#" class="minimize">Minimize</a>
                                                     </div>
                                                     <div class="panel-body">
@@ -526,7 +526,7 @@
 
                                                                 <select multiple="multiple" id="suppresed" name="suppresed[]" class="form-control" style="height:300px;">>
                                                                     <?php foreach ($tokens as $token) { ?>
-                                                                        <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " - " . $token->token_name ?></option>
+                                                                        <option value="<?php echo $token->token_id ?>"><?php echo /*$token->token_id . " - " .*/ $token->token_name ?></option>
                                                                     <?php } ?>
                                                                 </select>
                                                                 <br/>
@@ -569,7 +569,7 @@
                                                             <div class="col-lg-12">
                                                                 <select multiple="multiple" id="suppresed2" name="suppresed2[]" class=" form-control" style="height:300px; ">>
                                                                     <?php foreach ($prev_sup_tokens as $prev_sup_token) { ?>
-                                                                        <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo $prev_sup_token->token_id . " - " . $prev_sup_token->token_name ?></option>
+                                                                        <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo /*$prev_sup_token->token_id . " - " .*/ $prev_sup_token->token_name ?></option>
                                                                     <?php } ?>
                                                                 </select>													
                                                             </div>
@@ -612,7 +612,7 @@
 
                                                                     <select multiple="multiple" id="equal" name="equal[]" class="multiple form-control" style="height:300px; ">
                                                                         <?php foreach ($alltokens as $token) { ?>
-                                                                            <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " = " . $token->token_name ?></option>
+                                                                            <option value="<?php echo $token->token_id ?>"><?php echo /*$token->token_id . " = " .*/ $token->token_name ?></option>
                                                                         <?php } ?>
                                                                     </select>
                                                                     <br/>
