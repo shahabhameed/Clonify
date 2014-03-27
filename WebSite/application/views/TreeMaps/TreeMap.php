@@ -57,7 +57,7 @@
 
                                                             <div class="panel-body1">
                                                                 <div class="form-group">
-                                                                    <div id="treemap" class="col-lg-12 "></div>
+                                                                    <div id="treemap" align="center" class="marginL20 col-lg-12 "></div>
                                                                 </div>
                                                             </div><!-- End .panel body -->
                                                         </div>
@@ -230,7 +230,7 @@
             }
         ];
         $('#treemap').jqxTreeMap({
-            width: 1300,
+            width: 800,
             height: 800,
             source: data,
             colorRange: 50,
