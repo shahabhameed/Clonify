@@ -22,8 +22,12 @@ class Invoke extends CI_Controller
 		$user_name = $this->tank_auth->get_username();
 		$this->session->set_userdata(array('user_name'=>$user_name));
 	
-		$this->session->set_userdata(array('scc_min_sim'=>'','method_analysis'=>'','grouping_choice'=>'','files'=>'','language'=>'','supTokens'=>'','eqTokens'=>''));
-		$this->session->set_userdata(array('language'=>'1'));
+	
+		$asd = $this->session->userdata('language');
+		if(!isset($asd))
+			$this->session->set_userdata(array('language'=>'1'));
+	
+		$this->session->set_userdata(array('scc_min_sim'=>'','method_analysis'=>'','grouping_choice'=>'','files'=>'','supTokens'=>'','eqTokens'=>''));		
 		
 		$data['usrfiles']=$this->invoke_model->get_all_user_files();
 		$data['languages']=$this->invoke_model->get_all_languages();
@@ -52,6 +56,13 @@ class Invoke extends CI_Controller
 		//$data['tokens']=$this->invoke_model->get_all_language_tokens();
 		//$this->open_view('dashboard',$data);//loading success view
 	}
+	
+	function setSelectedLanguage($language)
+	{
+		$this->session->set_userdata(array('language'=>$language));
+		//$this->index();
+	}
+	
 	function test(){
             
 		$data['usrfiles']=$this->invoke_model->get_all_user_files();

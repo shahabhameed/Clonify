@@ -4,6 +4,28 @@
 <script type="text/javascript">
 
 
+	function onLanguageSelect(){
+		document.getElementById("submit").disabled=true;
+		var lang_list = document.getElementById("language");
+		
+		var sel_id = lang_list.selectedIndex;
+		
+		var lang_id = lang_list.options[sel_id].value;
+		var lang_txt = lang_list.options[sel_id].text;
+		//alert("lang_id: " + lang_id + lang_txt);
+		
+		$.ajax({
+			url:"<?php echo base_url();?>index.php/invoke/setSelectedLanguage/"+lang_id,
+			success:function(result){
+				//alert("result: " + result);
+				location.reload();
+			},
+			error:function(xhr){
+			  alert("An error occured: " + xhr.status + " " + xhr.statusText);
+			}
+		});
+	}
+
     function hideWizard()
     {
         var button = document.getElementById("submitButton");
@@ -348,7 +370,7 @@
                                                                     <div class="form-group">
                                                                         <label class="col-lg-3 control-label" >Language:</label>
                                                                         <div class="col-lg-6">
-                                                                            <select  name="language" id="language" class="nostyle form-control col-lg-2" style="width:auto">
+                                                                            <select  name="language" id="language" class="nostyle form-control col-lg-2" style="width:auto" onchange="onLanguageSelect()">
                                                                                 <option></option>
                                                                                 <?php foreach ($languages as $language) { ?>
                                                                                     <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option><?php } ?>
