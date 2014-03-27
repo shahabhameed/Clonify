@@ -18,25 +18,7 @@ class SCC_model extends CI_Model {
         $this->repository_directory_table = 'repository_directory';
     }
 
-    function getAllSCCSecondaryTableRows($scc_id, $invocationId, $user_id) {
-        $where = "tb1.invocation_id = $invocationId and tb1.scc_id= $scc_id and tb21.invocation_id = $invocationId";
-
-        $this->db->select('*');
-        $this->db->from('scc_instance AS tb1');
-        $this->db->join('invocation_files AS tb21', 'tb1.fid = tb21.cmfile_id', 'INNER');
-        $this->db->join('repository_file AS tb2', 'tb21.file_id = tb2.id', 'INNER');
-        $this->db->join('repository_directory AS tb3', 'tb2.directory_id = tb3.id', 'INNER');
-        $this->db->join('user_repository AS tb4', 'tb4.id = tb3.repository_id', 'INNER');
-
-        $this->db->where($where);
-        $result = $this->db->get();
-        // echo $this->db->last_query();exit;
-        if ($result->num_rows() > 0) {
-            return $result->result();
-        }
-        return NULL;
-    }
-
+  
     function getAllFCSWithinGroupSecondaryTableRows($fcs_ingroup_id, $fcc_ids, $invocationId, $user_id) {
         $where = "invocation_id = $invocationId and fcs_ingroup_id= $fcs_ingroup_id and fcc_id IN ($fcc_ids) and invocation_id = $invocationId";
         $this->db->select('*');
@@ -195,6 +177,25 @@ class SCC_model extends CI_Model {
         }
         return NULL;
     }
+    
+    public function getAllSCCSecondaryTableRows($scc_id, $invocationId, $user_id) {
+        $where = "tb1.invocation_id = $invocationId and tb1.scc_id= $scc_id and tb21.invocation_id = $invocationId";
+
+        $this->db->select('*');
+        $this->db->from('scc_instance AS tb1');
+        $this->db->join('invocation_files AS tb21', 'tb1.fid = tb21.cmfile_id', 'INNER');
+        $this->db->join('repository_file AS tb2', 'tb21.file_id = tb2.id', 'INNER');
+        $this->db->join('repository_directory AS tb3', 'tb2.directory_id = tb3.id', 'INNER');
+        $this->db->join('user_repository AS tb4', 'tb4.id = tb3.repository_id', 'INNER');
+
+        $this->db->where($where);
+        $result = $this->db->get();
+        // echo $this->db->last_query();exit;
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return NULL;
+    }
 
     public function getAllSCSWithInFile($invocationId, $userId) {
         $where = "tb1.invocation_id = $invocationId AND tb2.invocation_id = $invocationId AND tb3.invocation_id=$invocationId";
@@ -261,27 +262,24 @@ class SCC_model extends CI_Model {
         return array();
     }
 
-    public function getSCSAcrossFileParentTable($invocationId, $userId) {
-        $where = "tb1.invocation_id = $invocationId";
+    public function getSCSAcrossFileParentTable($invocationId) {
+
 
         $query = "select * from 
-    (select tb1.scs_crossfile_id,tc,pc,members,tb2.scc_id from scscrossfile_file tb1 
-    inner join scscrossfile_scc tb2 on tb1.scs_crossfile_id = tb2.scs_crossfile_id AND tb1.invocation_id = tb2.invocation_id 
-    inner join scc tb3 on tb3.invocation_id = tb2.invocation_id 
-    where tb1.invocation_id = $invocationId group by tb1.scs_crossfile_id
-    ) as parent
-
-    inner join 
-    (
-    select scs_crossfile_id,GROUP_CONCAT(scc_id) scc_id_csv from scscrossfile_scc 
-    where invocation_id=$invocationId  group by scs_crossfile_id
-    ) as child on parent.scs_crossfile_id=child.scs_crossfile_id";
-
-        /* $this->db->select('*');
-          $this->db->from('scscrossfile_file tb1');
-          $this->db->join('scscrossfile_scc tb2', 'tb1.scs_crossfile_id = tb2.scs_crossfile_id AND tb1.invocation_id = tb2.invocation_id', 'INNER');
-          $this->db->join('scc tb3', 'tb3.invocation_id = tb2.invocation_id', 'INNER');
-          $this->db->where($where); */
+                (select tb1.scs_crossfile_id,tb1.tc,tb1.pc,members,
+                tb2.scc_id 
+                from scscrossfile_file tb1 
+                inner join scscrossfile_scc tb2 on tb1.scs_crossfile_id = tb2.scs_crossfile_id AND tb1.invocation_id = tb2.invocation_id 
+                inner join scc tb3 on tb3.invocation_id = tb2.invocation_id 
+                where tb1.invocation_id = $invocationId group by tb1.scs_crossfile_id
+                ) as parent
+                inner join 
+                (
+                select scs_crossfile_id,GROUP_CONCAT(scc_id) scc_id_csv 
+                from scscrossfile_scc 
+                where invocation_id=$invocationId  group by scs_crossfile_id
+                ) as child 
+                on parent.scs_crossfile_id=child.scs_crossfile_id";
 
         $result = $this->db->query($query);
         if ($result->num_rows() > 0) {
@@ -290,10 +288,17 @@ class SCC_model extends CI_Model {
         return array();
     }
 
-    public function getSCSAcrossFileChildTable($invocationId, $scs_id) {
+    public function getSCSAcrossFileChildTable($scc_id,$invocationId) {
         
         
-        $query ="select tb1.scs_crossfile_id,tb1.fid,tb1.tc,tb1.pc,tb2.startline,tb2.startcol,tb2.endline,tb2.endcol,tb2.invocation_id,tb3.group_id,tb4.file_name,tb5.directory_name,tb6.repository_name
+        $query ="select 
+                tb1.scs_crossfile_id,tb1.fid,tb1.tc,tb1.pc,
+                tb2.startline,tb2.startcol,tb2.endline,tb2.endcol,tb2.invocation_id,
+                tb3.group_id,
+                tb4.file_name,
+                tb4.directory_id,
+                tb5.directory_name,
+                tb6.repository_name
                 from 
                 scscrossfile_file as tb1 
                 inner join 
@@ -304,22 +309,11 @@ class SCC_model extends CI_Model {
                 repository_file as tb4 on tb3.file_id = tb4.id
                 inner join 
                 repository_directory as tb5 on tb4.directory_id = tb5.id
-				inner join
-				user_repository AS tb6 on tb6.id = tb5.repository_id
-                where tb1.invocation_id=$invocationId and scs_crossfile_id=$scs_id
+		inner join
+		user_repository as tb6 on tb6.id = tb5.repository_id
+                where tb1.invocation_id=$invocationId and scs_crossfile_id=$scc_id
                 group by tb1.fid";
-                
-        
-        /*$where = "tb1.invocation_id = $invocationId AND tb1.scs_crossfile_id = $scs_id AND tb3.invocation_id = $invocationId";
 
-        $this->db->select('tb1.scs_crossfile_id,tb1.fid,tb1.tc,tb1.pc,tb2.startline,tb2.startcol,tb2.endline,tb2.endcol,tb2.invocation_id,tb3.group_id,tb4.file_name,tb5.directory_name');
-        $this->db->from('scscrossfile_file tb1');
-        $this->db->join('scc_instance AS tb2', 'tb1.invocation_id = tb2.invocation_id', 'INNER');
-        $this->db->join('invocation_files tb3', 'tb1.fid = tb3.cmfile_id', 'INNER');
-        $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
-        $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
-        $this->db->where($where);
-*/
         $result = $this->db->query($query); 
         if ($result->num_rows() > 0) {
             return $result->result();
@@ -386,15 +380,15 @@ class SCC_model extends CI_Model {
         //$query = "SELECT t3.mcc_instance_id, t3.mcc_id, t3.mid, t3.tc, t3.pc, t3.fid, t3.did, t3.gid, t2.mname methodname, CONCAT( directory_name, file_name ) filename, CONCAT( repository_name, directory_name, file_name ) filepath, t2.startline, t2.endline, COUNT( t3.mcc_id ) length, (SELECT GROUP_CONCAT( scc_id ) FROM mcc_scc WHERE mcc_id = t1.mcc_id
 //GROUP BY t1.mcc_id)scc FROM mcc t1, mcc_instance t3, method t2, repository_file f, repository_directory d, user_repository r WHERE t1.mcc_id = t3.mcc_id AND t1.invocation_id =$invocationId AND t3.mid = t2.mid AND d.id = f.directory_id AND d.repository_id = r.id AND f.id = t3.fid GROUP BY t3.mcc_id";
 $query = "select t2.mid, t2.fid, t1.cmdirectory_id did, group_id gid, mname methodname, count(t4.scc_id) length,CONCAT( directory_name, file_name ) filename
-from invocation_files t1, method_file t2, method t3, scc_method t4, repository_file f, repository_directory d
-where t1.invocation_id=t2.invocation_id and 
-t2.invocation_id=t3.invocation_id and 
-t2.invocation_id=104 and
-t3.mid=t4.mid and
-t2.fid=t1.cmfile_id and
-t3.mid = t2.mid and  d.id = f.directory_id AND f.id=t1.file_id 
-group by t4.mid
-ORDER BY `t2`.`mid` ASC";
+        from invocation_files t1, method_file t2, method t3, scc_method t4, repository_file f, repository_directory d
+        where t1.invocation_id=t2.invocation_id and 
+        t2.invocation_id=t3.invocation_id and 
+        t2.invocation_id=104 and
+        t3.mid=t4.mid and
+        t2.fid=t1.cmfile_id and
+        t3.mid = t2.mid and  d.id = f.directory_id AND f.id=t1.file_id 
+        group by t4.mid
+        ORDER BY `t2`.`mid` ASC";
 //      $result = $this->db->get();
         $result = $this->db->query($query);
         if ($result->num_rows() > 0) {

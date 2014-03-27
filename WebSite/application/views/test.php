@@ -485,7 +485,7 @@
                                                             <a href="#" class="minimize">Minimize</a>
                                                         </div>
 
-                                                        <div class="panel-body">
+                                                        <div class="panel-body col-lg-12">
                                                             <div class="form-group">
 
                                                                 <!-- <div class="panel-group accordion gradient col-lg-12 " id="grouplist1" name="grouplist1"></div> -->

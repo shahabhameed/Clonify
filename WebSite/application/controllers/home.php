@@ -103,19 +103,31 @@
       $this->load->view('clone_table/scs_within_file.php', $viewData);
       $this->load->view('partials/main_footer');
     }
+
+    public function SingleCloneStructureAcrossFile() {
+
+        $viewData = array();
+        $invocationId = $this->getInvocationIdFromURL();
+        $results = $this->scc->getAllSCSAcrossFile($invocationId);
+        $viewData['scc_data'] = $results;
+        $secondary_table_rows = array();
+        if ($results) {
+            foreach ($results as $row) {
+                $secondary_table_rows[$row['scs_crossfile_id']] = $this->scc->getALLSCSAcrossFileSecondaryTable($row,$invocationId);
+           //scs_crossfile_id or scc_id
+                }
+        }
+
+        $viewData['scs_clone_list_data'] = $secondary_table_rows;
+        $viewData['showCloneView'] = true;
+        $viewData['invocationId'] = $invocationId;
+        $this->load->view('partials/main_header');
+        $this->load->view('clone_table/scs_across_file.php', $viewData);
+        $this->load->view('partials/main_footer');
+        
+        
     
-    public function SingleCloneStructureAcrossFile(){
-      $viewData = array();      
-      $invocationId = $this->getInvocationIdFromURL();
-      
-      $results = $this->scc->getAllSCSAcrossFile($invocationId);   
-      $viewData['results'] = $results;
-      
-      $viewData['showCloneView'] = true;
-      $viewData['invocationId'] = $invocationId;
-      $this->load->view('partials/main_header');
-      $this->load->view('clone_table/scs_across_file.php', $viewData);
-      $this->load->view('partials/main_footer');
+
     }
     
     public function fcswithindirectory(){
