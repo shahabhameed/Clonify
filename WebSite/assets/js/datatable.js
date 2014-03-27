@@ -81,7 +81,7 @@ $(document).ready(function() {
                 
 	}
 	if($('table').hasClass('dynamicTableMcs')){
-            $('.dynamicTableScs').dataTable({
+            $('.dynamicTableMcs').dataTable({
             "sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
             "sPaginationType": "bootstrap",
             "bJQueryUI": false,
