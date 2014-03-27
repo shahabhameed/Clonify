@@ -14,6 +14,7 @@ class Invoke extends CI_Controller
 		$this->form_validation->set_error_delimiters('', '');
 		
 		$this->load->model('invoke_model');
+		$this->load->model('load_results_model');
 	}
 
 	function index()
