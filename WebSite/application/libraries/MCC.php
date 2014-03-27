@@ -87,31 +87,26 @@ class MCC {
 
     function getAllMCSAcrossFile($invocationId) {
         $userId = $this->ci->tank_auth->get_user_id();
-
         $data = $this->ci->mcc_model->getMCSAcrossFileParentTable($invocationId, $userId);
         if ($data) {
             $data = json_decode(json_encode($data), true); // Changing Obj in Array
         }
-        $result = array();
-		//ini_set('memory_limit', '-1');
-        foreach ($data as $d) {
-            $result[$d['mcs_crossfile_id']]['mcs_crossfile_id'] = $d['mcs_crossfile_id'];
-            $result[$d['mcs_crossfile_id']]['members'] = $d['members'];          
-            $result[$d['mcs_crossfile_id']]['mcc_id'][] = $d['mcc_id'];
-        }
-        foreach ($result as $index => $r) {
-            $result[$index]['mcc_id_csv'] = implode(", ", $result[$index]['mcc_id']);
-            $child_data = $this->ci->mcc_model->getMCSAcrossFileChildTable($invocationId, $index);
-            if ($child_data) {
-                $child_data = json_decode(json_encode($child_data), true); // Changing Obj in Array
-            }
-
-            $result[$index]['child_rows'] = $child_data;
-        }
-
-        return $result;
+        return $data;
+       
     }
 
+	
+    function getAllMCSAcrossFileChildTable($primary_table_row,$invocationId) {
+	
+		$userId = $this->ci->tank_auth->get_user_id();
+        $data = $this->ci->mcc_model->getMCSAcrossFileChildTable($primary_table_row['mcs_crossfile_id'], $invocationId);
+        if ($data) {
+            $data = json_decode(json_encode($data), true); // Changing Obj in Array
+        }
+        return  $data;
+	
+	}
+	
     function getMCCByFileData($invocationId) {
         $userId = $this->ci->tank_auth->get_user_id();
 

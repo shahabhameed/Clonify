@@ -110,6 +110,7 @@
         $invocationId = $this->getInvocationIdFromURL();
         $results = $this->scc->getAllSCSAcrossFile($invocationId);
         $viewData['scc_data'] = $results;
+		
         $secondary_table_rows = array();
         if ($results) {
             foreach ($results as $row) {
@@ -360,8 +361,18 @@
       $invocationId = $this->getInvocationIdFromURL();
       
       $results = $this->mcc->getAllMCSAcrossFile($invocationId);   
-      $viewData['results'] = $results;
+      $viewData['mcs_data'] = $results;
       
+	   $secondary_table_rows = array();
+        if ($results) {
+            foreach ($results as $row) {
+                $secondary_table_rows[$row['mcs_crossfile_id']] = $this->mcc->getAllMCSAcrossFileChildTable($row,$invocationId);
+          
+                }
+        }
+
+      $viewData['mcs_clone_list_data'] = $secondary_table_rows;
+		
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
