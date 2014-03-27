@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-10" id="scsidnumberfilter1">
+                            <div class="col-md-10" id="scsidnumberfilter">
                             </div>
                         </div>
                         <br>
@@ -160,7 +160,7 @@
                         <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
                     </div>
                     <div class="panel-body noPad clearfix">
-                        <table cellpadding="0" cellspacing="0" border="0" class="responsive scsafiletable display table table-bordered" width="100%">
+                        <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableScs  display table table-bordered" width="100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -174,7 +174,7 @@
                             <tbody>
                                 <?php
                                 $counter = 0;
-                                if ($scc_data) {
+                                if ($scc_data) {    
                                     foreach ($scc_data as $data) {
                                         $counter++;
                                         ?>
@@ -226,7 +226,7 @@
                             </div>
 
                             <div class="panel-body noPad clearfix">
-                                <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable dataTable display table table-bordered" width="100%">
+                                <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableScs dataTable display table table-bordered" width="100%">
                                     <thead>
                                         <tr>
                                             <th>No.</th>                        
@@ -321,34 +321,7 @@
 
 <script>
     $(document).ready(function() {
-        $('.scsafiletable').dataTable({
-            "sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
-            "sPaginationType": "bootstrap",
-            "bJQueryUI": false,
-            "bAutoWidth": false,
-            "iDisplayLength": 5,
-            "aLengthMenu": [5, 10, 25, 50],
-            "oLanguage": {
-                "sSearch": "<span></span> _INPUT_",
-                "sLengthMenu": "<span>_MENU_</span>",
-                "oPaginate": {"sFirst": "First", "sLast": "Last"}
-            }
-        }).columnFilter({
-            aoColumns: [
-                null,
-                {sSelector: "#scsidnumberfilter1", type: "number"},
-                null,
-                {sSelector: "#atcnumberfilter", type: "number"},
-                {sSelector: "#apcnumberfilter", type: "number-range"},
-                {sSelector: "#sccnumberfilter", type: "number"}
-            ]
-        });
-        $('.dataTables_length select').uniform();
-        $('.dataTables_paginate > ul').addClass('pagination');
-        $('.dataTables_filter>label>input').addClass('form-control');
-        $('.dataTables_filter').hide();
-        
-        
+         
         $(".list_view").on("click", function() {
             Clonify.SCC.viewSCSAcrossCloneInstance($(this).data("scsid"));
             event.preventDefault();
