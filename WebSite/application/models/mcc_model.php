@@ -123,8 +123,11 @@ class MCC_model extends CI_Model {
 		from mcscrossfile_mcc 
 		where invocation_id=$invocationId and mcs_crossfile_id = tb2.mcs_crossfile_id 
 		group by mcs_crossfile_id ) mcc_id_csv 
-		FROM mcc tb1, mcs_crossfile tb2, mcscrossfile_mcc tb3 
-		WHERE tb1.invocation_id = $invocationId AND tb2.mcs_crossfile_id = tb3.mcs_crossfile_id AND tb1.mcc_id = tb3.mcc_id GROUP BY tb2.mcs_crossfile_id";
+		FROM 
+		mcs_crossfile tb2 
+		INNER JOIN mcscrossfile_mcc tb3 ON tb2.mcs_crossfile_id = tb3.mcs_crossfile_id
+		INNER JOIN mcc tb1 ON tb1.mcc_id = tb3.mcc_id
+		WHERE tb1.invocation_id = $invocationId  GROUP BY tb2.mcs_crossfile_id";
       
 		$result = $this->db->query($query);
         if ($result->num_rows() > 0) {

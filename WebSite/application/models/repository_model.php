@@ -47,11 +47,37 @@ class Repository_Model extends CI_Model
 			$newId;
 			if ($this->isExistDirectoryName($dirPath, $id))
 				{
-					$this->db->query("INSERT INTO repository_directory(repository_id) VALUES('$id')");
+					$dbchange = $this->db->query("INSERT INTO repository_directory(repository_id) VALUES('$id')");
+					if ($dbchange>0)
+					{
+						$this->db->where('id', $id);
+						$query = $this->db->get('user_repository');
+					
+						if ($query->num_rows() == 1)
+						{ 
+							$newData = $query->row();
+							$version = $newData->version;
+							$version = $version+1;
+							$this->db->query("UPDATE user_repository SET version = $version WHERE id = $id");
+						}
+					}
 					$newId = mysql_insert_id();
 					if ($this->isExistFileName($newId, $fileName))
 					{
-						$this->db->query("INSERT INTO repository_file(file_name,directory_id,last_modified_time) VALUES('$fileName','$newId','$date')");
+						$dbchange = $this->db->query("INSERT INTO repository_file(file_name,directory_id,last_modified_time) VALUES('$fileName','$newId','$date')");
+						if ($dbchange>0)
+						{
+							$this->db->where('id', $id);
+							$query = $this->db->get('user_repository');
+					
+							if ($query->num_rows() == 1)
+							{ 
+								$newData = $query->row();
+								$version = $newData->version;
+								$version = $version+1;
+								$this->db->query("UPDATE user_repository SET version = $version WHERE id = $id");
+							}
+						}
 					}
 				}
 			else
@@ -59,7 +85,20 @@ class Repository_Model extends CI_Model
 					$newId = $this->getDirectoryId($dirPath, $id);
 					if ($this->isExistFileName($newId, $fileName))
 					{
-						$this->db->query("INSERT INTO repository_file(file_name,directory_id,last_modified_time) VALUES('$fileName','$newId','$date')");
+						$dbchange = $this->db->query("INSERT INTO repository_file(file_name,directory_id,last_modified_time) VALUES('$fileName','$newId','$date')");
+						if ($dbchange>0)
+						{
+							$this->db->where('id', $id);
+							$query = $this->db->get('user_repository');
+					
+							if ($query->num_rows() == 1)
+							{ 
+								$newData = $query->row();
+								$version = $newData->version;
+								$version = $version+1;
+								$this->db->query("UPDATE user_repository SET version = $version WHERE id = $id");
+							}
+						}
 					}
 				}
 		}
@@ -69,11 +108,37 @@ class Repository_Model extends CI_Model
 			$newId;
 			if ($this->isExistDirectoryName($newFileDir, $id))
 				{
-					$this->db->query("INSERT INTO repository_directory(repository_id,directory_name) VALUES('$id','$newFileDir')");
+					$dbchange = $this->db->query("INSERT INTO repository_directory(repository_id,directory_name) VALUES('$id','$newFileDir')");
+					if ($dbchange>0)
+					{
+						$this->db->where('id', $id);
+						$query = $this->db->get('user_repository');
+					
+						if ($query->num_rows() == 1)
+						{ 
+							$newData = $query->row();
+							$version = $newData->version;
+							$version = $version+1;
+							$this->db->query("UPDATE user_repository SET version = $version WHERE id = $id");
+						}
+					}
 					$newId = mysql_insert_id();
 					if ($this->isExistFileName($newId, $fileName))
 					{
-						$this->db->query("INSERT INTO repository_file(file_name,directory_id,last_modified_time) VALUES('$fileName','$newId','$date')");
+						$dbchange = $this->db->query("INSERT INTO repository_file(file_name,directory_id,last_modified_time) VALUES('$fileName','$newId','$date')");
+						if ($dbchange>0)
+						{
+							$this->db->where('id', $id);
+							$query = $this->db->get('user_repository');
+					
+							if ($query->num_rows() == 1)
+							{ 
+								$newData = $query->row();
+								$version = $newData->version;
+								$version = $version+1;
+								$this->db->query("UPDATE user_repository SET version = $version WHERE id = $id");
+							}
+						}
 					}
 				}
 			else
@@ -81,7 +146,20 @@ class Repository_Model extends CI_Model
 					$newId = $this->getDirectoryId($dirPath.'/', $id);
 					if ($this->isExistFileName($newId, $fileName))
 					{
-						$this->db->query("INSERT INTO repository_file(file_name,directory_id,last_modified_time) VALUES('$fileName','$newId','$date')");
+						$dbchange = $this->db->query("INSERT INTO repository_file(file_name,directory_id,last_modified_time) VALUES('$fileName','$newId','$date')");
+						if ($dbchange>0)
+						{
+							$this->db->where('id', $id);
+							$query = $this->db->get('user_repository');
+					
+							if ($query->num_rows() == 1)
+							{ 
+								$newData = $query->row();
+								$version = $newData->version;
+								$version = $version+1;
+								$this->db->query("UPDATE user_repository SET version = $version WHERE id = $id");
+							}
+						}
 					}
 				}
 		}
@@ -244,7 +322,20 @@ class Repository_Model extends CI_Model
 				{
 					$query = "DELETE FROM repository_file WHERE file_name = '$newFile->file_name' and id = $fileID ";
 					//echo $query;
-					$this->db->query($query);
+					$dbchange = $this->db->query($query);
+					if ($dbchange>0)
+					{
+						$this->db->where('id', $id);
+						$query = $this->db->get('user_repository');
+					
+						if ($query->num_rows() == 1)
+						{ 
+							$newData = $query->row();
+							$version = $newData->version;
+							$version = $version+1;
+							$this->db->query("UPDATE user_repository SET version = $version WHERE id = $id");
+						}
+					}
 					//$this->db->delete('repository_file', array('file_name' => $newFile->file_name, 'directory_id' => $dirId )); 
 				}
 			}
@@ -265,6 +356,26 @@ class Repository_Model extends CI_Model
 		$query = "SELECT * FROM repository_directory";
 		$results = $this->db->query($query);
 		return $results->result();
+	}
+	function changeDBVersion ($user_id)
+	{
+		$data = $this->getIdFromUserRepository($user_id);
+		$id = $data->id;
+		$this->db->where('id', $id);
+		$query = $this->db->get('user_repository');
+					
+		if ($query->num_rows() == 1)
+		{ 
+			$newData = $query->row();
+			$version = $newData->version;
+			$version = $version+1;
+			$this->db->query("UPDATE user_repository SET version = $version WHERE id = $id");
+		}
+		
+		$this->db->query("UPDATE user_invocations SET STATUS =  '4' WHERE user_id =1 AND repository_version <> (
+						SELECT version
+						FROM user_repository
+						WHERE user_id =$user_id)");
 	}
 	/*function getFileID($fileID)
 	{
