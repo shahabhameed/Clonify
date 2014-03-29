@@ -92,6 +92,31 @@
 
 <script type="text/javascript" charset="utf-8">
 
+	function loadTreeMap(data){
+		$('#treemap').jqxTreeMap({
+            width: 800,
+            height: 800,
+            source: data,
+            colorRange: 50,
+            renderCallbacks: {
+                '*': function(element, value) {
+                    if (value.data) {
+                        element.jqxTooltip({
+                            content: '<div><div style="font-weight: bold; max-width: 200px; font-family: verdana; font-size: 13px;">' + value.data.title + '</div><div style="width: 200px; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
+                            position: 'mouse',
+                            autoHideDelay: 6000
+                        });
+                    } else if (value.data === undefined) {
+                        element.css({
+                            backgroundColor: '#fff',
+                            border: '1px solid #555'
+                        });
+                    }
+                }
+            }
+        });
+	}
+	
     $(function() {
         var data = [
             {
@@ -229,6 +254,7 @@
                 data: {description: "F19", title: "F19"}
             }
         ];
+<<<<<<< HEAD
         $('#treemap').jqxTreeMap({
             width: 800,
             height: 800,
@@ -254,6 +280,5 @@
         });
     });
     
-    
-    
+
 </script>
