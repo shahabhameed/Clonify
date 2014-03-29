@@ -130,5 +130,26 @@ class Repository_Model_Test extends CI_Model
 		}
 		return true;
 	}
+	function changeDBVersion ($user_id)
+	{
+		$data = $this->getIdFromUserRepository($user_id);
+		$id = $data->id;
+		$this->db->where('id', $id);
+		$query = $this->db->get('user_repository');
+					
+		if ($query->num_rows() == 1)
+		{ 
+			$newData = $query->row();
+			$version = $newData->version;
+			$version = $version+1;
+			$this->db->query("UPDATE user_repository SET version = $version WHERE id = $id");
+		}
+		
+		$this->db->query("UPDATE user_invocations SET STATUS =  '4' WHERE user_id =1 AND repository_version <> (
+						SELECT version
+						FROM user_repository
+						WHERE user_id =$user_id)");
+		return true;
+	}
 	
 }
