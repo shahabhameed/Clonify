@@ -896,3 +896,4 @@ License: http://jqwidgets.com/license/
         }
     })
 }(jQuery));
+ 
