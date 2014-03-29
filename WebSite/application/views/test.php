@@ -706,4 +706,17 @@
     SelectSort("suppresed");
     SelectSort("box1View");
     SelectSort("equal");
+
+
+	//To select language in drop down on reload
+	var selectedLang = <?php echo $selectedLang ?>;
+	var lang_list = document.getElementById("language");
+    for (i = lang_list.options.length - 1; i >= 0; i--)
+    {
+        if (lang_list.options[i].value == selectedLang)
+        {
+            lang_list.options[i].selected=true;
+        }
+    }
+	
 </script>

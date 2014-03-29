@@ -37,7 +37,8 @@ class Invoke extends CI_Controller
 		$data['tokens']=$this->invoke_model->get_all_language_tokens_sup($prev_invo_params);
 		$data['minSimToks']=$this->invoke_model->get_prev_minSim($prev_invo_params);
 
-		
+		$data['selectedLang']=$this->session->userdata('language');
+
 		$this->open_view('test',$data);
 	}
 
