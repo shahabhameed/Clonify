@@ -21,7 +21,7 @@
             </div><!-- End .heading-->
 
             <div>
-                <form method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/ex_cont/saveFilesToDb" >
+                <form method="post" accept-charset="utf-8" action="<?php echo base_url(); ?>index.php/ex_cont/saveFilesToDb" OnSubmit="return ConfirmForm();">
 
                     <div class="row">
                         <div class="col-lg-12">
@@ -110,4 +110,11 @@
             },
         }).elfinder('instance');
     });
+	function ConfirmForm()
+	{
+	
+		return confirm("You are about make changes in your repository!" +
+
+		"Click OK to continue or Cancel to abort.");
+	}
 </script>
