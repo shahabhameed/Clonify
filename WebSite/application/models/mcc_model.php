@@ -159,21 +159,23 @@ class MCC_model extends CI_Model {
     }
 
     public function getMCCBYFile($invocationId, $userId) {
-		$query = "SELECT fid,did,gid,count(*) clones,CONCAT(directory_name,file_name) filename 
-FROM 
-mcc_instance m,
-repository_file f,
-repository_directory d,
-user_repository r,
-invocation_files i 
-where
-m.invocation_id=i.invocation_id and
-i.invocation_id=$invocationId and 
-i.cmfile_id=m.fid and 
-f.id=i.file_id and 
-d.id=f.directory_id and 
-d.repository_id=r.id
-group by i.cmfile_id";
+		$query = "SELECT distinct mf.fid,m.did,m.gid,round(count(mf.mcc_id)/281,0) clones,CONCAT(directory_name,file_name) filename 
+					FROM 
+					mcc_instance m,
+					mcc_file mf,
+					repository_file f,
+					repository_directory d,
+					user_repository r,
+					invocation_files i 
+					where
+					mf.invocation_id = $invocationId and
+					m.invocation_id=mf.invocation_id and
+					i.invocation_id=mf.invocation_id and
+					i.cmfile_id=mf.fid and 
+					f.id=i.file_id and 
+					d.id=f.directory_id and 
+					d.repository_id=r.id
+					group by mf.fid";
 		$result = $this->db->query($query);
 
         // echo $this->db->last_query();exit;
