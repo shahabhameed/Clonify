@@ -171,8 +171,11 @@ class Invoke_model extends CI_Model
 		if(empty($iname)){
 			$iname = $user_name.'_'.$user_id.'_'.$date;
 		}
-
-		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time,invocation_name,comments) VALUES('$user_id','$status','$date','$iname','$icomment')");
+		
+		$result_ver = $this->db->query("SELECT version from user_repository where user_id='$user_id'");
+		$version = $result_ver->result();
+		
+		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time,invocation_name,repository_version,comments) VALUES('$user_id','$status','$date','$iname',$version,'$icomment')");
 
 		$invoke_id = mysql_insert_id();
 		$this->session->set_userdata(array('invoke_id'=>$invoke_id));
@@ -221,7 +224,7 @@ class Invoke_model extends CI_Model
 		$user_id = $this->session->userdata('user_id');
 		$language = $this->session->userdata('language');
 		
-		$queryTemp = "select * from language_extensions  where language_id=$language";
+		$queryTemp = "select * from language_extensions  where language_id='$language'";
 		$resultsTemp = $this->db->query($queryTemp);
 		$langExtns = $resultsTemp->result();
 		$query_lang = "";
