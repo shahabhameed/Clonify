@@ -234,6 +234,7 @@
             height: 800,
             source: data,
             colorRange: 50,
+            selectionEnabled: true ,
             renderCallbacks: {
                 '*': function(element, value) {
                     if (value.data) {
@@ -252,4 +253,7 @@
             }
         });
     });
+    
+    
+    
 </script>
