@@ -118,10 +118,7 @@
 	}
 	
     $(function() {
-		
-		alert(<?php
-			echo $cars[3][2];
-		?>);
+	
 		
 		var data = [
             {
@@ -260,7 +257,7 @@
             }
         ];
 	loadTreeMap(data);
-       }
+       });
     
     function reloadTreeMapData(){
     var data = [
