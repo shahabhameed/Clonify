@@ -92,8 +92,38 @@
 
 <script type="text/javascript" charset="utf-8">
 
+	function loadTreeMap(data){
+		$('#treemap').jqxTreeMap({
+            width: 800,
+            height: 800,
+            source: data,
+            colorRange: 50,
+            renderCallbacks: {
+                '*': function(element, value) {
+                    if (value.data) {
+                        element.jqxTooltip({
+                            content: '<div><div style="font-weight: bold; max-width: 200px; font-family: verdana; font-size: 13px;">' + value.data.title + '</div><div style="width: 200px; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
+                            position: 'mouse',
+                            autoHideDelay: 6000
+                        });
+                    } else if (value.data === undefined) {
+                        element.css({
+                            backgroundColor: '#fff',
+                            border: '1px solid #555'
+                        });
+                    }
+                }
+            }
+        });
+	}
+	
     $(function() {
-        var data = [
+		
+		alert(<?php
+			echo $cars[3][2];
+		?>);
+		
+		var data = [
             {
                 label: 'FCS Within Group',
                 value: null,
@@ -229,31 +259,64 @@
                 data: {description: "F19", title: "F19"}
             }
         ];
-        $('#treemap').jqxTreeMap({
-            width: 800,
-            height: 800,
-            source: data,
-            colorRange: 50,
-            selectionEnabled: true ,
-            renderCallbacks: {
-                '*': function(element, value) {
-                    if (value.data) {
-                        element.jqxTooltip({
-                            content: '<div><div style="font-weight: bold; max-width: 200px; font-family: verdana; font-size: 13px;">' + value.data.title + '</div><div style="width: 200px; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
-                            position: 'mouse',
-                            autoHideDelay: 6000
-                        });
-                    } else if (value.data === undefined) {
-                        element.css({
-                            backgroundColor: '#fff',
-                            border: '1px solid #555'
-                        });
-                    }
-                }
+	loadTreeMap(data);
+       }
+    
+    function reloadTreeMapData(){
+    var data = [
+            {
+                label: 'FCS Within Group',
+                value: null,
+                color: '#2CDF90'
+            },
+            {
+                label: 'FCS Across Group',
+                value: null,
+                color: '#536FD8'
+            },
+            {
+                label: 'FCS Across Directory',
+                value: null,
+                color: '#9C9394'
+            },
+            {
+                label: 'FCS Within Directory',
+                value: null,
+                color: '#37D1D5'
+            },
+            {
+                label: 'F1',
+                value: 15.4,
+                parent: 'FCS Within Group',
+                data: {description: "F1", title: "F1"}
+            },
+            {
+                label: 'F5',
+                value: 8.8,
+                parent: 'FCS Across Group',
+                data: {description: "F5", title: "F5"}
+            },
+            {
+                label: 'F10',
+                value: 8.7,
+                parent: 'FCS Across Directory',
+                data: {description: "F10", title: "F10"}
+            },
+            {
+                label: 'F14',
+                value: 4.3,
+                parent: 'FCS Within Directory',
+                data: {description: "F14", title: "F14"}
+            },
+			
+            {
+                label: 'F15',
+                value: 4.2,
+                parent: 'FCS Within Directory',
+                data: {description: "F15", title: "F15"}
             }
-        });
-    });
-    
-    
-    
+        ];
+		
+		 loadTreeMap(data);
+	}
 </script>
