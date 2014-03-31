@@ -497,3 +497,50 @@ CREATE TABLE IF NOT EXISTS `scc_method` (
 
 -- 2014-03-25 0 By UMER
 ALTER TABLE  `scc_method` ADD  `invocation_id` INT NOT NULL ;
+
+
+-- 2014-03-30 BY Shahram
+
+
+CREATE TABLE IF NOT EXISTS `fcc` (
+  `invocation_id` int(11) NOT NULL,
+	`fcc_id` int(11) NOT NULL,
+  `atc` double NOT NULL,
+  `apc` double NOT NULL,
+  `members` int(11) NOT NULL  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `fcc_instance` (
+  `invocation_id` int(11) NOT NULL,
+	`fcc_instance_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL,  
+  `tc` double NOT NULL,
+  `pc` double NOT NULL,
+	`file_id` int(11) NOT NULL,
+  `directory_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `fcc_scc` (
+  `invocation_id` int(11) NOT NULL,
+	`scc_id` int(11) NOT NULL,
+  `fcc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `fcc_by_directory` (
+  `invocation_id` int(11) NOT NULL,
+	`fcc_id` int(11) NOT NULL,
+  `directory_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `fcc_by_group` (
+  `invocation_id` int(11) NOT NULL,
+	`fcc_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+

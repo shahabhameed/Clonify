@@ -1,6 +1,6 @@
-0,G:\LUMS\DSSD\nio
-1,G:\LUMS\DSSD\nio\channels
-2,G:\LUMS\DSSD\nio\channels\spi
-3,G:\LUMS\DSSD\nio\charset
-4,G:\LUMS\DSSD\nio\charset\spi
-5,G:\LUMS\DSSD\nio1
+0,C:\Users\SHERY\Desktop\nio1
+1,C:\Users\SHERY\Desktop\nio2
+2,C:\Users\SHERY\Desktop\nio2\channels
+3,C:\Users\SHERY\Desktop\nio2\channels\spi
+4,C:\Users\SHERY\Desktop\nio2\charset
+5,C:\Users\SHERY\Desktop\nio2\charset\spi
