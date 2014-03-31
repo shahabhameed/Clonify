@@ -117,15 +117,18 @@ class MCC_model extends CI_Model {
     }
 
     public function getMCSAcrossFileParentTable($invocationId, $userId) {
-      /*  $where = "tb2.mcc_id in (select mcc_id from mcc where invocation_id = $invocationId)";
-
-        $this->db->select('*');
-        $this->db->from('mcs_crossfile tb1');
-        $this->db->join('mcscrossfile_mcc tb2', 'tb1.mcs_crossfile_id = tb2.mcs_crossfile_id', 'INNER');
-        $this->db->where($where);
-		*/
-		$query = "SELECT tb2.mcs_crossfile_id, tb2.members, (select GROUP_CONCAT(mcc_id) from mcscrossfile_mcc where invocation_id=$invocationId and mcs_crossfile_id = tb2.mcs_crossfile_id group by mcs_crossfile_id ) mcc_id FROM mcc tb1, mcs_crossfile tb2, mcscrossfile_mcc tb3 WHERE tb1.invocation_id = $invocationId AND tb2.mcs_crossfile_id = tb3.mcs_crossfile_id AND tb1.mcc_id = tb3.mcc_id GROUP BY tb2.mcs_crossfile_id";
-      //  $result = $this->db->get();
+     
+		$query = "SELECT tb2.mcs_crossfile_id, tb2.members, 
+		(select GROUP_CONCAT(mcc_id) 
+		from mcscrossfile_mcc 
+		where invocation_id=$invocationId and mcs_crossfile_id = tb2.mcs_crossfile_id 
+		group by mcs_crossfile_id ) mcc_id_csv 
+		FROM 
+		mcs_crossfile tb2 
+		INNER JOIN mcscrossfile_mcc tb3 ON tb2.mcs_crossfile_id = tb3.mcs_crossfile_id
+		INNER JOIN mcc tb1 ON tb1.mcc_id = tb3.mcc_id
+		WHERE tb1.invocation_id = $invocationId  GROUP BY tb2.mcs_crossfile_id";
+      
 		$result = $this->db->query($query);
         if ($result->num_rows() > 0) {
             return $result->result();
@@ -133,23 +136,21 @@ class MCC_model extends CI_Model {
         return array();
     }
 
-    public function getMCSAcrossFileChildTable($invocationId, $mcs_id) {
-    /*    $where = "tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId GROUP BY tb1.mcs_crossfile_id";
-
-        $this->db->select('*');
-        $this->db->from('mcscrossfile_file tb1');
-        $this->db->join('invocation_files tb3', 'tb1.fid = tb3.cmfile_id', 'INNER');
-        $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
-        $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
-        $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
-		$this->db->join('mcscrossfile_methods AS tb7', 'tb1.mcs_crossfile_id = tb7.mcs_crossfile_id', 'INNER');
-	//	$this->db->join('method AS tb8', 'tb7.mid = tb8.mid', 'INNER');
-        $this->db->where($where);
-	*/
-	
-	//	$query = "SELECT * FROM mcscrossfile_file tb1, invocation_files tb3, repository_file tb4,repository_directory tb5, user_repository tb6, mcscrossfile_methods tb7, method tb8 WHERE tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId AND tb1.fid = tb3.cmfile_id AND tb3.file_id = tb4.id AND tb4.directory_id = tb5.id AND tb6.id = tb5.repository_id AND tb7.mid = tb8.mid";
-      //  $result = $this->db->get();
-		$query = "SELECT tb1.mcs_crossfile_id, tb1.fid, tb1.did, tb1.gid,tb4.file_name, tb7.mcc_id, tb5.directory_name,  tb4.directory_id,tb6.repository_name, (select GROUP_CONCAT(mid) from mcscrossfile_methods where  mcs_crossfile_id = tb1.mcs_crossfile_id and fid=tb1.fid ) mid FROM mcscrossfile_file tb1, invocation_files tb3, repository_file tb4,repository_directory tb5, user_repository tb6, mcscrossfile_methods tb7 WHERE tb1.invocation_id = $invocationId AND tb1.mcs_crossfile_id = $mcs_id AND tb3.invocation_id = $invocationId AND tb1.fid = tb3.cmfile_id AND tb3.file_id = tb4.id AND tb4.directory_id = tb5.id AND tb6.id = tb5.repository_id GROUP BY tb1.fid";
+    public function getMCSAcrossFileChildTable( $mcs_id,$invocationId) {
+ 
+		$query = "SELECT tb1.mcs_crossfile_id, tb1.fid, tb1.did, tb1.gid,tb4.file_name, 
+		tb7.mcc_id, tb5.directory_name,  
+		tb4.directory_id,tb6.repository_name,
+		(select GROUP_CONCAT(mid) from mcscrossfile_methods where  mcs_crossfile_id = tb1.mcs_crossfile_id and fid=tb1.fid ) mid_csv 
+		FROM mcscrossfile_methods tb7,
+		mcscrossfile_file tb1
+		INNER JOIN invocation_files tb3 ON tb1.invocation_id = tb3.invocation_id AND tb1.fid = tb3.cmfile_id
+		INNER JOIN repository_file tb4 ON tb3.file_id = tb4.id
+		INNER JOIN repository_directory tb5 ON tb4.directory_id = tb5.id 
+		INNER JOIN user_repository tb6  ON tb6.id = tb5.repository_id 
+		WHERE tb1.invocation_id = $invocationId
+		AND tb1.mcs_crossfile_id = $mcs_id
+		GROUP BY tb1.fid";
 	    $result = $this->db->query($query);
         if ($result->num_rows() > 0) {
             return $result->result();
@@ -158,21 +159,23 @@ class MCC_model extends CI_Model {
     }
 
     public function getMCCBYFile($invocationId, $userId) {
-		$query = "SELECT fid,did,gid,count(*) clones,CONCAT(directory_name,file_name) filename 
-FROM 
-mcc_instance m,
-repository_file f,
-repository_directory d,
-user_repository r,
-invocation_files i 
-where
-m.invocation_id=i.invocation_id and
-i.invocation_id=$invocationId and 
-i.cmfile_id=m.fid and 
-f.id=i.file_id and 
-d.id=f.directory_id and 
-d.repository_id=r.id
-group by i.cmfile_id";
+		$query = "SELECT distinct mf.fid,m.did,m.gid,round(count(mf.mcc_id)/281,0) clones,CONCAT(directory_name,file_name) filename 
+					FROM 
+					mcc_instance m,
+					mcc_file mf,
+					repository_file f,
+					repository_directory d,
+					user_repository r,
+					invocation_files i 
+					where
+					mf.invocation_id = $invocationId and
+					m.invocation_id=mf.invocation_id and
+					i.invocation_id=mf.invocation_id and
+					i.cmfile_id=mf.fid and 
+					f.id=i.file_id and 
+					d.id=f.directory_id and 
+					d.repository_id=r.id
+					group by mf.fid";
 		$result = $this->db->query($query);
 
         // echo $this->db->last_query();exit;
@@ -203,8 +206,10 @@ group by i.cmfile_id";
 	function getMCCByFileSecondaryTableRows($fid, $invocationId, $user_id) {
 	//$query = "SELECT t1.mcc_id, t1.mid, t2.mname methodname, t2.startline, t2.endline FROM mcc_instance t1, method t2 WHERE fid=$fid and t1.mid=t2.mid and invocation_id=$invocationId";
 	
-	$query = "SELECT t1.mcc_instance_id,t1.mcc_id, t1.mid, t2.mname methodname, t2.startline, t2.endline, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath FROM mcc_instance t1, method t2, repository_file f,repository_directory d,	user_repository r WHERE fid=$fid and t1.mid=t2.mid and t1.invocation_id=t2.invocation_id and t1.invocation_id=$invocationId and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=$fid and invocation_id=$invocationId)
-ORDER BY `t1`.`mcc_id` ASC";
+	//$query = "SELECT t1.mcc_instance_id,t1.mcc_id, t1.mid, t2.mname methodname, t2.startline, t2.endline, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath FROM mcc_instance t1, method t2, repository_file f,repository_directory d,	user_repository r WHERE fid=$fid and t1.mid=t2.mid and t1.invocation_id=t2.invocation_id and t1.invocation_id=$invocationId and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=$fid and invocation_id=$invocationId) ORDER BY `t1`.`mcc_id` ASC";
+
+	$query = "SELECT t1.mcc_instance_id,t1.mcc_id, t1.mid, t2.mname methodname, t2.startline, t2.endline, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath FROM mcc_instance t1, method t2, mcc_file t3, repository_file f,repository_directory d,	user_repository r WHERE t1.mcc_id=t3.mcc_id and t1.invocation_id=t3.invocation_id and t3.fid=$fid and t1.mid=t2.mid and t1.invocation_id=t2.invocation_id and t1.invocation_id=$invocationId and d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=$fid and invocation_id=$invocationId) group by t1.mid";
+		
         $result = $this->db->query($query);
         // echo $this->db->last_query();exit;
         if ($result->num_rows() > 0) {

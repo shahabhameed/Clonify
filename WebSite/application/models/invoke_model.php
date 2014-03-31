@@ -171,8 +171,11 @@ class Invoke_model extends CI_Model
 		if(empty($iname)){
 			$iname = $user_name.'_'.$user_id.'_'.$date;
 		}
-
-		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time,invocation_name,comments) VALUES('$user_id','$status','$date','$iname','$icomment')");
+		
+		$result_ver = $this->db->query("SELECT version from user_repository where user_id='$user_id'");
+		$version = $result_ver->result();
+		
+		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time,invocation_name,repository_version,comments) VALUES('$user_id','$status','$date','$iname',$version,'$icomment')");
 
 		$invoke_id = mysql_insert_id();
 		$this->session->set_userdata(array('invoke_id'=>$invoke_id));
@@ -219,8 +222,32 @@ class Invoke_model extends CI_Model
 	function get_all_user_files()
 	{
 		$user_id = $this->session->userdata('user_id');
-		$query = "select f.id, CONCAT(repository_name,directory_name,file_name) as fname from repository_file f,repository_directory d,user_repository r where d.repository_id=r.id and f.directory_id=d.id and r.user_id = '$user_id' order by fname";
-		$query_lang = " and f.file_name like '%.java'";
+		$language = $this->session->userdata('language');
+		
+		$queryTemp = "select * from language_extensions  where language_id='$language'";
+		$resultsTemp = $this->db->query($queryTemp);
+		$langExtns = $resultsTemp->result();
+		$query_lang = "";
+		$first = true;
+		//echo count($langExtns);
+		if(count($langExtns)>=1)
+		{
+			foreach ($langExtns as $langExtn)
+			{
+				
+				if($first)
+				{
+					$query_lang = $query_lang." AND (UPPER(f.file_name) like '%.$langExtn->extension'";
+					$first=false;
+				}
+				else
+					$query_lang = $query_lang." OR UPPER(f.file_name) like '%.$langExtn->extension'";
+			}
+			$query_lang = $query_lang.")";
+		}
+		
+		//$query = "select f.id, CONCAT(repository_name,directory_name,file_name) as fname from repository_file f,repository_directory d,user_repository r where d.repository_id=r.id and f.directory_id=d.id and r.user_id = '$user_id' order by fname";
+		$query = "select f.id, CONCAT(directory_name,file_name) as fname from repository_file f,repository_directory d,user_repository r where d.repository_id=r.id and f.directory_id=d.id and r.user_id = '$user_id' ".$query_lang." order by fname";
 		//echo $query;
 		$results = $this->db->query($query);
 /*

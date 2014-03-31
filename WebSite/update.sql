@@ -498,7 +498,6 @@ CREATE TABLE IF NOT EXISTS `scc_method` (
 -- 2014-03-25 0 By UMER
 ALTER TABLE  `scc_method` ADD  `invocation_id` INT NOT NULL ;
 
-
 -- 2014-03-30 BY Shahram
 
 
@@ -544,3 +543,21 @@ CREATE TABLE IF NOT EXISTS `fcc_by_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+-- 2014-03-27 0 By UMER
+ALTER TABLE  `user_invocations` ADD  `repository_version` INT NOT NULL AFTER  `invocation_name` ;
+
+-- 2014-03-27 0 By ABDULLAH
+ALTER TABLE  `user_repository` ADD  `version` INT NOT NULL ;
+
+-- 2014-03-29 9 By Hafeez
+CREATE TABLE IF NOT EXISTS `language_extensions` (
+  `language_id` int(11) NOT NULL,
+  `extension` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `language_extensions` (`language_id`, `extension`) VALUES
+(1, 'JAVA'),
+(2, 'CPP'),
+(2, 'H'),
+(2, 'C');

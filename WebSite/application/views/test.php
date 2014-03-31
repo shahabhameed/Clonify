@@ -4,6 +4,28 @@
 <script type="text/javascript">
 
 
+	function onLanguageSelect(){
+		document.getElementById("submit").disabled=true;
+		var lang_list = document.getElementById("language");
+		
+		var sel_id = lang_list.selectedIndex;
+		
+		var lang_id = lang_list.options[sel_id].value;
+		var lang_txt = lang_list.options[sel_id].text;
+		//alert("lang_id: " + lang_id + lang_txt);
+		
+		$.ajax({
+			url:"<?php echo base_url();?>index.php/invoke/setSelectedLanguage/"+lang_id,
+			success:function(result){
+				//alert("result: " + result);
+				location.reload();
+			},
+			error:function(xhr){
+			  alert("An error occured: " + xhr.status + " " + xhr.statusText);
+			}
+		});
+	}
+
     function hideWizard()
     {
         var button = document.getElementById("submitButton");
@@ -348,7 +370,7 @@
                                                                     <div class="form-group">
                                                                         <label class="col-lg-3 control-label" >Language:</label>
                                                                         <div class="col-lg-6">
-                                                                            <select  name="language" id="language" class="nostyle form-control col-lg-2" style="width:auto">
+                                                                            <select  name="language" id="language" class="nostyle form-control col-lg-2" style="width:auto" onchange="onLanguageSelect()">
                                                                                 <option></option>
                                                                                 <?php foreach ($languages as $language) { ?>
                                                                                     <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option><?php } ?>
@@ -485,7 +507,7 @@
                                                             <a href="#" class="minimize">Minimize</a>
                                                         </div>
 
-                                                        <div class="panel-body">
+                                                        <div class="panel-body col-lg-12">
                                                             <div class="form-group">
 
                                                                 <!-- <div class="panel-group accordion gradient col-lg-12 " id="grouplist1" name="grouplist1"></div> -->
@@ -516,7 +538,7 @@
 
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading"> 
-                                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Equal Tokens</span></h4>
+                                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Suppressed Tokens</span></h4>
                                                         <a href="#" class="minimize">Minimize</a>
                                                     </div>
                                                     <div class="panel-body">
@@ -526,7 +548,7 @@
 
                                                                 <select multiple="multiple" id="suppresed" name="suppresed[]" class="form-control" style="height:300px;">>
                                                                     <?php foreach ($tokens as $token) { ?>
-                                                                        <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " - " . $token->token_name ?></option>
+                                                                        <option value="<?php echo $token->token_id ?>"><?php echo /*$token->token_id . " - " .*/ $token->token_name ?></option>
                                                                     <?php } ?>
                                                                 </select>
                                                                 <br/>
@@ -569,7 +591,7 @@
                                                             <div class="col-lg-12">
                                                                 <select multiple="multiple" id="suppresed2" name="suppresed2[]" class=" form-control" style="height:300px; ">>
                                                                     <?php foreach ($prev_sup_tokens as $prev_sup_token) { ?>
-                                                                        <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo $prev_sup_token->token_id . " - " . $prev_sup_token->token_name ?></option>
+                                                                        <option value="<?php echo $prev_sup_token->token_id ?>"><?php echo /*$prev_sup_token->token_id . " - " .*/ $prev_sup_token->token_name ?></option>
                                                                     <?php } ?>
                                                                 </select>													
                                                             </div>
@@ -612,7 +634,7 @@
 
                                                                     <select multiple="multiple" id="equal" name="equal[]" class="multiple form-control" style="height:300px; ">
                                                                         <?php foreach ($alltokens as $token) { ?>
-                                                                            <option value="<?php echo $token->token_id ?>"><?php echo $token->token_id . " = " . $token->token_name ?></option>
+                                                                            <option value="<?php echo $token->token_id ?>"><?php echo /*$token->token_id . " = " .*/ $token->token_name ?></option>
                                                                         <?php } ?>
                                                                     </select>
                                                                     <br/>
@@ -684,4 +706,17 @@
     SelectSort("suppresed");
     SelectSort("box1View");
     SelectSort("equal");
+
+
+	//To select language in drop down on reload
+	var selectedLang = <?php echo $selectedLang ?>;
+	var lang_list = document.getElementById("language");
+    for (i = lang_list.options.length - 1; i >= 0; i--)
+    {
+        if (lang_list.options[i].value == selectedLang)
+        {
+            lang_list.options[i].selected=true;
+        }
+    }
+	
 </script>

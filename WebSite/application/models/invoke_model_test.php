@@ -150,4 +150,10 @@ class Invoke_model_test extends CI_Model
 		$results = $this->db->query($query);
 		return $results->result();
 	}
+	
+	function setSelectedLanguage($language)
+	{
+		$this->session->set_userdata(array('language'=>$language));
+		//$this->index();
+	}
 }

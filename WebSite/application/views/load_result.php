@@ -57,7 +57,10 @@
                                                         <td><a href="#"><img src="<?= asset_url('images/Tick.png') ?>" height ="24" width="24" /></a></td>
                                                     <?php } ?>
                                                     <?php if ($result->status == 3) { ?>
-                                                        <td><img src="<?= asset_url('images/Error.png') ?>" height ="24" width="24" /></td>
+                                                        <td><img src="<?= asset_url('images/Error.png') ?>" height ="24" width="24" title="Error"/></td>
+                                                    <?php } ?>
+													 <?php if ($result->status == 4) { ?>
+                                                        <td><img src="<?= asset_url('images/invalid.png') ?>" height ="24" width="24" title = "Invalid Result" /></td>
                                                     <?php } ?>
                                                 </tr>
                                                 <tr>

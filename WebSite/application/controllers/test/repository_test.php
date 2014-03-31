@@ -13,7 +13,7 @@ class Repository_Test extends Toast
 		$this->load->model('repository_model_test');
 	}
 	
-	function test_isExistFileName()
+/*	function test_isExistFileName()
 	{
 		$newId = 43;
 		$fileName = 'DSC_0594.jpg';
@@ -52,8 +52,53 @@ class Repository_Test extends Toast
 		$result = $this->repository_model_test->getIdFromUserRepository($user_id);
 		$this->_assert_not_empty($result);
 	}
+*/
+	function test_isExistFileName()
+	{
+		$newId = 43;
+		$fileName = 'Bits.java';
+		$result = $this->repository_model_test->isExistFileName($newId, $fileName );
+		$this->_assert_false($result);
+	}
 	
+	function test_isExistDirectoryName()
+	{
+		$dirPath = ".tmb/";
+		$id = 2;
+		$result = $this->repository_model_test->isExistDirectoryName($dirPath, $id);
+		$this->_assert_false($result);
+	}
 	
+	function test_getDirectoryId()
+	{
+		$dirPath = ".tmb/";
+		$id = 2;
+		$result = $this->repository_model_test->getDirectoryId($dirPath, $id);
+		$this->_assert_not_equals($result, 0);
+	}
+	
+	function  test_insertFileName()
+	{
+		$user_id = 1;
+		$dirPath = ".tmb";
+		$fileName = 'DSC_0594.jpg';
+		$result = $this->repository_model_test->insertFileName($user_id, $dirPath, $fileName);
+		$this->_assert_true($result);
+	}
+	
+	function  test_getIdFromUserRepository()
+	{
+		$user_id = 1;
+		$result = $this->repository_model_test->getIdFromUserRepository($user_id);
+		$this->_assert_not_empty($result);
+	}
+	
+	function test_updateVersion()
+	{
+		$user_id = 1;
+		$result = $this->repository_model_test->changeDBVersion($user_id);
+		$this->_assert_true($result);
+	}
 } 
 
 ?>

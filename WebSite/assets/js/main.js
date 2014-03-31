@@ -516,7 +516,7 @@ Clonify.SCC = {
 		$('.dataTables_length select').uniform();
 		$('.dataTables_paginate > ul').addClass('pagination');
 		$('.dataTables_filter>label>input').addClass('form-control');
-        $('.dataTables_filter').hide();
+                $('.dataTables_filter').hide();
   },
   viewSCSAcrossCloneInstance: function(_scs_id){
   	$(".scs_instance_list").hide();
