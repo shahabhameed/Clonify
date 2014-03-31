@@ -22,14 +22,6 @@
 <script type="text/javascript" src="<?= asset_url('plugins/forms/dualselect/jquery.dualListBox-1.3.min.js'); ?>"></script>    
 <script type="text/javascript" src="<?= asset_url('plugins/forms/tiny_mce/tinymce.min.js'); ?>"></script>
 
-<!-- JQWidgets for TreeMap -->
-<script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/scripts/jquery-1.11.0.min.js'); ?>"></script>
-<script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/jqxcore.js'); ?>"></script>
-<script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/jqxtooltip.js'); ?>"></script>
-<script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/jqxtreemap.js'); ?>"></script>
-
-
-
 
 <script type="text/javascript" src="<?= asset_url('plugins/misc/prettify/prettify.js'); ?>"></script><!-- Code view plugin -->
 <script type="text/javascript" src="<?= asset_url('plugins/misc/search/tipuesearch_set.js'); ?>"></script>
@@ -57,6 +49,10 @@
 <script type="text/javascript" src="<?= asset_url('plugins/misc/totop/jquery.ui.totop.min.js'); ?>"></script> <!-- Back to top plugin -->
 <script type="text/javascript" src="<?= asset_url('plugins/files/elfinder/elfinder.min.js'); ?>"></script>
 
+<!-- JQWidgets for TreeMap -->
+<script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/jqxcore.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/jqxtooltip.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/jqxtreemap.js'); ?>"></script>
 
 <!-- Init plugins -->
 <script type="text/javascript" src="<?= asset_url('js/jquery.mousewheel.js'); ?>"></script>
