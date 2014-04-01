@@ -6,9 +6,10 @@ class General extends CI_Controller {
        {
           parent::__construct();
           $this->load->library('tank_auth');
+		  $this->load->model('treemap_model');
        }
        
-        public function index()
+      public function index()
 	  {    
             redirect('/home/');
 	  }
@@ -34,12 +35,17 @@ class General extends CI_Controller {
 	public function fcs_within_directory()
 	{
 		$viewData = array();      
-	    $invocationId = $this->getInvocationIdFromURL();
+	    //$invocationId = $this->getInvocationIdFromURL();
+		$invocationId = 104;
+		$dids = array(0,1);
 		$viewData['showCloneView'] = true;
 	    $viewData['invocationId'] = $invocationId;
 		
+		$viewData['treemapdata']=$this->treemap_model->get_fcs_within_dir_treemap($invocationId,$dids);
+		
         $this->load->view('partials/main_header');
-	    $this->load->view('TreeMaps/fcs_within_directory', $viewData);
+	    //$this->load->view('TreeMaps/fcs_within_directory', $viewData);
+		$this->load->view('TreeMaps/TreeMap', $viewData);
 	    $this->load->view('partials/main_footer');
     }
 	
