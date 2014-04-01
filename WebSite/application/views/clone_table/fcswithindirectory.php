@@ -337,13 +337,55 @@
             </div>
         </div>
         
+        
+        	<div class="row" id="treeMapBlock">
+			<div class="col-lg-9">
+                                    
+
+                                        <div class="panel panel-default">
+
+                                            <div class="form-group">
+
+                                                <div class="col-lg-12">
+
+                                                    <div class="panel panel-default">
+
+                                                        <div class="panel-heading">
+                                                            <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Tree Map View</span> </h4><a href="#" class="minimize">Minimize</a>
+                                                        </div>
+
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+
+                                                                <div class="col-lg-12">
+                                                                 <div id="treemap" align="center" class="marginL20 col-lg-12 "></div>	
+                                                                    
+
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div><!-- End .panel body -->
+                                                    </div>
+
+                                                </div><!-- End .span8 -->
+
+                                               
+                                            </div>
+                                        </div><!-- End .row -->
+                                    </div>
+			
+			</div>
+        
       </div><!-- End contentwrapper -->
     </div><!-- End #content -->
  
 </div><!-- End #wrapper -->
 
 <script>
-    
+     $(function() {
+          generateTreeMap($(this).data("scsid"));
+     }
     function generateTreeMap(scsid)
     {
         <?php 
@@ -477,6 +519,7 @@ $(document).ready(function(){
     $(".list_view").on("click",function(){
      
         $('.scs_instance_list').hide();
+        $('.treeMapBlock').show();
         expand($(this).data("scsid"));
         $("#scs_instance_list_"+$(this).data("scsid")).show();
         generateTreeMap($(this).data("scsid"));
