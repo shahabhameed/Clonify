@@ -244,6 +244,26 @@
                 </div>
             </div>
             </div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- -->
+			
               <div class="col-md-3" style="border-left:1px solid;max-height:600px;overflow-y:scroll;overflow-x:hidden;">
                 <div class="todo">
                     <h4>Navigation <a href="#" class="icon tip" oldtitle="Add task" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-plus"></span></a></h4>
@@ -252,6 +272,44 @@
                 
               </div>
             </div>
+			<div class="row" id="treeMapBlock">
+			<div class="col-lg-9">
+                                    
+
+                                        <div class="panel panel-default">
+
+                                            <div class="form-group">
+
+                                                <div class="col-lg-12">
+
+                                                    <div class="panel panel-default">
+
+                                                        <div class="panel-heading">
+                                                            <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Tree Map View</span> </h4><a href="#" class="minimize">Minimize</a>
+                                                        </div>
+
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+
+                                                                <div class="col-lg-12">
+                                                                 <div id="treemap" align="center" class="marginL20 col-lg-12 "></div>	
+                                                                    
+
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div><!-- End .panel body -->
+                                                    </div>
+
+                                                </div><!-- End .span8 -->
+
+                                               
+                                            </div>
+                                        </div><!-- End .row -->
+                                    </div>
+			
+			</div>
         </div><!-- End contentwrapper -->
     </div><!-- End #content -->
 
