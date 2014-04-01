@@ -339,10 +339,110 @@
         
       </div><!-- End contentwrapper -->
     </div><!-- End #content -->
-    
+ 
 </div><!-- End #wrapper -->
 
 <script>
+    
+    function generateTreeMap(scsid)
+    {
+        <?php 
+       // if ($data) 
+        {   
+        $dirPath=$data['dirPath'];
+        $scsId=$data['scsId'];
+        $dirSize=$data['dirSize'];
+        $fileList=array(1,2,3); //$data['fileList'];
+
+        }
+         //<td><?php echo isset($data['pc']) ? $data['pc'] : '-'; ?></td>
+         //<td><?php echo $data['members']; ?></td>
+
+                                    
+                                
+        
+        ?>
+                
+        var data = [
+            {
+                label: 'FCS Within Group',
+                value: null,
+                color: '#2CDF90'
+            },
+            {
+                label: 'FCS Across Group',
+                value: null,
+                color: '#536FD8'
+            },
+            {
+                label: 'FCS Across Directory',
+                value: null,
+                color: '#9C9394'
+            },
+            {
+                label: 'FCS Within Directory',
+                value: null,
+                color: '#37D1D5'
+            },
+            
+            <?php
+                foreach($filelist as $file){
+                    echo "{";
+                    echo "label: '" . $file . "',";
+                    echo "value: " . $file . ",";
+                    echo "parent: 'FCS Within Directory',";
+                    echo "data: {description: " . $file . ", title: " . $file. "}";
+                    echo "},";
+                }
+            ?>
+                        
+            {
+                label: 'F5',
+                value: 8.8,
+                parent: 'FCS Across Group',
+                data: {description: "F5", title: "F5"}
+            },
+            {
+                label: 'F10',
+                value: 8.7,
+                parent: 'FCS Across Directory',
+                data: {description: "F10", title: "F10"}
+            },
+            {
+                label: 'F14',
+                value: 4.3,
+                parent: 'FCS Within Gr00up',
+                data: {description: "F14", title: "F14"}
+            },
+        ];
+        loadTreeMap(data);
+        
+    }
+    
+    	function loadTreeMap(data){
+		$('#treemap').jqxTreeMap({
+            width: 800,
+            height: 800,
+            source: data,
+            colorRange: 50,
+            renderCallbacks: {
+                '*': function(element, value) {
+                    if (value.data) {
+                        element.jqxTooltip({
+                            content: '<div><div style="font-weight: bold; max-width: 200px; font-family: verdana; font-size: 13px;">' + value.data.title + '</div><div style="width: 200px; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
+                            position: 'mouse',
+                            autoHideDelay: 6000
+                        });
+                    } else if (value.data === undefined) {
+                        element.css({
+                            backgroundColor: '#fff',
+                            border: '1px solid #555'
+                        });
+                    }
+                }
+            }
+        });
+	}
 $(document).ready(function(){
   $('.scsafiletable').dataTable( {
       "sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
@@ -371,12 +471,18 @@ $(document).ready(function(){
     $('.dataTables_paginate > ul').addClass('pagination');
     $('.dataTables_filter>label>input').addClass('form-control');
     $('.dataTables_filter').hide();
+    
+    
+    
     $(".list_view").on("click",function(){
-      $('.scs_instance_list').hide();
-      expand($(this).data("scsid"));
-      $("#scs_instance_list_"+$(this).data("scsid")).show();
-      return false;
-    });
+     
+        $('.scs_instance_list').hide();
+        expand($(this).data("scsid"));
+        $("#scs_instance_list_"+$(this).data("scsid")).show();
+        generateTreeMap($(this).data("scsid"));
+        return false;
+    }
+        );
     $(".code_view").on("click",function(){
        mysearch($(this).data("folders"));
     });
