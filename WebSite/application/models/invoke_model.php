@@ -175,7 +175,7 @@ class Invoke_model extends CI_Model
 		$result_ver = $this->db->query("SELECT version from user_repository where user_id='$user_id'");
 		$version = $result_ver->result();
 		
-		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time,invocation_name,repository_version,comments) VALUES('$user_id','$status','$date','$iname',$version,'$icomment')");
+		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time,invocation_name,repository_version,comments) VALUES('$user_id','$status','$date','$iname','$version','$icomment')");
 
 		$invoke_id = mysql_insert_id();
 		$this->session->set_userdata(array('invoke_id'=>$invoke_id));
@@ -399,8 +399,8 @@ class Invoke_model extends CI_Model
 		$scc_min_sim = $_POST['min_scc_token'];
 		$mcc_min_sim_tok = $_POST['min_mcc_token'];
 		$mcc_min_sim_per = $_POST['min_mcc_percent'];
-
 		$language = $_POST['language'];
+                
 		if(isset($_POST['methodAnalysis'])){
 	        $method_analysis = TRUE;
 		}
