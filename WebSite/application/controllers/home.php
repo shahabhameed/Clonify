@@ -32,6 +32,7 @@
       $scc_id = $this->input->post('scc_id');
       $start_line = $this->input->post('start_line');
       $end_line = $this->input->post('end_line');
+      $fid = $this->input->post('fid');
       $lines = array();
       $miniMapLinks = array();
       $miniMapLinkLable = array();
@@ -42,23 +43,31 @@
       $colors = array('#BDD6A9', '#C8CEC3', '#CCFBA8', '#BCD7A9', '#D5E0CE', '#D8EDCA', '#C3CFBC', '#E1F0DE',
                       '#C8E9F6', '#AEDFF2', '#9DE1FF', '#AFE4FD', '#C2D4DE', '#B7CCD4', '#B9D7E6', '#ADD6EB');
       $row = 1;
-      if (!$clone_list_id && !$start_line && !$start_line){
-        $scc_instances = $this->scc->getSCCInstancesBySCCId($invocation_id, $scc_id);
-        if ($scc_instances){
-          foreach($scc_instances as $scc_instance){
-            $lines = array();
-            for ($i = $scc_instance['startline']; $i <= $scc_instance['endline']; $i++) {
-              $lines[] = $i;
+      $total = count($colors);
+      if (!$clone_list_id && !$start_line && !$start_line){        
+        $temp = explode(",", $scc_id);
+        foreach($temp as $t){
+          $scc_ids[$t] = $t;
+        }
+        
+        foreach($scc_ids as $scc_id){
+          $scc_instances = $this->scc->getSCCInstancesBySCCId($invocation_id, $scc_id);
+          if ($scc_instances){
+            foreach($scc_instances as $scc_instance){
+              $lines = array();
+              for ($i = $scc_instance['startline']; $i <= $scc_instance['endline']; $i++) {
+                $lines[] = $i;
+              }
+              $r = $row % $total;
+              
+              $line_color = "background-color:" . $colors[$r] .";";
+              $obj->HighlightLines($lines, $line_color);
+              $miniMapLinks[] = $scc_instance['startline'];
+              $miniMapLinkLable[$scc_instance['startline']] = array('text' => '  ', 'rows' => $scc_instance['endline'] - $scc_instance['startline']);
+
+              $row++;              
             }
-            $color_index = count($colors) % $row;
-            $line_color = "background-color:" . $colors[$color_index] .";";            
-            $obj->HighlightLines($lines, $line_color);
-            $miniMapLinks[] = $scc_instance['startline'];
-            $miniMapLinkLable[$scc_instance['startline']] = array('text' => '  ', 'rows' => $scc_instance['endline'] - $scc_instance['startline']);
-            
-            $row++;
           }
-          
         }
       }else{
         for ($i = $start_line; $i <= $end_line; $i++) {

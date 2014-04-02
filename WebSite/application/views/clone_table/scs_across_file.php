@@ -175,7 +175,7 @@
                                 <?php
                                 $counter = 0;
                                 if ($scc_data) {    
-                                    foreach ($scc_data as $data) {
+                                    foreach ($scc_data as $index => $data) {
                                         $counter++;
                                         ?>
 
@@ -211,8 +211,8 @@
         <?php
         if ($scs_clone_list_data)
                 $scs_clone_list_data = $scs_clone_list_data ? $scs_clone_list_data : array();
-            foreach ($scs_clone_list_data as $scs_crossfile_id=> $data) {
-                
+            foreach ($scs_clone_list_data as $scs_crossfile_id => $data) {
+                $scc_csv = $scc_data[$scs_crossfile_id]['scc_id_csv'];
                 ?>
                 <div class="row scs_instance_list" id="scs_instance_list_<?php echo $scs_crossfile_id; ?>">
                     <div class="col-md-12">
@@ -245,7 +245,7 @@
                                         foreach ($data as $d) {
                                             $counter++;
                                             ?>
-                                            <tr class="code_view" data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>" data-endline="<?php echo $d['endline']; ?>" data-endcol="<?php echo $d['endcol']; ?>" data-startcol="<?php echo $d['startcol']; ?>" data-startline="<?php echo $d['startline']; ?>" data-fid="<?php echo $d['fid']; ?>" data-scsid= "<?php echo $scs_crossfile_id; ?>" data-clid="<?php echo $d['scs_crossfile_id']; ?>" data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
+                                            <tr class="code_view" data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="<?php echo $d['fid']; ?>" data-scsid="<?php echo $scc_csv;?>" data-clid="" data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
                                         
                                                 
                                                 <td><?php echo $counter; ?></td>
