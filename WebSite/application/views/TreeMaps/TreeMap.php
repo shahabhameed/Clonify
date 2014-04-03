@@ -123,47 +123,33 @@
 	
 	$(function(fcs_id) {
 		var data = [
-            {
-                label: 'FCS Within Group',
-                value: null,
-                color: '#2CDF90'
-            },
-            {
-                label: 'FCS Across Group',
-                value: null,
-                color: '#536FD8'
-            },
-            {
-                label: 'FCS Across Directory',
-                value: null,
-                color: '#9C9394'
-            },
+           
             {
                 label: 'FCS Within Directory',
                 value: null,
                 color: '#37D1D5'
             },
-            {
-                label: 'a',
-                value: 4,
-                parent: 'FCS Within Group',
-                data: {description: "a", title: "a"}
-            },
-            {
-                label: 'b',
-                value: 4,
-                parent: 'FCS Across Group',
-                data: {description: "b", title: "b"}
-            },
-            {
-                label: 'c',
+			{
+                label: 'JAVA/JAVA_1/',
                 value: 1,
-                parent: 'FCS Across Directory',
-                data: {description: "c", title: "c"}
+				parent: 'FCS Within Directory'
+            },
+			{
+                label: 'JAVA/JAVA_3/',
+                value: 1,
+				parent: 'FCS Within Directory'
+            },
+			{
+                label: 'AB',
+                value: 40,
+				parent: 'JAVA/JAVA_3/'
             }
+
+          
 			<?php
 			 
 			 $treemapdata = array ( 
+					"127"=>array(
 					"cmdid" => "0",
 					"did" => "125",
 					"dname" => "JAVA/JAVA_1/",
@@ -196,35 +182,36 @@
 							),
 						
 					"children" => array ( )
+					)
 					);
-			
-
+	
 				if(($treemapdata)){
-					$dname = $treemapdata['dname'];
-					$dsize = $treemapdata['dsize'];
-					$files = $treemapdata['files'];
-					//array("Cocos2dxAccelerometer.java","Cocos2dxActivity.java","Cocos2dxBitmap.java");//$treemapdata['files'];
-					//array("Cocos2dxAccelerometer.java","Cocos2dxActivity.java","Cocos2dxBitmap.java"); //$data['fileList'];
-					foreach($files as $file=>$data)
+					
+					
+					foreach($treemapdata as $fileList=>$data)
+					{
+					$dname = $data['dname'];
+					$dsize = $data['dsize'];
+					$files = $data['files'];
+					
+				
+
+					foreach($files as $file=>$filedata)
 					{
 					
 						echo ",{";
-						echo "label: '" . $data['filename'] . "',";
-						echo "value: " . $data['fsize'] . ",";
-						echo "parent: 'FCS Within Directory',";
-						echo "data: {description: '" . $data['filename'] . "', title: '" . $data['filename'] . "'}";
+						echo "label: '". $filedata['filename'] . "',";
+						echo "value: " . $filedata['fsize'] . ",";
+						echo "parent: '".$dname."',";
+						echo "data: {description: '" . $filedata['filename'] . "', title: '" . $filedata['filename'] . "'}";
 						echo "}";
 					
 				}
 				}
+				}
 				
             ?>
-			,{
-                label: 'd',
-                value: 1,
-                parent: 'Cocos2dxAccelerometer.java',
-                data: {description: "d", title: "d"}
-            }
+			
         ];
 		
 		loadTreeMap(data);
