@@ -194,6 +194,7 @@
       $this->load->view('partials/main_footer');
     }
     
+	
     public function SingleCloneStructureFCSWithinDirectory(){
       $viewData = array();      
       $invocationId = $this->getInvocationIdFromURL();

@@ -61,6 +61,10 @@
                                                                 </div>
                                                             </div><!-- End .panel body -->
                                                         </div>
+														
+														  
+
+
 
                                                     </div><!-- End .span8 -->
 
@@ -117,9 +121,7 @@
         });
 	}
 	
-    $(function() {
-	
-		
+	$(function(fcs_id) {
 		var data = [
             {
                 label: 'FCS Within Group',
@@ -142,178 +144,89 @@
                 color: '#37D1D5'
             },
             {
-                label: 'F1',
-                value: 15.4,
-                parent: 'FCS Within Group',
-                data: {description: "F1", title: "F1"}
-            },
-            {
-                label: 'F2',
+                label: 'a',
                 value: 4,
                 parent: 'FCS Within Group',
-                data: {description: "F1", title: "F1"}
+                data: {description: "a", title: "a"}
             },
             {
-                label: 'F3',
-                value: 41.5,
-                parent: 'FCS Within Group',
-                data: {description: "F3", title: "F3"}
-            },
-            {
-                label: 'F4',
-                value: 6.8,
-                parent: 'FCS Within Group',
-                data: {description: "F4", title: "F4"}
-            },
-            {
-                label: 'F5',
-                value: 8.8,
+                label: 'b',
+                value: 4,
                 parent: 'FCS Across Group',
-                data: {description: "F5", title: "F5"}
+                data: {description: "b", title: "b"}
             },
             {
-                label: 'F6',
-                value: 11,
-                parent: 'FCS Across Group',
-                data: {description: "TF6.", title: "F6"}
-            },
-            {
-                label: 'F7',
-                value: 8.9,
-                parent: 'FCS Across Group',
-                data: {description: "F7", title: "F7"}
-            },
-            {
-                label: 'F8',
-                value: 6.0,
-                parent: 'FCS Across Group',
-                data: {description: "F8", title: "F8"}
-            },
-            {
-                label: 'F9',
-                value: 8.7,
-                parent: 'FCS Across Group',
-                data: {description: "FF9", title: "F9"}
-            },
-            {
-                label: 'F10',
-                value: 8.7,
+                label: 'c',
+                value: 1,
                 parent: 'FCS Across Directory',
-                data: {description: "F10", title: "F10"}
-            },
-            {
-                label: 'F11',
-                value: 7.9,
-                parent: 'FCS Across Directory',
-                data: {description: "F11", title: "F11"}
-            },
-            {
-                label: 'F12',
-                value: 10.8,
-                parent: 'FCS Across Directory',
-                data: {description: "F12", title: "F12"}
-            },
-            {
-                label: 'F13',
-                value: 9.8,
-                parent: 'FCS Across Directory',
-                data: {description: "F13", title: "F13"}
-            },
-            {
-                label: 'F14',
-                value: 4.3,
-                parent: 'FCS Within Directory',
-                data: {description: "F14", title: "F14"}
-            },
-            {
-                label: 'F15',
-                value: 9.3,
-                parent: 'FCS Within Directory',
-                data: {description: "F15", title: "F15"}
-            },
-            {
-                label: 'F16',
-                value: 7,
-                parent: 'FCS Within Directory',
-                data: {description: "F16", title: "F16"}
-            },
-            {
-                label: 'F17',
-                value: 5.6,
-                parent: 'FCS Within Directory',
-                data: {description: "F17", title: "F17"}
-            },
-            {
-                label: 'F18',
-                value: 6.0,
-                parent: 'FCS Within Directory',
-                data: {description: "F18", title: "F18"}
-            },
-            {
-                label: 'F19',
-                value: 6.1,
-                parent: 'FCS Within Directory',
-                data: {description: "F19", title: "F19"}
+                data: {description: "c", title: "c"}
             }
-        ];
-	loadTreeMap(data);
-       });
-    
-    function reloadTreeMapData(){
-    var data = [
-            {
-                label: 'FCS Within Group',
-                value: null,
-                color: '#2CDF90'
-            },
-            {
-                label: 'FCS Across Group',
-                value: null,
-                color: '#536FD8'
-            },
-            {
-                label: 'FCS Across Directory',
-                value: null,
-                color: '#9C9394'
-            },
-            {
-                label: 'FCS Within Directory',
-                value: null,
-                color: '#37D1D5'
-            },
-            {
-                label: 'F1',
-                value: 15.4,
-                parent: 'FCS Within Group',
-                data: {description: "F1", title: "F1"}
-            },
-            {
-                label: 'F5',
-                value: 8.8,
-                parent: 'FCS Across Group',
-                data: {description: "F5", title: "F5"}
-            },
-            {
-                label: 'F10',
-                value: 8.7,
-                parent: 'FCS Across Directory',
-                data: {description: "F10", title: "F10"}
-            },
-            {
-                label: 'F14',
-                value: 4.3,
-                parent: 'FCS Within Directory',
-                data: {description: "F14", title: "F14"}
-            },
+			<?php
+			 
+			 $treemapdata = array ( 
+					"cmdid" => "0",
+					"did" => "125",
+					"dname" => "JAVA/JAVA_1/",
+					"dsize" => "2041",
+					"files" => array (
+						array(
+							"dname" => "JAVA/JAVA_1/",
+							"filename" => "2",
+							"filepath" => "D:/xampp/htdocs/Clonify/WebSite/files/shaban/JAVA/JAVA_1/2.java",
+							"fsize" => "12"
+							),
+							array(
+							"dname" => "JAVA/JAVA_1/",
+							"filename" => "3",
+							"filepath" => "D:/xampp/htdocs/Clonify/WebSite/files/shaban/JAVA/JAVA_1/3.java",
+							"fsize" => "8"
+							),
+							array(
+							"dname" => "JAVA/JAVA_1/",
+							"filename" => "4",
+							"filepath" => "D:/xampp/htdocs/Clonify/WebSite/files/shaban/JAVA/JAVA_1/4.java",
+							"fsize" => "15"
+							),
+							array(
+							"dname" => "JAVA/JAVA_1/",
+							"filename" => "5",
+							"filepath" => "D:/xampp/htdocs/Clonify/WebSite/files/shaban/JAVA/JAVA_1/5.java",
+							"fsize" => "20"
+							)
+							),
+						
+					"children" => array ( )
+					);
 			
-            {
-                label: 'F15',
-                value: 4.2,
-                parent: 'FCS Within Directory',
-                data: {description: "F15", title: "F15"}
+
+				if(($treemapdata)){
+					$dname = $treemapdata['dname'];
+					$dsize = $treemapdata['dsize'];
+					$files = $treemapdata['files'];
+					//array("Cocos2dxAccelerometer.java","Cocos2dxActivity.java","Cocos2dxBitmap.java");//$treemapdata['files'];
+					//array("Cocos2dxAccelerometer.java","Cocos2dxActivity.java","Cocos2dxBitmap.java"); //$data['fileList'];
+					foreach($files as $file=>$data)
+					{
+					
+						echo ",{";
+						echo "label: '" . $data['filename'] . "',";
+						echo "value: " . $data['fsize'] . ",";
+						echo "parent: 'FCS Within Directory',";
+						echo "data: {description: '" . $data['filename'] . "', title: '" . $data['filename'] . "'}";
+						echo "}";
+					
+				}
+				}
+				
+            ?>
+			,{
+                label: 'd',
+                value: 1,
+                parent: 'Cocos2dxAccelerometer.java',
+                data: {description: "d", title: "d"}
             }
         ];
 		
-		 loadTreeMap(data);
-	}
+		loadTreeMap(data);
+    });
 </script>

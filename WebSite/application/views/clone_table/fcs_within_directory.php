@@ -317,7 +317,20 @@
         });
 	}
 	
-	function showTreeMap() {
+	function showTreeMap(fcs_id) {
+		
+	/*	$.ajax({
+			url:"<?php echo base_url();?>home/SingleCloneStructureFCSWithinDirectory/" + <?php $invocationId ;?> + "_" + fcs_id,
+			success:function(result){
+				//alert("result: " + result);
+				location.reload();
+			},
+			error:function(xhr){
+			  alert("An error occured: " + xhr.status + " " + xhr.statusText);
+			}
+		});*/
+		
+		
 		var data = [
             {
                 label: 'FCS Within Group',
@@ -358,24 +371,19 @@
                 data: {description: "c", title: "c"}
             }
 			<?php
+				//foreach($treemapdata as directoryObj){
+				//directoryObj['']
+					$fileList=array("Cocos2dxAccelerometer.java","Cocos2dxActivity.java","Cocos2dxBitmap.java"); //$data['fileList'];
 			
-				if($treemapdata){
-					$dname = $treemapdata['dname'];
-					$dsize = $treemapdata['dsize'];
-					$files = $treemapdata['files'];
-					//$children = $treemapdata['children'];
-					
-					//$fileList=array("Cocos2dxAccelerometer.java","Cocos2dxActivity.java","Cocos2dxBitmap.java"); //$data['fileList'];
-			
-					foreach($files as $file){
+					foreach($fileList as $file){
 						echo ",{";
-						echo "label: '" . $file['filename'] . "',";
-						echo "value: " . $file['fsize'] . ",";
-						echo "parent: '" . $dname . "',";
-						echo "data: {description: '" . $file['filename'] . "', title: '" . $file['filename'] . "'}";
+						echo "label: '" . $file . "',";
+						echo "value: " . 1 . ",";
+						echo "parent: 'FCS Within Directory',";
+						echo "data: {description: '" . $file . "', title: '" . $file. "'}";
 						echo "}";
 					}
-				}
+				//}
             ?>
 			,{
                 label: 'd',
@@ -392,9 +400,7 @@
         $(".list_view").on("click", function() {
             Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
 			
-			alert();
-			
-			showTreeMap();
+			showTreeMap($(this).data("fcs_indir_id"));
 			
             event.preventDefault();
             return false;
