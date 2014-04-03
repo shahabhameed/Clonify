@@ -13,6 +13,8 @@
       $this->load->library('mcc');
       $this->load->library('common');
       $this->load->helper('tree');
+	  $this->load->model('treemap_model');
+	  
       if (!$this->tank_auth->is_logged_in()) {         // Not logged in
         redirect('/auth/login/');
       }
@@ -209,7 +211,10 @@
       
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
+	  $dids = array(0,1);
+	  $viewData['treemapdata']=$this->treemap_model->get_fcs_within_dir_treemap($invocationId,$dids);
       $viewData['treedata'] = create_tree($invocationId);
+	  
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/fcs_within_directory.php', $viewData);
       $this->load->view('partials/main_footer');

@@ -317,15 +317,7 @@
         });
 	}
 	
-	$(function() {
-		<?php 
-			//if ($data)         
-			//$dirPath=$data['dirPath'];
-			//$scsId=$data['scsId'];
-			//$dirSize=$data['dirSize'];
-			 $fileList=array(1,2,3); //$data['fileList'];
-        ?>
-		
+	function showTreeMap() {
 		var data = [
             {
                 label: 'FCS Within Group',
@@ -348,42 +340,62 @@
                 color: '#37D1D5'
             },
             {
-                label: 'F1',
+                label: 'a',
                 value: 4,
                 parent: 'FCS Within Group',
-                data: {description: "F1", title: "F1"}
+                data: {description: "a", title: "a"}
             },
             {
-                label: 'F5',
+                label: 'b',
                 value: 4,
                 parent: 'FCS Across Group',
-                data: {description: "F5", title: "F5"}
+                data: {description: "b", title: "b"}
             },
             {
-                label: 'F13',
+                label: 'c',
                 value: 1,
                 parent: 'FCS Across Directory',
-                data: {description: "F13", title: "F13"}
+                data: {description: "c", title: "c"}
             }
 			<?php
-                foreach($fileList as $file){
-                    echo ",{";
-                    echo "label: '" . $file . "',";
-                    echo "value: " . $file . ",";
-                    echo "parent: 'FCS Within Directory',";
-                    echo "data: {description: " . $file . ", title: " . $file. "}";
-                    echo "}";
-                }
+			
+				if($treemapdata){
+					$dname = $treemapdata['dname'];
+					$dsize = $treemapdata['dsize'];
+					$files = $treemapdata['files'];
+					//$children = $treemapdata['children'];
+					
+					//$fileList=array("Cocos2dxAccelerometer.java","Cocos2dxActivity.java","Cocos2dxBitmap.java"); //$data['fileList'];
+			
+					foreach($files as $file){
+						echo ",{";
+						echo "label: '" . $file['filename'] . "',";
+						echo "value: " . $file['fsize'] . ",";
+						echo "parent: '" . $dname . "',";
+						echo "data: {description: '" . $file['filename'] . "', title: '" . $file['filename'] . "'}";
+						echo "}";
+					}
+				}
             ?>
-
+			,{
+                label: 'd',
+                value: 1,
+                parent: 'Cocos2dxAccelerometer.java',
+                data: {description: "d", title: "d"}
+            }
         ];
 		loadTreeMap(data);
-    });
+    }
 
     // var zNodes = <?php $treedata ?>;
     $(document).ready(function() {
         $(".list_view").on("click", function() {
             Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
+			
+			alert();
+			
+			showTreeMap();
+			
             event.preventDefault();
             return false;
         });
