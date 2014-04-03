@@ -561,3 +561,7 @@ INSERT INTO `language_extensions` (`language_id`, `extension`) VALUES
 (2, 'CPP'),
 (2, 'H'),
 (2, 'C');
+
+
+-- 2014-04-03 0 By ABDULLAH
+ALTER TABLE  `repository_directory` ADD  `parent_id` INT NULL ;
