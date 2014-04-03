@@ -292,75 +292,7 @@
 </div><!-- End #wrapper -->
 
 <script>
-        
-    function generateTreeMap(scsid)
-    {
-        <?php 
-       // if ($data)         
-        //$dirPath=$data['dirPath'];
-        //$scsId=$data['scsId'];
-        //$dirSize=$data['dirSize'];
-         $fileList=array(1,2,3); //$data['fileList'];
-
-        ?>
-                
-        var data = [
-            {
-                label: 'FCS Within Group',
-                value: null,
-                color: '#2CDF90'
-            },
-            {
-                label: 'FCS Across Group',
-                value: null,
-                color: '#536FD8'
-            },
-            {
-                label: 'FCS Across Directory',
-                value: null,
-                color: '#9C9394'
-            },
-            {
-                label: 'FCS Within Directory',
-                value: null,
-                color: '#37D1D5'
-            },
-            
-            <?php
-                foreach($fileList as $file){
-                    echo "{";
-                    echo "label: '" . $file . "',";
-                    echo "value: " . $file . ",";
-                    echo "parent: 'FCS Within Directory',";
-                    echo "data: {description: " . $file . ", title: " . $file. "}";
-                    echo "},";
-                }
-            ?>
-                        
-            {
-                label: 'F5',
-                value: 8.8,
-                parent: 'FCS Across Group',
-                data: {description: "F5", title: "F5"}
-            },
-            {
-                label: 'F10',
-                value: 8.7,
-                parent: 'FCS Across Directory',
-                data: {description: "F10", title: "F10"}
-            },
-            {
-                label: 'F14',
-                value: 4.3,
-                parent: 'FCS Within Gr00up',
-                data: {description: "F14", title: "F14"}
-            }
-        ];
-        loadTreeMap(data);
-        
-    }
-    
-    	function loadTreeMap(data){
+    function loadTreeMap(data){
 		$('#treemap').jqxTreeMap({
             width: 800,
             height: 800,
@@ -384,9 +316,15 @@
             }
         });
 	}
-$(function() {
 	
-		
+	$(function() {
+		<?php 
+			//if ($data)         
+			//$dirPath=$data['dirPath'];
+			//$scsId=$data['scsId'];
+			//$dirSize=$data['dirSize'];
+			 $fileList=array(1,2,3); //$data['fileList'];
+        ?>
 		
 		var data = [
             {
@@ -409,134 +347,39 @@ $(function() {
                 value: null,
                 color: '#37D1D5'
             },
-             <?php
-                foreach($fileList as $file){
-                    echo "{";
-                    echo "label: '" . $file . "',";
-                    echo "value: " . $file . ",";
-                    echo "parent: 'FCS Within Directory',";
-                    echo "data: {description: " . $file . ", title: " . $file. "}";
-                    echo "},";
-                }
-            ?>
             {
                 label: 'F1',
-                value: 1,
+                value: 4,
                 parent: 'FCS Within Group',
                 data: {description: "F1", title: "F1"}
-            },
-            {
-                label: 'F2',
-                value: 1,
-                parent: 'FCS Within Group',
-                data: {description: "F1", title: "F1"}
-            },
-            {
-                label: 'F3',
-                value: 1,
-                parent: 'FCS Within Group',
-                data: {description: "F3", title: "F3"}
-            },
-            {
-                label: 'F4',
-                value: 1,
-                parent: 'FCS Within Group',
-                data: {description: "F4", title: "F4"}
             },
             {
                 label: 'F5',
-                value: 2,
+                value: 4,
                 parent: 'FCS Across Group',
                 data: {description: "F5", title: "F5"}
             },
             {
-                label: 'F6',
-                value: 2,
-                parent: 'FCS Across Group',
-                data: {description: "TF6.", title: "F6"}
-            },
-            {
-                label: 'F7',
-                value: 2,
-                parent: 'FCS Across Group',
-                data: {description: "F7", title: "F7"}
-            },
-            {
-                label: 'F8',
-                value: 2.0,
-                parent: 'FCS Across Group',
-                data: {description: "F8", title: "F8"}
-            },
-            {
-                label: 'F9',
-                value: 2,
-                parent: 'FCS Across Group',
-                data: {description: "FF9", title: "F9"}
-            },
-            {
-                label: 'F10',
-                value: 9,
-                parent: 'FCS Across Directory',
-                data: {description: "F10", title: "F10"}
-            },
-            {
-                label: 'F11',
-                value: 8,
-                parent: 'FCS Across Directory',
-                data: {description: "F11", title: "F11"}
-            },
-            {
-                label: 'F12',
-                value: 11,
-                parent: 'FCS Across Directory',
-                data: {description: "F12", title: "F12"}
-            },
-            {
                 label: 'F13',
-                value: 10,
+                value: 1,
                 parent: 'FCS Across Directory',
                 data: {description: "F13", title: "F13"}
-            },
-            {
-                label: 'F14',
-                value: 4,
-                parent: 'FCS Within Directory',
-                data: {description: "F14", title: "F14"}
-            },
-            {
-                label: 'F15',
-                value: 9,
-                parent: 'FCS Within Directory',
-                data: {description: "F15", title: "F15"}
-            },
-            {
-                label: 'F16',
-                value: 7,
-                parent: 'FCS Within Directory',
-                data: {description: "F16", title: "F16"}
-            },
-            {
-                label: 'F17',
-                value: 6,
-                parent: 'FCS Within Directory',
-                data: {description: "F17", title: "F17"}
-            },
-            {
-                label: 'F18',
-                value: 6.0,
-                parent: 'FCS Within Directory',
-                data: {description: "F18", title: "F18"}
-            },
-            {
-                label: 'F19',
-                value: 6,
-                parent: 'FCS Within Directory',
-                data: {description: "F19", title: "F19"}
             }
+			<?php
+                foreach($fileList as $file){
+                    echo ",{";
+                    echo "label: '" . $file . "',";
+                    echo "value: " . $file . ",";
+                    echo "parent: 'FCS Within Directory',";
+                    echo "data: {description: " . $file . ", title: " . $file. "}";
+                    echo "}";
+                }
+            ?>
+
         ];
-	loadTreeMap(data);
-       });
-        
+		loadTreeMap(data);
+    });
+
     // var zNodes = <?php $treedata ?>;
     $(document).ready(function() {
         $(".list_view").on("click", function() {
