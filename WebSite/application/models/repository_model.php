@@ -47,7 +47,7 @@ class Repository_Model extends CI_Model
 			$newId;
 			if ($this->isExistDirectoryName($dirPath, $id))
 				{
-					$dbchange = $this->db->query("INSERT INTO repository_directory(repository_id) VALUES('$id')");
+					$dbchange = $this->db->query("INSERT INTO repository_directory(repository_id,parent_id) VALUES('$id',-1)");
 					
 					$newId = mysql_insert_id();
 					if ($this->isExistFileName($newId, $fileName))
@@ -72,7 +72,12 @@ class Repository_Model extends CI_Model
 			$newId;
 			if ($this->isExistDirectoryName($newFileDir, $id))
 				{
+					
+			
+					//echo $parentDirId;
 					$dbchange = $this->db->query("INSERT INTO repository_directory(repository_id,directory_name) VALUES('$id','$newFileDir')");
+					
+					
 					$newId = mysql_insert_id();
 					if ($this->isExistFileName($newId, $fileName))
 					{
@@ -111,6 +116,20 @@ class Repository_Model extends CI_Model
 	{
 		$this->db->where('directory_name', $dirPath);
 		$this->db->where('repository_id', $id);
+		//$this->db->where('activated', $activated ? 1 : 0);
+
+		$query = $this->db->get('repository_directory');
+		if ($query->num_rows() == 1)
+		{ 
+			$newData = $query->row();
+			return $newData->id;
+		}
+		return NULL;
+	}
+	function getParentDirectoryId($dirPath)
+	{
+		$this->db->where('directory_name', $dirPath);
+		//$this->db->where('repository_id', $id);
 		//$this->db->where('activated', $activated ? 1 : 0);
 
 		$query = $this->db->get('repository_directory');
@@ -283,6 +302,13 @@ class Repository_Model extends CI_Model
 		$results = $this->db->query($query);
 		return $results->result();
 	}
+	
+	function getAllDirectoriesByRepoId($id)
+	{
+		$query = "SELECT * FROM repository_directory WHERE repository_id = '$id'";
+		$results = $this->db->query($query);
+		return $results->result();
+	}
 	function changeDBVersion ($user_id)
 	{
 		$data = $this->getIdFromUserRepository($user_id);
@@ -302,6 +328,45 @@ class Repository_Model extends CI_Model
 						SELECT version
 						FROM user_repository
 						WHERE user_id =$user_id)");
+						
+		
+		$allDirectories = $this->getAllDirectoriesByRepoId($id);
+		foreach ($allDirectories as $Directory)
+		{
+			$dirPath = $Directory->directory_name;
+			$dnames = explode("/",$dirPath);
+			$lengthOfDnames = count($dnames);
+			//echo $lengthOfDnames;
+			//print_r($dnames);
+			$parentDir = NULL;
+			if ($lengthOfDnames>2)
+			{
+				$lenDnames = $lengthOfDnames-2;
+				for ($i=0; $i<$lenDnames; $i++)
+				{
+					$parentDir = $parentDir.$dnames[$i].'/';
+				}
+			}
+			//echo $parentDir;
+					
+			//now check and get the id of the parent directory
+			$parentDirId=-1;
+				
+			if ($parentDir==NULL)
+			{
+				$parentDir = NULL;
+			}
+			else
+			{
+				//$parentDirectory = $parentDir.'/';
+				//echo $parentDirectory;
+				$parentDirId = $this->getDirectoryId($parentDir, $id);
+			//	echo $parentDirId;
+			}
+			$didnew = $Directory->id;
+			$this->db->query("UPDATE repository_directory SET parent_id = $parentDirId WHERE id = $didnew");
+		}
+		
 	}
 	/*function getFileID($fileID)
 	{
