@@ -155,6 +155,13 @@ class SCC
     return $data;
   }
   
+ function getAllFCCGroup($invocationId){
+    $userId = $this->ci->tank_auth->get_user_id();
+    $data = $this->ci->scc_model->getAllFCCGroupsRows($invocationId, $userId);
+    $data = json_decode(json_encode($data), true);
+    return $data;
+  }
+  
   function getAllFCSCrossGroup($invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     

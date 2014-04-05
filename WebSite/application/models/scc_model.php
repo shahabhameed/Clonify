@@ -134,6 +134,19 @@ class SCC_model extends CI_Model {
         return NULL;
     }
 
+     function getAllFCCGroupsRows($invocationId, $user_id) {
+        $where = "tb1.invocation_id = $invocationId";
+        $this->db->select('*,count("tb1.fcc_id") as noofinstance');
+        $this->db->from('fcc_by_group tb1');
+        $this->db->group_by('tb1.directory_id');
+        $this->db->where($where);
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+           return $result->result();
+        }
+        return NULL;
+    }
+
     function getAllFCSCrossGroupRows($invocationId, $user_id) {
         $where = "invocation_id = $invocationId";
         $this->db->select('*');
