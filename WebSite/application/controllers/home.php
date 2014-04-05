@@ -48,7 +48,7 @@
       $miniMapLinks = array();
       $miniMapLinkLable = array();
       
-      
+      $filePath = $this->input->post('file_path');
       $obj = new SyntaxHighlighter($filePath, 'java');
       $obj->EnableLineNumbers();
       $colors = array('#BDD6A9', '#C8CEC3', '#CCFBA8', '#BCD7A9', '#D5E0CE', '#D8EDCA', '#C3CFBC', '#E1F0DE',
@@ -211,8 +211,10 @@
       $result = $this->scc->getAllFCSWithinDirectory($invocationId);   
       $viewData['parent_table_data'] = $result;
       $secondary_table_rows = array();
+      $dids = array();
       if ($result){
         foreach($result as $row){
+          $dids[] = $row['directory_id'];
           $secondary_table_rows[$row['fcs_indir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
         }
       }
@@ -221,7 +223,7 @@
       
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
-	  $dids = array(0,1);
+	  //$dids = array(0,1,2);
 	  $viewData['treemapdata']=$this->treemap_model->get_fcs_within_dir_treemap($invocationId,$dids);
       $viewData['treedata'] = create_tree($invocationId);
 	  

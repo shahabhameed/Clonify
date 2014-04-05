@@ -61,9 +61,10 @@
 
 <script type="text/javascript" charset="utf-8">
 
+    
     function loadTreeMap(data) {
     $('#treemap').jqxTreeMap({
-            width: 1000,
+            width: 800,
             height: 800,
             source: data,
             colorRange: 150,
@@ -71,8 +72,11 @@
             '*': function(element, value) {
             if (value.data) {
             element.jqxTooltip({
-            content: '<div><div style="font-weight: bold; max-width: 200px;color:blue; font-family: verdana; font-size: 13px;">' + value.data.title + '</div><div style="width: 500px; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
-                    position: 'mouse',
+            content: '<div><div class="btn-primary "  style="font-weight: text-align: right; bold; width: auto; font-family: verdana; font-size: 13px;"><span align: left;>' + value.data.title + 
+                    '</span></div><div class="btn-default  " style="width: auto; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
+
+            
+            position: 'mouse',
                     autoHideDelay: 6000
             });
             } else if (value.data === undefined) {
@@ -233,7 +237,7 @@ if (($treemapdata)) {
             echo "label: '".$filedata['filename']."',";
             echo "value: ".$filedata['fsize'].",";
             echo "parent: '".$filedata['dname']."',";
-            echo "data: {description: '".$filedata['filepath']."', title: '".$filedata['filename']."'}";
+            echo "data: {description: '".$filedata['dname'].$filedata['filename']."</br>File Size: ".$filedata['fsize']."', title: '".$filedata['filename']."'}";
             echo "},";
     }
     }

@@ -36,8 +36,8 @@ class General extends CI_Controller {
 	{
 		$viewData = array();      
 	    //$invocationId = $this->getInvocationIdFromURL();
-		$invocationId = 104;
-		$dids = array(0,1);
+		$invocationId = 112;
+		$dids = array(0,1,2);
 		$viewData['showCloneView'] = true;
 	    $viewData['invocationId'] = $invocationId;
 		
