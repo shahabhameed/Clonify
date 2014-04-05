@@ -47,11 +47,11 @@ class SCC_model extends CI_Model {
         return NULL;
     }
     function getAllFCCDirSecondaryTableRows($dir_id, $invocationId, $user_id) {
-        $where = "tb1.invocation_id = $invocationId and tb1.directory_id= $dir_id and tb3.cmdirectory_id=$dir_id";
+        $where = "tb1.invocation_id = $invocationId and tb1.directory_id= $dir_id AND tb3.cmdirectory_id=$dir_id";
         $this->db->distinct();
         $this->db->select('tb1.fcc_id, tb3.cmfile_id, tb2.gid, tb4.file_name');
         $this->db->from('fcc_by_directory as tb1');
-        $this->db->join('fcc_instance tb2', "tb2.fcc_id = tb1.fcc_id  AND tb1.fcc_id=tb2.fcc_id AND tb2.invocation_id = tb1.invocation_id", 'INNER');
+        $this->db->join('fcc_instance tb2', "tb2.fcc_id = tb1.fcc_id AND tb1.fcc_id=tb2.fcc_id AND tb2.invocation_id = tb1.invocation_id", 'INNER');
         $this->db->join('invocation_files tb3', "tb2.fid = tb3.cmfile_id AND tb3.invocation_id = $invocationId", 'INNER');
         $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
         $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
@@ -66,11 +66,12 @@ class SCC_model extends CI_Model {
     }
 
     function getAllFCCGroupSecondaryTableRows($group_id, $invocationId, $user_id) {
-        $where = "tb1.invocation_id = $invocationId and tb1.group_id= $group_id";
+        $tempGroup_id = $group_id + 1;
+        $where = "tb1.invocation_id = $invocationId and tb1.group_id= $group_id AND tb3.group_id != $tempGroup_id ";
         $this->db->distinct();
         $this->db->select('tb1.fcc_id, tb3.cmfile_id, tb2.did, tb4.file_name');
         $this->db->from('fcc_by_group as tb1');
-        $this->db->join('fcc_instance tb2', "tb2.fcc_id = tb1.fcc_id AND tb2.invocation_id = $invocationId", 'INNER');
+        $this->db->join('fcc_instance tb2', "tb2.fcc_id = tb1.fcc_id AND tb1.fcc_id=tb2.fcc_id AND tb2.invocation_id = tb1.invocation_id", 'INNER');
         $this->db->join('invocation_files tb3', "tb2.fid = tb3.cmfile_id  AND tb3.invocation_id = $invocationId", 'INNER');
         $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
         $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
