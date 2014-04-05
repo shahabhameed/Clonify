@@ -47,7 +47,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	
         
         private static String INSERT_FCC = "INSERT INTO fcc(invocation_id, fcc_id, atc, apc, members) values ";
-        private static String INSERT_FCC_INSTANCE = "INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, file_id, directory_id, group_id) values ";
+        private static String INSERT_FCC_INSTANCE = "INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, fid, directory_id, group_id) values ";
         private static String INSERT_FCC_DIR = "INSERT INTO fcc_by_directory(invocation_id, fcc_id, directory_id) values ";
         private static String INSERT_FCC_SCC = "INSERT INTO fcc_scc(invocation_id, scc_id, fcc_id) values ";
         private static String INSERT_FCC_GROUP = "INSERT INTO fcc_by_group(invocation_id, fcc_id, group_id) values ";
@@ -571,6 +571,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			parse_InDirs_CloneFileStructures(invocationId);
 			Parse_CrossDirsCloneFileStructuresEx(invocationId);			
 			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
+                        parseFileCloneByDirs(invocationId);
 
 		} catch(Exception e){
 			e.printStackTrace();
@@ -821,7 +822,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
             Database.getInstance().executeTransaction(INSERT_FCC_SCC);
           }
           
-          if (!INSERT_FCC_INSTANCE.equalsIgnoreCase("INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, file_id, directory_id, group_id) values ")) {
+          if (!INSERT_FCC_INSTANCE.equalsIgnoreCase("INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, fid, directory_id, group_id) values ")) {
             Database.getInstance().executeTransaction(INSERT_FCC_INSTANCE);
           }
           
@@ -1074,7 +1075,62 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		}	
     }
     	
-	
+    public void parseFileCloneByGroups(int invocation_id) throws FileNotFoundException, IOException
+    {
+        String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.FILE_CLONES_BY_GROUPS+ Constants.CM_TEXT_FILE_EXTENSION;
+        File file18 = new File(filePath);
+	FileInputStream filein18 = new FileInputStream(file18);
+	BufferedReader stdin18 = new BufferedReader(new InputStreamReader(filein18));
+	int groupPosn = 0;
+        while ((line = stdin18.readLine()) != null) {
+            if (!line.equalsIgnoreCase("")) {
+                st = new StringTokenizer(line, ",");
+                    while (st.hasMoreTokens()) {
+                        String s2 = st.nextToken().trim();
+                        if (!s2.equalsIgnoreCase("")) {
+                            insertFCC_Group(invocation_id, Integer.parseInt(s2), groupPosn);
+			}
+                    }
+		}
+		groupPosn++;
+            }
+
+            if (!INSERT_FCC_GROUP.equalsIgnoreCase("INSERT INTO fcc_group(fcc_id, gid) values ")) {
+                Database.getInstance().executeTransaction(INSERT_FCC_GROUP);
+            }
+    }
+        
+    public void parseFileCloneByDirs(int invocation_id)throws FileNotFoundException, IOException
+    {
+           
+            String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.FILE_CLONES_BY_DIR+ Constants.CM_TEXT_FILE_EXTENSION;
+            File file15 = new File(filePath);
+            FileInputStream filein15 = new FileInputStream(file15);
+            BufferedReader stdin15 = new BufferedReader(new InputStreamReader(filein15));
+			int dirPosn = 0;
+			while ((line = stdin15.readLine()) != null) {
+				if (!line.equalsIgnoreCase("")) {
+					st = new StringTokenizer(line, ",");
+					while (st.hasMoreTokens()) {
+						String s2 = st.nextToken().trim();
+						if (!s2.equalsIgnoreCase("")) {
+							insertFCC_Dir(invocation_id,Integer.parseInt(s2), dirPosn);
+						}
+					}
+				}
+				dirPosn++;
+			}
+                      int aaa=0;
+
+			if (!INSERT_FCC_DIR.equalsIgnoreCase("INSERT INTO fcc_by_directory(invocation_id, fcc_id, directory_id) values ")) {
+                            Database.getInstance().executeTransaction(INSERT_FCC_DIR);
+			}
+            
+        }
+        
+        
+        
+        
 	
 	
 	
@@ -1642,4 +1698,16 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	public void insertMCC_File(int mcc_id, int fid, int pInvocationId) {
 		INSERT_MCC_FILE += "( \"" + mcc_id + "\" , \"" + fid + "\",\"" + pInvocationId + "\"),";
 	}
+
+	public void insertFCC_Dir(int invocation_id,int fcc_id, int did) {
+		INSERT_FCC_DIR += "(\"" + invocation_id + "\" , \"" + fcc_id + "\" , \"" + did + "\"  ),";
+	}
+        
+        public void insertFCC_Group(int invocation_id, int fcc_id, int gid) {
+		INSERT_FCC_GROUP += "( \"" + invocation_id + "\" , \"" + fcc_id + "\" , \"" + gid + "\"  ),";
+	}
+
+
+
+
 }
