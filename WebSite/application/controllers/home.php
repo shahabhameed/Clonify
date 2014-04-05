@@ -48,7 +48,7 @@
       $miniMapLinks = array();
       $miniMapLinkLable = array();
       
-      
+      $filePath = $this->input->post('file_path');
       $obj = new SyntaxHighlighter($filePath, 'java');
       $obj->EnableLineNumbers();
       $colors = array('#BDD6A9', '#C8CEC3', '#CCFBA8', '#BCD7A9', '#D5E0CE', '#D8EDCA', '#C3CFBC', '#E1F0DE',
