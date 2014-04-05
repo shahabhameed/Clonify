@@ -21,25 +21,28 @@ class Treemap_model extends CI_Model {
 			$dirParent = json_decode(json_encode($result->result()), true);
 			foreach($dirParent as $dirP)
 			{
-				$pArr = array($dirP['pid']);
-				$tmpP = $dirP['pid'];
-				while($tmpP != NULL)
-				{
-					$query = "SELECT d.id did, d.parent_id pid from repository_directory d where d.id = $tmpP";
-					$result = $this->db->query($query);
-					$dirPP = json_decode(json_encode($result->result()), true);
-					if($dirPP[0]['pid']!=NULL)
-					{
-						$tmpP = $dirPP[0]['pid'];
-						$pArr[] = $tmpP;
-					}
-					else
-					{
-						$tmpP = NULL;
-					}
-				}
-				$dirArr[] = array("cmdid"=>$did,"did"=>$dirP['did'],"parents"=>$pArr);
-				//$dirParent[$dirP]['pid']=$pArr;
+                if($dirP['pid']>=0)
+                {
+    				$pArr = array($dirP['pid']);
+    				$tmpP = $dirP['pid'];
+    				while($tmpP != NULL)
+    				{
+    					$query = "SELECT d.id did, d.parent_id pid from repository_directory d where d.id = $tmpP";
+    					$result = $this->db->query($query);
+    					$dirPP = json_decode(json_encode($result->result()), true);
+    					if($dirPP[0]['pid']!=NULL && $dirPP[0]['pid']>=0)
+    					{
+    						$tmpP = $dirPP[0]['pid'];
+    						$pArr[] = $tmpP;
+    					}
+    					else
+    					{
+    						$tmpP = NULL;
+    					}
+    				}
+    				$dirArr[] = array("cmdid"=>$did,"did"=>$dirP['did'],"parents"=>$pArr);
+    				//$dirParent[$dirP]['pid']=$pArr;
+                }
 			}
 		}
 		//return $dirArr;
