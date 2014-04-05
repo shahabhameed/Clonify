@@ -50,7 +50,26 @@ class SCC_model extends CI_Model {
         $where = "tb1.invocation_id = $invocationId and tb1.directory_id= $dir_id";
         $this->db->select('*');
         $this->db->from('fcc_by_directory as tb1');
-        $this->db->join('invocation_files tb3', 'tb1.fcc_id = tb3.cmfile_id', 'INNER');
+        $this->db->join('fcc_instance tb2', "tb2.fcc_id = tb1.fcc_id AND tb2.invocation_id = $invocationId", 'INNER');
+        $this->db->join('invocation_files tb3', 'tb2.fid = tb3.cmfile_id', 'INNER');
+        $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
+        $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
+        $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
+        $this->db->where($where);
+        $result = $this->db->get();
+         //print_r($result->result());exit;
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return NULL;
+    }
+
+    function getAllFCCGroupSecondaryTableRows($group_id, $invocationId, $user_id) {
+        $where = "tb1.invocation_id = $invocationId and tb1.group_id= $group_id";
+        $this->db->select('*');
+        $this->db->from('fcc_by_group as tb1');
+        $this->db->join('fcc_instance tb2', "tb2.fcc_id = tb1.fcc_id AND tb2.invocation_id = $invocationId", 'INNER');
+        $this->db->join('invocation_files tb3', "tb2.fid = tb3.cmfile_id  AND tb3.invocation_id = $invocationId", 'INNER');
         $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
         $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
         $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
@@ -138,7 +157,7 @@ class SCC_model extends CI_Model {
         $where = "tb1.invocation_id = $invocationId";
         $this->db->select('*,count("tb1.fcc_id") as noofinstance');
         $this->db->from('fcc_by_group tb1');
-        $this->db->group_by('tb1.directory_id');
+        $this->db->group_by('tb1.group_id');
         $this->db->where($where);
         $result = $this->db->get();
         if ($result->num_rows() > 0) {

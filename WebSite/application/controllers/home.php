@@ -457,7 +457,7 @@
       $secondary_table_rows = array();
       if ($result){
         foreach($result as $row){
-          $secondary_table_rows[$row['fcc_id']] = $this->scc->getAllFCCDIrSecondaryTableRows($row, $invocationId);
+          $secondary_table_rows[$row['fcc_id']] = $this->scc->getAllFCCGroupSecondaryTableRows($row, $invocationId);
         }
       }
       
@@ -466,7 +466,7 @@
       //print_r($viewData['secondary_table_rows']);exit;
        $viewData['showCloneView'] = true;
       $this->load->view('partials/main_header');
-      $this->load->view('clone_table/fccdir.php', $viewData);
+      $this->load->view('clone_table/fcc_by_group.php', $viewData);
       $this->load->view('partials/main_footer');
     }
 

@@ -268,6 +268,17 @@ class SCC
     return $result;
   }  
   
+  function getAllFCCGroupSecondaryTableRows($primary_table_row, $invocationId){
+    $userId = $this->ci->tank_auth->get_user_id();
+    $data = null;
+    $result = array();
+    $data = $this->ci->scc_model->getAllFCCGroupSecondaryTableRows($primary_table_row['group_id'], $invocationId, $userId);
+    if ($data){
+     return  $data = json_decode(json_encode($data), true);
+    }    
+    return $result;
+  }  
+  
   function getAllFCSCrossGroupSecondaryTableRows($primary_table_row, $invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     $data = null;
