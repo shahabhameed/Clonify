@@ -132,9 +132,9 @@ class Treemap_model extends CI_Model {
             }
             $parCount++;
         }
-        echo "<pre>".print_r($dirData,true)."</pre>";
+        //echo "<pre>".print_r($dirData,true)."</pre>";
         //echo "<pre>".print_r($currDir,true)."</pre>";
-		die();
+		//die();
         
 		return $dirData;
     }
