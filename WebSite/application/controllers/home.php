@@ -441,8 +441,8 @@
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       $viewData['invocationId'] = $invocationId;
-      //print_r($viewData['secondary_table_rows']);exit;
-       $viewData['showCloneView'] = true;
+      $viewData['treedata'] = create_tree($invocationId);
+      $viewData['showCloneView'] = true;
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/fccdir.php', $viewData);
       $this->load->view('partials/main_footer');
@@ -464,7 +464,7 @@
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       $viewData['invocationId'] = $invocationId;
       //print_r($viewData['secondary_table_rows']);exit;
-       $viewData['showCloneView'] = true;
+      $viewData['showCloneView'] = true;
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/fcc_by_group.php', $viewData);
       $this->load->view('partials/main_footer');
