@@ -119,7 +119,7 @@
                                         <th>No</th>
                                         <th>Directory ID</th>
                                         <th>Directory Name</th>                        
-                                        <th>No of Clones</th>                        
+                                        <th>No of Files</th>                        
                                         
                                     </tr>
                                 </thead>
@@ -130,13 +130,11 @@
                                         foreach ($parent_table_data as $data) {
                                             $counter++;
                                             ?>
-                                            <tr class="list_view" data-sccid="<?php echo $data['fcc_id']; ?>">
+                                            <tr class="list_view" data-sccid="<?php echo $data['cmdirectory_id']; ?>">
                                                 <td><?php echo $counter; ?></td>
-                                                <td><?php echo $data['directory_id']; ?></td>                          
-                                               
-                                                <td><?php echo get_dir_name( $data['directory_id']);?></td>
+                                                <td><?php echo $data['cmdirectory_id']; ?></td>                          
+                                                <td><?php echo get_dir_name( $data['cmdirectory_id']);?></td>
                                                 <td><?php echo isset($data['noofinstance']) ? $data['noofinstance']: '-'; ?></td>
-
                                             </tr>
                                         <?php } ?>                           
                                 </tbody>
@@ -145,7 +143,7 @@
                                         <th>No</th>
                                         <th>Directory ID</th>
                                         <th>Directory Name</th>                        
-                                        <th>No of Clones</th>                        
+                                        <th>No of Files</th>                        
                                     </tr>
                                 </tfoot>                     
                             </table>
@@ -175,11 +173,9 @@
                                      <thead>
                                    ` <tr>
                                         <th>No</th>
-                                        <th>FCC ID</th>
                                         <th>Group ID</th> 
                                         <th>File ID</th>
-                                        <th>File Name</th>                        
-                                        
+                                        <th>File Name</th>                
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -189,23 +185,20 @@
                                         foreach ($data as $d) {
                                             $counter++;
                                             ?>
-                                            <tr class="code_view" data-sccid="<?php echo $d['fcc_id']; ?>" data-files="<?php echo $d['cmfile_id']?>">
+                                            <tr class="code_view" data-sccid="<?php echo $d['cmfile_id']; ?>" data-files="<?php echo $d['cmfile_id']?>">
                                                 <td><?php echo $counter; ?></td>
-                                                <td><?php echo $d['fcc_id']; ?></td> 
-                                                 <td><?php echo $d['gid']; ?></td>                          
-                                                <td><?php echo $d['cmfile_id']?></td>
-                                                <td style="text-align: left;"><?php echo isset($d['file_name']) ? $d['file_name']: '-'; ?></td>
-
+                                                <td><?php echo $d['group_id']; ?></td> 
+                                                 <td><?php echo $d['file_id']; ?></td>                          
+                                                <td><?php echo isset($d['file_name']) ? $d['file_name']: '-'; ?></td>
                                             </tr>
                                         <?php } ?>                           
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>FCC ID</th>
                                         <th>Group ID</th> 
                                         <th>File ID</th>
-                                        <th>File Name</th>   
+                                        <th>File Name</th> 
                                     </tr>
                                 </tfoot>                             
                                 </table>
@@ -273,6 +266,6 @@
             event.preventDefault();
             return false;
         });
-        
+      
     });
 </script>

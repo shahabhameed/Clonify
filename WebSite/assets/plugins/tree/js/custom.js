@@ -121,6 +121,7 @@ var setting = {
 			set_color();
 			updateNodes(true);
 		}
+		
 		function set_color(){
 			if(current_color == 3){
 				current_color = 0;

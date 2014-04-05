@@ -469,6 +469,33 @@
       $this->load->view('clone_table/fcc_by_group.php', $viewData);
       $this->load->view('partials/main_footer');
     }
+    public function filebydir(){
+    	$viewData = array();      
+	    $invocationId = $this->getInvocationIdFromURL();
+	      
+        $result = $this->db->query('select count(*) as noofinstance, cmdirectory_id 
+									from invocation_files tb1    
+									where tb1.invocation_id = '.$invocationId.'
+									group by cmdirectory_id')->result_array();
+	      $viewData['parent_table_data'] = $result;
+	      $secondary_table_rows = array();
+	      if ($result){
+	        foreach($result as $row){
+	        	$res = $this->db->query('select * from invocation_files as tb1
+											join repository_file as tb2 on tb1.file_id = tb2.id 
+											where invocation_id = 3 and cmdirectory_id = '.$row['cmdirectory_id'])->result_array();
+	          $secondary_table_rows[$row['cmdirectory_id']] = $res;
+	        }
+	      }
+	      
+	      $viewData['secondary_table_rows'] = $secondary_table_rows;      
+	      $viewData['invocationId'] = $invocationId;
+	      $viewData['treedata'] = create_tree($invocationId);
+	      $viewData['showCloneView'] = true;
+	      $this->load->view('partials/main_header');
+	      $this->load->view('clone_table/filebydir.php', $viewData);
+	      $this->load->view('partials/main_footer');
+    }
 
 
   }
