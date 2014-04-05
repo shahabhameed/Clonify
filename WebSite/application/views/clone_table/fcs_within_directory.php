@@ -381,7 +381,7 @@
             echo "label: '".$filedata['filename']."',";
             echo "value: ".$filedata['fsize'].",";
             echo "parent: '".$filedata['dname']."',";
-            if($filedata['fsize']>5000)
+           /* if($filedata['fsize']>5000)
             {
                 echo "color: '#"."73DD58"."',";
             }
@@ -389,7 +389,9 @@
             {
                  echo "color: '#"."1292AA"."',";
             }
-           
+             */
+            
+            echo "color: '#".random_color()."',";
             echo "data: {description: '".$filedata['dname'].$filedata['filename']."</br>File Size: ".$filedata['fsize']."', title: '".$filedata['filename']."'}";
             echo "},";
     }

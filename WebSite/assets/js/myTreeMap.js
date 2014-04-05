@@ -4,7 +4,7 @@ function loadTreeMap(data) {
             height: 800,
             source: data,
             baseColor: '#B423F4',
-            colorMode:'autoColors',
+            colorMode:'parent',
             colorRanges :[{
                 color: "#F72828",
                 min: 0,
