@@ -125,8 +125,11 @@ class Treemap_model extends CI_Model {
         				}
                         $currDir = &$currDir[$currPar]['children'];
                     }
-                    $currDir[$currDid]=$dirData[$currDid];
-                    unset($dirData[$currDid]);
+                    if($dirData[$currDid])
+                    {
+                        $currDir[$currDid]=$dirData[$currDid];
+                        unset($dirData[$currDid]);
+                    }
     			}
     		}
             if(!$parFound)
