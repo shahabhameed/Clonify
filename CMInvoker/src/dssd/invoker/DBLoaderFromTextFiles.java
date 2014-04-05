@@ -44,8 +44,13 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	private static String INSERT_FCS_CROSSGROUP = "INSERT INTO fcs_crossgroup(invocation_id,fcs_crossgroup_id, members,group_id) values ";
 	private static String INSERT_FCSCROSSGROUP_FILES = "INSERT INTO fcs_crossgroup_files(invocation_id,fcs_crossgroup_id,fcc_id,group_id, fid) values ";
 	private static String INSERT_FCSCROSSGROUP_FCC = "INSERT INTO fcs_crossgroup_fcc(invocation_id,fcs_crossgroup_id, fcc_id ) values ";
-	private static String INSERT_FCC_INSTANCE = "INSERT INTO fcc_instance(invocation_id,fcc_instance_id, fcc_id, fid, tc, pc, did, gid) values ";
-
+	
+        
+        private static String INSERT_FCC = "INSERT INTO fcc(invocation_id, fcc_id, atc, apc, members) values ";
+        private static String INSERT_FCC_INSTANCE = "INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, file_id, directory_id, group_id) values ";
+        private static String INSERT_FCC_DIR = "INSERT INTO fcc_by_directory(invocation_id, fcc_id, directory_id) values ";
+        private static String INSERT_FCC_SCC = "INSERT INTO fcc_scc(invocation_id, scc_id, fcc_id) values ";
+        private static String INSERT_FCC_GROUP = "INSERT INTO fcc_by_group(invocation_id, fcc_id, group_id) values ";
 	
 	
 	private static String INSERT_MCC = "INSERT INTO mcc(mcc_id, atc, apc, invocation_id, members) values ";
@@ -774,52 +779,56 @@ public class DBLoaderFromTextFiles extends OutputHelper{
     ///Above file Completed////
 	
 	private void Parse_FileClustersXX(int invocation_id)throws FileNotFoundException, IOException{    	
-    	String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.FILE_CLUSTER_XX+ Constants.CM_TEXT_FILE_EXTENSION; 
-		File file4 = new File(filePath);
-		FileInputStream filein4 = new FileInputStream(file4);
-		BufferedReader stdin4 = new BufferedReader(new InputStreamReader(filein4));
-		while ((line = stdin4.readLine()) != null) {
-			if (!line.equalsIgnoreCase("")) {
-				st = new StringTokenizer(line, ";");
-				String cid = st.nextToken();
-				int fcc_id = Integer.parseInt(cid);
-				String support = st.nextToken();
-				String sccs = stdin4.readLine();
-				st2 = new StringTokenizer(sccs, ",");
-				Vector<String> sccVector = new Vector<String>();
-				while (st2.hasMoreTokens()) {
-					sccVector.add(st2.nextToken());
-				}
-				
-				int sup = (new Integer(support)).intValue();
-				double atc = 0;
-				double apc = 0;
-				for (int i = 0; i < sup; i++) {
-					line = stdin4.readLine();
-					st1 = new StringTokenizer(line, ";,");
-					fid = st1.nextToken();
-					String tk = st1.nextToken();
-					String coverage = st1.nextToken();
-					atc += Double.parseDouble(tk);
-					apc += Double.parseDouble(coverage);
-					insertFCC_Instance(invocation_id,i, fcc_id, Integer.parseInt(fid),
-							Double.parseDouble(tk), Double
-									.parseDouble(coverage));
-				}
-				atc = atc / sup;
-				apc = apc / sup;
-				
-			}
-		}
-
-		
-		if (!INSERT_FCC_INSTANCE
-				.equalsIgnoreCase("INSERT INTO fcc_instance(invocation_id,fcc_instance_id, fcc_id, fid, tc, pc, did, gid) values ")) {
-			Database.getInstance().executeTransaction(INSERT_FCC_INSTANCE);
-		}
-		
-    	
-    	
+          String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.FILE_CLUSTER_XX+ Constants.CM_TEXT_FILE_EXTENSION; 
+          File file4 = new File(filePath);		
+          FileInputStream filein4 = new FileInputStream(file4);
+          BufferedReader stdin4 = new BufferedReader(new InputStreamReader(filein4));
+          while ((line = stdin4.readLine()) != null) {
+            if (!line.equalsIgnoreCase("")) {
+              st = new StringTokenizer(line, ";");
+              String cid = st.nextToken();
+              int fcc_id = Integer.parseInt(cid);
+              String support = st.nextToken();
+              String sccs = stdin4.readLine();
+              st2 = new StringTokenizer(sccs, ",");
+              Vector<String> sccVector = new Vector<String>();
+              while (st2.hasMoreTokens()) {
+                sccVector.add(st2.nextToken());
+              }
+              for (int i = 0; i < sccVector.size(); i++) {
+                insertFCC_SCC(invocation_id, Integer.parseInt(sccVector.get(i)), fcc_id);
+              }
+              int sup = (new Integer(support)).intValue();
+              double atc = 0;
+              double apc = 0;
+              for (int i = 0; i < sup; i++) {
+                line = stdin4.readLine();
+                st1 = new StringTokenizer(line, ";,");
+                fid = st1.nextToken();
+                String tk = st1.nextToken();
+                String coverage = st1.nextToken();
+		atc += Double.parseDouble(tk);
+		apc += Double.parseDouble(coverage);
+		insertFCC_Instance(invocation_id, i, fcc_id, Integer.parseInt(fid), Double.parseDouble(tk), Double.parseDouble(coverage));
+              }
+              atc = atc / sup;
+              apc = apc / sup;
+              insertFCC(invocation_id, fcc_id, atc, apc, sup);
+            }
+          }
+          
+          if (!INSERT_FCC_SCC.equalsIgnoreCase("INSERT INTO fcc_scc(invocation_id, scc_id, fcc_id) values ")) {
+            Database.getInstance().executeTransaction(INSERT_FCC_SCC);
+          }
+          
+          if (!INSERT_FCC_INSTANCE.equalsIgnoreCase("INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, file_id, directory_id, group_id) values ")) {
+            Database.getInstance().executeTransaction(INSERT_FCC_INSTANCE);
+          }
+          
+          if (!INSERT_FCC.equalsIgnoreCase("INSERT INTO fcc(invocation_id, fcc_id, atc, apc, members) values ")) {
+            Database.getInstance().executeTransaction(INSERT_FCC);
+          }
+	
     }
 
     ///Above File Completed////
@@ -1536,14 +1545,24 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				+ "\",\"" + did + "\"  ),";
 	}
 	
-	public void insertFCC_Instance(int invocation_id,int fcc_instance_id, int fcc_id, int fid,
+        public void insertFCC_SCC(int invocation_id, int scc_id, int fcc_id) {
+		INSERT_FCC_SCC += "( \"" + invocation_id + "\" , \"" + scc_id + "\" , \"" + fcc_id + "\"  ),";
+	}
+        
+	public void insertFCC_Instance(int invocation_id, int fcc_instance_id, int fcc_id, int fid,
 			double tc, double pc) {
 		INSERT_FCC_INSTANCE += "( \"" + invocation_id + "\",\"" + fcc_instance_id + "\" ,\"" + fcc_id
-				+ "\" , \"" + fid + "\" , \"" + tc + "\" , \"" + pc + "\", \""
-				+ getDidFromFid(invocation_id,fid) + "\" , \"" + getGidFromFid(invocation_id,fid)
+				+ "\" , \"" + tc + "\" , \"" + pc + "\" , \"" + fid + "\", \""
+				+ getDidFromFid(invocation_id, fid) + "\" , \"" + getGidFromFid(invocation_id, fid)
 				+ "\"  ),";
 	}
-		public void insertMCSCrossFile_Methods(int mcs_crossfile_id, int fid,
+        
+        public void insertFCC(int invocation_id, int fcc_id, double atc, double apc, int members) {
+		INSERT_FCC += "( \"" + invocation_id + "\", \"" + fcc_id + "\" , \"" + atc + "\", \"" + apc
+				+ "\", \"" + members + "\"  ),";
+	}
+        
+	public void insertMCSCrossFile_Methods(int mcs_crossfile_id, int fid,
 			int mcc_id, int mid, int pInvocationId) {
 		INSERT_MCSCROSSFILE_METHODS += "( \"" + mcs_crossfile_id + "\" , \""
 				+ fid + "\", \"" + mcc_id + "\" , \"" + mid + "\",\"" + pInvocationId + "\"),";
