@@ -61,9 +61,10 @@
 
 <script type="text/javascript" charset="utf-8">
 
+    
     function loadTreeMap(data) {
     $('#treemap').jqxTreeMap({
-            width: 1000,
+            width: 800,
             height: 800,
             source: data,
             colorRange: 150,
@@ -236,7 +237,7 @@ if (($treemapdata)) {
             echo "label: '".$filedata['filename']."',";
             echo "value: ".$filedata['fsize'].",";
             echo "parent: '".$filedata['dname']."',";
-            echo "data: {description: '"    .$filedata['filepath']."</br>File Size: ".$filedata['fsize']."', title: '".$filedata['filename']."'}";
+            echo "data: {description: '".$filedata['dname'].$filedata['filename']."</br>File Size: ".$filedata['fsize']."', title: '".$filedata['filename']."'}";
             echo "},";
     }
     }
