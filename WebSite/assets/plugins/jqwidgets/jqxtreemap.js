@@ -227,48 +227,48 @@ License: http://jqwidgets.com/license/
                                 for (var q = 0; q < v.length; q += 1) {
                                     v[q].parent = s;
                                     if (!v[q].data) {
-                                        v[q].data = v[q].value
+                                        v[q].data = v[q].value;
                                     }
-                                    if (v[q].value == null) {
-                                        v[q].value = 0
+                                    if (v[q].value === null) {
+                                        v[q].value = 0;
                                     }
                                     if (isNaN(parseFloat(v[q].value))) {
                                         var w = v[q].value.toString();
                                         var u = "";
                                         for (var p = 0; p < w.length; p++) {
                                             var r = w.substring(p, p + 1);
-                                            if (r.match(/^[0-9]+$/) != null || r == ".") {
-                                                u += r
+                                            if (r.match(/^[0-9]+$/) != null || r === ".") {
+                                                u += r;
                                             }
                                         }
-                                        v[q].value = new Number(u)
+                                        v[q].value = new Number(u);
                                     } else {
-                                        v[q].value = parseFloat(v[q].value)
+                                        v[q].value = parseFloat(v[q].value);
                                     }
                                     f.push(v[q]);
                                     if (v[q].items) {
-                                        g(v[q].items, v[q].label)
+                                        g(v[q].items, v[q].label);
                                     }
                                 }
                             };
                         g(h, null);
-                        h = f
+                        h = f;
                     }
                     for (var j = 0; j < h.length; j += 1) {
                         l = h[j];
                         if (l.value) {
-                            if (l.parent != null) {
+                            if (l.parent !== null) {
                                 if (!n[l.parent]) {
-                                    n[l.parent] = 0
+                                    n[l.parent] = 0;
                                 }
-                                n[l.parent] += l.value
+                                n[l.parent] += l.value;
                             }
                         }
                     }
                     for (var j = 0; j < h.length; j += 1) {
                         l = h[j];
                         if (n[l.label] !== undefined) {
-                            l.value = n[l.label]
+                            l.value = n[l.label];
                         }
                     }
                     k._buildTree(h, k._root);
@@ -276,16 +276,16 @@ License: http://jqwidgets.com/license/
                     k._setStyles();
                     var o = d["default"];
                     if (k.layout === "simple") {
-                        o = d.simple
+                        o = d.simple;
                     }
                     k._render(k._root, o);
-                    k._renderLegend()
+                    k._renderLegend();
                 };
-            if (c.jqx.dataAdapter && this.source != null && this.source._source) {
+            if (c.jqx.dataAdapter && this.source !== null && this.source._source) {
                 this.dataBind(this.source, e);
-                return
+                return;
             }
-            e(this.source, this)
+            e(this.source, this);
         },
         dataBind: function (e, m) {
             this.records = new Array();
@@ -295,20 +295,20 @@ License: http://jqwidgets.com/license/
             });
             if (h) {
                 f = e;
-                e = e._source
+                e = e._source;
             }
             var g = function (n) {
-                    if (e.type != undefined) {
-                        f._options.type = e.type
+                    if (e.type !== undefined) {
+                        f._options.type = e.type;
                     }
-                    if (e.formatdata != undefined) {
-                        f._options.formatData = e.formatdata
+                    if (e.formatdata !== undefined) {
+                        f._options.formatData = e.formatdata;
                     }
-                    if (e.contenttype != undefined) {
-                        f._options.contentType = e.contenttype
+                    if (e.contenttype !== undefined) {
+                        f._options.contentType = e.contenttype;
                     }
-                    if (e.async != undefined) {
-                        f._options.async = e.async
+                    if (e.async !== undefined) {
+                        f._options.async = e.async;
                     }
                 };
             var j = function (p, o) {
@@ -317,16 +317,16 @@ License: http://jqwidgets.com/license/
                     for (var n = 0; n < p.records.length; n++) {
                         var r = p.records[n];
                         if (p.displayMember) {
-                            r.label = r[p.displayMember]
+                            r.label = r[p.displayMember];
                         }
                         if (p.valueMember) {
-                            r.value = r[p.valueMember]
+                            r.value = r[p.valueMember];
                         }
                         r.record = r;
-                        q.push(r)
+                        q.push(r);
                     }
                     p._trigger("bindingComplete");
-                    m(q, p)
+                    m(q, p);
                 };
             g(this);
             var k = this;
@@ -334,13 +334,13 @@ License: http://jqwidgets.com/license/
             case "local":
             case "array":
             default:
-                if (e.localdata != null) {
+                if (e.localdata !== null) {
                     f.unbindBindingUpdate(this.element.id);
                     f.dataBind();
                     j(this);
                     f.bindBindingUpdate(this.element.id, function (n) {
-                        j(k, n)
-                    })
+                        j(k, n);
+                    });
                 }
                 break;
             case "json":
@@ -351,45 +351,45 @@ License: http://jqwidgets.com/license/
             case "text":
             case "csv":
             case "tab":
-                if (e.localdata != null) {
+                if (e.localdata !== null) {
                     f.unbindBindingUpdate(this.element.id);
                     f.dataBind();
                     j(this);
                     f.bindBindingUpdate(this.element.id, function () {
-                        j(k)
+                        j(k);
                     });
-                    return
+                    return;
                 }
                 var l = {};
                 if (f._options.data) {
-                    c.extend(f._options.data, l)
+                    c.extend(f._options.data, l);
                 } else {
                     if (e.data) {
-                        c.extend(l, e.data)
+                        c.extend(l, e.data);
                     }
-                    f._options.data = l
+                    f._options.data = l;
                 }
                 var i = function () {
-                        j(k)
+                        j(k);
                     };
                 f.unbindDownloadComplete(k.element.id);
                 f.bindDownloadComplete(k.element.id, i);
-                f.dataBind()
+                f.dataBind();
             }
         },
         _destroy: function () {
-            this.host.children().remove()
+            this.host.children().remove();
         },
         destroy: function () {
-            this.host.remove()
+            this.host.remove();
         },
         refresh: function (e) {
             if (!e) {
-                this._refresh()
+                this._refresh();
             }
         },
         _refresh: function () {
-            this.render()
+            this.render();
         },
         _setStyles: function () {
             this.host.css({
@@ -398,48 +398,48 @@ License: http://jqwidgets.com/license/
                 height: this.height
             });
             var e = false;
-            if (this.width != null && this.width.toString().indexOf("%") != -1) {
-                e = true
+            if (this.width !== null && this.width.toString().indexOf("%") !== -1) {
+                e = true;
             }
-            if (this.height != null && this.height.toString().indexOf("%") != -1) {
-                e = true
+            if (this.height !== null && this.height.toString().indexOf("%") !== -1) {
+                e = true;
             }
             var f = this;
             c.jqx.utilities.resize(this.host, function () {
                 if (f.resizeTimer) {
-                    clearTimeout(f.resizeTimer)
+                    clearTimeout(f.resizeTimer);
                 }
                 f.resizeTimer = setTimeout(function () {
-                    f.performLayout()
-                }, 10)
-            })
+                    f.performLayout();
+                }, 10);
+            });
         },
         resize: function (f, e) {
             this.width = f;
             this.height = e;
-            this.performLayout()
+            this.performLayout();
         },
         performLayout: function () {
             var e = d["default"];
             this.clearSelection();
-            this._layout(this._root, e)
+            this._layout(this._root, e);
         },
         _getValues: function (g) {
             var e = [];
             for (var f = 0; f < g.length; f += 1) {
-                e.push(g[f].value)
+                e.push(g[f].value);
             }
-            return e
+            return e;
         },
         _isColor: function (e) {
             if (!e) {
-                return false
+                return false;
             }
             var f = this._colorEvaluator;
             if (f._isRgb(e) || f._isHex(e)) {
-                return true
+                return true;
             }
-            return false
+            return false;
         },
         _colorEvaluator: {
             _toRgb: function (f) {
@@ -448,7 +448,7 @@ License: http://jqwidgets.com/license/
                     r: parseInt(e[1], 16),
                     g: parseInt(e[2], 16),
                     b: parseInt(e[3], 16)
-                } : null
+                } : null;
             },
             _toHex: function (f) {
                 var i = f.r.toString(16),
@@ -457,26 +457,26 @@ License: http://jqwidgets.com/license/
                 i = i.length === 1 ? "0" + i : i;
                 h = h.length === 1 ? "0" + h : h;
                 e = e.length === 1 ? "0" + e : e;
-                return "#" + i + h + e
+                return "#" + i + h + e;
             },
             _isRgb: function (e) {
-                return (/(rgb|rgba)\s*\(\s*\d+\s*(,\s*\d+\s*){2}(,\d+\.\d+)?\)(;?)/i).test(e)
+                return (/(rgb|rgba)\s*\(\s*\d+\s*(,\s*\d+\s*){2}(,\d+\.\d+)?\)(;?)/i).test(e);
             },
             _isHex: function (e) {
-                return (/^(#([0-9A-F]{3})([0-9A-F]{3})?)$/i).test(e)
+                return (/^(#([0-9A-F]{3})([0-9A-F]{3})?)$/i).test(e);
             },
             getColorByValue: function (n, j, k) {
                 var o = this._colorEvaluator,
                     m, l, e, f, g, j;
                 if (o._isRgb(k)) {
-                    k = o._toHex(k)
+                    k = o._toHex(k);
                 }
                 k = o._toRgb(k);
                 e = j.length;
                 m = -Infinity;
                 for (var h = 0; h < e; h += 1) {
                     if (m < j[h].value) {
-                        m = j[h].value
+                        m = j[h].value;
                     }
                 }
                 l = n / m;
@@ -486,27 +486,27 @@ License: http://jqwidgets.com/license/
                     g: Math.max(k.g - f, 0),
                     b: Math.max(k.b - f, 0)
                 });
-                return g
+                return g;
             },
             parent: function (g) {
                 var f = g.parent.color,
                     e = this._colorEvaluator;
                 if (!g.parent) {
-                    return "#fff"
+                    return "#fff";
                 }
                 if (!f) {
-                    f = this.baseColor
+                    f = this.baseColor;
                 }
                 f = e.getColorByValue.call(this, g.value, g.parent.children, f);
                 g.color = f;
-                return f
+                return f;
             },
             autoColors: function (g) {
                 var f = this.baseColor,
                     e = this._colorEvaluator;
                 f = e.getColorByValue.call(this, g.value, this._dataList, f);
                 g.color = f;
-                return f
+                return f;
             },
             rangeColors: function (f) {
                 var h = f.value,
@@ -514,20 +514,20 @@ License: http://jqwidgets.com/license/
                 for (var e = 0; e < this.colorRanges.length; e += 1) {
                     g = this.colorRanges[e];
                     if (g.min < h && g.max >= h) {
-                        return g.color
+                        return g.color;
                     }
                 }
-                return "#fff"
+                return "#fff";
             }
         },
         _getColor: function (f) {
             var e = f.color,
                 g = this.colorMode;
             if (this._isColor(e)) {
-                return e
+                return e;
             }
             if (typeof this._colorEvaluator[g] === "function") {
-                return this._colorEvaluator[g].call(this, f)
+                return this._colorEvaluator[g].call(this, f);
             } else {
                 throw "Invalid colorMode"
             }
@@ -556,44 +556,44 @@ License: http://jqwidgets.com/license/
                 color: g,
                 rgb: k._toRgb(g)
             };
-            if (f.parent == this._root) {
-                h.parent = null
+            if (f.parent === this._root) {
+                h.parent = null;
             }
             if (typeof this.renderCallbacks["*"] === "function") {
                 var m = this.renderCallbacks["*"](j, h);
                 if (m !== undefined) {
-                    return j
+                    return j;
                 }
             }
             if (typeof this.renderCallbacks[f.label] === "function") {
-                this.renderCallbacks[f.label](j, h)
+                this.renderCallbacks[f.label](j, h);
             } else {
                 var e = j.width() - 2;
-                j.html('<span style="max-width:' + e + 'px;" class="jqx-treemap-label">' + f.label + "</span>")
+                j.html('<span style="max-width:' + e + 'px;" class="jqx-treemap-label">' + f.label + "</span>");
             }
-            return j
+            return j;
         },
         _centerLabel: function (g, f) {
             var e = g[0].firstChild;
             e.style.position = "absolute";
             if (f === a.HORIZONTAL || f === a.BOTH) {
-                e.style.left = (g[0].offsetWidth - e.offsetWidth) / 2 + "px"
+                e.style.left = (g[0].offsetWidth - e.offsetWidth) / 2 + "px";
             }
             if (f === a.VERTICAL || f === a.BOTH) {
-                e.style.top = (g[0].offsetHeight - e.offsetHeight) / 2 + "px"
+                e.style.top = (g[0].offsetHeight - e.offsetHeight) / 2 + "px";
             }
         },
         _trigger: function (g, f) {
             var h = c.Event(g);
             h.args = f;
-            return this.host.trigger(h)
+            return this.host.trigger(h);
         },
         _addHandlers: function (e, g) {
             var f = this;
             e.bind("mouseenter", function (h) {
                 if (f.hoverEnabled) {
                     f.host.find(".jqx-treemap-rectangle").removeClass("jqx-treemap-rectangle-hover");
-                    e.addClass(f.toThemeProperty("jqx-treemap-rectangle-hover"))
+                    e.addClass(f.toThemeProperty("jqx-treemap-rectangle-hover"));
                 }
                 f._trigger("mouseenterSector", g)
             });
@@ -768,8 +768,8 @@ License: http://jqwidgets.com/license/
             if (this.colorMode === "autoColors") {
                 e = this._getAutocolorRanges()
             }
-            var f = this._renderColorLegend(e);
-            this._renderLegendLabel(f)
+            //var f = this._renderColorLegend(e);
+            //this._renderLegendLabel(f)
         },
         _renderLegendLabel: function (f) {
             var g = c('<tr><td colspan="' + f.find("td").length / 2 + '"/></tr>'),

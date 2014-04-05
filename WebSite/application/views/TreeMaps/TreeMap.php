@@ -64,10 +64,27 @@
     
     function loadTreeMap(data) {
     $('#treemap').jqxTreeMap({
-            width: 800,
+            width: 'auto',
             height: 800,
             source: data,
-            colorRange: 150,
+            baseColor: '#B423F4',
+            colorMode:'autoColors',
+            colorRanges :[{
+                color: "#F72828",
+                min: 0,
+                max: 1000
+            }, {
+                color: "#28E4F7",
+                min: 1000,
+                max: 4000
+            }, {
+                color: "#28B33A",
+                min: 2000,
+                max: 10000
+            }],
+        
+        
+            
             renderCallbacks: {
             '*': function(element, value) {
             if (value.data) {
@@ -237,6 +254,15 @@ if (($treemapdata)) {
             echo "label: '".$filedata['filename']."',";
             echo "value: ".$filedata['fsize'].",";
             echo "parent: '".$filedata['dname']."',";
+            if($filedata['fsize']>5000)
+            {
+                echo "color: '#"."82469C"."',";
+            }
+            else
+            {
+                 echo "color: '#"."1292AA"."',";
+            }
+           
             echo "data: {description: '".$filedata['dname'].$filedata['filename']."</br>File Size: ".$filedata['fsize']."', title: '".$filedata['filename']."'}";
             echo "},";
     }
