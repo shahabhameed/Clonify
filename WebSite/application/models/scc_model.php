@@ -46,6 +46,22 @@ class SCC_model extends CI_Model {
         }
         return NULL;
     }
+    function getAllFCCDirSecondaryTableRows($dir_id, $invocationId, $user_id) {
+        $where = "tb1.invocation_id = $invocationId and tb1.directory_id= $dir_id";
+        $this->db->select('*');
+        $this->db->from('fcc_by_directory as tb1');
+        $this->db->join('invocation_files tb3', 'tb1.fcc_id = tb3.cmfile_id', 'INNER');
+        $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
+        $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
+        $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
+        $this->db->where($where);
+        $result = $this->db->get();
+         //print_r($result->result());exit;
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return NULL;
+    }
 
     function getAllFCSCrossGroupSecondaryTableRows($fcs_crossgroup_id, $fcc_ids, $invocationId, $user_id) {
         $where = "invocation_id = $invocationId and fcs_crossgroup_id= $fcs_crossgroup_id and fcc_id IN ($fcc_ids) and invocation_id = $invocationId";
@@ -102,6 +118,18 @@ class SCC_model extends CI_Model {
         $result = $this->db->get();
         if ($result->num_rows() > 0) {
             return $result->result();
+        }
+        return NULL;
+    }
+     function getAllFCCDIRRows($invocationId, $user_id) {
+        $where = "tb1.invocation_id = $invocationId";
+        $this->db->select('*,count("tb1.fcs_id") as noofinstance');
+        $this->db->from('fcc_by_directory tb1');
+        $this->db->group_by('tb1.directory_id');
+        $this->db->where($where);
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+           return $result->result();
         }
         return NULL;
     }

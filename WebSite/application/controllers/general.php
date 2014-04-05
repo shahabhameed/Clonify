@@ -85,4 +85,6 @@ class General extends CI_Controller {
 	    $this->load->view('partials/main_footer');
     }
 
+    
+
 }

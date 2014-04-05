@@ -148,6 +148,12 @@ class SCC
     }    
     return $data;
   }
+ function getAllFCCDIR($invocationId){
+    $userId = $this->ci->tank_auth->get_user_id();
+    $data = $this->ci->scc_model->getAllFCCDIRRows($invocationId, $userId);
+    $data = json_decode(json_encode($data), true);
+    return $data;
+  }
   
   function getAllFCSCrossGroup($invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
@@ -241,10 +247,16 @@ class SCC
     $data = $this->ci->scc_model->getAllFCCSecondaryTableRows($primary_table_row['fcc_id'], $invocationId, $userId);
     if ($data){
      return  $data = json_decode(json_encode($data), true);
-       // foreach($data as &$d){
-       //    // $d['directory_name'] = 
-       //    // $d['file_name'] = 
-       //  }
+    }    
+    return $result;
+  }  
+  function getAllFCCDirSecondaryTableRows($primary_table_row, $invocationId){
+    $userId = $this->ci->tank_auth->get_user_id();
+    $data = null;
+    $result = array();
+    $data = $this->ci->scc_model->getAllFCCDirSecondaryTableRows($primary_table_row['directory_id'], $invocationId, $userId);
+    if ($data){
+     return  $data = json_decode(json_encode($data), true);
     }    
     return $result;
   }  

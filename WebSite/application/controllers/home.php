@@ -424,6 +424,28 @@
       $this->load->view('clone_table/fcc.php', $viewData);
       $this->load->view('partials/main_footer');
     }
+    public function filecloneclassbydir(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $result = $this->scc->getAllFCCDIR($invocationId);   
+      $viewData['parent_table_data'] = $result;
+      $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['fcc_id']] = $this->scc->getAllFCCDIrSecondaryTableRows($row, $invocationId);
+        }
+      }
+      
+      $viewData['secondary_table_rows'] = $secondary_table_rows;      
+      $viewData['invocationId'] = $invocationId;
+      //print_r($viewData['secondary_table_rows']);exit;
+       $viewData['showCloneView'] = true;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/fccdir.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+
 
   }
   

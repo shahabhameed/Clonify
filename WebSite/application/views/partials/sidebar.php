@@ -78,6 +78,9 @@
                                 </a>
                                  <a href="<?php echo site_url('home/filecloneclass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCC
+                                </a> 
+                                <a href="<?php echo site_url('home/filecloneclassbydir') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>FCC BY Directory
                                 </a>
                             </li>
                         </ul>

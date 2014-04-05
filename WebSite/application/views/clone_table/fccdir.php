@@ -80,7 +80,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Search * From FCC Clone Instance List Where</h4>
+                            <h4 class="modal-title" id="myModalLabel">Search * From SCC Clone Instance List Where</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -119,7 +119,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default gradient">
                         <div class="panel-heading min">
-                            <h4><span> <i class="fa fa-list-alt fa-2"></i> FCC List</span></h4>
+                            <h4><span> <i class="fa fa-list-alt fa-2"></i> FCC BY Directory</span></h4>
                             <span class="loader" style="top:15px;cursor:pointer;">
                                 <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
                             </span>
@@ -131,11 +131,10 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>FCC ID</th>
-                                        <th>Structure(SCC ID)</th>                        
-                                        <th>ATC</th>                        
-                                        <th>APC</th>                        
-                                        <th>No. of Instances</th>
+                                        <th>Directory ID</th>
+                                        <th>Directory Name</th>                        
+                                        <th>No of Clones</th>                        
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -147,11 +146,10 @@
                                             ?>
                                             <tr class="list_view" data-sccid="<?php echo $data['fcc_id']; ?>">
                                                 <td><?php echo $counter; ?></td>
-                                                <td><?php echo $data['fcc_id']; ?></td>                          
-                                                <td ><?php echo isset($data['fcc_ids']) ? $data['fcc_ids'] : "-"; ?></td>
-                                                <td><?php echo isset($data['atc']) ? $data['atc'] : '-'; ?></td>
-                                                <td><?php echo isset($data['apc']) ? $data['apc'] : '-'; ?></td>
-                                                <td><?php echo isset($data['members']) ? $data['members'] : '-'; ?></td>
+                                                <td><?php echo $data['directory_id']; ?></td>                          
+                                               
+                                                <td><?php echo get_dir_name( $data['directory_id']);?></td>
+                                                <td><?php echo isset($data['noofinstance']) ? $data['noofinstance']: '-'; ?></td>
 
                                             </tr>
                                         <?php } ?>                           
@@ -159,11 +157,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>FCC ID</th>
-                                        <th>Structure(SCC ID)</th>                        
-                                        <th>ATC</th>                        
-                                        <th>APC</th>                        
-                                        <th>No. of Instances</th>
+                                        <th>Directory ID</th>
+                                        <th>Directory Name</th>                        
+                                        <th>No of Clones</th>                        
                                     </tr>
                                 </tfoot>                     
                             </table>
@@ -190,51 +186,42 @@
 
                             <div class="panel-body noPad clearfix">
                                 <table cellpadding="0" cellspacing="0" border="0" class="responsive dataTable display table table-bordered" width="100%">
-                                    <thead>
-                                        <tr>                        
-                                            <th>No.</th>
-                                            <th>Group ID</th>
-                                            <th>Directory ID</th>
-                                            <th>File ID</th>
-                                            <th>TC</th>
-                                            <th>PC</th>
-                                            <th>File Name</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
+                                     <thead>
+                                   ` <tr>
+                                        <th>No</th>
+                                        <th>FCC ID</th>
+                                        <th>Group ID</th> 
+                                        <th>File ID</th>
+                                        <th>File Name</th>                        
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   <?php
                                         $counter = 0;
                                         $data = $data ? $data : array();
                                         foreach ($data as $d) {
                                             $counter++;
                                             ?>
-
-                                            <tr class="code_view" 
-                                                data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>"
-                                                data-fid="<?php echo $d['fid']; ?>"
-                                                data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
+                                            <tr class="list_view" data-sccid="<?php echo $d['fcc_id']; ?>">
                                                 <td><?php echo $counter; ?></td>
-                                                <td><?php echo isset($d['group_id']) ? $d['group_id'] : "-"; ?></td>
-                                                <td><?php echo isset($d['directory_id']) ? $d['directory_id'] : "-"; ?></td>
-                                                <td><?php echo $d['fid']; ?></td>
-                                                <td><?php echo $d['tc']; ?></td>
-                                                <td><?php echo $d['pc']; ?></td>
-                                                <td style="text-align:left" ><?php echo $d['repository_name'] .$d['directory_name'] . $d['file_name']; ?></td>                            
+                                                <td><?php echo $d['fcc_id']; ?></td> 
+                                                 <td><?php echo $d['group_id']; ?></td>                          
+                                                <td><?php echo $d['id']?></td>
+                                                <td><?php echo isset($d['file_name']) ? $d['file_name']: '-'; ?></td>
+
                                             </tr>
-    <?php } ?>
-                                    </tbody> 
-                                    <tfoot>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Group ID</th>
-                                            <th>Directory ID</th>
-                                            <th>File ID</th>
-                                            <th>TC</th>
-                                            <th>PC</th>
-                                            <th>File Name</th>
-                                        </tr>
-                                    </tfoot>                       
+                                        <?php } ?>                           
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>FCC ID</th>
+                                        <th>Group ID</th> 
+                                        <th>File ID</th>
+                                        <th>File Name</th>   
+                                    </tr>
+                                </tfoot>                             
                                 </table>
                             </div>
                         </div>
@@ -288,14 +275,7 @@
             event.preventDefault();
             return false;
         });
-        $(".code_view").on("click", function() {
-            Clonify.FCC.viewCodeData(
-                                        $(this).data("path"), 
-                                        $(this).data("fid"), 
-                                        $(this).data("name"));
-            event.preventDefault();
-            return false;
-        });
+        
 
     });
 </script>
