@@ -475,6 +475,54 @@ Clonify.ns = Clonify.namespace;
 Clonify.ns('Clonify.SCC');
 Clonify.ns('Clonify.MCC');
 Clonify.ns('Clonify.FCS');
+Clonify.ns('Clonify.FCC');
+Clonify.FCC = {
+	viewCodeData: function(path, fid, file_name){
+	    var _url = base_url + "home/customloadcode";
+	    window_id = window_id + 1;
+	    $("#code_window1").css("overflow", "");
+	    $("#code_window2").css("overflow", "");
+	    var invocation_id = $("#sidebar_invocation_id").val();
+	    var _params = {
+	      file_path : path,
+	      fid : fid,
+	      file_name : file_name,
+	      window_id: window_id
+	    };
+	    
+	    $.post(_url, _params, function(r) {
+	      $(".code-window-containter").show();
+	      if ($("#code_window1").html() == ""){
+	        $(".code-window1").show();
+	        $("#file1").html('File Name : '+file_name);
+	        $("#code_window1").html(r);        
+	        window.location.hash='geshi-window'+window_id+'-'+start_line;
+	      }else{	          
+	        $("#code_window1").removeClass('col-md-11');
+	        $("#code_window1").addClass('col-md-5');
+	        $(".code-window2").show();
+	        $("#file2").html('File Name : '+file_name);
+	        $("#code_window2").html(r);        
+	        window.location.hash='geshi-window'+window_id+'-'+start_line;
+	      }      
+    });
+	
+    	$('#code-window1').wrap('<div class="responsive" />');
+    	$('#code-window2').wrap('<div class="responsive" />');
+
+    	$("div.responsive").each(function(){
+    		$(this).niceScroll({
+				cursoropacitymax: 0.7,
+				cursorborderradius: 6,
+				cursorwidth: "4px"
+			});
+    	});
+    
+  }
+
+}
+
+
 
 Clonify.SCC = {
     

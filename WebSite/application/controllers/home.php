@@ -27,7 +27,16 @@
       $this->load->view('dashboard.php');
       $this->load->view('partials/main_footer');
     }
-
+    public function customloadcode(){
+        $filePath = $this->input->post('file_path');
+        $obj = new SyntaxHighlighter($filePath, 'java');
+        $obj->EnableLineNumbers();
+        $colors = array('#BDD6A9', '#C8CEC3', '#CCFBA8', '#BCD7A9', '#D5E0CE', '#D8EDCA', '#C3CFBC', '#E1F0DE',
+                      '#C8E9F6', '#AEDFF2', '#9DE1FF', '#AFE4FD', '#C2D4DE', '#B7CCD4', '#B9D7E6', '#ADD6EB');
+        $window_id = $this->input->post('window_id');
+        $obj->SetId("window" . $window_id);
+        echo $obj->getFormattedCode();
+    }
     public function loadCode() {
       $clone_list_id = $this->input->post('clone_list_id');
       $invocation_id = $this->input->post('invocation_id');
@@ -39,7 +48,7 @@
       $miniMapLinks = array();
       $miniMapLinkLable = array();
       
-      $filePath = $this->input->post('file_path');
+      
       $obj = new SyntaxHighlighter($filePath, 'java');
       $obj->EnableLineNumbers();
       $colors = array('#BDD6A9', '#C8CEC3', '#CCFBA8', '#BCD7A9', '#D5E0CE', '#D8EDCA', '#C3CFBC', '#E1F0DE',
@@ -142,13 +151,13 @@
 
     }
     
-    public function fcswithindirectory(){
-      $viewData['showCloneView'] = true;
-      $viewData['invocationId'] = $this->getInvocationIdFromURL();
-      $this->load->view('partials/main_header');
-      $this->load->view('clone_table/fcswithindirectory.php', $viewData);
-      $this->load->view('partials/main_footer');
-    }
+    // public function fcswithindirectory(){
+    //   $viewData['showCloneView'] = true;
+    //   $viewData['invocationId'] = $this->getInvocationIdFromURL();
+    //   $this->load->view('partials/main_header');
+    //   $this->load->view('clone_table/fcswithindirectory.php', $viewData);
+    //   $this->load->view('partials/main_footer');
+    // }
     
     public function SingleCloneStructureFCSWithinGroup(){
       $viewData = array();      
@@ -392,6 +401,27 @@
       $viewData['invocationId'] = $invocationId;
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/mcs_across_file.php', $viewData);
+      $this->load->view('partials/main_footer');
+    }
+    public function filecloneclass(){
+      $viewData = array();      
+      $invocationId = $this->getInvocationIdFromURL();
+      
+      $result = $this->scc->getAllFCC($invocationId);   
+      $viewData['parent_table_data'] = $result;
+      $secondary_table_rows = array();
+      if ($result){
+        foreach($result as $row){
+          $secondary_table_rows[$row['fcc_id']] = $this->scc->getAllFCCSecondaryTableRows($row, $invocationId);
+        }
+      }
+      
+      $viewData['secondary_table_rows'] = $secondary_table_rows;      
+      $viewData['invocationId'] = $invocationId;
+      // print_r($viewData);exit;
+       $viewData['showCloneView'] = true;
+      $this->load->view('partials/main_header');
+      $this->load->view('clone_table/fcc.php', $viewData);
       $this->load->view('partials/main_footer');
     }
 

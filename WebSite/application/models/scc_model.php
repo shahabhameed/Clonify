@@ -30,6 +30,22 @@ class SCC_model extends CI_Model {
         }
         return NULL;
     }
+    function getAllFCCSecondaryTableRows($fcc_id, $invocationId, $user_id) {
+        $where = "tb1.invocation_id = $invocationId and tb1.fcc_id= $fcc_id";
+        $this->db->select('*');
+        $this->db->from('fcc_instance as tb1');
+        $this->db->join('invocation_files tb3', 'tb1.fid = tb3.cmfile_id', 'INNER');
+        $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
+        $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
+        $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
+        $this->db->where($where);
+        $result = $this->db->get();
+        // print_r($result->result());exit;
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return NULL;
+    }
 
     function getAllFCSCrossGroupSecondaryTableRows($fcs_crossgroup_id, $fcc_ids, $invocationId, $user_id) {
         $where = "invocation_id = $invocationId and fcs_crossgroup_id= $fcs_crossgroup_id and fcc_id IN ($fcc_ids) and invocation_id = $invocationId";
@@ -71,6 +87,17 @@ class SCC_model extends CI_Model {
         $where = "invocation_id = $invocationId";
         $this->db->select('*');
         $this->db->from('fcs_withingroup');
+        $this->db->where($where);
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return NULL;
+    } 
+    function getAllFCCRows($invocationId, $user_id) {
+        $where = "invocation_id = $invocationId";
+        $this->db->select('*');
+        $this->db->from('fcc');
         $this->db->where($where);
         $result = $this->db->get();
         if ($result->num_rows() > 0) {
@@ -119,6 +146,17 @@ class SCC_model extends CI_Model {
         $where = "invocation_id = $invocationId AND fcs_ingroup_id = $fcs_ingroup_id";
         $this->db->select('*');
         $this->db->from('fcs_withingroup_fcc');
+        $this->db->where($where);
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return NULL;
+    }
+    function getFCCStructureIDS($invocationId, $fcc_id, $user_id) {
+        $where = "invocation_id = $invocationId AND fcc_id = $fcc_id";
+        $this->db->select('*');
+        $this->db->from('fcc_scc');
         $this->db->where($where);
         $result = $this->db->get();
         if ($result->num_rows() > 0) {
@@ -323,7 +361,6 @@ class SCC_model extends CI_Model {
 
     public function getSCCBYFileParentTable($invocationId, $userId) {
         $where = "tb1.invocation_id = $invocationId AND tb3.invocation_id=$invocationId";
-
         $this->db->select('*');
         $this->db->from('scc_instance tb1');
         $this->db->join('scc tb2', 'tb1.scc_id = tb2.scc_id AND tb1.invocation_id=tb2.invocation_id', 'INNER');

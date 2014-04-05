@@ -125,6 +125,29 @@ class SCC
     }    
     return $data;
   }
+  function getAllFCC($invocationId){
+
+    $userId = $this->ci->tank_auth->get_user_id();
+    
+    $data = $this->ci->scc_model->getAllFCCRows($invocationId, $userId);
+    if ($data){
+      $data = json_decode(json_encode($data), true); // Changing Obj in Array
+      foreach($data as &$d){
+        $r = $this->ci->scc_model->getFCCStructureIDS($invocationId, $d['fcc_id'], $userId);
+        $fcc_ids = array();
+        if ($r){
+          $temp = json_decode(json_encode($r), true);
+          if ($temp){
+            foreach($temp as $t){
+              $fcc_ids[] = $t['scc_id'];
+            }
+          }
+        }
+        $d['fcc_ids'] = implode(", ", $fcc_ids);
+      }
+    }    
+    return $data;
+  }
   
   function getAllFCSCrossGroup($invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
@@ -209,6 +232,20 @@ class SCC
         }
       }    
     }
+    return $result;
+  }  
+  function getAllFCCSecondaryTableRows($primary_table_row, $invocationId){
+    $userId = $this->ci->tank_auth->get_user_id();
+    $data = null;
+    $result = array();
+    $data = $this->ci->scc_model->getAllFCCSecondaryTableRows($primary_table_row['fcc_id'], $invocationId, $userId);
+    if ($data){
+     return  $data = json_decode(json_encode($data), true);
+       // foreach($data as &$d){
+       //    // $d['directory_name'] = 
+       //    // $d['file_name'] = 
+       //  }
+    }    
     return $result;
   }  
   
