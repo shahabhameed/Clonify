@@ -206,8 +206,8 @@
                                             <tr class="list_view" data-sccid="<?php echo $d['fcc_id']; ?>">
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $d['fcc_id']; ?></td> 
-                                                 <td><?php echo $d['group_id']; ?></td>                          
-                                                <td><?php echo $d['id']?></td>
+                                                 <td><?php echo $d['gid']; ?></td>                          
+                                                <td><?php echo $d['cmfile_id']?></td>
                                                 <td><?php echo isset($d['file_name']) ? $d['file_name']: '-'; ?></td>
 
                                             </tr>
