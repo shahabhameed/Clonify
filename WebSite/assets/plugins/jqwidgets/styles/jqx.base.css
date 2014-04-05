@@ -3579,21 +3579,22 @@ ol li .jqx-listmenu-item-label:before
     border-bottom-right-radius: 0px !important;
 }
 .jqx-treemap-rectangle {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: normal;
     border: 1px solid #555;
-    color: #222;
+    color: #123;
     text-shadow: 0px 0px 0px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .jqx-treemap-label {
+    font-color: #342123;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 .jqx-treemap-rectangle-parent {
-    color: #222;
-    font-size: 15px;
+    font-color: #342123;
+    font-size: 13px;
     font-family: Verdana;
     font-weight: bold;
 }
