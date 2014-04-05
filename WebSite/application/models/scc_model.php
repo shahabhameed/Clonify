@@ -475,21 +475,16 @@ class SCC_model extends CI_Model {
 
     public function getSCCByMethodPrimaryTable($invocationId) {
 
-        //$query = "SELECT t1.mcc_id,t1.atc,t1.apc,count(t2.mcc_id) length, (select GROUP_CONCAT(scc_id) from mcc_scc where mcc_id = t1.mcc_id group by t1.mcc_id) scc FROM mcc t1 INNER JOIN mcc_instance t2 on t1.mcc_id = t2.mcc_id where t1.invocation_id=$invocationId group by t2.mcc_id";
-
-        //$query = "SELECT t3.mcc_instance_id, t3.mcc_id, t3.mid, t3.tc, t3.pc, t3.fid, t3.did, t3.gid, t2.mname methodname, CONCAT( directory_name, file_name ) filename, CONCAT( repository_name, directory_name, file_name ) filepath, t2.startline, t2.endline, COUNT( t3.mcc_id ) length, (SELECT GROUP_CONCAT( scc_id ) FROM mcc_scc WHERE mcc_id = t1.mcc_id
-//GROUP BY t1.mcc_id)scc FROM mcc t1, mcc_instance t3, method t2, repository_file f, repository_directory d, user_repository r WHERE t1.mcc_id = t3.mcc_id AND t1.invocation_id =$invocationId AND t3.mid = t2.mid AND d.id = f.directory_id AND d.repository_id = r.id AND f.id = t3.fid GROUP BY t3.mcc_id";
-$query = "select t2.mid, t2.fid, t1.cmdirectory_id did, group_id gid, mname methodname, count(t4.scc_id) length,CONCAT( directory_name, file_name ) filename
-        from invocation_files t1, method_file t2, method t3, scc_method t4, repository_file f, repository_directory d
-        where t1.invocation_id=t2.invocation_id and 
-        t2.invocation_id=t3.invocation_id and 
-        t2.invocation_id=104 and
-        t3.mid=t4.mid and
-        t2.fid=t1.cmfile_id and
-        t3.mid = t2.mid and  d.id = f.directory_id AND f.id=t1.file_id 
-        group by t4.mid
-        ORDER BY `t2`.`mid` ASC";
-//      $result = $this->db->get();
+   
+		$query = "SELECT a.mid, a.mname methodname, d.cmdirectory_id did, round(COUNT( b.scc_id )/25,0) length, c.fid, d.group_id gid, CONCAT( directory_name, file_name ) filename
+			FROM method a, scc_method b, method_file c, invocation_files d, repository_file e, repository_directory f
+			WHERE b.mid = a.mid
+			AND b.mid = c.mid
+			AND c.fid = d.cmfile_id
+			AND f.id = e.directory_id
+			AND e.id = d.file_id
+			AND d.invocation_id =$invocationId
+			GROUP BY b.mid";
         $result = $this->db->query($query);
         if ($result->num_rows() > 0) {
             return $result->result();
@@ -501,7 +496,17 @@ $query = "select t2.mid, t2.fid, t1.cmdirectory_id did, group_id gid, mname meth
 
         //$query = "SELECT t1.mcc_instance_id, t1.mcc_id, t1.mid, t1.tc, t1.pc, t1.fid, t1.did, t1.gid, t2.mname methodname, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath, t2.startline, t2.endline FROM mcc_instance t1, method t2, repository_file f,repository_directory d,	user_repository r WHERE mcc_id=$mcc_id and t1.mid=t2.mid and d.id=f.directory_id and d.repository_id=r.id and f.id=t1.fid";
 
-        $query = "select t1.fid,t1.scc_id, t1.scc_instance_id, t2.length, t1.endline, t1.startline,t1.endcol, t1.startcol,CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath from scc_instance t1, scc t2, repository_file f,repository_directory d,	user_repository r where t1.scc_id = t2.scc_id and t1.invocation_id = t2.invocation_id and t1.invocation_id = $invocation_id and t1.scc_id in (select scc_id from mcc_scc where mcc_id in (select mcc_id from mcc_instance where mid=$mid and invocation_id=$invocation_id)) AND d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=t1.fid and invocation_id=$invocation_id)";
+		
+        //$query = "select t1.fid,t1.scc_id, t1.scc_instance_id, t2.length, t1.endline, t1.startline,t1.endcol, t1.startcol,CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath from scc_instance t1, scc t2, repository_file f,repository_directory d,	user_repository r where t1.scc_id = t2.scc_id and t1.invocation_id = t2.invocation_id and t1.invocation_id = $invocation_id and t1.scc_id in (select scc_id from mcc_scc where mcc_id in (select mcc_id from mcc_instance where mid=$mid and invocation_id=$invocation_id)) AND d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=t1.fid and invocation_id=$invocation_id)";
+		$query = "SELECT a.scc_id,scc.length,a.fid, a.startline, a.endline, a.startcol, a.endcol, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath
+FROM scc_instance a, scc, repository_file f,repository_directory d,	user_repository r
+WHERE a.scc_id = scc.scc_id
+and a.invocation_id = scc.invocation_id
+AND a.invocation_id = $invocation_id
+AND a.scc_id in (select distinct scc_id from scc_method where mid= $mid)
+AND d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=a.fid and invocation_id=$invocation_id)
+group by a.scc_id";
+		
         $result = $this->db->query($query);
         // echo $this->db->last_query();exit;
         if ($result->num_rows() > 0) {

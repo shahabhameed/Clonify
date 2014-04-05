@@ -155,7 +155,7 @@ width: 50% !important;
                           <td><?php echo isset($data['gid']) ? $data['gid'] : '-';?></td>
                           <td><?php echo isset($data['methodname']) ? $data['methodname'] : '-';?></td>
 						  <td><?php echo $data['filename'];?></td>
-						  <<td></td>
+						  <td><?php echo $data['length'];?></td>
                         </tr>
                         <?php }?>                        
                       </tbody>
@@ -199,7 +199,6 @@ width: 50% !important;
                       <tr>                        
                         <th class="col-lg-1">No.</th>
                         <th class="col-lg-2">SCC ID</th>
-                        <th class="col-lg-2">Clone ID</th>
                         <th class="col-lg-2">Length</th>
                         <th class="col-lg-1">Start Line</th>
                         <th class="col-lg-1">End Line</th>
@@ -211,10 +210,9 @@ width: 50% !important;
                         foreach($data as $d){
                           $counter++;
                         ?>
-                          <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo $d['endcol'];?>" data-startcol="<?php echo $d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-sccid= "<?php echo $d['scc_id'];?>" data-clid= "<?php echo $d['scc_instance_id'];?>" data-path="<?php echo $d['filepath']?>">
+                          <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline'];?>" data-endcol="<?php echo $d['endcol'];?>" data-startcol="<?php echo $d['startcol'];?>" data-startline="<?php echo $d['startline'];?>" data-fid="<?php echo $d['fid'];?>" data-sccid= "<?php echo $d['scc_id'];?>" data-clid= "<?php //echo $d['scc_instance_id'];?>" data-path="<?php echo $d['filepath']?>">
                             <td><?php echo $counter;?></td>
                             <td><?php echo isset($d['scc_id']) ? $d['scc_id'] : "-";?></td>
-                            <td><?php echo isset($d['scc_instance_id']) ? $d['scc_instance_id'] : "-";?></td>
                             <td><?php echo $d['length'];?></td>
                             <td><?php echo $d['startline'];?></td>
                             <td><?php echo $d['endline'];?></td>
@@ -225,7 +223,6 @@ width: 50% !important;
                       <tr>                        
                         <th class="col-lg-1">No.</th>
                         <th class="col-lg-2">SCC ID</th>
-                        <th class="col-lg-2">Clone ID</th>
                         <th class="col-lg-2">Length</th>
                         <th class="col-lg-1">Start Line</th>
                         <th class="col-lg-1">End Line</th>
