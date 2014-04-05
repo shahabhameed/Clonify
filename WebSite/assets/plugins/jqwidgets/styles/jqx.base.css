@@ -3582,13 +3582,13 @@ ol li .jqx-listmenu-item-label:before
     font-size: 15px;
     font-weight: normal;
     border: 1px solid #555;
-    color: #20D831;
+    color: #5F5F5F;
     text-shadow: 0px 0px 0px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .jqx-treemap-label {
-    color: #747A74;
+    color: #5F5F5F;
     text-overflow: ellipsis;
     overflow: hidden;
     text-align: left;
