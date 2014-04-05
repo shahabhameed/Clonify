@@ -147,7 +147,7 @@
                         <th>Group Id</th>
                         <th>Directory ID</th>
                         <th>File Id</th>
-                        <th>File Name</th>
+                        <th style="text-align: left;">File Name</th>
                         <th>No. of Instances</th>
                       </tr>
                     </thead>
@@ -158,7 +158,7 @@
                         <td><?php echo $result['group_id'];?></td>
                         <td><?php echo $result['directory_id'];?></td>
                         <td><?php echo $result['fid'];?></td>
-                        <td><?php echo $result['directory_name'] . $result['file_name'];?></td>
+                        <td style="text-align: left;"><?php echo $result['directory_name'] . $result['file_name'];?></td>
                         <td><?php echo $result['members'];?></td>
                       </tr>
                       <?php }?>
@@ -169,7 +169,7 @@
                         <th>Group Id</th>
                         <th>Directory ID</th>
                         <th>File Id</th>
-                        <th>File Name</th>
+                        <th style="text-align: left;">File Name</th>
                         <th>No. of Instances</th>
                       </tr>
                     </tfoot>

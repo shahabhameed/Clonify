@@ -220,7 +220,7 @@
                                                 <td><?php echo $d['fid']; ?></td>
                                                 <td><?php echo $d['tc']; ?></td>
                                                 <td><?php echo $d['pc']; ?></td>
-                                                <td style="text-align:left" ><?php echo $d['repository_name'] .$d['directory_name'] . $d['file_name']; ?></td>                            
+                                                <td style="text-align:left" ><?php echo $d['directory_name'] . $d['file_name']; ?></td>                            
                                             </tr>
     <?php } ?>
                                     </tbody> 

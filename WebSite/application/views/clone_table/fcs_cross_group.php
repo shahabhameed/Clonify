@@ -118,8 +118,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>FCS ID</th>
-                                        <th>FCS Across Group List</th>                        
-                                        <th>Group Id</th>
+                                        <th>Structure (FCC ID, ...)</th>
                                         <th>No. Of Instances</th>
                                     </tr>
                                 </thead>
@@ -133,8 +132,7 @@
                                             <tr class="list_view" data-sccid="<?php echo $data['fcs_crossgroup_id']; ?>">
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $data['fcs_crossgroup_id']; ?></td>                          
-                                                <td ><?php echo isset($data['fcc_ids']) ? $data['fcc_ids'] : "-"; ?></td>
-                                                <td><?php echo isset($data['group_id']) ? $data['group_id'] : '-'; ?></td>
+                                                <td ><?php echo isset($data['fcc_ids']) ? $data['fcc_ids'] : "-"; ?></td>                                                
                                                 <td><?php echo isset($data['members']) ? $data['members'] : '-'; ?></td>
 
                                             </tr>
@@ -144,8 +142,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>FCS ID</th>
-                                        <th>FCS Across Group List</th>                        
-                                        <th>Group Id</th>
+                                        <th>Structure (FCC ID, ...)</th>
                                         <th>No. Of Instances</th>
                                     </tr>
                                 </tfoot>                     
@@ -176,8 +173,8 @@
                                     <thead>
                                         <tr>                        
                                             <th>No.</th>
-                                            <th>Clone ID</th>
-                                            <th>Structure(FID)</th>
+                                            <th>Group ID</th>
+                                            <th>Structure(FID, ...)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -200,7 +197,7 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Clone ID</th>
-                                            <th>Structure(FID)</th>
+                                            <th>Structure(FID, ...)</th>
                                         </tr>
                                     </tfoot>                       
                                 </table>

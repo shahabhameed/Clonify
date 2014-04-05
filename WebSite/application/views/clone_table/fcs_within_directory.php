@@ -117,7 +117,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>FCS ID</th>
-                                        <th>FCS Within Directory List</th>                        
+                                        <th>Structure (FCC ID, ...)</th>                        
                                         <th>Directory Id</th>
                                         <th>No. Of Instances</th>
                                     </tr>
@@ -143,7 +143,7 @@
                                     <tr>
                                        <th>No</th>
                                         <th>FCS ID</th>
-                                        <th>FCS Within Directory List</th>                        
+                                        <th>Structure (FCC ID, ...)</th>                        
                                         <th>Directory Id</th>
                                         <th>No. Of Instances</th>
                                     </tr>
@@ -176,7 +176,7 @@
                                         <tr>                        
                                             <th>No.</th>
                                             <th>Clone ID</th>
-                                            <th>Structure(FID)</th>
+                                            <th>Structure(FID, ...)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -199,7 +199,7 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Clone ID</th>
-                                            <th>Structure(FID)</th>
+                                            <th>Structure(FID, ...)</th>
                                         </tr>
                                     </tfoot>                       
                                 </table>

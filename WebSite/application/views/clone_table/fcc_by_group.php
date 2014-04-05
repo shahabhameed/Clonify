@@ -187,7 +187,7 @@
                                                 <td><?php echo $d['fcc_id']; ?></td> 
                                                  <td><?php echo $d['did']; ?></td>                          
                                                 <td><?php echo $d['cmfile_id']?></td>
-                                                <td><?php echo isset($d['file_name']) ? $d['file_name']: '-'; ?></td>
+                                                <td style="text-align: left;"><?php echo isset($d['file_name']) ? $d['file_name']: '-'; ?></td>
 
                                             </tr>
                                         <?php } ?>                           
