@@ -211,8 +211,10 @@
       $result = $this->scc->getAllFCSWithinDirectory($invocationId);   
       $viewData['parent_table_data'] = $result;
       $secondary_table_rows = array();
+      $dids = array();
       if ($result){
         foreach($result as $row){
+          $dids[] = $row['directory_id'];
           $secondary_table_rows[$row['fcs_indir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
         }
       }
@@ -221,7 +223,7 @@
       
       $viewData['showCloneView'] = true;
       $viewData['invocationId'] = $invocationId;
-	  $dids = array(0,1);
+	  //$dids = array(0,1,2);
 	  $viewData['treemapdata']=$this->treemap_model->get_fcs_within_dir_treemap($invocationId,$dids);
       $viewData['treedata'] = create_tree($invocationId);
 	  
