@@ -8,6 +8,7 @@
 
     }
 </style>
+<script type="text/javascript" src="<?= asset_url('js/myTreeMap.js') ?>"></script>
 <div id="wrapper">
 
     <?php

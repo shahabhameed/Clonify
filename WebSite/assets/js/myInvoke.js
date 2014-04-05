@@ -532,3 +532,127 @@ function myValidate() {
 
     return isValidated;
 }
+
+    function onLanguageSelect() {
+        document.getElementById("submit").disabled = true;
+        var lang_list = document.getElementById("language");
+
+        var sel_id = lang_list.selectedIndex;
+
+        var lang_id = lang_list.options[sel_id].value;
+        var lang_txt = lang_list.options[sel_id].text;
+        //alert("lang_id: " + lang_id + lang_txt);
+
+        $.ajax({
+            url: "<?php echo base_url(); ?>index.php/invoke/setSelectedLanguage/" + lang_id,
+            success: function(result) {
+                //alert("result: " + result);
+                location.reload();
+            },
+            error: function(xhr) {
+                alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            }
+        });
+    }
+
+    function hideWizard()
+    {
+        var button = document.getElementById("submitButton");
+        var wizardBody = document.getElementById("wizard-body");
+        var wizardHeading = document.getElementById("wizard-heading");
+        if (button.value === "Submit")
+        {
+            wizardBody.setAttribute("style", 'display:none');
+            wizardHeading.setAttribute("style", 'display:none');
+        }
+    }
+
+    function validateGroup()
+    {
+        var groupListCount = document.getElementById("hiddenGroup").options.length;
+        var error = document.getElementById("groupErr");
+
+        if (groupListCount < 1)
+        {
+            error.innerHTML = "Please add a group"
+            return false
+        }
+        else
+        {
+            error.innerHTML = "";
+            return true
+        }
+
+    }
+
+    function showProgress()
+    {
+
+
+        var progressBar = document.getElementById("barRow");
+
+        var iNow = new Date().setTime(new Date().getTime() + 1 * 1000); // now plus 2 secs
+        var iEnd = new Date().setTime(new Date().getTime() + 4 * 1000); // now plus 8 secs
+        var iEnd2 = new Date().setTime(new Date().getTime() + 5.5 * 1000); // now plus 8 secs
+
+        var button = document.getElementById("submitButton");
+
+        if (button.value === "Submit")
+        {
+            progressBar.setAttribute("style", 'display:block');
+            $('#progressRow').anim_progressbar({start: iNow, finish: iEnd, interval: 200});
+            // var iNow = new Date().setTime(new Date().getTime() + 2 * 1000); // now plus 2 secs
+            setTimeout(showMessage, iEnd2 - iNow);
+
+        }
+
+
+    }
+
+    function redirect()
+    {
+        window.location.href = "<?php echo base_url(); ?>index.php/load_results/";
+    }
+
+    function loadResults()
+    {
+        var iNow = new Date().setTime(new Date().getTime() + 1 * 1000); // now plus 2 secs
+        var iEnd = new Date().setTime(new Date().getTime() + 3 * 1000); // now plus 4 secs
+        var submitValue = document.getElementById("submit").value;
+        if (submitValue === "Submit")
+        {
+            setTimeout(redirect, iEnd - iNow);
+        }
+    }
+
+    function showMessage()
+    {
+        var finishButton = document.createElement("button");
+        var label = document.createElement("label");
+        label.innerHTML = "Your form has been submitted successfully!";
+
+        var messageBox = document.getElementById("message");
+
+        finishButton.setAttribute("class", "btn btn-success pull-right col-lg-2");
+        finishButton.setAttribute("onclick", "redirect()");
+        finishButton.innerHTML = "Proceed";
+        messageBox.appendChild(finishButton);
+
+        messageBox.setAttribute("style", "display:block");
+
+
+    }
+    function enable_text(status) {
+        status = (status) ? false : true; //convert status boolean to text 'disabled'
+        document.wizard.min_mcc_token.disabled = status;
+        document.wizard.min_mcc_percent.disabled = status;
+    }
+
+    function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
