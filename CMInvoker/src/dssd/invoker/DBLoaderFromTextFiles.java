@@ -47,7 +47,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	
         
         private static String INSERT_FCC = "INSERT INTO fcc(invocation_id, fcc_id, atc, apc, members) values ";
-        private static String INSERT_FCC_INSTANCE = "INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, fid, directory_id, group_id) values ";
+        private static String INSERT_FCC_INSTANCE = "INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, fid, did, gid) values ";
         private static String INSERT_FCC_DIR = "INSERT INTO fcc_by_directory(invocation_id, fcc_id, directory_id) values ";
         private static String INSERT_FCC_SCC = "INSERT INTO fcc_scc(invocation_id, scc_id, fcc_id) values ";
         private static String INSERT_FCC_GROUP = "INSERT INTO fcc_by_group(invocation_id, fcc_id, group_id) values ";
@@ -572,7 +572,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			Parse_CrossDirsCloneFileStructuresEx(invocationId);			
 			Parse_CrossGroupsCloneFileStructuresEx(invocationId);
                         parseFileCloneByDirs(invocationId);
-
+                        parseFileCloneByGroups(invocationId);;
 		} catch(Exception e){
 			e.printStackTrace();
 			return false;
@@ -822,7 +822,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
             Database.getInstance().executeTransaction(INSERT_FCC_SCC);
           }
           
-          if (!INSERT_FCC_INSTANCE.equalsIgnoreCase("INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, fid, directory_id, group_id) values ")) {
+          if (!INSERT_FCC_INSTANCE.equalsIgnoreCase("INSERT INTO fcc_instance(invocation_id, fcc_instance_id, fcc_id, tc, pc, fid, did, gid) values ")) {
             Database.getInstance().executeTransaction(INSERT_FCC_INSTANCE);
           }
           

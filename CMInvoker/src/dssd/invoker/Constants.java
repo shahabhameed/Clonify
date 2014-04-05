@@ -41,9 +41,9 @@ public class Constants {
 	public static final String CROSS_DIR_FILE_EX = "CrossDirsCloneFileStructuresEx";
 	public static final String FILE_STRUCTURE_CROSS_GROUP = "CrossGroupsCloneFileStructuresEx";
 	public static final String FILE_CLUSTER_XX = "FileClustersXX";
-	public static final String FILE_CLONES_BY_DIR = "FileClonesByDirs.txt";
+	public static final String FILE_CLONES_BY_DIR = "FileClonesByDirs";
         
-        public static final String FILE_CLONES_BY_GROUPS = "FileClonesByGroups.txt";
+        public static final String FILE_CLONES_BY_GROUPS = "FileClonesByGroups";
         
 	public static final String METHOD_CLUSTER_XX_FILE_NAME = "MethodClustersXX";
 	public static final String METHOD_STRUCTURE_FILE_NAME = "CrossFileCloneMethodStructuresEx";
