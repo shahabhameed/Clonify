@@ -71,7 +71,8 @@
             '*': function(element, value) {
             if (value.data) {
             element.jqxTooltip({
-            content: '<div><div style="font-weight: bold; max-width: 200px;color:blue; font-family: verdana; font-size: 13px;">' + value.data.title + '</div><div style="width: 500px; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
+            content: '<div><div class="label-primary style="font-weight: text-align: left; bold; max-width: 200px;color:blue; font-family: verdana; font-size: 13px;">' + value.data.title + 
+                    '</div><div style="width: 500px; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
                     position: 'mouse',
                     autoHideDelay: 6000
             });
@@ -233,7 +234,7 @@ if (($treemapdata)) {
             echo "label: '".$filedata['filename']."',";
             echo "value: ".$filedata['fsize'].",";
             echo "parent: '".$filedata['dname']."',";
-            echo "data: {description: '".$filedata['filepath']."', title: '".$filedata['filename']."'}";
+            echo "data: {description: '"    .$filedata['filepath']."</br>File Size: ".$filedata['fsize']."', title: '".$filedata['filename']."'}";
             echo "},";
     }
     }
