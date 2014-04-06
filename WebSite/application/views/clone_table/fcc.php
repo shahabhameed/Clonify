@@ -53,7 +53,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <u><h4>No. of Instances</h4></u>
+                                    <u><h4>APC</h4></u>
                                 </div>
                             </div>
                             <div class="row">
@@ -63,7 +63,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-10">
-                                    <small>For multiple values use [], e.g for number 1 and 2 write [1,2]</small>
+                                    <small></small>
                                 </div>
                             </div>
                         </div>
