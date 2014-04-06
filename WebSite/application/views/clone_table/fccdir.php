@@ -216,7 +216,10 @@
                                         foreach ($data as $d) {
                                             $counter++;
                                             ?>
-                                            <tr class="code_view" data-sccid="<?php echo $d['fcc_id']; ?>" data-files="<?php echo $d['cmfile_id']?>">
+                                            <tr class="code_view" 
+                                                data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>"
+                                                data-fid="<?php echo $d['cmfile_id']; ?>"
+                                                data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $d['fcc_id']; ?></td> 
                                                  <td><?php echo $d['gid']; ?></td>                          
@@ -297,6 +300,15 @@
     $(document).ready(function() {
         $(".list_view").on("click", function() {
             Clonify.FCS.viewInstanceFccByDirectory($(this).data("sccid"));
+            event.preventDefault();
+            return false;
+        });
+        
+         $(".code_view").on("click", function() {
+            Clonify.FCC.viewCodeData(
+                                        $(this).data("path"), 
+                                        $(this).data("fid"), 
+                                        $(this).data("name"));
             event.preventDefault();
             return false;
         });

@@ -113,6 +113,8 @@
                 </div>
             </div>
 
+            <div class="row-fluid">
+            <div class="col-md-9">
 
             <div class="row">
                 <div class="col-md-12">
@@ -196,7 +198,10 @@
                                         foreach ($data as $d) {
                                             $counter++;
                                             ?>
-                                            <tr class="list_view" data-sccid="<?php echo $d['fcc_id']; ?>">
+                                            <tr class="code_view" 
+                                                data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>"
+                                                data-fid="<?php echo $d['cmfile_id']; ?>"
+                                                data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">                                                                                          
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $d['fcc_id']; ?></td> 
                                                  <td><?php echo $d['did']; ?></td>                          
@@ -256,13 +261,25 @@
                     </div>
                 </div>
             </div>
+            
+            </div>
+             <div class="col-md-3" style="border-left:1px solid;max-height:600px;overflow-y:scroll;overflow-x:hidden;">
+                <div class="todo">
+                    <h4>Navigation <a href="#" class="icon tip" oldtitle="Add task" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-plus"></span></a></h4>
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+                
+              </div>
+            </div>
         </div><!-- End contentwrapper -->
     </div><!-- End #content -->
 
 </div><!-- End #wrapper -->
 
 <script>
+  var zNodes = <?php echo $treedata ?>;
     $(document).ready(function() {
+      
         $(".list_view").on("click", function() {
             Clonify.SCC.viewFccGroupInst($(this).data("sccid"));
             event.preventDefault();

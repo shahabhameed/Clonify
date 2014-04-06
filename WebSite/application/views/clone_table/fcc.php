@@ -132,7 +132,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>FCC ID</th>
-                                        <th>Structure(SCC ID)</th>                        
+                                        <th>Structure(SCC ID, ...)</th>                        
                                         <th>ATC</th>                        
                                         <th>APC</th>                        
                                         <th>No. of Instances</th>
@@ -160,7 +160,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>FCC ID</th>
-                                        <th>Structure(SCC ID)</th>                        
+                                        <th>Structure(SCC ID, ...)</th>                        
                                         <th>ATC</th>                        
                                         <th>APC</th>                        
                                         <th>No. of Instances</th>
@@ -175,7 +175,10 @@
             <?php
             if ($secondary_table_rows)
                 $secondary_table_rows = $secondary_table_rows ? $secondary_table_rows : array();
+            $c = 0;
             foreach ($secondary_table_rows as $scc_id => $data) {
+                $scc_csv = str_replace(" ", "", $parent_table_data[$c]['fcc_ids']);
+                $c++;
                 ?>
                 <div class="row scc_instance_list" id="scc_instance_list_<?php echo $scc_id; ?>">
                     <div class="col-md-12">
@@ -209,11 +212,14 @@
                                         foreach ($data as $d) {
                                             $counter++;
                                             ?>
-
                                             <tr class="code_view" 
-                                                data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>"
-                                                data-fid="<?php echo $d['fid']; ?>"
-                                                data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
+                                                data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>" 
+                                                data-endline="" data-endcol="" data-startcol="" 
+                                                data-startline="" 
+                                                data-fid="<?php echo $d['fid']; ?>" 
+                                                data-scsid="<?php echo $scc_csv;?>" 
+                                                data-clid="" 
+                                                data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">                                            
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo isset($d['group_id']) ? $d['group_id'] : "-"; ?></td>
                                                 <td><?php echo isset($d['directory_id']) ? $d['directory_id'] : "-"; ?></td>
@@ -289,10 +295,7 @@
             return false;
         });
         $(".code_view").on("click", function() {
-            Clonify.FCC.viewCodeData(
-                                        $(this).data("path"), 
-                                        $(this).data("fid"), 
-                                        $(this).data("name"));
+           Clonify.SCC.viewCodeData($(this).data("scsid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
             event.preventDefault();
             return false;
         });

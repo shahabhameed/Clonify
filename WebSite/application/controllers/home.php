@@ -44,7 +44,7 @@
       $start_line = $this->input->post('start_line');
       $end_line = $this->input->post('end_line');
       $fid = $this->input->post('fid');
-	  $mid = $this->input->post('mid');
+      $mid = $this->input->post('mid');
       $lines = array();
       $miniMapLinks = array();
       $miniMapLinkLable = array();
@@ -61,26 +61,60 @@
         foreach($temp as $t){
           $scc_ids[$t] = $t;
         }
-        
+        $all_lines = array();
+        $counter = 0;
+        $lines = array();        
         foreach($scc_ids as $scc_id){
           $scc_instances = $this->scc->getSCCInstancesBySCCId($invocation_id, $scc_id);
           if ($scc_instances){
             foreach($scc_instances as $scc_instance){
-              $lines = array();
-              for ($i = $scc_instance['startline']; $i <= $scc_instance['endline']; $i++) {
-                $lines[] = $i;
+              if (!$fid || $fid == $scc_instance['fid']){                
+                for ($i = $scc_instance['startline']; $i <= $scc_instance['endline']; $i++) {                  
+                  $all_lines[] = $i;
+                  $lines[] = $i;
+                }
               }
-              $r = $row % $total;
-              
-              $line_color = "background-color:" . $colors[$r] .";";
-              $obj->HighlightLines($lines, $line_color);
-              $miniMapLinks[] = $scc_instance['startline'];
-              $miniMapLinkLable[$scc_instance['startline']] = array('text' => '  ', 'rows' => $scc_instance['endline'] - $scc_instance['startline']);
-
-              $row++;              
+              $counter++;
             }
           }
         }
+        asort($lines);
+        asort($all_lines);
+        
+        $val = array_count_values($all_lines);
+        foreach($val as $in => $v){
+          if ($v == 1){
+            $opt = 0.5;
+          }else if ($v == 2){
+            $opt = 0.6;
+          }else if ($v == 3){
+            $opt = 0.7;
+          }else if ($v == 4){
+            $opt = 0.8;
+          }else if ($v == 5){
+            $opt = 0.9;
+          }else if ($v == 6){
+            $opt = 1.0;
+          }
+          
+          $line_color = "background-color:#C8CEC3;opacity:$opt;";
+          $obj->HighlightLines($in, $line_color);
+        }
+        $pre = -3;                
+        
+        foreach($val as $in => $v){
+          if ($in > $pre + 2){
+            $miniMapLinks[] = $in;
+            $miniMapLinkLable[$in] = array('text' => '  ', 'rows' => 50);
+          }
+          $pre = $in;
+        }
+        
+        
+        
+        echo "<pre>";
+        print_r($val);
+        echo "</pre>";
       }else if ($mid && !$start_line && !$start_line){        
         $temp = explode(",", $mid);
         foreach($temp as $t){
@@ -490,12 +524,13 @@
       
       $viewData['secondary_table_rows'] = $secondary_table_rows;      
       $viewData['invocationId'] = $invocationId;
-      //print_r($viewData['secondary_table_rows']);exit;
+      $viewData['treedata'] = create_tree($invocationId);
       $viewData['showCloneView'] = true;
       $this->load->view('partials/main_header');
       $this->load->view('clone_table/fcc_by_group.php', $viewData);
       $this->load->view('partials/main_footer');
     }
+    
     public function filebydir(){
     	$viewData = array();      
 	    $invocationId = $this->getInvocationIdFromURL();

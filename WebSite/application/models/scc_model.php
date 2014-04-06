@@ -49,7 +49,7 @@ class SCC_model extends CI_Model {
     function getAllFCCDirSecondaryTableRows($dir_id, $invocationId, $user_id) {
         $where = "tb1.invocation_id = $invocationId and tb1.directory_id= $dir_id AND tb3.cmdirectory_id=$dir_id";
         $this->db->distinct();
-        $this->db->select('tb1.fcc_id, tb3.cmfile_id, tb2.gid, tb4.file_name');
+        $this->db->select('tb1.fcc_id, tb3.cmfile_id, tb2.did, tb2.gid, tb4.file_name, tb5.directory_name, tb6.repository_name');
         $this->db->from('fcc_by_directory as tb1');
         $this->db->join('fcc_instance tb2', "tb2.fcc_id = tb1.fcc_id AND tb1.fcc_id=tb2.fcc_id AND tb2.invocation_id = tb1.invocation_id", 'INNER');
         $this->db->join('invocation_files tb3', "tb2.fid = tb3.cmfile_id AND tb3.invocation_id = $invocationId", 'INNER');
@@ -66,10 +66,11 @@ class SCC_model extends CI_Model {
     }
 
     function getAllFCCGroupSecondaryTableRows($group_id, $invocationId, $user_id) {
-        $tempGroup_id = $group_id + 1;
-        $where = "tb1.invocation_id = $invocationId and tb1.group_id= $group_id AND tb3.group_id != $tempGroup_id ";
+        //$tempGroup_id = $group_id - 1;
+        $tempGroup_id = $group_id;
+        $where = "tb1.invocation_id = $invocationId and tb1.group_id= $group_id AND tb3.group_id = $tempGroup_id ";
         $this->db->distinct();
-        $this->db->select('tb1.fcc_id, tb3.cmfile_id, tb2.did, tb4.file_name');
+        $this->db->select('tb1.fcc_id, tb3.cmfile_id, tb2.did, tb2.gid, tb4.file_name, tb5.directory_name, tb6.repository_name');
         $this->db->from('fcc_by_group as tb1');
         $this->db->join('fcc_instance tb2', "tb2.fcc_id = tb1.fcc_id AND tb1.fcc_id=tb2.fcc_id AND tb2.invocation_id = tb1.invocation_id", 'INNER');
         $this->db->join('invocation_files tb3', "tb2.fid = tb3.cmfile_id  AND tb3.invocation_id = $invocationId", 'INNER');
