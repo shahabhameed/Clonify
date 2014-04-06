@@ -139,7 +139,7 @@
                                             <tr class="list_view" data-sccid="<?php echo $data['cmdirectory_id']; ?>">
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $data['cmdirectory_id']; ?></td>                          
-                                                <td><?php echo get_dir_name( $data['cmdirectory_id']);?></td>
+                                                <td><?php echo get_dir_name( $data['cmdirectory_id'], $invocationId);?></td>
                                                 <td><?php echo isset($data['noofinstance']) ? $data['noofinstance']: '-'; ?></td>
                                             </tr>
                                         <?php } ?>                           

@@ -161,7 +161,7 @@
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $data['directory_id']; ?></td>                          
                                                
-                                                <td><?php echo get_dir_name( $data['directory_id']);?></td>
+                                                <td><?php echo get_dir_name( $data['directory_id'], $invocationId);?></td>
                                                 <td><?php echo isset($data['noofinstance']) ? $data['noofinstance']: '-'; ?></td>
 
                                             </tr>
