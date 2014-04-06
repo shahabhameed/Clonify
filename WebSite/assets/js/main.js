@@ -566,6 +566,45 @@ Clonify.SCC = {
 		$('.dataTables_filter>label>input').addClass('form-control');
                 $('.dataTables_filter').hide();
   },
+  viewFccGroupInst: function(_scc_id){
+    $(".scc_instance_list").hide();
+    $("#scc_instance_list_"+_scc_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#scc_instance_list_"+_scc_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                         			 null,
+                                     { sSelector: "#fccidfilter",type: "number" },
+                                     { sSelector: "#didfilter",type: "number" },
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+                                     null,
+                                     ]
+                		});
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+                $('.dataTables_filter').hide();
+  },
   viewSCSAcrossCloneInstance: function(_scs_id){
   	$(".scs_instance_list").hide();
     $("#scs_instance_list_"+_scs_id).show();
@@ -919,6 +958,83 @@ Clonify.FCS = {
                                      { sSelector: "#cloneId",type: "number" },
                                      null
                                      ]
+                    });;
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+  },
+  viewInstanceFileByDir: function(_fcs_id){
+    $(".scc_instance_list").hide();
+    $("#fcs_instance_list_"+_fcs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#fcs_instance_list_"+_fcs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                               		null,
+                                     { sSelector: "#gidfilter",type: "number" },
+                                     { sSelector: "#fileidfilter",type: "number" },
+                                     null
+                                     ]
+                    });;
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+  },
+   viewInstanceFccByDirectory: function(_fcs_id){
+    $(".scc_instance_list").hide();
+    $("#fcs_instance_list_"+_fcs_id).show();
+    $(".code-window-containter").hide();
+    $("#code_window1").html("");
+    $("#code_window2").html("");
+    $("#code_map1").html("");
+    $("#code_map2").html("");
+    $(".code-window1").hide();
+    $(".code-window2").hide();
+    window.location.hash='';
+    $("#fcs_instance_list_"+_fcs_id+" table").dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+             "bDestroy": true,
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+	                               null,
+	                               { sSelector: "#fccidfilter",type: "number" },
+	                               { sSelector: "#groupidfilter",type: "number" },
+	                               { sSelector: "#fileidfilter",type: "number" },
+	                               null
+                                ]
                     });;
 		$('.dataTables_length select').uniform();
 		$('.dataTables_paginate > ul').addClass('pagination');

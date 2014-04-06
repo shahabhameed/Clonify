@@ -37,17 +37,17 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Select * From FCC Where</h4>
+                            <h4 class="modal-title" id="myModalLabel">Select * From FCC BY Group Where</h4>
                         </div>
                         <div class="modal-body">
 
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h4>FCC ID</h4>
+                                    <h4>Group ID</h4>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-10" id="fccidfilter">
+                                <div class="col-md-10" id="groupidfilter">
                                 </div>
                             </div>
                             <br>
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4" id="fccnoofinstance">
+                                <div class="col-md-4" id="noofifilter">
                                 </div>
                             </div>
                             <br>
@@ -80,14 +80,28 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Search * From SCC Clone Instance List Where</h4>
+                            <h4 class="modal-title" id="myModalLabel">Search * From By Group Files Clone Instance List Where</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <u><h4>GROUP ID</h4></u>
+                                    <u><h4>FCC ID</h4></u>
                                 </div>
-                                <div class="col-md-4" id="gidnumberfilter">
+                                <div class="col-md-4" id="fccidfilter">
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-3">
+                                    <u><h4>Directory ID</h4></u>
+                                </div>
+                                <div class="col-md-4" id="didfilter">
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-3">
+                                    <u><h4>File ID</h4></u>
+                                </div>
+                                <div class="col-md-4" id="fidnumberfilter">
                                 </div>
                             </div>
                             <br class="clear_all"/>
@@ -112,7 +126,7 @@
 
                         </div>
                         <div class="panel-body noPad clearfix">
-                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTablefcc display table table-bordered" width="100%">
+                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTablefccgroup display table table-bordered" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -157,7 +171,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default gradient">
                             <div class="panel-heading min">
-                                <h4><span> <i class="fa fa-list-alt fa-2"></i>SCC Clone Instance List - SCC ID - <?php echo $scc_id; ?></span></h4>
+                                <h4><span> <i class="fa fa-list-alt fa-2"></i>FCC By Group Files </span></h4>
                                 <span class="loader" style="top:15px;cursor:pointer;">
                                     <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                                 </span>
@@ -250,7 +264,7 @@
 <script>
     $(document).ready(function() {
         $(".list_view").on("click", function() {
-            Clonify.SCC.viewSCCCloneInstance($(this).data("sccid"));
+            Clonify.SCC.viewFccGroupInst($(this).data("sccid"));
             event.preventDefault();
             return false;
         });
@@ -263,5 +277,35 @@
             return false;
         });
 
+    });
+    $(document).ready(function() {          
+        if($('table').hasClass('dynamicTablefccgroup')){
+            $('.dynamicTablefccgroup').dataTable( {
+                "sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+                "sPaginationType": "bootstrap",
+                "bJQueryUI": false,
+                "bAutoWidth": false,
+                "iDisplayLength" : 5,
+                "aLengthMenu" : [5,10,25,50],
+                "oLanguage": {
+                    "sSearch": "<span></span> _INPUT_",
+                    "sLengthMenu": "<span>_MENU_</span>",
+                    "oPaginate": { "sFirst": "First", "sLast": "Last" }
+                }
+
+            }).columnFilter({
+                             aoColumns: [
+                                            null,
+                                            { sSelector: "#groupidfilter",type: "number" },
+                                             { sSelector: "#noofifilter",type: "number" }
+                                         ]
+                            });
+
+            $('.dataTables_length select').uniform();
+            $('.dataTables_paginate > ul').addClass('pagination');
+            $('.dataTables_filter>label>input').addClass('form-control');
+                    $('.dataTables_filter').hide();
+                    
+        }
     });
 </script>

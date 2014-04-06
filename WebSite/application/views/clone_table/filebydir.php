@@ -37,27 +37,26 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Select * From FCC By Directory Where</h4>
+                            <h4 class="modal-title" id="myModalLabel">Select * From Files By Directory Where</h4>
                         </div>
                         <div class="modal-body">
-
                             <div class="row">
                                 <div class="col-md-4">
                                     <u><h4>Directory ID</h4></u>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4" id="directoryidfilter">
+                                <div class="col-md-4" id="diridfilter">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <u><h4>No. Of Clones</h4></u>
+                                    <u><h4>No. Of Files</h4></u>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4" id="noofclones">
+                                <div class="col-md-4" id="nooffilesfilter">
                                 </div>
                             </div>
                             <br>
@@ -81,14 +80,21 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Search * From SCC Clone Instance List Where</h4>
+                            <h4 class="modal-title" id="myModalLabel">Search * From File By Directory Files Instance List Where</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <u><h4>Clone Id</h4></u>
+                                    <u><h4>Group Id</h4></u>
                                 </div>
-                                <div class="col-md-4" id="cloneId">
+                                <div class="col-md-4" id="gidfilter">
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-3">
+                                    <u><h4>File Id</h4></u>
+                                </div>
+                                <div class="col-md-4" id="fileidfilter">
                                 </div>
                             </div>
                         </div>
@@ -105,7 +111,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default gradient">
                         <div class="panel-heading min">
-                            <h4><span> <i class="fa fa-list-alt fa-2"></i> FCS Across Directory</span></h4>
+                            <h4><span> <i class="fa fa-list-alt fa-2"></i> Files By Directory</span></h4>
                             <span class="loader" style="top:15px;cursor:pointer;">
                                 <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
                             </span>
@@ -113,7 +119,7 @@
 
                         </div>
                         <div class="panel-body noPad clearfix">
-                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTablefcc display table table-bordered" width="100%">
+                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTablefilesbydir display table table-bordered" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -161,7 +167,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default gradient">
                             <div class="panel-heading min">
-                                <h4><span> <i class="fa fa-list-alt fa-2"></i>FCS Secondary Table</span></h4>
+                                <h4><span> <i class="fa fa-list-alt fa-2"></i>Files By Directory Files Instance</span></h4>
                                 <span class="loader" style="top:15px;cursor:pointer;">
                                     <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                                 </span>
@@ -262,10 +268,41 @@
    var zNodes = <?php echo $treedata ?>;
     $(document).ready(function() {
         $(".list_view").on("click", function() {
-            Clonify.FCS.viewInstanceCrossDirectory($(this).data("sccid"));
+            Clonify.FCS.viewInstanceFileByDir($(this).data("sccid"));
             event.preventDefault();
             return false;
         });
       
+    });
+    $(document).ready(function() {          
+        if($('table').hasClass('dynamicTablefilesbydir')){
+            $('.dynamicTablefilesbydir').dataTable( {
+                "sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+                "sPaginationType": "bootstrap",
+                "bJQueryUI": false,
+                "bAutoWidth": false,
+                "iDisplayLength" : 5,
+                "aLengthMenu" : [5,10,25,50],
+                "oLanguage": {
+                    "sSearch": "<span></span> _INPUT_",
+                    "sLengthMenu": "<span>_MENU_</span>",
+                    "oPaginate": { "sFirst": "First", "sLast": "Last" }
+                }
+
+            }).columnFilter({
+                             aoColumns: [
+                                            null,
+                                            { sSelector: "#diridfilter",type: "number" },
+                                            null,
+                                            { sSelector: "#nooffilesfilter",type: "number" }
+                                         ]
+                            });
+
+            $('.dataTables_length select').uniform();
+            $('.dataTables_paginate > ul').addClass('pagination');
+            $('.dataTables_filter>label>input').addClass('form-control');
+                    $('.dataTables_filter').hide();
+                    
+        }
     });
 </script>
