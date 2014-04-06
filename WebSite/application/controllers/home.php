@@ -545,7 +545,7 @@
 	        foreach($result as $row){
 	        	$res = $this->db->query('select * from invocation_files as tb1
 											join repository_file as tb2 on tb1.file_id = tb2.id 
-											where invocation_id = 3 and cmdirectory_id = '.$row['cmdirectory_id'])->result_array();
+											where invocation_id = '.$invocationId.' and cmdirectory_id = '.$row['cmdirectory_id'])->result_array();
 	          $secondary_table_rows[$row['cmdirectory_id']] = $res;
 	        }
 	      }
