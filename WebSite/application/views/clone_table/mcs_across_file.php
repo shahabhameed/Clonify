@@ -233,7 +233,7 @@
                         foreach($data as $d){
                           $counter++;
                         ?>
-                          <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="<?php echo $d['endline']; ?>" data-endcol="" data-startcol="" data-startline="<?php echo $d['stratline']; ?>" data-fid="<?php echo $d['fid'];?>" data-scsid= "<?php echo $mcs_crossfile_id;?>" data-clid="<?php echo $mcs_crossfile_id;?>" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
+                          <tr class="code_view" data-name="<?php echo $d['directory_name'].$d['file_name']; ?>" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="<?php echo $d['fid'];?>" data-scsid= "<?php echo $mcs_crossfile_id;?>" data-clid="<?php echo ++$mcs_crossfile_id;?>" data-mid="<?php echo $d['mid_csv'];?>" data-path="<?php echo $d['repository_name'].$d['directory_name'].$d['file_name']?>">
                             <td><?php echo $counter;?></td>
                             <td><?php echo $d['gid'];?></td>
                             <td><?php echo $d['directory_id'];?></td>
@@ -305,12 +305,12 @@
 $(document).ready(function(){
   
     $(".list_view").live("click",function(){
-      Clonify.SCC.viewSCSAcrossCloneInstance($(this).data("scsid"));
+      Clonify.MCC.viewMCSAcrossCloneInstance($(this).data("scsid"));
       event.preventDefault();      
       return false;
     });
     $(".code_view").live("click",function(){
-        Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+        Clonify.MCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), $(this).data("mid"));
         event.preventDefault();        
         return false;
     });

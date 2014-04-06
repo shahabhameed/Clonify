@@ -167,5 +167,14 @@ class MCC {
         }
         return $data;
     }
+	public function getMethodInstancesByMId($invocationId, $m_id){
+   // $userId = $this->ci->tank_auth->get_user_id();
+    $data = $this->ci->mcc_model->getMethodInstancesByMId($invocationId, $m_id);
+    if ($data){
+      $data = json_decode(json_encode($data), true); // Changing Obj in Array
+    }
+    
+    return $data;
+  }
 
 }

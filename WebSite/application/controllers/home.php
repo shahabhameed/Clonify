@@ -44,6 +44,7 @@
       $start_line = $this->input->post('start_line');
       $end_line = $this->input->post('end_line');
       $fid = $this->input->post('fid');
+	  $mid = $this->input->post('mid');
       $lines = array();
       $miniMapLinks = array();
       $miniMapLinkLable = array();
@@ -80,7 +81,33 @@
             }
           }
         }
-      }else{
+      }else if ($mid && !$start_line && !$start_line){        
+        $temp = explode(",", $mid);
+        foreach($temp as $t){
+          $mids[$t] = $t;
+        }
+        //print_r($mids);
+        foreach($mids as $m_id){
+          $scc_instances = $this->mcc->getMethodInstancesByMId($invocation_id, $m_id);
+          if ($scc_instances){
+            foreach($scc_instances as $scc_instance){
+              $lines = array();
+              for ($i = $scc_instance['startline']; $i <= $scc_instance['endline']; $i++) {
+                $lines[] = $i;
+              }
+              $r = $row % $total;
+              
+              $line_color = "background-color:" . $colors[$r] .";";
+              $obj->HighlightLines($lines, $line_color);
+              $miniMapLinks[] = $scc_instance['startline'];
+              $miniMapLinkLable[$scc_instance['startline']] = array('text' => '  ', 'rows' => $scc_instance['endline'] - $scc_instance['startline']);
+
+              $row++;              
+            }
+          }
+        }
+      }
+	  else{
         for ($i = $start_line; $i <= $end_line; $i++) {
           $lines[] = $i;
         }

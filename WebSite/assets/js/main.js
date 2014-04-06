@@ -1051,7 +1051,8 @@ Clonify.MCC = {
 		$('.dataTables_filter>label>input').addClass('form-control');
         $('.dataTables_filter').hide();
   },
-  viewCodeData: function(_mcc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
+  viewCodeData: function(_mcc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name, _mid){
+	console.log(_mid);
     var _url = base_url + "home/loadCode";
     window_id = window_id + 1;
     $("#code_window1").css("overflow", "");
@@ -1068,6 +1069,7 @@ Clonify.MCC = {
       strt_col : strt_col,
       end_col : end_col,
       invocation_id: invocation_id,
+	  mid: _mid,
       window_id: window_id
     };
     

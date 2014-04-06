@@ -239,6 +239,21 @@ class MCC_model extends CI_Model {
         }
         return array();
     }
+	public function getMethodInstancesByMId($invocationId, $m_id) {
+       /* $where = "tb1.invocation_id = $invocationId AND tb1.mid=$m_id ";
+
+        $this->db->select('*');
+        $this->db->from('method tb1');
+        $this->db->where($where);
+		*/
+		$query = "SELECT * FROM method WHERE invocation_id = $invocationId AND mid = $m_id";
+		$result = $this->db->query($query);
+       // $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return array();
+    }
 
 
 }
