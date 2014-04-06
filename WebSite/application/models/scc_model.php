@@ -66,8 +66,8 @@ class SCC_model extends CI_Model {
     }
 
     function getAllFCCGroupSecondaryTableRows($group_id, $invocationId, $user_id) {
-        //$tempGroup_id = $group_id - 1;
-        $tempGroup_id = $group_id;
+        $tempGroup_id = $group_id - 1;
+        //$tempGroup_id = $group_id;
         $where = "tb1.invocation_id = $invocationId and tb1.group_id= $group_id AND tb3.group_id = $tempGroup_id ";
         $this->db->distinct();
         $this->db->select('tb1.fcc_id, tb3.cmfile_id, tb2.did, tb2.gid, tb4.file_name, tb5.directory_name, tb6.repository_name');
