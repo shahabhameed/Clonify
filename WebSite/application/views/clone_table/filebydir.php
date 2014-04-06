@@ -268,6 +268,9 @@
    var zNodes = <?php echo $treedata ?>;
     $(document).ready(function() {
         $(".list_view").on("click", function() {
+            $("tr").removeClass('selected-row');
+            $(this).addClass('selected-row');
+            
             Clonify.FCS.viewInstanceFileByDir($(this).data("sccid"));
             event.preventDefault();
             return false;

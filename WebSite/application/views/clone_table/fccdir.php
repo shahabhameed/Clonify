@@ -299,12 +299,18 @@
    var zNodes = <?php echo $treedata ?>;
     $(document).ready(function() {
         $(".list_view").on("click", function() {
+            $("tr").removeClass('selected-row');
+            $(this).addClass('selected-row');
+            
             Clonify.FCS.viewInstanceFccByDirectory($(this).data("sccid"));
             event.preventDefault();
             return false;
         });
         
          $(".code_view").on("click", function() {
+            $(".scc_instance_list tr").removeClass('selected-row');
+            $(this).addClass('selected-row');
+          
             Clonify.FCC.viewCodeData(
                                         $(this).data("path"), 
                                         $(this).data("fid"), 

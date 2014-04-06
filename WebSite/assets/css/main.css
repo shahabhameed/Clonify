@@ -3851,3 +3851,7 @@ nav.flexible-nav ul li a.tnn-h3 {
 .mcc_instance_list{
   display:none;
 }
+
+.selected-row{
+  background-color: #C0C0C0 !important; 
+}
