@@ -115,17 +115,20 @@ class Treemap_model extends CI_Model {
         				if(isset($currDir[$currPar]))
         				{
         					//$currDir[$currPar]['children'][$currDid]=$dirData[$currDid];
-        					$currDir[$currPar]['dsize']=$currDir[$currPar]['dsize'] + $dirData[$currDid]['dsize'];
+                            if(isset($dirData[$currDid]))
+                            {
+        					   $currDir[$currPar]['dsize']=$currDir[$currPar]['dsize'] + $dirData[$currDid]['dsize'];
+                            }
         					//unset($dirData[$currDid]);
         				}
-        				else
+        				else if(isset($dirData[$currDid]))
         				{
         					$currDir[$currPar]=array("cmdid"=>$dirArrP['cmdid'],"did"=>$currPar,"dname"=>'',"dsize"=>$dirData[$currDid]['dsize'],"files"=>array(),"children"=>array());
         					//unset($dirData[$currDid]);
         				}
                         $currDir = &$currDir[$currPar]['children'];
                     }
-                    if($dirData[$currDid])
+                    if(isset($dirData[$currDid]))
                     {
                         $currDir[$currDid]=$dirData[$currDid];
                         unset($dirData[$currDid]);
