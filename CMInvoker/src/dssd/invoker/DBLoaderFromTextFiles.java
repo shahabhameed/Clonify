@@ -695,10 +695,10 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 		int count = 0;
 		int count0 = 0;
 		int count1 = 0;
+                int fccId = -1;
 		Vector<String>fccs = null;
 		int size = getDirectorySize(invocation_id);
-		int fileSize = 0;
-                Vector<String> fcc_instance_data = getFCC_InstanceData(invocation_id);
+		int fileSize = 0;                
 		for (int i = 0; i < size; i++) {
 			line = stdin14.readLine();
 			if (!line.equalsIgnoreCase("")) {
@@ -724,29 +724,20 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 					Vector<String> files = null;
                                         files = new Vector<String>();                               
 					int dId = count0;
+					dId = count0;
 					for (int k = 0; k < cluster_size; k++) {
-						int fccId = Integer.parseInt(fccs.get(k));						
-                                                for (int xx = 0; xx < fcc_instance_data.size() ; xx++){
-                                                   String _obj = fcc_instance_data.get(xx);
-                                                   String[] parts = _obj.split("\\|\\|");
-                                                                                                      
-                                                   if (Integer.parseInt(parts[3]) == dId && Integer.parseInt(parts[2]) == fccId){
-                                                     files.add(parts[0]);
-                                                   }
-                                                }
-                                                
-						if (files != null) {
-							fileSize = files.size();
-							count1 = 0;
-							for (int n = 0; n < inst; n++) {
-								for (int q = 0; q < fileSize / inst; q++) {
-									insertFCSInDir_Files(invocation_id,count, fccId,
-											n, Integer.parseInt(files
-													.get(count1)));
-									count1++;
-								}
-							}
-						}
+                                          fccId = Integer.parseInt(fccs.get(k));
+                                          files = getFCSInDir_Files(invocation_id, dId, fccId);
+                                          if (files != null) {
+                                            fileSize = files.size();
+                                            count1 = 0;
+                                            for (int n = 0; n < inst; n++) {
+                                              for (int q = 0; q < fileSize / inst; q++) {
+                                                insertFCSInDir_Files(invocation_id, count, fccId, n, Integer.parseInt(files.get(count1)));
+                                                count1++;
+                                              }
+                                            }
+                                          }
 					}
 					insertFCS_InDir(invocation_id,count, inst,count0);
 					//insertFCSInDir_Dir(count, count0);
@@ -911,77 +902,62 @@ public class DBLoaderFromTextFiles extends OutputHelper{
     private void Parse_InGroupCloneFileStructures(int invocation_id)throws FileNotFoundException, IOException
     {
     	String filePath = InvokeService.CM_ROOT + File.separatorChar + Constants.CM_OUTPUT_FOLDER + File.separatorChar + Constants.IN_GROUP_STRUCTURE+ Constants.CM_TEXT_FILE_EXTENSION;  
-		File file7 = new File(filePath);
-		FileInputStream filein17 = new FileInputStream(file7);
-		BufferedReader stdin17 = new BufferedReader(new InputStreamReader(filein17));
-		String temp = null;
-		int count = 0;
-		int count0 = 0;
-		int count1 = 0;
-		int gId = -1;
-		int fccId = -1;
-		int fileSize = -1;
-		Vector<String> fccs = null;
-		int size = getGroupSize(invocation_id);
-                Vector<String> fcc_instance_data = getFCC_InstanceData(invocation_id);
-                
-		for (int i = 0; i < size; i++) {
-			line = stdin17.readLine();
-			if (!line.equalsIgnoreCase("")) {
-				st = new StringTokenizer(line, "()");
-				int loop = st.countTokens() / 2;
-				for (int j = 0; j < loop; j++) {
-					int inst = (new Integer(st.nextToken())).intValue();
-					String pat = st.nextToken();
-					StringTokenizer stPat = new StringTokenizer(pat, ",");
-					int cluster_size = 0;
-					String pre = "";
-					fccs = new Vector<String>();
-					while (stPat.hasMoreTokens()) {
-						temp = stPat.nextToken();
-						if (!pre.equalsIgnoreCase(temp)) {
-							fccs.add(temp);
-							cluster_size++;
-						}
-						insertFCSInGroup_FCC(invocation_id,count, Integer.parseInt(temp));
-						pre = temp;
-					}
-
-					Vector<String> files = null;
-					gId = count0;
-                                        String _obj = null;
-                                        files = new Vector<String>();
-					for (int k = 0; k < cluster_size; k++) {
-						fccId = Integer.parseInt(fccs.get(k));						
-                                                for (int xx = 0; xx < fcc_instance_data.size() ; xx++){
-                                                   _obj = fcc_instance_data.get(xx);
-                                                   String[] parts = _obj.split("\\|\\|");
-                                                   if (Integer.parseInt(parts[1]) == (gId - 1) && Integer.parseInt(parts[2]) == fccId){
-                                                     files.add(parts[0]);
-                                                   }
-                                                }
-                                                
-						if (files != null) {
-							fileSize = files.size();
-							count1 = 0;
-							for (int n = 0; n < inst; n++) {
-								for (int q = 0; q < fileSize / inst; q++) {
-									insertFCSInGroup_Files(invocation_id,count,
-											fccId, n, Integer
-													.parseInt(files
-															.get(count1)));
-									count1++;
-								}
-							}
-						}
-					}
-					insertFCS_InGroup(invocation_id,count, inst,count0);
-					//insertFCSInGroup_Group(count, count0);
-					count++;
-				}
-			}
-			count0++;
+	File file17 = new File(filePath);
+	FileInputStream filein17 = new FileInputStream(file17);
+	BufferedReader stdin17 = new BufferedReader(new InputStreamReader(filein17));
+	String temp = null;
+        int count = 0;
+        int count0 = 0;
+        int count1 = 0;
+	int gId = -1;
+	int fccId = -1;
+	int fileSize = -1;
+	Vector<String> fccs = null;
+        int cluster_size = 0;        
+	int size = getGroupSize(invocation_id);
+	for (int i = 0; i < size; i++) {
+          line = stdin17.readLine();
+          if (!line.equalsIgnoreCase("")) {
+            st = new StringTokenizer(line, "()");
+            int loop = st.countTokens() / 2;
+            for (int j = 0; j < loop; j++) {
+              int inst = (new Integer(st.nextToken())).intValue();
+              String pat = st.nextToken();
+              StringTokenizer stPat = new StringTokenizer(pat, ",");
+              cluster_size = 0;
+              String pre = "";
+              fccs = new Vector<String>();
+              while (stPat.hasMoreTokens()) {
+                temp = stPat.nextToken();
+		if (!pre.equalsIgnoreCase(temp)) {
+                  fccs.add(temp);
+                  cluster_size++;
 		}
+		insertFCSInGroup_FCC(invocation_id, count, Integer.parseInt(temp));
+		pre = temp;
+              }
+              Vector<String> files = null;
+              gId = count0;
+              for (int k = 0; k < cluster_size; k++) {
+                fccId = Integer.parseInt(fccs.get(k));
+                files = getFCSInGroup_Files(invocation_id, gId, fccId);
+                if (files != null) {
+                  fileSize = files.size();
+                  count1 = 0;
+                  for (int n = 0; n < inst; n++) {
+                    for (int q = 0; q < fileSize / inst; q++) {
+                      insertFCSInGroup_Files(invocation_id, count, fccId, n, Integer.parseInt(files.get(count1)));
+                      count1++;
+                    }
+                  }
+                }
+              }
+              insertFCS_InGroup(invocation_id, count, inst, count0);              
+              count++;
+            }
+          }
+          count0++;
+	}
 
 		if (!INSERT_FCS_INGROUP
 				.equalsIgnoreCase("INSERT INTO fcs_withingroup(invocation_id,fcs_ingroup_id, members,group_id) values ")) {
@@ -1352,6 +1328,62 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 	/*
 	 * Returns the file objectName of a file given the file id
 	 */
+        
+        public Vector<String> getFCSInGroup_Files(int invocation_id, int gid, int fcc_id) {
+		Vector<String> list = null;
+		String fid = null;
+
+		try {
+			Statement s = Database.getInstance().getDBConn().createStatement();
+			s.execute("use "+databaseName+";");
+			ResultSet results = s.executeQuery("select distinct fid "
+							+ " from fcc_instance "
+							+ " where gid = " + gid
+                                                        + " and invocation_id = " + invocation_id
+							+ " and fcc_id = " + fcc_id + ";");
+			list = new Vector<String>();
+			while (results.next()) {
+				fid = results.getString("fid");
+				list.add(fid);
+			}
+
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+
+		return list;
+	}
+        
+        public Vector<String> getFCSInDir_Files(int invocation_id, int did, int fcc_id) {
+		Vector<String> list = null;
+		String fid = null;
+
+		try {
+			Statement s = Database.getInstance().getDBConn().createStatement();
+			s.execute("use "+databaseName+";");
+			ResultSet results = s
+					.executeQuery("select distinct fid "
+							+ "from fcc_instance "
+							+ "where did = " + did
+                                                        + "and invocation_id = " + invocation_id
+							+ " and fcc_id = " + fcc_id + ";");
+			list = new Vector<String>();
+			while (results.next()) {
+				fid = results.getString("fid");
+				list.add(fid);
+			}
+
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+
+		return list;
+	}
+        
 	private String getFileName(int fid) {
 		String fileName = null;
 		try {
@@ -1630,8 +1662,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 				+ "\"  ),";
 	}
 
-	public void insertFCSInGroup_Files(int invocation_id,int fcs_ingroup_id, int fcc_id,
-			int fcsingroup_instance_id, int fid) {
+	public void insertFCSInGroup_Files(int invocation_id, int fcs_ingroup_id, int fcc_id, int fcsingroup_instance_id, int fid) {
 		INSERT_FCSINGROUP_FILES += "(\"" + invocation_id + "\", \"" + fcs_ingroup_id + "\" , \"" + fcc_id + "\" ,\"" + fcsingroup_instance_id
 				+ "\" , \"" + fid + "\"  ),";
 	}
