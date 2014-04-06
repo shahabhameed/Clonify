@@ -3,7 +3,7 @@ function loadTreeMap(data) {
             width: 'auto',
             height: 800,
             source: data,
-            baseColor: '#B423F4',
+            baseColor: '#E7F2FF',
             colorMode:'parent',
             colorRanges :[{
                 color: "#F72828",

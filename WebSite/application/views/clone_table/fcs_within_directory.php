@@ -251,8 +251,11 @@
                     </div>
 
                 </div>
+                <div class="col-lg-12 row">
+                    <button class="btn btn-primary tmBtn" id="tmBtn">Generate</button>
+                </div>
                 <div class="row" id="treeMapBlock">
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
 
 
                         <div class="panel panel-default">
@@ -295,9 +298,12 @@
     <script>
 
 
-      
-    $(function() {
-    var data = [
+
+function generateTreeMap()
+{
+    var treeMapData = <?php echo json_encode($treemapdata); ?>;
+    var data = new Array();
+   data = [
    
 <?php
 
@@ -313,8 +319,15 @@
 ?>
 
     ];
+    return data;
+}
+      
+    function myTreeMap() {
+    
+    data = generateTreeMap();
             loadTreeMap(data);
-    });
+            return data;
+    }
     
     
     
@@ -363,7 +376,8 @@
             echo "label: '".$parentName."',";
             echo "value: null,";
     }  
-            echo "color: '#".random_color()."',";
+            //echo "color: '#".random_color()."',";
+            echo "color: '#E7F2FF',";
             echo "},";
     }
     function random_color_part() {
@@ -378,42 +392,66 @@
         foreach ($files as $file => $filedata) {
 
             echo "{";
-            echo "label: '".$filedata['filename']."',";
+            echo "label: '".$filedata['cmfid']."',";
             echo "value: ".$filedata['fsize'].",";
             echo "parent: '".$filedata['dname']."',";
-           /* if($filedata['fsize']>5000)
-            {
-                echo "color: '#"."73DD58"."',";
-            }
-            else
-            {
-                 echo "color: '#"."1292AA"."',";
-            }
-             */
-            
-            echo "color: '#".random_color()."',";
+            //echo "color: '#".random_color()."',";
             echo "data: {description: '".$filedata['dname'].$filedata['filename']."</br>File Size: ".$filedata['fsize']."', title: '".$filedata['filename']."'}";
             echo "},";
     }
     }
     }
     
-    function showTreeMap()
-    {}
     
     ?>  
-
+        
+        
       //var zNodes = <?php echo $treedata ?>;
         
         
+        
+        function splitFIDs(fids)
+        {
+            fids = "0,1";
+            var fidArr = new Array();
+            if(typeof fids != 'undefined')
+            {
+                fidArr = fids.split(',');
+            }
+            return fidArr;
+        }
+        
+        function generateNewTreeMap(tmData,fidArr)
+        {
+            if(tmData)
+            {
+                for(var key in tmData) {
+                    if(typeof tmData[key] === "object") {
+                        if(fidArr.indexOf(tmData[key].label)>=0)
+                        {
+                            tmData[key].color = '#FFFF00';
+                        }
+                    }
+                }
+                loadTreeMap(tmData);
+            }
+        }
+        
         $(document).ready(function() {
+            tmData = myTreeMap();
+            //generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
+            
             $(".list_view").on("click", function() {
                 Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
-
-                showTreeMap($(this).data("fcs_indir_id"));
-
                 event.preventDefault();
                 return false;
             });
+            
+            $("#tmBtn").on("click", function() {
+                generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
+                event.preventDefault();
+                return false;
+            });
+            
         });
     </script>
