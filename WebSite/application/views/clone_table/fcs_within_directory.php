@@ -406,7 +406,7 @@ function generateTreeMap()
     ?>  
         
         
-      //var zNodes = <?php echo $treedata ?>;
+      var zNodes = <?php echo $treedata ?>;
         
         
         
