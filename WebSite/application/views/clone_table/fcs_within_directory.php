@@ -412,7 +412,7 @@ function generateTreeMap()
         
         function splitFIDs(fids)
         {
-            fids = "0,1";
+            //fids = "0,1";
             var fidArr = new Array();
             if(typeof fids != 'undefined')
             {
