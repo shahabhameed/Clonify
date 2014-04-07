@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__)."/../auth.php");
 
-class TestSP3 extends CI_Controller
+class TestSP4 extends CI_Controller
 {    
     function __construct()
     {          

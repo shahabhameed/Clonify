@@ -13,7 +13,7 @@
       $this->load->library('mcc');
       $this->load->library('common');
       $this->load->helper('tree');
-	  $this->load->model('treemap_model');
+      $this->load->model('treemap_model');
 	  
       if (!$this->tank_auth->is_logged_in()) {         // Not logged in
         redirect('/auth/login/');
@@ -108,13 +108,7 @@
             $miniMapLinkLable[$in] = array('text' => '  ', 'rows' => 50);
           }
           $pre = $in;
-        }
-        
-        
-        
-        echo "<pre>";
-        print_r($val);
-        echo "</pre>";
+        }        
       }else if ($mid && !$start_line && !$start_line){        
         $temp = explode(",", $mid);
         foreach($temp as $t){
