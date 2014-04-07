@@ -1466,7 +1466,7 @@ public class DBLoaderFromTextFiles extends OutputHelper{
 			if (results.next()) {
 				gid = results.getInt(1);
                                 if (gid > 0){
-                                  gid = gid - 1;
+                                  //gid = gid - 1;
                                 } 
 			}
 			s.close();
