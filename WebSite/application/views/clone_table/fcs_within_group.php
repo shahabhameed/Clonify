@@ -244,7 +244,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3" style="border-left:1px solid;max-height:600px;overflow-y:scroll;overflow-x:hidden;">
+                <div class="col-md-3" style="border-left:1px solid;height:auto;overflow-y:scroll;overflow-x:hidden;">
                     <div class="todo">
                         <h5>Navigation</h5>
                         <ul id="treeDemo" class="ztree"></ul>
@@ -297,7 +297,7 @@
         return data;
     }
 
-    var zNodes = <?= $treedata ?>;
+    var zNodes = <?php echo $treedata ?>;
     $(document).ready(function() {
 
         $(".list_view").on("click", function() {
