@@ -283,8 +283,57 @@
 </div><!-- End #wrapper -->
 
 <script>
+            function generateTreeMap()
+            {
+                var data = new Array();
+                data = <?php
+                    if ($treemapdata) {
+                        echo $treemapdata;
+                    }
+                    ?>;
+                return data;
+            }
+
+            function myTreeMap() {
+
+                var treeData = generateTreeMap();
+                loadTreeMap(treeData);
+                return treeData;
+            }
+
+            function splitFIDs(fids)
+            {
+                fids = "0,1";
+                var fidArr = new Array();
+                if (typeof fids != 'undefined')
+                {
+                    fidArr = fids.split(',');
+                }
+                return fidArr;
+            }
+            
+            function generateNewTreeMap(tmData, fidArr)
+            {
+                if (tmData)
+                {
+                    for (var key in tmData) {
+                        if (typeof tmData[key] === "object") {
+                            if (fidArr.indexOf(tmData[key].label) >= 0)
+                            {
+                                tmData[key].color = '#FFFF00';
+                            }
+                        }
+                    }
+                    loadTreeMap(tmData);
+                }
+            }
+
+
     var zNodes = <?=$treedata?>;
     $(document).ready(function() {
+        
+        tmData = myTreeMap();
+        
         $(".list_view").on("click", function() {
             Clonify.FCS.viewInstanceAcrossGroup($(this).data("sccid"));
             event.preventDefault();

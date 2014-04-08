@@ -187,8 +187,9 @@ class FCS extends CI_Controller {
         } else {
             $output.="label: '" . $parentName . "',";
             $output.="value: null,";
+            $output.="parent: 'Root',";            
         }
-        $output.= "color: '#".$color."',";
+        //$output.= "color: '#".$color."',";
         $output.="color: '#E7F2FF' ,";
         $output.="},";
         return $output;
@@ -222,6 +223,12 @@ class FCS extends CI_Controller {
 
     public function generateTreeMapData($treemapdata) {
         $output="[";
+        
+        $output.="{";
+        $output.="label: 'Root',";
+        $output.="value: null,";
+        $output.="},";
+        
         foreach ($treemapdata as $dirList => $data) {
            $output.= $this->parseDirStructure($data, "Root");
         }
@@ -266,15 +273,23 @@ class FCS extends CI_Controller {
         $secondary_table_rows = array();
         if ($result) {
             foreach ($result as $row) {
-                $gids[] = $row['group_id'];
+                //$gids[] = $row['group_id'];
                 $secondary_table_rows[$row['fcs_crossgroup_id']] = $this->scc->getAllFCSCrossGroupSecondaryTableRows($row, $invocationId);
+            }
+        }
+        foreach($secondary_table_rows as $temp1)
+        {
+            $tmp2 = array_keys($temp1);
+            foreach($tmp2 as $tmp22)
+            {
+                $gids[] = $tmp22;
             }
         }
         $gids = array_unique($gids);
         $treeMapData =$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
         $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
 
-        $viewData['secondary_table_rows'] = $secondary_table_rows;
+        $viewData['secondary_table_rows'] = $secondary_table_rows;        
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;
@@ -297,7 +312,7 @@ class FCS extends CI_Controller {
                 $secondary_table_rows[$row['fcs_indir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
             }
         }
-        //$dids = array(0,1,2);
+        //$dids = array(0,1);
         $dids = array_unique($dids);
         $treeMapData = $this->treemap_model->get_fcs_dir_treemap($invocationId, $dids);
         $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);

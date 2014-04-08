@@ -336,7 +336,7 @@
             }
             //ON Click Functionality
             $(document).ready(function() {
-                //tmData = myTreeMap();
+                tmData = myTreeMap();
                 //generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
 
                 $(".list_view").on("click", function() {

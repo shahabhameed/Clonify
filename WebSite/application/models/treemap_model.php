@@ -49,7 +49,7 @@ class Treemap_model extends CI_Model {
 		$dirArr = array();
 		foreach($dids as $did)
 		{
-			$query = "SELECT d.id did, d.parent_id pid from repository_file f,repository_directory d, user_repository r WHERE d.id=f.directory_id and d.repository_id=r.id and f.id in(select file_id from invocation_files where cmdirectory_id=$did and invocation_id=$invocationId)";
+			$query = "SELECT distinct d.id did, d.parent_id pid from repository_file f,repository_directory d, user_repository r WHERE d.id=f.directory_id and d.repository_id=r.id and f.id in(select file_id from invocation_files where cmdirectory_id=$did and invocation_id=$invocationId)";
 			$result = $this->db->query($query);
 			$dirParent = json_decode(json_encode($result->result()), true);
 			foreach($dirParent as $dirP)
@@ -76,9 +76,12 @@ class Treemap_model extends CI_Model {
     				$dirArr[] = array("cmdid"=>$did,"did"=>$dirP['did'],"parents"=>$pArr);
     				//$dirParent[$dirP]['pid']=$pArr;
                 }
+                else if($dirP['pid']==-1)
+                {
+                    $dirArr[] = array("cmdid"=>$did,"did"=>$dirP['did'],"parents"=>array());
+                }
 			}
 		}
-		//return $dirArr;
 		//$dirArr has all dir ids and list of their parents (complete heirarchy)
 		//SAMPLE:
 		//Array ( [0] => Array ( [0] => 125 [1] => Array ( [0] => 2 ) ) [1] => Array ( [0] => 126 [1] => Array ( [0] => 2 ) ) [2] => Array ( [0] => 127 [1] => Array ( [0] => 126 [1] => 2 ) ) )
