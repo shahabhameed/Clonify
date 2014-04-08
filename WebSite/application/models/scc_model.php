@@ -477,7 +477,7 @@ class SCC_model extends CI_Model {
     public function getSCCByMethodPrimaryTable($invocationId) {
 
    
-		$query = "SELECT a.mid, a.mname methodname, d.cmdirectory_id did, round(COUNT( b.scc_id )/25,0) length, c.fid, d.group_id gid, CONCAT( directory_name, file_name ) filename
+		$query = "SELECT a.mid, a.mname methodname, d.cmdirectory_id did, COUNT( b.scc_id) length, c.fid, d.group_id gid, CONCAT( directory_name, file_name ) filename
 			FROM method a, scc_method b, method_file c, invocation_files d, repository_file e, repository_directory f
 			WHERE b.mid = a.mid
 			AND b.mid = c.mid
@@ -500,13 +500,13 @@ class SCC_model extends CI_Model {
 		
         //$query = "select t1.fid,t1.scc_id, t1.scc_instance_id, t2.length, t1.endline, t1.startline,t1.endcol, t1.startcol,CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath from scc_instance t1, scc t2, repository_file f,repository_directory d,	user_repository r where t1.scc_id = t2.scc_id and t1.invocation_id = t2.invocation_id and t1.invocation_id = $invocation_id and t1.scc_id in (select scc_id from mcc_scc where mcc_id in (select mcc_id from mcc_instance where mid=$mid and invocation_id=$invocation_id)) AND d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=t1.fid and invocation_id=$invocation_id)";
 		$query = "SELECT a.scc_id,scc.length,a.fid, a.startline, a.endline, a.startcol, a.endcol, CONCAT(directory_name,file_name) filename, CONCAT(repository_name,directory_name,file_name) filepath
-FROM scc_instance a, scc, repository_file f,repository_directory d,	user_repository r
-WHERE a.scc_id = scc.scc_id
-and a.invocation_id = scc.invocation_id
-AND a.invocation_id = $invocation_id
-AND a.scc_id in (select distinct scc_id from scc_method where mid= $mid)
-AND d.id=f.directory_id and d.repository_id=r.id and f.id=(select file_id from invocation_files where cmfile_id=a.fid and invocation_id=$invocation_id)
-group by a.scc_id";
+				FROM scc_instance a, scc, repository_file f,repository_directory d,	user_repository r
+				WHERE a.scc_id = scc.scc_id
+				AND a.invocation_id = scc.invocation_id
+				AND a.invocation_id = $invocation_id
+				AND a.scc_id IN (SELECT DISTINCT scc_id from scc_method where mid= $mid)
+				AND d.id=f.directory_id and d.repository_id=r.id and f.id=(SELECT file_id from invocation_files where cmfile_id=a.fid and invocation_id=$invocation_id)
+				GROUP BY a.scc_id";
 		
         $result = $this->db->query($query);
         // echo $this->db->last_query();exit;
