@@ -150,7 +150,7 @@ width: 50% !important;
                           <td><?php echo $data['fid'];?></td>                          
                           <td><?php echo $data['did'];?></td>
                           <td><?php echo $data['gid'];?></td>
-                          <td><?php echo $data['filename'];?></td>
+                          <td style="text-align:left"><?php echo $data['filename'];?></td>
                           <td><?php echo $data['methods'];?></td>
                         </tr>
                         <?php }?>                        

@@ -153,8 +153,8 @@ width: 50% !important;
                           <td><?php echo $data['fid'];?></td>
                           <td><?php echo isset($data['did']) ? $data['did'] : '-';?></td>
                           <td><?php echo isset($data['gid']) ? $data['gid'] : '-';?></td>
-                          <td align="left"><?php echo isset($data['methodname']) ? $data['methodname'] : '-';?></td>
-						  <td><?php echo $data['filename'];?></td>
+                          <td style="text-align:left"><?php echo isset($data['methodname']) ? $data['methodname'] : '-';?></td>
+						  <td style="text-align:left"><?php echo $data['filename'];?></td>
 						  <td><?php echo $data['length'];?></td>
                         </tr>
                         <?php }?>                        
