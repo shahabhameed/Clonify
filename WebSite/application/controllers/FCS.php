@@ -153,8 +153,8 @@ class FCS extends CI_Controller {
         echo $obj->getFormattedCode();
     }
    function parseDirStructure($directory, $parentName) {
+        $output = "";
         if (!empty($directory)) {
-
             if ($directory ['dname'] == "") {
                 $dname = $parentName;
             } else {
@@ -162,33 +162,35 @@ class FCS extends CI_Controller {
             }
             $dsize = $directory['dsize'];
 
-            createParent($directory, $parentName);
+            $output.=$this->createParent($directory, $parentName);
 
             $children = $directory['children'];
             if (!empty($children)) {
                 foreach ($children as $child => $childData) {
-                    parseDirStructure($childData, $dname);
+                    $output.=$this->parseDirStructure($childData, $dname);
                 }
             }
 
             $files = $directory['files'];
-            traverseFiles($files);
+            $output.=$this->traverseFiles($files);
         }
+        return $output;
     }
 
     function createParent($directory, $parentName) {
-        echo "{";
+        $output="{";
         if ($directory['dname'] != "") {
-            echo "label: '" . $directory['dname'] . "',";
-            echo "value: 1,";
-            echo "parent: '" . $parentName . "',";
+            $output.= "label: '" . $directory['dname'] . "',";
+            $output.= "value: 1,";
+            $output.="parent: '" . $parentName . "',";
         } else {
-            echo "label: '" . $parentName . "',";
-            echo "value: null,";
+            $output.="label: '" . $parentName . "',";
+            $output.="value: null,";
         }
-        //echo "color: '#".random_color()."',";
-        echo "color: '#E7F2FF',";
-        echo "},";
+        //$output.="color: '#".random_color()."',";
+        $output.="color: '#E7F2FF',";
+        $output.="},";
+        return $output;
     }
 
     function random_color_part() {
@@ -200,28 +202,29 @@ class FCS extends CI_Controller {
     }
 
     function traverseFiles($files) {
+        $output = "";
         if (!empty($files)) {
             foreach ($files as $file => $filedata) {
-
-                echo "{";
-                echo "label: '" . $filedata['cmfid'] . "',";
-                echo "value: " . $filedata['fsize'] . ",";
-                echo "parent: '" . $filedata['dname'] . "',";
-                //echo "color: '#".random_color()."',";
-                echo "data: {description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "', title: '" . $filedata['filename'] . "'}";
-                echo "},";
+                
+                $output.="{";
+                $output.="label: '" . $filedata['cmfid'] . "',";
+                $output.="value: " . $filedata['fsize'] . ",";
+                $output.="parent: '" . $filedata['dname'] . "',";
+                //$output.= "color: '#".random_color()."',";
+                $output.="data: {description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "', title: '" . $filedata['filename'] . "'}";
+                $output.="},";
             }
         }
+        return $output;
     }
 
     public function generateTreeMapData($treemapdata) {
-        $output="";
+        $output="[";
         foreach ($treemapdata as $dirList => $data) {
-
-           parseDirStructure($data, "Root");
+           $output.= $this->parseDirStructure($data, "Root");
         }
-
-        
+        $output.="]";
+        return $output;
         }
 
     public function FCSWithinGroup() {
@@ -287,7 +290,7 @@ class FCS extends CI_Controller {
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;
         //$dids = array(0,1,2);
-        $treeMapData = $this->treemap_model->get_fcs_within_dir_treemap($invocationId, $dids);
+        $treeMapData = $this->treemap_model->get_fcs_dir_treemap($invocationId, $dids);
         $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
         $viewData['treedata'] = create_tree($invocationId);
 

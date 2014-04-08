@@ -301,9 +301,10 @@ var zNodes = <?php echo $treedata ?>;
 
         function generateTreeMap()
         {
-            //var treeMapData = <?php echo json_encode($treemapdata); ?>;
+            //var treeMapData = <?php //echo json_encode($treemapdata); ?>;
             var data = new Array();
-            data = [ <?php if ($treemapdata) {echo $treemapdata;}?>  ];
+            data = <?php if ($treemapdata) {echo $treemapdata;}?>;
+            alert(data);
             return data;
         }
 
