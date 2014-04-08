@@ -297,137 +297,43 @@
 
     <script>
 
+var zNodes = <?php echo $treedata ?>;
 
-
-function generateTreeMap()
-{
-    var treeMapData = <?php echo json_encode($treemapdata); ?>;
-    var data = new Array();
-   data = [
-   
-<?php
-
-    if ($treemapdata)
+        function generateTreeMap()
         {
-
-
-    foreach ($treemapdata as $dirList => $data) {
-
-        parseDirStructure($data, "Root");
-    }
-}
-?>
-
-    ];
-    return data;
-}
-      
-    function myTreeMap() {
-    
-    data = generateTreeMap();
-            loadTreeMap(data);
+            //var treeMapData = <?php echo json_encode($treemapdata); ?>;
+            var data = new Array();
+            data = [ <?php if ($treemapdata) {echo $treemapdata;}?>  ];
             return data;
-    }
-    
-    
-    
-    <?php
-            function parseDirStructure($directory, $parentName)
-            {
-                 if(!empty($directory)){
-                     
-                     if($directory ['dname']==""){
-                         $dname = $parentName;
-                     }
-                     else
-                     {
-                        $dname = $directory ['dname'];
-                     }
-                    $dsize = $directory['dsize'];        
-                    
-                    createParent($directory, $parentName);
-                   
-                    $children = $directory['children'];
-                    if(!empty($children)){
-                        foreach($children as $child => $childData)
-                         {
-                            parseDirStructure($childData, $dname);
-                         }
-                    }
+        }
 
-                     $files = $directory['files'];
-                     traverseFiles($files);
-            }
-            }
+        function myTreeMap() {
+
+            var treeData = generateTreeMap();
+            loadTreeMap(treeData);
+            return treeData;
+        }
 
 
-    function createParent($directory, $parentName)
-    {
-    echo "{";
-            if ($directory['dname'] != "")
-    {
-             echo "label: '".$directory['dname']."',";
-             echo "value: 1,";
-             echo "parent: '".$parentName."',";
- 
-    }
-    else
-    {
-            echo "label: '".$parentName."',";
-            echo "value: null,";
-    }  
-            //echo "color: '#".random_color()."',";
-            echo "color: '#E7F2FF',";
-            echo "},";
-    }
-    function random_color_part() {
-    return str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT);
-            }
-    function random_color() {
-    return random_color_part().random_color_part().random_color_part();
-            }
-    function traverseFiles($files)
-    {
-        if(!empty($files)){
-        foreach ($files as $file => $filedata) {
+        
 
-            echo "{";
-            echo "label: '".$filedata['cmfid']."',";
-            echo "value: ".$filedata['fsize'].",";
-            echo "parent: '".$filedata['dname']."',";
-            //echo "color: '#".random_color()."',";
-            echo "data: {description: '".$filedata['dname'].$filedata['filename']."</br>File Size: ".$filedata['fsize']."', title: '".$filedata['filename']."'}";
-            echo "},";
-    }
-    }
-    }
-    
-    
-    ?>  
-        
-        
-      var zNodes = <?php echo $treedata ?>;
-        
-        
-        
         function splitFIDs(fids)
         {
             //fids = "0,1";
             var fidArr = new Array();
-            if(typeof fids != 'undefined')
+            if (typeof fids != 'undefined')
             {
                 fidArr = fids.split(',');
             }
             return fidArr;
         }
-        
-        function generateNewTreeMap(tmData,fidArr)
+        function generateNewTreeMap(tmData, fidArr)
         {
-            if(tmData)
+            if (tmData)
             {
-                for(var key in tmData) {
-                    if(typeof tmData[key] === "object") {
-                        if(fidArr.indexOf(tmData[key].label)>=0)
+                for (var key in tmData) {
+                    if (typeof tmData[key] === "object") {
+                        if (fidArr.indexOf(tmData[key].label) >= 0)
                         {
                             tmData[key].color = '#FFFF00';
                         }
@@ -436,22 +342,22 @@ function generateTreeMap()
                 loadTreeMap(tmData);
             }
         }
-        
+        //ON Click Functionality
         $(document).ready(function() {
             tmData = myTreeMap();
             //generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
-            
+
             $(".list_view").on("click", function() {
                 Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
                 event.preventDefault();
                 return false;
             });
-            
+
             $("#tmBtn").on("click", function() {
-                generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
+                generateNewTreeMap(tmData, splitFIDs($(this).data("files")));
                 event.preventDefault();
                 return false;
             });
-            
+
         });
     </script>

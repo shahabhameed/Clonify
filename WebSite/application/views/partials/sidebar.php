@@ -58,7 +58,7 @@
                                 <a href="<?php echo site_url('home/SingleCloneStructureFCSCrossGroup') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Across Group
                                 </a>
-                                <a href="<?php echo site_url('home/SingleCloneStructureFCSWithinDirectory') . "/" . $invocationId; ?>">
+                                <a href="<?php echo site_url('FCS/FCSWithinDirectory') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Within Directory
                                 </a>
                                 <a href="<?php echo site_url('home/SingleCloneStructureFCSCrossDirectory') . "/" . $invocationId; ?>">

@@ -3,14 +3,13 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class FCS extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->library('tank_auth');
         $this->load->library('SyntaxHighlighter');
         $this->load->library('scc');
-        $this->load->library('mcc');
         $this->load->library('common');
         $this->load->helper('tree');
         $this->load->model('treemap_model');
@@ -153,57 +152,79 @@ class Home extends CI_Controller {
         echo "<span><input type='hidden' id='startline-" . $window_id . "' value='" . $first_row . "'></span>";
         echo $obj->getFormattedCode();
     }
+   function parseDirStructure($directory, $parentName) {
+        if (!empty($directory)) {
 
-    public function SingleCloneClassByFile() {
-        $viewData = array();
-        $invocationId = $this->getInvocationIdFromURL();
+            if ($directory ['dname'] == "") {
+                $dname = $parentName;
+            } else {
+                $dname = $directory ['dname'];
+            }
+            $dsize = $directory['dsize'];
 
-        $results = $this->scc->getSCSSByFileData($invocationId);
-        $viewData['results'] = $results;
-        $viewData['showCloneView'] = true;
-        $viewData['invocationId'] = $invocationId;
-        $this->load->view('partials/main_header');
-        $this->load->view('clone_table/scc_file.php', $viewData);
-        $this->load->view('partials/main_footer');
+            createParent($directory, $parentName);
+
+            $children = $directory['children'];
+            if (!empty($children)) {
+                foreach ($children as $child => $childData) {
+                    parseDirStructure($childData, $dname);
+                }
+            }
+
+            $files = $directory['files'];
+            traverseFiles($files);
+        }
     }
 
-    public function SingleCloneStructureWithinFile() {
-        $viewData = array();
-        $invocationId = $this->getInvocationIdFromURL();
-
-        $results = $this->scc->getAllSCSWithInFile($invocationId);
-        $viewData['results'] = $results;
-        $viewData['showCloneView'] = true;
-        $viewData['invocationId'] = $invocationId;
-        $this->load->view('partials/main_header');
-        $this->load->view('clone_table/scs_within_file.php', $viewData);
-        $this->load->view('partials/main_footer');
+    function createParent($directory, $parentName) {
+        echo "{";
+        if ($directory['dname'] != "") {
+            echo "label: '" . $directory['dname'] . "',";
+            echo "value: 1,";
+            echo "parent: '" . $parentName . "',";
+        } else {
+            echo "label: '" . $parentName . "',";
+            echo "value: null,";
+        }
+        //echo "color: '#".random_color()."',";
+        echo "color: '#E7F2FF',";
+        echo "},";
     }
 
-    public function SingleCloneStructureAcrossFile() {
+    function random_color_part() {
+        return str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT);
+    }
 
-        $viewData = array();
-        $invocationId = $this->getInvocationIdFromURL();
-        $results = $this->scc->getAllSCSAcrossFile($invocationId);
-        $viewData['scc_data'] = $results;
+    function random_color() {
+        return random_color_part() . random_color_part() . random_color_part();
+    }
 
-        $secondary_table_rows = array();
-        if ($results) {
-            foreach ($results as $row) {
-                $secondary_table_rows[$row['scs_crossfile_id']] = $this->scc->getALLSCSAcrossFileSecondaryTable($row, $invocationId);
-                //scs_crossfile_id or scc_id
+    function traverseFiles($files) {
+        if (!empty($files)) {
+            foreach ($files as $file => $filedata) {
+
+                echo "{";
+                echo "label: '" . $filedata['cmfid'] . "',";
+                echo "value: " . $filedata['fsize'] . ",";
+                echo "parent: '" . $filedata['dname'] . "',";
+                //echo "color: '#".random_color()."',";
+                echo "data: {description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "', title: '" . $filedata['filename'] . "'}";
+                echo "},";
             }
         }
-
-        $viewData['scs_clone_list_data'] = $secondary_table_rows;
-        $viewData['showCloneView'] = true;
-        $viewData['invocationId'] = $invocationId;
-        $this->load->view('partials/main_header');
-        $this->load->view('clone_table/scs_across_file.php', $viewData);
-        $this->load->view('partials/main_footer');
     }
 
-    public function SingleCloneStructureFCSWithinGroup() {
+    public function generateTreeMapData($treemapdata) {
+        $output="";
+        foreach ($treemapdata as $dirList => $data) {
+
+           parseDirStructure($data, "Root");
+        }
+
+        
+        }
+
+    public function FCSWithinGroup() {
         $viewData = array();
         $invocationId = $this->getInvocationIdFromURL();
 
@@ -225,7 +246,7 @@ class Home extends CI_Controller {
         $this->load->view('partials/main_footer');
     }
 
-    public function SingleCloneStructureFCSCrossGroup() {
+    public function FCSCrossGroup() {
         $viewData = array();
         $invocationId = $this->getInvocationIdFromURL();
 
@@ -247,7 +268,7 @@ class Home extends CI_Controller {
         $this->load->view('partials/main_footer');
     }
 
-    public function SingleCloneStructureFCSWithinDirectory() {
+    public function FCSWithinDirectory() {
         $viewData = array();
         $invocationId = $this->getInvocationIdFromURL();
 
@@ -261,13 +282,13 @@ class Home extends CI_Controller {
                 $secondary_table_rows[$row['fcs_indir_id']] = $this->scc->getAllFCSWithinDirectorySecondaryTableRows($row, $invocationId);
             }
         }
-
         $viewData['secondary_table_rows'] = $secondary_table_rows;
 
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;
         //$dids = array(0,1,2);
-        $viewData['treemapdata'] = $this->treemap_model->get_fcs_within_dir_treemap($invocationId, $dids);
+        $treeMapData = $this->treemap_model->get_fcs_within_dir_treemap($invocationId, $dids);
+        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
         $viewData['treedata'] = create_tree($invocationId);
 
         $this->load->view('partials/main_header');
@@ -275,7 +296,7 @@ class Home extends CI_Controller {
         $this->load->view('partials/main_footer');
     }
 
-    public function SingleCloneStructureFCSCrossDirectory() {
+    public function FCSCrossDirectory() {
         $viewData = array();
         $invocationId = $this->getInvocationIdFromURL();
 
@@ -294,26 +315,6 @@ class Home extends CI_Controller {
         $viewData['invocationId'] = $invocationId;
         $this->load->view('partials/main_header');
         $this->load->view('clone_table/fcs_cross_directory.php', $viewData);
-        $this->load->view('partials/main_footer');
-    }
-
-    public function SingleCloneClass() {
-        $viewData = array();
-        $invocationId = $this->getInvocationIdFromURL();
-        $result = $this->scc->getAllSCCRows($invocationId);
-        $viewData['scc_data'] = $result;
-        $secondary_table_rows = array();
-        if ($result) {
-            foreach ($result as $row) {
-                $secondary_table_rows[$row['scc_id']] = $this->scc->getAllSCCSecondaryTableRows($row, $invocationId);
-            }
-        }
-
-        $viewData['scc_clone_list_data'] = $secondary_table_rows;
-        $viewData['invocationId'] = $invocationId;
-        $viewData['showCloneView'] = true;
-        $this->load->view('partials/main_header');
-        $this->load->view('clone_table/scc.php', $viewData);
         $this->load->view('partials/main_footer');
     }
 
@@ -337,117 +338,6 @@ class Home extends CI_Controller {
         $test_result = $obj->getDifferenceBetweenStrings($file1_clone_string, $file2_clone_string);
         $data = implode(",", $test_result);
         echo $data;
-    }
-
-    public function MethodCloneClass() {
-        $viewData = array();
-        $invocationId = $this->getInvocationIdFromURL();
-        $result = $this->mcc->getAllMCCRows($invocationId);
-        $viewData['mcc_data'] = $result;
-        $secondary_table_rows = array();
-        if ($result) {
-            foreach ($result as $row) {
-                $secondary_table_rows[$row['mcc_id']] = $this->mcc->getAllMCCSecondaryTableRows($row, $invocationId);
-            }
-        }
-
-        $viewData['mcc_clone_list_data'] = $secondary_table_rows;
-        $viewData['invocationId'] = $invocationId;
-        $viewData['showCloneView'] = true;
-        $this->load->view('partials/main_header');
-        $this->load->view('clone_table/mcc.php', $viewData);
-        $this->load->view('partials/main_footer');
-    }
-
-    public function MethodCloneClassByFile() {
-        $viewData = array();
-        $invocationId = $this->getInvocationIdFromURL();
-
-        $result = $this->mcc->getMCCByFileData($invocationId);
-        $viewData['mcc_data'] = $result;
-
-        $secondary_table_rows = array();
-        if ($result) {
-            foreach ($result as $row) {
-                $secondary_table_rows[$row['fid']] = $this->mcc->getMCCByFileSecondaryTableRows($row, $invocationId);
-            }
-        }
-
-        $viewData['mcc_file_data'] = $secondary_table_rows;
-
-        $viewData['showCloneView'] = true;
-        $viewData['invocationId'] = $invocationId;
-        $this->load->view('partials/main_header');
-        $this->load->view('clone_table/mcc_by_file.php', $viewData);
-        $this->load->view('partials/main_footer');
-    }
-
-    public function MethodByFile() {
-        $viewData = array();
-        $invocationId = $this->getInvocationIdFromURL();
-
-        $result = $this->mcc->getMethodByFileData($invocationId);
-        $viewData['file_data'] = $result;
-
-        $secondary_table_rows = array();
-        if ($result) {
-            foreach ($result as $row) {
-                $secondary_table_rows[$row['fid']] = $this->mcc->getMethodByFileSecondaryTableRows($row, $invocationId);
-            }
-        }
-
-        $viewData['file_method_data'] = $secondary_table_rows;
-
-        $viewData['showCloneView'] = true;
-        $viewData['invocationId'] = $invocationId;
-        $this->load->view('partials/main_header');
-        $this->load->view('clone_table/method_by_file.php', $viewData);
-        $this->load->view('partials/main_footer');
-    }
-
-    public function SCCByMethod() {
-        $viewData = array();
-        $invocationId = $this->getInvocationIdFromURL();
-        $result = $this->scc->getMethodByClassPrimaryRows($invocationId);
-        $viewData['scc_Method_data'] = $result;
-
-        $secondary_table_rows = array();
-        if ($result) {
-            foreach ($result as $row) {
-                $secondary_table_rows[$row['mid']] = $this->scc->getMethodByClassSecondaryRows($row['mid'], $invocationId);
-            }
-        }
-
-        $viewData['scc_Method_secondary_data'] = $secondary_table_rows;
-
-        $viewData['invocationId'] = $invocationId;
-        $viewData['showCloneView'] = true;
-        $this->load->view('partials/main_header');
-        $this->load->view('clone_table/scc_by_method.php', $viewData);
-        $this->load->view('partials/main_footer');
-    }
-
-    public function MethodCloneStructureAcrossFile() {
-        $viewData = array();
-        $invocationId = $this->getInvocationIdFromURL();
-
-        $results = $this->mcc->getAllMCSAcrossFile($invocationId);
-        $viewData['mcs_data'] = $results;
-
-        $secondary_table_rows = array();
-        if ($results) {
-            foreach ($results as $row) {
-                $secondary_table_rows[$row['mcs_crossfile_id']] = $this->mcc->getAllMCSAcrossFileChildTable($row, $invocationId);
-            }
-        }
-
-        $viewData['mcs_clone_list_data'] = $secondary_table_rows;
-
-        $viewData['showCloneView'] = true;
-        $viewData['invocationId'] = $invocationId;
-        $this->load->view('partials/main_header');
-        $this->load->view('clone_table/mcs_across_file.php', $viewData);
-        $this->load->view('partials/main_footer');
     }
 
     public function filecloneclass() {
@@ -544,4 +434,5 @@ class Home extends CI_Controller {
         $this->load->view('partials/main_footer');
     }
 
+ 
 }
