@@ -99,7 +99,7 @@
                 </div>
             </div>
 
-            <div class="row-fluid">
+            <div class="row">
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12">
@@ -251,114 +251,105 @@
                     </div>
 
                 </div>
-                <div class="col-lg-12 row">
-                    <button class="btn btn-primary tmBtn" id="tmBtn">Generate</button>
-                </div>
-                <div class="row" id="treeMapBlock">
-                    <div class="col-lg-12">
 
 
-                        <div class="panel panel-default">
-
-                            <div class="form-group">
-
-                                <div class="col-lg-12">
-
-                                    <div class="panel panel-default">
-
-                                        <div class="panel-heading">
-                                            <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Tree Map View</span> </h4><a href="#" class="minimize">Minimize</a>
-                                        </div>
-
-                                        <div class="panel-body">
-                                            <div class="form-group">
-
-                                                <div class="col-lg-12">
-                                                    <div id="treemap" align="center" class="marginL20 col-lg-12 "></div>	
+            </div><!-- End contentwrapper -->
 
 
-                                                </div>
+            <div class="row" id="treeMapBlock">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
 
+                            <div class="col-lg-12">
 
-                                            </div>
-                                        </div><!-- End .panel body -->
+                                <div class="panel panel-default">
+
+                                    <div class="panel-heading">
+                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Tree Map View</span> </h4><a href="#" class="minimize">Minimize</a>
                                     </div>
 
-                                </div><!-- End .span8 -->
+                                    <div class="panel-body">
+                                        <div class="form-group col-lg-12">
+                                            <div id="treemap"  class="col-lg-12 "></div>	
 
+                                        </div>
 
-                            </div>
+                                    </div>
+                                </div><!-- End .panel body -->
+
+                            </div><!-- End .span8 -->
                         </div><!-- End .row -->
                     </div>
                 </div>
-            </div><!-- End contentwrapper -->
-        </div><!-- End #content -->
-    </div><!-- End #wrapper -->
+            </div><!-- End #content -->
+        </div><!-- End #wrapper -->
 
-    <script>
+        <script>
 
-var zNodes = <?php echo $treedata ?>;
+            var zNodes = <?php echo $treedata ?>;
 
-        function generateTreeMap()
-        {
-            //var treeMapData = <?php //echo json_encode($treemapdata); ?>;
-            var data = new Array();
-            data = <?php if ($treemapdata) {echo $treemapdata;}?>;
-            alert(data);
-            return data;
-        }
-
-        function myTreeMap() {
-
-            var treeData = generateTreeMap();
-            loadTreeMap(treeData);
-            return treeData;
-        }
-
-
-        
-
-        function splitFIDs(fids)
-        {
-            //fids = "0,1";
-            var fidArr = new Array();
-            if (typeof fids != 'undefined')
+            function generateTreeMap()
             {
-                fidArr = fids.split(',');
+                //var treeMapData = <?php //echo json_encode($treemapdata);     ?>;
+                var data = new Array();
+                data = <?php
+                    if ($treemapdata) {
+                        echo $treemapdata;
+                    }
+                    ?>;
+                //alert(data);
+                return data;
             }
-            return fidArr;
-        }
-        function generateNewTreeMap(tmData, fidArr)
-        {
-            if (tmData)
+
+            function myTreeMap() {
+
+                var treeData = generateTreeMap();
+                loadTreeMap(treeData);
+                return treeData;
+            }
+
+            function splitFIDs(fids)
             {
-                for (var key in tmData) {
-                    if (typeof tmData[key] === "object") {
-                        if (fidArr.indexOf(tmData[key].label) >= 0)
-                        {
-                            tmData[key].color = '#FFFF00';
+                //fids = "0,1";
+                var fidArr = new Array();
+                if (typeof fids != 'undefined')
+                {
+                    fidArr = fids.split(',');
+                }
+                return fidArr;
+            }
+            function generateNewTreeMap(tmData, fidArr)
+            {
+                if (tmData)
+                {
+                    for (var key in tmData) {
+                        if (typeof tmData[key] === "object") {
+                            if (fidArr.indexOf(tmData[key].label) >= 0)
+                            {
+                                tmData[key].color = '#FFFF00';
+                            }
                         }
                     }
+                    loadTreeMap(tmData);
                 }
-                loadTreeMap(tmData);
             }
-        }
-        //ON Click Functionality
-        $(document).ready(function() {
-            tmData = myTreeMap();
-            //generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
+            //ON Click Functionality
+            $(document).ready(function() {
+                //tmData = myTreeMap();
+                //generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
 
-            $(".list_view").on("click", function() {
-                Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
-                event.preventDefault();
-                return false;
+                $(".list_view").on("click", function() {
+                    Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
+                    event.preventDefault();
+                    return false;
+                });
+
+                $("#tmBtn").on("click", function() {
+                    //generateNewTreeMap(tmData, splitFIDs($(this).data("files")));
+                    //event.preventDefault();
+                    return false;
+                });
+
             });
-
-            $("#tmBtn").on("click", function() {
-                generateNewTreeMap(tmData, splitFIDs($(this).data("files")));
-                event.preventDefault();
-                return false;
-            });
-
-        });
-    </script>
+        </script>

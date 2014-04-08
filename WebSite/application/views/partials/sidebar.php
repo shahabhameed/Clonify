@@ -52,16 +52,16 @@
                                 <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCS Across File
                                 </a>
-                                <a href="<?php echo site_url('home/SingleCloneStructureFCSWithinGroup') . "/" . $invocationId; ?>">
+                                <a href="<?php echo site_url('FCS/FCSWithinGroup') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Within Group
                                 </a>
-                                <a href="<?php echo site_url('home/SingleCloneStructureFCSCrossGroup') . "/" . $invocationId; ?>">
+                                <a href="<?php echo site_url('FCS/FCSCrossGroup') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Across Group
                                 </a>
                                 <a href="<?php echo site_url('FCS/FCSWithinDirectory') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Within Directory
                                 </a>
-                                <a href="<?php echo site_url('home/SingleCloneStructureFCSCrossDirectory') . "/" . $invocationId; ?>">
+                                <a href="<?php echo site_url('FCS/FCSCrossDirectory') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Across Directory
                                 </a>
                                 <a href="<?php echo site_url('home/MethodCloneClass') . "/" . $invocationId; ?>">

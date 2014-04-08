@@ -756,17 +756,17 @@ License: http://jqwidgets.com/license/
                     min: m,
                     max: h + f,
                     color: this._colorEvaluator.getColorByValue.call(this, m, this._dataList, this.baseColor)
-                })
+                });
             }
-            return k
+            return k;
         },
         _renderLegend: function () {
             if (!(/autoColors|rangeColors/).test(this.colorMode) || !this.showLegend) {
-                return
+                return;
             }
             var e = this.colorRanges;
             if (this.colorMode === "autoColors") {
-                e = this._getAutocolorRanges()
+                e = this._getAutocolorRanges();
             }
             //var f = this._renderColorLegend(e);
             //this._renderLegendLabel(f)
@@ -776,15 +776,15 @@ License: http://jqwidgets.com/license/
                 e = c('<div class="' + this.toThemeProperty("jqx-treemap-legend-label") + '" />');
             e.text(this.legendLabel);
             g.children().append(e);
-            f.prepend(g)
+            f.prepend(g);
         },
         _renderColorLegend: function (e) {
             var o = c('<div class="' + this.toThemeProperty("jqx-treemap-legend") + '"/>'),
                 q, n, r, p = function (i) {
-                    return i
+                    return i;
                 };
             if (typeof this.legendScaleCallback === "function") {
-                p = this.legendScaleCallback
+                p = this.legendScaleCallback;
             }
             var s = c('<table class="' + this.toThemeProperty("jqx-treemap-legend-table") + '"/>');
             o.append(s);
@@ -797,15 +797,15 @@ License: http://jqwidgets.com/license/
             var g = function (t, i) {
                     try {
                         if (t.min < i.min) {
-                            return -1
+                            return -1;
                         }
                         if (t.min > i.min) {
-                            return 1
+                            return 1;
                         }
                     } catch (u) {
-                        var v = u
+                        var v = u;
                     }
-                    return 0
+                    return 0;
                 };
             e.sort(g);
             var f = Math.round(o.width() / e.length);
