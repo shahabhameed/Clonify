@@ -150,7 +150,7 @@ width: 50% !important;
                           <td><?php echo $data['fid'];?></td>                          
                           <td><?php echo $data['did'];?></td>
                           <td><?php echo $data['gid'];?></td>
-                          <td><?php echo $data['filename'];?></td>
+                          <td style="text-align:left"><?php echo $data['filename'];?></td>
                           <td><?php echo $data['clones'];?></td>
                         </tr>
                         <?php }?>                        
@@ -206,7 +206,7 @@ width: 50% !important;
                             <td><?php echo $counter;?></td>
                             <td><?php echo $d['mcc_id'];?></td>
                             <td><?php echo $d['mid'];?></td>
-                            <td><?php echo $d['methodname'];?></td>
+                            <td style="text-align:left"><?php echo $d['methodname'];?></td>
                           </tr>
                         <?php }?>
                       </tbody> 
