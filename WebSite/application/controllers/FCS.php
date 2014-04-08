@@ -178,6 +178,7 @@ class FCS extends CI_Controller {
     }
 
     function createParent($directory, $parentName) {
+        $color="E7F2FF";
         $output="{";
         if ($directory['dname'] != "") {
             $output.= "label: '" . $directory['dname'] . "',";
@@ -187,8 +188,8 @@ class FCS extends CI_Controller {
             $output.="label: '" . $parentName . "',";
             $output.="value: null,";
         }
-        //$output.="color: '#".random_color()."',";
-        $output.="color: '#E7F2FF',";
+        $output.= "color: '#".$color."',";
+        $output.="color: '#E7F2FF' ,";
         $output.="},";
         return $output;
     }
@@ -210,6 +211,7 @@ class FCS extends CI_Controller {
                 $output.="label: '" . $filedata['cmfid'] . "',";
                 $output.="value: " . $filedata['fsize'] . ",";
                 $output.="parent: '" . $filedata['dname'] . "',";
+                //Uncomment to randomize color of each file block
                 //$output.= "color: '#".random_color()."',";
                 $output.="data: {description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "', title: '" . $filedata['filename'] . "'}";
                 $output.="},";
@@ -234,8 +236,10 @@ class FCS extends CI_Controller {
         $result = $this->scc->getAllFCSWithinGroup($invocationId);
         $viewData['parent_table_data'] = $result;
         $secondary_table_rows = array();
+        $dids = array();
         if ($result) {
             foreach ($result as $row) {
+                 $dids[] = $row['directory_id'];
                 $secondary_table_rows[$row['fcs_ingroup_id']] = $this->scc->getAllFCSWithinGroupSecondaryTableRows($row, $invocationId);
             }
         }
@@ -244,6 +248,8 @@ class FCS extends CI_Controller {
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;
+        $treeMapData = $this->treemap_model->get_fcs_within_dir_treemap($invocationId, $dids);
+        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
         $this->load->view('partials/main_header');
         $this->load->view('clone_table/fcs_within_group.php', $viewData);
         $this->load->view('partials/main_footer');
@@ -256,8 +262,10 @@ class FCS extends CI_Controller {
         $result = $this->scc->getAllFCSCrossGroup($invocationId);
         $viewData['parent_table_data'] = $result;
         $secondary_table_rows = array();
+        $dids = array();
         if ($result) {
             foreach ($result as $row) {
+                $dids[] = $row['directory_id'];
                 $secondary_table_rows[$row['fcs_crossgroup_id']] = $this->scc->getAllFCSCrossGroupSecondaryTableRows($row, $invocationId);
             }
         }
@@ -266,6 +274,8 @@ class FCS extends CI_Controller {
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;
+        $treeMapData = $this->treemap_model->get_fcs_within_dir_treemap($invocationId, $dids);
+        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
         $this->load->view('partials/main_header');
         $this->load->view('clone_table/fcs_cross_group.php', $viewData);
         $this->load->view('partials/main_footer');
@@ -286,11 +296,10 @@ class FCS extends CI_Controller {
             }
         }
         $viewData['secondary_table_rows'] = $secondary_table_rows;
-
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;
         //$dids = array(0,1,2);
-        $treeMapData = $this->treemap_model->get_fcs_dir_treemap($invocationId, $dids);
+        $treeMapData = $this->treemap_model->get_fcs_within_dir_treemap($invocationId, $dids);
         $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
         $viewData['treedata'] = create_tree($invocationId);
 
@@ -306,8 +315,10 @@ class FCS extends CI_Controller {
         $result = $this->scc->getAllFCSCrossDirectory($invocationId);
         $viewData['parent_table_data'] = $result;
         $secondary_table_rows = array();
+        $dids = array();
         if ($result) {
             foreach ($result as $row) {
+                $dids[] = $row['directory_id'];
                 $secondary_table_rows[$row['fcs_crossdir_id']] = $this->scc->getAllFCSCrossDirectorySecondaryTableRows($row, $invocationId);
             }
         }
@@ -316,6 +327,8 @@ class FCS extends CI_Controller {
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;
+        $treeMapData = $this->treemap_model->get_fcs_within_dir_treemap($invocationId, $dids);
+        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
         $this->load->view('partials/main_header');
         $this->load->view('clone_table/fcs_cross_directory.php', $viewData);
         $this->load->view('partials/main_footer');
