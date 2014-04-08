@@ -9,8 +9,41 @@ class Treemap_model extends CI_Model {
         parent::__construct();
     }
 
+
+    function get_fcs_grp_treemap($invocationId, $gids)
+    {
+        $first = true;
+        $gidList = "";
+        foreach($gids as $gid)
+        {
+            if($first)
+            {
+                $gidList.="(".$gid;
+                $first = false;
+            }
+            else
+            {
+                $gidList.=",".$gid;
+            }
+        }
+        if($gidList!="")
+        {
+            $gidList.=")";
+            $query = "select distinct cmdirectory_id from invocation_files where group_id IN $gidList and invocation_id=$invocationId";
+            $result = $this->db->query($query);
+    		$resTmp = json_decode(json_encode($result->result()), true);
+            $dids = array();
+            foreach($resTmp as $did)
+            {
+                $dids[] = $did['cmdirectory_id'];
+            }
+            return $this->get_fcs_dir_treemap($invocationId,$dids);
+        }
+        else
+            return NULL;
+    }
   
-    function get_fcs_within_dir_treemap($invocationId, $dids)
+    function get_fcs_dir_treemap($invocationId, $dids)
 	{
 		//$fcs_within_dir = array();
 		$dirArr = array();
@@ -57,7 +90,7 @@ class Treemap_model extends CI_Model {
 			$did = $dirArrT['cmdid'];
 			$filarr = array();
 			//$query = "SELECT directory_name dname, file_name filename, CONCAT(repository_name,directory_name,file_name) filepath, 0 as fsize FROM repository_file f,repository_directory d,	user_repository r WHERE d.id=f.directory_id and d.repository_id=r.id and f.id in(select file_id from invocation_files where cmdirectory_id=$did and invocation_id=$invocationId)";
-            $query = "SELECT i.cmfile_id cmfid, directory_name dname, file_name filename, CONCAT(repository_name,directory_name,file_name) filepath, 0 as fsize FROM repository_file f,repository_directory d,	user_repository r, invocation_files i WHERE d.id=f.directory_id and d.repository_id=r.id and f.id=i.file_id and i.cmdirectory_id=$did and i.invocation_id=$invocationId";
+            $query = "SELECT i.cmfile_id cmfid, directory_name dname, file_name filename, i.group_id gid, CONCAT(repository_name,directory_name,file_name) filepath, 0 as fsize FROM repository_file f,repository_directory d,	user_repository r, invocation_files i WHERE d.id=f.directory_id and d.repository_id=r.id and f.id=i.file_id and i.cmdirectory_id=$did and i.invocation_id=$invocationId";
 			$result = $this->db->query($query);
 			$dir_files = $result->result();
 			if($dir_files)
