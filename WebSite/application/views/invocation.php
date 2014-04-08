@@ -455,7 +455,7 @@
                                                         </div>
 
                                                         <div class="panel-body">
-                                                            <div class="form-group">
+                                                            <div class="row form-group">
 
                                                                 <div class="col-lg-12">
                                                                     <select id="box1View" multiple="multiple" class="form-control" style="height:300px;">
@@ -474,26 +474,18 @@
                                                                 <div  class="col-lg-12"> 
                                                                     <div class="form-group" >
                                                                         <label class="col-lg-0 marginL20 control-label pull-left" >Group Count:</label>
-                                                                        <div class="col-lg-5">
-                                                                            <input  READONLY name="groupCount" id="groupCount"   type="text"  class="form-control" value="0" style="width:50px">
-                                                                            <select id="hiddenGroup" name="hiddenGroup[]" style="display:none" multiple="multiple"></select>
+                                                                        <div class="row col-lg-12">
+                                                                            <div class="col-lg-5">
+                                                                                <input  READONLY name="groupCount" id="groupCount"   type="text"  class="form-control" value="0" style="width:50px">
+                                                                                <select id="hiddenGroup" name="hiddenGroup[]" style="display:none" multiple="multiple"></select>
+                                                                            </div>
+
+                                                                            <div  class="col-lg-4"> 
+                                                                                <button  type="button" class="btn btn-success btn  pull-right" onclick="createNewElement('Group', 'box1View');" >Create Group</button>
+                                                                            </div>
                                                                         </div>
-
-                                                                        <div  class="col-lg-5"> 
-                                                                            <button  type="button" class="btn btn-success btn marginT6 pull-right" onclick="createNewElement('Group', 'box1View');" >Create Group</button>
-
-                                                                        </div>
-
                                                                     </div><!-- End .form-group  -->
-
-
-
                                                                 </div>
-
-
-
-
-
                                                             </div>
                                                         </div><!-- End .panel body -->
                                                     </div>
