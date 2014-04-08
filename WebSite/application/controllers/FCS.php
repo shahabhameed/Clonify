@@ -245,7 +245,7 @@ class FCS extends CI_Controller {
         }
         
         $gids = array_unique($gids);
-        $treemapdata =$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
+        $treeMapData=$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
         $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
 
         $viewData['secondary_table_rows'] = $secondary_table_rows;
@@ -271,7 +271,7 @@ class FCS extends CI_Controller {
             }
         }
         $gids = array_unique($gids);
-        $treemapdata =$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
+        $treeMapData =$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
         $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
 
         $viewData['secondary_table_rows'] = $secondary_table_rows;
