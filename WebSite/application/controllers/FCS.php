@@ -178,7 +178,7 @@ class FCS extends CI_Controller {
     }
 
     function createParent($directory, $parentName) {
-        $color="E7F2FF";
+        $color="57AC57";
         $output="{";
         if ($directory['dname'] != "") {
             $output.= "label: '" . $directory['dname'] . "',";
@@ -190,7 +190,7 @@ class FCS extends CI_Controller {
             $output.="parent: 'Root',";            
         }
         //$output.= "color: '#".$color."',";
-        $output.="color: '#E7F2FF' ,";
+        $output.="color: '#57AC57' ,";
         $output.="},";
         return $output;
     }
@@ -254,7 +254,6 @@ class FCS extends CI_Controller {
         $gids = array_unique($gids);
         $treeMapData=$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
         $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
-
         $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
@@ -288,7 +287,6 @@ class FCS extends CI_Controller {
         $gids = array_unique($gids);
         $treeMapData =$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
         $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
-
         $viewData['secondary_table_rows'] = $secondary_table_rows;        
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
@@ -315,8 +313,7 @@ class FCS extends CI_Controller {
         //$dids = array(0,1);
         $dids = array_unique($dids);
         $treeMapData = $this->treemap_model->get_fcs_dir_treemap($invocationId, $dids);
-        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);
-        
+        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData);     
         $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;

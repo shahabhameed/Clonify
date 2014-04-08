@@ -8,7 +8,8 @@
 
     }
 </style>
-<script type="text/javascript" src="<?= asset_url('js/myTreeMap.js') ?>"></script>
+<script type="text/javascript" src="<?= asset_url('js/myTreeMap.js'); ?>"></script>
+
 <div id="wrapper">
 
     <?php
@@ -319,167 +320,21 @@
  <script>
 
 
-      
-    $(function(fcs_id) {
-    var data = [
-  
-<?php
-$treemapdata = Array (
-"2" => Array (
-    "cmdid" => "0",
-    "did" => "2",
-    "dname" => "",
-    "dsize" => "9752",
-    "files" => Array (),
-    "children" => Array (
-                "125" => Array (
-                "cmdid" => "0",
-                "did" => "125",
-                "dname" => "JAVA/JAVA_1/",
-                "dsize" => "2041",
-                "files" => Array (
-                        "0" => Array (
-                                "dname" => "JAVA/JAVA_1/",
-                                "filename" => "2.java",
-                                "filepath" => "C:/xampp/htdocs/Clonify/WebSite/files/shaban/JAVA/JAVA_1/2.java",
-                                "fsize" => "2041"
-                                     )
-                                ),
-                "children" => Array ( )
-                ),
-                "126" => Array (
-                "cmdid" => "1",
-                "did" => "126",
-                "dname" => "JAVA/JAVA_2/",
-                "dsize" => "17653",
-                "files" => Array (
-                            "0" => Array (
-                            "dname" => "JAVA/JAVA_2/",
-                            "filename" => "3.java",
-                            "filepath" => "C:/xampp/htdocs/Clonify/WebSite/files/shaban/JAVA/JAVA_2/3.java",
-                            "fsize" => "7711",
-                            )
-                            ),
-                "children" => Array (
-                            "127" => Array (
-                                    "cmdid" => "2",
-                                    "did" => "127",
-                                    "dname" => "JAVA/JAVA_2/JAVA_2_1/",
-                                    "dsize" => "9942",
-                                    "files" => Array (
-                                                    "0" => Array (
-                                                    "dname" => "JAVA/JAVA_2/JAVA_2_1/",
-                                                    "filename" => "1.java",
-                                                    "filepath" => "C:/xampp/htdocs/Clonify/WebSite/files/shaban/JAVA/JAVA_2/JAVA_2_1/1.java",
-                                                    "fsize" => "9942"
-                                                            )
-                                                     ),
-                                    "children" => Array ()
-                                            )
-                                    )
-                                )
-)
-)
-);
-
-if (($treemapdata)) {
-
-
-    foreach ($treemapdata as $dirList => $data) {
-
-        parseDirStructure($data, "Root");
-    }
-}
-?>
-
-    ];
-            loadTreeMap(data);
-    });
-    
-    
-    
-    <?php
-            function parseDirStructure($directory, $parentName)
+ function generateTreeMap()
             {
-                 if(!empty($directory)){
-                     
-                     if($directory ['dname']==""){
-                         $dname = $parentName;
-                     }
-                     else
-                     {
-                        $dname = $directory ['dname'];
-                     }
-                    $dsize = $directory['dsize'];        
-                    
-                    createParent($directory, $parentName);
-                   
-                    $children = $directory['children'];
-                    if(!empty($children)){
-                        foreach($children as $child => $childData)
-                         {
-                            parseDirStructure($childData, $dname);
-                         }
+                //var treeMapData = <?php //echo json_encode($treemapdata);     ?>;
+                var data = new Array();
+                data = <?php
+                    if ($treemapdata) {
+                        echo $treemapdata;
                     }
-
-                     $files = $directory['files'];
-                     traverseFiles($files);
+                    ?>;
+                //alert(data);
+                return data;
             }
-            }
-
-
-    function createParent($directory, $parentName)
-    {
-    echo "{";
-            if ($directory['dname'] != "")
-    {
-             echo "label: '".$directory['dname']."',";
-             echo "value: 1,";
-             echo "parent: '".$parentName."',";
- 
-    }
-    else
-    {
-            echo "label: '".$parentName."',";
-            echo "value: null,";
-    }  
-            echo "color: '#".random_color()."',";
-            echo "},";
-    }
-    function random_color_part() {
-    return str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT);
-            }
-    function random_color() {
-    return random_color_part().random_color_part().random_color_part();
-            }
-    function traverseFiles($files)
-    {
-        if(!empty($files)){
-        foreach ($files as $file => $filedata) {
-
-            echo "{";
-            echo "label: '".$filedata['filename']."',";
-            echo "value: ".$filedata['fsize'].",";
-            echo "parent: '".$filedata['dname']."',";
-          /*  if($filedata['fsize']>5000)
-            {
-                echo "color: '#"."73DD58"."',";
-            }
-            else
-            {
-                 echo "color: '#"."1292AA"."',";
-            }*/
-            echo "color: '#".random_color()."',";
-            echo "data: {description: '".$filedata['dname'].$filedata['filename']."</br>File Size: ".$filedata['fsize']."', title: '".$filedata['filename']."'}";
-            echo "},";
-    }
-    }
-    }
     
-    function showTreeMap()
-    {}
     
-    ?>  
+    
     var zNodes = <?=$treedata?>;
     $(document).ready(function() {
         $(".list_view").on("click", function() {

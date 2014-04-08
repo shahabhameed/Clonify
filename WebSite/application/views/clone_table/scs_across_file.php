@@ -5,7 +5,7 @@
     <div id="content" class="clearfix">
       <div class="contentwrapper">
         <div class="heading">
-          <h3>Single Clone Structure Across File</h3> 
+          <h3>Simple Clone Structure Across File</h3> 
           <ul class="breadcrumb">
                 <li>You are here:</li>
                 <li>
@@ -16,7 +16,7 @@
                         <span class="icon16 fa fa-caret-right"></span>
                     </span>
                 </li>
-                <li class="active">Single Clone Structure Across File</li>
+                <li class="active">Simple Clone Structure Across File</li>
             </ul>                   
         </div>
         

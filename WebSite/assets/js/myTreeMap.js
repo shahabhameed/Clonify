@@ -1,11 +1,11 @@
 function loadTreeMap(data) {
     $('#treemap').jqxTreeMap({
-            width: 'auto',
-            height: 800,
-            source: data,
-            baseColor: '#E7F2FF',
-            colorMode:'parent',
-            colorRanges :[{
+        width: 'auto',
+        height: 800,
+        source: data,
+        baseColor: '#E7F2FF',
+        colorMode: 'parent',
+        colorRanges: [{
                 color: "#F72828",
                 min: 0,
                 max: 1000
@@ -18,29 +18,58 @@ function loadTreeMap(data) {
                 min: 2000,
                 max: 10000
             }],
-        
-        
-            
-            renderCallbacks: {
+        renderCallbacks: {
             '*': function(element, value) {
-            if (value.data) {
-            element.jqxTooltip({
-            content: '<div><div class="btn-primary "  style="font-weight: text-align: right; bold; width: auto; font-family: verdana; font-size: 13px;"><span align: left;>' + value.data.title + 
-                    '</span></div><div class="btn-default  " style="width: auto; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
-
-            
-            position: 'mouse',
-                    autoHideDelay: 6000
-            });
-            } else if (value.data === undefined) {
-            element.css({
-            backgroundColor: '#fff',
-                    border: '1px solid #555'
-            });
+                if (value.data) {
+                    element.jqxTooltip({
+                        content: '<div><div class="btn-primary "  style="font-weight: text-align: right; bold; width: auto; font-family: verdana; font-size: 13px;"><span align: left;>' + value.data.title +
+                                '</span></div><div class="btn-default  " style="width: auto; font-family: verdana; font-size: 12px;">' + value.data.description + '</div></div>',
+                        position: 'mouse',
+                        autoHideDelay: 6000
+                    });
+                } else if (value.data === undefined) {
+                    element.css({
+                        backgroundColor: '#fff',
+                        border: '1px solid #555'
+                    });
+                }
             }
-            }
-            }
+        }
     });
+}
+
+function renderTreeMap() {
+
+    var treeData = generateTreeMap();
+    loadTreeMap(treeData);
+    return treeData;
+}
+
+function splitFIDs(fids)
+{
+    fids = "0,1";
+    var fidArr = new Array();
+    if (typeof fids != 'undefined')
+    {
+        fidArr = fids.split(',');
     }
-    
+    return fidArr;
+}
+
+function generateNewTreeMap(tmData, fidArr)
+{
+    if (tmData)
+    {
+        for (var key in tmData) {
+            if (typeof tmData[key] === "object") {
+                if (fidArr.indexOf(tmData[key].label) >= 0)
+                {
+                    tmData[key].color = '#FFFF00';
+                }
+            }
+        }
+        loadTreeMap(tmData);
+    }
+}
+
     

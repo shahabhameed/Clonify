@@ -252,14 +252,54 @@
               </div>
             </div>
         </div><!-- End contentwrapper -->
+        <div class="row" id="treeMapBlock">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="col-lg-12">
+
+                                <div class="panel panel-default">
+
+                                    <div class="panel-heading">
+                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Tree Map View</span> </h4><a href="#" class="minimize">Minimize</a>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div class="form-group col-lg-12">
+                                            <div id="treemap" class="col-lg-12 "></div>	
+
+                                        </div>
+
+                                    </div>
+                                </div><!-- End .panel body -->
+
+                            </div><!-- End .span8 -->
+                        </div><!-- End .row -->
+                    </div>
+                </div>
+            </div><!-- End #content -->
     </div><!-- End #content -->
 
 </div><!-- End #wrapper -->
 
 <script>
+     function generateTreeMap()
+            {
+                var data = new Array();
+                data = <?php
+                    if ($treemapdata) {
+                        echo $treemapdata;
+                    }
+                    ?>;
+                return data;
+            }
+
     var zNodes = <?=$treedata?>;
     $(document).ready(function() {
+        
         $(".list_view").on("click", function() {
+            tmData = renderTreeMap();
             Clonify.FCS.viewInstanceWithinGroup($(this).data("sccid"));
             event.preventDefault();
             return false;
