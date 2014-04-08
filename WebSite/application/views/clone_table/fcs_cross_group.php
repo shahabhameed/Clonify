@@ -297,10 +297,10 @@
           
 
 
-    var zNodes = <?=$treedata?>;
+  var zNodes = <?php echo $treedata ?>;
     $(document).ready(function() {
         
-        tmData = myTreeMap();
+        tmData = renderTreeMap();
         
         $(".list_view").on("click", function() {
             Clonify.FCS.viewInstanceAcrossGroup($(this).data("sccid"));
