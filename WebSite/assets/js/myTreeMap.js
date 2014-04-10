@@ -47,7 +47,7 @@ function renderTreeMap() {
 
 function splitFIDs(fids)
 {
-    fids = "0,1";
+    //fids = "110,30,58,138,75,155,84,4";
     var fidArr = new Array();
     if (typeof fids != 'undefined')
     {
@@ -56,20 +56,40 @@ function splitFIDs(fids)
     return fidArr;
 }
 
-function generateNewTreeMap(tmData, fidArr)
+function generateNewTreeMap(tmData, fidArr, tmCount)
 {
     if (tmData)
     {
+        //colors for multiple clicks
+        var tmClr = '#FFFF00';
+        if(tmCount == 1)
+            tmClr = '#FFFF00';//yellow
+        else if(tmCount == 2)
+            tmClr = '#FF4500';//orange
+        else if(tmCount == 3)
+            tmClr = '#7FFF00';//green
+        else if(tmCount == 4)
+            tmClr = '#00FFFF';//cyan
+        else if(tmCount == 5)
+            tmClr = '#FFFF00';
+        else if(tmCount == 6)
+            tmClr = '#FF0000';
+        else if(tmCount == 7)
+            tmClr = '#FFFF00';
+        else if(tmCount == 8)
+            tmClr = '#FF0000';
+            
         for (var key in tmData) {
             if (typeof tmData[key] === "object") {
                 if (fidArr.indexOf(tmData[key].label) >= 0)
                 {
-                    tmData[key].color = '#FFFF00';
+                    tmData[key].color = tmClr;
                 }
             }
         }
         loadTreeMap(tmData);
     }
+    return tmData;
 }
 
     

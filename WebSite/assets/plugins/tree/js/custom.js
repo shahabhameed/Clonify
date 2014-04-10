@@ -132,8 +132,11 @@ var setting = {
 		
 		var key;
 		$(document).ready(function(){
+                tmCount = 1;
 				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 				$(".code_view").on("click",function(){
-		       mysearch($(this).data("files"));
+                    tmData = generateNewTreeMap(tmData,splitFIDs($(this).data("files")),tmCount);
+                    tmCount++;
+                    mysearch($(this).data("files"));
 		    });
 		});
