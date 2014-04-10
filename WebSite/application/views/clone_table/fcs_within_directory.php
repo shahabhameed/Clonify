@@ -31,11 +31,7 @@
                     <li class="active">File Clone Structure</li>
                 </ul>                   
             </div>
-
-            <!-- Modal 1-->
-        </div><!-- End #wrapper -->
-
-
+        <!-- End #contentwrapper -->
 
         <div class="row">
             <div class="col-lg-12">
@@ -252,9 +248,7 @@
                 </div>
             </div><!-- End .span8 -->
         </div><!-- End .row -->
-        
-        
-        
+
         <!-- Tabs Start-->
         <div class="row" id="tabs">
             <div class="col-lg-12">
@@ -296,35 +290,35 @@
             </div>
         </div>
         <!-- Tabs End-->
-    </div><!-- Content Wrapper End-->
-    </div><!-- Wrapper End-->
-            <script>
+    </div><!-- Content  End-->
+</div><!-- Wrapper End-->
+<script>
 
-                var zNodes = <?php echo $treedata ?>;
+    var zNodes = <?php echo $treedata ?>;
 
-                function generateTreeMap()
-                {
-                    //var treeMapData = <?php //echo json_encode($treemapdata);               ?>;
-                    var data = new Array();
-                    data = <?php
+    function generateTreeMap()
+    {
+        //var treeMapData = <?php //echo json_encode($treemapdata);                ?>;
+        var data = new Array();
+        data = <?php
                     if ($treemapdata) {
                         echo $treemapdata;
                     }
                     ?>;
-                    //alert(data);
-                    return data;
-                }
+        //alert(data);
+        return data;
+    }
 
-                //ON Click Functionality
-                $(document).ready(function() {
-                    tmData = renderTreeMap();
-                    //generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
+    //ON Click Functionality
+    $(document).ready(function() {
+        tmData = renderTreeMap();
+        //generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
 
-                    $(".list_view").on("click", function() {
-                        Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
-                        event.preventDefault();
-                        return false;
-                    });
+        $(".list_view").on("click", function() {
+            Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
+            event.preventDefault();
+            return false;
+        });
 
-                });
-            </script>
+    });
+</script>
