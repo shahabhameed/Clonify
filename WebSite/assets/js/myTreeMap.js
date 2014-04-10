@@ -47,7 +47,7 @@ function renderTreeMap() {
 
 function splitFIDs(fids)
 {
-    //fids = "110,30,58,138,75,155,84,4";
+    //fids = "110,30,58,138,75,155,84,4";//hard coded fids for testing - when secondary table not loading
     var fidArr = new Array();
     if (typeof fids != 'undefined')
     {
