@@ -7,6 +7,7 @@ class Treemap_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
+        $this->load->library('scc');
     }
 
 
@@ -86,6 +87,9 @@ class Treemap_model extends CI_Model {
 		//SAMPLE:
 		//Array ( [0] => Array ( [0] => 125 [1] => Array ( [0] => 2 ) ) [1] => Array ( [0] => 126 [1] => Array ( [0] => 2 ) ) [2] => Array ( [0] => 127 [1] => Array ( [0] => 126 [1] => 2 ) ) )
 		
+        //SCC By File
+        $sccByF = $this->scc->getSCSSByFileData($invocationId);
+        
 		//foreach($dids as $did)
 		$dirData = array();
 		foreach($dirArr as $dirArrT)
@@ -93,7 +97,7 @@ class Treemap_model extends CI_Model {
 			$did = $dirArrT['cmdid'];
 			$filarr = array();
 			//$query = "SELECT directory_name dname, file_name filename, CONCAT(repository_name,directory_name,file_name) filepath, 0 as fsize FROM repository_file f,repository_directory d,	user_repository r WHERE d.id=f.directory_id and d.repository_id=r.id and f.id in(select file_id from invocation_files where cmdirectory_id=$did and invocation_id=$invocationId)";
-            $query = "SELECT i.cmfile_id cmfid, directory_name dname, file_name filename, i.group_id gid, CONCAT(repository_name,directory_name,file_name) filepath, 0 as fsize FROM repository_file f,repository_directory d,	user_repository r, invocation_files i WHERE d.id=f.directory_id and d.repository_id=r.id and f.id=i.file_id and i.cmdirectory_id=$did and i.invocation_id=$invocationId";
+            $query = "SELECT i.cmfile_id cmfid, directory_name dname, file_name filename, i.group_id gid, CONCAT(repository_name,directory_name,file_name) filepath, 0 as fsize, 0 as clones FROM repository_file f,repository_directory d,	user_repository r, invocation_files i WHERE d.id=f.directory_id and d.repository_id=r.id and f.id=i.file_id and i.cmdirectory_id=$did and i.invocation_id=$invocationId";
 			$result = $this->db->query($query);
 			$dir_files = $result->result();
 			if($dir_files)
@@ -107,6 +111,12 @@ class Treemap_model extends CI_Model {
 					$file_size = filesize($file_path);
 					$dir_size = $dir_size + $file_size;
 					$dir_file['fsize'] = $file_size;
+                    
+                    if(isset($sccByF[$dir_file['cmfid']]))
+                    {
+                        $dir_file['clones'] = $sccByF[$dir_file['cmfid']]['members'];                        
+                    }
+                    
 					$filarr[$dir_file['cmfid']]=$dir_file;
 				}
 				//$dids[$did]=array("cmdid"=>$did,"did"=>$dirArrT['did'],"dname"=>$dname,"dsize"=>$dir_size,"files"=>$filarr,"children"=>array());
