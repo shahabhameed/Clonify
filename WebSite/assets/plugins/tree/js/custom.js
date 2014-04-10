@@ -1,6 +1,8 @@
 var colors = ['red', 'green', 'blue', 'orange'];
 var current_color = 0;
 var tempAH = new Array();
+var tempAHFP = new Array();
+var tempAHFN = new Array();
 var setting = {
 			data: {
 				simpleData: {

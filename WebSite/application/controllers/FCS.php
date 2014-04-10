@@ -215,6 +215,8 @@ class FCS extends CI_Controller {
                 $output.="parent: '" . $filedata['dname'] . "',";
                 //Uncomment to randomize color of each file block
                 //$output.= "color: '#".random_color()."',";
+                $output.="filepath: '" . $filedata['filepath'] . "',";
+                $output.="filename: '" . $filedata['filename'] . "',";
                 $output.="data: {description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
                 $output.="},";
             }

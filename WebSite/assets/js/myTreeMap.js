@@ -88,6 +88,8 @@ function generateNewTreeMap(tmData, fidArr, tmCount)
                 {
                     tmData[key].color = tmClr;
                     tempAH[k] = tmData[key].label;
+                    tempAHFP[k] = tmData[key].filepath;
+                    tempAHFN[k] = tmData[key].filename;
                     k=k+1;
                 }
             }
