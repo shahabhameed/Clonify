@@ -81,16 +81,16 @@ function generateNewTreeMap(tmData, fidArr, tmCount)
         else if(tmCount == 8)
             tmClr = '#FF0000';
           
-         var k =0;      
+        // var k =0;      
         for (var key in tmData) {
             if (typeof tmData[key] === "object") {
                 if (fidArr.indexOf(tmData[key].label) >= 0)
                 {
                     tmData[key].color = tmClr;
-                    tempAH[k] = tmData[key].label;
-                    tempAHFP[k] = tmData[key].filepath;
-                    tempAHFN[k] = tmData[key].filename;
-                    k=k+1;
+                    tempAH[globalK] = tmData[key].label;
+                    tempAHFP[globalK] = tmData[key].filepath;
+                    tempAHFN[globalK] = tmData[key].filename;
+                    globalK=globalK+1;
                 }
             }
         }
