@@ -299,7 +299,8 @@
 
     var zNodes = <?php echo $treedata ?>;
     $(document).ready(function() {
-
+        tmData = renderTreeMap();
+        
         $(".list_view").on("click", function() {
             tmData = renderTreeMap();
             Clonify.FCS.viewInstanceWithinGroup($(this).data("sccid"));

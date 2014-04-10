@@ -299,7 +299,6 @@
 
   var zNodes = <?php echo $treedata ?>;
     $(document).ready(function() {
-        
         tmData = renderTreeMap();
         
         $(".list_view").on("click", function() {

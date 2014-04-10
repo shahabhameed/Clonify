@@ -320,6 +320,8 @@
 
     var zNodes = <?php echo $treedata ?>;
     $(document).ready(function() {
+        tmData = renderTreeMap();
+        
         $(".list_view").on("click", function() {
             Clonify.FCS.viewInstanceCrossDirectory($(this).data("sccid"));
             event.preventDefault();
