@@ -186,7 +186,7 @@ class FCS extends CI_Controller {
             $output.="parent: '" . $parentName . "',";
         } else {
             $output.="label: '" . $parentName . "',";
-            $output.="value: null,";
+            $output.="value: 1,";
             $output.="parent: 'Root',";            
         }
         //$output.= "color: '#".$color."',";
