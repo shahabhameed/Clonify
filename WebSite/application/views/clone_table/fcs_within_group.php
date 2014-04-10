@@ -31,8 +31,10 @@
                     <li class="active">File Clone Structure</li>
                 </ul>                   
             </div>
-
+	</div>
             <!-- Modal 1-->
+        <div class="row">
+            <div class="col-lg-12">
             <div class="modal fade" id="qtable1" tabindex="-1" role="dialog" aria-labelledby="Table 1 Query" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -99,8 +101,7 @@
                 </div>
             </div>
 
-            <div class="row-fluid">
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-default gradient">
@@ -243,47 +244,53 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3" style="border-left:1px solid;height:auto;overflow-y:scroll;overflow-x:hidden;">
-                    <div class="todo">
-                        <h5>Navigation</h5>
-                        <ul id="treeDemo" class="ztree"></ul>
-                    </div>
-
-                </div>
-                
-            </div>
+                </div>                
         </div><!-- End contentwrapper -->
-        <div class="row" id="treeMapBlock">
-            <div class="col-lg-9">
-                <div class="row">
-                    <div class="col-md-12">
+            </div><!-- End #content -->
 
-                        <div class="col-lg-12">
+        
 
-                            <div class="panel panel-default">
+         <!-- Tabs Start-->
+        <div class="row" id="tabs">
+            <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <div style="margin-bottom: 20px;">
+                        <ul id="myTab" class="nav nav-tabs pattern">
+                            <li class="active"><a href="#tree" data-toggle="tab">Tree Map</a></li>
+                            <li><a href="#navigation" data-toggle="tab">Navigation</a></li>
 
-                                <div class="panel-heading">
-                                    <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Tree Map View</span> </h4><a href="#" class="minimize">Minimize</a>
-                                </div>
+                        </ul>
 
-                                <div class="panel-body">
-                                    <div class="form-group col-lg-12">
-                                        <div id="treemap" class="col-lg-12 "></div>	
-
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tree">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group col-lg-12">
+                                                <div id="treemap"  class="col-lg-12 "></div>	
+                                            </div>
+                                        </div><!-- End .row -->
                                     </div>
-
                                 </div>
-                            </div><!-- End .panel body -->
+                            </div>
 
-                        </div><!-- End .span8 -->
-                    </div><!-- End .row -->
-                </div>
+                            <div class="tab-pane fade" id="navigation">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="marginL10 col-lg-12" style="border-left:1px solid;border-color:#57AC57;max-height:600px;  height:auto;overflow-y:scroll;overflow-x:hidden;">
+                                            <div class="todo">                          
+                                                <ul id="treeDemo" class="ztree"></ul>
+                                            </div>
+                                        </div>
+                                    </div><!-- End contentwrapper -->
+                                </div><!-- End .panel -->     
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End .span6 -->  
             </div>
-        </div><!-- End #content -->
-    </div><!-- End #content -->
-
-</div><!-- End #wrapper -->
+        </div>
+        <!-- Tabs End-->
 
 <script>
     function generateTreeMap()
