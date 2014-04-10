@@ -179,19 +179,22 @@ class FCS extends CI_Controller {
 
     function createParent($directory, $parentName) {
         $color="57AC57";
-        $output="{";
+        $output="";
         if ($directory['dname'] != "") {
+            $output="{";
             $output.= "label: '" . $directory['dname'] . "',";
             $output.= "value: 1,";
             $output.="parent: '" . $parentName . "',";
-        } else {
+            $output.="color: '#C8D0D2' ,";
+            $output.="},";
+        }
+        /*else {
             $output.="label: '" . $parentName . "',";
             $output.="value: 1,";
             $output.="parent: 'Root',";            
-        }
+        }*/
         //$output.= "color: '#".$color."',";
-        $output.="color: '#C8D0D2' ,";
-        $output.="},";
+        
         return $output;
     }
 
@@ -212,7 +215,15 @@ class FCS extends CI_Controller {
                 $output.="label: '" . $filedata['cmfid'] . "',";
                 //$output.="value: " . $filedata['fsize'] . ",";
                 $output.="value: " . $filedata['clones'] . ",";
-                $output.="parent: '" . $filedata['dname'] . "',";
+
+                if($filedata['dname']=='')
+                {
+                    $output.="parent: 'Root',";
+                }
+                else
+                {
+                    $output.="parent: '" . $filedata['dname'] . "',";
+                }
                 //Uncomment to randomize color of each file block
                 //$output.= "color: '#".random_color()."',";
                 $output.="filepath: '" . $filedata['filepath'] . "',";
@@ -230,12 +241,18 @@ class FCS extends CI_Controller {
         $output.="{";
         $output.="label: 'Root',";
         $output.="value: null,";
+        $output.="color: '#C8D0D2'";
         $output.="},";
         
-        foreach ($treemapdata as $dirList => $data) {
-           $output.= $this->parseDirStructure($data, "Root");
-        }
+        if(isset($treemapdata ))
+        {
+            foreach ($treemapdata as $dirList => $data) {
+               $output.= $this->parseDirStructure($data, "Root");
+            }
+        }        
         $output.="]";
+        //echo "<pre>".print_r($output,true)."</pre>";
+		//die();
         return $output;
         }
 
