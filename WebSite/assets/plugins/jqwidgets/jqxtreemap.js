@@ -604,7 +604,24 @@ License: http://jqwidgets.com/license/
                 f._trigger("mouseleaveSector", g)
             });
             e.bind("click", function (i) {
-				reloadTreeMapData();
+			//	reloadTreeMapData();
+             //alert("Hello");
+             //Clonify.MCC.viewCodeData(1,2,"C:/xampp/htdocs/Clonify/WebSite/files/shaban/nio/Bits.java",394,1,2,0,0, "Bits.java", 1);
+             //event.preventDefault();
+            // alert(this[1]);
+            console.log(this.getElementsByTagName("span")[0].innerHTML);
+            var obj = this.getElementsByTagName("span")[0].innerHTML;
+            var fids = splitFIDs($(this).data("files"));
+            for (var key in tmData) {
+            if (typeof tmData[key] === "object") {
+                if (fids.indexOf(tmData[key].label) >= 0)
+                {
+                   // tmData[key].color = tmClr;
+                   console.log("Object found!");
+                }
+             }
+            }
+            console.log();
                 if (f.selectionEnabled) {
                     var h = c.data(this, "jqx-treemap-selected") || false;
                     if (f.singleSelection) {
@@ -623,6 +640,7 @@ License: http://jqwidgets.com/license/
                     c.data(this, "jqx-treemap-selected", h);
                     i.stopImmediatePropagation()
                 }
+               
             })
         },
         clearSelection: function () {
