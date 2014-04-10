@@ -606,13 +606,15 @@ License: http://jqwidgets.com/license/
             e.bind("click", function (i) {
 			//	reloadTreeMapData();
              //alert("Hello");
-             //Clonify.MCC.viewCodeData(1,2,"C:/xampp/htdocs/Clonify/WebSite/files/shaban/nio/Bits.java",394,1,2,0,0, "Bits.java", 1);
-             //event.preventDefault();
+            // Clonify.MCC.viewCodeData(1,2,"C:/xampp/htdocs/Clonify/WebSite/files/shaban/nio/Bits.java",394,1,2,0,0, "Bits.java", 1);
+            // event.preventDefault();
             // alert(this[1]);
             console.log(this.getElementsByTagName("span")[0].innerHTML);
             var obj = this.getElementsByTagName("span")[0].innerHTML;
           //  var fids = splitFIDs($(this).data("files"));
             var fids = tempAH;
+            var filePathsTemp = tempAHFP;
+            var fileNamesTemp = tempAHFN;
           /*  for(var key in fids)
             {
                 console.log(fids[key]);
@@ -624,7 +626,11 @@ License: http://jqwidgets.com/license/
             {
                // tmData[key].color = tmClr;
               // alert('a');
-               console.log("Object found!");
+              var indexMatched = fids.indexOf(obj);
+             //  console.log("Object found!");
+             //  console.log(filePathsTemp[indexMatched]);
+               Clonify.MCC.viewCodeData(1,2,filePathsTemp[indexMatched],obj,0,0,0,0,fileNamesTemp[indexMatched], 0);
+               event.preventDefault();
             }
                 if (f.selectionEnabled) {
                     var h = c.data(this, "jqx-treemap-selected") || false;
