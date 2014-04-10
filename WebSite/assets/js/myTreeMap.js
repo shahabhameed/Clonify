@@ -3,7 +3,7 @@ function loadTreeMap(data) {
         width: 'auto',
         height: 800,
         source: data,
-        baseColor: '#E7F2FF',
+        baseColor: '#C8D0D2',
         colorMode: 'parent',
         selectionEnabled: true ,
         colorRanges: [{
@@ -19,6 +19,7 @@ function loadTreeMap(data) {
                 min: 2000,
                 max: 10000
             }],
+        
         renderCallbacks: {
             '*': function(element, value) {
                 if (value.data) {

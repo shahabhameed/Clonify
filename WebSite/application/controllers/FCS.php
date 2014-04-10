@@ -190,7 +190,7 @@ class FCS extends CI_Controller {
             $output.="parent: 'Root',";            
         }
         //$output.= "color: '#".$color."',";
-        $output.="color: '#57AC57' ,";
+        $output.="color: '#C8D0D2' ,";
         $output.="},";
         return $output;
     }
