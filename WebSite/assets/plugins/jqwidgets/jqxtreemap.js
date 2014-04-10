@@ -612,14 +612,11 @@ License: http://jqwidgets.com/license/
             console.log(this.getElementsByTagName("span")[0].innerHTML);
             var obj = this.getElementsByTagName("span")[0].innerHTML;
             var fids = splitFIDs($(this).data("files"));
-            for (var key in tmData) {
-            if (typeof tmData[key] === "object") {
-                if (fids.indexOf(tmData[key].label) >= 0)
-                {
-                   // tmData[key].color = tmClr;
-                   console.log("Object found!");
-                }
-             }
+            if (fids.indexOf(obj) >= 0)
+            {
+               // tmData[key].color = tmClr;
+               alert('a');
+               console.log("Object found!");
             }
             console.log();
                 if (f.selectionEnabled) {
