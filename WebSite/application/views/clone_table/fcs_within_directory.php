@@ -261,8 +261,8 @@
                 <div class="col-lg-12">
                     <div style="margin-bottom: 20px;">
                         <ul id="myTab" class="nav nav-tabs pattern">
-                            <li class="active"><a href="#tree" data-toggle="tab">Tree Map</a></li>
-                            <li><a href="#navigation" data-toggle="tab">Navigation</a></li>
+                            <li class="active" ><a href="#tree" data-toggle="tab" class=""><h4>Tree Map</h4></a></li>
+                            <li><a href="#navigation" data-toggle="tab"><h4>Navigation</h4></a></li>
 
                         </ul>
 
