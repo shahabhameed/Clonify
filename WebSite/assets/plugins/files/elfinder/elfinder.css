@@ -387,7 +387,7 @@
     cursor: default;
 }
 .elfinder-contextmenu .elfinder-contextmenu-item span {
-    font-size: .76em;
+    font-size: 0.76em;
     display: block;
 }
 .elfinder-contextmenu-ltr .elfinder-contextmenu-item {
@@ -445,7 +445,7 @@
 }
 .elfinder-cwd {
     position: relative;
-    font-size: .7em;
+    font-size: 1.2  em;
     cursor: default;
     padding: 0;
     margin: 0;
@@ -612,7 +612,7 @@
     border-right: 0 solid;
 }
 .elfinder .elfinder-cwd table thead td {
-    font-size: .9em;
+    font-size: 1.2em;
 }
 .elfinder .elfinder-cwd table td {
     padding: 3px 12px;
@@ -924,7 +924,7 @@
 .elfinder .elfinder-navbar {
     width: 230px;
     padding: 3px 5px;
-    font-size: .72em;
+    font-size: 1.2em;
     background-image: none;
     border-top: 0 solid;
     border-bottom: 0 solid;
