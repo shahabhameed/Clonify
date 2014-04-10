@@ -611,14 +611,21 @@ License: http://jqwidgets.com/license/
             // alert(this[1]);
             console.log(this.getElementsByTagName("span")[0].innerHTML);
             var obj = this.getElementsByTagName("span")[0].innerHTML;
-            var fids = splitFIDs($(this).data("files"));
+          //  var fids = splitFIDs($(this).data("files"));
+            var fids = tempAH;
+          /*  for(var key in fids)
+            {
+                console.log(fids[key]);
+            }
+            */
+            //console.log(fids);
+          //  console.log(tempAH);
             if (fids.indexOf(obj) >= 0)
             {
                // tmData[key].color = tmClr;
-               alert('a');
+              // alert('a');
                console.log("Object found!");
             }
-            console.log();
                 if (f.selectionEnabled) {
                     var h = c.data(this, "jqx-treemap-selected") || false;
                     if (f.singleSelection) {

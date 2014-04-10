@@ -80,12 +80,15 @@ function generateNewTreeMap(tmData, fidArr, tmCount)
             tmClr = '#FFFF00';
         else if(tmCount == 8)
             tmClr = '#FF0000';
-            
+          
+         var k =0;      
         for (var key in tmData) {
             if (typeof tmData[key] === "object") {
                 if (fidArr.indexOf(tmData[key].label) >= 0)
                 {
                     tmData[key].color = tmClr;
+                    tempAH[k] = tmData[key].label;
+                    k=k+1;
                 }
             }
         }
