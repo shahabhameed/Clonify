@@ -296,6 +296,8 @@
             </div>
         </div>
         <!-- Tabs End-->
+    </div><!-- Content Wrapper End-->
+    </div><!-- Wrapper End-->
             <script>
 
                 var zNodes = <?php echo $treedata ?>;
