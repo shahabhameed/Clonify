@@ -767,7 +767,7 @@ select {width: 150px;}
 .panel-group .panel+.panel {
 	margin-top: -1px;
 }
-.panel-default>.panel-heading+.panel-collapse .panel-body {border-top: none;}
+.panel-default.panel-heading+.panel-collapse .panel-body {border-top: none;}
 .panel-heading .accordion-toggle {display: inline-block;width: 100%;}
 .panel-heading .accordion-toggle:after {
     font-family: 'icomoon'; 

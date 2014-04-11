@@ -134,7 +134,7 @@
                                                             <tr class="list_view" data-sccid="<?php echo $data['fcs_crossdir_id']; ?>">
                                                                 <td><?php echo $counter; ?></td>
                                                                 <td><?php echo $data['fcs_crossdir_id']; ?></td>                          
-                                                                <td ><?php echo isset($data['fcc_ids']) ? $data['fcc_ids'] : "-"; ?></td>
+                                                                <td style="text-align:left"><?php echo isset($data['fcc_ids']) ? $data['fcc_ids'] : "-"; ?></td>
                                                                 <td><?php echo isset($data['directory_id']) ? $data['directory_id'] : '-'; ?></td>
                                                                 <td><?php echo isset($data['members']) ? $data['members'] : '-'; ?></td>
 
@@ -193,7 +193,7 @@
                                                             <tr class="code_view" data-files="<?php echo $temp_filds; ?>">
                                                                 <td><?php echo $counter; ?></td>
                                                                 <td><?php echo $ingroup_id; ?></td>
-                                                                <td><?php echo $new_fids; ?></td>
+                                                                <td style="text-align:left"><?php echo $new_fids; ?></td>
                                                             </tr>
                                                         <?php } ?>
                                                     </tbody> 
@@ -267,7 +267,22 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group col-lg-12">
-                                                <div id="treemap"  class="col-lg-12 "></div>	
+                                                <div id="treemap"  class="col-lg-12 "></div>
+                                                <div class="col-lg-4 pull-right">
+                                                        <div class="panel panel-default ">
+                                                            <div class="panel-body1">
+                                                                <ul class="list-unstyled marginT5 marginL5">
+                                                                    <li>
+                                                                        <span><h4>Legend</h4></span>
+                                                                        <span class="label legend-treemap1 ">Low(0-25)</span>
+                                                                        <span class="label legend-treemap2">Medium(25-50)</span>
+                                                                        <span class="label legend-treemap3">High(50-100)</span>
+                                                                        <span class="label legend-treemap4">Very High(>100)</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div><!-- End .panel -->
+                                                    </div><!-- End .span4 -->
                                             </div>
                                         </div><!-- End .row -->
                                     </div>

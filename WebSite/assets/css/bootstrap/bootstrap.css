@@ -5093,6 +5093,18 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .label-default {
   background-color: #999999;
 }
+.legend-treemap1{
+    background-color: #C3BCBC;
+}
+.legend-treemap2{
+    background-color: #A9A6B3;
+}
+.legend-treemap3{
+    background-color: #9692A1;
+}
+.legend-treemap4{
+    background-color: #7B7784;
+}
 
 .label-default[href]:hover,
 .label-default[href]:focus {
