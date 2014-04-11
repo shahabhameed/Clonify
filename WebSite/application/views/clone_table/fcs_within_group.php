@@ -329,7 +329,8 @@
                 tmData = renderTreeMap();
 
                 $(".list_view").on("click", function() {
-                    tmData = renderTreeMap();
+                    $("tr").removeClass('selected-row');
+                    $(this).addClass('selected-row');
                     Clonify.FCS.viewInstanceWithinGroup($(this).data("sccid"));
                     event.preventDefault();
                     return false;

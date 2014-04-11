@@ -267,7 +267,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group col-lg-12">
                                                     <div id="treemap"  class="col-lg-12 "></div>	
-                                                   
+
                                                     <div class="col-lg-4 pull-right">
                                                         <div class="panel panel-default ">
                                                             <div class="panel-body1">
@@ -315,7 +315,7 @@
 
         function generateTreeMap()
         {
-            //var treeMapData = <?php //echo json_encode($treemapdata);                 ?>;
+            //var treeMapData = <?php //echo json_encode($treemapdata);                  ?>;
             var data = new Array();
             data = <?php
                         if ($treemapdata) {
@@ -332,6 +332,8 @@
             //generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
 
             $(".list_view").on("click", function() {
+                $("tr").removeClass('selected-row');
+                $(this).addClass('selected-row');
                 Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
                 event.preventDefault();
                 return false;

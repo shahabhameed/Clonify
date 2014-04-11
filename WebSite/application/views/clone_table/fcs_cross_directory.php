@@ -100,175 +100,175 @@
                         </div>
                     </div>
 
-                    
-                        <div class="col-md-12">
-                            <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default gradient">
+                                    <div class="panel-heading min">
+                                        <h4><span> <i class="fa fa-list-alt fa-2"></i> FCS Across Directory</span></h4>
+                                        <span class="loader" style="top:15px;cursor:pointer;">
+                                            <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
+                                        </span>
+                                        <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
+
+                                    </div>
+                                    <div class="panel-body noPad clearfix">
+                                        <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTablefcs display table table-bordered" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>FCS ID</th>
+                                                    <th>Structure (FCC ID, ...)</th>                        
+                                                    <th>Directory Id</th>
+                                                    <th>No. Of Instance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $counter = 0;
+                                                if ($parent_table_data)
+                                                    foreach ($parent_table_data as $data) {
+                                                        $counter++;
+                                                        ?>
+                                                        <tr class="list_view" data-sccid="<?php echo $data['fcs_crossdir_id']; ?>">
+                                                            <td><?php echo $counter; ?></td>
+                                                            <td><?php echo $data['fcs_crossdir_id']; ?></td>                          
+                                                            <td style="text-align:left"><?php echo isset($data['fcc_ids']) ? $data['fcc_ids'] : "-"; ?></td>
+                                                            <td><?php echo isset($data['directory_id']) ? $data['directory_id'] : '-'; ?></td>
+                                                            <td><?php echo isset($data['members']) ? $data['members'] : '-'; ?></td>
+
+                                                        </tr>
+                                                    <?php } ?>                        
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>FCS ID</th>
+                                                    <th>Structure (FCC ID, ...)</th>                        
+                                                    <th>Directory Id</th>
+                                                    <th>No. Of Instance</th>
+                                                </tr>
+                                            </tfoot>                     
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        if ($secondary_table_rows)
+                            $secondary_table_rows = $secondary_table_rows ? $secondary_table_rows : array();
+                        foreach ($secondary_table_rows as $fcs_id => $data) {
+                            ?>
+                            <div class="row scc_instance_list" id="fcs_instance_list_<?php echo $fcs_id; ?>">
                                 <div class="col-md-12">
                                     <div class="panel panel-default gradient">
                                         <div class="panel-heading min">
-                                            <h4><span> <i class="fa fa-list-alt fa-2"></i> FCS Across Directory</span></h4>
+                                            <h4><span> <i class="fa fa-list-alt fa-2"></i>FCS Secondary Table</span></h4>
                                             <span class="loader" style="top:15px;cursor:pointer;">
-                                                <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable1"></i>
+                                                <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                                             </span>
-                                            <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
-
+                                            <a href="#"  id="pannel2" class="minimize" style="display: inline;">Minimize</a>
                                         </div>
+
                                         <div class="panel-body noPad clearfix">
-                                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTablefcs display table table-bordered" width="100%">
+                                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dataTable display table table-bordered" width="100%">
                                                 <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>FCS ID</th>
-                                                        <th>Structure (FCC ID, ...)</th>                        
-                                                        <th>Directory Id</th>
-                                                        <th>No. Of Instance</th>
+                                                    <tr>                        
+                                                        <th>No.</th>
+                                                        <th>Clone ID</th>
+                                                        <th>Structure(FID, ...)</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php
                                                     $counter = 0;
-                                                    if ($parent_table_data)
-                                                        foreach ($parent_table_data as $data) {
-                                                            $counter++;
-                                                            ?>
-                                                            <tr class="list_view" data-sccid="<?php echo $data['fcs_crossdir_id']; ?>">
-                                                                <td><?php echo $counter; ?></td>
-                                                                <td><?php echo $data['fcs_crossdir_id']; ?></td>                          
-                                                                <td style="text-align:left"><?php echo isset($data['fcc_ids']) ? $data['fcc_ids'] : "-"; ?></td>
-                                                                <td><?php echo isset($data['directory_id']) ? $data['directory_id'] : '-'; ?></td>
-                                                                <td><?php echo isset($data['members']) ? $data['members'] : '-'; ?></td>
-
-                                                            </tr>
-                                                        <?php } ?>                        
-                                                </tbody>
+                                                    $data = $data ? $data : array();
+                                                    foreach ($data as $ingroup_id => $fids) {
+                                                        $counter++;
+                                                        $new_fids = join(", ", $fids);
+                                                        $temp_filds = join(",", $fids);
+                                                        ?>
+                                                        <tr class="code_view" data-files="<?php echo $temp_filds; ?>">
+                                                            <td><?php echo $counter; ?></td>
+                                                            <td><?php echo $ingroup_id; ?></td>
+                                                            <td style="text-align:left"><?php echo $new_fids; ?></td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody> 
                                                 <tfoot>
                                                     <tr>
-                                                        <th>No</th>
-                                                        <th>FCS ID</th>
-                                                        <th>Structure (FCC ID, ...)</th>                        
-                                                        <th>Directory Id</th>
-                                                        <th>No. Of Instance</th>
+                                                        <th>No.</th>
+                                                        <th>Clone ID</th>
+                                                        <th>Structure(FID, ...)</th>
                                                     </tr>
-                                                </tfoot>                     
+                                                </tfoot>                       
                                             </table>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                            if ($secondary_table_rows)
-                                $secondary_table_rows = $secondary_table_rows ? $secondary_table_rows : array();
-                            foreach ($secondary_table_rows as $fcs_id => $data) {
-                                ?>
-                                <div class="row scc_instance_list" id="fcs_instance_list_<?php echo $fcs_id; ?>">
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default gradient">
-                                            <div class="panel-heading min">
-                                                <h4><span> <i class="fa fa-list-alt fa-2"></i>FCS Secondary Table</span></h4>
-                                                <span class="loader" style="top:15px;cursor:pointer;">
-                                                    <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
-                                                </span>
-                                                <a href="#"  id="pannel2" class="minimize" style="display: inline;">Minimize</a>
-                                            </div>
-
-                                            <div class="panel-body noPad clearfix">
-                                                <table cellpadding="0" cellspacing="0" border="0" class="responsive dataTable display table table-bordered" width="100%">
-                                                    <thead>
-                                                        <tr>                        
-                                                            <th>No.</th>
-                                                            <th>Clone ID</th>
-                                                            <th>Structure(FID, ...)</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $counter = 0;
-                                                        $data = $data ? $data : array();
-                                                        foreach ($data as $ingroup_id => $fids) {
-                                                            $counter++;
-                                                            $new_fids = join(", ", $fids);
-                                                            $temp_filds = join(",", $fids);
-                                                            ?>
-                                                            <tr class="code_view" data-files="<?php echo $temp_filds; ?>">
-                                                                <td><?php echo $counter; ?></td>
-                                                                <td><?php echo $ingroup_id; ?></td>
-                                                                <td style="text-align:left"><?php echo $new_fids; ?></td>
-                                                            </tr>
-                                                        <?php } ?>
-                                                    </tbody> 
-                                                    <tfoot>
-                                                        <tr>
-                                                            <th>No.</th>
-                                                            <th>Clone ID</th>
-                                                            <th>Structure(FID, ...)</th>
-                                                        </tr>
-                                                    </tfoot>                       
-                                                </table>
-                                            </div>
-                                        </div>
+                        <?php } ?>
+                        <div class="row code-window-containter">
+                            <div class="col-md-12">
+                                <div class="panel panel-default gradient">
+                                    <div class="panel-heading">
+                                        <h4><span>Code Window</span></h4>
                                     </div>
-                                </div>
-                            <?php } ?>
-                            <div class="row code-window-containter">
-                                <div class="col-md-12">
-                                    <div class="panel panel-default gradient">
-                                        <div class="panel-heading">
-                                            <h4><span>Code Window</span></h4>
+                                    <div class="panel-body noPad clearfix">
+                                        <div class="">
+                                            <div class="col-md-6 panel-heading">
+                                                <h4><span id="file1"></span></h4>
+                                            </div>
+                                            <div class="col-md-6 panel-heading">
+                                                <h4><span id="file2"></span></h4>
+                                            </div>
                                         </div>
-                                        <div class="panel-body noPad clearfix">
-                                            <div class="">
-                                                <div class="col-md-6 panel-heading">
-                                                    <h4><span id="file1"></span></h4>
-                                                </div>
-                                                <div class="col-md-6 panel-heading">
-                                                    <h4><span id="file2"></span></h4>
-                                                </div>
-                                            </div>
-                                            <div class="code-window1">
-                                                <div class="col-md-11 padding15 code-window responsive" id="code_window1" >                    
-                                                </div>
-
-                                                <div class="col-md-1" id="code_map1" style="padding:0px;padding-right:5px;width:65px !important;">
-                                                </div>
+                                        <div class="code-window1">
+                                            <div class="col-md-11 padding15 code-window responsive" id="code_window1" >                    
                                             </div>
 
-                                            <div class="code-window2">
-                                                <div class="col-md-1" id="code_map2" style="padding:0px;width:65px !important;">
-                                                </div>
-                                                <div class="col-md-5 padding15 code-window responsive" id="code_window2">
-                                                </div>
-
+                                            <div class="col-md-1" id="code_map1" style="padding:0px;padding-right:5px;width:65px !important;">
                                             </div>
+                                        </div>
+
+                                        <div class="code-window2">
+                                            <div class="col-md-1" id="code_map2" style="padding:0px;width:65px !important;">
+                                            </div>
+                                            <div class="col-md-5 padding15 code-window responsive" id="code_window2">
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- -->
-                    
+                    </div>
+                    <!-- -->
+
                 </div>
             </div>
-            
-             <!-- Tabs Start-->
-        <div class="row" id="tabs">
-            <div class="col-lg-12">
+
+            <!-- Tabs Start-->
+            <div class="row" id="tabs">
                 <div class="col-lg-12">
-                    <div style="margin-bottom: 20px;">
-                        <ul id="myTab" class="nav nav-tabs pattern">
-                            <li class="active" ><a href="#tree" data-toggle="tab" class=""><h4>Tree Map</h4></a></li>
-                            <li><a href="#navigation" data-toggle="tab"><h4>Navigation</h4></a></li>
+                    <div class="col-lg-12">
+                        <div style="margin-bottom: 20px;">
+                            <ul id="myTab" class="nav nav-tabs pattern">
+                                <li class="active" ><a href="#tree" data-toggle="tab" class=""><h4>Tree Map</h4></a></li>
+                                <li><a href="#navigation" data-toggle="tab"><h4>Navigation</h4></a></li>
 
-                        </ul>
+                            </ul>
 
-                        <div class="tab-content">
-                            <div class="tab-pane fade in active" id="tree">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group col-lg-12">
-                                                <div id="treemap"  class="col-lg-12 "></div>
-                                                <div class="col-lg-4 pull-right">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tree">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group col-lg-12">
+                                                    <div id="treemap"  class="col-lg-12 "></div>
+                                                    <div class="col-lg-4 pull-right">
                                                         <div class="panel panel-default ">
                                                             <div class="panel-body1">
                                                                 <ul class="list-unstyled marginT5 marginL5">
@@ -283,30 +283,30 @@
                                                             </div>
                                                         </div><!-- End .panel -->
                                                     </div><!-- End .span4 -->
-                                            </div>
-                                        </div><!-- End .row -->
+                                                </div>
+                                            </div><!-- End .row -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="tab-pane fade" id="navigation">
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="marginL10 col-lg-12" style="border-left:1px solid;border-color:#57AC57;max-height:600px;  height:auto;overflow-y:scroll;overflow-x:hidden;">
-                                            <div class="todo">                          
-                                                <ul id="treeDemo" class="ztree"></ul>
+                                <div class="tab-pane fade" id="navigation">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="marginL10 col-lg-12" style="border-left:1px solid;border-color:#57AC57;max-height:600px;  height:auto;overflow-y:scroll;overflow-x:hidden;">
+                                                <div class="todo">                          
+                                                    <ul id="treeDemo" class="ztree"></ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div><!-- End contentwrapper -->
-                                </div><!-- End .panel -->     
+                                        </div><!-- End contentwrapper -->
+                                    </div><!-- End .panel -->     
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div><!-- End .span6 -->  
+                    </div><!-- End .span6 -->  
+                </div>
             </div>
-        </div>
-        <!-- Tabs End-->
-            
+            <!-- Tabs End-->
+
         </div><!-- End contentwrapper -->
     </div><!-- End #content -->
 
@@ -317,13 +317,13 @@
 
     function generateTreeMap()
     {
-        //var treeMapData = <?php //echo json_encode($treemapdata);       ?>;
+        //var treeMapData = <?php //echo json_encode($treemapdata);        ?>;
         var data = new Array();
         data = <?php
-                            if ($treemapdata) {
-                                echo $treemapdata;
-                            }
-                            ?>;
+                        if ($treemapdata) {
+                            echo $treemapdata;
+                        }
+                        ?>;
         //alert(data);
         return data;
     }
@@ -335,6 +335,8 @@
         tmData = renderTreeMap();
 
         $(".list_view").on("click", function() {
+            $("tr").removeClass('selected-row');
+            $(this).addClass('selected-row');
             Clonify.FCS.viewInstanceCrossDirectory($(this).data("sccid"));
             event.preventDefault();
             return false;
