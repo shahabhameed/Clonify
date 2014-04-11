@@ -265,22 +265,29 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group col-lg-12">
-                                                    <div id="treemap"  class="col-lg-12 "></div>
-                                                    <div class="col-lg-4 pull-right">
-                                                        <div class="panel panel-default ">
-                                                            <div class="panel-body1">
-                                                                <ul class="list-unstyled marginT5 marginL5">
-                                                                    <li>
-                                                                        <span><h4>Legend</h4></span>
-                                                                        <span class="label legend-treemap1 ">Low(0-25)</span>
-                                                                        <span class="label legend-treemap2">Medium(25-50)</span>
-                                                                        <span class="label legend-treemap3">High(50-100)</span>
-                                                                        <span class="label legend-treemap4">Very High(>100)</span>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div><!-- End .panel -->
-                                                    </div><!-- End .span4 -->
+                                                                <div class="row">
+                                                        <div id="treemap"  class="col-lg-12 "></div>
+                                                    </div>
+
+                                                    <!-- Treemap Legend Start-->
+                                                    <div class="row" id="treemap-legend">
+                                                        <div class="col-lg-5 pull-left">
+                                                            <div class="panel panel-default ">
+                                                                <div class="panel-body">
+                                                                    <ul class="list-unstyled marginT5 marginL5">
+                                                                        <li>     
+                                                                            <label style="font-size:15px;">Legend: </label>
+                                                                            <span class="label legend-treemap1">Low( 0-25 )</span>
+                                                                            <span class="label legend-treemap2">Medium( 25-50 )</span>
+                                                                            <span class="label legend-treemap3">High( 50-100 )</span>
+                                                                            <span class="label legend-treemap4">Very High( >100 )</span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div><!-- End .panel -->
+                                                        </div><!-- End .span4 -->
+                                                    </div>
+                                                    <!-- Treemap Legend End-->
                                                 </div>
                                             </div><!-- End .row -->
                                         </div>

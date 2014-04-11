@@ -20,17 +20,17 @@
 
         <div class="mainnav">
             <ul>
-                <li><a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>File Manager</a></li>
-                <li><a href=" <?php echo site_url('invoke/'); ?>"><span class="icon16  icomoon-icon-equalizer-2"></span>Invoke</a></li>
+                <li><a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>Repository</a></li>
+                <li><a href=" <?php echo site_url('invoke/'); ?>"><span class="icon16  icomoon-icon-equalizer-2"></span>Clone Detection</a></li>
 
                 <?php if ($this->tank_auth->get_role_id() == 1) { ?>
                     <li><a href="<?php echo site_url('updatetokens/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Update Tokens</a></li>
                 <?php } ?>
 
-                <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Load Results</a></li>
-                 <li><a href="<?php echo site_url('general/tree_map/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Tree Map</a></li>
-                
-                
+                <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>View Results</a></li>
+
+
+
                 <?php if (isset($showCloneView) && $invocationId) { ?>
                     <input type="hidden" id="sidebar_invocation_id" value="<?php echo $invocationId; ?>"/>
                     <li>
@@ -40,7 +40,7 @@
                                 <a href="<?php echo site_url('home/SingleCloneClass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCC
                                 </a>
-								<a href="<?php echo site_url('home/SCCByMethod') . "/" . $invocationId; ?>">
+                                <a href="<?php echo site_url('home/SCCByMethod') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCC By Method
                                 </a>
                                 <a href="<?php echo site_url('home/SingleCloneClassByFile') . "/" . $invocationId; ?>">
@@ -76,7 +76,7 @@
                                 <a href="<?php echo site_url('home/MethodByFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>Methods By File
                                 </a>
-                                 <a href="<?php echo site_url('home/filecloneclass') . "/" . $invocationId; ?>">
+                                <a href="<?php echo site_url('home/filecloneclass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCC
                                 </a> 
                                 <a href="<?php echo site_url('home/filecloneclassbydir') . "/" . $invocationId; ?>">
@@ -92,6 +92,8 @@
                         </ul>
                     </li>
                 <?php } ?>
+
+                <li><a href="<?php echo site_url('general/tree_map/'); ?>"><span class="icon16 icomoon-icon-exit"></span>About Us</a></li>
             </ul>
         </div>
     </div><!-- End sidenav --> 
