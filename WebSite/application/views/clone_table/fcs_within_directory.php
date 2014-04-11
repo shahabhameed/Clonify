@@ -272,7 +272,7 @@
 
                                                     <!-- Treemap Legend Start-->
                                                     <div class="row" id="treemap-legend">
-                                                        <div class="col-lg-5 pull-left">
+                                                        <div class="col-lg-7 pull-left">
                                                             <div class="panel panel-default ">
                                                                 <div class="panel-body">
                                                                     <ul class="list-unstyled marginT5 marginL5">
