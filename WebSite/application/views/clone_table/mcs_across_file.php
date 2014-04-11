@@ -305,11 +305,15 @@
 $(document).ready(function(){
   
     $(".list_view").live("click",function(){
+		$("tr").removeClass('selected-row');
+        $(this).addClass('selected-row');
       Clonify.MCC.viewMCSAcrossCloneInstance($(this).data("scsid"));
       event.preventDefault();      
       return false;
     });
     $(".code_view").live("click",function(){
+		 $(".scs_instance_list tr").removeClass('selected-row');
+         $(this).addClass('selected-row');
         Clonify.MCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), $(this).data("mid"));
         event.preventDefault();        
         return false;
