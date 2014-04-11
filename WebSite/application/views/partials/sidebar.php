@@ -76,7 +76,7 @@
                                 <a href="<?php echo site_url('home/MethodByFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>Methods By File
                                 </a>
-                                <a href="<?php echo site_url('home/filecloneclass') . "/" . $invocationId; ?>">
+                                 <a href="<?php echo site_url('FCS/filecloneclass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCC
                                 </a> 
                                 <a href="<?php echo site_url('home/filecloneclassbydir') . "/" . $invocationId; ?>">

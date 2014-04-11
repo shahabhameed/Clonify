@@ -252,6 +252,7 @@ class FCS extends CI_Controller {
                 }
                 //Uncomment to randomize color of each file block
                 //$output.= "color: '#".random_color()."',";
+                $output.="fid: '" . $filedata['cmfid'] . "',";
                 $output.="filepath: '" . $filedata['filepath'] . "',";
                 $output.="filename: '" . $filedata['filename'] . "',";
                 $output.="data: {description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
@@ -421,7 +422,6 @@ class FCS extends CI_Controller {
     public function filecloneclass() {
         $viewData = array();
         $invocationId = $this->getInvocationIdFromURL();
-
         $result = $this->scc->getAllFCC($invocationId);
         $viewData['parent_table_data'] = $result;
         $secondary_table_rows = array();
@@ -430,7 +430,19 @@ class FCS extends CI_Controller {
                 $secondary_table_rows[$row['fcc_id']] = $this->scc->getAllFCCSecondaryTableRows($row, $invocationId);
             }
         }
-
+        $viewData['treemapFCCdata'] = json_encode($secondary_table_rows);
+        
+        $dids = array();
+        $result = $this->scc->getAllFCCDIR($invocationId);                
+        if ($result) {
+            foreach ($result as $row) {
+                $dids[] = $row['directory_id'];
+            }
+        }
+        $dids = array_unique($dids);
+        $treeMapData = $this->treemap_model->get_fcs_dir_treemap($invocationId, $dids);
+        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData,false);
+        
         $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['invocationId'] = $invocationId;
         // print_r($viewData);exit;

@@ -8,6 +8,7 @@
 
     }
 </style>
+<script type="text/javascript" src="<?= asset_url('js/myTreeMap.js') ?>"></script>
 <div id="wrapper">
 
     <?php
@@ -342,8 +343,43 @@
 </div><!-- End #wrapper -->
 
 <script>
+    function generateTreeMap()
+    {
+        //var treeMapData = <?php //echo json_encode($treemapdata);                ?>;
+        var data = new Array();
+        data = <?php
+                    if ($treemapdata) {
+                        echo $treemapdata;
+                    }
+                    ?>;
+        //alert(data);
+        return data;
+    }
+    
+    var fccTMData = <?php echo $treemapFCCdata ?>;
+    //console.log(fccTMData[1][0]['fid']);
+
     $(document).ready(function() {
+        tmData = renderTreeMap();
+        tmCount=1;
+        
         $(".list_view").on("click", function() {
+            
+            fid = new Array();
+            var fccId = $(this).data("sccid");
+            for (var key in fccTMData[fccId]) {
+                if (typeof fccTMData[fccId][key] === "object") {
+                    //console.log(fccTMData[fccId][key]['fid']);
+                    tmpFid = fccTMData[fccId][key]['fid'];
+                    tmpFid = tmpFid.toString();
+                    fid.push(tmpFid);
+                }
+            }
+            fid = $.unique(fid);
+            fid = $.unique(fid);
+            tmData = generateNewTreeMap(tmData,fid,tmCount);
+            tmCount++;
+            
             $("tr").removeClass('selected-row');
             $(this).addClass('selected-row');
 
@@ -351,7 +387,12 @@
             event.preventDefault();
             return false;
         });
+        
         $(".code_view").on("click", function() {
+            fid = $(this).data("fid");
+            fid = fid.toString();
+            tmData = generateNewTreeMap(tmData,splitFIDs(fid),tmCount);
+            tmCount++;
             $(".scc_instance_list tr").removeClass('selected-row');
             $(this).addClass('selected-row');
             Clonify.SCC.viewCodeData($(this).data("scsid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));

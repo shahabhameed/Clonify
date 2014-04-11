@@ -1,3 +1,7 @@
+var globalK = 0;
+var tempAH = new Array();
+var tempAHFP = new Array();
+var tempAHFN = new Array();
 function loadTreeMap(data) {
     $('#treemap').jqxTreeMap({
         width: 'auto',
@@ -88,10 +92,10 @@ function generateNewTreeMap(tmData, fidArr, tmCount)
         // var k =0;      
         for (var key in tmData) {
             if (typeof tmData[key] === "object") {
-                if (fidArr.indexOf(tmData[key].label) >= 0)
+                if (fidArr.indexOf(tmData[key].fid) >= 0)
                 {
                     tmData[key].color = tmClr;
-                    tempAH[globalK] = tmData[key].label;
+                    tempAH[globalK] = tmData[key].fid;
                     tempAHFP[globalK] = tmData[key].filepath;
                     tempAHFN[globalK] = tmData[key].filename;
                     globalK=globalK+1;

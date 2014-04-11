@@ -138,7 +138,7 @@ class SCC_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('fcc');
         $this->db->where($where);
-        $result = $this->db->get();
+        $result = $this->db->get();        
         if ($result->num_rows() > 0) {
             return $result->result();
         }
