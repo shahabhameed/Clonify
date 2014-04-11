@@ -3,10 +3,10 @@ function loadTreeMap(data) {
         width: 'auto',
         height: 800,
         source: data,
-        //baseColor: '#C8D0D2',
-        colorMode: 'rangeColors',
+        baseColor: '#C8D0D2',
+        colorMode: 'parent',
         selectionEnabled: true ,
-        colorRanges: [{
+        /*colorRanges: [{
                 color: "#C3BCBC",
                 min: 0,
                 max: 25
@@ -23,7 +23,7 @@ function loadTreeMap(data) {
                 min: 100,
                 max: 10000
             }],
-        
+        */
         renderCallbacks: {
             '*': function(element, value) {
                 if (value.data) {
