@@ -279,12 +279,12 @@
                     <div class="col-md-11 padding15 code-window responsive" id="code_window1" >                    
                     </div>
 
-                    <div class="col-md-1" id="code_map1" style="padding:0px;padding-right:5px;width:65px !important;">
+                    <div class="col-md-1" id="code_map1">
                     </div>
                   </div>
                                   
                   <div class="code-window2">
-                    <div class="col-md-1" id="code_map2" style="padding:0px;width:65px !important;">
+                    <div class="col-md-1" id="code_map2">
                     </div>
                     <div class="col-md-5 padding15 code-window" id="code_window2">
 

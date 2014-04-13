@@ -109,3 +109,18 @@ form .control-group .controls-row .btn.special {margin-left: 10px;}
 #geshi-window1, #geshi-window2{
 	min-width: 960px;
 }
+.code-window1 .col-md-5{
+	width:895px !important;
+}
+.code-window2 .col-md-5{
+	width:895px !important;
+}
+#code_map1{
+	padding:0px;
+	padding-right:5px;
+	width:25px !important;
+}
+#code_map2{
+	padding:0px;
+	width:25px !important;
+}
