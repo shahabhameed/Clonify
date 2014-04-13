@@ -553,3 +553,7 @@ INSERT INTO `language_extensions` (`language_id`, `extension`) VALUES
 
 -- 2014-04-03 0 By ABDULLAH
 ALTER TABLE  `repository_directory` ADD  `parent_id` INT NULL ;
+
+
+-- 2014-04-13 0 By HAFEEZ
+ALTER TABLE  `user_invocations` ADD `is_email_sent_on_completion` INT NULL ;
