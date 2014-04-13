@@ -12,8 +12,26 @@ var setting = {
     },
     view: {
         fontCss: getFontCss
+    },
+    callback: {
+        onClick: zTreeOnClick
     }
 };
+function zTreeOnClick(event, treeId, treeNode) {
+    if(treeNode.path){
+        var _url = base_url + "home/customloadcode";
+        var _params = {
+          file_path : treeNode.path,
+          file_name : treeNode.name,
+        };
+        $('#filemodallabel').html(treeNode.name);
+        $.post(_url, _params, function(r) {
+            $('#file-modal-content').html(r);
+
+            $('#file-modal').modal('show');
+         });
+     }
+}
 function focusKey(e) {
     if (key.hasClass("empty")) {
         key.removeClass("empty");
@@ -142,8 +160,9 @@ $(document).ready(function() {
     $(".code_view").on("click", function() {
         $(".scc_instance_list tr").removeClass('selected-row');
         $(this).addClass('selected-row');
+        mysearch($(this).data("files"));
         tmData = generateNewTreeMap(tmData, splitFIDs($(this).data("files")), tmCount);
         tmCount++;
-        mysearch($(this).data("files"));
+       
     });
 });

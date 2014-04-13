@@ -190,7 +190,7 @@
                                                         $new_fids = join(", ", $fids);
                                                         $temp_filds = join(",", $fids);
                                                         ?>
-                                                        <tr class="code_view" data-files="<?php echo $temp_filds; ?>">
+                                                        <tr class="code_view" data-files="<?php echo $temp_filds; ?>"  >
                                                             <td><?php echo $counter; ?></td>
                                                             <td><?php echo $ingroup_id; ?></td>
                                                             <td style="text-align:left;"><?php echo $new_fids; ?></td>
@@ -330,7 +330,6 @@
                         ?>;
                 return data;
             }
-
             var zNodes = <?php echo $treedata ?>;
             $(document).ready(function() {
                 tmData = renderTreeMap();

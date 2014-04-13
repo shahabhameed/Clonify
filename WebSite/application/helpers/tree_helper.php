@@ -15,9 +15,11 @@ if (!function_exists('create_tree')) {
 
     function create_tree($invocation_id) {
         $CI = & get_instance();
-        $result = $CI->db->query('select cmfile_id,cmdirectory_id,group_id,rf.file_name,rd.id,rd.directory_name from invocation_files inf
+        $result = $CI->db->query('select cmfile_id,cmdirectory_id,group_id,rf.file_name,rd.id,rd.directory_name,ur.repository_name
+                                    from invocation_files inf
                                     join repository_file rf on inf.file_id = rf.id
                                     join repository_directory rd on rf.directory_id = rd.id
+                                    join user_repository ur on rd.repository_id = ur.id
                                     where inf.invocation_id = '.$invocation_id)->result_array();
         $tree = array();
         $parent;
@@ -27,7 +29,7 @@ if (!function_exists('create_tree')) {
         $parent_id = -1;
         foreach ($result as $res) {
            
-            // print_r($group_ids);
+            // print_r($res);
             // echo $group_id;
             
             if($group_id == -1 || !in_array($res['group_id'], $group_ids)){
@@ -58,6 +60,8 @@ if (!function_exists('create_tree')) {
                                 'id'=>"f_".intval($res['cmfile_id']),
                                 'pId'=>"p_".intval($parent_id),
                                 'name'=>$res['file_name'],
+                                'path' => $res['repository_name'].$res['directory_name'].$res['file_name']
+                                
                             );
             // print_r($res);
         }
