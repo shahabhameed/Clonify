@@ -19,7 +19,7 @@ Class CronController extends CI_Controller
 		
 		$this->load->view('cronView');
 
-		echo "checking ... " . date(DATE_RFC2822) . "<br /><br /><br />";
+		echo "checking ... " . date(DATE_RFC2822) . "<br /><br /><br /> ";
 		
 		$listOfInvocationsForEmails = $this->cronModel->getUserInvocationsToBeEmailed();
 
