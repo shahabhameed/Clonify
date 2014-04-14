@@ -7,7 +7,7 @@ class Invoke_model extends CI_Model
 		$user_id = $this->session->userdata('user_id');
 		$status = '0';// 0 - Inactive (Not Started Yet)
 		$date = date('Y-m-d H:i:s');				
-		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time) VALUES('$user_id','$status','$date')");
+		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time,is_email_sent_on_completion) VALUES('$user_id','$status','$date', 0)");
 		
 		echo $this->db->affected_rows();
 		$invoke_id = mysql_insert_id();
@@ -175,7 +175,7 @@ class Invoke_model extends CI_Model
 		$result_ver = $this->db->query("SELECT version from user_repository where user_id='$user_id'");
 		$version = $result_ver->result();
 		
-		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time,invocation_name,repository_version,comments) VALUES('$user_id','$status','$date','$iname','$version','$icomment')");
+		$this->db->query("INSERT INTO user_invocations(user_id,status,invoked_time,invocation_name,repository_version,comments,is_email_sent_on_completion) VALUES('$user_id','$status','$date','$iname','$version','$icomment',0)");
 
 		$invoke_id = mysql_insert_id();
 		$this->session->set_userdata(array('invoke_id'=>$invoke_id));

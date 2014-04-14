@@ -1,132 +1,174 @@
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\Bits.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\Buffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\BufferOverflowException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\BufferUnderflowException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsCharBufferB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsCharBufferL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsCharBufferRB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsCharBufferRL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsDoubleBufferB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsDoubleBufferL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsDoubleBufferRB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsDoubleBufferRL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsFloatBufferB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsFloatBufferL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsFloatBufferRB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\ByteBufferAsFloatBufferRL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\AlreadyConnectedException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\AsynchronousCloseException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\ByteChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\CancelledKeyException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\Channel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\Channels.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\ClosedByInterruptException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\ClosedChannelException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\ClosedSelectorException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\ConnectionPendingException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\DatagramChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\FileChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\FileLock.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\FileLockInterruptionException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\GatheringByteChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\IllegalBlockingModeException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\IllegalSelectorException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\InterruptibleChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\NoConnectionPendingException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\NonReadableChannelException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\NonWritableChannelException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\NotYetBoundException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\NotYetConnectedException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\OverlappingFileLockException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\Pipe.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\ReadableByteChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\ScatteringByteChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\SelectableChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\SelectionKey.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\Selector.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\ServerSocketChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\SocketChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\UnresolvedAddressException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\UnsupportedAddressTypeException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\WritableByteChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\spi\AbstractInterruptibleChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\spi\AbstractSelectableChannel.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\spi\AbstractSelectionKey.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\spi\AbstractSelector.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\channels\spi\SelectorProvider.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\CharacterCodingException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\Charset.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\CharsetDecoder.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\CharsetEncoder.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\CoderMalfunctionError.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\CoderResult.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\CodingErrorAction.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\IllegalCharsetNameException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\MalformedInputException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\UnmappableCharacterException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\UnsupportedCharsetException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio\charset\spi\CharsetProvider.java;
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsIntBufferB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsIntBufferL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsIntBufferRB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsIntBufferRL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsLongBufferB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsLongBufferL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsLongBufferRB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsLongBufferRL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsShortBufferB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsShortBufferL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsShortBufferRB.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteBufferAsShortBufferRL.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ByteOrder.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\CharBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectByteBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectByteBufferR.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectCharBufferRS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectCharBufferRU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectCharBufferS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectCharBufferU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectDoubleBufferRS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectDoubleBufferRU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectDoubleBufferS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectDoubleBufferU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectFloatBufferRS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectFloatBufferRU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectFloatBufferS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectFloatBufferU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectIntBufferRS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectIntBufferRU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectIntBufferS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectIntBufferU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectLongBufferRS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectLongBufferRU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectLongBufferS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectLongBufferU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectShortBufferRS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectShortBufferRU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectShortBufferS.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DirectShortBufferU.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\DoubleBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\FloatBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapByteBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapByteBufferR.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapCharBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapCharBufferR.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapDoubleBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapDoubleBufferR.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapFloatBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapFloatBufferR.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapIntBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapIntBufferR.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapLongBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapLongBufferR.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapShortBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\HeapShortBufferR.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\IntBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\InvalidMarkException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\LongBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\MappedByteBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ReadOnlyBufferException.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\ShortBuffer.java
-E:\xampp\htdocs\Clonify\WebSite\files\shahramjaved75\nio1\StringCharBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\2.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\Cocos2dxAccelerometer.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\Cocos2dxActivity.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\Cocos2dxBitmap.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\Cocos2dxGLSurfaceView.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\Cocos2dxMusic.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\Cocos2dxRenderer.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\Cocos2dxSound.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\SCICopy.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\SCSInFileInstance.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\JAVA_1\2.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\JAVA_2\3.java
+D:\xampp\htdocs\WebSite\files\hafeez\JAVA\JAVA_2\JAVA_2_1\1.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\Bits - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\Bits.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\Buffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\Buffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\BufferOverflowException - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\BufferOverflowException.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\BufferUnderflowException - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\BufferUnderflowException.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsCharBufferB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsCharBufferB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsCharBufferL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsCharBufferL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsCharBufferRB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsCharBufferRB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsCharBufferRL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsCharBufferRL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsDoubleBufferB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsDoubleBufferB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsDoubleBufferL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsDoubleBufferL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsDoubleBufferRB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsDoubleBufferRB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsDoubleBufferRL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsDoubleBufferRL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsFloatBufferB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsFloatBufferB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsFloatBufferL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsFloatBufferL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsFloatBufferRB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsFloatBufferRB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsFloatBufferRL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsFloatBufferRL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsIntBufferB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsIntBufferB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsIntBufferL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsIntBufferL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsIntBufferRB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsIntBufferRB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsIntBufferRL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsIntBufferRL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsLongBufferB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsLongBufferB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsLongBufferL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsLongBufferL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsLongBufferRB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsLongBufferRB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsLongBufferRL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsLongBufferRL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsShortBufferB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsShortBufferB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsShortBufferL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsShortBufferL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsShortBufferRB - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsShortBufferRB.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsShortBufferRL - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteBufferAsShortBufferRL.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteOrder - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ByteOrder.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\CharBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\CharBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectByteBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectByteBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectByteBufferR - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectByteBufferR.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectCharBufferRS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectCharBufferRS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectCharBufferRU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectCharBufferRU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectCharBufferS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectCharBufferS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectCharBufferU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectCharBufferU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectDoubleBufferRS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectDoubleBufferRS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectDoubleBufferRU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectDoubleBufferRU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectDoubleBufferS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectDoubleBufferS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectDoubleBufferU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectDoubleBufferU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectFloatBufferRS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectFloatBufferRS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectFloatBufferRU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectFloatBufferRU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectFloatBufferS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectFloatBufferS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectFloatBufferU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectFloatBufferU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectIntBufferRS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectIntBufferRS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectIntBufferRU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectIntBufferRU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectIntBufferS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectIntBufferS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectIntBufferU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectIntBufferU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectLongBufferRS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectLongBufferRS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectLongBufferRU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectLongBufferRU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectLongBufferS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectLongBufferS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectLongBufferU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectLongBufferU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectShortBufferRS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectShortBufferRS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectShortBufferRU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectShortBufferRU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectShortBufferS - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectShortBufferS.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectShortBufferU - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DirectShortBufferU.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DoubleBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\DoubleBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\FloatBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\FloatBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapByteBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapByteBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapByteBufferR - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapByteBufferR.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapCharBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapCharBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapCharBufferR - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapCharBufferR.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapDoubleBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapDoubleBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapDoubleBufferR - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapDoubleBufferR.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapFloatBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapFloatBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapFloatBufferR - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapFloatBufferR.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapIntBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapIntBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapIntBufferR - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapIntBufferR.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapLongBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapLongBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapLongBufferR - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapLongBufferR.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapShortBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapShortBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapShortBufferR - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\HeapShortBufferR.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\IntBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\IntBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\InvalidMarkException - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\InvalidMarkException.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\LongBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\LongBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\MappedByteBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\MappedByteBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ReadOnlyBufferException - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ReadOnlyBufferException.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ShortBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\ShortBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\StringCharBuffer - Copy.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio\StringCharBuffer.java
+D:\xampp\htdocs\WebSite\files\hafeez\nio2\2.java
