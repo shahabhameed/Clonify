@@ -209,6 +209,28 @@ class FCS extends CI_Controller {
     function traverseFiles($files, $isGroup) {
         $output = "";
         if (!empty($files)) {
+            
+            $isFirst = true;
+            foreach ($files as $file => $filedata) 
+            {
+                if($isFirst)
+                {
+                    $min = $max = $filedata['clones'];
+                    $isFirst = false;
+                }
+                if($filedata['clones'] > $max)
+                {
+                    $max = $filedata['clones'];
+                }
+                if($filedata['clones'] <= $min)
+                {
+                    $min = $filedata['clones'];
+                }
+            }
+            $rangeSize = round(($max - $min)/4);
+            $r1 = $min + $rangeSize;
+            $r2 = $r1 + $rangeSize;
+            $r3 = $r2 + $rangeSize;
             foreach ($files as $file => $filedata) {
                 
                 $output.="{";
@@ -218,27 +240,28 @@ class FCS extends CI_Controller {
                 }
                 else
                 {
-                    $output.="label: '" . $filedata['cmfid'] . "',";
+                    //$output.="label: '" . $filedata['cmfid'] . "',";
+                    $output.="label: ' ',";
                 }
                 $output.="value: " . $filedata['fsize'] . ",";
                 //$output.="value: " . $filedata['clones'] . ",";
                 if(isset($filedata['clones']))
                 {
-                    if($filedata['clones']>=0 && $filedata['clones']<=25)
+                    if($filedata['clones']>=$min && $filedata['clones']<=$r1)
                     {
-                        $output.= "color: '#C3BCBC',";
+                        $output.= "color: '#E3E3E3',";
                     }
-                    else if($filedata['clones']>25 && $filedata['clones']<=50)
+                    else if($filedata['clones']>$r1 && $filedata['clones']<=$r2)
                     {
-                        $output.= "color: '#A9A6B3',";
+                        $output.= "color: '#C4C4C4',";
                     }
-                    else if($filedata['clones']>50 && $filedata['clones']<=100)
+                    else if($filedata['clones']>$r2 && $filedata['clones']<=$r3)
                     {
-                        $output.= "color: '#9692A1',";
+                        $output.= "color: '#9E9E9E',";
                     }
-                    else if($filedata['clones']>100)
+                    else if($filedata['clones']>$r3 && $filedata['clones']<=$max)
                     {
-                        $output.= "color: '#7B7784',";
+                        $output.= "color: '#696969',";
                     }
                 }
 
@@ -255,7 +278,7 @@ class FCS extends CI_Controller {
                 $output.="fid: '" . $filedata['cmfid'] . "',";
                 $output.="filepath: '" . $filedata['filepath'] . "',";
                 $output.="filename: '" . $filedata['filename'] . "',";
-                $output.="data: {description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
+                $output.="data: {fid:".$filedata['cmfid'].",description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
                 $output.="},";
             }
         }

@@ -570,6 +570,11 @@ License: http://jqwidgets.com/license/
             } else {
                 var e = j.width() - 2;
                 j.html('<span style="max-width:' + e + 'px;" class="jqx-treemap-label">' + f.label + "</span>");
+                if(typeof f.data != 'undefined')
+                {
+                    console.log(f.data.fid);
+                    j.html('<span style="display:none;">' + f.data.fid + "</span>");
+                }
             }
             return j;
         },
@@ -747,6 +752,7 @@ License: http://jqwidgets.com/license/
             } else {
                 var e = j.width() - 2;
                 j.html('<span style="max-width:' + e + 'px;" class="jqx-treemap-label">' + f.label + "</span>")
+                j.html('<span style="display:none;">' + f.fid + "</span>");
             }
         },
         _getBoundValues: function () {
