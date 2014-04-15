@@ -32,7 +32,7 @@
 				
 			},
 			error: function(xhr) {
-				alert("An error occured: " + xhr.status + " " + xhr.statusText);
+				//alert("An error occured: " + xhr.status + " " + xhr.statusText);
 			}
 		});
 		setTimeout('loadNow()',5000);
