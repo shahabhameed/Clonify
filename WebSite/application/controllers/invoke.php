@@ -99,6 +99,21 @@ class Invoke extends CI_Controller
 		$this->load->view($pagename,$data);
 		$this->load->view('partials/main_footer');		
 	}
+	
+	function isInvocationInProgressControllerFunc(){
+		$user_id = $this->tank_auth->get_user_id();
+		//echo "user_id : " . $user_id;
+		$results = $this->invoke_model->isInvocationInProgressModelFunc($user_id);
+		
+		$isNumOfRowsNonZero = false;
+		
+		foreach($results as $result){
+			$isNumOfRowsNonZero = true;
+			break;
+		}
+		
+		echo $isNumOfRowsNonZero;
+	}
 }
 
 /* End of file auth.php */

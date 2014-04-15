@@ -462,5 +462,9 @@ class Invoke_model extends CI_Model
 		$this->invoke();
 	}
 
-	
+	function isInvocationInProgressModelFunc($userId){
+		$query = "SELECT * FROM `user_invocations` WHERE user_id=$userId AND status<2";
+		$results = $this->db->query($query);
+		return $results->result();
+	}
 }

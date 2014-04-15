@@ -37,9 +37,9 @@
 					{
 						echo 'Finished with error(s)'; 
 					}
-					else if($status==4)
+					else
 					{
-						echo 'Invalidated due to some change in repository. <br /> Note: Usually any changes done to repository after invocation invalidates the results fro that invocation.'; 
+						echo 'Some status change occured'; 
 					} 
 				?>
 				</b>

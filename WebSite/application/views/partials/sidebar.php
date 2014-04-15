@@ -8,6 +8,36 @@
     <a href="#" class="tipR" title="Hide Left Sidebar"><span class="icon12 minia-icon-layout"></span></a>
 </div>
 
+<script>
+
+	function loadNow(){
+		$.ajax({
+			url: "<?php echo base_url(); ?>index.php/invoke/isInvocationInProgressControllerFunc/",
+			success: function(result) {
+				//alert("result: " + result);
+				var repositoryListItemObj = document.getElementById("repositoryListItem")
+				
+				if(result == true){
+					repositoryListItemObj.style.display='none'; 
+				}
+				else{
+					repositoryListItemObj.style.display='block';
+				}
+				
+			},
+			error: function(xhr) {
+				alert("An error occured: " + xhr.status + " " + xhr.statusText);
+			}
+		});
+		setTimeout('loadNow()',5000);
+	}
+  
+	$(function(){
+		loadNow();
+	});
+
+</script>
+
 <!--Sidebar background-->
 <div id="sidebarbg"></div>
 <div id="sidebar"> 
@@ -20,7 +50,9 @@
 
         <div class="mainnav">
             <ul>
-                <li><a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>Repository</a></li>
+				
+				<li id="repositoryListItem" style="display:none;"><a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>Repository</a></li>
+				
                 <li><a href=" <?php echo site_url('invoke/'); ?>"><span class="icon16  icomoon-icon-equalizer-2"></span>Clone Detection</a></li>
 
                 <?php if ($this->tank_auth->get_role_id() == 1) { ?>
