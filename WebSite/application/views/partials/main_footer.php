@@ -1,17 +1,17 @@
 <div class="modal fade " id="file-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog" style="width:80%;">
-    <div class="modal-content">
-      <div class="modal-header">
-       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="filemodallabel"></h4>
-      </div>
-      <div class="modal-body " id="file-modal-content">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog" style="width:80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="filemodallabel"></h4>
+            </div>
+            <div class="modal-body " id="file-modal-content">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 </body>    
 
@@ -64,11 +64,12 @@
 <script type="text/javascript" src="<?= asset_url('plugins/misc/totop/jquery.ui.totop.min.js'); ?>"></script> <!-- Back to top plugin -->
 <script type="text/javascript" src="<?= asset_url('plugins/files/elfinder/elfinder.min.js'); ?>"></script>
 
+<?php if (isset($treemapdata)) { ?>
 <!-- JQWidgets for TreeMap -->
 <script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/jqxcore.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/jqxtooltip.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('plugins/jqwidgets/jqxtreemap.js'); ?>"></script>
-
+<?php } ?>
 <!-- Init plugins -->
 <script type="text/javascript" src="<?= asset_url('js/jquery.mousewheel.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('js/jRespond.min.js'); ?>"></script>

@@ -5094,16 +5094,16 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: #999999;
 }
 .legend-treemap1{
-    background-color: #C3BCBC;
+    background-color: #E3E3E3;
 }
 .legend-treemap2{
-    background-color: #A9A6B3;
+    background-color: #C4C4C4;
 }
 .legend-treemap3{
-    background-color: #9692A1;
+    background-color: #9E9E9E;
 }
 .legend-treemap4{
-    background-color: #7B7784;
+    background-color: #696969;
 }
 
 .label-default[href]:hover,

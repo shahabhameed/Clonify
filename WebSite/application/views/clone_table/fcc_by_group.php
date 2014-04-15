@@ -268,49 +268,63 @@
                 </div>
             </div>
             <!-- Tabs Start-->
-        <div class="row" id="tabs">
-            <div class="col-lg-12">
+            <div class="row" id="tabs">
                 <div class="col-lg-12">
-                    <div style="margin-bottom: 20px;">
-                        <ul id="myTab" class="nav nav-tabs pattern">
-                            <li class="active" ><a href="#tree" data-toggle="tab" class=""><h4>Tree Map</h4></a></li>
-                            <li><a href="#navigation" data-toggle="tab"><h4>Navigation</h4></a></li>
+                    <div class="col-lg-12">
+                        <div style="margin-bottom: 20px;">
+                            <ul id="myTab" class="nav nav-tabs pattern">
+                                <li class="active" ><a href="#tree" data-toggle="tab" class=""><h4>Tree Map</h4></a></li>
+                                <li><a href="#navigation" data-toggle="tab"><h4>Navigation</h4></a></li>
 
-                        </ul>
+                            </ul>
 
-                        <div class="tab-content">
-                            <div class="tab-pane fade in active" id="tree">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-12">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tree">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <!-- Treemap  Start-->
                                             <div class="form-group col-lg-12">
-                                                <div id="treemap"  class="col-lg-12 "></div>	
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4>
+                                                            <span class="icon16 icomoon-icon-equalizer-2"></span>                                                                                                            
+                                                            <span class="label legend-treemap4">Very High</span>
+                                                            <span class="label legend-treemap3">High</span>
+                                                            <span class="label legend-treemap2">Medium</span>
+                                                            <span class="label legend-treemap1">Low</span>
+                                                        </h4>
+                                                        <a href="#" class="minimize">Minimize</a>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div id="treemap"  class="col-lg-12 "></div>
+                                                    </div>
+                                                </div><!-- End .panel -->
                                             </div>
-                                        </div><!-- End .row -->
+                                            <!-- Treemap End-->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="tab-pane fade" id="navigation">
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="marginL10 col-lg-12" style="border-left:1px solid;border-color:#57AC57;max-height:600px;  height:auto;overflow-y:scroll;overflow-x:hidden;">
-                                            <div class="todo">                          
-                                                <ul id="treeDemo" class="ztree"></ul>
+                                <div class="tab-pane fade" id="navigation">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="marginL10 col-lg-12" style="border-left:1px solid;border-color:#57AC57;max-height:600px;  height:auto;overflow-y:scroll;overflow-x:hidden;">
+                                                <div class="todo">                          
+                                                    <ul id="treeDemo" class="ztree"></ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div><!-- End contentwrapper -->
-                                </div><!-- End .panel -->     
+                                        </div><!-- End contentwrapper -->
+                                    </div><!-- End .panel -->     
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div><!-- End .span6 -->  
+                    </div><!-- End .span6 -->  
+                </div>
             </div>
-        </div>
-        <!-- Tabs End-->
+            <!-- Tabs End-->
         </div><!-- End contentwrapper -->
 
-        
+
     </div><!-- End #content -->
 
 </div><!-- End #wrapper -->

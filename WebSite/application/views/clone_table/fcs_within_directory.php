@@ -262,36 +262,30 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="tree">
-                                    <div class="col-md-12">
+                                    <div class="col-lg-12">
                                         <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group col-lg-12">
-                                                    <div class="row">
+
+                                            <!-- Treemap  Start-->
+                                            <div class="form-group col-lg-12">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4>
+                                                            <span class="icon16 icomoon-icon-equalizer-2"></span>                                                                                                            
+                                                            <span class="label legend-treemap4">Very High</span>
+                                                            <span class="label legend-treemap3">High</span>
+                                                            <span class="label legend-treemap2">Medium</span>
+                                                            <span class="label legend-treemap1">Low</span>
+                                                        </h4>
+                                                        <a href="#" class="minimize">Minimize</a>
+                                                    </div>
+                                                    <div class="panel-body">
                                                         <div id="treemap"  class="col-lg-12 "></div>
                                                     </div>
-
-                                                    <!-- Treemap Legend Start-->
-                                                    <div class="row" id="treemap-legend">
-                                                        <div class="col-lg-7 pull-left">
-                                                            <div class="panel panel-default ">
-                                                                <div class="panel-body">
-                                                                    <ul class="list-unstyled marginT5 marginL5">
-                                                                        <li>     
-                                                                            <label style="font-size:15px;">Legend: </label>
-                                                                            <span class="label legend-treemap1">Low( 0-25 )</span>
-                                                                            <span class="label legend-treemap2">Medium( 25-50 )</span>
-                                                                            <span class="label legend-treemap3">High( 50-100 )</span>
-                                                                            <span class="label legend-treemap4">Very High( >100 )</span>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div><!-- End .panel -->
-                                                        </div><!-- End .span4 -->
-                                                    </div>
-                                                    <!-- Treemap Legend End-->
-                                                </div>
-                                            </div><!-- End .row -->
-                                        </div>
+                                                </div><!-- End .panel -->
+                                            </div>
+                                            <!-- Treemap End-->
+                                            
+                                        </div><!-- End .row -->
                                     </div>
                                 </div>
 
@@ -320,7 +314,7 @@
 
         function generateTreeMap()
         {
-            //var treeMapData = <?php //echo json_encode($treemapdata);                     ?>;
+            //var treeMapData = <?php //echo json_encode($treemapdata);                          ?>;
             var data = new Array();
             data = <?php
                         if ($treemapdata) {

@@ -301,13 +301,27 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="tree">
-                                    <div class="col-md-12">
+                                    <div class="col-lg-12">
                                         <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group col-lg-12">
-                                                    <div id="treemap"  class="col-lg-12 "></div>	
-                                                </div>
-                                            </div><!-- End .row -->
+                                            <!-- Treemap  Start-->
+                                            <div class="form-group col-lg-12">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4>
+                                                            <span class="icon16 icomoon-icon-equalizer-2"></span>                                                                                                            
+                                                            <span class="label legend-treemap4">Very High</span>
+                                                            <span class="label legend-treemap3">High</span>
+                                                            <span class="label legend-treemap2">Medium</span>
+                                                            <span class="label legend-treemap1">Low</span>
+                                                        </h4>
+                                                        <a href="#" class="minimize">Minimize</a>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div id="treemap"  class="col-lg-12 "></div>
+                                                    </div>
+                                                </div><!-- End .panel -->
+                                            </div>
+                                            <!-- Treemap End-->
                                         </div>
                                     </div>
                                 </div>
@@ -345,26 +359,26 @@
 <script>
     function generateTreeMap()
     {
-        //var treeMapData = <?php //echo json_encode($treemapdata);                ?>;
+        //var treeMapData = <?php //echo json_encode($treemapdata);                 ?>;
         var data = new Array();
         data = <?php
-                    if ($treemapdata) {
-                        echo $treemapdata;
-                    }
-                    ?>;
+                        if ($treemapdata) {
+                            echo $treemapdata;
+                        }
+                        ?>;
         //alert(data);
         return data;
     }
-    
+
     var fccTMData = <?php echo $treemapFCCdata ?>;
     //console.log(fccTMData[1][0]['fid']);
 
     $(document).ready(function() {
         tmData = renderTreeMap();
-        tmCount=1;
-        
+        tmCount = 1;
+
         $(".list_view").on("click", function() {
-            
+
             fid = new Array();
             var fccId = $(this).data("sccid");
             for (var key in fccTMData[fccId]) {
@@ -377,9 +391,9 @@
             }
             fid = $.unique(fid);
             fid = $.unique(fid);
-            tmData = generateNewTreeMap(tmData,fid,tmCount);
+            tmData = generateNewTreeMap(tmData, fid, tmCount);
             tmCount++;
-            
+
             $("tr").removeClass('selected-row');
             $(this).addClass('selected-row');
 
@@ -387,11 +401,11 @@
             event.preventDefault();
             return false;
         });
-        
+
         $(".code_view").on("click", function() {
             fid = $(this).data("fid");
             fid = fid.toString();
-            tmData = generateNewTreeMap(tmData,splitFIDs(fid),tmCount);
+            tmData = generateNewTreeMap(tmData, splitFIDs(fid), tmCount);
             tmCount++;
             $(".scc_instance_list tr").removeClass('selected-row');
             $(this).addClass('selected-row');
