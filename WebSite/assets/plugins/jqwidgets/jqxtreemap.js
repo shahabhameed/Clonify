@@ -572,7 +572,7 @@ License: http://jqwidgets.com/license/
                 j.html('<span style="max-width:' + e + 'px;" class="jqx-treemap-label">' + f.label + "</span>");
                 if(typeof f.data != 'undefined')
                 {
-                    console.log(f.data.fid);
+                   // console.log(f.data.fid);
                     j.html('<span style="display:none;">' + f.data.fid + "</span>");
                 }
             }
@@ -634,8 +634,19 @@ License: http://jqwidgets.com/license/
               var indexMatched = fids.indexOf(obj);
              //  console.log("Object found!");
              //  console.log(filePathsTemp[indexMatched]);
-               Clonify.MCC.viewCodeData(1,2,filePathsTemp[indexMatched],obj,0,0,0,0,fileNamesTemp[indexMatched], 0);
-               event.preventDefault();
+             var _url = base_url + "home/customloadcode";
+             var _params = {
+                 file_path : filePathsTemp[indexMatched],
+                 file_name : fileNamesTemp[indexMatched],
+                };
+             $('#filemodallabel').html(fileNamesTemp[indexMatched]);
+             $.post(_url, _params, function(r) {
+             $('#file-modal-content').html(r);
+
+             $('#file-modal').modal('show');
+               });
+              // Clonify.MCC.viewCodeData(1,2,filePathsTemp[indexMatched],obj,0,0,0,0,fileNamesTemp[indexMatched], 0);
+              // event.preventDefault();
             }
                 if (f.selectionEnabled) {
                     var h = c.data(this, "jqx-treemap-selected") || false;
