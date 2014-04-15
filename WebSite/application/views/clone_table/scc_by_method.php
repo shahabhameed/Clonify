@@ -40,17 +40,6 @@ width: 50% !important;
                 <h4 class="modal-title" id="myModalLabel">Select * From SCC Where</h4>
               </div>
               <div class="modal-body">
-                
-               <div class="row">
-                  <div class="col-md-4">
-                    <h4>Length</h4>
-                  </div>
-               </div>
-               <div class="row">
-                    <div class="col-md-10" id="sccrangefilter">
-                    </div>
-                </div>
-                <br>
                 <div class="row">
                   <div class="col-md-4">
                     <u><h4>No. of Instances</h4></u>
@@ -127,7 +116,7 @@ width: 50% !important;
                  
                 </div>
                 <div class="panel-body noPad clearfix">
-                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable1 display table table-bordered" width="100%">
+                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableSccByMethod display table table-bordered" width="100%">
                     <thead>
                       <tr>
                         <th>No</th>
