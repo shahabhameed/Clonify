@@ -18,20 +18,26 @@
 				var repositoryListItemObj = document.getElementById("repositoryListItem")
 				
 				if(result == true){
-					repositoryListItemObj.style.display='none'; 
+					
+					$( "#repositoryListItem" ).fadeOut( "slow", function() {
+						repositoryListItemObj.style.display='none'; 
+					});
 				}
 				else{
-					repositoryListItemObj.style.display='block';
+					
+					$( "#repositoryListItem" ).fadeIn( "slow", function() {
+						repositoryListItemObj.style.display='block';
+					});
 				}
 				
 			},
 			error: function(xhr) {
-				alert("An error occured: " + xhr.status + " " + xhr.statusText);
+				//alert("An error occured: " + xhr.status + " " + xhr.statusText);
 			}
 		});
 		setTimeout('loadNow()',5000);
 	}
-  
+	
 	$(function(){
 		loadNow();
 	});

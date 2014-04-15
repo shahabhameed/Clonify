@@ -139,6 +139,70 @@ $(document).ready(function() {
                 $('.dataTables_filter').hide();
                 
 	}
+	if($('table').hasClass('dynamicTableMcc')){
+		$('.dynamicTableMcc').dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                                     null,
+                                     null,
+									 null,
+									 null,
+									 null,
+                                     { sSelector: "#sccnumberfilter",type: "number" }
+                                     ]
+                		});
+
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+                $('.dataTables_filter').hide();
+                
+	}
+	if($('table').hasClass('dynamicTableSccByMethod')){
+		$('.dynamicTableSccByMethod').dataTable( {
+			"sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+			"sPaginationType": "bootstrap",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+            "iDisplayLength" : 5,
+            "aLengthMenu" : [5,10,25,50],
+			"oLanguage": {
+				"sSearch": "<span></span> _INPUT_",
+				"sLengthMenu": "<span>_MENU_</span>",
+				"oPaginate": { "sFirst": "First", "sLast": "Last" }
+			}
+
+		}).columnFilter({
+                         aoColumns: [
+                                     null,
+                                     null,
+									 null,
+									 null,
+									 null,
+									 null,
+									 null,
+                                     { sSelector: "#sccnumberfilter",type: "number" }
+                                     ]
+                		});
+
+		$('.dataTables_length select').uniform();
+		$('.dataTables_paginate > ul').addClass('pagination');
+		$('.dataTables_filter>label>input').addClass('form-control');
+                $('.dataTables_filter').hide();
+                
+	}
 
 	if($('table').hasClass('dynamicTablefcc')){
 		$('.dynamicTablefcc').dataTable( {
