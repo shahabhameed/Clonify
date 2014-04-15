@@ -3628,7 +3628,7 @@ ol li .jqx-listmenu-item-label:before
     box-shadow:         15px 15px 15px rgba(0, 0, 0, 0.5);
     border-style: solid;
     border-color: #000000 ;
-    /*border-width: 3px;*/
+    border-width: 5px;
     z-index: 40;
 }
 /*jqxRangeSelector*/

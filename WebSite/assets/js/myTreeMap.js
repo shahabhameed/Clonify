@@ -107,4 +107,27 @@ function generateNewTreeMap(tmData, fidArr, tmCount)
     return tmData;
 }
 
+function selectCurrentFileTreeMap(tmData, fidArr, tmCount)
+{
+    if (tmData)
+    {
+        treeMapDivs = document.getElementById('treemap').getElementsByTagName("div");
+        for (var i = 0; i < treeMapDivs.length; i++)
+        {
+            treeMapSpans = treeMapDivs[i].getElementsByTagName("span");
+            if(fidArr.indexOf(treeMapSpans[0].innerHTML) >= 0)
+            {
+                treeMapDivs[i].className = 'jqx-treemap-rectangle-hover';
+            }
+            else
+            {
+                treeMapDivs[i].className = 'jqx-treemap-rectangle';
+            }
+        }
+        
+        //loadTreeMap(tmData);
+    }
+    return tmData;
+}
+
     
