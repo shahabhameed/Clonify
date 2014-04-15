@@ -61,7 +61,7 @@ function splitFIDs(fids)
     var fidArr = new Array();
     if (typeof fids != 'undefined')
     {
-        fidArr = fids.split(',');
+        fidArr = fids.split(",");
     }
     return fidArr;
 }
