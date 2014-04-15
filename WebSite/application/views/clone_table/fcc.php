@@ -405,11 +405,12 @@
         $(".code_view").on("click", function() {
             fid = $(this).data("fid");
             fid = fid.toString();
-            tmData = generateNewTreeMap(tmData, splitFIDs(fid), tmCount);
+            tmData = selectCurrentFileTreeMap(tmData,splitFIDs(fid),tmCount);
             tmCount++;
             $(".scc_instance_list tr").removeClass('selected-row');
             $(this).addClass('selected-row');
-            Clonify.SCC.viewCodeData($(this).data("scsid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+            
+            //Clonify.SCC.viewCodeData($(this).data("scsid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
             event.preventDefault();
             return false;
         });
