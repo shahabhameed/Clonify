@@ -569,12 +569,14 @@ License: http://jqwidgets.com/license/
                 this.renderCallbacks[f.label](j, h);
             } else {
                 var e = j.width() - 2;
-                j.html('<span style="max-width:' + e + 'px;" class="jqx-treemap-label">' + f.label + "</span>");
+                var myHTML = '<span style="max-width:' + e + 'px;" class="jqx-treemap-label">' + f.label + "</span>"; 
+                
                 if(typeof f.data != 'undefined')
                 {
                    // console.log(f.data.fid);
-                    j.html('<span style="display:none;">' + f.data.fid + "</span>");
+                    myHTML += '<span style="display:none;">' + f.data.fid + "</span>";
                 }
+                j.html(myHTML);
             }
             return j;
         },
@@ -614,8 +616,8 @@ License: http://jqwidgets.com/license/
             // Clonify.MCC.viewCodeData(1,2,"C:/xampp/htdocs/Clonify/WebSite/files/shaban/nio/Bits.java",394,1,2,0,0, "Bits.java", 1);
             // event.preventDefault();
             // alert(this[1]);
-            console.log(this.getElementsByTagName("span")[0].innerHTML);
-            var obj = this.getElementsByTagName("span")[0].innerHTML;
+            console.log(this.getElementsByTagName("span")[1].innerHTML);
+            var obj = this.getElementsByTagName("span")[1].innerHTML;
           //  var fids = splitFIDs($(this).data("files"));
             var fids = tempAH;
             var filePathsTemp = tempAHFP;
