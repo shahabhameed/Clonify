@@ -16,7 +16,7 @@
                     <li>You are here:</li>
                     <li>
                     </li>
-                    <li class="active">File Manager</li>
+                    <li class="active">Repository</li>
                 </ul>
             </div><!-- End .heading-->
 
@@ -26,44 +26,33 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default gradient">
-                                <div class="panel-heading">
+                                <div class="panel-heading" style="height:45px;">
                                     <h4><span class="icon16 fa fa-cloud-upload"></span>
-                                        <span >File Manager</span></h4>
-                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <span >File Manager</span>
+                                        <button class=" btn btn-success  btn-sm col-lg-offset-9 right marginR10" type="submit" style="width:100px;">Update</button>
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 </div>
-                                <div class="panel-body noPad clearfix">
-
+                                <div class="panel-body noPad clearfix" style="height:550px">;
                                     <div class="row ">
                                         <div class=" box gradient col-lg-12">
                                             <div class="content noPad col-lg-12">
-
-                                              <div class="alert alert-info">
-                                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                            <strong>Press Update to upload files to database</strong>
-                                                            
-
-                                                        </div>
-
-                                                        <button class=" btn btn-success  pull-right col-lg-1" type="submit">Update</button>
+                                                <div class="alert alert-info">
+                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                    <strong>Press Update to upload files to database</strong>
+                                                </div>
                                             </div>  
                                         </div>
                                     </div>
 
-
-
                                     <div class="row">
-
                                         <div class="box gradient col-lg-12 ">
-
-                                            <div class="content noPad col-lg-12">
-                                                <div id="elfinder"></div>
+                                            <div class="content noPad col-lg-12 " style="height:550px">
+                                                <div id="elfinder"  ></div>
                                             </div>
-
                                         </div><!-- End .box -->
-
                                     </div><!-- End .row-fluid -->
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -110,11 +99,10 @@
             },
         }).elfinder('instance');
     });
-	function ConfirmForm()
-	{
-	
-		return confirm("You are about make changes in your repository!" +
+    function ConfirmForm()
+    {
 
-		"Click OK to continue or Cancel to abort.");
-	}
+        return confirm("You are about make changes in your repository!" +
+                "Click OK to continue or Cancel to abort.");
+    }
 </script>

@@ -137,7 +137,7 @@
                 <li>You are here:</li>
                 <li>
                 </li>
-                <li class="active">Configuration</li>
+                <li class="active">Clone Detection</li>
             </ul>
         </div>
 
@@ -447,12 +447,12 @@
                                                         <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Suppressed Tokens</span></h4>
                                                         <a href="#" class="minimize">Minimize</a>
                                                     </div>
-                                                    <div class="panel-body">
+                                                    <div class="panel-body" style="height:350px;">
                                                         <div class="form-group">
 
                                                             <div class="col-lg-12">
 
-                                                                <select multiple="multiple" id="suppresed" name="suppresed[]" class="form-control" style="height:300px;">>
+                                                                <select multiple="multiple" id="suppresed" name="suppresed[]" class="form-control" style="height:320px;">>
                                                                     <?php foreach ($tokens as $token) { ?>
                                                                         <option value="<?php echo $token->token_id ?>"><?php echo /* $token->token_id . " - " . */ $token->token_name ?></option>
                                                                     <?php } ?>
@@ -474,11 +474,8 @@
                                                 <div class="panel panel-default"> 
                                                     <div class="dualBtn">
                                                         <div class="form-group" align="center">
-
-
                                                             <button id="to2" type="button" class="btn marginT2" onclick="moveOptions('suppresed', 'suppresed2')"><span class="icon12 minia-icon-arrow-right-3"></span></button><br/>
                                                             <button id="to1" type="button" class="btn marginT5" onclick="moveOptions('suppresed2', 'suppresed')"><span class="icon12 minia-icon-arrow-left-3"></span></button>
-
                                                         </div>
 
                                                     </div>
@@ -491,7 +488,7 @@
                                                         <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Selected Tokens</span></h4>
                                                         <a href="#" class="minimize">Minimize</a>
                                                     </div>
-                                                    <div class="panel-body">
+                                                    <div class="panel-body" style="height:350px;">
                                                         <div class="form-group">
 
                                                             <div class="col-lg-12">
@@ -533,14 +530,14 @@
                                                             <h4>
                                                                 <span class="icon16 icomoon-icon-equalizer-2"></span>
                                                                 <span>Equal Tokens</span> 
-                                                                
+
                                                                  <button  type="button" class="btn btn-success btn-xs right marginR10" onclick="createNewElement('Rule', 'equal');">Add Rule</button>
                                                               
                                                             </h4>
                                                             <!--<a href="#" class="minimize">Minimize</a>-->
                                                         </div>
 
-                                                        <div class="panel-body">
+                                                        <div class="panel-body" style="height:350px; ">
                                                             <div class="form-group">
                                                                 <div class="col-lg-12">
                                                                     <select multiple="multiple" id="equal" name="equal[]" class="multiple form-control" style="height:320px; ">
@@ -554,16 +551,12 @@
                                                                     <div class="dn"><select id="box1Storage" name="box1Storage" class="nostyle"></select></div>
 
                                                                 </div>
-
                                                                 <!-- Add rule Button
                                                                 <div align="right" class="col-lg-12"> 
                                                                     <button  type="button" class="btn btn-success btn marginT6" onclick="createNewElement('Rule', 'equal');">Add Rule</button>
                                                                 </div>
                                                                 -->
                                                                 <select id="hiddenRule" name="hiddenRule[]" style="display:none" multiple="multiple"></select>
-
-
-
                                                             </div>
                                                         </div><!-- End .panel body -->
                                                     </div>
@@ -577,44 +570,27 @@
                                                         <div class="panel-heading"> <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Rules</span></h4>
                                                             <a href="#" class="minimize">Minimize</a>
                                                         </div>
-
                                                         <div class="panel-body">
                                                             <div class="form-group">
-
                                                                 <div class="panel-group accordion" id="accordionRule">
                                                                 </div>
-
                                                             </div>  
                                                         </div>
-
                                                     </div><!-- End .panel -->
-
                                                 </div><!-- End .span4 -->
                                             </div>
                                         </div><!-- End .row -->
                                     </div>
-
-
-
                                 </div><!-- End .panel -->
-
-
                             </div><!-- End .step -->      
-
                         </form>
-
                     </div>  <!-- End .wizard -->
-
                 </div><!-- End .panel -->
-
             </div><!-- End .span12 -->
-
         </div><!-- End .row -->
-
-
-
     </div> <!-- End content wrapper -->   
 </div> <!-- End content -->   
+
 <script>
     SelectSort("suppresed");
     SelectSort("box1View");
