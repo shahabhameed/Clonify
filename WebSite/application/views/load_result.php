@@ -27,12 +27,12 @@
 
                                         <div class="panel-heading " style="height:45px"> <h4><span class="icon16 icomoon-icon-equalizer-2 left"></span>
                                                 <span class="left">Results</span>
-                                                <button type="submit" class="btn btn-info btn-sm  marginR5 col-lg-offset-9 " style="width:98px; text-align:center;" >Save Changes</button>
-                                                <button type="button" class="btn btn-danger btn-sm "style="width:98px;text-align:center ;"  onclick="location.href = '<?php echo base_url(); ?>'" >Cancel</button>
+                                                <button type="button" class="btn btn-danger btn-sm right marginR10"style="width:98px;text-align:center ;"  onclick="location.href = '<?php echo base_url(); ?>'" >Cancel</button>
+                                                <button type="submit" class="btn btn-info btn-sm  marginR10 right" style="width:98px; text-align:center;" >Save Changes</button>
 
 
                                             </h4>
-                                            <a href="#" class="minimize">Minimize</a>
+                                            <!-- <a href="#" class="minimize">Minimize</a> -->
                                         </div>
 
 
