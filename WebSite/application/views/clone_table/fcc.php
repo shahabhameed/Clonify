@@ -151,7 +151,7 @@
                                                         <tr class="list_view" data-sccid="<?php echo $data['fcc_id']; ?>">
                                                             <td><?php echo $counter; ?></td>
                                                             <td><?php echo $data['fcc_id']; ?></td>                          
-                                                            <td ><?php echo isset($data['fcc_ids']) ? $data['fcc_ids'] : "-"; ?></td>
+                                                            <td style="text-align:left"><?php echo isset($data['fcc_ids']) ? $data['fcc_ids'] : "-"; ?></td>
                                                             <td><?php echo isset($data['atc']) ? $data['atc'] : '-'; ?></td>
                                                             <td><?php echo isset($data['apc']) ? $data['apc'] : '-'; ?></td>
                                                             <td><?php echo isset($data['members']) ? $data['members'] : '-'; ?></td>

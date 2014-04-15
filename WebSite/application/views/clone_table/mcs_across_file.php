@@ -178,7 +178,7 @@
                       <tr class="list_view" data-scsid="<?php echo $result['mcs_crossfile_id'];?>">
                         <td><?php echo $counter;?></td>
                         <td><?php echo $result['mcs_crossfile_id'];?></td>
-                        <td><?php echo $result['mcc_id_csv'];?></td>                    
+                        <td style="text-align:left"><?php echo $result['mcc_id_csv'];?></td>                    
                         <td><?php echo $result['members'];?></td>
                       </tr>
                       <?php }?>

@@ -182,7 +182,7 @@
                                         <tr class="list_view" data-scsid="<?php echo $data['scs_crossfile_id']; ?>">
                                             <td><?php echo $counter; ?></td>
                                             <td><?php echo $data['scs_crossfile_id']; ?></td>
-                                            <td><?php echo $data['scc_id_csv']; ?></td>
+                                            <td style="text-align:left"><?php echo $data['scc_id_csv']; ?></td>
                                             <td><?php echo isset($data['tc']) ? $data['tc'] : '-'; ?></td>
                                             <td><?php echo isset($data['pc']) ? $data['pc'] : '-'; ?></td>
                                             <td><?php echo $data['members']; ?></td>

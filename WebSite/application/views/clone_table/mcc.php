@@ -148,7 +148,7 @@ width: 50% !important;
                         <tr class="list_view" data-mccid="<?php echo $data['mcc_id'];?>">
                           <td><?php echo $counter;?></td>
                           <td><?php echo $data['mcc_id'];?></td>                          
-                          <td><?php echo $data['scc'];?></td>
+                          <td style="text-align:left"><?php echo $data['scc'];?></td>
                           <td><?php echo isset($data['atc']) ? $data['atc'] : '-';?></td>
                           <td><?php echo isset($data['apc']) ? $data['apc'] : '-';?></td>
                           <td><?php echo isset($data['length']) ? $data['length'] : '-';?></td>
