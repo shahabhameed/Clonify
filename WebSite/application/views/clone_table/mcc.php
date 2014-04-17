@@ -42,14 +42,34 @@ width: 50% !important;
               <div class="modal-body">
                 
                 <div class="row">
-                  <div class="col-md-4">
-                    <u><h4>No. of Instances</h4></u>
-                  </div>
-               </div>
-               <div class="row">
-                    <div class="col-md-4" id="sccnumberfilter">
-                    </div>
-                </div>
+                            <div class="col-md-4">
+                                <u><h4>ATC</h4></u>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" id="atcnumberfilter">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <u><h4>APC</h4></u>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" id="apcnumberfilter">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <u><h4>No Of Instances</h4></u>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" id="sccrangefilter">
+                            </div>
+                        </div>
                 <br>
                 <div class="row">
                   <div class="col-md-10">
@@ -117,7 +137,7 @@ width: 50% !important;
                  
                 </div>
                 <div class="panel-body noPad clearfix">
-                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableMcc display table table-bordered" width="100%">
+                  <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableScs display table table-bordered" width="100%">
                     <thead>
                       <tr>
                         <th>No</th>

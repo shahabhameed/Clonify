@@ -71,7 +71,7 @@ $(document).ready(function() {
                 null,
                 {sSelector: "#atcnumberfilter", type: "number"},
                 {sSelector: "#apcnumberfilter", type: "number"},
-                {sSelector: "#sccnumberfilter", type: "number"}
+                {sSelector: "#sccrangefilter", type: "number-range"}
             ]
         });
         $('.dataTables_length select').uniform();
@@ -156,11 +156,11 @@ $(document).ready(function() {
 		}).columnFilter({
                          aoColumns: [
                                      null,
-                                     null,
+                                     { sSelector: "#fidnumberfilter",type: "number" },
+									 { sSelector: "#didnumberfilter",type: "number" },
+									 { sSelector: "#gidnumberfilter",type: "number" },
 									 null,
-									 null,
-									 null,
-                                     { sSelector: "#sccnumberfilter",type: "number" }
+                                     { sSelector: "#sccrangefilter",type: "number-range" }
                                      ]
                 		});
 
