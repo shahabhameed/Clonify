@@ -29,28 +29,20 @@
                                 <div class="panel-heading" style="height:45px;">
                                     <h4><span class="icon16 fa fa-cloud-upload"></span>
                                         <span >File Manager</span>
-                                        <button class=" btn btn-success  btn-sm col-lg-offset-9 right marginR10" type="submit" style="width:100px;">Update</button>
+                                        <button class=" btn btn-success  btn-sm  right marginR10" type="submit" style="width:100px;">Update</button>
                                     </h4>
-                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    
                                 </div>
-                                <div class="panel-body noPad clearfix" style="height:550px">;
+                                <div class="panel-body noPadding " style="height:500px">
                                     <div class="row ">
-                                        <div class=" box gradient col-lg-12">
-                                            <div class="content noPad col-lg-12">
-                                                <div class="alert alert-info">
-                                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                    <strong>Press Update to upload files to database</strong>
-                                                </div>
-                                            </div>  
+                                        <div class="alert alert-info">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>Press Update to upload files to database</strong>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="box gradient col-lg-12 ">
-                                            <div class="content noPad col-lg-12 " style="height:550px">
-                                                <div id="elfinder"  ></div>
-                                            </div>
-                                        </div><!-- End .box -->
+                                        <div id="elfinder"  ></div>
                                     </div><!-- End .row-fluid -->
                                 </div>
                             </div>

@@ -408,9 +408,9 @@ function createNewElement(newElement, baseElement) {
             var del = document.createElement('input');
 
             //Setting Button Attributes
-            setAttributes(add, 'button', 'Add', 'add' + childCount + 1, 'btn btn-primary pull-left col-lg-2 	', 'moveOptions(\'' + baseElement + '\',\'' + newElement + 'List' + (childCount + 1) + '\')');
-            setAttributes(remove, 'button', 'Remove', 'remove' + childCount + 1, 'btn btn-warning col-lg-2 col-lg-offset-1', 'moveOptions(\'' + newElement + 'List' + (childCount + 1) + '\',\'' + baseElement + '\');	checkAndDelete(\'' + newElement + 'List' + (childCount + 1) + '\',\'' + rootDiv + '\',\'' + newElement + (childCount + 1) + '\',\'hidden' + newElement + '\',\'' + newElement + 'List' + (childCount + 1) + '\');');
-            setAttributes(del, 'button', 'Delete', 'delete' + childCount + 1, 'btn btn-danger col-lg-2 col-lg-offset-1', 'selectAllOptions(\'' + newElement + 'List' + (childCount + 1) + '\');moveOptions(\'' + newElement + 'List' + (childCount + 1) + '\',\'' + baseElement + '\');deleteGroup(\'' + rootDiv + '\',\'' + newElement + (childCount + 1) + '\',\'hidden' + newElement + '\',\'' + newElement + 'List' + (childCount + 1) + '\');');
+            setAttributes(add, 'button', 'Add', 'add' + childCount + 1, 'btn btn-primary btn-sm pull-left col-lg-2 	', 'moveOptions(\'' + baseElement + '\',\'' + newElement + 'List' + (childCount + 1) + '\')');
+            setAttributes(remove, 'button', 'Remove', 'remove' + childCount + 1, 'btn btn-warning btn-sm col-lg-2 marginL10', 'moveOptions(\'' + newElement + 'List' + (childCount + 1) + '\',\'' + baseElement + '\');	checkAndDelete(\'' + newElement + 'List' + (childCount + 1) + '\',\'' + rootDiv + '\',\'' + newElement + (childCount + 1) + '\',\'hidden' + newElement + '\',\'' + newElement + 'List' + (childCount + 1) + '\');');
+            setAttributes(del, 'button', 'Delete', 'delete' + childCount + 1, 'btn btn-danger btn-sm col-lg-2 marginL10', 'selectAllOptions(\'' + newElement + 'List' + (childCount + 1) + '\');moveOptions(\'' + newElement + 'List' + (childCount + 1) + '\',\'' + baseElement + '\');deleteGroup(\'' + rootDiv + '\',\'' + newElement + (childCount + 1) + '\',\'hidden' + newElement + '\',\'' + newElement + 'List' + (childCount + 1) + '\');');
 
             //Appending buttons to Buttons panel
             buttons.appendChild(add);

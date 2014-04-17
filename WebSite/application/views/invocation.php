@@ -28,13 +28,15 @@
 
     function hideWizard()
     {
-        var button = document.getElementById("submitButton");
-        var wizardBody = document.getElementById("wizard-body");
-        var wizardHeading = document.getElementById("wizard-heading");
-        if (button.value === "Submit")
+        var buttonNext = document.getElementById("submit");
+        var buttonBack = document.getElementById("back");
+        var wizardHeading = document.getElementById("equal-tokens");
+        if (buttonNext.value === "Submit")
         {
-            wizardBody.setAttribute("style", 'display:none');
+           // wizardBody.setAttribute("style", 'display:none');
             wizardHeading.setAttribute("style", 'display:none');
+            buttonNext.setAttribute("style", 'display:none');
+            buttonBack.setAttribute("style", 'display:none');
         }
     }
 
@@ -45,13 +47,13 @@
 
         if (groupListCount < 1)
         {
-            error.innerHTML = "Please add a group"
-            return false
+            error.innerHTML = "Please add a group";
+            return false;
         }
         else
         {
             error.innerHTML = "";
-            return true
+            return true;
         }
 
     }
@@ -88,7 +90,7 @@
     function loadResults()
     {
         var iNow = new Date().setTime(new Date().getTime() + 1 * 1000); // now plus 2 secs
-        var iEnd = new Date().setTime(new Date().getTime() + 3 * 1000); // now plus 4 secs
+        var iEnd = new Date().setTime(new Date().getTime() + 6 * 1000); // now plus 4 secs
         var submitValue = document.getElementById("submit").value;
         if (submitValue === "Submit")
         {
@@ -194,15 +196,9 @@
                             <div class="msg"></div>
                             <div class="wizard-actions">
 
-                                <!--
-                                <button class="btn btn-default pull-left col-lg-1" type="reset" onclick="changeTextonBack()"> Back </button>
-                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="changeText();SelectOnSubmit()" id="submitButton"> Next</button>
-                                <button class="btn btn-success pull-right col-lg-1" type="submit" onclick="changeText();SelectOnSubmit()" id="submitButton"> Next</button>
-                                -->
-
-                                <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" />
+                                <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" id="back" />
                                 <input type="submit" formmethod="POST" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submit"   onclick="SelectOnSubmit();
-                                        loadResults()"/>
+                                        hideWizard();loadResults();"/>
 
                             </div><!-- End .form-group  -->
 
@@ -371,11 +367,11 @@
                                         <div class="form-group">
                                             <div class="col-lg-6">
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading">
+                                                    <div class="panel-heading" style="height:45px;">
                                                         <h4>
                                                             <span class="icon16 icomoon-icon-equalizer-2"></span>
                                                             <span>Files From Database</span>
-                                                            <button  type="button" class="btn btn-success btn-xs right marginR10" onclick="createNewElement('Group', 'box1View');" >Create Group</button>
+                                                            <button  type="button" class="btn btn-success btn-sm right marginR10" onclick="createNewElement('Group', 'box1View');" >Create Group</button>
                                                         </h4>
 
                                                     </div>
@@ -526,12 +522,12 @@
 
                                                     <div class="panel panel-default">
 
-                                                        <div class="panel-heading">
+                                                        <div class="panel-heading" style="height:45px;">
                                                             <h4>
                                                                 <span class="icon16 icomoon-icon-equalizer-2"></span>
                                                                 <span>Equal Tokens</span> 
 
-                                                                 <button  type="button" class="btn btn-success btn-xs right marginR10" onclick="createNewElement('Rule', 'equal');">Add Rule</button>
+                                                                 <button  type="button" class="btn btn-success btn-sm right marginR10" onclick="createNewElement('Rule', 'equal');">Add Rule</button>
                                                               
                                                             </h4>
                                                             <!--<a href="#" class="minimize">Minimize</a>-->

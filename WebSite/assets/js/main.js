@@ -926,7 +926,6 @@ Clonify.FCS = {
 		$('.dataTables_filter>label>input').addClass('form-control');
         $('.dataTables_filter').hide();
   },
-  
   viewInstanceCrossDirectory: function(_fcs_id){
     $(".scc_instance_list").hide();
     $("#fcs_instance_list_"+_fcs_id).show();

@@ -10,37 +10,37 @@
 
 <script>
 
-	function loadNow(){
-		$.ajax({
-			url: "<?php echo base_url(); ?>index.php/invoke/isInvocationInProgressControllerFunc/",
-			success: function(result) {
-				//alert("result: " + result);
-				var repositoryListItemObj = document.getElementById("repositoryListItem")
-				
-				if(result == true){
-					
-					$( "#repositoryListItem" ).fadeOut( "slow", function() {
-						repositoryListItemObj.style.display='none'; 
-					});
-				}
-				else{
-					
-					$( "#repositoryListItem" ).fadeIn( "slow", function() {
-						repositoryListItemObj.style.display='block';
-					});
-				}
-				
-			},
-			error: function(xhr) {
-				//alert("An error occured: " + xhr.status + " " + xhr.statusText);
-			}
-		});
-		setTimeout('loadNow()',5000);
-	}
-	
-	$(function(){
-		loadNow();
-	});
+    function loadNow() {
+        $.ajax({
+            url: "<?php echo base_url(); ?>index.php/invoke/isInvocationInProgressControllerFunc/",
+            success: function(result) {
+                //alert("result: " + result);
+                var repositoryListItemObj = document.getElementById("repositoryListItem")
+
+                if (result == true) {
+
+                    $("#repositoryListItem").fadeOut("slow", function() {
+                        repositoryListItemObj.style.display = 'none';
+                    });
+                }
+                else {
+
+                    $("#repositoryListItem").fadeIn("slow", function() {
+                        repositoryListItemObj.style.display = 'block';
+                    });
+                }
+
+            },
+            error: function(xhr) {
+                //alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            }
+        });
+        setTimeout('loadNow()', 5000);
+    }
+
+    $(function() {
+        loadNow();
+    });
 
 </script>
 
@@ -56,10 +56,10 @@
 
         <div class="mainnav">
             <ul>
-				
-				<li id="repositoryListItem" style="display:none;"><a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>Repository</a></li>
-				
-                <li><a href=" <?php echo site_url('invoke/'); ?>"><span class="icon16  icomoon-icon-equalizer-2"></span>Clone Detection</a></li>
+
+                <li id="repositoryListItem" style="display:none;"><a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>Manage Repository</a></li>
+
+                <li><a href=" <?php echo site_url('invoke/'); ?>"><span class="icon16  icomoon-icon-equalizer-2"></span>Detect Clones</a></li>
 
                 <?php if ($this->tank_auth->get_role_id() == 1) { ?>
                     <li><a href="<?php echo site_url('updatetokens/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Update Tokens</a></li>
@@ -114,7 +114,7 @@
                                 <a href="<?php echo site_url('home/MethodByFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>Methods By File
                                 </a>
-                                 <a href="<?php echo site_url('FCS/filecloneclass') . "/" . $invocationId; ?>">
+                                <a href="<?php echo site_url('FCS/filecloneclass') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCC
                                 </a> 
                                 <a href="<?php echo site_url('home/filecloneclassbydir') . "/" . $invocationId; ?>">
