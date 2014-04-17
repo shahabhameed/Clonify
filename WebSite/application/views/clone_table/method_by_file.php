@@ -103,17 +103,14 @@
                             <h4 class="modal-title" id="myModalLabel">Search * From MCC Clone Instance List Where</h4>
                         </div>
                         <div class="modal-body">
-                          
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <u><h4>MID</h4></u>
                                 </div>
+                                <div class="col-md-4" id="methodidfilter"></div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-8" id="methodidfilter">
-                                </div>
-                            </div>
-                         
+                            <br class="clear_all"/>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -196,7 +193,7 @@
                             </div>
 
                             <div class="panel-body noPad clearfix">
-                                <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableMethodByFileSecondary display table table-bordered col-lg-12" width="100%">
+                                <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableMethodByFileSecondary dataTable display table table-bordered col-lg-12" width="100%">
                                     <thead>
                                         <tr>                        
                                             <th class="col-lg-1">No.</th>
@@ -213,7 +210,7 @@
                                         foreach ($data as $d) {
                                             $counter++;
                                             ?>
-                                            <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline']; ?>" data-endcol="<?php echo 1; //$d['endcol'];    ?>" data-startcol="<?php echo 1; //$d['startcol'];    ?>" data-startline="<?php echo $d['startline']; ?>" data-fid="<?php echo $fid; ?>" data-path="<?php echo $d['filepath'] ?>">
+                                            <tr class="code_view" data-name="<?php echo $d['filename']; ?>" data-endline="<?php echo $d['endline']; ?>" data-endcol="<?php echo 1; //$d['endcol'];     ?>" data-startcol="<?php echo 1; //$d['startcol'];     ?>" data-startline="<?php echo $d['startline']; ?>" data-fid="<?php echo $fid; ?>" data-path="<?php echo $d['filepath'] ?>">
                                                 <td style="text-align:center"><?php echo $counter; ?></td>
                                                 <td><?php echo $d['mid']; ?></td>
                                                 <td style="text-align:left"><?php echo $d['mname']; ?></td>
