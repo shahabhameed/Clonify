@@ -117,7 +117,7 @@ function selectCurrentFileTreeMap(tmData, fidArr, tmCount)
             treeMapSpans = treeMapDivs[i].getElementsByTagName("span");
             if(fidArr.indexOf(treeMapSpans[0].innerHTML) >= 0)
             {
-                treeMapDivs[i].className = 'jqx-treemap-rectangle-hover';
+                treeMapDivs[i].className  = 'jqx-treemap-rectangle-hover';
             }
             else
             {

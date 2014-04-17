@@ -131,7 +131,7 @@
                     </li>
                 <?php } ?>
 
-                <li><a href="<?php echo site_url('general/tree_map/'); ?>"><span class="icon16 icomoon-icon-exit"></span>About Us</a></li>
+                <li><a href="<?php echo site_url('general/about_us'); ?>"><span class="icon16 icomoon-icon-exit"></span>About Us</a></li>
             </ul>
         </div>
     </div><!-- End sidenav --> 
