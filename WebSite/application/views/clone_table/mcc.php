@@ -67,7 +67,7 @@ width: 50% !important;
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4" id="sccrangefilter">
+                            <div class="col-md-10" id="sccrangefilter">
                             </div>
                         </div>
                 <br>
