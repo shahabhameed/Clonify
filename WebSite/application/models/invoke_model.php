@@ -145,7 +145,7 @@ class Invoke_model extends CI_Model
 		
 		$mcc_min_sim_tok = $this->session->userdata('mcc_min_sim_tok');
 		$mcc_min_sim_per = $this->session->userdata('mcc_min_sim_per');
-
+        
 		$iname = $this->session->userdata('iname');
 		$grouping_choice = $this->session->userdata('grouping_choice');
 		$method_analysis = $this->session->userdata('method_analysis');
@@ -153,6 +153,8 @@ class Invoke_model extends CI_Model
 //		$files = $this->session->userdata('files');
 		$supTokens = $this->session->userdata('supTokens');
 		$eqTokens = $this->session->userdata('eqTokens');
+        $supTokensCom = $this->session->userdata('supTokensCom');
+		$eqTokensCom = $this->session->userdata('eqTokensCom');
 		$language = $this->session->userdata('language');
 		$icomment = $this->session->userdata('icomment');
 		$langName = $language;
@@ -166,7 +168,7 @@ class Invoke_model extends CI_Model
 		}
 		
 		if(empty($icomment)){
-			$icomment = 'Min Sim Tokens: '.$scc_min_sim.'. Language: '.$langName.'.\nSuppressed Tokens:'.$supTokens.'.\nEqual Tokens:'.$eqTokens.'.';
+			$icomment = 'Min Sim Tokens: '.$scc_min_sim.'. Language: '.$langName.'.\nSuppressed Tokens:'.$supTokensCom.'.\nEqual Tokens:'.$eqTokensCom.'.';
 		}
 		if(empty($iname)){
 			$iname = $user_name.'_'.$user_id.'_'.$date;
@@ -382,12 +384,21 @@ class Invoke_model extends CI_Model
 	function myinit()
     {
 		//Initial Params
-                $iName = $_POST['iName'];
+        $iName = $_POST['iName'];
 		$iComment = $_POST['iComment'];
 		$scc_min_sim = $_POST['min_scc_token'];
 		$mcc_min_sim_tok = $_POST['min_mcc_token'];
 		$mcc_min_sim_per = $_POST['min_mcc_percent'];
 		$language = $_POST['language'];
+        
+        
+        $all_tokens_fromDB = $this->get_all_language_tokens();
+        $all_tokens = array();
+        foreach($all_tokens_fromDB as $tokenCom)
+        {
+            $all_tokens[$tokenCom->token_id] = $tokenCom->token_name;
+        }
+        //$all_tokens = $this->session->userdata('allTokens');
                 
 		if(isset($_POST['methodAnalysis'])){
 	        $method_analysis = TRUE;
@@ -399,6 +410,7 @@ class Invoke_model extends CI_Model
 		
 		//Suppressed Tokens
 		$supTokens = '';
+        $supTokensCom = '';
 		if (!empty($_POST["suppresed2"]))
 		{
 			$suppresed = $_POST['suppresed2'];
@@ -406,11 +418,19 @@ class Invoke_model extends CI_Model
 			$first = true;
 			foreach ($_POST['suppresed2'] as $selSup) {
 				if($first){
-					$supTokens=$selSup;
+					$supTokens = $selSup;
+                    if(isset($all_tokens[$selSup]))
+                    {
+                        $supTokensCom = $all_tokens[$selSup];
+                    }
 					$first = false;
 				}
 				else{
 					$supTokens=$supTokens.','.$selSup;
+                    if(isset($all_tokens[$selSup]))
+                    {
+                        $supTokensCom = $supTokensCom.','.$all_tokens[$selSup];
+                    }
 				}
 			}
 		}
@@ -418,6 +438,7 @@ class Invoke_model extends CI_Model
 		//Equal Tokens
 
 		$eqTokens = '';
+        $eqTokensCom = '';
 		if (!empty($_POST["hiddenRule"]))
 		{
 			//$eqTokens = $eqTokens.'-'.'if hidden rule';
@@ -436,15 +457,24 @@ class Invoke_model extends CI_Model
 					}
 					else{
 						$eqTokens = $eqTokens.'|';
+                        $eqTokensCom = $eqTokensCom.',';
 					}
 					foreach ($_POST[$selEq] as $selEq2)
 					{
 						if($firstIn){
 							$eqTokens = $eqTokens.$selEq2;
-							$firstIn = false;
+                            $firstIn = false;
+                            if(isset($all_tokens[$selEq2]))
+                            {
+                                $eqTokensCom = $eqTokensCom.$all_tokens[$selEq2];
+                            }
 						}
 						else{
 							$eqTokens = $eqTokens.'='.$selEq2;
+                            if(isset($all_tokens[$selEq2]))
+                            {
+                                $eqTokensCom = $eqTokensCom.'='.$all_tokens[$selEq2];
+                            }
 						}
 					}				
 				}
@@ -458,6 +488,8 @@ class Invoke_model extends CI_Model
 		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment,'mcc_min_sim_tok'=>$mcc_min_sim_tok,'mcc_min_sim_per'=>$mcc_min_sim_per));
 		$this->session->set_userdata(array('supTokens'=>$supTokens));
 		$this->session->set_userdata(array('eqTokens'=>$eqTokens));
+        $this->session->set_userdata(array('supTokensCom'=>$supTokensCom));
+		$this->session->set_userdata(array('eqTokensCom'=>$eqTokensCom));
 
 		$this->invoke();
 	}
