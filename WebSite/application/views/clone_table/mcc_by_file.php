@@ -41,23 +41,43 @@ width: 50% !important;
               </div>
               <div class="modal-body">
                 
-               <div class="row">
+               				 <div class="row">
                   <div class="col-md-4">
-                    <h4>Length</h4>
+                    <u><h4>FID</h4></u>
                   </div>
                </div>
                <div class="row">
-                    <div class="col-md-10" id="sccrangefilter">
+                    <div class="col-md-4" id="fidnumberfilter">
                     </div>
                 </div>
                 <br>
-                <div class="row">
+				 <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>DID</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-4" id="didnumberfilter">
+                    </div>
+                </div>
+				<br>
+				 <div class="row">
+                  <div class="col-md-4">
+                    <u><h4>GID</h4></u>
+                  </div>
+               </div>
+               <div class="row">
+                    <div class="col-md-4" id="gidnumberfilter">
+                    </div>
+                </div>
+                <br>
+				 <div class="row">
                   <div class="col-md-4">
                     <u><h4>No.Colones</h4></u>
                   </div>
                </div>
                <div class="row">
-                    <div class="col-md-4" id="sccnumberfilter">
+                    <div class="col-md-10" id="sccrangefilter">
                     </div>
                 </div>
                 <br>

@@ -160,7 +160,7 @@
                         <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
                     </div>
                     <div class="panel-body noPad clearfix">
-                        <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableScs  display table table-bordered" width="100%">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" class="responsive dynamicTableScs  display table table-bordered" width="100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -182,7 +182,7 @@
                                         <tr class="list_view" data-scsid="<?php echo $data['scs_crossfile_id']; ?>">
                                             <td><?php echo $counter; ?></td>
                                             <td><?php echo $data['scs_crossfile_id']; ?></td>
-                                            <td style="text-align:left; word-wrap:break-word;"><?php echo $data['scc_id_csv']; ?></td>
+                                            <td style="text-align:left;width:12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><?php echo $data['scc_id_csv']; ?></td>
                                             <td><?php echo isset($data['tc']) ? $data['tc'] : '-'; ?></td>
                                             <td><?php echo isset($data['pc']) ? $data['pc'] : '-'; ?></td>
                                             <td><?php echo $data['members']; ?></td>
