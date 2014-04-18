@@ -73,7 +73,7 @@ class Home extends CI_Controller {
             }
             $all_lines = array();
             $counter = 0;
-            $lines = array();
+            $lines = array();            
             foreach ($scc_ids as $scc_id) {
                 $scc_instances = $this->scc->getSCCInstancesBySCCId($invocation_id, $scc_id);
                 if ($scc_instances) {
@@ -90,7 +90,7 @@ class Home extends CI_Controller {
             }
             asort($lines);
             asort($all_lines);
-
+            
             $val = array_count_values($all_lines);
             foreach ($val as $in => $v) {
                 if ($v == 1) {
@@ -111,14 +111,19 @@ class Home extends CI_Controller {
                 $obj->HighlightLines($in, $line_color);
             }
             $pre = -3;
-
-            foreach ($val as $in => $v) {
-                if ($in > $pre + 2) {
-                    $miniMapLinks[] = $in;
-                    $miniMapLinkLable[$in] = array('text' => '  ', 'rows' => 50);
+            foreach ($val as $in => $v){
+              if ($in > $pre + 2) {                
+                $miniMapLinks[] = $in;                                        
+                $miniMapLinkLable[$in] = array('text' => '  ', 'rows' => 20);
+                if (count($miniMapLinks) > 1){
+                  $miniMapLinkLable[$miniMapLinks[count($miniMapLinks) - 2]]['rows'] = $counter;                  
                 }
-                $pre = $in;
+                $counter = 0;
+              }
+              $pre = $in;
+              $counter++;
             }
+            $miniMapLinkLable[$miniMapLinks[count($miniMapLinks) - 1 ]]['rows'] = $counter;
         } else if ($mid && !$start_line && !$start_line) {
             $temp = explode(",", $mid);
             foreach ($temp as $t) {
@@ -164,14 +169,19 @@ class Home extends CI_Controller {
                 $obj->HighlightLines($in, $line_color);
             }
             $pre = -3;
-
-            foreach ($val as $in => $v) {
-                if ($in > $pre + 2) {
-                    $miniMapLinks[] = $in;
-                    $miniMapLinkLable[$in] = array('text' => '  ', 'rows' => 50);
+            foreach ($val as $in => $v){
+              if ($in > $pre + 2) {                
+                $miniMapLinks[] = $in;                                        
+                $miniMapLinkLable[$in] = array('text' => '  ', 'rows' => 20);
+                if (count($miniMapLinks) > 1){
+                  $miniMapLinkLable[$miniMapLinks[count($miniMapLinks) - 2]]['rows'] = $counter;                  
                 }
-                $pre = $in;
+                $counter = 0;
+              }
+              $pre = $in;
+              $counter++;
             }
+            $miniMapLinkLable[$miniMapLinks[count($miniMapLinks) - 1 ]]['rows'] = $counter;
         } else {
             for ($i = $start_line; $i <= $end_line; $i++) {
                 $lines[] = $i;

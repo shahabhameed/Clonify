@@ -43,8 +43,7 @@ $(window).resize(function(){
 		$('.sidenav.hided').removeClass('hided').attr("style","");
 	}
 
-	var size ="Window size is:" + $(window).width();
-	//console.log(size);
+	var size ="Window size is:" + $(window).width();	
 });
 
 $(window).load(function(){
@@ -801,11 +800,7 @@ Clonify.SCC = {
   calculateCloneDifferences : function(){
       
         var _url = base_url + "home/cloneDifference";
-        $.post(_url, code_compare_global_attributes, function(r) {
-            
-
-        	console.log(code_compare_global_attributes.file_2_window_id);
-        	console.log(code_compare_global_attributes.file_1_window_id);
+        $.post(_url, code_compare_global_attributes, function(r) {            
 
             var selector2 = "";
             for (var i = code_compare_global_attributes.file_2_start_line; i <= code_compare_global_attributes.file_2_end_line; i++){
@@ -1247,8 +1242,7 @@ Clonify.MCC = {
       invocation_id: invocation_id,
 	  mid: _mid,
       window_id: window_id
-    };
-    console.log(_params);
+    };    
     
     $.post(_url, _params, function(r) {
       $(".code-window-containter").show();
@@ -1314,11 +1308,7 @@ Clonify.MCC = {
   calculateCloneDifferences : function(){
       
         var _url = base_url + "home/cloneDifference";
-        $.post(_url, code_compare_global_attributes, function(r) {
-            
-
-        	console.log(code_compare_global_attributes.file_2_window_id);
-        	console.log(code_compare_global_attributes.file_1_window_id);
+        $.post(_url, code_compare_global_attributes, function(r) {                    
 
             var selector2 = "";
             for (var i = code_compare_global_attributes.file_2_start_line; i <= code_compare_global_attributes.file_2_end_line; i++){
