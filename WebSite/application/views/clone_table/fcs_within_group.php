@@ -312,19 +312,19 @@
 
 
         <script>
-            function generateTreeMap()
-            {
-                var data = new Array();
-                data = <?php
-                        if ($treemapdata) {
-                            echo $treemapdata;
-                        }
-                        ?>;
-                return data;
-            }
+            // function generateTreeMap()
+            // {
+            //     var data = new Array();
+            //     data = <?php
+            //             if ($treemapdata) {
+            //                 echo $treemapdata;
+            //             }
+            //             ?>;
+            //     return data;
+            // }
             var zNodes = <?php echo $treedata ?>;
             $(document).ready(function() {
-                tmData = renderTreeMap();
+                // tmData = renderTreeMap();
                 $(".list_view").on("click", function() {
                     $("tr").removeClass('selected-row');
                     $(this).addClass('selected-row');
