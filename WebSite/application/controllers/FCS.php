@@ -322,8 +322,8 @@ class FCS extends CI_Controller {
         }
         
         $gids = array_unique($gids);
-        $treeMapData=$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
-        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData,true);
+        // $treeMapData=$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
+        // $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData,true);
         $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
