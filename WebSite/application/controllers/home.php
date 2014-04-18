@@ -47,6 +47,14 @@ class Home extends CI_Controller {
         $end_line = $this->input->post('end_line');
         $fid = $this->input->post('fid');
         $mid = $this->input->post('mid');
+        $window_id = $this->input->post('window_id');
+        $col_code_id = $window_id % 2;        
+        if ($col_code_id == 0){
+          $color_code = "#00FF00";
+        }else{
+          $color_code = "#FFFF00";
+        }
+        
         $lines = array();
         $miniMapLinks = array();
         $miniMapLinkLable = array();
@@ -99,7 +107,7 @@ class Home extends CI_Controller {
                     $opt = 1.0;
                 }
 
-                $line_color = "background-color:#C8CEC3;opacity:$opt;";
+                $line_color = "background-color:$color_code;opacity:$opt;";
                 $obj->HighlightLines($in, $line_color);
             }
             $pre = -3;
@@ -142,11 +150,11 @@ class Home extends CI_Controller {
             }
             $miniMapLinks[] = $start_line;
             $miniMapLinkLable[$start_line] = array('text' => '  ', 'rows' => $end_line - $start_line);
-            $obj->HighlightLines($lines, null);
+            $line_color = "background-color:$color_code";
+            $obj->HighlightLines($lines, $line_color);
         }
 
-        $obj->AddMiniMapLinkLabel($miniMapLinkLable);
-        $window_id = $this->input->post('window_id');
+        $obj->AddMiniMapLinkLabel($miniMapLinkLable);        
         $obj->SetId("window" . $window_id);
         $first_row = $miniMapLinks[0];
 

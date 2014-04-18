@@ -277,15 +277,15 @@
 
 </div><!-- End #wrapper -->
 
-<script>
+<script>  
     $(document).ready(function() {
-        $(".list_view").on("click", function() {
-            Clonify.SCC.viewSCCCloneInstance($(this).data("sccid"));
+        $(".list_view").on("click", function() {            
+            Clonify.SCC.viewSCCCloneInstance($(this).data("sccid"), this);
             event.preventDefault();
             return false;
         });
-        $(".code_view").on("click", function() {
-            Clonify.SCC.viewCodeData($(this).data("sccid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+        $(".code_view").on("click", function() {            
+            Clonify.SCC.viewCodeData($(this).data("sccid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), this);
             event.preventDefault();
             return false;
         });

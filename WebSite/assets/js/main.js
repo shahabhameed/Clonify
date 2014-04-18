@@ -522,11 +522,20 @@ Clonify.FCC = {
 
 }
 
+function heightlightParentRow(_me){
+  if (_me != null && _me != undefined){
+      $("tr").removeClass('selected-row');
+      $("tr").removeClass('selected-row0');
+      $("tr").removeClass('selected-row1');
+      $(_me).addClass('selected-row');
+  }
+}
 
 
 Clonify.SCC = {
     
-  viewSCCCloneInstance: function(_scc_id){
+  viewSCCCloneInstance: function(_scc_id, _me){  
+    heightlightParentRow(_me);
     $(".scc_instance_list").hide();
     $("#scc_instance_list_"+_scc_id).show();
     $(".code-window-containter").hide();
@@ -566,7 +575,9 @@ Clonify.SCC = {
 		$('.dataTables_filter>label>input').addClass('form-control');
                 $('.dataTables_filter').hide();
   },
-  viewFccGroupInst: function(_scc_id){
+  viewFccGroupInst: function(_scc_id, _me){
+    heightlightParentRow(_me);
+    
     $(".scc_instance_list").hide();
     $("#scc_instance_list_"+_scc_id).show();
     $(".code-window-containter").hide();
@@ -605,7 +616,8 @@ Clonify.SCC = {
 		$('.dataTables_filter>label>input').addClass('form-control');
                 $('.dataTables_filter').hide();
   },
-  viewSCSAcrossCloneInstance: function(_scs_id){
+  viewSCSAcrossCloneInstance: function(_scs_id, _me){
+    heightlightParentRow(_me);
   	$(".scs_instance_list").hide();
     $("#scs_instance_list_"+_scs_id).show();
     $(".code-window-containter").hide();
@@ -646,7 +658,9 @@ Clonify.SCC = {
         $('.dataTables_filter').hide();
 
   },
-  viewSCSCloneInstance: function(_scs_id){
+  viewSCSCloneInstance: function(_scs_id, _me){
+    heightlightParentRow(_me);
+    
     $(".scs_instance_list").hide();
     $("#scs_instance_list_"+_scs_id).show();
     $(".code-window-containter").hide();
@@ -686,9 +700,26 @@ Clonify.SCC = {
 		$('.dataTables_filter>label>input').addClass('form-control');
         $('.dataTables_filter').hide();
   },
-  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name){
+  
+  viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name, _me){
     var _url = base_url + "home/loadCode";
     window_id = window_id + 1;
+    var col = window_id % 2;
+    var css_class = "selected-row" + col;
+    
+    if (_me != null && _me != undefined){      
+      
+      if ($(_me).hasClass("selected-row0") || $(_me).hasClass("selected-row1")){
+        window_id = window_id - 1;
+        return;
+      }else{
+        if ($("."+css_class).length > 0){
+          $("." + css_class).removeClass(css_class);
+        }
+        $(_me).addClass(css_class);
+      }      
+    }        
+    
     $("#code_window1").css("overflow", "");
     $("#code_window2").css("overflow", "");
     var invocation_id = $("#sidebar_invocation_id").val();
@@ -729,10 +760,22 @@ Clonify.SCC = {
           
         $("#code_window1").removeClass('col-md-11');
         $("#code_window1").addClass('col-md-5');
-        $(".code-window2").show();
+        $(".code-window2").show();        
+        
+        var load_1st_bar_map = false;
+        if ($("#code_window2").html() != ""){
+          $("#file1").html( $("#file2").html() );
+          $("#code_window1").html( $("#code_window2").html() );
+          $("#code_map2").html("");
+          $("#code_map1").html("");
+          load_1st_bar_map = true;
+        }
         $("#file2").html('File Name : '+file_name);
-        $("#code_window2").html(r);        
+        $("#code_window2").html(r);
         new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map2') );
+        if (load_1st_bar_map){
+          new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window'+(window_id - 1)+'-minimap-index').make().prependTo('#code_map1') );
+        }
         Clonify.SCC.calculateCloneDifferences();        
         if (start_line == null || start_line == ""){
           start_line = $("#startline-"+window_id).val();
@@ -1166,8 +1209,8 @@ Clonify.MCC = {
 		$('.dataTables_filter>label>input').addClass('form-control');
         $('.dataTables_filter').hide();
   },
-  viewCodeData: function(_mcc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name, _mid){
-	console.log(_mid);
+  
+  viewCodeData: function(_mcc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name, _mid){	
     var _url = base_url + "home/loadCode";
     window_id = window_id + 1;
     $("#code_window1").css("overflow", "");
