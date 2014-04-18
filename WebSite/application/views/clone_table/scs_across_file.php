@@ -69,11 +69,7 @@
                             <div class="col-md-4" id="sccnumberfilter">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <small>For multiple values use "[ ]", e.g for number 1 and 2 write [1,2]</small>
-                            </div>
-                        </div>
+                      
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -160,7 +156,7 @@
                         <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
                     </div>
                     <div class="panel-body noPad clearfix">
-                        <table cellpadding="0" cellspacing="0" border="0" style="width:12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" class="responsive dynamicTableScs  display table table-bordered" width="100%">
+                        <table cellpadding="0" cellspacing="0" border="0" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" class="responsive dynamicTableScs  display table table-bordered" width="100%">
                             <thead>
                                 <tr>
                                     <th>No</th>

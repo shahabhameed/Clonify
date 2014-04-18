@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4" id="noofclones">
+                                        <div class="col-md-4" id="clonesfilter">
                                         </div>
                                     </div>
                                     <br>
@@ -332,6 +332,5 @@
                     event.preventDefault();
                     return false;
                 });
-
             });
         </script>

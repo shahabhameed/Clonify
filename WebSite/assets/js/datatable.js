@@ -36,14 +36,10 @@ $(document).ready(function() {
                 "oPaginate": {"sFirst": "First", "sLast": "Last"}
             }
 
-        }).columnFilter({
-            aoColumns: [
-                null,
-                null,
-                {sSelector: "#sccrangefilter", type: "number-range"},
-                {sSelector: "#sccnumberfilter", type: "number"}
-            ]
-        });
+        }).yadcf([
+            {column_number : 2,filter_container_id : "sccrangefilter", filter_type: "range_number_slider"},
+            {column_number : 3,filter_container_id : "sccnumberfilter"},
+        ]);
 
         $('.dataTables_length select').uniform();
         $('.dataTables_paginate > ul').addClass('pagination');
@@ -71,7 +67,7 @@ $(document).ready(function() {
                 null,
                 {sSelector: "#atcnumberfilter", type: "number"},
                 {sSelector: "#apcnumberfilter", type: "number"},
-                {sSelector: "#sccrangefilter", type: "number-range"}
+                {sSelector: "#sccnumberfilter", type: "number-range"}
             ]
         });
         $('.dataTables_length select').uniform();
@@ -93,15 +89,10 @@ $(document).ready(function() {
                 "sLengthMenu": "<span>_MENU_</span>",
                 "oPaginate": {"sFirst": "First", "sLast": "Last"}
             }
-        }).columnFilter({
-            aoColumns: [
-                null,
-                {sSelector: "#mcsidnumberfilter", type: "number"},
-                null,
-                {sSelector: "#sccnumberfilter", type: "number-range"}
-
-            ]
-        });
+        }).yadcf([
+            {column_number : 1,filter_container_id : "mcsidnumberfilter"},
+            {column_number : 3,filter_container_id : "sccnumberfilter"},
+        ]);
         $('.dataTables_length select').uniform();
         $('.dataTables_paginate > ul').addClass('pagination');
         $('.dataTables_filter>label>input').addClass('form-control');
@@ -122,15 +113,11 @@ $(document).ready(function() {
                 "oPaginate": {"sFirst": "First", "sLast": "Last"}
             }
 
-        }).columnFilter({
-            aoColumns: [
-                null,
-                {sSelector: "#fcsidfilter", type: "number"},
-                null,
-                null,
-                {sSelector: "#noofclones", type: "number"}
-            ]
-        });
+        }).yadcf([
+            {column_number : 1,filter_container_id : "fcsidfilter"},
+            {column_number : 4,filter_container_id : "clonesfilter"},
+        ]);
+
 
         $('.dataTables_length select').uniform();
         $('.dataTables_paginate > ul').addClass('pagination');
@@ -152,17 +139,13 @@ $(document).ready(function() {
                 "oPaginate": {"sFirst": "First", "sLast": "Last"}
             }
 
-        }).columnFilter({
-            aoColumns: [
-                null,
-                {sSelector: "#fidnumberfilter", type: "number"},
-                {sSelector: "#didnumberfilter", type: "number"},
-                {sSelector: "#gidnumberfilter", type: "number"},
-                null,
-                {sSelector: "#mccrangefilter", type: "number-range"}
-            ]
-        });
-
+        }).yadcf([
+            {column_number : 1,filter_container_id : "fidnumberfilter"},
+            {column_number : 2,filter_container_id : "didnumberfilter"},
+            {column_number : 3,filter_container_id : "gidnumberfilter"},
+            {column_number : 5,filter_container_id : "mccrangefilter", filter_type: "range_number_slider"},
+        ]);
+       
         $('.dataTables_length select').uniform();
         $('.dataTables_paginate > ul').addClass('pagination');
         $('.dataTables_filter>label>input').addClass('form-control');
@@ -183,17 +166,11 @@ $(document).ready(function() {
                 "oPaginate": {"sFirst": "First", "sLast": "Last"}
             }
 
-        }).columnFilter({
-            aoColumns: [
-                null,
-                {sSelector: "#gidnumberfilter", type: "number"},
-                {sSelector: "#didnumberfilter", type: "number"},
-                {sSelector: "#fidnumberfilter", type: "number"},
-                null,
-                null
-            ]
-        });
-
+        }).yadcf([
+            {column_number : 1,filter_container_id : "gidnumberfilter"},
+            {column_number : 2,filter_container_id : "didnumberfilter"},
+            {column_number : 3,filter_container_id : "fidnumberfilter"},
+        ]);
         $('.dataTables_length select').uniform();
         $('.dataTables_paginate > ul').addClass('pagination');
         $('.dataTables_filter>label>input').addClass('form-control');
@@ -214,15 +191,9 @@ $(document).ready(function() {
                 "oPaginate": {"sFirst": "First", "sLast": "Last"}
             }
 
-        }).columnFilter({
-            aoColumns: [
-                null,
-                {sSelector: "#methodidfilter", type: "number"},
-                null,
-                null,
-                null
-            ]
-        });
+        }).yadcf([
+            {column_number : 1,filter_container_id : "methodidfilter"},
+        ]);
 
         $('.dataTables_length select').uniform();
         $('.dataTables_paginate > ul').addClass('pagination');
@@ -244,18 +215,9 @@ $(document).ready(function() {
                 "oPaginate": {"sFirst": "First", "sLast": "Last"}
             }
 
-        }).columnFilter({
-            aoColumns: [
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                {sSelector: "#sccnumberfilter", type: "number"}
-            ]
-        });
+        }).yadcf([
+            {column_number : 7,filter_container_id : "sccnumberfilter"},
+        ]);
 
         $('.dataTables_length select').uniform();
         $('.dataTables_paginate > ul').addClass('pagination');
@@ -278,15 +240,10 @@ $(document).ready(function() {
                 "oPaginate": {"sFirst": "First", "sLast": "Last"}
             }
 
-        }).columnFilter({
-            aoColumns: [
-                null,
-                {sSelector: "#fccidfilter", type: "number"},
-                null,
-                null,
-                {sSelector: "#fccnoofinstance", type: "number"}
-            ]
-        });
+        }).yadcf([
+            {column_number : 1,filter_container_id : "fccidfilter"},
+            {column_number : 4,filter_container_id : "fccnoofinstance"},
+        ]);
 
         $('.dataTables_length select').uniform();
         $('.dataTables_paginate > ul').addClass('pagination');
