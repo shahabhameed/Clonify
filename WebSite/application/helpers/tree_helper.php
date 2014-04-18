@@ -15,7 +15,7 @@ if (!function_exists('create_tree')) {
 
     function create_tree($invocation_id) {
         $CI = & get_instance();
-        $result = $CI->db->query('select cmfile_id,cmdirectory_id,group_id,rf.file_name,rd.id,rd.directory_name,ur.repository_name
+        $result = $CI->db->query('select cmfile_id,cmdirectory_id,group_id,rf.file_name,rd.id,rd.directory_name,rd.parent_id,ur.repository_name
                                     from invocation_files inf
                                     join repository_file rf on inf.file_id = rf.id
                                     join repository_directory rd on rf.directory_id = rd.id
@@ -27,13 +27,9 @@ if (!function_exists('create_tree')) {
         $group_ids = array();
         $parent_ids = array();
         $parent_id = -1;
+         // print_r($result);exit;
         foreach ($result as $res) {
-           
-            // print_r($res);
-            // echo $group_id;
-            
             if($group_id == -1 || !in_array($res['group_id'], $group_ids)){
-                // echo "g";
                 $group_id = $res['group_id'];
                 $group_ids[] = $group_id;
                 $tree[] = array(
@@ -44,18 +40,29 @@ if (!function_exists('create_tree')) {
                                 'isParent'=>true
                             );
             }
-            if($parent_id == -1 || !in_array($res['id'], $parent_ids)){
-                // echo "p";
-                $parent_id = $res['id'];
-                $parent_ids[] = $parent_id;
-                $tree[] = array(
-                                'id'=>"p_".intval($parent_id),
-                                'pId'=>"g_".intval($group_id),
-                                'name'=>$res['directory_name'],
-                                'open'=>false,
-                                'isParent'=>true
+            if(($res['parent_id'] == -1) && (!in_array($res['id'], $parent_ids))){
+                    $parent_id = $res['id'];
+                    $parent_ids[] = $parent_id;
+                    $tree[] = array(
+                                    'id'=>"p_".intval($parent_id),
+                                    'pId'=>"g_".intval($group_id),
+                                    'name'=>$res['directory_name'],
+                                    'open'=>false,
+                                    'isParent'=>true
+                            );
+            }elseif($res['parent_id'] != -1 && !in_array($res['id'], $parent_ids)){
+                    $oldparent = $parent_id;
+                     $parent_id = $res['id'];
+                    $parent_ids[] = $parent_id;
+                    $tree[] = array(
+                                    'id'=>"p_".intval($parent_id),
+                                    'pId'=>"p_".intval($res['parent_id']),
+                                    'name'=>$res['directory_name'],
+                                    'open'=>false,
+                                    'isParent'=>true
                             );
             }
+
             $tree[] = array(
                                 'id'=>"f_".intval($res['cmfile_id']),
                                 'pId'=>"p_".intval($parent_id),
@@ -63,13 +70,9 @@ if (!function_exists('create_tree')) {
                                 'path' => $res['repository_name'].$res['directory_name'].$res['file_name']
                                 
                             );
-            // print_r($res);
+            
         }
-        // echo (json_encode($tree));exit;
+         // print_r($tree);exit;
         return json_encode($tree);
-        
     }
 }
-
-/* End of file url_helper.php */
-/* Location: ./application/helpers/url_helper.php */
