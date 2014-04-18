@@ -323,12 +323,12 @@ $(document).ready(function(){
       $('.dataTables_filter>label>input').addClass('form-control');
       $('.dataTables_filter').hide();
     $(".list_view").live("click",function(){
-      Clonify.SCC.viewSCSCloneInstance($(this).data("scsid"));
+      Clonify.SCC.viewSCSCloneInstance($(this).data("scsid"), this);
       event.preventDefault();      
       return false;
     });
      $(".code_view").live("click",function(){
-        Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+        Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), this);
         event.preventDefault();        
         return false;
     });

@@ -308,12 +308,12 @@ $(document).ready(function(){
       $('.dataTables_filter').hide();
                   
     $(".list_view").live("click",function(){        
-        Clonify.SCC.viewSCCCloneInstance($(this).data("sccfileid"));
+        Clonify.SCC.viewSCCCloneInstance($(this).data("sccfileid"), this);
         event.preventDefault();            
         return false;
     });
      $(".code_view").live("click",function(){
-        Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+        Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), this);
         event.preventDefault();            
         return false;
     });

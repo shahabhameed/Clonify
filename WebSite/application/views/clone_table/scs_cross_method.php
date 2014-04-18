@@ -16,7 +16,7 @@
     <div id="content" class="clearfix">
         <div class="contentwrapper">
             <div class="heading">
-                <h3>Simple Clone Class</h3> 
+                <h3>Simple Clone Structure Across Method</h3> 
                 <ul class="breadcrumb">
                     <li>You are here:</li>
                     <li>
@@ -27,7 +27,7 @@
                             <span class="icon16 fa fa-caret-right"></span>
                         </span>
                     </li>
-                    <li class="active">Simple Clone Class</li>
+                    <li class="active">Simple Clone Structure Across Method</li>
                 </ul>                   
             </div>
 
@@ -37,7 +37,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Select * From SCC Where</h4>
+                            <h4 class="modal-title" id="myModalLabel">Select * From SCS_Across_Method Where</h4>
                         </div>
                         <div class="modal-body">
 
@@ -61,7 +61,11 @@
                                 </div>
                             </div>
                             <br>
-                          
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <small>For multiple values use [], e.g for number 1 and 2 write [1,2]</small>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -76,7 +80,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Search * From SCC Clone Instance List Where</h4>
+                            <h4 class="modal-title" id="myModalLabel">Search * From SCS_Across_Method Instance List Where</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -127,26 +131,34 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>SCC ID</th>
-                                        <th>Length</th>                        
+                                        <th>SCS ID</th>
+                                        <th>Structure(SCC ID, ...)</th>
+                                        <th>ATC</th>
+                                        <th>APC</th>
                                         <th>No. of Instances</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $counter = 0;
-                                    if ($scc_data)
-                                        foreach ($scc_data as $data) {
+                                    if ($parent_table_data)
+                                        foreach ($parent_table_data as $data) {
                                             $counter++;
                                             ?>
-                                            <tr class="list_view" data-sccid="<?php echo $data['scc_id']; ?>">
+                                            <tr class="list_view" data-sccid="<?php echo $data['scs_crossmethod_id']; ?>">
                                                 <td><?php echo $counter; ?>
 
 
                                                 </td>
-                                                <td><?php echo $data['scc_id']; ?></td>                          
-                                                <td >
-                                                    <?php echo $data['length']; ?>
+                                                <td><?php echo $data['scs_crossmethod_id']; ?></td>                          
+                                                <td>
+                                                    <?php echo $data['scc_id']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $data['atc']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $data['apc']; ?>
                                                 </td>
                                                 <td><?php echo isset($data['members']) ? $data['members'] : '-'; ?></td>
 
@@ -155,9 +167,11 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>No</th>
-                                        <th>SCC ID</th>
-                                        <th>Length</th>                        
+                                       <th>No</th>
+                                        <th>SCS ID</th>
+                                        <th>Structure(SCC ID, ...)</th>
+                                        <th>ATC</th>
+                                        <th>APC</th>
                                         <th>No. of Instances</th>
                                     </tr>
                                 </tfoot>                     
@@ -168,15 +182,15 @@
                 </div>
             </div>
             <?php
-            if ($scc_clone_list_data)
-                $scc_clone_list_data = $scc_clone_list_data ? $scc_clone_list_data : array();
-            foreach ($scc_clone_list_data as $scc_id => $data) {
+            if ($secondary_table_rows)
+                $secondary_table_rows = $secondary_table_rows ? $secondary_table_rows : array();
+            foreach ($secondary_table_rows as $scs_crossmethod_id => $data){
                 ?>
-                <div class="row scc_instance_list" id="scc_instance_list_<?php echo $scc_id; ?>">
+                <div class="row scc_instance_list" id="scc_instance_list_<?php echo $scs_crossmethod_id; ?>">
                     <div class="col-md-12">
                         <div class="panel panel-default gradient">
                             <div class="panel-heading min">
-                                <h4><span> <i class="fa fa-list-alt fa-2"></i>SCC Clone Instance List - SCC ID - <?php echo $scc_id; ?></span></h4>
+                                <h4><span> <i class="fa fa-list-alt fa-2"></i>SCS Clone Instance List - SCS ID - <?php echo $scs_crossmethod_id; ?></span></h4>
                                 <span class="loader" style="top:15px;cursor:pointer;">
                                     <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                                 </span>
@@ -191,10 +205,11 @@
                                             <th>Group ID</th>
                                             <th>Directory ID</th>
                                             <th>File ID</th>
-                                            <th>Start Line</th>
-                                            <th>End Line</th>
+                                            <th>Method Id</th>
+                                            <th>TC</th>
+                                            <th>PC</th>
+                                            <th>Method Name</th>
                                             <th>File Name</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -205,14 +220,16 @@
                                             $counter++;
                                             ?>
 
-                                            <tr class="code_view" data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>" data-endline="<?php echo $d['endline']; ?>" data-endcol="<?php echo $d['endcol']; ?>" data-startcol="<?php echo $d['startcol']; ?>" data-startline="<?php echo $d['startline']; ?>" data-fid="<?php echo $d['fid']; ?>" data-sccid= "<?php echo $scc_id; ?>" data-clid= "<?php echo $d['scc_instance_id']; ?>" data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
+                                            <tr class="code_view" data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>" data-endline="" data-endcol="" data-startcol="" data-startline="" data-fid="" data-sccid= "" data-clid="<?php echo $scs_crossmethod_id+1; ?>" data-mid="<?php echo $d['mid']?>" data-path="<?php echo $d['repository_name'] . $d['directory_name'] . $d['file_name'] ?>">
                                                 <td><?php echo $counter; ?></td>
-                                                <td><?php echo isset($d['group_id']) ? $d['group_id'] : "-"; ?></td>
-                                                <td><?php echo isset($d['directory_id']) ? $d['directory_id'] : "-"; ?></td>
+                                                <td><?php echo $d['gid']; ?></td>
+                                                <td><?php echo $d['did']; ?></td>
                                                 <td><?php echo $d['fid']; ?></td>
-                                                <td><?php echo $d['startline']; ?></td>
-                                                <td><?php echo $d['endline']; ?></td>
-                                                <td style="text-align:left" ><?php echo $d['directory_name'] . $d['file_name']; ?></td>                            
+                                                <td><?php echo $d['mid']; ?></td>
+                                                <td><?php echo $d['tc']; ?></td>
+                                                <td><?php echo $d['pc']; ?></td>
+                                                <td><?php echo $d['mname']; ?></td>                                                
+                                                <td style="text-align:left" ><?php echo $d['directory_name'] . $d['file_name']; ?></td>
                                             </tr>
     <?php } ?>
                                     </tbody> 
@@ -222,8 +239,10 @@
                                             <th>Group ID</th>
                                             <th>Directory ID</th>
                                             <th>File ID</th>
-                                            <th>Start Line</th>
-                                            <th>End Line</th>
+                                            <th>Method Id</th>
+                                            <th>TC</th>
+                                            <th>PC</th>
+                                            <th>Method Name</th>
                                             <th>File Name</th>
                                         </tr>
                                     </tfoot>                       
@@ -273,18 +292,19 @@
 
 </div><!-- End #wrapper -->
 
-<script>  
-    $(document).ready(function() {
-        $(".list_view").on("click", function() {            
+<script>
+   $(document).ready(function() {
+         $(".list_view").on("click", function() {            
             Clonify.SCC.viewSCCCloneInstance($(this).data("sccid"), this);
             event.preventDefault();
             return false;
         });
-        $(".code_view").on("click", function() {            
-            Clonify.SCC.viewCodeData($(this).data("sccid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), this);
+        
+        $(".code_view").on("click", function(){            
+            Clonify.MCC.viewCodeData($(this).data("sccid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), $(this).data("mid"), this);
             event.preventDefault();
             return false;
         });
 
-    });
+    });    
 </script>
