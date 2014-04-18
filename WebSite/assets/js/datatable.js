@@ -47,6 +47,33 @@ $(document).ready(function() {
         $('.dataTables_filter').hide();
 
     }
+    if ($('table').hasClass('dynamicTableaccM')) {
+        $('.dynamicTableaccM').dataTable({
+            "sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
+            "sPaginationType": "bootstrap",
+            "bJQueryUI": false,
+            "bAutoWidth": false,
+            "iDisplayLength": 5,
+            "aLengthMenu": [5, 10, 25, 50],
+            "oLanguage": {
+                "sSearch": "<span></span> _INPUT_",
+                "sLengthMenu": "<span>_MENU_</span>",
+                "oPaginate": {"sFirst": "First", "sLast": "Last"}
+            }
+
+        }).yadcf([
+            {column_number : 5,filter_container_id : "sccnumberfilter"},
+            {column_number : 1,filter_container_id : "scsidfilter"},
+            {column_number : 3,filter_container_id : "atcfilter"},
+            {column_number : 4,filter_container_id : "apcfilter"},
+        ]);
+
+        $('.dataTables_length select').uniform();
+        $('.dataTables_paginate > ul').addClass('pagination');
+        $('.dataTables_filter>label>input').addClass('form-control');
+        $('.dataTables_filter').hide();
+
+    }
     if ($('table').hasClass('dynamicTableScs')) {
         $('.dynamicTableScs').dataTable({
             "sDom": "<'row'<'col-lg-6'><'col-lg-6'f>r>t<'row'<'col-lg-6'i l><'col-lg-6'p>>",
@@ -67,7 +94,7 @@ $(document).ready(function() {
                 null,
                 {sSelector: "#atcnumberfilter", type: "number"},
                 {sSelector: "#apcnumberfilter", type: "number"},
-                {sSelector: "#sccnumberfilter", type: "number-range"}
+               
             ]
         });
         $('.dataTables_length select').uniform();

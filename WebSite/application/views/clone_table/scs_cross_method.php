@@ -40,17 +40,36 @@
                             <h4 class="modal-title" id="myModalLabel">Select * From SCS_Across_Method Where</h4>
                         </div>
                         <div class="modal-body">
-
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h4>Length</h4>
+                                    <u><h4>SCS ID</h4></u>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-10" id="sccrangefilter">
+                                <div class="col-md-4" id="scsidfilter">
                                 </div>
                             </div>
                             <br>
+                             <div class="row">
+                                <div class="col-md-4">
+                                    <u><h4>ATC</h4></u>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4" id="atcfilter">
+                                </div>
+                            </div>
+                           <br>
+                           <div class="row">
+                                <div class="col-md-4">
+                                    <u><h4>APC</h4></u>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4" id="apcfilter">
+                                </div>
+                            </div>
+                           <br>
                             <div class="row">
                                 <div class="col-md-4">
                                     <u><h4>No. of Instances</h4></u>
@@ -61,11 +80,7 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <small>For multiple values use [], e.g for number 1 and 2 write [1,2]</small>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -127,7 +142,7 @@
 
                         </div>
                         <div class="panel-body noPad clearfix">
-                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable1 display table table-bordered" width="100%">
+                            <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableaccM display table table-bordered" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>

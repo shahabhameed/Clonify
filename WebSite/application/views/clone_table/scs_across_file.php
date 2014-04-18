@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <br>
-                        <div class="row">
+                       <!--  <div class="row">
                             <div class="col-md-4">
                                 <u><h4>No Of Instances</h4></u>
                             </div>
@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col-md-4" id="sccnumberfilter">
                             </div>
-                        </div>
+                        </div> -->
                       
                     </div>
                     <div class="modal-footer">
