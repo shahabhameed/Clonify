@@ -11,6 +11,7 @@
 <script>
 
     function loadNow() {
+      return false;
         $.ajax({
             url: "<?php echo base_url(); ?>index.php/invoke/isInvocationInProgressControllerFunc/",
             success: function(result) {

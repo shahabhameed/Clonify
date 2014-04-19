@@ -758,12 +758,6 @@ Clonify.SCC = {
         }
         window.location.hash='geshi-window'+window_id+'-'+start_line;
       }else{
-        code_compare_global_attributes.file_2_path = path;
-        code_compare_global_attributes.file_2_start_line = start_line;
-        code_compare_global_attributes.file_2_end_line = end_line;
-        code_compare_global_attributes.file_2_start_col = strt_col;
-        code_compare_global_attributes.file_2_end_col = end_col;        
-        code_compare_global_attributes.file_2_window_id = window_id;
           
         $("#code_window1").removeClass('col-md-11');
         $("#code_window1").addClass('col-md-5');
@@ -771,11 +765,36 @@ Clonify.SCC = {
         
         var load_1st_bar_map = false;
         if ($("#code_window2").html() != ""){
+          
+          
+          code_compare_global_attributes.file_1_path = code_compare_global_attributes.file_2_path;
+          code_compare_global_attributes.file_1_start_line = code_compare_global_attributes.file_2_start_line;
+          code_compare_global_attributes.file_1_end_line = code_compare_global_attributes.file_2_end_line;
+          code_compare_global_attributes.file_1_start_col = code_compare_global_attributes.file_2_start_col;
+          code_compare_global_attributes.file_1_end_col = code_compare_global_attributes.file_2_end_col;        
+          code_compare_global_attributes.file_1_window_id = code_compare_global_attributes.file_2_window_id;
+
+          code_compare_global_attributes.file_2_path = path;
+          code_compare_global_attributes.file_2_start_line = start_line;
+          code_compare_global_attributes.file_2_end_line = end_line;
+          code_compare_global_attributes.file_2_start_col = strt_col;
+          code_compare_global_attributes.file_2_end_col = end_col;        
+          code_compare_global_attributes.file_2_window_id = window_id;
+          
+          
           $("#file1").html( $("#file2").html() );
           $("#code_window1").html( $("#code_window2").html() );
           $("#code_map2").html("");
           $("#code_map1").html("");
           load_1st_bar_map = true;
+        }else{
+          code_compare_global_attributes.file_2_path = path;
+          code_compare_global_attributes.file_2_start_line = start_line;
+          code_compare_global_attributes.file_2_end_line = end_line;
+          code_compare_global_attributes.file_2_start_col = strt_col;
+          code_compare_global_attributes.file_2_end_col = end_col;        
+          code_compare_global_attributes.file_2_window_id = window_id;
+          
         }
         $("#file2").html('File Name : '+file_name);
         $("#code_window2").html(r);
@@ -807,12 +826,27 @@ Clonify.SCC = {
   },
   calculateCloneDifferences : function(){
       
+      console.debug(code_compare_global_attributes);
+      
         var _url = base_url + "home/cloneDifference";
-        $.post(_url, code_compare_global_attributes, function(r) {            
+        $.post(_url, code_compare_global_attributes, function(r) { 
+          
+          console.log(r);
 
             var selector2 = "";
             for (var i = code_compare_global_attributes.file_2_start_line; i <= code_compare_global_attributes.file_2_end_line; i++){
                 selector2 += '#geshi-window'+code_compare_global_attributes.file_2_window_id+'-'+i+",";
+                
+//                if (i == code_compare_global_attributes.file_2_start_line){
+//                  var sec = '#geshi-window'+code_compare_global_attributes.file_2_window_id+'-'+i;
+//                  var t = $(sec).find('div').html();
+//                  t = t.substring(code_compare_global_attributes.file_2_start_col);
+//                  $(sec).css('background-color', '#000000 !important');
+//                  console.log(t);
+//                  t = '<div style="background-color: #FFFF00;">'+t+'</div>';
+//                  $(sec).find('div').html(t);
+//                }
+                
             }
             selector2 = selector2.substring(0, selector2.length-1);
 
