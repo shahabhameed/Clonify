@@ -80,12 +80,7 @@
                                 <div class="col-md-10" id="mccrangefilter">
                                 </div>
                             </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <small>For multiple values use [], e.g for number 1 and 2 write [1,2]</small>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
