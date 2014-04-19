@@ -11,11 +11,15 @@ var code_compare_global_attributes = {
     file_1_path : null,
     file_1_start_line : null,
     file_1_end_line : null,
+    file_1_start_col : null,
+    file_1_end_col : null,    
     file_1_window_id: null,
     file_2_window_id: null,
     file_2_path : null,
     file_2_start_line : null,
     file_2_end_line : null,
+    file_2_start_col : null,
+    file_2_end_col : null,
     file_2_window_id : null
 }
 var window_id = 0;
@@ -712,6 +716,8 @@ Clonify.SCC = {
         code_compare_global_attributes.file_1_path = path;
         code_compare_global_attributes.file_1_start_line = start_line;
         code_compare_global_attributes.file_1_end_line = end_line;
+        code_compare_global_attributes.file_1_start_col = strt_col;
+        code_compare_global_attributes.file_1_end_col = end_col;
         code_compare_global_attributes.file_1_window_id = window_id;
         $(".code-window1").show();
         $("#file1").html('File Name : '+file_name);
@@ -725,6 +731,8 @@ Clonify.SCC = {
         code_compare_global_attributes.file_2_path = path;
         code_compare_global_attributes.file_2_start_line = start_line;
         code_compare_global_attributes.file_2_end_line = end_line;
+        code_compare_global_attributes.file_2_start_col = strt_col;
+        code_compare_global_attributes.file_2_end_col = end_col;        
         code_compare_global_attributes.file_2_window_id = window_id;
           
         $("#code_window1").removeClass('col-md-11');
