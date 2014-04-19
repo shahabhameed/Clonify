@@ -255,12 +255,14 @@ class StringCompare{
       }
       //var_dump($s1_copy);
       $comma_separated = implode("", $clean_result);
-      $different = implode(" ", $s1_copy);
-      $different2 = implode(" ", $s2_copy);
-      $return_array[0] = $different;
-      $return_array[1] = $different2;
+      
+      return array_merge($s1_copy, $s2_copy);
+      
+//      $different = implode(" ", $s1_copy);
+//      $different2 = implode(" ", $s2_copy);
+//      $return_array[0] = $different;
+//      $return_array[1] = $different2;
       return $return_array;
-      //return $comma_separated;
     }
 }  
 

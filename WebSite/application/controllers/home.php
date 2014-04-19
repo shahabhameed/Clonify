@@ -384,6 +384,7 @@ class Home extends CI_Controller {
         $file2_clone_string = $this->common->extractClonedSubstring($this->input->post('file_2_path'), $this->input->post('file_2_start_line'), $this->input->post('file_2_end_line'), $this->input->post('file_2_start_col'), $this->input->post('file_2_end_col'));
         $obj = new StringCompare();
         $test_result = $obj->getDifferenceBetweenStrings1($file1_clone_string, $file2_clone_string, $this->input->post('file_1_start_line'), $this->input->post('file_2_start_line'));
+//        echo "<pre>".print_r($test_result)."</pre>";
         $data = implode(",", $test_result);
 //        $data = json_encode($test_result);
         echo $data;
