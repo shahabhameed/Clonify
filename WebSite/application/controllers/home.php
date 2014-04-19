@@ -47,6 +47,9 @@ class Home extends CI_Controller {
         $end_line = $this->input->post('end_line');
         $fid = $this->input->post('fid');
         $mid = $this->input->post('mid');
+
+        $start_col = $this->input->post('strt_col');
+        $end_col = $this->input->post('end_col');
         $window_id = $this->input->post('window_id');
         $col_code_id = $window_id % 2;        
         if ($col_code_id == 0){
@@ -377,8 +380,8 @@ class Home extends CI_Controller {
     }
 
     function cloneDifference() {
-        $file1_clone_string = $this->common->extractClonedSubstring($this->input->post('file_1_path'), $this->input->post('file_1_start_line'), $this->input->post('file_1_end_line'));
-        $file2_clone_string = $this->common->extractClonedSubstring($this->input->post('file_2_path'), $this->input->post('file_2_start_line'), $this->input->post('file_2_end_line'));
+        $file1_clone_string = $this->common->extractClonedSubstring($this->input->post('file_1_path'), $this->input->post('file_1_start_line'), $this->input->post('file_1_end_line'), $this->input->post('file_1_start_col'), $this->input->post('file_1_end_col'));
+        $file2_clone_string = $this->common->extractClonedSubstring($this->input->post('file_2_path'), $this->input->post('file_2_start_line'), $this->input->post('file_2_end_line'), $this->input->post('file_2_start_col'), $this->input->post('file_2_end_col'));
         $obj = new StringCompare();
         $test_result = $obj->getDifferenceBetweenStrings($file1_clone_string, $file2_clone_string);
         $data = implode(",", $test_result);

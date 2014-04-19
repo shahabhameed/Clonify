@@ -10,7 +10,7 @@
       $this->ci->load->library('StringCompare');
     }
 
-    function extractClonedSubstring($file_path, $start_line, $end_line) {
+    function extractClonedSubstring($file_path, $start_line, $end_line, $start_col, $end_col) {
       $file_contents = file_get_contents($file_path);
       $file_contents = str_replace("\r\n", "\n", $file_contents);
       $file_contents = str_replace("\r", "\n", $file_contents); 
@@ -18,9 +18,13 @@
       $code = "";
       if ($file_contents):
         for($i = ($start_line-1); $i <= $end_line; $i++):
+          if ($i == ($start_line-1))
+            $file_contents[$i] = substr($file_contents[$i], $start_col);
+          else if ($i == $end_line)
+            $file_contents[$i] = substr($file_contents[$i], $end_col);
           $code .= isset($file_contents[$i]) ? $file_contents[$i] : "";
         endfor;        
-      endif;
+      endif;      
       return $code;
     }
 
