@@ -130,4 +130,10 @@ function selectCurrentFileTreeMap(tmData, fidArr, tmCount)
     return tmData;
 }
 
+function resetTreeMap()
+{
+    tmData = renderTreeMap();
+    tmCount = 1;
+}
+
     

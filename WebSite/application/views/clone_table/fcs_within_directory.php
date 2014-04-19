@@ -334,6 +334,7 @@
             $(".list_view").on("click", function() {
                 $("tr").removeClass('selected-row');
                 //generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
+                resetTreeMap();
                 $(this).addClass('selected-row');
                 Clonify.FCS.viewInstanceWithinDirectory($(this).data("sccid"));
                 event.preventDefault();
