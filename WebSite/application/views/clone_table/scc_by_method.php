@@ -37,9 +37,39 @@ width: 50% !important;
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Select * From SCC Where</h4>
+                <h4 class="modal-title" id="myModalLabel">Select * From SCC By Method Where</h4>
               </div>
               <div class="modal-body">
+                <div class="row">
+                            <div class="col-md-4">
+                                <u><h4>GID</h4></u>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10" id="gidnumberfilter">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <u><h4>DID</h4></u>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" id="didnumberfilter">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <u><h4>FID</h4></u>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" id="fidnumberfilter">
+                            </div>
+                        </div>
+                        <br>
                 <div class="row">
                   <div class="col-md-4">
                     <u><h4>No. of Instances</h4></u>
@@ -49,12 +79,7 @@ width: 50% !important;
                     <div class="col-md-4" id="sccnumberfilter">
                     </div>
                 </div>
-                <br>
-                <div class="row">
-                  <div class="col-md-10">
-                    <small>For multiple values use [], e.g for number 1 and 2 write [1,2]</small>
-                  </div>
-                </div>
+                
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
