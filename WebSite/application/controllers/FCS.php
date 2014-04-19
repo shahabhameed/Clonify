@@ -278,7 +278,8 @@ class FCS extends CI_Controller {
                 $output.="fid: '" . $filedata['cmfid'] . "',";
                 $output.="filepath: '" . $filedata['filepath'] . "',";
                 $output.="filename: '" . $filedata['filename'] . "',";
-                $output.="data: {fid:".$filedata['cmfid'].",description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
+                //$output.="data: {fid:".$filedata['cmfid'].",description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
+                $output.="data: {fid:".$filedata['cmfid'].",description: 'File ID: " . $filedata['cmfid'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
                 $output.="},";
             }
         }
