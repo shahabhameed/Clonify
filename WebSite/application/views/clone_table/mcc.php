@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4" id="atcnumberfilter">
+                                <div class="col-md-10" id="atcnumberfilter">
                                 </div>
                             </div>
                             <br>
@@ -67,15 +67,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-10" id="sccrangefilter">
+                                <div class="col-md-10" id="sccfilter">
                                 </div>
                             </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <small>For multiple values use [], e.g for number 1 and 2 write [1,2]</small>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
