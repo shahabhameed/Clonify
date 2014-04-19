@@ -183,7 +183,7 @@ $(document).ready(function() {
             $(".scc_instance_list tr").removeClass('selected-row');
             $(this).addClass('selected-row');
             mysearch($(this).data("files"));
-            // tmData = generateNewTreeMap(tmData, splitFIDs($(this).data("files").toString()), tmCount);
+            tmData = generateNewTreeMap(tmData, splitFIDs($(this).data("files").toString()), tmCount);
             tmCount++;
            
         });

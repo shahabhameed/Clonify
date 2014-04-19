@@ -629,6 +629,7 @@ License: http://jqwidgets.com/license/
             */
             //console.log(fids);
           //  console.log(tempAH);
+          
             if (fids.indexOf(obj) >= 0)
             {
                // tmData[key].color = tmClr;
@@ -641,14 +642,21 @@ License: http://jqwidgets.com/license/
                  file_path : filePathsTemp[indexMatched],
                  file_name : fileNamesTemp[indexMatched],
                 };
-             $('#filemodallabel').html(fileNamesTemp[indexMatched]);
-             $.post(_url, _params, function(r) {
-             $('#file-modal-content').html(r);
-
-             $('#file-modal').modal('show');
-               });
-              // Clonify.MCC.viewCodeData(1,2,filePathsTemp[indexMatched],obj,0,0,0,0,fileNamesTemp[indexMatched], 0);
-              // event.preventDefault();
+             
+               
+              if(typeof isFccPage != 'undefined' && isFccPage)
+              {
+                complete_id = '#fcc_'+currentfccid+'_'+obj;
+                $(complete_id).trigger( "click" );
+              }
+              else
+              {
+                $('#filemodallabel').html(fileNamesTemp[indexMatched]);
+                $.post(_url, _params, function(r) {
+                     $('#file-modal-content').html(r);
+                     $('#file-modal').modal('show');
+                });
+              }
             }
                 if (f.selectionEnabled) {
                     var h = c.data(this, "jqx-treemap-selected") || false;

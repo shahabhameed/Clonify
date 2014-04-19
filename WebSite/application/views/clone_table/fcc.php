@@ -373,7 +373,8 @@ var currentfccid = 0;
         //alert(data);
         return data;
     }
-
+    var isFccPage = true;
+    var fccTMCodeData = null;
     var fccTMData = <?php echo $treemapFCCdata ?>;
     //console.log(fccTMData[1][0]['fid']);
 
