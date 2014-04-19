@@ -187,7 +187,7 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-default gradient">
                                         <div class="panel-heading min">
-                                            <h4><span> <i class="fa fa-list-alt fa-2"></i>SCC Clone Instance List - SCC ID - <?php echo $scc_id; ?></span></h4>
+                                            <h4><span> <i class="fa fa-list-alt fa-2"></i>SCC Clone Instance List - FCC ID - <?php echo $scc_id; ?></span></h4>
                                             <span class="loader" style="top:15px;cursor:pointer;">
                                                 <i class="fa fa-search fa-4" data-toggle="modal" data-target="#qtable2"></i>
                                             </span>
@@ -215,7 +215,7 @@
                                                     foreach ($data as $d) {
                                                         $counter++;
                                                         ?>
-                                                        <tr class="code_view" 
+                                                        <tr class="code_view" id="fcc_<?php echo $scc_id; ?>_<?php echo $d['fid']; ?>"
                                                             data-name="<?php echo $d['directory_name'] . $d['file_name']; ?>" 
                                                             data-endline="" data-endcol="" data-startcol="" 
                                                             data-startline="" 
@@ -313,6 +313,7 @@
                                                             <span class="label legend-treemap3">High</span>
                                                             <span class="label legend-treemap2">Medium</span>
                                                             <span class="label legend-treemap1">Low</span>
+                                                            <span class="right marginR5">Tree Map Legend: </span>
                                                         </h4>
                                                         <a href="#" class="minimize">Minimize</a>
                                                     </div>
@@ -357,6 +358,9 @@
 </div><!-- End #wrapper -->
 
 <script>
+var zNodes = <?php echo $treedata ?>;
+var fcctree = 1;
+var currentfccid = 0;
     function generateTreeMap()
     {
         //var treeMapData = <?php //echo json_encode($treemapdata);                 ?>;
@@ -369,7 +373,8 @@
         //alert(data);
         return data;
     }
-
+    var isFccPage = true;
+    var fccTMCodeData = null;
     var fccTMData = <?php echo $treemapFCCdata ?>;
     //console.log(fccTMData[1][0]['fid']);
 
@@ -381,6 +386,8 @@
 
             fid = new Array();
             var fccId = $(this).data("sccid");
+            currentfccid = fccId;
+
             for (var key in fccTMData[fccId]) {
                 if (typeof fccTMData[fccId][key] === "object") {
                     //console.log(fccTMData[fccId][key]['fid']);
@@ -391,6 +398,7 @@
             }
             fid = $.unique(fid);
             fid = $.unique(fid);
+            mysearch(fid);
             tmData = generateNewTreeMap(tmData, fid, tmCount);
             tmCount++;
 
@@ -409,11 +417,11 @@
             tmCount++;
             $(".scc_instance_list tr").removeClass('selected-row');
             $(this).addClass('selected-row');
-            
-            //Clonify.SCC.viewCodeData($(this).data("scsid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+            Clonify.SCC.viewCodeData($(this).data("scsid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), this);
             event.preventDefault();
             return false;
         });
+
 
     });
 </script>

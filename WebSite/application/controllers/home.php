@@ -47,8 +47,17 @@ class Home extends CI_Controller {
         $end_line = $this->input->post('end_line');
         $fid = $this->input->post('fid');
         $mid = $this->input->post('mid');
+
         $start_col = $this->input->post('strt_col');
         $end_col = $this->input->post('end_col');
+        $window_id = $this->input->post('window_id');
+        $col_code_id = $window_id % 2;        
+        if ($col_code_id == 0){
+          $color_code = "#00FF00";
+        }else{
+          $color_code = "#FFFF00";
+        }
+        
         $lines = array();
         $miniMapLinks = array();
         $miniMapLinkLable = array();
@@ -67,7 +76,7 @@ class Home extends CI_Controller {
             }
             $all_lines = array();
             $counter = 0;
-            $lines = array();
+            $lines = array();            
             foreach ($scc_ids as $scc_id) {
                 $scc_instances = $this->scc->getSCCInstancesBySCCId($invocation_id, $scc_id);
                 if ($scc_instances) {
@@ -81,6 +90,64 @@ class Home extends CI_Controller {
                         $counter++;
                     }
                 }
+            }
+            asort($lines);
+            asort($all_lines);
+            
+            $val = array_count_values($all_lines);
+            foreach ($val as $in => $v) {
+                if ($v == 1) {
+                    $opt = 0.5;
+                } else if ($v == 2) {
+                    $opt = 0.6;
+                } else if ($v == 3) {
+                    $opt = 0.7;
+                } else if ($v == 4) {
+                    $opt = 0.8;
+                } else if ($v == 5) {
+                    $opt = 0.9;
+                } else if ($v == 6) {
+                    $opt = 1.0;
+                }
+
+                $line_color = "background-color:$color_code;opacity:$opt;";
+                $obj->HighlightLines($in, $line_color);
+            }
+            $pre = -3;
+            foreach ($val as $in => $v){
+              if ($in > $pre + 2) {                
+                $miniMapLinks[] = $in;                                        
+                $miniMapLinkLable[$in] = array('text' => '  ', 'rows' => 20);
+                if (count($miniMapLinks) > 1){
+                  $miniMapLinkLable[$miniMapLinks[count($miniMapLinks) - 2]]['rows'] = $counter;                  
+                }
+                $counter = 0;
+              }
+              $pre = $in;
+              $counter++;
+            }
+            $miniMapLinkLable[$miniMapLinks[count($miniMapLinks) - 1 ]]['rows'] = $counter;
+        } else if ($mid && !$start_line && !$start_line) {
+            $temp = explode(",", $mid);
+            foreach ($temp as $t) {
+                $mids[$t] = $t;
+            }
+            $all_lines = array();
+            $counter = 0;
+            $lines = array();
+            foreach ($mids as $m_id) {
+                $scc_instances = $this->mcc->getMethodInstancesByMId($invocation_id, $m_id);
+                if ($scc_instances) {
+                        foreach ($scc_instances as $scc_instance) {
+                            if (!$fid || $fid == $scc_instance['fid']) {
+                                for ($i = $scc_instance['startline']; $i <= $scc_instance['endline']; $i++) {
+                                    $all_lines[] = $i;
+                                    $lines[] = $i;
+                                }
+                            }
+                            $counter++;
+                        }
+                    }
             }
             asort($lines);
             asort($all_lines);
@@ -101,54 +168,34 @@ class Home extends CI_Controller {
                     $opt = 1.0;
                 }
 
-                $line_color = "background-color:#C8CEC3;opacity:$opt;";
+                $line_color = "background-color:$color_code;opacity:$opt;";
                 $obj->HighlightLines($in, $line_color);
             }
             $pre = -3;
-
-            foreach ($val as $in => $v) {
-                if ($in > $pre + 2) {
-                    $miniMapLinks[] = $in;
-                    $miniMapLinkLable[$in] = array('text' => '  ', 'rows' => 50);
+            foreach ($val as $in => $v){
+              if ($in > $pre + 2) {                
+                $miniMapLinks[] = $in;                                        
+                $miniMapLinkLable[$in] = array('text' => '  ', 'rows' => 20);
+                if (count($miniMapLinks) > 1){
+                  $miniMapLinkLable[$miniMapLinks[count($miniMapLinks) - 2]]['rows'] = $counter;                  
                 }
-                $pre = $in;
+                $counter = 0;
+              }
+              $pre = $in;
+              $counter++;
             }
-        } else if ($mid && !$start_line && !$start_line) {
-            $temp = explode(",", $mid);
-            foreach ($temp as $t) {
-                $mids[$t] = $t;
-            }
-            //print_r($mids);
-            foreach ($mids as $m_id) {
-                $scc_instances = $this->mcc->getMethodInstancesByMId($invocation_id, $m_id);
-                if ($scc_instances) {
-                    foreach ($scc_instances as $scc_instance) {
-                        $lines = array();
-                        for ($i = $scc_instance['startline']; $i <= $scc_instance['endline']; $i++) {
-                            $lines[] = $i;
-                        }
-                        $r = $row % $total;
-
-                        $line_color = "background-color:" . $colors[$r] . ";";
-                        $obj->HighlightLines($lines, $line_color);
-                        $miniMapLinks[] = $scc_instance['startline'];
-                        $miniMapLinkLable[$scc_instance['startline']] = array('text' => '  ', 'rows' => $scc_instance['endline'] - $scc_instance['startline']);
-
-                        $row++;
-                    }
-                }
-            }
+            $miniMapLinkLable[$miniMapLinks[count($miniMapLinks) - 1 ]]['rows'] = $counter;
         } else {
             for ($i = $start_line; $i <= $end_line; $i++) {
                 $lines[] = $i;
             }
             $miniMapLinks[] = $start_line;
             $miniMapLinkLable[$start_line] = array('text' => '  ', 'rows' => $end_line - $start_line);
-            $obj->HighlightLines($lines, null);
+            $line_color = "background-color:$color_code";
+            $obj->HighlightLines($lines, $line_color);
         }
 
-        $obj->AddMiniMapLinkLabel($miniMapLinkLable);
-        $window_id = $this->input->post('window_id');
+        $obj->AddMiniMapLinkLabel($miniMapLinkLable);        
         $obj->SetId("window" . $window_id);
         $first_row = $miniMapLinks[0];
 
@@ -493,6 +540,27 @@ class Home extends CI_Controller {
         $viewData['showCloneView'] = true;
         $this->load->view('partials/main_header');
         $this->load->view('clone_table/fccdir.php', $viewData);
+        $this->load->view('partials/main_footer');
+    }
+    
+    public function SCSAcrossMethod() {
+        $viewData = array();
+        $invocationId = $this->getInvocationIdFromURL();
+
+        $result = $this->scc->getSCSAcrossMethodPrimaryTable($invocationId);
+        $viewData['parent_table_data'] = $result;
+        $secondary_table_rows = array();
+        if ($result) {
+          foreach ($result as $row) {
+            $secondary_table_rows[$row['scs_crossmethod_id']] = $this->scc->getSCSAcrossMethodSecondaryTable($row['scs_crossmethod_id'], $invocationId);
+          }
+        }
+
+        $viewData['secondary_table_rows'] = $secondary_table_rows;
+        $viewData['invocationId'] = $invocationId;        
+        $viewData['showCloneView'] = true;
+        $this->load->view('partials/main_header');
+        $this->load->view('clone_table/scs_cross_method.php', $viewData);
         $this->load->view('partials/main_footer');
     }
 

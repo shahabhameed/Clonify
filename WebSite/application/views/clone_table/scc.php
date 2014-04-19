@@ -61,11 +61,7 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <small>For multiple values use [], e.g for number 1 and 2 write [1,2]</small>
-                                </div>
-                            </div>
+                          
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -277,15 +273,15 @@
 
 </div><!-- End #wrapper -->
 
-<script>
+<script>  
     $(document).ready(function() {
-        $(".list_view").on("click", function() {
-            Clonify.SCC.viewSCCCloneInstance($(this).data("sccid"));
+        $(".list_view").on("click", function() {            
+            Clonify.SCC.viewSCCCloneInstance($(this).data("sccid"), this);
             event.preventDefault();
             return false;
         });
-        $(".code_view").on("click", function() {
-            Clonify.SCC.viewCodeData($(this).data("sccid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+        $(".code_view").on("click", function() {            
+            Clonify.SCC.viewCodeData($(this).data("sccid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), this);
             event.preventDefault();
             return false;
         });

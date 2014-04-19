@@ -515,5 +515,39 @@ class SCC_model extends CI_Model {
         }
         return NULL;
     }
+    
+    public function getSCSAcrossMethodPrimaryTable($invocationId, $userId) {
+   
+      $query = "SELECT tb1.scs_crossmethod_id, tb1.atc, tb1.apc, tb1.members,
+                       (SELECT GROUP_CONCAT(scc_id) FROM scscrossmethod_scc tb2 WHERE tb2.invocation_id=$invocationId AND tb2.scs_crossmethod_id=tb1.scs_crossmethod_id) as scc_id
+			FROM scs_crossmethod tb1                              
+			WHERE tb1.invocation_id =$invocationId";
+        $result = $this->db->query($query);
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return NULL;
+    }
+
+    function getSCSAcrossMethodSecondaryTable($scs_crossmethod_id, $invocation_id){
+        $where = "tb1.invocation_id = $invocation_id AND tb3.invocation_id=$invocation_id AND tb1.scs_crossmethod_id=$scs_crossmethod_id";
+        
+        $this->db->select('tb1.scs_crossmethod_id, tb1.mid, tb1.tc, tb1.pc, tb1.fid, tb1.did, 
+                           tb1.gid, tb2.mname, tb2.tokens, tb2.startline, tb2.endline, tb4.file_name, 
+                           tb5.directory_name, tb6.repository_name');
+        $this->db->from('scscrossmethod_method tb1');
+        $this->db->join('method tb2', 'tb1.mid = tb2.mid AND tb1.invocation_id=tb2.invocation_id', 'INNER');
+        $this->db->join('invocation_files tb3', 'tb1.fid = tb3.cmfile_id', 'INNER');
+        $this->db->join('repository_file tb4', 'tb3.file_id = tb4.id', 'INNER');
+        $this->db->join('repository_directory tb5', 'tb4.directory_id = tb5.id', 'INNER');
+        $this->db->join('user_repository AS tb6', 'tb6.id = tb5.repository_id', 'INNER');
+        $this->db->where($where);
+
+        $result = $this->db->get();        
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+        return array();
+    }
 
 }

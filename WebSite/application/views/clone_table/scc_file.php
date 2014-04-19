@@ -61,7 +61,7 @@
                 <br>
                 <div class="row">
                   <div class="col-md-4">
-                    <u><h4>Number Of Colones</h4></u>
+                    <u><h4>Number Of Instances</h4></u>
                   </div>
                </div>
                <div class="row">
@@ -294,16 +294,13 @@ $(document).ready(function(){
           "sLengthMenu": "<span>_MENU_</span>",
           "oPaginate": { "sFirst": "First", "sLast": "Last" }
         }
-      }).columnFilter({
-           aoColumns: [
-                       null,
-                       { sSelector: "#ginumberfilter",type: "number-range" },
-                       { sSelector: "#dinumberfilter",type: "number" },
-                       { sSelector: "#finumberfilter",type: "number" },
-                       null,
-                       { sSelector: "#sccnumberfilter",type: "number" }
-                       ]
-      });
+      }).yadcf([
+            {column_number : 1,filter_container_id : "ginumberfilter"},
+            {column_number : 2,filter_container_id : "dinumberfilter"},
+            {column_number : 3,filter_container_id : "finumberfilter"},
+            {column_number : 5,filter_container_id : "sccnumberfilter"},
+        ]);
+
 
       $('.dataTables_length select').uniform();
       $('.dataTables_paginate > ul').addClass('pagination');
@@ -311,12 +308,12 @@ $(document).ready(function(){
       $('.dataTables_filter').hide();
                   
     $(".list_view").live("click",function(){        
-        Clonify.SCC.viewSCCCloneInstance($(this).data("sccfileid"));
+        Clonify.SCC.viewSCCCloneInstance($(this).data("sccfileid"), this);
         event.preventDefault();            
         return false;
     });
      $(".code_view").live("click",function(){
-        Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+        Clonify.SCC.viewCodeData($(this).data("sccid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), this);
         event.preventDefault();            
         return false;
     });

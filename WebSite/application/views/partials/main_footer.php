@@ -50,6 +50,7 @@
 
 <script type="text/javascript" src="<?= asset_url('plugins/tables/dataTables/jquery.dataTables.min.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('plugins/tables/dataTables/jquery.dataTables.columnFilter.js'); ?>"></script>
+<script type="text/javascript" src="<?= asset_url('plugins/tables/dataTables/jquery.dataTables.yadcf.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('plugins/tables/dataTables/TableTools.min.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('plugins/tables/dataTables/ZeroClipboard.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('plugins/tables/responsive-tables/responsive-tables.js'); ?>"></script>

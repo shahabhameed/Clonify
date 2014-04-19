@@ -17,6 +17,20 @@ var setting = {
         onClick: zTreeOnClick
     }
 };
+var setting2 = {
+    data: {
+        simpleData: {
+            enable: true
+        }
+    },
+    view: {
+        fontCss: getFontCss
+    },
+    callback: {
+        onClick: fcczTreeOnClick
+    }
+};
+
 function zTreeOnClick(event, treeId, treeNode) {
     if(treeNode.path){
         var _url = base_url + "home/customloadcode";
@@ -30,6 +44,13 @@ function zTreeOnClick(event, treeId, treeNode) {
 
             $('#file-modal').modal('show');
          });
+     }
+}
+function fcczTreeOnClick(event, treeId, treeNode) {
+   if(treeNode.highlight){
+        id = treeNode.id.split("_")[1];
+        complete_id = '#fcc_'+currentfccid+'_'+id
+        $(complete_id).trigger( "click" );
      }
 }
 function focusKey(e) {
@@ -155,14 +176,20 @@ function set_color() {
 
 var key;
 $(document).ready(function() {
-    tmCount = 1;
-    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-    $(".code_view").on("click", function() {
-        $(".scc_instance_list tr").removeClass('selected-row');
-        $(this).addClass('selected-row');
-        mysearch($(this).data("files"));
-        tmData = generateNewTreeMap(tmData, splitFIDs($(this).data("files").toString()), tmCount);
-        tmCount++;
+    if(typeof(fcctree) == 'undefined'){
+        tmCount = 1;
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        $(".code_view").on("click", function() {
+            $(".scc_instance_list tr").removeClass('selected-row');
+            $(this).addClass('selected-row');
+            mysearch($(this).data("files"));
+            tmData = generateNewTreeMap(tmData, splitFIDs($(this).data("files").toString()), tmCount);
+            tmCount++;
+           
+        });
+    }else{
        
-    });
+        $.fn.zTree.init($("#treeDemo"), setting2, zNodes);
+    }
+    
 });

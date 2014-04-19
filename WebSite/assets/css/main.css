@@ -3856,3 +3856,10 @@ nav.flexible-nav ul li a.tnn-h3 {
   background-color: #C0C0C0 !important; 
 }
 
+.selected-row0{
+  background-color: #00FF00 !important; 
+}
+
+.selected-row1{
+  background-color: #FFFF00 !important; 
+}

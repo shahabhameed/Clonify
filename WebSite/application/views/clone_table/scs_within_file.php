@@ -62,18 +62,14 @@
                 <br>
                 <div class="row">
                   <div class="col-md-4">
-                    <u><h4>No Colones</h4></u>
+                    <u><h4>No Instances</h4></u>
                   </div>
                </div>
                <div class="row">
                     <div class="col-md-4" id="sccnumberfilter">
                     </div>
                 </div>
-                 <div class="row">
-                  <div class="col-md-10">
-                    <small>For multiple values use "[ ]", e.g for number 1 and 2 write [1,2]</small>
-                  </div>
-                </div>
+                 
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -315,29 +311,24 @@ $(document).ready(function(){
           "sLengthMenu": "<span>_MENU_</span>",
           "oPaginate": { "sFirst": "First", "sLast": "Last" }
         }
-      }).columnFilter({
-           aoColumns: [
-                       null,
-                       null,
-                       null,
-                       { sSelector: "#ginumberfilter",type: "number" },
-                       { sSelector: "#dinumberfilter",type: "number" },
-                       { sSelector: "#finumberfilter",type: "number" },
-                       { sSelector: "#sccnumberfilter",type: "number" }
-                       ]
-      });
+      }).yadcf([
+            {column_number : 3,filter_container_id : "ginumberfilter"},
+            {column_number : 4,filter_container_id : "dinumberfilter"},
+            {column_number : 5,filter_container_id : "finumberfilter"},
+            {column_number : 6,filter_container_id : "sccnumberfilter"},
+        ]);
 
       $('.dataTables_length select').uniform();
       $('.dataTables_paginate > ul').addClass('pagination');
       $('.dataTables_filter>label>input').addClass('form-control');
       $('.dataTables_filter').hide();
     $(".list_view").live("click",function(){
-      Clonify.SCC.viewSCSCloneInstance($(this).data("scsid"));
+      Clonify.SCC.viewSCSCloneInstance($(this).data("scsid"), this);
       event.preventDefault();      
       return false;
     });
      $(".code_view").live("click",function(){
-        Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+        Clonify.SCC.viewCodeData($(this).data("scsid"),$(this).data("clid"),$(this).data("path"),$(this).data("fid"),$(this).data("startline"),$(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), this);
         event.preventDefault();        
         return false;
     });

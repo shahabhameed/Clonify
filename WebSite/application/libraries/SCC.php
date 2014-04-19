@@ -155,6 +155,20 @@ class SCC
     return $data;
   }
   
+  function getSCSAcrossMethodPrimaryTable($invocationId){
+    $userId = $this->ci->tank_auth->get_user_id();
+    $data = $this->ci->scc_model->getSCSAcrossMethodPrimaryTable($invocationId, $userId);
+    $data = json_decode(json_encode($data), true);
+    return $data;
+  }
+  
+  function getSCSAcrossMethodSecondaryTable($scs_crossmethod_id, $invocationId){
+    $userId = $this->ci->tank_auth->get_user_id();
+    $data = $this->ci->scc_model->getSCSAcrossMethodSecondaryTable($scs_crossmethod_id, $invocationId);
+    $data = json_decode(json_encode($data), true);
+    return $data;
+  }
+  
  function getAllFCCGroup($invocationId){
     $userId = $this->ci->tank_auth->get_user_id();
     $data = $this->ci->scc_model->getAllFCCGroupsRows($invocationId, $userId);

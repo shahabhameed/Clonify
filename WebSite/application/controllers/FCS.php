@@ -465,7 +465,7 @@ class FCS extends CI_Controller {
         $dids = array_unique($dids);
         $treeMapData = $this->treemap_model->get_fcs_dir_treemap($invocationId, $dids);
         $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData,false);
-        
+        $viewData['treedata'] = create_tree($invocationId);
         $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['invocationId'] = $invocationId;
         // print_r($viewData);exit;

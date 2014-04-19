@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <br>
-                        <div class="row">
+                       <!--  <div class="row">
                             <div class="col-md-4">
                                 <u><h4>No Of Instances</h4></u>
                             </div>
@@ -68,12 +68,8 @@
                         <div class="row">
                             <div class="col-md-4" id="sccnumberfilter">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <small>For multiple values use "[ ]", e.g for number 1 and 2 write [1,2]</small>
-                            </div>
-                        </div>
+                        </div> -->
+                      
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -160,7 +156,7 @@
                         <a href="#"  id="pannel1" class="minimize" style="display: inline;">Minimize</a>
                     </div>
                     <div class="panel-body noPad clearfix">
-                        <table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTableScs  display table table-bordered" width="100%">
+                        <table cellpadding="0" cellspacing="0" border="0" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" class="responsive dynamicTableScs  display table table-bordered" width="100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -182,7 +178,7 @@
                                         <tr class="list_view" data-scsid="<?php echo $data['scs_crossfile_id']; ?>">
                                             <td><?php echo $counter; ?></td>
                                             <td><?php echo $data['scs_crossfile_id']; ?></td>
-                                            <td style="text-align:left; word-wrap:break-word;"><?php echo $data['scc_id_csv']; ?></td>
+                                            <td style="text-align:left;width:12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><?php echo $data['scc_id_csv']; ?></td>
                                             <td><?php echo isset($data['tc']) ? $data['tc'] : '-'; ?></td>
                                             <td><?php echo isset($data['pc']) ? $data['pc'] : '-'; ?></td>
                                             <td><?php echo $data['members']; ?></td>
@@ -323,12 +319,12 @@
     $(document).ready(function() {
          
         $(".list_view").on("click", function() {
-            Clonify.SCC.viewSCSAcrossCloneInstance($(this).data("scsid"));
+            Clonify.SCC.viewSCSAcrossCloneInstance($(this).data("scsid"), this);
             event.preventDefault();
             return false;
         });
         $(".code_view").on("click", function() {
-            Clonify.SCC.viewCodeData($(this).data("scsid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"));
+            Clonify.SCC.viewCodeData($(this).data("scsid"), $(this).data("clid"), $(this).data("path"), $(this).data("fid"), $(this).data("startline"), $(this).data("endline"), $(this).data("startcol"), $(this).data("endcol"), $(this).data("name"), this);
             event.preventDefault();
             return false;
         });

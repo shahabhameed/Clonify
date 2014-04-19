@@ -80,7 +80,7 @@
                                 </a>
                                 <a href="<?php echo site_url('home/SCCByMethod') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCC By Method
-                                </a>
+                                </a>                                
                                 <a href="<?php echo site_url('home/SingleCloneClassByFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCC By File
                                 </a>
@@ -89,6 +89,9 @@
                                 </a>
                                 <a href="<?php echo site_url('home/SingleCloneStructureAcrossFile') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>SCS Across File
+                                </a>
+                                <a href="<?php echo site_url('home/SCSAcrossMethod') . "/" . $invocationId; ?>">
+                                    <span class="icon16 fa fa fa-caret-right"></span>SCS Across Method
                                 </a>
                                 <a href="<?php echo site_url('FCS/FCSWithinGroup') . "/" . $invocationId; ?>">
                                     <span class="icon16 fa fa fa-caret-right"></span>FCS Within Group
@@ -131,7 +134,7 @@
                     </li>
                 <?php } ?>
 
-                <li><a href="<?php echo site_url('general/tree_map/'); ?>"><span class="icon16 icomoon-icon-exit"></span>About Us</a></li>
+                <li><a href="<?php echo site_url('general/about_us'); ?>"><span class="icon16 icomoon-icon-exit"></span>About Us</a></li>
             </ul>
         </div>
     </div><!-- End sidenav --> 
