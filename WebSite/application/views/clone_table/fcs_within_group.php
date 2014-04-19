@@ -273,6 +273,7 @@
                                                             <span class="label legend-treemap3">High</span>
                                                             <span class="label legend-treemap2">Medium</span>
                                                             <span class="label legend-treemap1">Low</span>
+                                                            <span class="right marginR5">Tree Map Legend: </span>
                                                         </h4>
                                                         <a href="#" class="minimize">Minimize</a>
                                                     </div>
@@ -312,21 +313,23 @@
 
 
         <script>
-            // function generateTreeMap()
-            // {
-            //     var data = new Array();
-            //     data = <?php
-            //             if ($treemapdata) {
-            //                 echo $treemapdata;
-            //             }
-            //             ?>;
-            //     return data;
-            // }
+             function generateTreeMap()
+           {
+                 var data = new Array();
+                 data = <?php
+                                     if ($treemapdata) {
+                                         echo $treemapdata;
+                                     }
+                                     
+                        ?>;
+                 return data;
+             }
             var zNodes = <?php echo $treedata ?>;
             $(document).ready(function() {
-                // tmData = renderTreeMap();
+                tmData = renderTreeMap();
                 $(".list_view").on("click", function() {
                     $("tr").removeClass('selected-row');
+                    generateNewTreeMap(tmData,splitFIDs($(this).data("files")));
                     $(this).addClass('selected-row');
                     Clonify.FCS.viewInstanceWithinGroup($(this).data("sccid"));
                     event.preventDefault();

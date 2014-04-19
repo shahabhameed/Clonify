@@ -142,7 +142,8 @@ $(document).ready(function() {
 
         }).yadcf([
             {column_number : 1,filter_container_id : "fcsidfilter"},
-            {column_number : 4,filter_container_id : "clonesfilter"},
+            {column_number : 3,filter_container_id : "clonesfilter"}
+            
         ]);
 
 
