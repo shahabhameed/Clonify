@@ -310,12 +310,13 @@
 
 <script>
     function generateTreeMap()
-    {        
-        var data = '<?php
+    {
+        var data = new Array();
+        data = <?php
                         if ($treemapdata) {
                             echo $treemapdata;
                         }
-                        ?>';
+                        ?>;
         return data;
     }
 
