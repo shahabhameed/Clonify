@@ -296,7 +296,7 @@
                                 <div class="tab-pane fade in active" id="tree">
                                     <div class="col-lg-12">
                                         <div class="row">
-                                            <!-- Treemap  Start-->
+                                            <!-- Treemap  Start
                                             <div class="form-group col-lg-12">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
@@ -316,6 +316,7 @@
                                                 </div><!-- End .panel -->
                                             </div>
                                             <!-- Treemap End-->
+                                            
                                         </div>
                                     </div>
                                 </div>
