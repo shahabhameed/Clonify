@@ -16,9 +16,9 @@
             url: "<?php echo base_url(); ?>index.php/invoke/isInvocationInProgressControllerFunc/",
             success: function(result) {
                 //alert("result: " + result);
-                var repositoryListItemObj = document.getElementById("repositoryListItem")
+                var repositoryListItemObj = document.getElementById("repositoryListItem");
 
-                if (result == true) {
+                if (result === true) {
 
                     $("#repositoryListItem").fadeOut("slow", function() {
                         repositoryListItemObj.style.display = 'none';
@@ -36,7 +36,7 @@
                 //alert("An error occured: " + xhr.status + " " + xhr.statusText);
             }
         });
-        setTimeout('loadNow()', 5000);
+        setTimeout('loadNow()', 10000);
     }
 
     $(function() {
