@@ -18,14 +18,14 @@
       $code = "";
       if ($file_contents):
         for($i = ($start_line-1); $i <= $end_line; $i++):
-          if ($i == ($start_line-1))
-            $file_contents[$i] = substr($file_contents[$i], $start_col);
-          else if ($i == $end_line)
-            $file_contents[$i] = substr($file_contents[$i], $end_col);
-          $code .= isset($file_contents[$i]) ? $file_contents[$i] : "";
+//          if ($i == ($start_line-1))
+//            $file_contents[$i] = substr($file_contents[$i], $start_col, strlen($file_contents[$i]));
+//          else if ($i == $end_line)
+//            $file_contents[$i] = substr($file_contents[$i], 0, $end_col);
+          $code .= isset($file_contents[$i]) ? trim($file_contents[$i]) : "";
         endfor;        
       endif;      
-      return $code;
+      return trim($code);
     }
 
   }
