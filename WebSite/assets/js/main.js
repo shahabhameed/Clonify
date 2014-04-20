@@ -849,20 +849,28 @@ Clonify.SCC = {
                 
             }
             selector2 = selector2.substring(0, selector2.length-1);
+            
+            console.log("selector 2 : " + selector2);
 
             $(selector2).poshytip({
               content: 'Clone Difference is : '+r
             });
             
             var temp = r.split(",");
-            var file_1_difference_arr = temp[0].split(" ");
-            var file_2_difference_arr = temp[1].split(" ");
+            var file_1_difference_arr = temp;
+            var file_2_difference_arr = temp;
                         
             $(selector2).each(function(){
+                var str = $(this).find('div').html();
                 for(var i = 0; i < file_2_difference_arr.length; i++){
                     var temp = $.trim(file_2_difference_arr[i]);
-                    var str = $(this).find('div').html();
-                    str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+                    if (temp.indexOf("." != -1)){
+                      var temp1 = temp.split(".");
+                      for (var j = 0; j < temp1.length; j++){
+                        str = str.replace(temp1[j],"<span style='background-color: red !important'>"+temp1[j]+"</span>");
+                      }
+                    }else                    
+                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
                 }
                 $(this).find('div').html(str);
             });            
@@ -875,10 +883,16 @@ Clonify.SCC = {
             selector1 = selector1.substring(0, selector1.length-1);
             
             $(selector1).each(function(){
+                var str = $(this).find('div').html();
                 for(var i = 0; i < file_1_difference_arr.length; i++){
                     var temp = $.trim(file_1_difference_arr[i]);
-                    var str = $(this).find('div').html();
-                    str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+                    if (temp.indexOf("." != -1)){
+                      var temp1 = temp.split(".");
+                      for (var j = 0; j < temp1.length; j++){
+                        str = str.replace(temp1[j],"<span style='background-color: red !important'>"+temp1[j]+"</span>");
+                      }
+                    }else                                        
+                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
                 }
                 $(this).find('div').html(str);
             });            
