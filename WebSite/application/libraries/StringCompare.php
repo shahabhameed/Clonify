@@ -181,7 +181,9 @@ class StringCompare{
 
   }  
   
-  function getDifferenceBetweenStrings1($s1, $s2, $s1_start_line, $s2_start_line) {
+  function getDifferenceBetweenStrings1($s1, $s2, $s1_start_line, $s2_start_line, $start_col, $end_col) {
+      $s1 = substr($s1, $start_col, strlen($s1));
+      $s2 = substr($s2, $start_col, strlen($s2));
       $i = 0;
       $s1_len = strlen($s1);
       $s2_len = strlen($s2);
@@ -256,12 +258,12 @@ class StringCompare{
       //var_dump($s1_copy);
       $comma_separated = implode("", $clean_result);
       
-      return array_merge($s1_copy, $s2_copy);
+      //return array_merge($s1_copy, $s2_copy);
       
-//      $different = implode(" ", $s1_copy);
-//      $different2 = implode(" ", $s2_copy);
-//      $return_array[0] = $different;
-//      $return_array[1] = $different2;
+      $different = implode(" ", $s1_copy);
+      $different2 = implode(" ", $s2_copy);
+      $return_array[0] = $different;
+      $return_array[1] = $different2;
       return $return_array;
     }
 }  

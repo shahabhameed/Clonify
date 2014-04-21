@@ -58,7 +58,8 @@ class Home extends CI_Controller {
         $start_col = $this->input->post('strt_col');
         $end_col = $this->input->post('end_col');
         $window_id = $this->input->post('window_id');
-        $col_code_id = $window_id % 2;        
+        $col_code_id = $window_id % 2; 
+        $color_code = "";
         if ($col_code_id == 0){
           $color_code = "#00FF00";
         }else{
@@ -207,7 +208,7 @@ class Home extends CI_Controller {
         $first_row = $miniMapLinks[0];
 
         echo "<span><input type='hidden' id='startline-" . $window_id . "' value='" . $first_row . "'></span>";
-        echo $obj->getFormattedCode();
+        echo $obj->getFormattedCode()."---!!!^^^".json_encode($this->common->extractFirstAndLastLine($filePath, $start_line, $end_line))."---!!!^^^".$color_code;
     }
 
     public function SingleCloneClassByFile() {
@@ -390,11 +391,13 @@ class Home extends CI_Controller {
         $file1_clone_string = $this->common->extractClonedSubstring($this->input->post('file_1_path'), $this->input->post('file_1_start_line'), $this->input->post('file_1_end_line'), $this->input->post('file_1_start_col'), $this->input->post('file_1_end_col'));
         $file2_clone_string = $this->common->extractClonedSubstring($this->input->post('file_2_path'), $this->input->post('file_2_start_line'), $this->input->post('file_2_end_line'), $this->input->post('file_2_start_col'), $this->input->post('file_2_end_col'));
         $obj = new StringCompare();
-        $test_result = $obj->getDifferenceBetweenStrings1($file1_clone_string, $file2_clone_string, $this->input->post('file_1_start_line'), $this->input->post('file_2_start_line'));
+        $test_result = $obj->getDifferenceBetweenStrings1($file1_clone_string, $file2_clone_string, $this->input->post('file_1_start_line'), $this->input->post('file_2_start_line'), $this->input->post('file_1_start_col'), $this->input->post('file_2_end_col'));
 //        echo "<pre>".print_r($test_result)."</pre>";
-        $data = implode(",", $test_result);
+     //   $data = implode(",", $test_result);
 //        $data = json_encode($test_result);
-        echo $data;
+      //  echo $data;
+	  echo json_encode($test_result);
+	  
     }
 
     public function MethodCloneClass() {
