@@ -62,9 +62,10 @@ $(document).ready(function() {
             }
 
         }).yadcf([
-            {column_number : 3,filter_container_id : "atcnumberfilter", filter_type: "range_number_slider"},
-            {column_number : 4,filter_container_id : "apcnumberfilter", filter_type: "range_number_slider"},
-            {column_number : 5,filter_container_id : "sccfilter", filter_type: "range_number_slider"},
+             {column_number : 1,filter_container_id : "scsidfilter"},
+            {column_number : 3,filter_container_id : "atcfilter"},
+            {column_number : 4,filter_container_id : "apcfilter"},
+            {column_number : 5,filter_container_id : "sccnumberfilter"},
         ]);
 
         $('.dataTables_length select').uniform();
