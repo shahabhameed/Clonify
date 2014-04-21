@@ -78,11 +78,11 @@
                                     <span class="txt"><?php echo $this->tank_auth->get_username(); ?></span>
                                     <b class="caret"></b>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="menu">
+                                <ul class="dropdown-menu col-lg-2">
+                                    <li class="menu col-lg-12">
                                         <ul>
-                                            <li><a href="#"><span class="icon16 icomoon-icon-user-plus"></span>Update Profile</a></li>  
-                                            <li><a href="<?php echo site_url('auth/change_password'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Change Password</a></li>                                    
+                                            <li><a href="#"><span class=""></span>Update Profile</a></li>  
+                                            <li><a href="<?php echo site_url('auth/change_password'); ?>"><span class=""></span>Change Password</a></li>                                    
                                         </ul>
                                     </li>
                                 </ul>

@@ -97,7 +97,7 @@ class Treemap_model extends CI_Model {
 			$did = $dirArrT['cmdid'];
 			$filarr = array();
 			//$query = "SELECT directory_name dname, file_name filename, CONCAT(repository_name,directory_name,file_name) filepath, 0 as fsize FROM repository_file f,repository_directory d,	user_repository r WHERE d.id=f.directory_id and d.repository_id=r.id and f.id in(select file_id from invocation_files where cmdirectory_id=$did and invocation_id=$invocationId)";
-            $query = "SELECT i.cmfile_id cmfid, directory_name dname, file_name filename, i.group_id gid, CONCAT(repository_name,directory_name,file_name) filepath, 0 as fsize, 0 as clones FROM repository_file f,repository_directory d,	user_repository r, invocation_files i WHERE d.id=f.directory_id and d.repository_id=r.id and f.id=i.file_id and i.cmdirectory_id=$did and i.invocation_id=$invocationId";
+            $query = "SELECT i.cmfile_id cmfid, directory_id did, directory_name dname, file_name filename, i.group_id gid, CONCAT(repository_name,directory_name,file_name) filepath, 0 as fsize, 0 as clones FROM repository_file f,repository_directory d,	user_repository r, invocation_files i WHERE d.id=f.directory_id and d.repository_id=r.id and f.id=i.file_id and i.cmdirectory_id=$did and i.invocation_id=$invocationId";
 			$result = $this->db->query($query);
 			$dir_files = $result->result();
 			if($dir_files)
@@ -120,7 +120,11 @@ class Treemap_model extends CI_Model {
 					$filarr[$dir_file['cmfid']]=$dir_file;
 				}
 				//$dids[$did]=array("cmdid"=>$did,"did"=>$dirArrT['did'],"dname"=>$dname,"dsize"=>$dir_size,"files"=>$filarr,"children"=>array());
-				$dirData[$dirArrT['did']]=array("cmdid"=>$did,"did"=>$dirArrT['did'],"dname"=>$dname,"dsize"=>$dir_size,"files"=>$filarr,"children"=>array());
+                if($dir_file['did']==$dirArrT['did'])
+                {
+                    $dirData[$dirArrT['did']]=array("cmdid"=>$did,"did"=>$dirArrT['did'],"dname"=>$dname,"dsize"=>$dir_size,"files"=>$filarr,"children"=>array());
+                                    
+                }
 			}
 			//print_r($dids[$did]);
 		}

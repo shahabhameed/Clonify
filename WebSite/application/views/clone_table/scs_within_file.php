@@ -165,7 +165,7 @@
                       <tr class="list_view" data-scsid="<?php echo $result['scs_infile_id'];?>">
                         <td><?php echo $counter;?></td>
                         <td><?php echo $result['scs_infile_id'];?></td>
-                        <td><?php echo $result['scc_id_csv'];?></td>
+                        <td style="text-align:left"><?php echo $result['scc_id_csv'];?></td>
                         <td><?php echo $result['group_id'];?></td>
                         <td><?php echo $result['directory_id'];?></td>
                         <td><?php echo $result['fid'];?></td>

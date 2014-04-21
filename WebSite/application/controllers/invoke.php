@@ -106,12 +106,10 @@ class Invoke extends CI_Controller
 		$results = $this->invoke_model->isInvocationInProgressModelFunc($user_id);
 		
 		$isNumOfRowsNonZero = false;
-		
-		foreach($results as $result){
-			$isNumOfRowsNonZero = true;
-			break;
-		}
-		
+		if(count($results)>0)
+                {
+                    $isNumOfRowsNonZero = true;
+                }	
 		echo $isNumOfRowsNonZero;
 	}
 }

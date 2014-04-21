@@ -33,7 +33,7 @@
         var wizardHeading = document.getElementById("equal-tokens");
         if (buttonNext.value === "Submit")
         {
-           // wizardBody.setAttribute("style", 'display:none');
+            // wizardBody.setAttribute("style", 'display:none');
             wizardHeading.setAttribute("style", 'display:none');
             buttonNext.setAttribute("style", 'display:none');
             buttonBack.setAttribute("style", 'display:none');
@@ -198,7 +198,8 @@
 
                                 <input type="reset" form="wizard" class="btn btn-default pull-left col-lg-1" value="Back" id="back" />
                                 <input type="submit" formmethod="POST" form="wizard" class="btn btn-success pull-right col-lg-1" value="Next" id="submit"   onclick="SelectOnSubmit();
-                                        hideWizard();loadResults();"/>
+                                        hideWizard();
+                                        loadResults();"/>
 
                             </div><!-- End .form-group  -->
 
@@ -235,41 +236,44 @@
                                                                             <div class="form-group ">
                                                                                 <label class="col-lg-6 control-label" for="min_scc_token">Minimum Similarity of SCC in Tokens:</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <INPUT id="min_scc_token" onkeypress="return isNumberKey(event)" type="text" name="min_scc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
+                                                                                    <div class="input-group">
+                                                                                        <INPUT id="min_scc_token" onkeypress="return isNumberKey(event)" type="text" name="min_scc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
+                                                                                    </div>
                                                                                 </div>
                                                                             </div><!-- End .form-group  -->
                                                                             <div class="form-group">
                                                                                 <label class="col-lg-6 control-label" for="methodAnalysis">Detect MCC:</label>
                                                                                 <div class="col-lg-1 " >
-                                                                                    <input class="nostyle" type="checkbox" name="methodAnalysis" id="methodAnalysis" checked="checked" onclick="enable_text(this.checked)" style="width: 1.5em;height: 1.5em; horizontal-align:middle;vertical-align:middle"/>
-                                                                                    <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                                                    <div class="input-group">
+                                                                                        <input class="nostyle" type="checkbox" name="methodAnalysis" id="methodAnalysis" checked="checked" onclick="enable_text(this.checked)" style="width: 1.5em;height: 1.5em; horizontal-align:middle;vertical-align:middle"/>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div><!-- End .form-group  -->	
 
                                                                             <div class="form-group">
                                                                                 <label class="col-lg-6 control-label" for="min_mcc_token">Minimum Similarity of MCC in Tokens:</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <INPUT id="min_mcc_token" onkeypress="return isNumberKey(event)" type="text" name="min_mcc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
-                                                                                    <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                                                    <div class="input-group">
+                                                                                        <INPUT id="min_mcc_token" onkeypress="return isNumberKey(event)" type="text" name="min_mcc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
+                                                                                    </div>
                                                                                 </div>
                                                                             </div><!-- End .form-group  -->
                                                                             <div class="form-group">
                                                                                 <label class="col-lg-6 control-label" for="min_mcc_percent">Minimum Similarity of MCC in Percentage:</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <label class="checkbox-inline">
+                                                                                    <div class="input-group">
                                                                                         <input id="min_mcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_mcc_percent" type="text" value="30" min="0"  max="100" maxlength="3" style="width:50px">
-                                                                                    </label>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="col-lg-offset-2">
-                                                                                    <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
-                                                                                </div>
+
                                                                             </div>
 
                                                                             <div class="form-group">
                                                                                 <label class="col-lg-6 control-label" for="min_fcc_token">Minimum Similarity of FCC in Tokens:</label>
-                                                                                <div class="col-lg-1">
-                                                                                    <INPUT id="min_fcc_token" onkeypress="return isNumberKey(event)" type="text" name="min_fcc_token" class="nostyle form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
-                                                                                    <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
+                                                                                <div class="col-lg-4">
+                                                                                    <div class="input-group">
+                                                                                        <input id="min_fcc_token" onkeypress="return isNumberKey(event)" type="text" name="min_fcc_token" class="form-control" value="30" max="999" min="0" maxlength="3" style="width:50px">
+                                                                                    </div>
                                                                                 </div>
                                                                             </div><!-- End .form-group  -->
                                                                             <div class="form-group">
@@ -279,9 +283,7 @@
                                                                                         <input id="min_fcc_percent" class="form-control" onkeypress="return isNumberKey(event)" name="min_fcc_percent" type="text" value="30" min="0"  max="100" maxlength="3" style="width:50px">
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-lg-1">
-                                                                                    <label style="display:inline-block" class="myErrLbl" id="minTokErr"></label>
-                                                                                </div>
+
                                                                             </div>     
                                                                         </div>
 
@@ -300,23 +302,27 @@
                                                                     </div><!-- End .form-group  -->
                                                                     <div class="form-group">
                                                                         <label class="col-lg-3 control-label" >Language:</label>
-                                                                        <div class="col-lg-6">
-                                                                            <select  name="language" id="language" class="nostyle form-control col-lg-2" style="width:auto" onchange="onLanguageSelect()">
-                                                                                <option></option>
-                                                                                <?php foreach ($languages as $language) { ?>
-                                                                                    <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option><?php } ?>
-                                                                            </select>
+                                                                        <div class="col-lg-8">
+                                                                            <div class="input-group">
+                                                                                <select  name="language" id="language" class="nostyle form-control col-lg-2" style="width:auto" onchange="onLanguageSelect()">
+                                                                                    <option selected="true"></option>
+                                                                                    <?php foreach ($languages as $language) { ?>
+                                                                                        <option value="<?php echo $language->id ?>"><?php echo $language->language ?></option><?php } ?>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
 
                                                                     </div><!-- End .form-group  -->
                                                                     <div class="form-group">
                                                                         <label class="col-lg-3 control-label" >Grouping Mode:</label>
-                                                                        <div class="col-lg-6">
-                                                                            <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2" style="width:auto">
-                                                                                <option></option>
-                                                                                <option value="mixed" selected="true">Mixed Mode</option>
-                                                                                <option value="across_groups">Across Groups</option>
-                                                                            </select>  
+                                                                        <div class="col-lg-8">
+                                                                            <div class="input-group">
+                                                                                <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2" style="width:auto">
+                                                                                    <option selected="true"></option>
+                                                                                    <option value="mixed" >Mixed Mode</option>
+                                                                                    <option value="across_groups">Across Groups</option>
+                                                                                </select>  
+                                                                            </div>
                                                                         </div>
 
                                                                     </div><!-- End .form-group  -->
@@ -381,9 +387,11 @@
                                                             <div class="form-group" >
                                                                 <label class="col-lg-0 control-label pull-left" >Group Count:</label>
                                                                 <div class="row col-lg-12">
-                                                                    <div class="col-lg-6">
-                                                                        <input  READONLY name="groupCount" id="groupCount"   type="text"  class="form-control" value="0" style="width:50px; height:auto;">
-                                                                        <select id="hiddenGroup" name="hiddenGroup[]" style="display:none" multiple="multiple"></select>
+                                                                    <div class="col-lg-8">
+                                                                        <div class="input-group">
+                                                                            <input  READONLY name="groupCount" id="groupCount"   type="text"  class="form-control" value="0" style="width:50px; height:auto;">
+                                                                            <select id="hiddenGroup" name="hiddenGroup[]" style="display:none" multiple="multiple"></select>
+                                                                        </div>
                                                                     </div>
 
                                                                 </div>
@@ -527,8 +535,8 @@
                                                                 <span class="icon16 icomoon-icon-equalizer-2"></span>
                                                                 <span>Equal Tokens</span> 
 
-                                                                 <button  type="button" class="btn btn-success btn-sm right marginR10" onclick="createNewElement('Rule', 'equal');">Add Rule</button>
-                                                              
+                                                                <button  type="button" class="btn btn-success btn-sm right marginR10" onclick="createNewElement('Rule', 'equal');">Add Rule</button>
+
                                                             </h4>
                                                             <!--<a href="#" class="minimize">Minimize</a>-->
                                                         </div>

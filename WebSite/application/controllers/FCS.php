@@ -152,7 +152,8 @@ class FCS extends CI_Controller {
         echo "<span><input type='hidden' id='startline-" . $window_id . "' value='" . $first_row . "'></span>";
         echo $obj->getFormattedCode();
     }
-   function parseDirStructure($directory, $parentName, $isGroup) {
+
+    function parseDirStructure($directory, $parentName, $isGroup, &$map) {
         $output = "";
         if (!empty($directory)) {
             if ($directory ['dname'] == "") {
@@ -162,39 +163,45 @@ class FCS extends CI_Controller {
             }
             $dsize = $directory['dsize'];
 
-            $output.=$this->createParent($directory, $parentName);
+            $output.=$this->createParent($directory, $parentName, $map);
 
             $children = $directory['children'];
             if (!empty($children)) {
                 foreach ($children as $child => $childData) {
-                    $output.=$this->parseDirStructure($childData, $dname, $isGroup);
+                    $output.=$this->parseDirStructure($childData, $dname, $isGroup, $map);
                 }
             }
 
             $files = $directory['files'];
-            $output.=$this->traverseFiles($files, $isGroup);
+            $output.=$this->traverseFiles($files, $isGroup, $map);
         }
         return $output;
     }
 
-    function createParent($directory, $parentName) {
-        $color="57AC57";
-        $output="";
+    function createParent($directory, $parentName, &$map) {
+        $color = "57AC57";
+        $output = "";
         if ($directory['dname'] != "") {
-            $output="{";
+            $output = "{";
             $output.= "label: '" . $directory['dname'] . "',";
             $output.= "value: 1,";
             $output.="parent: '" . $parentName . "',";
             $output.="color: '#C8D0D2' ,";
             $output.="},";
+            $map[] = array(
+                'label' => $directory['dname'],
+                'value' => 1,
+                'parent' => $parentName,
+                'color' => '#C8D0D2',
+            );
         }
-        /*else {
-            $output.="label: '" . $parentName . "',";
-            $output.="value: 1,";
-            $output.="parent: 'Root',";            
-        }*/
+        /* else {
+          $output.="label: '" . $parentName . "',";
+          $output.="value: 1,";
+          $output.="parent: 'Root',";
+          } */
         //$output.= "color: '#".$color."',";
-        
+
         return $output;
     }
 
@@ -206,72 +213,63 @@ class FCS extends CI_Controller {
         return random_color_part() . random_color_part() . random_color_part();
     }
 
-    function traverseFiles($files, $isGroup) {
+    function traverseFiles($files, $isGroup, &$map) {
         $output = "";
         if (!empty($files)) {
-            
+
             $isFirst = true;
-            foreach ($files as $file => $filedata) 
-            {
-                if($isFirst)
-                {
+            foreach ($files as $file => $filedata) {
+                if ($isFirst) {
                     $min = $max = $filedata['clones'];
                     $isFirst = false;
                 }
-                if($filedata['clones'] > $max)
-                {
+                if ($filedata['clones'] > $max) {
                     $max = $filedata['clones'];
                 }
-                if($filedata['clones'] <= $min)
-                {
+                if ($filedata['clones'] <= $min) {
                     $min = $filedata['clones'];
                 }
             }
-            $rangeSize = round(($max - $min)/4);
+            $rangeSize = round(($max - $min) / 4);
             $r1 = $min + $rangeSize;
             $r2 = $r1 + $rangeSize;
             $r3 = $r2 + $rangeSize;
             foreach ($files as $file => $filedata) {
-                
+                $temp = array();
                 $output.="{";
-                if($isGroup)
-                {
+                if ($isGroup) {
                     $output.="label: '" . $filedata['gid'] . "',";
-                }
-                else
-                {
+                    $temp['label'] = $filedata['gid'];
+                } else {
                     //$output.="label: '" . $filedata['cmfid'] . "',";
                     $output.="label: ' ',";
+                    $temp['label'] = ' ';
                 }
                 $output.="value: " . $filedata['fsize'] . ",";
+                $temp['value'] = $filedata['fsize'];
                 //$output.="value: " . $filedata['clones'] . ",";
-                if(isset($filedata['clones']))
-                {
-                    if($filedata['clones']>=$min && $filedata['clones']<=$r1)
-                    {
+                if (isset($filedata['clones'])) {
+                    if ($filedata['clones'] >= $min && $filedata['clones'] <= $r1) {
                         $output.= "color: '#E3E3E3',";
-                    }
-                    else if($filedata['clones']>$r1 && $filedata['clones']<=$r2)
-                    {
+                        $temp['color'] = '#E3E3E3';
+                    } else if ($filedata['clones'] > $r1 && $filedata['clones'] <= $r2) {
                         $output.= "color: '#C4C4C4',";
-                    }
-                    else if($filedata['clones']>$r2 && $filedata['clones']<=$r3)
-                    {
+                        $temp['color'] = '#C4C4C4';
+                    } else if ($filedata['clones'] > $r2 && $filedata['clones'] <= $r3) {
                         $output.= "color: '#9E9E9E',";
-                    }
-                    else if($filedata['clones']>$r3 && $filedata['clones']<=$max)
-                    {
+                        $temp['color'] = '#9E9E9E';
+                    } else if ($filedata['clones'] > $r3 && $filedata['clones'] <= $max) {
                         $output.= "color: '#696969',";
+                        $temp['color'] = '#696969';
                     }
                 }
 
-                if($filedata['dname']=='')
-                {
+                if ($filedata['dname'] == '') {
                     $output.="parent: 'Root',";
-                }
-                else
-                {
+                    $temp['parent'] = 'Root';
+                } else {
                     $output.="parent: '" . $filedata['dname'] . "',";
+                    $temp['parent'] = $filedata['dname'];
                 }
                 //Uncomment to randomize color of each file block
                 //$output.= "color: '#".random_color()."',";
@@ -279,33 +277,43 @@ class FCS extends CI_Controller {
                 $output.="filepath: '" . $filedata['filepath'] . "',";
                 $output.="filename: '" . $filedata['filename'] . "',";
                 //$output.="data: {fid:".$filedata['cmfid'].",description: '" . $filedata['dname'] . $filedata['filename'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
-                $output.="data: {fid:".$filedata['cmfid'].",description: 'File ID: " . $filedata['cmfid'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
+                $output.="data: {fid:" . $filedata['cmfid'] . ",description: 'File ID: " . $filedata['cmfid'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'] . "', title: '" . $filedata['filename'] . "'}";
                 $output.="},";
+                $temp['fid'] = $filedata['cmfid'];
+                $temp['filepath'] = $filedata['filepath'];
+                $temp['filename'] = $filedata['filename'];
+                $temp['data'] = (array('fid' => $filedata['cmfid'], 'description' => "File ID: " . $filedata['cmfid'] . "</br>File Size: " . $filedata['fsize'] . "</br>No. of Clones: " . $filedata['clones'], 'title' => $filedata['filename']) );
+
+                $map[] = $temp;
             }
         }
         return $output;
     }
 
-    public function generateTreeMapData($treemapdata,$isGroup) {
-        $output="[";
-        
+    public function generateTreeMapData($treemapdata, $isGroup, &$map) {
+
+        $map[] = array(
+            'label' => 'Root',
+            'value' => null,
+            'color' => '#C8D0D2',
+        );
+        $output = "[";
         $output.="{";
         $output.="label: 'Root',";
         $output.="value: null,";
         $output.="color: '#C8D0D2'";
         $output.="},";
-        
-        if(isset($treemapdata ))
-        {
+
+        if (isset($treemapdata)) {
             foreach ($treemapdata as $dirList => $data) {
-               $output.= $this->parseDirStructure($data, "Root",$isGroup);
+                $output.= $this->parseDirStructure($data, "Root", $isGroup, $map);
             }
-        }        
+        }
         $output.="]";
         //echo "<pre>".print_r($output,true)."</pre>";
-		//die();
+        //die();
         return $output;
-        }
+    }
 
     public function FCSWithinGroup() {
         $viewData = array();
@@ -321,10 +329,13 @@ class FCS extends CI_Controller {
                 $secondary_table_rows[$row['fcs_ingroup_id']] = $this->scc->getAllFCSWithinGroupSecondaryTableRows($row, $invocationId);
             }
         }
-        
+
         $gids = array_unique($gids);
-        $treeMapData=$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
-        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData,true);
+        $treeMapData = $this->treemap_model->get_fcs_grp_treemap($invocationId, $gids);
+        $map = array();
+        $t = $this->generateTreeMapData($treeMapData, true, $map);
+        $td = json_encode($map);
+        $viewData['treemapdata'] =$td;// $this->generateTreeMapData($treeMapData, true, $map);
         $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
@@ -347,23 +358,60 @@ class FCS extends CI_Controller {
                 $secondary_table_rows[$row['fcs_crossgroup_id']] = $this->scc->getAllFCSCrossGroupSecondaryTableRows($row, $invocationId);
             }
         }
-        foreach($secondary_table_rows as $temp1)
-        {
+        foreach ($secondary_table_rows as $temp1) {
             $tmp2 = array_keys($temp1);
-            foreach($tmp2 as $tmp22)
-            {
+            foreach ($tmp2 as $tmp22) {
                 $gids[] = $tmp22;
             }
         }
         $gids = array_unique($gids);
-        $treeMapData =$this->treemap_model->get_fcs_grp_treemap($invocationId,$gids);
-        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData,true);
-        $viewData['secondary_table_rows'] = $secondary_table_rows;        
+
+        $treeMapData = $this->treemap_model->get_fcs_grp_treemap($invocationId, $gids);
+        $map = array();
+        $t = $this->generateTreeMapData($treeMapData, true, $map);
+        $td = json_encode($map);
+
+        $viewData['treemapdata'] = $td;
+        $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;
         $this->load->view('partials/main_header');
         $this->load->view('clone_table/fcs_cross_group.php', $viewData);
+        $this->load->view('partials/main_footer');
+        return $viewData['treemapdata'];
+    }
+
+    public function FCSGroupTreeMap() {
+        $viewData = array();
+        $invocationId = $this->getInvocationIdFromURL();
+        $gids = array();
+        $result = $this->scc->getAllFCSCrossGroup($invocationId);
+        $viewData['parent_table_data'] = $result;
+        $secondary_table_rows = array();
+        if ($result) {
+            foreach ($result as $row) {
+                //$gids[] = $row['group_id'];
+                $secondary_table_rows[$row['fcs_crossgroup_id']] = $this->scc->getAllFCSCrossGroupSecondaryTableRows($row, $invocationId);
+            }
+        }
+        foreach ($secondary_table_rows as $temp1) {
+            $tmp2 = array_keys($temp1);
+            foreach ($tmp2 as $tmp22) {
+                $gids[] = $tmp22;
+            }
+        }
+        $gids = array_unique($gids);
+        $treeMapData = $this->treemap_model->get_fcs_grp_treemap($invocationId, $gids);
+        $map = array();
+        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData, true, $map);
+
+        $viewData['secondary_table_rows'] = $secondary_table_rows;
+        $viewData['treedata'] = create_tree($invocationId);
+        $viewData['showCloneView'] = true;
+        $viewData['invocationId'] = $invocationId;
+        $this->load->view('groupTreeMap', $viewData);
+        $this->load->view('partials/main_header');
         $this->load->view('partials/main_footer');
     }
 
@@ -384,7 +432,12 @@ class FCS extends CI_Controller {
         //$dids = array(0,1);
         $dids = array_unique($dids);
         $treeMapData = $this->treemap_model->get_fcs_dir_treemap($invocationId, $dids);
-        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData,false);     
+        
+        $map = array();
+        $t = $this->generateTreeMapData($treeMapData, false, $map);
+        $td = json_encode($map);
+        
+        $viewData['treemapdata'] = $td;//$this->generateTreeMapData($treeMapData, false, $map);
         $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['showCloneView'] = true;
         $viewData['invocationId'] = $invocationId;
@@ -410,8 +463,11 @@ class FCS extends CI_Controller {
         }
         $dids = array_unique($dids);
         $treeMapData = $this->treemap_model->get_fcs_dir_treemap($invocationId, $dids);
-        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData,false);
-
+        $map = array();
+        $t = $this->generateTreeMapData($treeMapData, false, $map);
+        $td = json_encode($map);
+        $viewData['treemapdata'] = $td;//$this->generateTreeMapData($treeMapData, false, $map);
+        
         $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['showCloneView'] = true;
@@ -455,9 +511,9 @@ class FCS extends CI_Controller {
             }
         }
         $viewData['treemapFCCdata'] = json_encode($secondary_table_rows);
-        
+
         $dids = array();
-        $result = $this->scc->getAllFCCDIR($invocationId);                
+        $result = $this->scc->getAllFCCDIR($invocationId);
         if ($result) {
             foreach ($result as $row) {
                 $dids[] = $row['directory_id'];
@@ -465,7 +521,10 @@ class FCS extends CI_Controller {
         }
         $dids = array_unique($dids);
         $treeMapData = $this->treemap_model->get_fcs_dir_treemap($invocationId, $dids);
-        $viewData['treemapdata'] = $this->generateTreeMapData($treeMapData,false);
+        $map = array();
+        $t = $this->generateTreeMapData($treeMapData, false, $map);
+        $td = json_encode($map);
+        $viewData['treemapdata'] = $t;//$this->generateTreeMapData($treeMapData, false, $map);
         $viewData['treedata'] = create_tree($invocationId);
         $viewData['secondary_table_rows'] = $secondary_table_rows;
         $viewData['invocationId'] = $invocationId;
@@ -548,5 +607,4 @@ class FCS extends CI_Controller {
         $this->load->view('partials/main_footer');
     }
 
- 
 }
