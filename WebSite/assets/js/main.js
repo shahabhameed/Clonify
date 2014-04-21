@@ -741,6 +741,11 @@ Clonify.SCC = {
     };
     
     $.post(_url, _params, function(r) {
+      var tt = r.split("---!!!^^^");
+      var color = tt[2];
+      r = tt[0];
+      tt = eval("(" + tt[1] + ')');
+      
       $(".code-window-containter").show();
       if ($("#code_window1").html() == ""){
         code_compare_global_attributes.file_1_path = path;
@@ -809,7 +814,18 @@ Clonify.SCC = {
           start_line = $("#startline-"+window_id).val();
         }
         window.location.hash='geshi-window'+window_id+'-'+start_line;
-      }      
+      }
+      
+      var start_width = $('#geshi-window'+window_id+'-'+start_line).width();
+      var tt_col = tt[0].substr(strt_col,tt[0].length);
+      tt_col = '<div>'+tt[0].substr(0, (strt_col-1))+'<span style="background-color: '+color+' !important;width:'+start_width+'px !important;">'+tt_col+'</span></div>';
+      var tt_end_col = tt[1].substr(0,end_col);
+      tt_end_col = '<div><span style="background-color: '+color+' !important">'+tt_end_col+'</span>'+tt[1].substr(end_col, tt[1].length)+'</div>';
+      $('#geshi-window'+window_id+'-'+start_line).html(tt_col);
+      $('#geshi-window'+window_id+'-'+end_line).html(tt_end_col);
+      $('#geshi-window'+window_id+'-'+start_line).css('background-color','none repeat scroll 0 0 rgba(0, 0, 0, 0) !important')
+      $('#geshi-window'+window_id+'-'+end_line).css('background-color','none repeat scroll 0 0 rgba(0, 0, 0, 0) !important')
+      
     });
 	
     	$('#code-window1').wrap('<div class="responsive" />');
@@ -826,12 +842,8 @@ Clonify.SCC = {
   },
   calculateCloneDifferences : function(){
       
-      console.debug(code_compare_global_attributes);
-      
         var _url = base_url + "home/cloneDifference";
         $.post(_url, code_compare_global_attributes, function(r) { 
-          
-          console.log(r);
 
             var selector2 = "";
             for (var i = code_compare_global_attributes.file_2_start_line; i <= code_compare_global_attributes.file_2_end_line; i++){
@@ -850,12 +862,19 @@ Clonify.SCC = {
             }
             selector2 = selector2.substring(0, selector2.length-1);
             
-            console.log("selector 2 : " + selector2);
 
             $(selector2).poshytip({
               content: 'Clone Difference is : '+r
             });
             
+
+//            var temp = r.split(",");
+//            var file_1_difference_arr = temp;
+//            var file_2_difference_arr = temp;
+//            
+//            console.log('File 1 diff : '+file_1_difference_arr);
+//            console.log('File 2 diff : '+file_2_difference_arr);
+
            // var temp = r.split(",");
            // var file_1_difference_arr = temp;
             //var file_2_difference_arr = temp;
@@ -867,6 +886,7 @@ Clonify.SCC = {
 			
 			console.log(file_1_difference_arr);
 			console.log(file_2_difference_arr);
+
                         
 						
             $(selector2).each(function(){
