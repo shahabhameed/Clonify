@@ -27,6 +27,13 @@ class Home extends CI_Controller {
         $this->load->view('home.php');
         $this->load->view('partials/main_footer');
     }
+      public function dashboard() {
+        $data['user_id'] = $this->tank_auth->get_user_id();
+        $data['username'] = $this->tank_auth->get_username();
+        $this->load->view('partials/main_header', $data);
+        $this->load->view('dashboard.php');
+        $this->load->view('partials/main_footer');
+    }
 
     public function customloadcode() {
         $filePath = $this->input->post('file_path');

@@ -36,7 +36,7 @@
                 //alert("An error occured: " + xhr.status + " " + xhr.statusText);
             }
         });
-        setTimeout('loadNow()', 10000);
+        //setTimeout('loadNow()', 10000);
     }
 
     $(function() {
@@ -58,7 +58,7 @@
         <div class="mainnav">
             <ul>
 
-                <li id="repositoryListItem" style="display:none;"><a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>Manage Repository</a></li>
+                <li id="repositoryListItem" style="display:block;"><a href="<?php echo site_url('home/dashboard/'); ?>"><span class="icon16 fa fa-cloud-upload"></span>Manage Repository</a></li>
 
                 <li><a href=" <?php echo site_url('invoke/'); ?>"><span class="icon16  icomoon-icon-equalizer-2"></span>Detect Clones</a></li>
 
