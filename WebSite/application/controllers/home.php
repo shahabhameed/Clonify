@@ -385,9 +385,11 @@ class Home extends CI_Controller {
         $obj = new StringCompare();
         $test_result = $obj->getDifferenceBetweenStrings1($file1_clone_string, $file2_clone_string, $this->input->post('file_1_start_line'), $this->input->post('file_2_start_line'));
 //        echo "<pre>".print_r($test_result)."</pre>";
-        $data = implode(",", $test_result);
+     //   $data = implode(",", $test_result);
 //        $data = json_encode($test_result);
-        echo $data;
+      //  echo $data;
+	  echo json_encode($test_result);
+	  
     }
 
     public function MethodCloneClass() {

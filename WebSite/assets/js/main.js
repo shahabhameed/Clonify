@@ -856,10 +856,19 @@ Clonify.SCC = {
               content: 'Clone Difference is : '+r
             });
             
-            var temp = r.split(",");
-            var file_1_difference_arr = temp;
-            var file_2_difference_arr = temp;
+           // var temp = r.split(",");
+           // var file_1_difference_arr = temp;
+            //var file_2_difference_arr = temp;
+			console.log(r);
+			var temp = eval("(" + r + ')');
+			console.log(temp);
+            var file_1_difference_arr = temp[0].split(" ");
+            var file_2_difference_arr = temp[1].split(" ");
+			
+			console.log(file_1_difference_arr);
+			console.log(file_2_difference_arr);
                         
+						
             $(selector2).each(function(){
                 var str = $(this).find('div').html();
                 for(var i = 0; i < file_2_difference_arr.length; i++){
