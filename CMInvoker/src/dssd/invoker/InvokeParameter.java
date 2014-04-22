@@ -13,6 +13,8 @@ public class InvokeParameter {
 	private String equal_tokens;
 	private Integer min_similatiry_MCC_tokens;
 	private Integer min_similatiry_MCC_percent;
+	private Integer min_similatiry_FCC_tokens;
+	private Integer min_similatiry_FCC_percent;
 	private List<List<InvocationFileInfo>> input_files = new ArrayList<List<InvocationFileInfo>>();
 	
 	
@@ -30,7 +32,9 @@ public class InvokeParameter {
 			String suppressed_tokens,
 			String equal_tokens,
 			Integer min_similatiry_MCC_tokens,
-			Integer min_similatiry_MCC_percent
+			Integer min_similatiry_MCC_percent,
+			Integer min_similatiry_FCC_tokens,
+			Integer min_similatiry_FCC_percent
 	)
 	{
 		this.invocation_id = invocation_id;
@@ -41,6 +45,8 @@ public class InvokeParameter {
 		this.equal_tokens = equal_tokens;
 		this.min_similatiry_MCC_tokens = min_similatiry_MCC_tokens;
 		this.min_similatiry_MCC_percent = min_similatiry_MCC_percent;
+		this.min_similatiry_FCC_tokens = min_similatiry_FCC_tokens;
+		this.min_similatiry_FCC_percent = min_similatiry_FCC_percent;
 	}
 	
 	/**
@@ -163,6 +169,15 @@ public class InvokeParameter {
 	public void setMin_similatiry_MCC_percent(Integer min_similatiry_MCC_percent) {
 		this.min_similatiry_MCC_percent = min_similatiry_MCC_percent;
 	}
+	
+	public Integer getMin_similatiry_FCC_percent() {
+		return min_similatiry_FCC_percent;
+	}
+
+	public void setMin_similatiry_FCC_percent(Integer min_similatiry_FCC_percent) {
+		this.min_similatiry_FCC_percent = min_similatiry_FCC_percent;
+	}
+
 
 	public String toString(){
 		return 
