@@ -28,7 +28,7 @@
                             <div class="panel panel-default gradient">
                                 <div class="panel-heading" style="height:45px;">
                                     <h4><span class="icon16 fa fa-cloud-upload"></span>
-                                        <span >File Manager</span>
+                                        <span >Repository</span>
                                         <button class=" btn btn-success  btn-sm  right marginR10" type="submit" style="width:100px;">Update</button>
                                     </h4>
                                     

@@ -27,7 +27,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default gradient">
                                 <div class="panel-heading" style="height:45px;">
-                                    <h4><span class="icon16 fa fa-cloud-upload"></span>
+                                    <h4><span class="icon16 fa fa-home"></span>
                                         <span >Home</span>
                                         
                                     </h4>
