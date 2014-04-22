@@ -319,8 +319,8 @@
                                                                             <div class="input-group">
                                                                                 <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2" style="width:auto">
                                                                                     <option selected="true"></option>
-                                                                                    <option value="mixed" >Mixed Mode</option>
-                                                                                    <option value="across_groups">Across Groups</option>
+                                                                                    <option value="0">Mixed Mode</option>
+                                                                                    <option value="1">Across Groups</option>
                                                                                 </select>  
                                                                             </div>
                                                                         </div>
