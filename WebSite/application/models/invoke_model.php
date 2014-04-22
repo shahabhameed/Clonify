@@ -145,6 +145,8 @@ class Invoke_model extends CI_Model
 		
 		$mcc_min_sim_tok = $this->session->userdata('mcc_min_sim_tok');
 		$mcc_min_sim_per = $this->session->userdata('mcc_min_sim_per');
+        $fcc_min_sim_tok = $this->session->userdata('fcc_min_sim_tok');
+		$fcc_min_sim_per = $this->session->userdata('fcc_min_sim_per');
         
 		$iname = $this->session->userdata('iname');
 		$grouping_choice = $this->session->userdata('grouping_choice');
@@ -182,7 +184,7 @@ class Invoke_model extends CI_Model
 		$invoke_id = mysql_insert_id();
 		$this->session->set_userdata(array('invoke_id'=>$invoke_id));
 
-		$this->db->query("INSERT INTO invocation_parameters(min_similatiry_SCC_tokens,grouping_choice,method_analysis,invocation_id,suppressed_tokens,equal_tokens,language_id,min_similarity_MCC_tokens,min_similarity_MCC_percentage) VALUES('$scc_min_sim','$grouping_choice','$method_analysis','$invoke_id','$supTokens','$eqTokens','$language','$mcc_min_sim_tok','$mcc_min_sim_per')");
+		$this->db->query("INSERT INTO invocation_parameters(min_similatiry_SCC_tokens,grouping_choice,method_analysis,invocation_id,suppressed_tokens,equal_tokens,language_id,min_similarity_MCC_tokens,min_similarity_MCC_percentage,min_similarity_FCC_tokens,min_similarity_FCC_percentage) VALUES('$scc_min_sim','$grouping_choice','$method_analysis','$invoke_id','$supTokens','$eqTokens','$language','$mcc_min_sim_tok','$mcc_min_sim_per','$fcc_min_sim_tok','$fcc_min_sim_per')");
 		
 		//FILE GROUPS
 		$groupList = $_POST['hiddenGroup']; //get hidden list
@@ -197,7 +199,6 @@ class Invoke_model extends CI_Model
                     }
                     $groupId++;
                   }
-
 		}
 		
 /*		
@@ -389,6 +390,8 @@ class Invoke_model extends CI_Model
 		$scc_min_sim = $_POST['min_scc_token'];
 		$mcc_min_sim_tok = $_POST['min_mcc_token'];
 		$mcc_min_sim_per = $_POST['min_mcc_percent'];
+        $fcc_min_sim_tok = $_POST['min_fcc_token'];
+		$fcc_min_sim_per = $_POST['min_fcc_percent'];
 		$language = $_POST['language'];
         
         
@@ -485,7 +488,7 @@ class Invoke_model extends CI_Model
 		
 		//Session
 		
-		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment,'mcc_min_sim_tok'=>$mcc_min_sim_tok,'mcc_min_sim_per'=>$mcc_min_sim_per));
+		$this->session->set_userdata(array('scc_min_sim'=>$scc_min_sim,'method_analysis'=>$method_analysis,'grouping_choice'=>$grouping_choice,'language'=>$language,'iname'=>$iName,'icomment'=>$iComment,'mcc_min_sim_tok'=>$mcc_min_sim_tok,'mcc_min_sim_per'=>$mcc_min_sim_per,'fcc_min_sim_tok'=>$fcc_min_sim_tok,'fcc_min_sim_per'=>$fcc_min_sim_per));
 		$this->session->set_userdata(array('supTokens'=>$supTokens));
 		$this->session->set_userdata(array('eqTokens'=>$eqTokens));
         $this->session->set_userdata(array('supTokensCom'=>$supTokensCom));
