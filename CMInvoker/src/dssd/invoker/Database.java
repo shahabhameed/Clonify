@@ -103,7 +103,9 @@ public class Database {
 															results.getString("suppressed_tokens"),
 															results.getString("equal_tokens"),
 															results.getInt("min_similarity_MCC_tokens"),
-															results.getInt("min_similarity_MCC_percentage")
+															results.getInt("min_similarity_MCC_percentage"),
+															results.getInt("min_similarity_FCC_tokens"),
+															results.getInt("min_similarity_FCC_percentage")
                                                             );
 					
 					System.out.println(" \ninvokeParameter: " +invokeParameter.toString());
