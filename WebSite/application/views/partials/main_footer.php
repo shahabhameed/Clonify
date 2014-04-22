@@ -16,6 +16,15 @@
 </body>    
 
 <!-- plugins -->
+<!-- Charts plugins -->
+
+<script type="text/javascript" src="<?= asset_url('plugins/charts/flot/jquery.flot.js'); ?>"></script>        
+<script type="text/javascript" src="<?= asset_url('plugins/charts/flot/jquery.flot.grow.js'); ?>"></script>        
+<script type="text/javascript" src="<?= asset_url('plugins/charts/flot/jquery.flot.resize.js'); ?>"></script>    
+<script type="text/javascript" src="<?= asset_url('plugins/charts/flot/jquery.flot.tooltip_0.4.4.js'); ?>"></script>     
+<script type="text/javascript" src="<?= asset_url('plugins/charts/flot/jquery.flot.orderBars.js'); ?>"></script>    
+  
+    
 <script type="text/javascript" src="<?= asset_url('plugins/charts/sparkline/jquery.sparkline.min.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('plugins/charts/knob/jquery.knob.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('plugins/forms/uniform/jquery.uniform.min.js'); ?>"></script>
@@ -83,7 +92,7 @@
 <script type="text/javascript" src="<?= asset_url('js/jquery-ui.min.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('js/forms.js'); ?>"></script>
 <script type="text/javascript" src="<?= asset_url('js/form-validation.js'); ?>"></script>
-
+<script type="text/javascript" src="<?= asset_url('js/charts.js'); ?>"></script>
 
 
 </html>

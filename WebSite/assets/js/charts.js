@@ -3,14 +3,6 @@ $(document).ready(function() {
 
 	var divElement = $('div'); //log all div elements
 
-	//Boostrap modal
-	$('#myModal').modal({ show: false});
-	
-	//add event to modal after closed
-	$('#myModal').on('hidden', function () {
-	  	console.log('modal is closed');
-	})
-
 	//Simple chart 
     if (divElement.hasClass('simple-chart')) {
 	$(function () {
