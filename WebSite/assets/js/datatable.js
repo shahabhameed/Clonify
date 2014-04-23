@@ -88,8 +88,8 @@ $(document).ready(function() {
             }
         }).yadcf([
             {column_number : 1,filter_container_id : "scsidnumberfilter"},
-            {column_number : 3,filter_container_id : "atcnumberfilter", filter_type: "range_number_slider"},
-            {column_number : 4,filter_container_id : "apcnumberfilter", filter_type: "range_number_slider"}
+            {column_number : 3,filter_container_id : "atcnumberfilter"},
+            {column_number : 4,filter_container_id : "apcnumberfilter"}
         ]);
         $('.dataTables_length select').uniform();
         $('.dataTables_paginate > ul').addClass('pagination');
