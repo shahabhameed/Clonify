@@ -30,6 +30,8 @@ class Invoke_model extends CI_Model
         $grouping_choice = $_POST['groupingChoice'];
 		$files = $_POST['files'];
 		
+                
+                
 		$this->db->query("INSERT INTO invocation_parameters(min_similatiry_SCC_tokens,grouping_choice,method_analysis,invocation_id) VALUES('$scc_min_sim','$grouping_choice','$grouping_choice','$invoke_id')");
 		
 		//$suppresed = $_POST['suppresed'];
@@ -184,7 +186,8 @@ class Invoke_model extends CI_Model
 		$invoke_id = mysql_insert_id();
 		$this->session->set_userdata(array('invoke_id'=>$invoke_id));
 
-		$this->db->query("INSERT INTO invocation_parameters(min_similatiry_SCC_tokens,grouping_choice,method_analysis,invocation_id,suppressed_tokens,equal_tokens,language_id,min_similarity_MCC_tokens,min_similarity_MCC_percentage,min_similarity_FCC_tokens,min_similarity_FCC_percentage) VALUES('$scc_min_sim','$grouping_choice','$method_analysis','$invoke_id','$supTokens','$eqTokens','$language','$mcc_min_sim_tok','$mcc_min_sim_per','$fcc_min_sim_tok','$fcc_min_sim_per')");
+                
+		$this->db->query("INSERT INTO invocation_parameters(min_similatiry_SCC_tokens,grouping_choice,method_analysis,invocation_id,suppressed_tokens,equal_tokens,language_id,min_similarity_MCC_tokens,min_similarity_MCC_percentage,min_similarity_FCC_tokens,min_similarity_FCC_percent) VALUES('$scc_min_sim','$grouping_choice','$method_analysis','$invoke_id','$supTokens','$eqTokens','$language','$mcc_min_sim_tok','$mcc_min_sim_per','$fcc_min_sim_tok','$fcc_min_sim_per')");
 		
 		//FILE GROUPS
 		$groupList = $_POST['hiddenGroup']; //get hidden list

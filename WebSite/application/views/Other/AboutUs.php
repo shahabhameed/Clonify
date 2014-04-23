@@ -74,7 +74,8 @@
                                                                             <p style="text-align: center">Shahab Hameed</p>
                                                                         </div>
                                                                     </div>
-                                                                  
+                                                                </div>
+                                                                <div class="row">
                                                                     <div class="col-lg-2">
                                                                         <img src="<?= asset_url('images/gallery/khizer.jpg') ?>" class="img-circle" style="height:160px;width:160px;">
                                                                         <div class="row">
@@ -106,7 +107,8 @@
                                                                             <p style="text-align: center">Hafeez ur Rehman</p>
                                                                         </div>
                                                                     </div>
-                                                                  
+                                                                </div>
+                                                                <div class="row">
                                                                     <div class="col-lg-2">
                                                                         <img src="<?= asset_url('images/gallery/motz.jpg') ?>" class="img-circle" style="height:160px;width:160px;">
                                                                         <div class="row">
