@@ -268,7 +268,7 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4>
-                                                            <span class="icon16 icomoon-icon-equalizer-2"></span>                                                                                                            
+                                                            <span class="icon16 fa fa-map-marker"></span>                                                                                                             
                                                             <span class="label legend-treemap4">Very High</span>
                                                             <span class="label legend-treemap3">High</span>
                                                             <span class="label legend-treemap2">Medium</span>
