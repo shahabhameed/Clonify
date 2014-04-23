@@ -319,8 +319,8 @@
                                                                             <div class="input-group">
                                                                                 <select  name="groupingChoice" id="groupingChoice" class="form-control col-lg-2" style="width:auto">
                                                                                     <option selected="true"></option>
-                                                                                    <option value="0">Mixed Mode</option>
-                                                                                    <option value="1">Across Groups</option>
+                                                                                    <option value="0">All clones</option>
+                                                                                    <option value="2">Clones across groups</option>
                                                                                 </select>  
                                                                             </div>
                                                                         </div>
@@ -448,7 +448,7 @@
 
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading"> 
-                                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Suppressed Tokens</span></h4>
+                                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>List of Tokens</span></h4>
                                                         <a href="#" class="minimize">Minimize</a>
                                                     </div>
                                                     <div class="panel-body" style="height:350px;">
@@ -489,7 +489,7 @@
                                             <div class="col-lg-5">	
                                                 <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
-                                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Selected Tokens</span></h4>
+                                                        <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Suppressed Tokens</span></h4>
                                                         <a href="#" class="minimize">Minimize</a>
                                                     </div>
                                                     <div class="panel-body" style="height:350px;">
