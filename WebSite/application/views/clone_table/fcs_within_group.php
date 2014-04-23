@@ -28,7 +28,7 @@
                             <span class="icon16 fa fa-caret-right"></span>
                         </span>
                     </li>
-                    <li class="active">File Clone Structure</li>
+                    <li class="active">File Clone Structure Within Group</li>
                 </ul>                   
             </div>
 
@@ -273,7 +273,7 @@
                                                             <span class="label legend-treemap3">High</span>
                                                             <span class="label legend-treemap2">Medium</span>
                                                             <span class="label legend-treemap1">Low</span>
-                                                            <span class="right marginR5">Tree Map Legend: </span>
+                                                            <span class="right marginR5">Clone Intensity: </span>
                                                         </h4>
                                                         <a href="#" class="minimize">Minimize</a>
                                                     </div>

@@ -533,7 +533,7 @@
                                                         <div class="panel-heading" style="height:45px;">
                                                             <h4>
                                                                 <span class="icon16 icomoon-icon-equalizer-2"></span>
-                                                                <span>Equal Tokens</span> 
+                                                                <span>List of Tokens</span> 
 
                                                                 <button  type="button" class="btn btn-success btn-sm right marginR10" onclick="createNewElement('Rule', 'equal');">Add Rule</button>
 
@@ -571,7 +571,7 @@
 
                                                     <div class="panel panel-default">
 
-                                                        <div class="panel-heading"> <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Rules</span></h4>
+                                                        <div class="panel-heading"> <h4><span class="icon16 icomoon-icon-equalizer-2"></span><span>Equal Token Rules</span></h4>
                                                             <a href="#" class="minimize">Minimize</a>
                                                         </div>
                                                         <div class="panel-body">
