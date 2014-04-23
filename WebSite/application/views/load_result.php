@@ -6,7 +6,7 @@
 
             <div class="heading">
 
-                <h3>View Results</h3>                                                                               
+               <!-- <h3>View Results</h3>   -->                                                                             
             </div><!-- End .heading-->
             <div class="row">
                 <div class="col-lg-12">
@@ -21,8 +21,9 @@
 
                         <div class="content noPadding">
                             <div class="panel panel-default">
-                                <div class="panel-heading " style="height:45px"> <h4><span class="icon16 icomoon-icon-equalizer-2 left"></span>
-                                        <span class="left">Results</span>
+                                <div class="panel-heading " style="height:45px"> 
+                                    <h4><span class="icon16 fa fa-desktop left marginT5"></span>
+                                        <span class="">Results</span>
                                         <button type="button" class="btn btn-danger btn-sm right marginR10"style="width:98px;text-align:center ;"  onclick="location.href = '<?php echo base_url(); ?>'" >Cancel</button>
                                         <button type="submit" class="btn btn-info btn-sm  marginR10 right" style="width:98px; text-align:center;" >Save Changes</button>
                                     </h4>

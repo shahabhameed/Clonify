@@ -35,7 +35,7 @@
                 //alert("An error occured: " + xhr.status + " " + xhr.statusText);
             }
         });
-        setTimeout('loadNow()', 10000);
+        //setTimeout('loadNow()', 10000);
     }
 
     $(function() {
@@ -56,16 +56,16 @@
 
         <div class="mainnav">
             <ul>
+                <li><a href=" <?php echo site_url('home/'); ?>"><span class="icon16  fa fa-home"></span>Home</a></li>
+                <li id="repositoryListItem" style="display:block;"><a href="<?php echo site_url('home/dashboard/'); ?>"><span class="icon16 fa fa-cloud-upload"></span>Manage Repository</a></li>
 
-                <li id="repositoryListItem" style="display:none;"><a href="<?php echo site_url(); ?>"><span class="icon16 fa fa-cloud-upload"></span>Manage Repository</a></li>
-
-                <li><a href=" <?php echo site_url('invoke/'); ?>"><span class="icon16  icomoon-icon-equalizer-2"></span>Detect Clones</a></li>
+                <li><a href=" <?php echo site_url('invoke/'); ?>"><span class="icon16  fa fa-code"></span>Detect Clones</a></li>
 
                 <?php if ($this->tank_auth->get_role_id() == 1) { ?>
-                    <li><a href="<?php echo site_url('updatetokens/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>Update Tokens</a></li>
+                    <li><a href="<?php echo site_url('updatetokens/'); ?>"><span class="icon16 fa fa-refresh"></span>Update Tokens</a></li>
                 <?php } ?>
 
-                <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 icomoon-icon-user-plus"></span>View Results</a></li>
+                <li><a href="<?php echo site_url('load_results/'); ?>"><span class="icon16 fa fa-files-o"></span>View Results</a></li>
 
 
 
@@ -134,7 +134,7 @@
                     </li>
                 <?php } ?>
 
-                <li><a href="<?php echo site_url('general/about_us'); ?>"><span class="icon16 icomoon-icon-exit"></span>About Us</a></li>
+                <li><a href="<?php echo site_url('general/about_us'); ?>"><span class="icon16 fa fa-question"></span>About Us</a></li>
             </ul>
         </div>
     </div><!-- End sidenav --> 

@@ -113,6 +113,7 @@ form .control-group .controls-row .btn.special {margin-left: 10px;}
 	width:47% !important;
 }
 .code-window2 .col-md-5{
+	padding-left: 0px;
 	width:47% !important;
 }
 #code_map1{
@@ -122,5 +123,6 @@ form .control-group .controls-row .btn.special {margin-left: 10px;}
 }
 #code_map2{
 	padding:0px;
+
 	width:25px !important;
 }

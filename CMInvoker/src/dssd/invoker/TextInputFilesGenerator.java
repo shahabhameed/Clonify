@@ -140,7 +140,7 @@ public class TextInputFilesGenerator extends InputHelper{
 				
 				PrintWriter writer = new PrintWriter(filePath, "UTF-8");
 				//Comment for Team1: Please replace "50,50" with appropriate field.
-				String tempString = "50"+"," + "50"+"," + invokeParameter.getMin_similatiry_MCC_percent()+"," + invokeParameter.getMin_similatiry_MCC_tokens();
+				String tempString = invokeParameter.getMin_similatiry_FCC_percent()+"," + invokeParameter.getMin_similatiry_MCC_tokens()+"," + invokeParameter.getMin_similatiry_MCC_percent()+"," + invokeParameter.getMin_similatiry_MCC_tokens();
 				
 				System.out.println(tempString);
 				writer.println(tempString);
