@@ -68,6 +68,13 @@
                                                                             <p style="text-align: center">CEO : Hamid Abdul Basit</p>
                                                                         </div>
                                                                     </div>
+                                                                   <div class="col-lg-2">
+                                                                        <img src="<?= asset_url('images/gallery/shahab.jpg') ?>" class="img-circle" style="height:160px;width:160px;">
+                                                                        <div class="row">
+                                                                            <p style="text-align: center">Shahab Hameed</p>
+                                                                        </div>
+                                                                    </div>
+                                                                  
                                                                     <div class="col-lg-2">
                                                                         <img src="<?= asset_url('images/gallery/khizer.jpg') ?>" class="img-circle" style="height:160px;width:160px;">
                                                                         <div class="row">
@@ -99,6 +106,33 @@
                                                                             <p style="text-align: center">Hafeez ur Rehman</p>
                                                                         </div>
                                                                     </div>
+                                                                  
+                                                                    <div class="col-lg-2">
+                                                                        <img src="<?= asset_url('images/gallery/motz.jpg') ?>" class="img-circle" style="height:160px;width:160px;">
+                                                                        <div class="row">
+                                                                            <p style="text-align: center">Muhammad Usman</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="col-lg-2">
+                                                                        <img src="<?= asset_url('images/gallery/shahram.jpg') ?>" class="img-circle" style="height:160px;width:160px;">
+                                                                        <div class="row">
+                                                                            <p style="text-align: center">Shahram Javed</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <img src="<?= asset_url('images/gallery/danish.jpg') ?>" class="img-circle" style="height:160px;width:160px;">
+                                                                        <div class="row">
+                                                                            <p style="text-align: center">Danish Jalil</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <img src="<?= asset_url('images/gallery/rohan.jpg') ?>" class="img-circle" style="height:160px;width:160px;">
+                                                                        <div class="row">
+                                                                            <p style="text-align: center">Rohan Jalil</p>
+                                                                        </div>
+                                                                    </div>
+                                                                  
 
                                                                 </div>
                                                             </div>
