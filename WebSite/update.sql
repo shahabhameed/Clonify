@@ -559,5 +559,5 @@ ALTER TABLE  `repository_directory` ADD  `parent_id` INT NULL ;
 ALTER TABLE  `user_invocations` ADD `is_email_sent_on_completion` INT NULL ;
 
 -- 2014-04-22 0 By HAFEEZ
-ALTER TABLE  `invocation_parameters` ADD `min_similatiry_FCC_tokens` INT NULL ;
-ALTER TABLE  `invocation_parameters` ADD `min_similatiry_FCC_percent` INT NULL ;
+ALTER TABLE  `invocation_parameters` ADD `min_similarity_FCC_tokens` INT NULL ;
+ALTER TABLE  `invocation_parameters` ADD `min_similarity_FCC_percent` INT NULL ;
