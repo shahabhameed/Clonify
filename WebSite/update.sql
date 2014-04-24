@@ -561,3 +561,6 @@ ALTER TABLE  `user_invocations` ADD `is_email_sent_on_completion` INT NULL ;
 -- 2014-04-22 0 By HAFEEZ
 ALTER TABLE  `invocation_parameters` ADD `min_similarity_FCC_tokens` INT NULL ;
 ALTER TABLE  `invocation_parameters` ADD `min_similarity_FCC_percent` INT NULL ;
+
+-- 2014-04-24 0 By KHIZER
+ALTER TABLE  `invocation_parameters` CHANGE  `min_similarity_FCC_percent`  `min_similarity_FCC_percentage` INT( 11 ) NULL DEFAULT NULL ;
