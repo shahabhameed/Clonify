@@ -33,7 +33,15 @@
       $file_contents = str_replace("\r\n", "\n", $file_contents);
       $file_contents = str_replace("\r", "\n", $file_contents); 
       $file_contents = explode("\n", $file_contents);
-      return $result = array($file_contents[$start_line-1], $file_contents[$end_line]);
+      $start_line = $file_contents[$start_line-1];
+      $end_line = $file_contents[$end_line-1];
+      if (false !== strpos($start_line, "\t")) {
+        $start_line = str_replace("\t", "    ", $start_line);
+      }
+      if (false !== strpos($end_line, "\t")) {
+        $end_line = str_replace("\t", "    ", $end_line);
+      }
+      return $result = array($start_line, $end_line);
     }
 
   }

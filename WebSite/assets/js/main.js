@@ -815,9 +815,9 @@ Clonify.SCC = {
         }
         window.location.hash='geshi-window'+window_id+'-'+start_line;
       }
-      
+
       var start_width = $('#geshi-window'+window_id+'-'+start_line).width();
-      var tt_col = tt[0].substr(strt_col,tt[0].length);
+      var tt_col = tt[0].substr((strt_col-1),tt[0].length);
       tt_col = '<div>'+tt[0].substr(0, (strt_col-1))+'<span style="background-color: '+color+' !important;width:'+start_width+'px !important;">'+tt_col+'</span></div>';
       var tt_end_col = tt[1].substr(0,end_col);
       tt_end_col = '<div><span style="background-color: '+color+' !important">'+tt_end_col+'</span>'+tt[1].substr(end_col, tt[1].length)+'</div>';
@@ -889,20 +889,20 @@ Clonify.SCC = {
 
                         
 						
-            $(selector2).each(function(){
-                var str = $(this).find('div').html();
-                for(var i = 0; i < file_2_difference_arr.length; i++){
-                    var temp = $.trim(file_2_difference_arr[i]);
-                    if (temp.indexOf("." != -1)){
-                      var temp1 = temp.split(".");
-                      for (var j = 0; j < temp1.length; j++){
-                        str = str.replace(temp1[j],"<span style='background-color: red !important'>"+temp1[j]+"</span>");
-                      }
-                    }else                    
-                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
-                }
-                $(this).find('div').html(str);
-            });            
+//            $(selector2).each(function(){
+//                var str = $(this).find('div').html();
+//                for(var i = 0; i < file_2_difference_arr.length; i++){
+//                    var temp = $.trim(file_2_difference_arr[i]);
+//                    if (temp.indexOf("." != -1)){
+//                      var temp1 = temp.split(".");
+//                      for (var j = 0; j < temp1.length; j++){
+//                        str = str.replace(temp1[j],"<span style='background-color: red !important'>"+temp1[j]+"</span>");
+//                      }
+//                    }else                    
+//                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+//                }
+//                $(this).find('div').html(str);
+//            });            
 
             var selector1 = "";
             for (var i = code_compare_global_attributes.file_1_start_line; i <= code_compare_global_attributes.file_1_end_line; i++){
@@ -911,20 +911,20 @@ Clonify.SCC = {
 
             selector1 = selector1.substring(0, selector1.length-1);
             
-            $(selector1).each(function(){
-                var str = $(this).find('div').html();
-                for(var i = 0; i < file_1_difference_arr.length; i++){
-                    var temp = $.trim(file_1_difference_arr[i]);
-                    if (temp.indexOf("." != -1)){
-                      var temp1 = temp.split(".");
-                      for (var j = 0; j < temp1.length; j++){
-                        str = str.replace(temp1[j],"<span style='background-color: red !important'>"+temp1[j]+"</span>");
-                      }
-                    }else                                        
-                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
-                }
-                $(this).find('div').html(str);
-            });            
+//            $(selector1).each(function(){
+//                var str = $(this).find('div').html();
+//                for(var i = 0; i < file_1_difference_arr.length; i++){
+//                    var temp = $.trim(file_1_difference_arr[i]);
+//                    if (temp.indexOf("." != -1)){
+//                      var temp1 = temp.split(".");
+//                      for (var j = 0; j < temp1.length; j++){
+//                        str = str.replace(temp1[j],"<span style='background-color: red !important'>"+temp1[j]+"</span>");
+//                      }
+//                    }else                                        
+//                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+//                }
+//                $(this).find('div').html(str);
+//            });            
             
 
             $(selector1).poshytip({
