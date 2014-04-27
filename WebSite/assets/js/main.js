@@ -704,6 +704,17 @@ Clonify.SCC = {
         $('.dataTables_filter').hide();
   },
   
+  replaceHtmlWithOriginal: function(start_line, end_line, window_id, complete_string){
+    
+    var count = 0;
+    for (var z = (start_line+1); z < (end_line); z++){
+      console.log(z);
+      $('#geshi-window'+window_id+'-'+z).html('<div>'+complete_string[count]+'</div>');
+      count++;
+    }        
+        
+  },
+  
   viewCodeData: function(_scc_id, _clone_list_id, path, fid, start_line, end_line, strt_col, end_col, file_name, _me){
     var _url = base_url + "home/loadCode";
     window_id = window_id + 1;
@@ -743,8 +754,10 @@ Clonify.SCC = {
     $.post(_url, _params, function(r) {
       var tt = r.split("---!!!^^^");
       var color = tt[2];
+      var complete_string = tt[3];
       r = tt[0];
       tt = eval("(" + tt[1] + ')');
+      complete_string = eval("(" + complete_string + ')');
       
       $(".code-window-containter").show();
       if ($("#code_window1").html() == ""){
@@ -756,7 +769,10 @@ Clonify.SCC = {
         code_compare_global_attributes.file_1_window_id = window_id;
         $(".code-window1").show();
         $("#file1").html('File Name : '+file_name);
-        $("#code_window1").html(r);        
+        $("#code_window1").html(r); 
+        
+        Clonify.SCC.replaceHtmlWithOriginal(start_line, end_line, window_id, complete_string);
+        
         new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map1') );
         if (start_line == null || start_line == ""){
           start_line = $("#startline-"+window_id).val();
@@ -792,6 +808,9 @@ Clonify.SCC = {
           $("#code_map2").html("");
           $("#code_map1").html("");
           load_1st_bar_map = true;
+
+          Clonify.SCC.replaceHtmlWithOriginal(start_line, end_line, window_id, complete_string);
+          
         }else{
           code_compare_global_attributes.file_2_path = path;
           code_compare_global_attributes.file_2_start_line = start_line;
@@ -803,11 +822,15 @@ Clonify.SCC = {
         }
         $("#file2").html('File Name : '+file_name);
         $("#code_window2").html(r);
+        
+        Clonify.SCC.replaceHtmlWithOriginal(start_line, end_line, window_id, complete_string);
+        
         if (load_1st_bar_map){
           new FlexibleNav('#code_window1', new FlexibleNavMaker('.geshi-window'+(window_id - 1)+'-minimap-index').make().prependTo('#code_map1') );
         }
         
         new FlexibleNav('#code_window2', new FlexibleNavMaker('.geshi-window'+window_id+'-minimap-index').make().prependTo('#code_map2') );
+                
         
         Clonify.SCC.calculateCloneDifferences();        
         if (start_line == null || start_line == ""){
@@ -815,7 +838,9 @@ Clonify.SCC = {
         }
         window.location.hash='geshi-window'+window_id+'-'+start_line;
       }
-
+      
+      
+      
       var start_width = $('#geshi-window'+window_id+'-'+start_line).width();
       var tt_col = tt[0].substr((strt_col-1),tt[0].length);
       tt_col = '<div>'+tt[0].substr(0, (strt_col-1))+'<span style="background-color: '+color+' !important;width:'+start_width+'px !important;">'+tt_col+'</span></div>';
@@ -825,6 +850,7 @@ Clonify.SCC = {
       $('#geshi-window'+window_id+'-'+end_line).html(tt_end_col);
       $('#geshi-window'+window_id+'-'+start_line).css('background-color','none repeat scroll 0 0 rgba(0, 0, 0, 0) !important')
       $('#geshi-window'+window_id+'-'+end_line).css('background-color','none repeat scroll 0 0 rgba(0, 0, 0, 0) !important')
+      
       
     });
 	
@@ -844,7 +870,11 @@ Clonify.SCC = {
       
         var _url = base_url + "home/cloneDifference";
         $.post(_url, code_compare_global_attributes, function(r) { 
-
+            console.log(r);
+            var response = r.split("---!!!^^^");
+            r = response[0];
+            var complete_string = response[1];
+            
             var selector2 = "";
             for (var i = code_compare_global_attributes.file_2_start_line; i <= code_compare_global_attributes.file_2_end_line; i++){
                 selector2 += '#geshi-window'+code_compare_global_attributes.file_2_window_id+'-'+i+",";
@@ -878,9 +908,13 @@ Clonify.SCC = {
            // var temp = r.split(",");
            // var file_1_difference_arr = temp;
             //var file_2_difference_arr = temp;
-			console.log(r);
+			console.log("Clone Before eval : "+r);
 			var temp = eval("(" + r + ')');
-			console.log(temp);
+            console.log("Clone After eval : "+temp);
+            
+            console.log("Before String : "+complete_string);
+			complete_string = eval("(" + complete_string + ')');
+            console.log("Complete String : "+complete_string);
             var file_1_difference_arr = temp[0].split(" ");
             var file_2_difference_arr = temp[1].split(" ");
 			
@@ -888,21 +922,24 @@ Clonify.SCC = {
 			console.log(file_2_difference_arr);
 
                         
-						
-//            $(selector2).each(function(){
-//                var str = $(this).find('div').html();
-//                for(var i = 0; i < file_2_difference_arr.length; i++){
-//                    var temp = $.trim(file_2_difference_arr[i]);
+            var counter = 0;
+            $(selector2).each(function(){
+//              console.log("Second : "+complete_string[1][counter]);
+//                $(this).find('div').html(complete_string[1][counter]);
+                var str = $(this).find('div').html();
+                counter++;
+                for(var i = 0; i < file_2_difference_arr.length; i++){
+                    var temp = $.trim(file_2_difference_arr[i]);
 //                    if (temp.indexOf("." != -1)){
 //                      var temp1 = temp.split(".");
 //                      for (var j = 0; j < temp1.length; j++){
 //                        str = str.replace(temp1[j],"<span style='background-color: red !important'>"+temp1[j]+"</span>");
 //                      }
 //                    }else                    
-//                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
-//                }
-//                $(this).find('div').html(str);
-//            });            
+                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+                }
+                $(this).find('div').html(str);
+            });            
 
             var selector1 = "";
             for (var i = code_compare_global_attributes.file_1_start_line; i <= code_compare_global_attributes.file_1_end_line; i++){
@@ -911,20 +948,24 @@ Clonify.SCC = {
 
             selector1 = selector1.substring(0, selector1.length-1);
             
-//            $(selector1).each(function(){
-//                var str = $(this).find('div').html();
-//                for(var i = 0; i < file_1_difference_arr.length; i++){
-//                    var temp = $.trim(file_1_difference_arr[i]);
+            var counter = 0;
+            $(selector1).each(function(){
+//                console.log("First : "+complete_string[0][counter]);
+//                $(this).find('div').html(complete_string[0][counter]);
+                var str = $(this).find('div').html();
+                counter++;
+                for(var i = 0; i < file_1_difference_arr.length; i++){
+                    var temp = $.trim(file_1_difference_arr[i]);
 //                    if (temp.indexOf("." != -1)){
 //                      var temp1 = temp.split(".");
 //                      for (var j = 0; j < temp1.length; j++){
 //                        str = str.replace(temp1[j],"<span style='background-color: red !important'>"+temp1[j]+"</span>");
 //                      }
 //                    }else                                        
-//                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
-//                }
-//                $(this).find('div').html(str);
-//            });            
+                      str = str.replace(temp,"<span style='background-color: red !important'>"+temp+"</span>");                    
+                }
+                $(this).find('div').html(str);
+            });            
             
 
             $(selector1).poshytip({

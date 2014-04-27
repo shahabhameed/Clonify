@@ -208,7 +208,13 @@ class Home extends CI_Controller {
         $first_row = $miniMapLinks[0];
 
         echo "<span><input type='hidden' id='startline-" . $window_id . "' value='" . $first_row . "'></span>";
-        echo $obj->getFormattedCode()."---!!!^^^".json_encode($this->common->extractFirstAndLastLine($filePath, $start_line, $end_line))."---!!!^^^".$color_code;
+        
+        $complete_file1_clone_string = $this->common->extractClonedCompleteStrings($this->input->post('file_path'), $this->input->post('start_line'), $this->input->post('end_line'));
+//        $complete_file2_clone_string = $this->common->extractClonedCompleteStrings($this->input->post('file_2_path'), $this->input->post('file_2_start_line'), $this->input->post('file_2_end_line'));
+        $count = count($complete_file1_clone_string);
+        unset($complete_file1_clone_string[0], $complete_file1_clone_string[$count-1]);
+        
+        echo $obj->getFormattedCode()."---!!!^^^".json_encode($this->common->extractFirstAndLastLine($filePath, $start_line, $end_line))."---!!!^^^".$color_code."---!!!^^^".json_encode(array_values($complete_file1_clone_string));
     }
 
     public function SingleCloneClassByFile() {
@@ -390,13 +396,17 @@ class Home extends CI_Controller {
     function cloneDifference() {
         $file1_clone_string = $this->common->extractClonedSubstring($this->input->post('file_1_path'), $this->input->post('file_1_start_line'), $this->input->post('file_1_end_line'), $this->input->post('file_1_start_col'), $this->input->post('file_1_end_col'));
         $file2_clone_string = $this->common->extractClonedSubstring($this->input->post('file_2_path'), $this->input->post('file_2_start_line'), $this->input->post('file_2_end_line'), $this->input->post('file_2_start_col'), $this->input->post('file_2_end_col'));
+        $complete_file1_clone_string = $this->common->extractClonedCompleteStrings($this->input->post('file_1_path'), $this->input->post('file_1_start_line'), $this->input->post('file_1_end_line'));
+        $complete_file2_clone_string = $this->common->extractClonedCompleteStrings($this->input->post('file_2_path'), $this->input->post('file_2_start_line'), $this->input->post('file_2_end_line'));
         $obj = new StringCompare();
         $test_result = $obj->getDifferenceBetweenStrings1($file1_clone_string, $file2_clone_string, $this->input->post('file_1_start_line'), $this->input->post('file_2_start_line'), $this->input->post('file_1_start_col'), $this->input->post('file_2_end_col'));
+//        $test_result = $obj->getDifferenceBetweenStrings($file1_clone_string, $file2_clone_string, $this->input->post('file_1_start_line'), $this->input->post('file_2_start_line'), $this->input->post('file_1_start_col'), $this->input->post('file_2_end_col'));
 //        echo "<pre>".print_r($test_result)."</pre>";
      //   $data = implode(",", $test_result);
 //        $data = json_encode($test_result);
       //  echo $data;
-	  echo json_encode($test_result);
+//        print_r(array($complete_file1_clone_string, $complete_file2_clone_string));
+	  echo json_encode($test_result)."---!!!^^^".json_encode(array($complete_file1_clone_string, $complete_file2_clone_string));
 	  
     }
 
